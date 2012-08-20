@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="..\DD_Support_Auto.xsd"/>
-	<xs:include schemaLocation="..\DD_Support.xsd"/>
+	<xs:include schemaLocation="..\Utilities\DD_Support_v2.xsd"/>
 	<xs:element name="PF">
 		<xs:annotation>
-			<xs:documentation>Description of the active poloidal field (PF) coils, axisymmetric passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems</xs:documentation>
+			<xs:documentation>Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</xs:documentation>
 			<xs:appinfo/>
 		</xs:annotation>
 		<xs:complexType>
@@ -19,10 +18,10 @@
 						<xs:sequence>
 							<xs:element name="Names">
 								<xs:annotation>
-									<xs:documentation>Names of coils</xs:documentation>
+									<xs:documentation>Names of PF coils</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
+										<Type>STATIC</Type>
+										<Axis1>N</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -31,10 +30,10 @@
 							</xs:element>
 							<xs:element name="Identifiers">
 								<xs:annotation>
-									<xs:documentation>IDs of coils</xs:documentation>
+									<xs:documentation>Alphanumeric identifiers of coils used for convenience</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -45,9 +44,9 @@
 								<xs:annotation>
 									<xs:documentation>Coil resistances</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Ohm</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Ohm</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -58,9 +57,9 @@
 								<xs:annotation>
 									<xs:documentation>Maximum Energy to be dissipated in coils</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Joule</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Joule</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -69,17 +68,19 @@
 							</xs:element>
 							<xs:element name="Coil" maxOccurs="unbounded">
 								<xs:annotation>
-									<xs:documentation>Axisymmetric conductor description of each coil, each containing Elements individually described cross-Section elements</xs:documentation>
-																		<xs:appinfo><axis1>../Names</axis1></xs:appinfo>
-</xs:annotation>
+									<xs:documentation>Axisymmetric conductor description of each coil; each is comprised of a number of cross-section elements described  individually</xs:documentation>
+									<xs:appinfo>
+										<Axis1>../Names</Axis1>
+									</xs:appinfo>
+								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="Element_Names">
 											<xs:annotation>
-												<xs:documentation>Names of the elements</xs:documentation>
+												<xs:documentation>Names of the elements of this coil</xs:documentation>
 												<xs:appinfo>
-													<type>STATIC</type>
-													<axis1>N</axis1>
+													<Type>STATIC</Type>
+													<Axis1>N</Axis1>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -88,10 +89,10 @@
 										</xs:element>
 										<xs:element name="Element_Identifiers">
 											<xs:annotation>
-												<xs:documentation>IDs of the elements</xs:documentation>
+												<xs:documentation>Identifiers of the elements of this coil</xs:documentation>
 												<xs:appinfo>
-													<type>STATIC</type>
-													<axis1>../Names</axis1>
+													<Type>STATIC</Type>
+													<Axis1>../Names</Axis1>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -100,17 +101,17 @@
 										</xs:element>
 										<xs:element name="Element_Turns_With_Sign">
 											<xs:annotation>
-												<xs:documentation>Sign of turn and fraction of a turn for calculating magnetic field of the Elements</xs:documentation>
+												<xs:documentation>Number of effective turns in the elements for calculating magnetic fields of the coil; includes the sign of the number of turns</xs:documentation>
 												<xs:appinfo>
-													<type>STATIC</type>
-													<axis1>../Names</axis1>
+													<Type>STATIC</Type>
+													<Axis1>../Names</Axis1>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
 												<xs:group ref="INT_1D">
 													<xs:annotation>
 														<xs:appinfo>
-															<axis1>../Element_Names</axis1>
+															<Axis1>../Element_Names</Axis1>
 														</xs:appinfo>
 													</xs:annotation>
 												</xs:group>
@@ -118,11 +119,11 @@
 										</xs:element>
 										<xs:element name="Element_Areas">
 											<xs:annotation>
-												<xs:documentation>Surface areas of the elements</xs:documentation>
+												<xs:documentation>Cross-sectional areas of the elements</xs:documentation>
 												<xs:appinfo>
-													<type>STATIC</type>
-													<axis1>../Element_Names</axis1>
-													<units>m^2</units>
+													<Type>STATIC</Type>
+													<Axis1>../Element_Names</Axis1>
+													<Units>m^2</Units>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -131,19 +132,19 @@
 										</xs:element>
 										<xs:element name="Element_Geometry" maxOccurs="unbounded">
 											<xs:annotation>
-												<xs:documentation>Shape of the PF Coil Elements</xs:documentation>
-												<xs:appinfo><axis1>../Element_Names</axis1></xs:appinfo>
+												<xs:documentation>Cross-sectional shape of each of the coil elements</xs:documentation>
+												<xs:appinfo>
+													<Axis1>../Element_Names</Axis1>
+												</xs:appinfo>
 											</xs:annotation>
-																					
-
 											<xs:complexType>
 												<xs:sequence>
-													<xs:element name="Type">
+													<xs:element name="Geometry_Type">
 														<xs:annotation>
 															<xs:documentation>Type used to describe a coil shape (0 for 'rzcoordinates' or 1 for 'rzdrdz') </xs:documentation>
 															<xs:appinfo>
-																<type>STATIC</type>
-																<axis1>../Element_Names</axis1>
+																<Type>STATIC</Type>
+																<Axis1>../Element_Names</Axis1>
 															</xs:appinfo>
 														</xs:annotation>
 														<xs:complexType>
@@ -154,10 +155,10 @@
 														<xs:annotation>
 															<xs:documentation>Irregular outline</xs:documentation>
 															<xs:appinfo>
-																<type>STATIC</type>
-																<axis2>../Element_Names</axis2>
-																<axis1>2</axis1>
-																<units>m</units>
+																<Type>STATIC</Type>
+																<Axis2>../Element_Names</Axis2>
+																<Axis1>2</Axis1>
+																<Units>m</Units>
 															</xs:appinfo>
 														</xs:annotation>
 														<xs:complexType>
@@ -168,9 +169,9 @@
 														<xs:annotation>
 															<xs:documentation>4-Vector defining Centre R,Z and full extents dR, dZ </xs:documentation>
 															<xs:appinfo>
-																<type>STATIC</type>
-																<axis1>4</axis1>
-																<units>m</units>
+																<Type>STATIC</Type>
+																<Axis1>4</Axis1>
+																<Units>m</Units>
 															</xs:appinfo>
 														</xs:annotation>
 														<xs:complexType>
@@ -180,18 +181,36 @@
 												</xs:sequence>
 											</xs:complexType>
 										</xs:element>
-										<xs:element ref="Timebase"/>
 										<xs:element name="Current">
 											<xs:annotation>
 												<xs:documentation>Current in the coil</xs:documentation>
 												<xs:appinfo>
-													<type>SIGNAL</type>
-													<axis1>../Timebase</axis1>
-													<units>Sec</units>
+													<Type>SIGNAL</Type>
+													<Axis1>../Timebase</Axis1>
+													<Units>Amp</Units>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
-												<xs:group ref="FLT_1D"/>
+												<xs:sequence>
+													<xs:element ref="Timebase"/>
+													<xs:group ref="FLT_1D"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Voltage">
+											<xs:annotation>
+												<xs:documentation>Voltage on the coil terminals</xs:documentation>
+												<xs:appinfo>
+													<Type>SIGNAL</Type>
+													<Axis1>../Timebase</Axis1>
+													<Units>Volt</Units>
+												</xs:appinfo>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="Timebase"/>
+													<xs:group ref="FLT_1D"/>
+												</xs:sequence>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -202,7 +221,7 @@
 				</xs:element>
 				<xs:element name="Vertical_Forces">
 					<xs:annotation>
-						<xs:documentation>Vertical forces on the CS+PF system</xs:documentation>
+						<xs:documentation>Vertical forces on the axisymmetric PF coil system</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
@@ -210,8 +229,8 @@
 								<xs:annotation>
 									<xs:documentation>Names of Force combinations</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
+										<Type>STATIC</Type>
+										<Axis1>N</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -222,9 +241,9 @@
 								<xs:annotation>
 									<xs:documentation>Combinations of forces</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../../Coils/Names</axis1>
-										<axis2>../Names</axis2>
+										<Type>STATIC</Type>
+										<Axis1>../../Coils/Names</Axis1>
+										<Axis2>../Names</Axis2>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -235,9 +254,9 @@
 								<xs:annotation>
 									<xs:documentation>Vertical Force combination limits</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>N</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>N</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -248,28 +267,30 @@
 								<xs:annotation>
 									<xs:documentation>Vertical Force combination limits</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>N</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>N</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:group ref="FLT_1D"/>
 								</xs:complexType>
 							</xs:element>
-							<xs:element ref="Timebase"/>
 							<xs:element name="Forces">
 								<xs:annotation>
 									<xs:documentation>Force combinations</xs:documentation>
 									<xs:appinfo>
-										<type>SIGNAL</type>
-										<axis2>../Timebase</axis2>
-										<axis1>../Names</axis1>
-										<units>N</units>
+										<Type>SIGNAL</Type>
+										<Axis2>../Timebase</Axis2>
+										<Axis1>../Names</Axis1>
+										<Units>N</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
-									<xs:group ref="FLT_2D"/>
+									<xs:sequence>
+										<xs:element ref="Timebase"/>
+										<xs:group ref="FLT_2D"/>
+									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
 						</xs:sequence>
@@ -285,8 +306,8 @@
 								<xs:annotation>
 									<xs:documentation>Names of circuits</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
+										<Type>STATIC</Type>
+										<Axis1>N</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -297,8 +318,8 @@
 								<xs:annotation>
 									<xs:documentation>IDs of circuits</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -309,8 +330,8 @@
 								<xs:annotation>
 									<xs:documentation>Types of circuit</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -319,16 +340,48 @@
 							</xs:element>
 							<xs:element name="Connections">
 								<xs:annotation>
-									<xs:documentation>Description of the supplies and coils connections (nodes) across each circuit. Array-3D (N_Circuits,max_nnodes,2*ncomponents), describing for each node which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the third dimension, listing first all supplies, then all coils (in the same order as listed in PFSUPPLIES and PFCOILS). An example can be found in the data structure documentation PFconnections.pdf</xs:documentation>
+									<xs:documentation>Description of the supplies and coils connections (nodes) across each circuit. Array-3D (N_Circuits,max_nnodes,2*ncomponents), describing for each node which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the third dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD)</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1> TBD</axis1>
-										<axis2> TBD</axis2>
-										<axis3> TBD</axis3>
+										<Type>STATIC</Type>
+										<Axis1> TBD</Axis1>
+										<Axis2> TBD</Axis2>
+										<Axis3> TBD</Axis3>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:group ref="FLT_3D"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Voltage" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Voltage on the circuit</xs:documentation>
+									<xs:appinfo>
+										<Type>SIGNAL</Type>
+										<Axis1>../Timebase</Axis1>
+										<Units>Volt</Units>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="Timebase"/>
+										<xs:group ref="FLT_1D"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Current" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Current in the circuit</xs:documentation>
+									<xs:appinfo>
+										<Type>SIGNAL</Type>
+										<Axis1>../Timebase</Axis1>
+										<Units>Volt</Units>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="Timebase"/>
+										<xs:group ref="FLT_1D"/>
+									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
 						</xs:sequence>
@@ -336,16 +389,16 @@
 				</xs:element>
 				<xs:element name="Supplies">
 					<xs:annotation>
-						<xs:documentation>PF coil power supplies</xs:documentation>
+						<xs:documentation>PF power supplies</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="Names">
 								<xs:annotation>
-									<xs:documentation>Names of the supplies</xs:documentation>
+									<xs:documentation>Names of the PF supplies</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
+										<Type>STATIC</Type>
+										<Axis1>N</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -354,10 +407,10 @@
 							</xs:element>
 							<xs:element name="Identifiers">
 								<xs:annotation>
-									<xs:documentation>IDs of the supplies</xs:documentation>
+									<xs:documentation>Identifiers of the supplies</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -366,10 +419,10 @@
 							</xs:element>
 							<xs:element name="Types">
 								<xs:annotation>
-									<xs:documentation>Types of supply</xs:documentation>
+									<xs:documentation>Types of supplies; TBD add free description of non-linear power supplies</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -378,11 +431,11 @@
 							</xs:element>
 							<xs:element name="Resistances">
 								<xs:annotation>
-									<xs:documentation>Supply internal resistances</xs:documentation>
+									<xs:documentation>Power supply internal resistances</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Ohm</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Ohm</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -393,9 +446,9 @@
 								<xs:annotation>
 									<xs:documentation>Pure delays in the supplies</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Sec</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Sec</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -404,11 +457,11 @@
 							</xs:element>
 							<xs:element name="Filters_Numerators">
 								<xs:annotation>
-									<xs:documentation>Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n</xs:documentation>
+									<xs:documentation>Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<axis2>N</axis2>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Axis2>N</Axis2>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -417,11 +470,11 @@
 							</xs:element>
 							<xs:element name="Filters_Denominators">
 								<xs:annotation>
-									<xs:documentation>Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m</xs:documentation>
+									<xs:documentation>Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description</xs:documentation>
 									<xs:appinfo>
-										<axis1>../Names</axis1>
-										<axis2>N</axis2>
-										<type>STATIC</type>
+										<Axis1>../Names</Axis1>
+										<Axis2>N</Axis2>
+										<Type>STATIC</Type>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -430,11 +483,11 @@
 							</xs:element>
 							<xs:element name="Current_Max_Limits">
 								<xs:annotation>
-									<xs:documentation>Maximum currents</xs:documentation>
+									<xs:documentation>Maximum currents in the supplies</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Amp</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Amp</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -443,11 +496,11 @@
 							</xs:element>
 							<xs:element name="Current_Min_Limits">
 								<xs:annotation>
-									<xs:documentation>Minimum currents</xs:documentation>
+									<xs:documentation>Minimum currents in the supplies</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Amp</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Amp</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -456,11 +509,11 @@
 							</xs:element>
 							<xs:element name="Voltage_Max_Limits">
 								<xs:annotation>
-									<xs:documentation>Minimum voltages</xs:documentation>
+									<xs:documentation>Minimum voltages from the supplies</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Volt</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Volt</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -469,11 +522,24 @@
 							</xs:element>
 							<xs:element name="Voltage_Min_Limits">
 								<xs:annotation>
-									<xs:documentation>Maximum voltages</xs:documentation>
+									<xs:documentation>Maximum voltages from the supplies</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Volt</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Volt</Units>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:group ref="FLT_1D"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Current_Limiter_Gain">
+								<xs:annotation>
+									<xs:documentation>Gains to prevent overcurrent in a linear model of the supplies</xs:documentation>
+									<xs:appinfo>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Volt</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -482,11 +548,11 @@
 							</xs:element>
 							<xs:element name="Energy_Max_Limits">
 								<xs:annotation>
-									<xs:documentation>Maximum Energies to be dissipated in supplies</xs:documentation>
+									<xs:documentation>Maximum energies to be dissipated in the supplies during a pulse</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Joule</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Joule</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -495,8 +561,10 @@
 							</xs:element>
 							<xs:element name="Supply" maxOccurs="unbounded">
 								<xs:annotation>
-									<xs:documentation>One of the many power supplies; the supply index follows the supply name convention</xs:documentation>
-									<xs:appinfo><axis1>../Names</axis1></xs:appinfo>
+									<xs:documentation>Each of the power supplies; the supply index follows the supply name list</xs:documentation>
+									<xs:appinfo>
+										<Axis1>../Names</Axis1>
+									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
@@ -504,9 +572,9 @@
 											<xs:annotation>
 												<xs:documentation>Voltages at the supply output</xs:documentation>
 												<xs:appinfo>
-													<type>SIGNAL</type>
-													<axis1>Timebase</axis1>
-													<units>Volt</units>
+													<Type>SIGNAL</Type>
+													<Axis1>Timebase</Axis1>
+													<Units>Volt</Units>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -520,9 +588,9 @@
 											<xs:annotation>
 												<xs:documentation>Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description</xs:documentation>
 												<xs:appinfo>
-													<type>SIGNAL</type>
-													<axis1>Timebase</axis1>
-													<units>Amp</units>
+													<Type>SIGNAL</Type>
+													<Axis1>Timebase</Axis1>
+													<Units>Amp</Units>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -530,6 +598,14 @@
 													<xs:element ref="Timebase"/>
 													<xs:group ref="FLT_1D"/>
 												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Nonlinear_Model">
+											<xs:annotation>
+												<xs:documentation>Description of the nonlinear transfer function of the supply</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:group ref="STR_0D"/>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -540,7 +616,7 @@
 				</xs:element>
 				<xs:element name="Passive_Loops">
 					<xs:annotation>
-						<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops. Note that any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
+						<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
 						<xs:appinfo/>
 					</xs:annotation>
 					<xs:complexType>
@@ -549,8 +625,8 @@
 								<xs:annotation>
 									<xs:documentation>Names of loops</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
+										<Type>STATIC</Type>
+										<Axis1>N</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -561,9 +637,9 @@
 								<xs:annotation>
 									<xs:documentation>Surface areas of the passive loops</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>m^2</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>m^2</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -574,9 +650,9 @@
 								<xs:annotation>
 									<xs:documentation>Passive element resistances</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Ohm</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Ohm</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -586,7 +662,9 @@
 							<xs:element name="Geometry" maxOccurs="unbounded">
 								<xs:annotation>
 									<xs:documentation>Shape of each Passive Loop</xs:documentation>
-									<xs:appinfo>										<axis1>../Names</axis1></xs:appinfo>
+									<xs:appinfo>
+										<Axis1>../Names</Axis1>
+									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
@@ -594,7 +672,7 @@
 											<xs:annotation>
 												<xs:documentation>Type used to describe a coil shape (0 for 'rzcoordinates' or 1 for 'rzdrdz')</xs:documentation>
 												<xs:appinfo>
-													<type>STATIC</type>
+													<Type>STATIC</Type>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -605,10 +683,10 @@
 											<xs:annotation>
 												<xs:documentation>Irregular outline</xs:documentation>
 												<xs:appinfo>
-													<type>STATIC</type>
-													<axis1>../Names</axis1>
-													<axis2>2</axis2>
-													<units>m</units>
+													<Type>STATIC</Type>
+													<Axis1>../Names</Axis1>
+													<Axis2>2</Axis2>
+													<Units>m</Units>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -619,9 +697,9 @@
 											<xs:annotation>
 												<xs:documentation>4-Vector defining Centre R,Z and full extents dR, dZ</xs:documentation>
 												<xs:appinfo>
-													<type>STATIC</type>
-													<axis1>4</axis1>
-													<units>m</units>
+													<Type>STATIC</Type>
+													<Axis1>4</Axis1>
+													<Units>m</Units>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -631,19 +709,21 @@
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
-							<xs:element ref="Timebase"/>
 							<xs:element name="Currents">
 								<xs:annotation>
-									<xs:documentation>Passive Loop currents</xs:documentation>
+									<xs:documentation>Passive Loop currents (assumed to share their timebase)</xs:documentation>
 									<xs:appinfo>
-										<type>SIGNAL</type>
-										<axis2>../Timebase</axis2>
-										<axis1>../Names</axis1>
-										<units>Amp</units>
+										<Type>SIGNAL</Type>
+										<Axis2>../Timebase</Axis2>
+										<Axis1>../Names</Axis1>
+										<Units>Amp</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
-									<xs:group ref="FLT_2D"/>
+									<xs:sequence>
+										<xs:element ref="Timebase"/>
+										<xs:group ref="FLT_2D"/>
+									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
 						</xs:sequence>
@@ -651,7 +731,7 @@
 				</xs:element>
 				<xs:element name="Vacuum_Model">
 					<xs:annotation>
-						<xs:documentation>Electromagnetic Vacuum Model of the PF System, active and passive</xs:documentation>
+						<xs:documentation>Electromagnetic Vacuum Model of the PF System, including both active and passive coils</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
@@ -659,8 +739,8 @@
 								<xs:annotation>
 									<xs:documentation>Names of circuits [Active;Passive]</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
+										<Type>STATIC</Type>
+										<Axis1>N</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -671,10 +751,10 @@
 								<xs:annotation>
 									<xs:documentation>Inductance matrix between circuits</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<axis2>../Names</axis2>
-										<units>Henry</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Axis2>../Names</Axis2>
+										<Units>Henry</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -685,9 +765,9 @@
 								<xs:annotation>
 									<xs:documentation>Resistances of PF coils</xs:documentation>
 									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>Ohm</units>
+										<Type>STATIC</Type>
+										<Axis1>../Names</Axis1>
+										<Units>Ohm</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
