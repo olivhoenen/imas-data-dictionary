@@ -1,0 +1,2353 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Data Dictionary HTML documentation</title>
+		<style type="text/css">
+			p {color:black;font-size:12pt;font-weight:normal;}
+			p.name {color:red;font-size:18pt;font-weight:bold;}
+			p.welcome {color:#3333aa; font-size:20pt; font-weight:bold; text-align:center;}
+			span.head {color:#3333aa; font-size:12pt; font-weight:bold; }
+       </style>
+	</head>
+	<body>
+		<p class="welcome">ITER Physics Data Model Documentation for Core_Profiles</p><b></b><br><table border="1">
+			<thead style="color:#ff0000">
+				<td>Full path name</td>
+				<td>Description</td>
+				<td>Data Type</td>
+				<td>Axes</td>
+			</thead>
+			<tr>
+				<td>IDS_Properties</td>
+				<td>Interface Data Structure properties; it can be placed at any node, allowing this node to be identified as an IDS and to be completed automatically by applications. </td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Status_of</td>
+				<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Comment_of</td>
+				<td>Any additional comment from the source application</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Source_of</td>
+				<td>Where do the data for this Data Item come from and where are they put </td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Date_of</td>
+				<td>Date of consistent creation of this IDS</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Creator_of</td>
+				<td>Creator of this consistent IDS</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Homogeneous_Timebase</td>
+				<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+				<td>int_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Rho_Tor_Norm</td>
+				<td>Normalised toroidal flux coordinate values (= rho_tor normalised to the value at the last radial grid point, which is usually almost at the Last Closed Flux Surface) {SIGNAL}</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Rho</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Rho_Tor</td>
+				<td>Toroidal flux coordinate (not normalised) {SIGNAL} [m]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>dRho_Tor_dT</td>
+				<td>Time derivative of Rho_Tor {SIGNAL} [m/s]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Toroidal_Field</td>
+				<td>Toroidal field information entering the definition of Rho_Tor, for reference only</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Toroidal_Field/B0</td>
+				<td>Vacuum field at R0 {SIGNAL} [T]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Toroidal_Field/dB0_dT</td>
+				<td>Time derivative of the vacuum field at R0 {SIGNAL} [T/s]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Toroidal_Field/R0</td>
+				<td>Characteristic major radius of the device (used in publications, usually middle of the vessel at the equatorial midplane) {CONSTANT} [m]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition</td>
+				<td>Generic declaration of Plasma Composition for a simulation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Nuclei</td>
+				<td>Array of nuclei considered.</td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Nuclei</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Nuclei/Zn</td>
+				<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Nuclei/A</td>
+				<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Nuclei/Label</td>
+				<td>String identifying element (e.g. H, D, T, He, C, ...) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions</td>
+				<td>Array of main plasma ions.</td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Ions</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions/Nucleus_Index</td>
+				<td>Index into list of nuclei {CONSTANT}</td>
+				<td>INT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions/Zion</td>
+				<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {CONSTANT} [Elementary Charge Unit]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions/Multiple_Charge_State_Flag</td>
+				<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Impurities structure TBD {CONSTANT}</td>
+				<td>INT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions/Label</td>
+				<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Psi</td>
+				<td>Poloidal magnetic flux</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Psi/Value</td>
+				<td>Field value {SIGNAL} [Wb]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/dValue_dRho_Tor</td>
+				<td>Radial derivative (dValue/dRho_Tor) {SIGNAL} [Wb.m^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/d2Value_dRho_Tor2</td>
+				<td>Second order radial derivative {SIGNAL} [Wb.m^-2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/dValue_dT_CRho_Tor_Norm</td>
+				<td>Time derivative of the poloidal flux at constant rho_tor_norm [V] {SIGNAL} [V]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/dValue_dT_CPhi</td>
+				<td>Time derivative of the poloidal flux at constant toroidal flux {SIGNAL} [V]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Psi/Calculation_Mode</td>
+				<td>Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step {SIGNAL}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/Boundary_Condition</td>
+				<td>Boundary condition for the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Psi/Boundary_Condition/Value</td>
+				<td>Value of the boundary condition. Unit depends on type, respectively [1-Wb, 2-A, 3-V]. For type 1 to 3, only the first position in the vector is used. For type 5, all three positions are used, meaning respectively a1, a2, a3.  {SIGNAL} [Variable]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...3</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/Boundary_Condition/Source</td>
+				<td>Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Psi/Boundary_Condition/Type</td>
+				<td>Type of the boundary condition for the transport solver. 0- equation not solved; 1- edge value of poloidal flux; 2- total current inside boundary; 3- edge Vloop; 4- not defined; 5- generic boundary condition expressed as a1*(dpsi_drho_tor)+a2*psi=a3 {SIGNAL}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/Boundary_Condition/Rho_Tor_Norm</td>
+				<td>Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/J_Non_Inductive</td>
+				<td>Non-inductive parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/Conductivity_Parallel</td>
+				<td>Parallel conductivity {SIGNAL} [ohm^-1.m^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Psi/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te</td>
+				<td>Electron temperature</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Value</td>
+				<td>Field value {SIGNAL} [eV]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/dValue_dRho_Tor</td>
+				<td>Radial derivative (dValue/dRho_Tor) {SIGNAL} [eV.m^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/d2Value_dRho_Tor2</td>
+				<td>Second order radial derivative {SIGNAL} [eV.m^-2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/dValue_dT</td>
+				<td>Time derivative (dValue/dTime) {SIGNAL} [eV.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Calculation_Mode</td>
+				<td>Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step {SIGNAL}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Boundary_Condition</td>
+				<td>Boundary condition for the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Boundary_Condition/Value</td>
+				<td>Value of the boundary condition. Unit depends on type, respectively [1-eV, 2-eV.m^-1, 3-m, 4-eV.s^-1]. For Type 1 to 4, only the first row in the matrix is used. For type 5, all three rows are used, meaning respectively a1, a2, a3. {SIGNAL} [Variable]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...3</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Boundary_Condition/Source</td>
+				<td>Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Boundary_Condition/Type</td>
+				<td>Type of the boundary condition for the transport solver. 0- equation not solved; 1- value of the field y; 2-radial derivative of the field (-dy/drho_tor); 3-scale length of the field y/(-dy/drho_tor); 4- flux; 5- generic boundary condition y expressed as a1y'+a2y=a3 {SIGNAL}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Boundary_Condition/Rho_Tor_Norm</td>
+				<td>Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Source_Term</td>
+				<td>Total source term used in the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Source_Term/Value</td>
+				<td>Value of the source term {SIGNAL} [W.m^-3]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Source_Term/Integral</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the source term {SIGNAL} [W.m^-2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Source_Term/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Q_Ohmic</td>
+				<td>Ohmic heating</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Q_Ohmic/Value</td>
+				<td>Value of the source term {SIGNAL} [W.m^-3]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Q_Ohmic/Integral</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the source term {SIGNAL} [W.m^-2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Q_Ohmic/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Q_ei</td>
+				<td>Collisional heat transfer from electrons to (all) ions (equipartition term)</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Q_ei/Value</td>
+				<td>Value of the source term {SIGNAL} [W.m^-3]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Q_ei/Integral</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the source term {SIGNAL} [W.m^-2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Q_ei/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Transport_Coefficients</td>
+				<td>Total transport coefficients used in the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Transport_Coefficients/Diffusion</td>
+				<td>Diffusion coefficient {SIGNAL} [m^2.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Transport_Coefficients/Convection</td>
+				<td>Convection coefficient {SIGNAL} [m/s]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Transport_Coefficients/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Fluxes</td>
+				<td>Fluxes of the transported quantity</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Te/Fluxes/Flux_From_Coefficients</td>
+				<td>Flux of the field calculated from the transport coefficients {SIGNAL} [W.m^-2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Fluxes/Flux_Interpretative</td>
+				<td>Interpretative flux deduced from the field data, the integral of the source term, and the time derivative of the field {SIGNAL} [W.m^-2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Fluxes/Flux_Through_Surface</td>
+				<td>Net flux through the magnetic surface, i.e. integral over the magnetic surface area of Flux_From_Coefficients {SIGNAL} [W]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Fluxes/Integral_DT_Term</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation {SIGNAL} [W.m^(4/3)]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Te/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti</td>
+				<td>Ion temperature</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ti/Value</td>
+				<td>Field value {SIGNAL} [eV]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/dValue_dRho_Tor</td>
+				<td>Radial derivative (dValue/dRho_Tor) {SIGNAL} [eV.m^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/d2Value_dRho_Tor2</td>
+				<td>Second order radial derivative {SIGNAL} [eV.m^-2]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/dValue_dT</td>
+				<td>Time derivative (dValue/dTime) {SIGNAL} [eV.s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...) {CONSTANT}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Plasma_Composition/Ions</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Calculation_Mode</td>
+				<td>Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step {SIGNAL}</td>
+				<td>INT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Boundary_Condition</td>
+				<td>Boundary condition for the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ti/Boundary_Condition/Value</td>
+				<td>Value of the boundary condition. Unit depends on type, respectively [1-eV, 2-eV.m^-1, 3-m, 4-eV.s^-1]. For Type 1 to 4, only the first row in the matrix is used. For type 5, all three rows are used, meaning respectively a1, a2, a3. {SIGNAL} [Variable]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...3</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Boundary_Condition/Source</td>
+				<td>Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging) {CONSTANT}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Boundary_Condition/Type</td>
+				<td>Type of the boundary condition for the transport solver. 0- equation not solved; 1- value of the field y; 2-radial derivative of the field (-dy/drho_tor); 3-scale length of the field y/(-dy/drho_tor); 4- flux; 5- generic boundary condition y expressed as a1y'+a2y=a3 {SIGNAL}</td>
+				<td>INT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Boundary_Condition/Rho_Tor_Norm</td>
+				<td>Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed {SIGNAL}</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Source_Term</td>
+				<td>Total source term used in the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ti/Source_Term/Value</td>
+				<td>Value of the source term {SIGNAL} [W.m^-3]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Source_Term/Integral</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the source term {SIGNAL} [W.m^-2]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Source_Term/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Transport_Coefficients</td>
+				<td>Total transport coefficients used in the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ti/Transport_Coefficients/Diffusion</td>
+				<td>Diffusion coefficient {SIGNAL} [m^2.s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Transport_Coefficients/Convection</td>
+				<td>Convection coefficient {SIGNAL} [m/s]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Transport_Coefficients/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Fluxes</td>
+				<td>Fluxes of the transported quantity</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ti/Fluxes/Flux_From_Coefficients</td>
+				<td>Flux of the field calculated from the transport coefficients {SIGNAL} [W.m^-2]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Fluxes/Flux_Interpretative</td>
+				<td>Interpretative flux deduced from the field data, the integral of the source term, and the time derivative of the field {SIGNAL} [W.m^-2]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Fluxes/Flux_Through_Surface</td>
+				<td>Net flux through the magnetic surface, i.e. integral over the magnetic surface area of Flux_From_Coefficients {SIGNAL} [W]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Fluxes/Integral_DT_Term</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation {SIGNAL} [W.m^(4/3)]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ti/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne</td>
+				<td>Electron density</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ne/Value</td>
+				<td>Field value {SIGNAL} [m^-3]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/dValue_dRho_Tor</td>
+				<td>Radial derivative (dValue/dRho_Tor) {SIGNAL} [m^-4]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/d2Value_dRho_Tor2</td>
+				<td>Second order radial derivative {SIGNAL} [m^-5]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/dValue_dT</td>
+				<td>Time derivative (dValue/dTime) {SIGNAL} [m^-3.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ne/Calculation_Mode</td>
+				<td>Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step {SIGNAL}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Boundary_Condition</td>
+				<td>Boundary condition for the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ne/Boundary_Condition/Value</td>
+				<td>Value of the boundary condition. Unit depends on type, respectively [1-m^-3, 2-m^-4, 3-m, 4-m^-3.s^-1]. For Type 1 to 4, only the first row in the matrix is used. For type 5, all three rows are used, meaning respectively a1, a2, a3. {SIGNAL} [Variable]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...3</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Boundary_Condition/Source</td>
+				<td>Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ne/Boundary_Condition/Type</td>
+				<td>Type of the boundary condition for the transport solver. 0- equation not solved; 1- value of the field y; 2-radial derivative of the field (-dy/drho_tor); 3-scale length of the field y/(-dy/drho_tor); 4- flux; 5- generic boundary condition y expressed as a1y'+a2y=a3 {SIGNAL}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Boundary_Condition/Rho_Tor_Norm</td>
+				<td>Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Source_Term</td>
+				<td>Total source term used in the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ne/Source_Term/Value</td>
+				<td>Value of the source term {SIGNAL} [m^-3.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Source_Term/Integral</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the source term {SIGNAL} [m^-2.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Source_Term/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ne/Transport_Coefficients</td>
+				<td>Total transport coefficients used in the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ne/Transport_Coefficients/Diffusion</td>
+				<td>Diffusion coefficient {SIGNAL} [m^2.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Transport_Coefficients/Convection</td>
+				<td>Convection coefficient {SIGNAL} [m/s]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Transport_Coefficients/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ne/Fluxes</td>
+				<td>Fluxes of the transported quantity</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ne/Fluxes/Flux_From_Coefficients</td>
+				<td>Flux of the field calculated from the transport coefficients {SIGNAL} [m^-2.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Fluxes/Flux_Interpretative</td>
+				<td>Interpretative flux deduced from the field data, the integral of the source term, and the time derivative of the field {SIGNAL} [m^-2.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Fluxes/Flux_Through_Surface</td>
+				<td>Net flux through the magnetic surface, i.e. integral over the magnetic surface area of Flux_From_Coefficients {SIGNAL} [s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Fluxes/Integral_DT_Term</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation {SIGNAL} [s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ne/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni</td>
+				<td>Ion density</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ni/Value</td>
+				<td>Field value {SIGNAL} [m^-3]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/dValue_dRho_Tor</td>
+				<td>Radial derivative (dValue/dRho_Tor) {SIGNAL} [m^-4]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/d2Value_dRho_Tor2</td>
+				<td>Second order radial derivative {SIGNAL} [m^-5]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/dValue_dT</td>
+				<td>Time derivative (dValue/dTime) {SIGNAL} [m^-3.s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...) {CONSTANT}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Plasma_Composition/Ions</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Calculation_Mode</td>
+				<td>Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step {SIGNAL}</td>
+				<td>INT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Boundary_Condition</td>
+				<td>Boundary condition for the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ni/Boundary_Condition/Value</td>
+				<td>Value of the boundary condition. Unit depends on type, respectively [1-m^-3, 2-m^-4, 3-m, 4-m^-3.s^-1]. For Type 1 to 4, only the first row in the matrix is used. For type 5, all three rows are used, meaning respectively a1, a2, a3. {SIGNAL} [Variable]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...3</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Boundary_Condition/Source</td>
+				<td>Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging) {CONSTANT}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Boundary_Condition/Type</td>
+				<td>Type of the boundary condition for the transport solver. 0- equation not solved; 1- value of the field y; 2-radial derivative of the field (-dy/drho_tor); 3-scale length of the field y/(-dy/drho_tor); 4- flux; 5- generic boundary condition y expressed as a1y'+a2y=a3 {SIGNAL}</td>
+				<td>INT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Boundary_Condition/Rho_Tor_Norm</td>
+				<td>Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed {SIGNAL}</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Source_Term</td>
+				<td>Total source term used in the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ni/Source_Term/Value</td>
+				<td>Value of the source term {SIGNAL} [m^-3.s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Source_Term/Integral</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the source term {SIGNAL} [m^-2.s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Source_Term/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Transport_Coefficients</td>
+				<td>Total transport coefficients used in the transport equation</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ni/Transport_Coefficients/Diffusion</td>
+				<td>Diffusion coefficient {SIGNAL} [m^2.s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Transport_Coefficients/Convection</td>
+				<td>Convection coefficient {SIGNAL} [m/s]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Transport_Coefficients/Source</td>
+				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Plasma_Composition/Ions</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Fluxes</td>
+				<td>Fluxes of the transported quantity</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Ni/Fluxes/Flux_From_Coefficients</td>
+				<td>Flux of the field calculated from the transport coefficients {SIGNAL} [m^-2.s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Fluxes/Flux_Interpretative</td>
+				<td>Interpretative flux deduced from the field data, the integral of the source term, and the time derivative of the field {SIGNAL} [m^-2.s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Fluxes/Flux_Through_Surface</td>
+				<td>Net flux through the magnetic surface, i.e. integral over the magnetic surface area of Flux_From_Coefficients {SIGNAL} [s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Fluxes/Integral_DT_Term</td>
+				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation {SIGNAL} [s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Ni/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles</td>
+				<td>Profiles derived from the fields solved in the transport equations, or from experiment.</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Pe</td>
+				<td>Electron pressure {SIGNAL} [Pa]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/dPe_dT</td>
+				<td>Time derivative of the electron pressure {SIGNAL} [Pa.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Pi</td>
+				<td>Ion pressure (per ion species) {SIGNAL} [Pa]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Pi_Total</td>
+				<td>Total ion pressure (sum over the ion species) {SIGNAL} [Pa]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/dPi_Total_dT</td>
+				<td>Time derivative of the total ion pressure {SIGNAL} [Pa.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Pressure_Thermal</td>
+				<td>Thermal pressure (electrons+ions) {SIGNAL} [Pa]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Pressure_Perpendicular</td>
+				<td>Total perpendicular pressure (electrons+ions, thermal+non-thermal) {SIGNAL} [Pa]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Pressure_Parallel</td>
+				<td>Total parallel pressure (electrons+ions, thermal+non-thermal) {SIGNAL} [Pa]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/J_Total</td>
+				<td>Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/J_Toroidal</td>
+				<td>Total toroidal current density = average(J_Toroidal/R) / average(1/R) {SIGNAL} [A/m^2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/J_Ohmic</td>
+				<td>Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/V_Loop</td>
+				<td>Toroidal loop voltage {SIGNAL} [V]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/E_Parallel</td>
+				<td>Parallel electric field = average(E.B) / B0, where Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [V.m^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/E_B</td>
+				<td>Average(E.B) {SIGNAL} [V.T.m^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/q</td>
+				<td>Safety factor profile {SIGNAL}</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Magnetic_Shear</td>
+				<td>Magnetic shear profile; {SIGNAL}</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Ni_Fast</td>
+				<td>Density of fast ions, for the various ion species {SIGNAL} [m^-3]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Momentum_Tor</td>
+				<td>Toroidal momentum of the various ion species {SIGNAL} [kg.m^-2.s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Rotation_Frequency_Tor</td>
+				<td>Angular toroidal rotation frequency of the various ion species {SIGNAL} [s^-1]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Plasma_Composition/Ions</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/Zeff</td>
+				<td>Effective charge profile {SIGNAL}</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/B_Pol</td>
+				<td>Average poloidal magnetic field, defined as sqrt(ave(grad Rho^2/R^2)).dPsi/dRho {SIGNAL} [T]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Profiles/ddV_dRho_Tor_dT</td>
+				<td>Time derivative of the radial derivative of the volume enclosed in the flux surface, i.e. d/dt(dV/drho_tor) {SIGNAL} [m^2.s^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Global</td>
+				<td>Various global quantities calculated from the fields solved in the transport equations and from the Derived Profiles</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Derived_Global/Current_Total</td>
+				<td>Total plasma current {SIGNAL} [A]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Global/Current_Inside_Boundary</td>
+				<td>Plasma current inside the transport solver boundary Core_Profiles/Psi/Boundary/Rho_Tor_Norm {SIGNAL} [A]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Global/Current_Non_Inductive</td>
+				<td>Total non-inductive parallel current {SIGNAL} [A]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Global/V_Loop</td>
+				<td>Toroidal loop voltage {SIGNAL} [V]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Global/Li_3</td>
+				<td>Internal inductance {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Global/Beta_Tor</td>
+				<td>Toroidal beta (ratio of kinetic to magnetic pressure) {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Global/Beta_Tor_Norm</td>
+				<td>Normalised toroidal beta {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Global/Beta_Pol</td>
+				<td>Poloidal beta {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Derived_Global/Energy_Diamagnetic</td>
+				<td>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (Pressure_Thermal + Pressure_Perpendicular) {SIGNAL} [A]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Code_Parameters</td>
+				<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Code_Name</td>
+				<td>Name of the code {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Code_Version</td>
+				<td>Version of the code {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Parameters</td>
+				<td>List of the code specific parameters, string expected to be in XML format. {SIGNAL}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Code_Parameters/Output_Diagnostics</td>
+				<td>List of the code specific diagnostic/output, string expected to be in XML format. {SIGNAL}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Code_Parameters/Output_Flag</td>
+				<td>Output flag : 0 means the run is successful, other values meaning some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IDSs xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<IDS name="Core_Profiles" maxoccur="1" documentation="Core plasma 1D profiles as a function of the normalised toroidal flux coordinate. TBD: toroidal and poloidal velocities">
+		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties; it can be placed at any node, allowing this node to be identified as an IDS and to be completed automatically by applications. " data_type="structure">
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this Data Item come from and where are they put " data_type="str_type"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
+		</field>
+		<field name="Rho_Tor_Norm" path="Rho_Tor_Norm" documentation="Normalised toroidal flux coordinate values (= rho_tor normalised to the value at the last radial grid point, which is usually almost at the Last Closed Flux Surface)" data_type="FLT_2D" type="SIGNAL" axis1="1...N_Rho" axis2="../Timebase"/>
+		<field name="Rho_Tor" path="Rho_Tor" documentation="Toroidal flux coordinate (not normalised)" data_type="FLT_2D" type="SIGNAL" axis1="../Rho_Tor_Norm" axis2="../Timebase" units="m"/>
+		<field name="dRho_Tor_dT" path="dRho_Tor_dT" documentation="Time derivative of Rho_Tor" data_type="FLT_2D" type="SIGNAL" axis1="../Rho_Tor_Norm" axis2="../Timebase" units="m/s"/>
+		<field name="Toroidal_Field" path="Toroidal_Field" documentation="Toroidal field information entering the definition of Rho_Tor, for reference only" data_type="structure">
+			<field name="B0" path="Toroidal_Field/B0" documentation="Vacuum field at R0" data_type="FLT_1D" axis1="../../Timebase" units="T" type="SIGNAL"/>
+			<field name="dB0_dT" path="Toroidal_Field/dB0_dT" documentation="Time derivative of the vacuum field at R0" data_type="FLT_1D" axis1="../../Timebase" units="T/s" type="SIGNAL"/>
+			<field name="R0" path="Toroidal_Field/R0" documentation="Characteristic major radius of the device (used in publications, usually middle of the vessel at the equatorial midplane)" data_type="FLT_0D" units="m" type="CONSTANT"/>
+		</field>
+		<field name="Plasma_Composition" path="Plasma_Composition" documentation="Generic declaration of Plasma Composition for a simulation" data_type="structure">
+			<field name="Nuclei" path="Plasma_Composition/Nuclei" documentation="Array of nuclei considered." data_type="struct_array" axis1="1...N_Nuclei">
+				<field name="Zn" path="Plasma_Composition/Nuclei/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+				<field name="A" path="Plasma_Composition/Nuclei/A" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="CONSTANT"/>
+				<field name="Label" path="Plasma_Composition/Nuclei/Label" documentation="String identifying element (e.g. H, D, T, He, C, ...)" data_type="STR_0D" type="CONSTANT"/>
+			</field>
+			<field name="Ions" path="Plasma_Composition/Ions" documentation="Array of main plasma ions." data_type="struct_array" axis1="1...N_Ions">
+				<field name="Nucleus_Index" path="Plasma_Composition/Ions/Nucleus_Index" documentation="Index into list of nuclei" data_type="INT_0D" type="CONSTANT" index_into="../../Nuclei"/>
+				<field name="Zion" path="Plasma_Composition/Ions/Zion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="CONSTANT" units="Elementary Charge Unit"/>
+				<field name="Multiple_Charge_State_Flag" path="Plasma_Composition/Ions/Multiple_Charge_State_Flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Impurities structure TBD" data_type="INT_0D" type="CONSTANT"/>
+				<field name="Label" path="Plasma_Composition/Ions/Label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="CONSTANT"/>
+			</field>
+		</field>
+		<field name="Psi" path="Psi" documentation="Poloidal magnetic flux" data_type="structure">
+			<field name="Value" path="Psi/Value" documentation="Field value" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="Wb" type="SIGNAL"/>
+			<field name="dValue_dRho_Tor" path="Psi/dValue_dRho_Tor" documentation="Radial derivative (dValue/dRho_Tor)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="Wb.m^-1" type="SIGNAL"/>
+			<field name="d2Value_dRho_Tor2" path="Psi/d2Value_dRho_Tor2" documentation="Second order radial derivative" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="Wb.m^-2" type="SIGNAL"/>
+			<field name="dValue_dT_CRho_Tor_Norm" path="Psi/dValue_dT_CRho_Tor_Norm" documentation="Time derivative of the poloidal flux at constant rho_tor_norm [V]" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="V" type="SIGNAL"/>
+			<field name="dValue_dT_CPhi" path="Psi/dValue_dT_CPhi" documentation="Time derivative of the poloidal flux at constant toroidal flux" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="V" type="SIGNAL"/>
+			<field name="Source" path="Psi/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...)" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Calculation_Mode" path="Psi/Calculation_Mode" documentation="Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step" data_type="INT_1D" axis1="../Timebase" type="SIGNAL"/>
+			<field name="Boundary_Condition" path="Psi/Boundary_Condition" documentation="Boundary condition for the transport equation" data_type="structure">
+				<field name="Value" path="Psi/Boundary_Condition/Value" documentation="Value of the boundary condition. Unit depends on type, respectively [1-Wb, 2-A, 3-V]. For type 1 to 3, only the first position in the vector is used. For type 5, all three positions are used, meaning respectively a1, a2, a3. " data_type="FLT_2D" axis1="1...3" axis2="../../Timebase" units="Variable" type="SIGNAL"/>
+				<field name="Source" path="Psi/Boundary_Condition/Source" documentation="Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging)" data_type="STR_0D" type="CONSTANT"/>
+				<field name="Type" path="Psi/Boundary_Condition/Type" documentation="Type of the boundary condition for the transport solver. 0- equation not solved; 1- edge value of poloidal flux; 2- total current inside boundary; 3- edge Vloop; 4- not defined; 5- generic boundary condition expressed as a1*(dpsi_drho_tor)+a2*psi=a3" data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
+				<field name="Rho_Tor_Norm" path="Psi/Boundary_Condition/Rho_Tor_Norm" documentation="Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			</field>
+			<field name="J_Non_Inductive" path="Psi/J_Non_Inductive" documentation="Non-inductive parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="A/m^2" type="SIGNAL"/>
+			<field name="Conductivity_Parallel" path="Psi/Conductivity_Parallel" documentation="Parallel conductivity" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="ohm^-1.m^-1" type="SIGNAL"/>
+			<field name="Timebase" path="Psi/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		</field>
+		<field name="Te" path="Te" documentation="Electron temperature" data_type="structure">
+			<field name="Value" path="Te/Value" documentation="Field value" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="eV" type="SIGNAL"/>
+			<field name="dValue_dRho_Tor" path="Te/dValue_dRho_Tor" documentation="Radial derivative (dValue/dRho_Tor)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="eV.m^-1" type="SIGNAL"/>
+			<field name="d2Value_dRho_Tor2" path="Te/d2Value_dRho_Tor2" documentation="Second order radial derivative" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="eV.m^-2" type="SIGNAL"/>
+			<field name="dValue_dT" path="Te/dValue_dT" documentation="Time derivative (dValue/dTime)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="eV.s^-1" type="SIGNAL"/>
+			<field name="Source" path="Te/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...)" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Calculation_Mode" path="Te/Calculation_Mode" documentation="Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step" data_type="INT_1D" axis1="../Timebase" type="SIGNAL"/>
+			<field name="Boundary_Condition" path="Te/Boundary_Condition" documentation="Boundary condition for the transport equation" data_type="structure">
+				<field name="Value" path="Te/Boundary_Condition/Value" documentation="Value of the boundary condition. Unit depends on type, respectively [1-eV, 2-eV.m^-1, 3-m, 4-eV.s^-1]. For Type 1 to 4, only the first row in the matrix is used. For type 5, all three rows are used, meaning respectively a1, a2, a3." data_type="FLT_2D" axis1="1...3" axis2="../../Timebase" units="Variable" type="SIGNAL"/>
+				<field name="Source" path="Te/Boundary_Condition/Source" documentation="Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging)" data_type="STR_0D" type="CONSTANT"/>
+				<field name="Type" path="Te/Boundary_Condition/Type" documentation="Type of the boundary condition for the transport solver. 0- equation not solved; 1- value of the field y; 2-radial derivative of the field (-dy/drho_tor); 3-scale length of the field y/(-dy/drho_tor); 4- flux; 5- generic boundary condition y expressed as a1y'+a2y=a3" data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
+				<field name="Rho_Tor_Norm" path="Te/Boundary_Condition/Rho_Tor_Norm" documentation="Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			</field>
+			<field name="Source_Term" path="Te/Source_Term" documentation="Total source term used in the transport equation" data_type="structure">
+				<field name="Value" path="Te/Source_Term/Value" documentation="Value of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-3" type="SIGNAL"/>
+				<field name="Integral" path="Te/Source_Term/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Source" path="Te/Source_Term/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
+			</field>
+			<field name="Q_Ohmic" path="Te/Q_Ohmic" documentation="Ohmic heating" data_type="structure">
+				<field name="Value" path="Te/Q_Ohmic/Value" documentation="Value of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-3" type="SIGNAL"/>
+				<field name="Integral" path="Te/Q_Ohmic/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Source" path="Te/Q_Ohmic/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
+			</field>
+			<field name="Q_ei" path="Te/Q_ei" documentation="Collisional heat transfer from electrons to (all) ions (equipartition term)" data_type="structure">
+				<field name="Value" path="Te/Q_ei/Value" documentation="Value of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-3" type="SIGNAL"/>
+				<field name="Integral" path="Te/Q_ei/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Source" path="Te/Q_ei/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
+			</field>
+			<field name="Transport_Coefficients" path="Te/Transport_Coefficients" documentation="Total transport coefficients used in the transport equation" data_type="structure">
+				<field name="Diffusion" path="Te/Transport_Coefficients/Diffusion" documentation="Diffusion coefficient" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="m^2.s^-1" type="SIGNAL"/>
+				<field name="Convection" path="Te/Transport_Coefficients/Convection" documentation="Convection coefficient" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="m/s" type="SIGNAL"/>
+				<field name="Source" path="Te/Transport_Coefficients/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
+			</field>
+			<field name="Fluxes" path="Te/Fluxes" documentation="Fluxes of the transported quantity" data_type="structure">
+				<field name="Flux_From_Coefficients" path="Te/Fluxes/Flux_From_Coefficients" documentation="Flux of the field calculated from the transport coefficients" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Flux_Interpretative" path="Te/Fluxes/Flux_Interpretative" documentation="Interpretative flux deduced from the field data, the integral of the source term, and the time derivative of the field" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Flux_Through_Surface" path="Te/Fluxes/Flux_Through_Surface" documentation="Net flux through the magnetic surface, i.e. integral over the magnetic surface area of Flux_From_Coefficients" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W" type="SIGNAL"/>
+				<field name="Integral_DT_Term" path="Te/Fluxes/Integral_DT_Term" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^(4/3)" type="SIGNAL"/>
+			</field>
+			<field name="Timebase" path="Te/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		</field>
+		<field name="Ti" path="Ti" documentation="Ion temperature" data_type="structure">
+			<field name="Value" path="Ti/Value" documentation="Field value" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../Timebase" units="eV" type="SIGNAL"/>
+			<field name="dValue_dRho_Tor" path="Ti/dValue_dRho_Tor" documentation="Radial derivative (dValue/dRho_Tor)" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../Timebase" units="eV.m^-1" type="SIGNAL"/>
+			<field name="d2Value_dRho_Tor2" path="Ti/d2Value_dRho_Tor2" documentation="Second order radial derivative" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../Timebase" units="eV.m^-2" type="SIGNAL"/>
+			<field name="dValue_dT" path="Ti/dValue_dT" documentation="Time derivative (dValue/dTime)" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../Timebase" units="eV.s^-1" type="SIGNAL"/>
+			<field name="Source" path="Ti/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...)" data_type="STR_1D" type="CONSTANT" axis1="../../Plasma_Composition/Ions"/>
+			<field name="Calculation_Mode" path="Ti/Calculation_Mode" documentation="Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step" data_type="INT_2D" axis1="../../Plasma_Composition/Ions" axis2="../Timebase" type="SIGNAL"/>
+			<field name="Boundary_Condition" path="Ti/Boundary_Condition" documentation="Boundary condition for the transport equation" data_type="structure">
+				<field name="Value" path="Ti/Boundary_Condition/Value" documentation="Value of the boundary condition. Unit depends on type, respectively [1-eV, 2-eV.m^-1, 3-m, 4-eV.s^-1]. For Type 1 to 4, only the first row in the matrix is used. For type 5, all three rows are used, meaning respectively a1, a2, a3." data_type="FLT_3D" axis1="1...3" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="Variable" type="SIGNAL"/>
+				<field name="Source" path="Ti/Boundary_Condition/Source" documentation="Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging)" data_type="STR_1D" type="CONSTANT" axis1="../../../Plasma_Composition/Ions"/>
+				<field name="Type" path="Ti/Boundary_Condition/Type" documentation="Type of the boundary condition for the transport solver. 0- equation not solved; 1- value of the field y; 2-radial derivative of the field (-dy/drho_tor); 3-scale length of the field y/(-dy/drho_tor); 4- flux; 5- generic boundary condition y expressed as a1y'+a2y=a3" data_type="INT_2D" axis1="../../../Plasma_Composition/Ions" axis2="../../Timebase" type="SIGNAL"/>
+				<field name="Rho_Tor_Norm" path="Ti/Boundary_Condition/Rho_Tor_Norm" documentation="Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed" data_type="FLT_2D" axis1="../../../Plasma_Composition/Ions" axis2="../../Timebase" type="SIGNAL"/>
+			</field>
+			<field name="Source_Term" path="Ti/Source_Term" documentation="Total source term used in the transport equation" data_type="structure">
+				<field name="Value" path="Ti/Source_Term/Value" documentation="Value of the source term" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="W.m^-3" type="SIGNAL"/>
+				<field name="Integral" path="Ti/Source_Term/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Source" path="Ti/Source_Term/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_1D" type="CONSTANT" axis1="../../../Plasma_Composition/Ions"/>
+			</field>
+			<field name="Transport_Coefficients" path="Ti/Transport_Coefficients" documentation="Total transport coefficients used in the transport equation" data_type="structure">
+				<field name="Diffusion" path="Ti/Transport_Coefficients/Diffusion" documentation="Diffusion coefficient" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="m^2.s^-1" type="SIGNAL"/>
+				<field name="Convection" path="Ti/Transport_Coefficients/Convection" documentation="Convection coefficient" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="m/s" type="SIGNAL"/>
+				<field name="Source" path="Ti/Transport_Coefficients/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_1D" type="CONSTANT" axis1="../../../Plasma_Composition/Ions"/>
+			</field>
+			<field name="Fluxes" path="Ti/Fluxes" documentation="Fluxes of the transported quantity" data_type="structure">
+				<field name="Flux_From_Coefficients" path="Ti/Fluxes/Flux_From_Coefficients" documentation="Flux of the field calculated from the transport coefficients" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Flux_Interpretative" path="Ti/Fluxes/Flux_Interpretative" documentation="Interpretative flux deduced from the field data, the integral of the source term, and the time derivative of the field" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Flux_Through_Surface" path="Ti/Fluxes/Flux_Through_Surface" documentation="Net flux through the magnetic surface, i.e. integral over the magnetic surface area of Flux_From_Coefficients" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="W" type="SIGNAL"/>
+				<field name="Integral_DT_Term" path="Ti/Fluxes/Integral_DT_Term" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="W.m^(4/3)" type="SIGNAL"/>
+			</field>
+			<field name="Timebase" path="Ti/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		</field>
+		<field name="Ne" path="Ne" documentation="Electron density" data_type="structure">
+			<field name="Value" path="Ne/Value" documentation="Field value" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="m^-3" type="SIGNAL"/>
+			<field name="dValue_dRho_Tor" path="Ne/dValue_dRho_Tor" documentation="Radial derivative (dValue/dRho_Tor)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="m^-4" type="SIGNAL"/>
+			<field name="d2Value_dRho_Tor2" path="Ne/d2Value_dRho_Tor2" documentation="Second order radial derivative" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="m^-5" type="SIGNAL"/>
+			<field name="dValue_dT" path="Ne/dValue_dT" documentation="Time derivative (dValue/dTime)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../Timebase" units="m^-3.s^-1" type="SIGNAL"/>
+			<field name="Source" path="Ne/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...)" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Calculation_Mode" path="Ne/Calculation_Mode" documentation="Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step" data_type="INT_1D" axis1="../Timebase" type="SIGNAL"/>
+			<field name="Boundary_Condition" path="Ne/Boundary_Condition" documentation="Boundary condition for the transport equation" data_type="structure">
+				<field name="Value" path="Ne/Boundary_Condition/Value" documentation="Value of the boundary condition. Unit depends on type, respectively [1-m^-3, 2-m^-4, 3-m, 4-m^-3.s^-1]. For Type 1 to 4, only the first row in the matrix is used. For type 5, all three rows are used, meaning respectively a1, a2, a3." data_type="FLT_2D" axis1="1...3" axis2="../../Timebase" units="Variable" type="SIGNAL"/>
+				<field name="Source" path="Ne/Boundary_Condition/Source" documentation="Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging)" data_type="STR_0D" type="CONSTANT"/>
+				<field name="Type" path="Ne/Boundary_Condition/Type" documentation="Type of the boundary condition for the transport solver. 0- equation not solved; 1- value of the field y; 2-radial derivative of the field (-dy/drho_tor); 3-scale length of the field y/(-dy/drho_tor); 4- flux; 5- generic boundary condition y expressed as a1y'+a2y=a3" data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
+				<field name="Rho_Tor_Norm" path="Ne/Boundary_Condition/Rho_Tor_Norm" documentation="Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			</field>
+			<field name="Source_Term" path="Ne/Source_Term" documentation="Total source term used in the transport equation" data_type="structure">
+				<field name="Value" path="Ne/Source_Term/Value" documentation="Value of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="m^-3.s^-1" type="SIGNAL"/>
+				<field name="Integral" path="Ne/Source_Term/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="m^-2.s^-1" type="SIGNAL"/>
+				<field name="Source" path="Ne/Source_Term/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
+			</field>
+			<field name="Transport_Coefficients" path="Ne/Transport_Coefficients" documentation="Total transport coefficients used in the transport equation" data_type="structure">
+				<field name="Diffusion" path="Ne/Transport_Coefficients/Diffusion" documentation="Diffusion coefficient" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="m^2.s^-1" type="SIGNAL"/>
+				<field name="Convection" path="Ne/Transport_Coefficients/Convection" documentation="Convection coefficient" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="m/s" type="SIGNAL"/>
+				<field name="Source" path="Ne/Transport_Coefficients/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
+			</field>
+			<field name="Fluxes" path="Ne/Fluxes" documentation="Fluxes of the transported quantity" data_type="structure">
+				<field name="Flux_From_Coefficients" path="Ne/Fluxes/Flux_From_Coefficients" documentation="Flux of the field calculated from the transport coefficients" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="m^-2.s^-1" type="SIGNAL"/>
+				<field name="Flux_Interpretative" path="Ne/Fluxes/Flux_Interpretative" documentation="Interpretative flux deduced from the field data, the integral of the source term, and the time derivative of the field" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="m^-2.s^-1" type="SIGNAL"/>
+				<field name="Flux_Through_Surface" path="Ne/Fluxes/Flux_Through_Surface" documentation="Net flux through the magnetic surface, i.e. integral over the magnetic surface area of Flux_From_Coefficients" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="s^-1" type="SIGNAL"/>
+				<field name="Integral_DT_Term" path="Ne/Fluxes/Integral_DT_Term" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="s^-1" type="SIGNAL"/>
+			</field>
+			<field name="Timebase" path="Ne/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		</field>
+		<field name="Ni" path="Ni" documentation="Ion density" data_type="structure">
+			<field name="Value" path="Ni/Value" documentation="Field value" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../Timebase" units="m^-3" type="SIGNAL"/>
+			<field name="dValue_dRho_Tor" path="Ni/dValue_dRho_Tor" documentation="Radial derivative (dValue/dRho_Tor)" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../Timebase" units="m^-4" type="SIGNAL"/>
+			<field name="d2Value_dRho_Tor2" path="Ni/d2Value_dRho_Tor2" documentation="Second order radial derivative" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../Timebase" units="m^-5" type="SIGNAL"/>
+			<field name="dValue_dT" path="Ni/dValue_dT" documentation="Time derivative (dValue/dTime)" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../Timebase" units="m^-3.s^-1" type="SIGNAL"/>
+			<field name="Source" path="Ni/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...)" data_type="STR_1D" type="CONSTANT" axis1="../../Plasma_Composition/Ions"/>
+			<field name="Calculation_Mode" path="Ni/Calculation_Mode" documentation="Flag describing how the profile has been calculated : 0-not calculated 1-interpretative; 2-calculated by the transport solver; 3-calculated by a separate code; 4-used value from the previous time step" data_type="INT_2D" axis1="../../Plasma_Composition/Ions" axis2="../Timebase" type="SIGNAL"/>
+			<field name="Boundary_Condition" path="Ni/Boundary_Condition" documentation="Boundary condition for the transport equation" data_type="structure">
+				<field name="Value" path="Ni/Boundary_Condition/Value" documentation="Value of the boundary condition. Unit depends on type, respectively [1-m^-3, 2-m^-4, 3-m, 4-m^-3.s^-1]. For Type 1 to 4, only the first row in the matrix is used. For type 5, all three rows are used, meaning respectively a1, a2, a3." data_type="FLT_3D" axis1="1...3" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="Variable" type="SIGNAL"/>
+				<field name="Source" path="Ni/Boundary_Condition/Source" documentation="Source of the boundary condition (any comment describing its origin : code, path to diagnostic signals, massaging)" data_type="STR_1D" type="CONSTANT" axis1="../../../Plasma_Composition/Ions"/>
+				<field name="Type" path="Ni/Boundary_Condition/Type" documentation="Type of the boundary condition for the transport solver. 0- equation not solved; 1- value of the field y; 2-radial derivative of the field (-dy/drho_tor); 3-scale length of the field y/(-dy/drho_tor); 4- flux; 5- generic boundary condition y expressed as a1y'+a2y=a3" data_type="INT_2D" axis1="../../../Plasma_Composition/Ions" axis2="../../Timebase" type="SIGNAL"/>
+				<field name="Rho_Tor_Norm" path="Ni/Boundary_Condition/Rho_Tor_Norm" documentation="Position of the boundary condition (in terms of normalised toroidal flux coordinate) for the transport solver. Outside this boundary, the value of the data are considered to be prescribed" data_type="FLT_2D" axis1="../../../Plasma_Composition/Ions" axis2="../../Timebase" type="SIGNAL"/>
+			</field>
+			<field name="Source_Term" path="Ni/Source_Term" documentation="Total source term used in the transport equation" data_type="structure">
+				<field name="Value" path="Ni/Source_Term/Value" documentation="Value of the source term" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="m^-3.s^-1" type="SIGNAL"/>
+				<field name="Integral" path="Ni/Source_Term/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="m^-2.s^-1" type="SIGNAL"/>
+				<field name="Source" path="Ni/Source_Term/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_1D" type="CONSTANT" axis1="../../../Plasma_Composition/Ions"/>
+			</field>
+			<field name="Transport_Coefficients" path="Ni/Transport_Coefficients" documentation="Total transport coefficients used in the transport equation" data_type="structure">
+				<field name="Diffusion" path="Ni/Transport_Coefficients/Diffusion" documentation="Diffusion coefficient" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="m^2.s^-1" type="SIGNAL"/>
+				<field name="Convection" path="Ni/Transport_Coefficients/Convection" documentation="Convection coefficient" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="m/s" type="SIGNAL"/>
+				<field name="Source" path="Ni/Transport_Coefficients/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_1D" type="CONSTANT" axis1="../../../Plasma_Composition/Ions"/>
+			</field>
+			<field name="Fluxes" path="Ni/Fluxes" documentation="Fluxes of the transported quantity" data_type="structure">
+				<field name="Flux_From_Coefficients" path="Ni/Fluxes/Flux_From_Coefficients" documentation="Flux of the field calculated from the transport coefficients" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="m^-2.s^-1" type="SIGNAL"/>
+				<field name="Flux_Interpretative" path="Ni/Fluxes/Flux_Interpretative" documentation="Interpretative flux deduced from the field data, the integral of the source term, and the time derivative of the field" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="m^-2.s^-1" type="SIGNAL"/>
+				<field name="Flux_Through_Surface" path="Ni/Fluxes/Flux_Through_Surface" documentation="Net flux through the magnetic surface, i.e. integral over the magnetic surface area of Flux_From_Coefficients" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="s^-1" type="SIGNAL"/>
+				<field name="Integral_DT_Term" path="Ni/Fluxes/Integral_DT_Term" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation" data_type="FLT_3D" axis1="../../../Rho_Tor_Norm" axis2="../../../Plasma_Composition/Ions" axis3="../../Timebase" units="s^-1" type="SIGNAL"/>
+			</field>
+			<field name="Timebase" path="Ni/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		</field>
+		<field name="Derived_Profiles" path="Derived_Profiles" documentation="Profiles derived from the fields solved in the transport equations, or from experiment." data_type="structure">
+			<field name="Pe" path="Derived_Profiles/Pe" documentation="Electron pressure" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="Pa" type="SIGNAL"/>
+			<field name="dPe_dT" path="Derived_Profiles/dPe_dT" documentation="Time derivative of the electron pressure" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="Pa.s^-1" type="SIGNAL"/>
+			<field name="Pi" path="Derived_Profiles/Pi" documentation="Ion pressure (per ion species)" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../../Timebase" units="Pa" type="SIGNAL"/>
+			<field name="Pi_Total" path="Derived_Profiles/Pi_Total" documentation="Total ion pressure (sum over the ion species)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="Pa" type="SIGNAL"/>
+			<field name="dPi_Total_dT" path="Derived_Profiles/dPi_Total_dT" documentation="Time derivative of the total ion pressure" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="Pa.s^-1" type="SIGNAL"/>
+			<field name="Pressure_Thermal" path="Derived_Profiles/Pressure_Thermal" documentation="Thermal pressure (electrons+ions)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="Pa" type="SIGNAL"/>
+			<field name="Pressure_Perpendicular" path="Derived_Profiles/Pressure_Perpendicular" documentation="Total perpendicular pressure (electrons+ions, thermal+non-thermal)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="Pa" type="SIGNAL"/>
+			<field name="Pressure_Parallel" path="Derived_Profiles/Pressure_Parallel" documentation="Total parallel pressure (electrons+ions, thermal+non-thermal)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="Pa" type="SIGNAL"/>
+			<field name="J_Total" path="Derived_Profiles/J_Total" documentation="Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="A/m^2" type="SIGNAL"/>
+			<field name="J_Toroidal" path="Derived_Profiles/J_Toroidal" documentation="Total toroidal current density = average(J_Toroidal/R) / average(1/R)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="A/m^2" type="SIGNAL"/>
+			<field name="J_Ohmic" path="Derived_Profiles/J_Ohmic" documentation="Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="A/m^2" type="SIGNAL"/>
+			<field name="V_Loop" path="Derived_Profiles/V_Loop" documentation="Toroidal loop voltage" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="V" type="SIGNAL"/>
+			<field name="E_Parallel" path="Derived_Profiles/E_Parallel" documentation="Parallel electric field = average(E.B) / B0, where Core_Profiles/Toroidal_Field/ B0" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="V.m^-1" type="SIGNAL"/>
+			<field name="E_B" path="Derived_Profiles/E_B" documentation="Average(E.B)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="V.T.m^-1" type="SIGNAL"/>
+			<field name="q" path="Derived_Profiles/q" documentation="Safety factor profile" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" type="SIGNAL"/>
+			<field name="Magnetic_Shear" path="Derived_Profiles/Magnetic_Shear" documentation="Magnetic shear profile;" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" type="SIGNAL"/>
+			<field name="Ni_Fast" path="Derived_Profiles/Ni_Fast" documentation="Density of fast ions, for the various ion species" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../../Timebase" units="m^-3" type="SIGNAL"/>
+			<field name="Momentum_Tor" path="Derived_Profiles/Momentum_Tor" documentation="Toroidal momentum of the various ion species" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../../Timebase" units="kg.m^-2.s^-1" type="SIGNAL"/>
+			<field name="Rotation_Frequency_Tor" path="Derived_Profiles/Rotation_Frequency_Tor" documentation="Angular toroidal rotation frequency of the various ion species" data_type="FLT_3D" axis1="../../Rho_Tor_Norm" axis2="../../Plasma_Composition/Ions" axis3="../../Timebase" units="s^-1" type="SIGNAL"/>
+			<field name="Zeff" path="Derived_Profiles/Zeff" documentation="Effective charge profile" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" type="SIGNAL"/>
+			<field name="B_Pol" path="Derived_Profiles/B_Pol" documentation="Average poloidal magnetic field, defined as sqrt(ave(grad Rho^2/R^2)).dPsi/dRho" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="T" type="SIGNAL"/>
+			<field name="ddV_dRho_Tor_dT" path="Derived_Profiles/ddV_dRho_Tor_dT" documentation="Time derivative of the radial derivative of the volume enclosed in the flux surface, i.e. d/dt(dV/drho_tor)" data_type="FLT_2D" axis1="../../Rho_Tor_Norm" axis2="../../Timebase" units="m^2.s^-1" type="SIGNAL"/>
+		</field>
+		<field name="Derived_Global" path="Derived_Global" documentation="Various global quantities calculated from the fields solved in the transport equations and from the Derived Profiles" data_type="structure">
+			<field name="Current_Total" path="Derived_Global/Current_Total" documentation="Total plasma current" data_type="FLT_1D" axis1="../../Timebase" units="A" type="SIGNAL"/>
+			<field name="Current_Inside_Boundary" path="Derived_Global/Current_Inside_Boundary" documentation="Plasma current inside the transport solver boundary Core_Profiles/Psi/Boundary/Rho_Tor_Norm" data_type="FLT_1D" axis1="../../Timebase" units="A" type="SIGNAL"/>
+			<field name="Current_Non_Inductive" path="Derived_Global/Current_Non_Inductive" documentation="Total non-inductive parallel current" data_type="FLT_1D" axis1="../../Timebase" units="A" type="SIGNAL"/>
+			<field name="V_Loop" path="Derived_Global/V_Loop" documentation="Toroidal loop voltage" data_type="FLT_1D" axis1="../../Timebase" units="V" type="SIGNAL"/>
+			<field name="Li_3" path="Derived_Global/Li_3" documentation="Internal inductance" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Beta_Tor" path="Derived_Global/Beta_Tor" documentation="Toroidal beta (ratio of kinetic to magnetic pressure)" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Beta_Tor_Norm" path="Derived_Global/Beta_Tor_Norm" documentation="Normalised toroidal beta" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Beta_Pol" path="Derived_Global/Beta_Pol" documentation="Poloidal beta" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Energy_Diamagnetic" path="Derived_Global/Energy_Diamagnetic" documentation="Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (Pressure_Thermal + Pressure_Perpendicular)" data_type="FLT_1D" axis1="../../Timebase" units="A" type="SIGNAL"/>
+		</field>
+		<field name="Code_Parameters" path="Code_Parameters" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="Code_Name" path="Code_Parameters/Code_Name" documentation="Name of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Code_Version" path="Code_Parameters/Code_Version" documentation="Version of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Parameters" path="Code_Parameters/Parameters" documentation="List of the code specific parameters, string expected to be in XML format." data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output, string expected to be in XML format." data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values meaning some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
+		</field>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+	</IDS>
+</IDSs>

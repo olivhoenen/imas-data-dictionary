@@ -79,18 +79,18 @@
 	<!-- This template assumes that the support xsd is in the same utilities directory as the xsl -->
 	<xsl:template name="doGroupDeclare"> <!-- expand this group with a defined reference name, searching both support files -->
 		<xsl:param name="thisRef"/>
-		<xsl:for-each select="document('DD_Support_v2.xsd')/*/xs:group[@name=$thisRef]/xs:sequence/xs:element">
+		<xsl:for-each select="document('Utilities/DD_Support_v2.xsd')/*/xs:group[@name=$thisRef]/xs:sequence/xs:element">
 			<xsl:element name="{@name}"><xsl:value-of select="@fixed"/><xsl:value-of select="@default"/></xsl:element>
 		</xsl:for-each>
 	
-		<xsl:for-each select="document('DD_Support_v2.xsd')/*/xs:group[@name='Data_Properties']/xs:sequence/xs:element">
+		<xsl:for-each select="document('Utilities/DD_Support_v2.xsd')/*/xs:group[@name='Data_Properties']/xs:sequence/xs:element">
 			<xsl:element name="{@name}"><xsl:value-of select="@fixed"/><xsl:value-of select="@default"/></xsl:element>
 		</xsl:for-each>
 	</xsl:template>
 	
 	<xsl:template name="doRefDeclare"> <!-- expand this ref with a defined reference name, searching both support files -->
 		<xsl:param name="thisRef"/>
-		<xsl:apply-templates select="document('DD_Support_v2.xsd')/*/xs:element[@name=$thisRef]" mode="declare_child"/>
+		<xsl:apply-templates select="document('Utilities/DD_Support_v2.xsd')/*/xs:element[@name=$thisRef]" mode="declare_child"/>
 	</xsl:template>
 	
 	<!--

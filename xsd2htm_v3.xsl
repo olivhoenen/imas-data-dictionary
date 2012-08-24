@@ -15,7 +15,7 @@
        </style>
       </head>
       <body>
-        <p class="welcome">ITER Physics Data Model Documentation for <xsl:value-of select="//xs:element/@name"/></p>
+        <p class="welcome">ITER Physics Data Model Documentation for <xsl:value-of select="/*/xs:element/@name"/></p>
         <p>The Data Dictionary (XSD file) is transformed into this documentation on the fly.</p>
         <xsl:apply-templates select="xs:include"/>
         <b></b>
@@ -23,6 +23,7 @@
         <table border="1">
         <thead style="color:#ff0000"><td>Full path name</td><td>Description</td><td>Character</td><td>Axes</td></thead>
         <xsl:apply-templates select="xs:element"/>
+        <xsl:apply-templates select="xs:complexType"/>
         </table>
      </body>
     </html>

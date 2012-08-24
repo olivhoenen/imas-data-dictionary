@@ -207,7 +207,6 @@
 							<type>CONSTANT</type>
 						</xs:appinfo>
 					</xs:annotation>
-
 				</xs:element>
 				<xs:element name="Parameters_Default" type="str_type">
 					<xs:annotation>
@@ -216,12 +215,11 @@
 							<type>CONSTANT</type>
 						</xs:appinfo>
 					</xs:annotation>
-			
 				</xs:element>
 				<xs:element name="Schema" type="str_type">
 					<xs:annotation>
 						<xs:documentation>Code parameters schema</xs:documentation>
-								<xs:appinfo>
+						<xs:appinfo>
 							<type>CONSTANT</type>
 						</xs:appinfo>
 					</xs:annotation>
@@ -325,33 +323,33 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="Status_of" type="xs:string">
+				<xs:element name="Status_of" type="str_type">
 					<xs:annotation>
 						<xs:documentation>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Comment_of" type="xs:string">
+				<xs:element name="Comment_of" type="str_type">
 					<xs:annotation>
 						<xs:documentation>Any additional comment from the source application</xs:documentation>
 						<xs:appinfo>machine description</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Source_of" type="xs:string">
+				<xs:element name="Source_of" type="str_type">
 					<xs:annotation>
 						<xs:documentation>Where do the data for this Data Item come from and where are they put </xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Date_of" type="xs:string">
+				<xs:element name="Date_of" type="str_type">
 					<xs:annotation>
 						<xs:documentation>Date of consistent creation of this IDS</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Creator_of" type="xs:string">
+				<xs:element name="Creator_of" type="str_type">
 					<xs:annotation>
 						<xs:documentation>Creator of this consistent IDS</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Homogeneous_Timebase" type="xs:integer">
+				<xs:element name="Homogeneous_Timebase" type="int_type">
 					<xs:annotation>
 						<xs:documentation>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</xs:documentation>
 					</xs:annotation>
@@ -369,7 +367,7 @@
 					<xs:documentation>Free string carrying a comment on the Data Item</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Source_of" type="xs:string" default="HDF5::*">
+			<xs:element name="Source_of" type="str_type">
 				<xs:annotation>
 					<xs:documentation>Where do the data for this Data Item come from (string expression)</xs:documentation>
 				</xs:annotation>
@@ -391,10 +389,12 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:group>
-	<xs:element name="Timebase">
+	<xs:element name="Timebase" type="flt_1d_type">
 		<xs:annotation>
 			<xs:documentation>Generic timebase [s]</xs:documentation>
-			<xs:appinfo/>
+			<xs:appinfo>
+				<axis1>1...N_Times</axis1>
+			</xs:appinfo>
 		</xs:annotation>
 	</xs:element>
 	<xs:group name="INT_0D">
