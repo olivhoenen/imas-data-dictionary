@@ -90,7 +90,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>dRho_Tor_dT</td>
+				<td>dRho_Tor_dt</td>
 				<td>Time derivative of Rho_Tor {SIGNAL} [m/s]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -123,7 +123,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Toroidal_Field/dB0_dT</td>
+				<td>Toroidal_Field/dB0_dt</td>
 				<td>Time derivative of the vacuum field at R0 {SIGNAL} [T/s]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -279,7 +279,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Psi/dValue_dT_CPhi</td>
+				<td>Psi/dValue_dt_CPhi</td>
 				<td>Time derivative of the poloidal flux at constant toroidal flux {SIGNAL} [V]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -363,36 +363,6 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Psi/J_Non_Inductive</td>
-				<td>Non-inductive parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
-				<td>FLT_2D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../Rho_Tor_Norm</td>
-						</tr>
-						<tr>
-							<td>2- ../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Psi/Conductivity_Parallel</td>
-				<td>Parallel conductivity {SIGNAL} [ohm^-1.m^-1]</td>
-				<td>FLT_2D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../Rho_Tor_Norm</td>
-						</tr>
-						<tr>
-							<td>2- ../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
 				<td>Psi/Timebase</td>
 				<td>Generic timebase [s]</td>
 				<td>flt_1d_type</td>
@@ -456,7 +426,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Te/dValue_dT</td>
+				<td>Te/dValue_dt</td>
 				<td>Time derivative (dValue/dTime) {SIGNAL} [eV.s^-1]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -759,7 +729,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Te/Fluxes/Integral_DT_Term</td>
+				<td>Te/Fluxes/Integral_dt_Term</td>
 				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation {SIGNAL} [W.m^(4/3)]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -846,7 +816,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Ti/dValue_dT</td>
+				<td>Ti/dValue_dt</td>
 				<td>Time derivative (dValue/dTime) {SIGNAL} [eV.s^-1]</td>
 				<td>FLT_3D</td>
 				<td>
@@ -1125,7 +1095,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Ti/Fluxes/Integral_DT_Term</td>
+				<td>Ti/Fluxes/Integral_dt_Term</td>
 				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation {SIGNAL} [W.m^(4/3)]</td>
 				<td>FLT_3D</td>
 				<td>
@@ -1206,7 +1176,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Ne/dValue_dT</td>
+				<td>Ne/dValue_dt</td>
 				<td>Time derivative (dValue/dTime) {SIGNAL} [m^-3.s^-1]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1425,7 +1395,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Ne/Fluxes/Integral_DT_Term</td>
+				<td>Ne/Fluxes/Integral_dt_Term</td>
 				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation {SIGNAL} [s^-1]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1512,7 +1482,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Ni/dValue_dT</td>
+				<td>Ni/dValue_dt</td>
 				<td>Time derivative (dValue/dTime) {SIGNAL} [m^-3.s^-1]</td>
 				<td>FLT_3D</td>
 				<td>
@@ -1791,7 +1761,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Ni/Fluxes/Integral_DT_Term</td>
+				<td>Ni/Fluxes/Integral_dt_Term</td>
 				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation {SIGNAL} [s^-1]</td>
 				<td>FLT_3D</td>
 				<td>
@@ -1821,13 +1791,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles</td>
-				<td>Profiles derived from the fields solved in the transport equations, or from experiment.</td>
+				<td>Other_Profiles</td>
+				<td>Other profiles, some being derived from the fields solved in the transport equations, or from experiment.</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Pe</td>
+				<td>Other_Profiles/Pe</td>
 				<td>Electron pressure {SIGNAL} [Pa]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1842,7 +1812,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/dPe_dT</td>
+				<td>Other_Profiles/dPe_dt</td>
 				<td>Time derivative of the electron pressure {SIGNAL} [Pa.s^-1]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1857,7 +1827,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Pi</td>
+				<td>Other_Profiles/Pi</td>
 				<td>Ion pressure (per ion species) {SIGNAL} [Pa]</td>
 				<td>FLT_3D</td>
 				<td>
@@ -1875,7 +1845,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Pi_Total</td>
+				<td>Other_Profiles/Pi_Total</td>
 				<td>Total ion pressure (sum over the ion species) {SIGNAL} [Pa]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1890,7 +1860,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/dPi_Total_dT</td>
+				<td>Other_Profiles/dPi_Total_dt</td>
 				<td>Time derivative of the total ion pressure {SIGNAL} [Pa.s^-1]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1905,7 +1875,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Pressure_Thermal</td>
+				<td>Other_Profiles/Pressure_Thermal</td>
 				<td>Thermal pressure (electrons+ions) {SIGNAL} [Pa]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1920,7 +1890,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Pressure_Perpendicular</td>
+				<td>Other_Profiles/Pressure_Perpendicular</td>
 				<td>Total perpendicular pressure (electrons+ions, thermal+non-thermal) {SIGNAL} [Pa]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1935,7 +1905,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Pressure_Parallel</td>
+				<td>Other_Profiles/Pressure_Parallel</td>
 				<td>Total parallel pressure (electrons+ions, thermal+non-thermal) {SIGNAL} [Pa]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1950,7 +1920,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/J_Total</td>
+				<td>Other_Profiles/J_Total</td>
 				<td>Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1965,7 +1935,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/J_Toroidal</td>
+				<td>Other_Profiles/J_Toroidal</td>
 				<td>Total toroidal current density = average(J_Toroidal/R) / average(1/R) {SIGNAL} [A/m^2]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1980,7 +1950,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/J_Ohmic</td>
+				<td>Other_Profiles/J_Ohmic</td>
 				<td>Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -1995,7 +1965,37 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/V_Loop</td>
+				<td>Other_Profiles/J_Non_Inductive</td>
+				<td>Non-inductive parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Other_Profiles/J_Bootstrap</td>
+				<td>Bootstrap parallel current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Other_Profiles/V_Loop</td>
 				<td>Toroidal loop voltage {SIGNAL} [V]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -2010,7 +2010,22 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/E_Parallel</td>
+				<td>Other_Profiles/Conductivity_Parallel</td>
+				<td>Parallel conductivity {SIGNAL} [ohm^-1.m^-1]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Rho_Tor_Norm</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Other_Profiles/E_Parallel</td>
 				<td>Parallel electric field = average(E.B) / B0, where Core_Profiles/Toroidal_Field/ B0 {SIGNAL} [V.m^-1]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -2025,7 +2040,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/E_B</td>
+				<td>Other_Profiles/E_B</td>
 				<td>Average(E.B) {SIGNAL} [V.T.m^-1]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -2040,7 +2055,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/q</td>
+				<td>Other_Profiles/q</td>
 				<td>Safety factor profile {SIGNAL}</td>
 				<td>FLT_2D</td>
 				<td>
@@ -2055,7 +2070,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Magnetic_Shear</td>
+				<td>Other_Profiles/Magnetic_Shear</td>
 				<td>Magnetic shear profile; {SIGNAL}</td>
 				<td>FLT_2D</td>
 				<td>
@@ -2070,7 +2085,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Ni_Fast</td>
+				<td>Other_Profiles/Ni_Fast</td>
 				<td>Density of fast ions, for the various ion species {SIGNAL} [m^-3]</td>
 				<td>FLT_3D</td>
 				<td>
@@ -2088,7 +2103,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Momentum_Tor</td>
+				<td>Other_Profiles/Momentum_Tor</td>
 				<td>Toroidal momentum of the various ion species {SIGNAL} [kg.m^-2.s^-1]</td>
 				<td>FLT_3D</td>
 				<td>
@@ -2106,7 +2121,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Rotation_Frequency_Tor</td>
+				<td>Other_Profiles/Rotation_Frequency_Tor</td>
 				<td>Angular toroidal rotation frequency of the various ion species {SIGNAL} [s^-1]</td>
 				<td>FLT_3D</td>
 				<td>
@@ -2124,7 +2139,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/Zeff</td>
+				<td>Other_Profiles/Zeff</td>
 				<td>Effective charge profile {SIGNAL}</td>
 				<td>FLT_2D</td>
 				<td>
@@ -2139,7 +2154,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/B_Pol</td>
+				<td>Other_Profiles/B_Pol</td>
 				<td>Average poloidal magnetic field, defined as sqrt(ave(grad Rho^2/R^2)).dPsi/dRho {SIGNAL} [T]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -2154,7 +2169,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Profiles/ddV_dRho_Tor_dT</td>
+				<td>Other_Profiles/ddV_dRho_Tor_dt</td>
 				<td>Time derivative of the radial derivative of the volume enclosed in the flux surface, i.e. d/dt(dV/drho_tor) {SIGNAL} [m^2.s^-1]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -2169,13 +2184,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Global</td>
-				<td>Various global quantities calculated from the fields solved in the transport equations and from the Derived Profiles</td>
+				<td>Global</td>
+				<td>Various global quantities calculated from the fields solved in the transport equations and from the Other Profiles</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Derived_Global/Current_Total</td>
+				<td>Global/Current_Total</td>
 				<td>Total plasma current {SIGNAL} [A]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -2187,7 +2202,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Global/Current_Inside_Boundary</td>
+				<td>Global/Current_Inside_Boundary</td>
 				<td>Plasma current inside the transport solver boundary Core_Profiles/Psi/Boundary/Rho_Tor_Norm {SIGNAL} [A]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -2199,7 +2214,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Global/Current_Non_Inductive</td>
+				<td>Global/Current_Non_Inductive</td>
 				<td>Total non-inductive parallel current {SIGNAL} [A]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -2211,7 +2226,19 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Global/V_Loop</td>
+				<td>Global/Current_Bootstrap</td>
+				<td>Bootstrap parallel current {SIGNAL} [A]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Global/V_Loop</td>
 				<td>Toroidal loop voltage {SIGNAL} [V]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -2223,7 +2250,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Global/Li_3</td>
+				<td>Global/li_3</td>
 				<td>Internal inductance {SIGNAL}</td>
 				<td>FLT_1D</td>
 				<td>
@@ -2235,7 +2262,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Global/Beta_Tor</td>
+				<td>Global/Beta_Tor</td>
 				<td>Toroidal beta (ratio of kinetic to magnetic pressure) {SIGNAL}</td>
 				<td>FLT_1D</td>
 				<td>
@@ -2247,7 +2274,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Global/Beta_Tor_Norm</td>
+				<td>Global/Beta_Tor_Norm</td>
 				<td>Normalised toroidal beta {SIGNAL}</td>
 				<td>FLT_1D</td>
 				<td>
@@ -2259,7 +2286,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Global/Beta_Pol</td>
+				<td>Global/Beta_Pol</td>
 				<td>Poloidal beta {SIGNAL}</td>
 				<td>FLT_1D</td>
 				<td>
@@ -2271,7 +2298,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Derived_Global/Energy_Diamagnetic</td>
+				<td>Global/Energy_Diamagnetic</td>
 				<td>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (Pressure_Thermal + Pressure_Perpendicular) {SIGNAL} [A]</td>
 				<td>FLT_1D</td>
 				<td>

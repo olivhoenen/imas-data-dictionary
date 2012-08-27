@@ -28,7 +28,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="dB0_dT">
+			<xs:element name="dB0_dt">
 				<xs:annotation>
 					<xs:documentation>Time derivative of the vacuum field at R0</xs:documentation>
 					<xs:appinfo>
@@ -533,7 +533,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="Core_Profiles_Derived_Profiles">
+	<xs:complexType name="Core_Profiles_Other_Profiles">
 		<xs:annotation>
 			<xs:documentation>Profiles derived from the fields solved in the transport equations, or from experiment.</xs:documentation>
 		</xs:annotation>
@@ -552,7 +552,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="dPe_dT">
+			<xs:element name="dPe_dt">
 				<xs:annotation>
 					<xs:documentation>Time derivative of the electron pressure</xs:documentation>
 					<xs:appinfo>
@@ -595,7 +595,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="dPi_Total_dT">
+			<xs:element name="dPi_Total_dt">
 				<xs:annotation>
 					<xs:documentation>Time derivative of the total ion pressure</xs:documentation>
 					<xs:appinfo>
@@ -693,6 +693,34 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="J_Non_Inductive">
+				<xs:annotation>
+					<xs:documentation>Non-inductive parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Rho_Tor_Norm</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>A/m^2</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="J_Bootstrap">
+				<xs:annotation>
+					<xs:documentation>Bootstrap parallel current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Rho_Tor_Norm</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>A/m^2</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="V_Loop">
 				<xs:annotation>
 					<xs:documentation>Toroidal loop voltage</xs:documentation>
@@ -700,6 +728,20 @@
 						<axis1>../../Rho_Tor_Norm</axis1>
 						<axis2>../../Timebase</axis2>
 						<units>V</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Conductivity_Parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel conductivity</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Rho_Tor_Norm</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>ohm^-1.m^-1</units>
 						<type>SIGNAL</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -833,7 +875,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="ddV_dRho_Tor_dT">
+			<xs:element name="ddV_dRho_Tor_dt">
 				<xs:annotation>
 					<xs:documentation>Time derivative of the radial derivative of the volume enclosed in the flux surface, i.e. d/dt(dV/drho_tor)</xs:documentation>
 					<xs:appinfo>
@@ -849,7 +891,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="Core_Profiles_Derived_Global">
+	<xs:complexType name="Core_Profiles_Global">
 		<xs:annotation>
 			<xs:documentation>Various global quantities calculated from the fields solved in the transport equations and from the Derived Profiles</xs:documentation>
 		</xs:annotation>
@@ -893,6 +935,19 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="Current_Bootstrap">
+				<xs:annotation>
+					<xs:documentation>Bootstrap parallel current</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Timebase</axis1>
+						<units>A</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="V_Loop">
 				<xs:annotation>
 					<xs:documentation>Toroidal loop voltage</xs:documentation>
@@ -906,7 +961,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Li_3">
+			<xs:element name="li_3">
 				<xs:annotation>
 					<xs:documentation>Internal inductance</xs:documentation>
 					<xs:appinfo>
@@ -1111,7 +1166,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Integral_DT_Term">
+			<xs:element name="Integral_dt_Term">
 				<xs:annotation>
 					<xs:documentation>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation</xs:documentation>
 					<xs:appinfo>
@@ -1177,7 +1232,7 @@
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Integral_DT_Term">
+			<xs:element name="Integral_dt_Term">
 				<xs:annotation>
 					<xs:documentation>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation</xs:documentation>
 					<xs:appinfo>
@@ -1244,7 +1299,7 @@
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Integral_DT_Term">
+			<xs:element name="Integral_dt_Term">
 				<xs:annotation>
 					<xs:documentation>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation</xs:documentation>
 					<xs:appinfo>
@@ -1308,7 +1363,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Integral_DT_Term">
+			<xs:element name="Integral_dt_Term">
 				<xs:annotation>
 					<xs:documentation>Integral (over dRho_Tor) from 0 to Rho_Tor of the time derivative term of the transport equation</xs:documentation>
 					<xs:appinfo>
@@ -1371,7 +1426,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="dValue_dT">
+			<xs:element name="dValue_dt">
 				<xs:annotation>
 					<xs:documentation>Time derivative (dValue/dTime)</xs:documentation>
 					<xs:appinfo>
@@ -1491,7 +1546,7 @@
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="dValue_dT">
+			<xs:element name="dValue_dt">
 				<xs:annotation>
 					<xs:documentation>Time derivative (dValue/dTime)</xs:documentation>
 					<xs:appinfo>
@@ -1604,7 +1659,7 @@
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="dValue_dT">
+			<xs:element name="dValue_dt">
 				<xs:annotation>
 					<xs:documentation>Time derivative (dValue/dTime)</xs:documentation>
 					<xs:appinfo>
@@ -1714,7 +1769,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="dValue_dT">
+			<xs:element name="dValue_dt">
 				<xs:annotation>
 					<xs:documentation>Time derivative (dValue/dTime)</xs:documentation>
 					<xs:appinfo>
@@ -1835,7 +1890,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="dValue_dT_CPhi">
+			<xs:element name="dValue_dt_CPhi">
 				<xs:annotation>
 					<xs:documentation>Time derivative of the poloidal flux at constant toroidal flux</xs:documentation>
 					<xs:appinfo>
@@ -1877,34 +1932,6 @@
 					<xs:documentation>Boundary condition for the transport equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="J_Non_Inductive">
-				<xs:annotation>
-					<xs:documentation>Non-inductive parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Toroidal_Field/ B0</xs:documentation>
-					<xs:appinfo>
-						<axis1>../../Rho_Tor_Norm</axis1>
-						<axis2>../Timebase</axis2>
-						<units>A/m^2</units>
-						<type>SIGNAL</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Conductivity_Parallel">
-				<xs:annotation>
-					<xs:documentation>Parallel conductivity</xs:documentation>
-					<xs:appinfo>
-						<axis1>../../Rho_Tor_Norm</axis1>
-						<axis2>../Timebase</axis2>
-						<units>ohm^-1.m^-1</units>
-						<type>SIGNAL</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element ref="Timebase"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1942,7 +1969,7 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="dRho_Tor_dT">
+				<xs:element name="dRho_Tor_dt">
 					<xs:annotation>
 						<xs:documentation>Time derivative of Rho_Tor</xs:documentation>
 						<xs:appinfo>
@@ -1987,14 +2014,14 @@
 						<xs:documentation>Ion density</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Derived_Profiles" type="Core_Profiles_Derived_Profiles">
+				<xs:element name="Other_Profiles" type="Core_Profiles_Other_Profiles">
 					<xs:annotation>
-						<xs:documentation>Profiles derived from the fields solved in the transport equations, or from experiment.</xs:documentation>
+						<xs:documentation>Other profiles, some being derived from the fields solved in the transport equations, or from experiment.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Derived_Global" type="Core_Profiles_Derived_Global">
+				<xs:element name="Global" type="Core_Profiles_Global">
 					<xs:annotation>
-						<xs:documentation>Various global quantities calculated from the fields solved in the transport equations and from the Derived Profiles</xs:documentation>
+						<xs:documentation>Various global quantities calculated from the fields solved in the transport equations and from the Other Profiles</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="Code_Parameters"/>
