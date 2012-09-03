@@ -273,10 +273,32 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi1D_STATIC_List">
+	<xs:complexType name="Signal_Type">
+		<xs:annotation>
+			<xs:documentation>Structure for 1D signal (prototype to be evaluated)</xs:documentation>
+			<xs:appinfo>parent-dependent</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Timebase"/>
+			<xs:element name="Value">
+				<xs:annotation>
+					<xs:documentation>Value of the signal. Value/Data is ugly. Moreover the metadata are not at the right place. </xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<unit>Defined by its parent</unit>
+						<axis1>../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:group ref="FLT_1D"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RZPhi1D_STATIC_List">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi positions (1D, STATIC)</xs:documentation>
-			<xs:appinfo>parent-dependent</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="R">
@@ -285,6 +307,7 @@
 					<xs:appinfo>
 						<type>STATIC</type>
 						<units_of>m</units_of>
+						<axis1>1...N_Points</axis1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -297,6 +320,7 @@
 					<xs:appinfo>
 						<type>STATIC</type>
 						<units_of>m</units_of>
+						<axis1>../R</axis1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -309,6 +333,40 @@
 					<xs:appinfo>
 						<type>STATIC</type>
 						<units_of>rad</units_of>
+						<axis1>../R</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RZ1D_CONSTANT_List">
+		<xs:annotation>
+			<xs:documentation>Structure for list of R, Z positions (1D, CONSTANT)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="R">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+						<units_of>m</units_of>
+						<axis1>1...N_Points</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Z">
+				<xs:annotation>
+					<xs:documentation>Altitude</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+						<units_of>m</units_of>
+						<axis1>../R</axis1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
