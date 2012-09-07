@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IDSs xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<IDS name="Equilibrium" maxoccur="1" documentation="Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.">
+		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties; it can be placed at any node, allowing this node to be identified as an IDS and to be completed automatically by applications. " data_type="structure">
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this Data Item come from and where are they put " data_type="str_type"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
+		</field>
+		<field name="Boundary" path="Boundary" documentation="Description of the plasma boundary" data_type="structure">
+			<field name="Type" path="Boundary/Type" documentation="0 (limiter) or 1 (diverted)" data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Outline" path="Boundary/Outline" documentation="RZ description of the plasma boundary" data_type="structure">
+				<field name="N_Points" path="Boundary/Outline/N_Points" documentation="Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points))." data_type="INT_1D" type="SIGNAL" axis1="../../../Timebase"/>
+				<field name="R" path="Boundary/Outline/R" documentation="Major radius" data_type="FLT_2D" type="SIGNAL" units_of="m" axis1="1...max(N_Points)" axis2="../../../Timebase"/>
+				<field name="Z" path="Boundary/Outline/Z" documentation="Altitude" data_type="FLT_2D" type="SIGNAL" units_of="m" axis1="../R" axis2="../../../Timebase"/>
+			</field>
+			<field name="Geometric_Axis" path="Boundary/Geometric_Axis" documentation="Position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)" data_type="structure">
+				<field name="R" path="Boundary/Geometric_Axis/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+				<field name="Z" path="Boundary/Geometric_Axis/Z" documentation="Altitude" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+			</field>
+			<field name="a_minor" path="Boundary/a_minor" documentation="Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL" units="m"/>
+			<field name="Elongation" path="Boundary/Elongation" documentation="Elongation of the plasma boundary" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Elongation_upper" path="Boundary/Elongation_upper" documentation="Elongation (upper half) of the plasma boundary" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Elongation_Lower" path="Boundary/Elongation_Lower" documentation="Elongation (lower half) of the plasma boundary" data_type="structure"/>
+			<field name="Triangularity_Upper" path="Boundary/Triangularity_Upper" documentation="Upper triangularity of the plasma boundary" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Triangularity_Lower" path="Boundary/Triangularity_Lower" documentation="Lower triangularity of the plasma boundary; Time-dependent; Scalar" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="X_points" path="Boundary/X_points" documentation="Position of the X points, first is the active X point if diverted" data_type="structure">
+				<field name="N_Points" path="Boundary/X_points/N_Points" documentation="Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points))." data_type="INT_1D" type="SIGNAL" axis1="../../../Timebase"/>
+				<field name="R" path="Boundary/X_points/R" documentation="Major radius" data_type="FLT_2D" type="SIGNAL" units_of="m" axis1="1...max(N_Points)" axis2="../../../Timebase"/>
+				<field name="Z" path="Boundary/X_points/Z" documentation="Altitude" data_type="FLT_2D" type="SIGNAL" units_of="m" axis1="../R" axis2="../../../Timebase"/>
+			</field>
+			<field name="Strike_Point_Lower_Left" path="Boundary/Strike_Point_Lower_Left" documentation="Position of the lower left strike point" data_type="structure">
+				<field name="R" path="Boundary/Strike_Point_Lower_Left/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+				<field name="Z" path="Boundary/Strike_Point_Lower_Left/Z" documentation="Altitude" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+			</field>
+			<field name="Strike_Point_Upper_Left" path="Boundary/Strike_Point_Upper_Left" documentation="Position of the upper left strike point" data_type="structure">
+				<field name="R" path="Boundary/Strike_Point_Upper_Left/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+				<field name="Z" path="Boundary/Strike_Point_Upper_Left/Z" documentation="Altitude" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+			</field>
+			<field name="Strike_Point_Lower_Right" path="Boundary/Strike_Point_Lower_Right" documentation="Position of the lower right strike point" data_type="structure">
+				<field name="R" path="Boundary/Strike_Point_Lower_Right/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+				<field name="Z" path="Boundary/Strike_Point_Lower_Right/Z" documentation="Altitude" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+			</field>
+			<field name="Strike_Point_Upper_Right" path="Boundary/Strike_Point_Upper_Right" documentation="Position of the upper right strike point" data_type="structure">
+				<field name="R" path="Boundary/Strike_Point_Upper_Right/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+				<field name="Z" path="Boundary/Strike_Point_Upper_Right/Z" documentation="Altitude" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+			</field>
+			<field name="Active_Limiter_Point" path="Boundary/Active_Limiter_Point" documentation="Position of the active limiter point (point of the plasma boundary in contact with the limiter)" data_type="structure">
+				<field name="R" path="Boundary/Active_Limiter_Point/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+				<field name="Z" path="Boundary/Active_Limiter_Point/Z" documentation="Altitude" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+			</field>
+		</field>
+		<field name="Global" path="Global" documentation="0D parameters of the equilibrium" data_type="structure">
+			<field name="Beta_Pol" path="Global/Beta_Pol" documentation="Poloidal beta" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase"/>
+			<field name="Beta_Tor" path="Global/Beta_Tor" documentation="Toroidal beta" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase"/>
+			<field name="Beta_Normal" path="Global/Beta_Normal" documentation="Normalised toroidal beta" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase"/>
+			<field name="Ip" path="Global/Ip" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above." data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="A"/>
+			<field name="li_3" path="Global/li_3" documentation="Internal inductance" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase"/>
+			<field name="Volume" path="Global/Volume" documentation="Total plasma volume" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="m^3"/>
+			<field name="Area" path="Global/Area" documentation="Area of the poloidal cross section" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="m^2"/>
+			<field name="Psi_Axis" path="Global/Psi_Axis" documentation="Poloidal flux at the magnetic axis" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="Wb"/>
+			<field name="Psi_Boundary" path="Global/Psi_Boundary" documentation="Poloidal flux at the selected plasma boundary (separatrix for a free boundary code; fixed boundary for fixed boundary code) " data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="Wb"/>
+			<field name="Magnetic_Axis" path="Global/Magnetic_Axis" documentation="Magnetic axis position" data_type="structure">
+				<field name="R" path="Global/Magnetic_Axis/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+				<field name="Z" path="Global/Magnetic_Axis/Z" documentation="Altitude" data_type="FLT_1D" type="SIGNAL" units_of="m" axis1="../../../Timebase"/>
+			</field>
+			<field name="B_Tor_Axis" path="Global/B_Tor_Axis" documentation="Total toroidal magnetic field at the magnetic axis" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="T"/>
+			<field name="q_Axis" path="Global/q_Axis" documentation="q at the magnetic axis" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="Wb"/>
+			<field name="q_95" path="Global/q_95" documentation="q at the 95% poloidal flux surface" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="Wb"/>
+			<field name="q_min" path="Global/q_min" documentation="Minimum q value in the plasma" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="Wb"/>
+			<field name="Toroidal_Field" path="Global/Toroidal_Field" documentation="Characteristics of the vacuum toroidal field" data_type="structure">
+				<field name="R0" path="Global/Toroidal_Field/R0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="CONSTANT" units="m"/>
+				<field name="B0" path="Global/Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="SIGNAL" units="T" axis1="../../../Timebase"/>
+			</field>
+			<field name="W_MHD" path="Global/W_MHD" documentation="Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="J"/>
+			<field name="Gamma" path="Global/Gamma" documentation="Adiabatic index" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase"/>
+		</field>
+		<field name="Profiles_1D" path="Profiles_1D" documentation="Equilibrium profiles (1D radial grid) as a function of the poloidal flux" data_type="structure">
+			<field name="Psi" path="Profiles_1D/Psi" documentation="Poloidal flux, without 1/2pi and such that Bp=|grad psi| /R/2/pi" data_type="FLT_2D" type="SIGNAL" axis1="1...N_Psi" axis2="../../Timebase" units="Wb"/>
+			<field name="Phi" path="Profiles_1D/Phi" documentation="Toroidal flux" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="Wb"/>
+			<field name="Pressure" path="Profiles_1D/Pressure" documentation="Pressure profile as a function of the poloidal flux" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="Wb"/>
+			<field name="F" path="Profiles_1D/F" documentation="Diamagnetic function (F=R B_Phi)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="T.m"/>
+			<field name="dPressure_dPsi" path="Profiles_1D/dPressure_dPsi" documentation="Psi derivative of the pressure profile" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="Pa/Wb"/>
+			<field name="F_dF_dPsi" path="Profiles_1D/F_dF_dPsi" documentation="psi derivative of F multiplied with F" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="T^2.m^2/Wb"/>
+			<field name="J_Tor" path="Profiles_1D/J_Tor" documentation="Flux surface averaged toroidal current density = average(J_TorR) / average(1/R)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="A/m^2"/>
+			<field name="J_Parallel" path="Profiles_1D/J_Parallel" documentation="Flux surface averaged parallel current density = average(j.B) / B0, where B0 = Equilibrium/Global/Toroidal_Field/B0" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="A/m^2"/>
+			<field name="q" path="Profiles_1D/q" documentation="Safety factor" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
+			<field name="R_Inboard" path="Profiles_1D/R_Inboard" documentation="Radial coordinate (major radius) at the height and on the left of the magnetic axis" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m"/>
+			<field name="R_Outboard" path="Profiles_1D/R_Outboard" documentation="Radial coordinate (major radius) at the height and on the right of the magnetic axis" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m"/>
+			<field name="Rho_Tor" path="Profiles_1D/Rho_Tor" documentation="Toroidal flux coordinate, defined as sqrt(Phi/pi/B0), where B0 = Equilibrium/Global/Toroidal_Field/B0" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m"/>
+			<field name="dPsi_dRho_Tor" path="Profiles_1D/dPsi_dRho_Tor" documentation="Derivative of Psi with respect to Rho_Tor" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="Wb/m"/>
+			<field name="Rho_Vo_Norm" path="Profiles_1D/Rho_Vo_Norm" documentation="Normalised radial coordinate related to the plasma volume. Defined as sqrt(volume / volume[LCFS])" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
+			<field name="Beta_Pol" path="Profiles_1D/Beta_Pol" documentation="Poloidal beta (inside the magnetic surface)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
+			<field name="li_3" path="Profiles_1D/li_3" documentation="internal inductance (inside the magnetic surface)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
+			<field name="Elongation" path="Profiles_1D/Elongation" documentation="Elongation profile" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
+			<field name="Triangularity_Upper" path="Profiles_1D/Triangularity_Upper" documentation="Upper triangularity profile" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
+			<field name="Triangularity_Lower" path="Profiles_1D/Triangularity_Lower" documentation="Lower triangularity profile" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m"/>
+			<field name="Volume" path="Profiles_1D/Volume" documentation="Volume enclosed in the flux surface" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^3"/>
+			<field name="dVolume_dPsi" path="Profiles_1D/dVolume_dPsi" documentation="Radial derivative of the volume enclosed in the flux surface with respect to Psi" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^3/Wb"/>
+			<field name="dVolume_dRho_Tor" path="Profiles_1D/dVolume_dRho_Tor" documentation="Radial derivative of the volume enclosed in the flux surface with respect to Rho_Tor" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^2"/>
+			<field name="Area" path="Profiles_1D/Area" documentation="Cross-sectional area of the flux surface" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^2"/>
+			<field name="dA_dPsi" path="Profiles_1D/dA_dPsi" documentation="Radial derivative of the cross-sectional area of the flux surface with respect to Psi" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^2/Wb"/>
+			<field name="Surface" path="Profiles_1D/Surface" documentation="Surface area of the flux surface" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^2"/>
+			<field name="Trapped_Fraction" path="Profiles_1D/Trapped_Fraction" documentation="Trapped particle fraction" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
+			<field name="gm1" path="Profiles_1D/gm1" documentation="average(1/R^2)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^-2"/>
+			<field name="gm2" path="Profiles_1D/gm2" documentation="average(grad_rho^2/R^2)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^-2"/>
+			<field name="gm3" path="Profiles_1D/gm3" documentation="average(grad_rho^2)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
+			<field name="gm4" path="Profiles_1D/gm4" documentation="average(1/B^2)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="T^-2"/>
+			<field name="gm5" path="Profiles_1D/gm5" documentation="average(B^2)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="T^2"/>
+			<field name="gm6" path="Profiles_1D/gm6" documentation="average(grad_rho^2/B^2)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="T^-2"/>
+			<field name="gm7" path="Profiles_1D/gm7" documentation="average(grad_rho)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
+			<field name="gm8" path="Profiles_1D/gm8" documentation="average(R)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m"/>
+			<field name="gm9" path="Profiles_1D/gm9" documentation="average(1/R)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^-1"/>
+			<field name="B_Average" path="Profiles_1D/B_Average" documentation="average(B)" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="T"/>
+			<field name="B_Min" path="Profiles_1D/B_Min" documentation="Minimum(B) on the flux surface" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="T"/>
+			<field name="B_Max" path="Profiles_1D/B_Max" documentation="Maximum(B) on the flux surface" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="T^-2"/>
+		</field>
+		<field name="Profiles_2D" path="Profiles_2D" documentation="Equilibrium 2D profiles in the poloidal plane. Multiple 2D representations of the equilibrium can be stored here." data_type="struct_array" axis1="1...N_Representations">
+			<field name="Grid_Type" path="Profiles_2D/Grid_Type" documentation="Selection of one of a set of grid types. 1-rectangular (R,Z) grid, in this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2." data_type="STR_0D" type="CONSTANT"/>
+			<field name="Grid" path="Profiles_2D/Grid" documentation="Definition of the 2D grid" data_type="structure">
+				<field name="Dim1" path="Profiles_2D/Grid/Dim1" documentation="First dimension values" data_type="FLT_2D" type="SIGNAL" axis1="1...N_Dim1" axis2="../../../Timebase" units="variable"/>
+				<field name="Dim2" path="Profiles_2D/Grid/Dim2" documentation="Second dimension values" data_type="FLT_2D" type="SIGNAL" axis1="1...N_Dim2" axis2="../../../Timebase" units="variable"/>
+			</field>
+			<field name="R" path="Profiles_2D/R" documentation="Values of the major radius on the grid" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="m"/>
+			<field name="Z" path="Profiles_2D/Z" documentation="Values of the altitude on the grid" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="m"/>
+			<field name="Psi" path="Profiles_2D/Psi" documentation="Values of the poloidal flux at the grid in the poloidal plane" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="Wb"/>
+			<field name="Theta" path="Profiles_2D/Theta" documentation="Values of the poloidal angle on the grid" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="m"/>
+			<field name="Phi" path="Profiles_2D/Phi" documentation="Toroidal flux" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="Wb"/>
+			<field name="J_Tor" path="Profiles_2D/J_Tor" documentation="Toroidal plasma current density" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="A.m^-2"/>
+			<field name="J_Parallel" path="Profiles_2D/J_Parallel" documentation="Parallel (to magnetic field) plasma current density" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="A.m^-2"/>
+			<field name="B_R" path="Profiles_2D/B_R" documentation="R component of the poloidal magnetic field" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="T"/>
+			<field name="B_Z" path="Profiles_2D/B_Z" documentation="Z component of the poloidal magnetic field" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="T"/>
+			<field name="B_Tor" path="Profiles_2D/B_Tor" documentation="Toroidal component of the magnetic field" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="T"/>
+		</field>
+		<field name="Coordinate_System" path="Coordinate_System" documentation="Flux surface coordinate system on a square grid of flux and poloidal angle" data_type="structure">
+			<field name="Grid_Type" path="Coordinate_System/Grid_Type" documentation="Type of coordinate system" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Grid" path="Coordinate_System/Grid" documentation="Definition of the 2D grid" data_type="structure">
+				<field name="Dim1" path="Coordinate_System/Grid/Dim1" documentation="First dimension values" data_type="FLT_2D" type="SIGNAL" axis1="1...N_Dim1" axis2="../../../Timebase" units="variable"/>
+				<field name="Dim2" path="Coordinate_System/Grid/Dim2" documentation="Second dimension values" data_type="FLT_2D" type="SIGNAL" axis1="1...N_Dim2" axis2="../../../Timebase" units="variable"/>
+			</field>
+			<field name="R" path="Coordinate_System/R" documentation="Values of the major radius on the grid" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="m"/>
+			<field name="Z" path="Coordinate_System/Z" documentation="Values of the altitude on the grid" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="m"/>
+			<field name="Jacobian" path="Coordinate_System/Jacobian" documentation="Jacobian of the coordinate system" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="variable"/>
+			<field name="g_11" path="Coordinate_System/g_11" documentation="metric coefficients g_11; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="T"/>
+			<field name="g_12" path="Coordinate_System/g_12" documentation="metric coefficients g_12; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="T"/>
+			<field name="g_13" path="Coordinate_System/g_13" documentation="metric coefficients g_13; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="T"/>
+			<field name="g_22" path="Coordinate_System/g_22" documentation="metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="structure"/>
+			<field name="g_23" path="Coordinate_System/g_23" documentation="metric coefficients g_23; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="T"/>
+			<field name="g_33" path="Coordinate_System/g_33" documentation="metric coefficients g_33; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_3D" type="SIGNAL" axis1="../Grid/Dim1" axis2="../Grid/Dim2" axis3="../../Timebase" units="T"/>
+		</field>
+		<field name="Code_Parameters" path="Code_Parameters" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="Code_Name" path="Code_Parameters/Code_Name" documentation="Name of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Code_Version" path="Code_Parameters/Code_Version" documentation="Version of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Parameters" path="Code_Parameters/Parameters" documentation="List of the code specific parameters, string expected to be in XML format." data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output, string expected to be in XML format." data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values meaning some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
+		</field>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+	</IDS>
+</IDSs>

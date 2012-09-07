@@ -1,0 +1,556 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Data Dictionary HTML documentation</title>
+		<style type="text/css">
+			p {color:black;font-size:12pt;font-weight:normal;}
+			p.name {color:red;font-size:18pt;font-weight:bold;}
+			p.welcome {color:#3333aa; font-size:20pt; font-weight:bold; text-align:center;}
+			span.head {color:#3333aa; font-size:12pt; font-weight:bold; }
+       </style>
+	</head>
+	<body>
+		<p class="welcome">ITER Physics Data Model Documentation for Magnetics</p><b></b><br><table border="1">
+			<thead style="color:#ff0000">
+				<td>Full path name</td>
+				<td>Description</td>
+				<td>Data Type</td>
+				<td>Axes</td>
+			</thead>
+			<tr>
+				<td>IDS_Properties</td>
+				<td>Interface Data Structure properties; it can be placed at any node, allowing this node to be identified as an IDS and to be completed automatically by applications. </td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Status_of</td>
+				<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Comment_of</td>
+				<td>Any additional comment from the source application</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Source_of</td>
+				<td>Where do the data for this Data Item come from and where are they put </td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Date_of</td>
+				<td>Date of consistent creation of this IDS</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Creator_of</td>
+				<td>Creator of this consistent IDS</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Homogeneous_Timebase</td>
+				<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+				<td>int_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops</td>
+				<td>Flux loops</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops/Names</td>
+				<td>Names of flux loops.  {STATIC}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- N</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Flux_Loops/Identifiers</td>
+				<td>IDs of flux loops.  {STATIC}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Flux_Loops/Positions</td>
+				<td>List of (R,Z,phi) points defining the position of the loops (see data structure documentation FLUXLOOPposition.pdf) {STATIC}</td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Flux_Loops/Positions/R</td>
+				<td>Major radius {STATIC}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Points</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Flux_Loops/Positions/Z</td>
+				<td>Altitude {STATIC}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../R</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Flux_Loops/Positions/Phi</td>
+				<td>Toroidal angle {STATIC}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../R</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Flux_Loops/Flux_Loop</td>
+				<td>Measurements by a given Flux Loop. </td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Flux_Loops/Flux_Loop/Flux</td>
+				<td>Measured flux.</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops/Flux_Loop/Flux/Data</td>
+				<td>Measured flux. {SIGNAL} [Wb]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Flux_Loops/Flux_Loop/Flux/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Flux_Loops/Flux_Loop/Flux_Error</td>
+				<td>Absolute error on measured flux.</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops/Flux_Loop/Flux_Error/Type</td>
+				<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops/Flux_Loop/Flux_Error/Signal</td>
+				<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops/Flux_Loop/Flux_Error/Constant</td>
+				<td>Relative error in % provided as a constant {CONSTANT}</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops/Flux_Loop/Flux_Error/Expression</td>
+				<td>Absolute error provided as an Expression.</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes</td>
+				<td>Poloidal field probes</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Names</td>
+				<td>Names of the probes {STATIC}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- N</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Identifiers</td>
+				<td>IDs of probes {STATIC}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Centre_Positions</td>
+				<td>Position of coil centre. Note we should develop a generic RZPHI1D capable of inheriting Axis property from its parent. {STATIC} [m]</td>
+				<td>structure</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Centre_Positions/R</td>
+				<td>Major radius {STATIC}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Points</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Centre_Positions/Z</td>
+				<td>Altitude {STATIC}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../R</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Centre_Positions/Phi</td>
+				<td>Toroidal angle {STATIC}</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../R</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Poloidal_Angles</td>
+				<td>Poloidal angles of coil orientation {STATIC} [rad]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Toroidal_Angles</td>
+				<td>Toroidal angles of coil orientation (0 if fully in the poloidal plane)  {STATIC} [rad]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Areas</td>
+				<td>Area of coils {STATIC} [m^2]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Lengths</td>
+				<td>Lengths of coils {STATIC} [m]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Turns</td>
+				<td>Turns in the coils {STATIC}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Bpol_Probe</td>
+				<td>Measurements by a given Bpol_Probe</td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field</td>
+				<td>Measured flux</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field/Data</td>
+				<td>Measured flux {SIGNAL} [T]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error</td>
+				<td>Absolute error on measured magnetic field.</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Type</td>
+				<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Signal</td>
+				<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Constant</td>
+				<td>Relative error in % provided as a constant {CONSTANT}</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Expression</td>
+				<td>Absolute error provided as an Expression.</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processing_Methods</td>
+				<td>List of data processing methods {STATIC}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- N</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Processed_Data</td>
+				<td>Processed quantities derived from the magnetic measurements.</td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Processing_Method</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Processed_Data/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Processed_Data/Ip</td>
+				<td>Plasma current. Positive sign means anti-clockwise when viewed from above {SIGNAL} [A]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Processed_Data/Ip_Error</td>
+				<td>Error on plasma current </td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processed_Data/Ip_Error/Type</td>
+				<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processed_Data/Ip_Error/Signal</td>
+				<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processed_Data/Ip_Error/Constant</td>
+				<td>Relative error in % provided as a constant {CONSTANT}</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processed_Data/Ip_Error/Expression</td>
+				<td>Absolute error provided as an Expression.</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processed_Data/Diamagnetic_Flux</td>
+				<td>Diamagnetic flux {SIGNAL} [Wb]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Processed_Data/Diamagnetic_Flux_Error</td>
+				<td>Error on diamagnetic flux</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processed_Data/Diamagnetic_Flux_Error/Type</td>
+				<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processed_Data/Diamagnetic_Flux_Error/Signal</td>
+				<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
+				<td>FLT_1D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processed_Data/Diamagnetic_Flux_Error/Constant</td>
+				<td>Relative error in % provided as a constant {CONSTANT}</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Processed_Data/Diamagnetic_Flux_Error/Expression</td>
+				<td>Absolute error provided as an Expression.</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

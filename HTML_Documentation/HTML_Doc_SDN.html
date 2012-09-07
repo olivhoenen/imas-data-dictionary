@@ -1,0 +1,175 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Data Dictionary HTML documentation</title>
+		<style type="text/css">
+			p {color:black;font-size:12pt;font-weight:normal;}
+			p.name {color:red;font-size:18pt;font-weight:bold;}
+			p.welcome {color:#3333aa; font-size:20pt; font-weight:bold; text-align:center;}
+			span.head {color:#3333aa; font-size:12pt; font-weight:bold; }
+       </style>
+	</head>
+	<body>
+		<p class="welcome">ITER Physics Data Model Documentation for SDN</p><b></b><br><table border="1">
+			<thead style="color:#ff0000">
+				<td>Full path name</td>
+				<td>Description</td>
+				<td>Data Type</td>
+				<td>Axes</td>
+			</thead>
+			<tr>
+				<td>IDS_Properties</td>
+				<td>Interface Data Structure properties; it can be placed at any node, allowing this node to be identified as an IDS and to be completed automatically by applications. </td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Status_of</td>
+				<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Comment_of</td>
+				<td>Any additional comment from the source application</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Source_of</td>
+				<td>Where do the data for this Data Item come from and where are they put </td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Date_of</td>
+				<td>Date of consistent creation of this IDS</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Creator_of</td>
+				<td>Creator of this consistent IDS</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Homogeneous_Timebase</td>
+				<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+				<td>int_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Allocatable_Signals</td>
+				<td>Dictionary of the signal names and definitions which can be allocated to the SDN</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Allocatable_Signals/Names</td>
+				<td>Names of all the allocatable signals {STATIC}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- N</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Allocatable_Signals/Definitions </td>
+				<td>Definitions of the allocatable signals {STATIC}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Allocatable_Signals/Ip_Normalise</td>
+				<td>Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops {STATIC}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Allocated_Signals</td>
+				<td>Allocation of signal names to positions in the SDN {STATIC}</td>
+				<td>STR_1D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Signals</td>
+				<td>Data on the SDN {SIGNAL} [Mixed]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Timebase</td>
+						</tr>
+						<tr>
+							<td>2- ../Allocated_Signals</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>N_List</td>
+				<td>Number items in the vector of structures</td>
+				<td>int_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>List</td>
+				<td>List of the groups of signals used at different reading and writing points</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>List/Names</td>
+				<td>Names of the group of SDN signals {STATIC}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- N</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>List/Indices</td>
+				<td>Indices into the current SDN allocated list; it must be updated when the allocated list is changed {STATIC}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- N</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
