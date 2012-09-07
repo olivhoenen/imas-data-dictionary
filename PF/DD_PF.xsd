@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="..\Utilities\DD_Support_v2.xsd"/>
+	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
 	<xs:element name="PF">
 		<xs:annotation>
 			<xs:documentation>Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</xs:documentation>
@@ -186,7 +186,7 @@
 												<xs:documentation>Current in the coil</xs:documentation>
 												<xs:appinfo>
 													<Type>SIGNAL</Type>
-													<Axis1>../Timebase</Axis1>
+													<Axis1>Timebase</Axis1>
 													<Units>Amp</Units>
 												</xs:appinfo>
 											</xs:annotation>
@@ -202,7 +202,7 @@
 												<xs:documentation>Voltage on the coil terminals</xs:documentation>
 												<xs:appinfo>
 													<Type>SIGNAL</Type>
-													<Axis1>../Timebase</Axis1>
+													<Axis1>Timebase</Axis1>
 													<Units>Volt</Units>
 												</xs:appinfo>
 											</xs:annotation>
@@ -281,7 +281,7 @@
 									<xs:documentation>Force combinations</xs:documentation>
 									<xs:appinfo>
 										<Type>SIGNAL</Type>
-										<Axis2>../Timebase</Axis2>
+										<Axis2>Timebase</Axis2>
 										<Axis1>../Names</Axis1>
 										<Units>N</Units>
 									</xs:appinfo>
@@ -357,7 +357,7 @@
 									<xs:documentation>Voltage on the circuit</xs:documentation>
 									<xs:appinfo>
 										<Type>SIGNAL</Type>
-										<Axis1>../Timebase</Axis1>
+										<Axis1>Timebase</Axis1>
 										<Units>Volt</Units>
 									</xs:appinfo>
 								</xs:annotation>
@@ -373,7 +373,7 @@
 									<xs:documentation>Current in the circuit</xs:documentation>
 									<xs:appinfo>
 										<Type>SIGNAL</Type>
-										<Axis1>../Timebase</Axis1>
+										<Axis1>Timebase</Axis1>
 										<Units>Volt</Units>
 									</xs:appinfo>
 								</xs:annotation>
@@ -714,8 +714,8 @@
 									<xs:documentation>Passive Loop currents (assumed to share their timebase)</xs:documentation>
 									<xs:appinfo>
 										<Type>SIGNAL</Type>
-										<Axis2>../Timebase</Axis2>
 										<Axis1>../Names</Axis1>
+										<Axis2>Timebase</Axis2>
 										<Units>Amp</Units>
 									</xs:appinfo>
 								</xs:annotation>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./%24GET%5Bstylesheet%5D" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
-<xsl:stylesheet xmlns:yaslt="http://www.mod-xslt2.com/ns/1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" extension-element-prefixes="yaslt" xmlns:fn="http://www.w3.org/2005/02/xpath-functions">
+<xsl:stylesheet xmlns:yaslt="http://www.mod-xslt2.com/ns/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" extension-element-prefixes="yaslt" xmlns:fn="http://www.w3.org/2005/02/xpath-functions">
 	<!-- -->
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!-- This script transforms the whole schema of the ITM Phase 4 data structure (with all its includes and references) into a single XML file describing explicitly all nodes with their characteristics-->
@@ -160,6 +160,7 @@
 							<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
 							<xsl:for-each select="xs:annotation/xs:appinfo/*">
 								<!-- Generic method for declaring all appinfo as attributes-->
+								<!-- It would be good to put all attribute names to lower-case but I failed finding the valid syntax for the lower-case function (XMLSpy does not seem to be aware of the lower-case function ?? -->
 								<xsl:attribute name="{name(.)}"><xsl:value-of select="."/></xsl:attribute>
 							</xsl:for-each>
 						</field>
@@ -231,11 +232,35 @@
 										<!-- It is an array of structures -->
 										<xsl:when test="@maxOccurs='unbounded'">
 											<xsl:attribute name="data_type">struct_array</xsl:attribute>
-											
+																		<xsl:if test="xs:annotation/xs:appinfo/axis1 or xs:annotation/xs:appinfo/Axis1"><xsl:attribute name="axis1"><xsl:value-of select="xs:annotation/xs:appinfo/axis1"/><xsl:value-of select="xs:annotation/xs:appinfo/Axis1"/></xsl:attribute></xsl:if>
 										</xsl:when>
 										<!-- It is a regular structure -->
 										<xsl:otherwise>
 											<xsl:attribute name="data_type">structure</xsl:attribute>
+<!-- TREAT HERE THE CASE OF DIRECT BRANCHING OF A GROUP BELOW A STRUCTURE, OCCURS FOR SOME SIGNALS, NEED TO ADD A DATA CHILD -->											
+											<xsl:if test="xs:complexType/xs:sequence/xs:group">
+											
+											<field>
+							<xsl:attribute name="name">Data</xsl:attribute>
+							<xsl:choose>
+								<xsl:when test="$currPath=''">
+									<xsl:attribute name="path">Data</xsl:attribute>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/Data')"/></xsl:attribute>
+								</xsl:otherwise>
+							</xsl:choose>
+							<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
+							<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:attribute>
+							<xsl:for-each select="xs:annotation/xs:appinfo/*">
+								<!-- Generic method for declaring all appinfo as attributes-->
+								<xsl:attribute name="{name(.)}">
+<xsl:if test="contains(name(.),'Axis') or contains(name(.),'axis') ">../</xsl:if>     <!-- We just add ../ to all Axes since their are viewed from Data, one level below the original parent -->
+								<xsl:value-of select="."/>
+								</xsl:attribute>
+							</xsl:for-each>
+						</field>
+											</xsl:if>
 										</xsl:otherwise>
 									</xsl:choose>
 									<xsl:choose>

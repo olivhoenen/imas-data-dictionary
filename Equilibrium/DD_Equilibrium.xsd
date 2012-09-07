@@ -1,0 +1,1266 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
+<?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./%24GET%5Bstylesheet%5D" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
+<?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:complexType name="Equilibrium_Boundary">
+		<xs:annotation>
+			<xs:documentation>Geometry of the plasma boundary</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Type">
+				<xs:annotation>
+					<xs:documentation>0 (limiter) or 1 (diverted)</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Timebase</axis1>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Outline" type="RZ2D_SIGNAL_Npoints">
+				<xs:annotation>
+					<xs:documentation>RZ description of the plasma boundary</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Geometric_Axis" type="RZ1D_SIGNAL">
+				<xs:annotation>
+					<xs:documentation>Position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="a_minor">
+				<xs:annotation>
+					<xs:documentation>Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Timebase</axis1>
+						<type>SIGNAL</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Elongation">
+				<xs:annotation>
+					<xs:documentation>Elongation of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Timebase</axis1>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Elongation_upper">
+				<xs:annotation>
+					<xs:documentation>Elongation (upper half) of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Timebase</axis1>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Elongation_Lower">
+				<xs:annotation>
+					<xs:documentation>Elongation (lower half) of the plasma boundary</xs:documentation>
+					<xs:appinfo>experimental</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Triangularity_Upper">
+				<xs:annotation>
+					<xs:documentation>Upper triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Timebase</axis1>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Triangularity_Lower">
+				<xs:annotation>
+					<xs:documentation>Lower triangularity of the plasma boundary; Time-dependent; Scalar</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Timebase</axis1>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="X_points" type="RZ2D_SIGNAL_Npoints">
+				<xs:annotation>
+					<xs:documentation>Position of the X points, first is the active X point if diverted</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Strike_Point_Lower_Left" type="RZ1D_SIGNAL">
+				<xs:annotation>
+					<xs:documentation>Position of the lower left strike point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Strike_Point_Upper_Left" type="RZ1D_SIGNAL">
+				<xs:annotation>
+					<xs:documentation>Position of the upper left strike point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Strike_Point_Lower_Right" type="RZ1D_SIGNAL">
+				<xs:annotation>
+					<xs:documentation>Position of the lower right strike point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Strike_Point_Upper_Right" type="RZ1D_SIGNAL">
+				<xs:annotation>
+					<xs:documentation>Position of the upper right strike point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Active_Limiter_Point" type="RZ1D_SIGNAL">
+				<xs:annotation>
+					<xs:documentation>Position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Equlibrium_Global">
+		<xs:annotation>
+			<xs:documentation>0D parameters of the equilibrium</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Beta_Pol">
+				<xs:annotation>
+					<xs:documentation>Poloidal beta</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Beta_Tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal beta</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Beta_Normal">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal beta</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ip">
+				<xs:annotation>
+					<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above.</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="li_3">
+				<xs:annotation>
+					<xs:documentation>Internal inductance</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Volume">
+				<xs:annotation>
+					<xs:documentation>Total plasma volume</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Area">
+				<xs:annotation>
+					<xs:documentation>Area of the poloidal cross section</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Psi_Axis">
+				<xs:annotation>
+					<xs:documentation>Poloidal flux at the magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Psi_Boundary">
+				<xs:annotation>
+					<xs:documentation>Poloidal flux at the selected plasma boundary (separatrix for a free boundary code; fixed boundary for fixed boundary code) </xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Magnetic_Axis" type="RZ1D_SIGNAL">
+				<xs:annotation>
+					<xs:documentation>Magnetic axis position</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="B_Tor_Axis">
+				<xs:annotation>
+					<xs:documentation>Total toroidal magnetic field at the magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="q_Axis">
+				<xs:annotation>
+					<xs:documentation>q at the magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="q_95">
+				<xs:annotation>
+					<xs:documentation>q at the 95% poloidal flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="q_min">
+				<xs:annotation>
+					<xs:documentation>Minimum q value in the plasma</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Toroidal_Field" type="B_Tor_Vacuum">
+				<xs:annotation>
+					<xs:documentation>Characteristics of the vacuum toroidal field</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="W_MHD">
+				<xs:annotation>
+					<xs:documentation>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+						<units>J</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Gamma">
+				<xs:annotation>
+					<xs:documentation>Adiabatic index</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Equilibrium_Profiles_1D">
+		<xs:annotation>
+			<xs:documentation>Equilibrium profiles (1D radial grid) as a function of the poloidal flux</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal flux, without 1/2pi and such that Bp=|grad psi| /R/2/pi</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...N_Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal flux</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Pressure">
+				<xs:annotation>
+					<xs:documentation>Pressure profile as a function of the poloidal flux</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="F">
+				<xs:annotation>
+					<xs:documentation>Diamagnetic function (F=R B_Phi)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>T.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dPressure_dPsi">
+				<xs:annotation>
+					<xs:documentation>Psi derivative of the pressure profile</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>Pa/Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="F_dF_dPsi">
+				<xs:annotation>
+					<xs:documentation>psi derivative of F multiplied with F</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>T^2.m^2/Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="J_Tor">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged toroidal current density = average(J_TorR) / average(1/R)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>A/m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="J_Parallel">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged parallel current density = average(j.B) / B0, where B0 = Equilibrium/Global/Toroidal_Field/B0</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>A/m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="q">
+				<xs:annotation>
+					<xs:documentation>Safety factor</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="R_Inboard">
+				<xs:annotation>
+					<xs:documentation>Radial coordinate (major radius) at the height and on the left of the magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="R_Outboard">
+				<xs:annotation>
+					<xs:documentation>Radial coordinate (major radius) at the height and on the right of the magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Rho_Tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal flux coordinate, defined as sqrt(Phi/pi/B0), where B0 = Equilibrium/Global/Toroidal_Field/B0</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dPsi_dRho_Tor">
+				<xs:annotation>
+					<xs:documentation>Derivative of Psi with respect to Rho_Tor</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>Wb/m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Rho_Vo_Norm">
+				<xs:annotation>
+					<xs:documentation>Normalised radial coordinate related to the plasma volume. Defined as sqrt(volume / volume[LCFS])</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Beta_Pol">
+				<xs:annotation>
+					<xs:documentation>Poloidal beta (inside the magnetic surface)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="li_3">
+				<xs:annotation>
+					<xs:documentation>internal inductance (inside the magnetic surface)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Elongation">
+				<xs:annotation>
+					<xs:documentation>Elongation profile</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Triangularity_Upper">
+				<xs:annotation>
+					<xs:documentation>Upper triangularity profile</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Triangularity_Lower">
+				<xs:annotation>
+					<xs:documentation>Lower triangularity profile</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Volume">
+				<xs:annotation>
+					<xs:documentation>Volume enclosed in the flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dVolume_dPsi">
+				<xs:annotation>
+					<xs:documentation>Radial derivative of the volume enclosed in the flux surface with respect to Psi</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^3/Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dVolume_dRho_Tor">
+				<xs:annotation>
+					<xs:documentation>Radial derivative of the volume enclosed in the flux surface with respect to Rho_Tor</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Area">
+				<xs:annotation>
+					<xs:documentation>Cross-sectional area of the flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dA_dPsi">
+				<xs:annotation>
+					<xs:documentation>Radial derivative of the cross-sectional area of the flux surface with respect to Psi</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^2/Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Surface">
+				<xs:annotation>
+					<xs:documentation>Surface area of the flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Trapped_Fraction">
+				<xs:annotation>
+					<xs:documentation>Trapped particle fraction</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm1">
+				<xs:annotation>
+					<xs:documentation>average(1/R^2)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm2">
+				<xs:annotation>
+					<xs:documentation>average(grad_rho^2/R^2)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm3">
+				<xs:annotation>
+					<xs:documentation>average(grad_rho^2)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm4">
+				<xs:annotation>
+					<xs:documentation>average(1/B^2)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>T^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm5">
+				<xs:annotation>
+					<xs:documentation>average(B^2)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>T^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm6">
+				<xs:annotation>
+					<xs:documentation>average(grad_rho^2/B^2)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>T^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm7">
+				<xs:annotation>
+					<xs:documentation>average(grad_rho)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm8">
+				<xs:annotation>
+					<xs:documentation>average(R)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm9">
+				<xs:annotation>
+					<xs:documentation>average(1/R)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="B_Average">
+				<xs:annotation>
+					<xs:documentation>average(B)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="B_Min">
+				<xs:annotation>
+					<xs:documentation>Minimum(B) on the flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="B_Max">
+				<xs:annotation>
+					<xs:documentation>Maximum(B) on the flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>T^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Equilibrium_Profiles_2D_Grid">
+		<xs:annotation>
+			<xs:documentation>Definition of the 2D grid</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Dim1">
+				<xs:annotation>
+					<xs:documentation>First dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...N_Dim1</axis1>
+						<axis2>../../../Timebase</axis2>
+						<units>variable</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Dim2">
+				<xs:annotation>
+					<xs:documentation>Second dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...N_Dim2</axis1>
+						<axis2>../../../Timebase</axis2>
+						<units>variable</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Equilibrium_Profiles_2D">
+		<xs:annotation>
+			<xs:documentation>Equilibrium 2D profiles in the poloidal plane</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Grid_Type">
+				<xs:annotation>
+					<xs:documentation>Selection of one of a set of grid types. 1-rectangular (R,Z) grid, in this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Grid" type="Equilibrium_Profiles_2D_Grid">
+				<xs:annotation>
+					<xs:documentation>Definition of the 2D grid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="R">
+				<xs:annotation>
+					<xs:documentation>Values of the major radius on the grid</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Z">
+				<xs:annotation>
+					<xs:documentation>Values of the altitude on the grid</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Psi">
+				<xs:annotation>
+					<xs:documentation>Values of the poloidal flux at the grid in the poloidal plane</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Theta">
+				<xs:annotation>
+					<xs:documentation>Values of the poloidal angle on the grid</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal flux</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="J_Tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal plasma current density</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>A.m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="J_Parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel (to magnetic field) plasma current density</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>A.m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="B_R">
+				<xs:annotation>
+					<xs:documentation>R component of the poloidal magnetic field</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="B_Z">
+				<xs:annotation>
+					<xs:documentation>Z component of the poloidal magnetic field</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="B_Tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal component of the magnetic field</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Equilibrium_Coordinate_System">
+		<xs:annotation>
+			<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Grid_Type">
+				<xs:annotation>
+					<xs:documentation>Type of coordinate system</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Grid" type="Equilibrium_Profiles_2D_Grid">
+				<xs:annotation>
+					<xs:documentation>Definition of the 2D grid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="R">
+				<xs:annotation>
+					<xs:documentation>Values of the major radius on the grid</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Z">
+				<xs:annotation>
+					<xs:documentation>Values of the altitude on the grid</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Jacobian">
+				<xs:annotation>
+					<xs:documentation>Jacobian of the coordinate system</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>variable</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_11">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_11; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_12">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_12; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_13">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_13; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_22">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="g_23">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_23; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_33">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_33; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Equilibrium">
+		<xs:annotation>
+			<xs:documentation>Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="IDS_Properties"/>
+				<xs:element name="Boundary" type="Equilibrium_Boundary">
+					<xs:annotation>
+						<xs:documentation>Description of the plasma boundary</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Global" type="Equlibrium_Global">
+					<xs:annotation>
+						<xs:documentation>0D parameters of the equilibrium</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Profiles_1D" type="Equilibrium_Profiles_1D">
+					<xs:annotation>
+						<xs:documentation>Equilibrium profiles (1D radial grid) as a function of the poloidal flux</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Profiles_2D" type="Equilibrium_Profiles_2D" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Equilibrium 2D profiles in the poloidal plane. Multiple 2D representations of the equilibrium can be stored here.</xs:documentation>
+						<xs:appinfo>
+							<axis1>1...N_Representations</axis1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Coordinate_System" type="Equilibrium_Coordinate_System">
+					<xs:annotation>
+						<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="Code_Parameters"/>
+				<xs:element ref="Timebase"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

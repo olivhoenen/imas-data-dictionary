@@ -296,7 +296,39 @@
 			<xs:group ref="FLT_1D"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="RZPhi1D_STATIC_List">
+	<xs:complexType name="B_Tor_Vacuum">
+		<xs:annotation>
+			<xs:documentation>Characteristics of the vacuum toroidal field. Timebase assumed to be two levels above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="R0">
+				<xs:annotation>
+					<xs:documentation>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="B0">
+				<xs:annotation>
+					<xs:documentation>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<units>T</units>
+						<axis1>../../../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RZPhi1D_STATIC">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi positions (1D, STATIC)</xs:documentation>
 		</xs:annotation>
@@ -342,7 +374,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="RZ1D_CONSTANT_List">
+	<xs:complexType name="RZ1D_CONSTANT">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z positions (1D, CONSTANT)</xs:documentation>
 		</xs:annotation>
@@ -371,6 +403,86 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RZ1D_SIGNAL">
+		<xs:annotation>
+			<xs:documentation>Structure for list of R, Z positions (1D, SIGNAL), Timebase assumed to be 2 levels above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="R">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<units_of>m</units_of>
+						<axis1>../../../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Z">
+				<xs:annotation>
+					<xs:documentation>Altitude</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<units_of>m</units_of>
+						<axis1>../../../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RZ2D_SIGNAL_Npoints">
+		<xs:annotation>
+			<xs:documentation>Structure for list of R, Z positions (2D, SIGNAL), with an N_Points indicator of the number of active points in each list. This could be improved later, making the parent a vector of structure indexed on a Timebase, when the PUAL allows for it. Timebase assumed to be 2 levels above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="N_Points">
+				<xs:annotation>
+					<xs:documentation>Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points)).</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../../Timebase</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="R">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<units_of>m</units_of>
+						<axis1>1...max(N_Points)</axis1>
+						<axis2>../../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Z">
+				<xs:annotation>
+					<xs:documentation>Altitude</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<units_of>m</units_of>
+						<axis1>../R</axis1>
+						<axis2>../../../Timebase</axis2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

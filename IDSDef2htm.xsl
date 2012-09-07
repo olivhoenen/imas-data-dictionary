@@ -35,20 +35,23 @@
 
            <td><xsl:value-of select="@documentation"/>
            <xsl:if test="@type"> {<xsl:value-of select="@type"/>}</xsl:if>
+           <xsl:if test="@Type"> {<xsl:value-of select="@Type"/>}</xsl:if>
           <xsl:if test="@units"> [<xsl:value-of select="@units"/>]</xsl:if>
+                    <xsl:if test="@Units"> [<xsl:value-of select="@Units"/>]</xsl:if>
+
            </td>
            <td><xsl:value-of select="@data_type"/></td>  
   
 <td>
-<xsl:if test="@axis1"> <!--If there is at least one axis-->
+<xsl:if test="@axis1 or @Axis1"> <!--If there is at least one axis-->
 <table>
-<tr><td>1- <xsl:value-of select="@axis1"/>
+<tr><td>1- <xsl:value-of select="@axis1"/> <xsl:value-of select="@Axis1"/>
 </td></tr>
 <xsl:if test="@axis2">
-<tr><td>2- <xsl:value-of select="@axis2"/>
+<tr><td>2- <xsl:value-of select="@axis2"/> <xsl:value-of select="@Axis2"/>
 </td></tr>
 <xsl:if test="@axis3">
-<tr><td>3- <xsl:value-of select="@axis3"/>
+<tr><td>3- <xsl:value-of select="@axis3"/> <xsl:value-of select="@Axis3"/>
 </td></tr>
 </xsl:if>
 </xsl:if>
