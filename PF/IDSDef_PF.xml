@@ -10,12 +10,12 @@
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
 		</field>
 		<field name="Coils" path="Coils" documentation="Active PF coils" data_type="structure">
-			<field name="Names" path="Coils/Names" documentation="Names of PF coils" data_type="STR_1D" Type="STATIC" Axis1="N"/>
+			<field name="Names" path="Coils/Names" documentation="Names of PF coils" data_type="STR_1D" Type="STATIC" Axis1="1...N_PF_Coils"/>
 			<field name="Identifiers" path="Coils/Identifiers" documentation="Alphanumeric identifiers of coils used for convenience" data_type="STR_1D" Type="STATIC" Axis1="../Names"/>
 			<field name="Resistances" path="Coils/Resistances" documentation="Coil resistances" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Ohm"/>
 			<field name="Energy_Max_Limits" path="Coils/Energy_Max_Limits" documentation="Maximum Energy to be dissipated in coils" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Joule"/>
 			<field name="Coil" path="Coils/Coil" documentation="Axisymmetric conductor description of each coil; each is comprised of a number of cross-section elements described  individually" data_type="struct_array" axis1="../Names">
-				<field name="Element_Names" path="Coils/Coil/Element_Names" documentation="Names of the elements of this coil" data_type="STR_1D" Type="STATIC" Axis1="N"/>
+				<field name="Element_Names" path="Coils/Coil/Element_Names" documentation="Names of the elements of this coil" data_type="STR_1D" Type="STATIC" Axis1="1...N_Elements"/>
 				<field name="Element_Identifiers" path="Coils/Coil/Element_Identifiers" documentation="Identifiers of the elements of this coil" data_type="STR_1D" Type="STATIC" Axis1="../Names"/>
 				<field name="Element_Turns_With_Sign" path="Coils/Coil/Element_Turns_With_Sign" documentation="Number of effective turns in the elements for calculating magnetic fields of the coil; includes the sign of the number of turns" data_type="INT_1D" Type="STATIC" Axis1="../Names"/>
 				<field name="Element_Areas" path="Coils/Coil/Element_Areas" documentation="Cross-sectional areas of the elements" data_type="FLT_1D" Type="STATIC" Axis1="../Element_Names" Units="m^2"/>
@@ -35,7 +35,7 @@
 			</field>
 		</field>
 		<field name="Vertical_Forces" path="Vertical_Forces" documentation="Vertical forces on the axisymmetric PF coil system" data_type="structure">
-			<field name="Names" path="Vertical_Forces/Names" documentation="Names of Force combinations" data_type="STR_1D" Type="STATIC" Axis1="N"/>
+			<field name="Names" path="Vertical_Forces/Names" documentation="Names of Force combinations" data_type="STR_1D" Type="STATIC" Axis1="1...N_Force_Combinations"/>
 			<field name="Combinations" path="Vertical_Forces/Combinations" documentation="Combinations of forces" data_type="FLT_2D" Type="STATIC" Axis1="../../Coils/Names" Axis2="../Names"/>
 			<field name="Max_Limits" path="Vertical_Forces/Max_Limits" documentation="Vertical Force combination limits" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="N"/>
 			<field name="Min_Limits" path="Vertical_Forces/Min_Limits" documentation="Vertical Force combination limits" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="N"/>
@@ -45,10 +45,10 @@
 			</field>
 		</field>
 		<field name="Circuits" path="Circuits" documentation="Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system" data_type="structure">
-			<field name="Names" path="Circuits/Names" documentation="Names of circuits" data_type="STR_1D" Type="STATIC" Axis1="N"/>
+			<field name="Names" path="Circuits/Names" documentation="Names of circuits" data_type="STR_1D" Type="STATIC" Axis1="1...N_Circuits"/>
 			<field name="Identifiers" path="Circuits/Identifiers" documentation="IDs of circuits" data_type="STR_1D" Type="STATIC" Axis1="../Names"/>
 			<field name="Types" path="Circuits/Types" documentation="Types of circuit" data_type="STR_1D" Type="STATIC" Axis1="../Names"/>
-			<field name="Connections" path="Circuits/Connections" documentation="Description of the supplies and coils connections (nodes) across each circuit. Array-3D (N_Circuits,max_nnodes,2*ncomponents), describing for each node which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the third dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD)" data_type="FLT_3D" Type="STATIC" Axis1=" TBD" Axis2=" TBD" Axis3=" TBD"/>
+			<field name="Connections" path="Circuits/Connections" documentation="Description of the supplies and coils connections (nodes) across each circuit. Array-3D (N_Circuits,max_nnodes,2*ncomponents), describing for each node which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the third dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD)" data_type="FLT_3D" Type="STATIC" Axis1="TBD" Axis2="TBD" Axis3="TBD"/>
 			<field name="Voltage" path="Circuits/Voltage" documentation="Voltage on the circuit" data_type="struct_array" axis1="Timebase">
 				<field name="Timebase" path="Circuits/Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 			</field>
@@ -57,33 +57,33 @@
 			</field>
 		</field>
 		<field name="Supplies" path="Supplies" documentation="PF power supplies" data_type="structure">
-			<field name="Names" path="Supplies/Names" documentation="Names of the PF supplies" data_type="STR_1D" Type="STATIC" Axis1="N"/>
+			<field name="Names" path="Supplies/Names" documentation="Names of the PF supplies" data_type="STR_1D" Type="STATIC" Axis1="1...N_PF_Supplies"/>
 			<field name="Identifiers" path="Supplies/Identifiers" documentation="Identifiers of the supplies" data_type="STR_1D" Type="STATIC" Axis1="../Names"/>
 			<field name="Types" path="Supplies/Types" documentation="Types of supplies; TBD add free description of non-linear power supplies" data_type="INT_1D" Type="STATIC" Axis1="../Names"/>
 			<field name="Resistances" path="Supplies/Resistances" documentation="Power supply internal resistances" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Ohm"/>
 			<field name="Delays" path="Supplies/Delays" documentation="Pure delays in the supplies" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Sec"/>
-			<field name="Filters_Numerators" path="Supplies/Filters_Numerators" documentation="Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description" data_type="FLT_2D" Type="STATIC" Axis1="../Names" Axis2="N"/>
-			<field name="Filters_Denominators" path="Supplies/Filters_Denominators" documentation="Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description" data_type="FLT_2D" Axis1="../Names" Axis2="N" Type="STATIC"/>
-			<field name="Current_Max_Limits" path="Supplies/Current_Max_Limits" documentation="Maximum currents in the supplies" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Amp"/>
+			<field name="Filters_Numerators" path="Supplies/Filters_Numerators" documentation="Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description" data_type="FLT_2D" Type="STATIC" Axis1="../Names" Axis2="1...N_Numerator_Coefficients"/>
+			<field name="Filters_Denominators" path="Supplies/Filters_Denominators" documentation="Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description" data_type="FLT_2D" Axis1="../Names" Axis2="1...N_Denominator_Coefficients" Type="STATIC"/>
+			<field name="Current_Max_Limits" path="Supplies/Current_Max_Limits" documentation="Maximum currents in the supplies" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="A"/>
 			<field name="Current_Min_Limits" path="Supplies/Current_Min_Limits" documentation="Minimum currents in the supplies" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Amp"/>
 			<field name="Voltage_Max_Limits" path="Supplies/Voltage_Max_Limits" documentation="Minimum voltages from the supplies" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Volt"/>
-			<field name="Voltage_Min_Limits" path="Supplies/Voltage_Min_Limits" documentation="Maximum voltages from the supplies" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Volt"/>
-			<field name="Current_Limiter_Gain" path="Supplies/Current_Limiter_Gain" documentation="Gains to prevent overcurrent in a linear model of the supplies" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Volt"/>
-			<field name="Energy_Max_Limits" path="Supplies/Energy_Max_Limits" documentation="Maximum energies to be dissipated in the supplies during a pulse" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Joule"/>
+			<field name="Voltage_Min_Limits" path="Supplies/Voltage_Min_Limits" documentation="Maximum voltages from the supplies" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="V"/>
+			<field name="Current_Limiter_Gain" path="Supplies/Current_Limiter_Gain" documentation="Gains to prevent overcurrent in a linear model of the supplies" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="V"/>
+			<field name="Energy_Max_Limits" path="Supplies/Energy_Max_Limits" documentation="Maximum energies to be dissipated in the supplies during a pulse" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="J"/>
 			<field name="Supply" path="Supplies/Supply" documentation="Each of the power supplies; the supply index follows the supply name list" data_type="struct_array" axis1="../Names">
 				<field name="Voltage" path="Supplies/Supply/Voltage" documentation="Voltages at the supply output" data_type="structure">
-					<field name="Data" path="Supplies/Supply/Voltage/Data" documentation="Voltages at the supply output" data_type="FLT_1D" Type="SIGNAL" Axis1="../Timebase" Units="Volt"/>
+					<field name="Data" path="Supplies/Supply/Voltage/Data" documentation="Voltages at the supply output" data_type="FLT_1D" Type="SIGNAL" Axis1="../Timebase" Units="V"/>
 					<field name="Timebase" path="Supplies/Supply/Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 				</field>
 				<field name="Current" path="Supplies/Supply/Current" documentation="Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description" data_type="structure">
-					<field name="Data" path="Supplies/Supply/Current/Data" documentation="Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description" data_type="FLT_1D" Type="SIGNAL" Axis1="../Timebase" Units="Amp"/>
+					<field name="Data" path="Supplies/Supply/Current/Data" documentation="Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description" data_type="FLT_1D" Type="SIGNAL" Axis1="../Timebase" Units="A"/>
 					<field name="Timebase" path="Supplies/Supply/Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 				</field>
 				<field name="Nonlinear_Model" path="Supplies/Supply/Nonlinear_Model" documentation="Description of the nonlinear transfer function of the supply" data_type="STR_0D"/>
 			</field>
 		</field>
 		<field name="Passive_Loops" path="Passive_Loops" documentation="Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached." data_type="structure">
-			<field name="Names" path="Passive_Loops/Names" documentation="Names of loops" data_type="STR_1D" Type="STATIC" Axis1="N"/>
+			<field name="Names" path="Passive_Loops/Names" documentation="Names of loops" data_type="STR_1D" Type="STATIC" Axis1="N_Passive_Loops"/>
 			<field name="Areas" path="Passive_Loops/Areas" documentation="Surface areas of the passive loops" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="m^2"/>
 			<field name="Resistances" path="Passive_Loops/Resistances" documentation="Passive element resistances" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Ohm"/>
 			<field name="Geometry" path="Passive_Loops/Geometry" documentation="Shape of each Passive Loop" data_type="struct_array" axis1="../Names">
@@ -97,7 +97,7 @@
 			</field>
 		</field>
 		<field name="Vacuum_Model" path="Vacuum_Model" documentation="Electromagnetic Vacuum Model of the PF System, including both active and passive coils" data_type="structure">
-			<field name="Names" path="Vacuum_Model/Names" documentation="Names of circuits [Active;Passive]" data_type="STR_1D" Type="STATIC" Axis1="N"/>
+			<field name="Names" path="Vacuum_Model/Names" documentation="Names of circuits [Active;Passive]" data_type="STR_1D" Type="STATIC" Axis1="1...N_Active_Passive_Circuits"/>
 			<field name="Inductance_Matrix" path="Vacuum_Model/Inductance_Matrix" documentation="Inductance matrix between circuits" data_type="FLT_2D" Type="STATIC" Axis1="../Names" Axis2="../Names" Units="Henry"/>
 			<field name="Resistance_Vector" path="Vacuum_Model/Resistance_Vector" documentation="Resistances of PF coils" data_type="FLT_1D" Type="STATIC" Axis1="../Names" Units="Ohm"/>
 		</field>

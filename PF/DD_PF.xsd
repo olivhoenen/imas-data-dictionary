@@ -21,7 +21,7 @@
 									<xs:documentation>Names of PF coils</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
-										<Axis1>N</Axis1>
+										<Axis1>1...N_PF_Coils</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -80,7 +80,7 @@
 												<xs:documentation>Names of the elements of this coil</xs:documentation>
 												<xs:appinfo>
 													<Type>STATIC</Type>
-													<Axis1>N</Axis1>
+													<Axis1>1...N_Elements</Axis1>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -230,7 +230,7 @@
 									<xs:documentation>Names of Force combinations</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
-										<Axis1>N</Axis1>
+										<Axis1>1...N_Force_Combinations</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -307,7 +307,7 @@
 									<xs:documentation>Names of circuits</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
-										<Axis1>N</Axis1>
+										<Axis1>1...N_Circuits</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -343,9 +343,9 @@
 									<xs:documentation>Description of the supplies and coils connections (nodes) across each circuit. Array-3D (N_Circuits,max_nnodes,2*ncomponents), describing for each node which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the third dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD)</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
-										<Axis1> TBD</Axis1>
-										<Axis2> TBD</Axis2>
-										<Axis3> TBD</Axis3>
+										<Axis1>TBD</Axis1>
+										<Axis2>TBD</Axis2>
+										<Axis3>TBD</Axis3>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -358,7 +358,7 @@
 									<xs:appinfo>
 										<Type>SIGNAL</Type>
 										<Axis1>Timebase</Axis1>
-										<Units>Volt</Units>
+										<Units>V</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -374,7 +374,7 @@
 									<xs:appinfo>
 										<Type>SIGNAL</Type>
 										<Axis1>Timebase</Axis1>
-										<Units>Volt</Units>
+										<Units>V</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -398,7 +398,7 @@
 									<xs:documentation>Names of the PF supplies</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
-										<Axis1>N</Axis1>
+										<Axis1>1...N_PF_Supplies</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -461,7 +461,7 @@
 									<xs:appinfo>
 										<Type>STATIC</Type>
 										<Axis1>../Names</Axis1>
-										<Axis2>N</Axis2>
+										<Axis2>1...N_Numerator_Coefficients</Axis2>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -473,7 +473,7 @@
 									<xs:documentation>Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description</xs:documentation>
 									<xs:appinfo>
 										<Axis1>../Names</Axis1>
-										<Axis2>N</Axis2>
+										<Axis2>1...N_Denominator_Coefficients</Axis2>
 										<Type>STATIC</Type>
 									</xs:appinfo>
 								</xs:annotation>
@@ -487,7 +487,7 @@
 									<xs:appinfo>
 										<Type>STATIC</Type>
 										<Axis1>../Names</Axis1>
-										<Units>Amp</Units>
+										<Units>A</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -526,7 +526,7 @@
 									<xs:appinfo>
 										<Type>STATIC</Type>
 										<Axis1>../Names</Axis1>
-										<Units>Volt</Units>
+										<Units>V</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -539,7 +539,7 @@
 									<xs:appinfo>
 										<Type>STATIC</Type>
 										<Axis1>../Names</Axis1>
-										<Units>Volt</Units>
+										<Units>V</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -552,7 +552,7 @@
 									<xs:appinfo>
 										<Type>STATIC</Type>
 										<Axis1>../Names</Axis1>
-										<Units>Joule</Units>
+										<Units>J</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -574,7 +574,7 @@
 												<xs:appinfo>
 													<Type>SIGNAL</Type>
 													<Axis1>Timebase</Axis1>
-													<Units>Volt</Units>
+													<Units>V</Units>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -590,7 +590,7 @@
 												<xs:appinfo>
 													<Type>SIGNAL</Type>
 													<Axis1>Timebase</Axis1>
-													<Units>Amp</Units>
+													<Units>A</Units>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -626,7 +626,7 @@
 									<xs:documentation>Names of loops</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
-										<Axis1>N</Axis1>
+										<Axis1>N_Passive_Loops</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -740,7 +740,7 @@
 									<xs:documentation>Names of circuits [Active;Passive]</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
-										<Axis1>N</Axis1>
+										<Axis1>1...N_Active_Passive_Circuits</Axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>

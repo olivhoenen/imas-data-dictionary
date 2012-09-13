@@ -48,10 +48,10 @@
 <table>
 <tr><td>1- <xsl:value-of select="@axis1"/> <xsl:value-of select="@Axis1"/>
 </td></tr>
-<xsl:if test="@axis2">
+<xsl:if test="@axis2 or @Axis2">
 <tr><td>2- <xsl:value-of select="@axis2"/> <xsl:value-of select="@Axis2"/>
 </td></tr>
-<xsl:if test="@axis3">
+<xsl:if test="@axis3 or @Axis3">
 <tr><td>3- <xsl:value-of select="@axis3"/> <xsl:value-of select="@Axis3"/>
 </td></tr>
 </xsl:if>
