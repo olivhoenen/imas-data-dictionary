@@ -56,9 +56,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Elongation_upper">
+			<xs:element name="Elongation_Upper">
 				<xs:annotation>
-					<xs:documentation>Elongation (upper half) of the plasma boundary</xs:documentation>
+					<xs:documentation>Elongation (upper half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<axis1>../../Timebase</axis1>
 						<type>SIGNAL</type>
@@ -70,7 +70,7 @@
 			</xs:element>
 			<xs:element name="Elongation_Lower">
 				<xs:annotation>
-					<xs:documentation>Elongation (lower half) of the plasma boundary</xs:documentation>
+					<xs:documentation>Elongation (lower half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
 					<xs:appinfo>experimental</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -88,7 +88,7 @@
 			</xs:element>
 			<xs:element name="Triangularity_Lower">
 				<xs:annotation>
-					<xs:documentation>Lower triangularity of the plasma boundary; Time-dependent; Scalar</xs:documentation>
+					<xs:documentation>Lower triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<axis1>../../Timebase</axis1>
 						<type>SIGNAL</type>
@@ -237,7 +237,7 @@
 			</xs:element>
 			<xs:element name="Psi_Boundary">
 				<xs:annotation>
-					<xs:documentation>Poloidal flux at the selected plasma boundary (separatrix for a free boundary code; fixed boundary for fixed boundary code) </xs:documentation>
+					<xs:documentation>Poloidal flux at the selected plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../../Timebase</axis1>
@@ -272,7 +272,7 @@
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../../Timebase</axis1>
-						<units>Wb</units>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -285,7 +285,7 @@
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../../Timebase</axis1>
-						<units>Wb</units>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -298,14 +298,14 @@
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../../Timebase</axis1>
-						<units>Wb</units>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Toroidal_Field" type="B_Tor_Vacuum">
+			<xs:element name="Vacuum_Toroidal_Field" type="B_Tor_Vacuum">
 				<xs:annotation>
 					<xs:documentation>Characteristics of the vacuum toroidal field</xs:documentation>
 				</xs:annotation>
@@ -344,7 +344,7 @@
 		<xs:sequence>
 			<xs:element name="Psi">
 				<xs:annotation>
-					<xs:documentation>Poloidal flux, without 1/2pi and such that Bp=|grad psi| /R/2/pi</xs:documentation>
+					<xs:documentation>Poloidal flux, such that Bp=|grad psi| /R/2/pi</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>1...N_Psi</axis1>
@@ -372,12 +372,12 @@
 			</xs:element>
 			<xs:element name="Pressure">
 				<xs:annotation>
-					<xs:documentation>Pressure profile as a function of the poloidal flux</xs:documentation>
+					<xs:documentation>Pressure</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
-						<units>Wb</units>
+						<units>Pa</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -400,12 +400,12 @@
 			</xs:element>
 			<xs:element name="dPressure_dPsi">
 				<xs:annotation>
-					<xs:documentation>Psi derivative of the pressure profile</xs:documentation>
+					<xs:documentation>Derivative of Pressure w.r.t. Psi</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
-						<units>Pa/Wb</units>
+						<units>Pa.Wb^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -414,7 +414,7 @@
 			</xs:element>
 			<xs:element name="F_dF_dPsi">
 				<xs:annotation>
-					<xs:documentation>psi derivative of F multiplied with F</xs:documentation>
+					<xs:documentation>Derivative of F w.r.t. Psi, multiplied with F</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -461,6 +461,7 @@
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -469,7 +470,7 @@
 			</xs:element>
 			<xs:element name="R_Inboard">
 				<xs:annotation>
-					<xs:documentation>Radial coordinate (major radius) at the height and on the left of the magnetic axis</xs:documentation>
+					<xs:documentation>Radial coordinate (major radius) on the inboard side of the magnetic axis</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -483,7 +484,7 @@
 			</xs:element>
 			<xs:element name="R_Outboard">
 				<xs:annotation>
-					<xs:documentation>Radial coordinate (major radius) at the height and on the right of the magnetic axis</xs:documentation>
+					<xs:documentation>Radial coordinate (major radius) on the outboard side of the magnetic axis</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -523,39 +524,14 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Rho_Vo_Norm">
+			<xs:element name="Rho_Vol_Norm">
 				<xs:annotation>
 					<xs:documentation>Normalised radial coordinate related to the plasma volume. Defined as sqrt(volume / volume[LCFS])</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Beta_Pol">
-				<xs:annotation>
-					<xs:documentation>Poloidal beta (inside the magnetic surface)</xs:documentation>
-					<xs:appinfo>
-						<type>SIGNAL</type>
-						<axis1>../Psi</axis1>
-						<axis2>../../Timebase</axis2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="li_3">
-				<xs:annotation>
-					<xs:documentation>internal inductance (inside the magnetic surface)</xs:documentation>
-					<xs:appinfo>
-						<type>SIGNAL</type>
-						<axis1>../Psi</axis1>
-						<axis2>../../Timebase</axis2>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -564,11 +540,12 @@
 			</xs:element>
 			<xs:element name="Elongation">
 				<xs:annotation>
-					<xs:documentation>Elongation profile</xs:documentation>
+					<xs:documentation>Elongation</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -577,11 +554,12 @@
 			</xs:element>
 			<xs:element name="Triangularity_Upper">
 				<xs:annotation>
-					<xs:documentation>Upper triangularity profile</xs:documentation>
+					<xs:documentation>Upper triangularity w.r.t. magnetic axis</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -590,12 +568,12 @@
 			</xs:element>
 			<xs:element name="Triangularity_Lower">
 				<xs:annotation>
-					<xs:documentation>Lower triangularity profile</xs:documentation>
+					<xs:documentation>Lower triangularity w.r.t. magnetic axis</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
-						<units>m</units>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -623,7 +601,7 @@
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
-						<units>m^3/Wb</units>
+						<units>m^3.Wb^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -665,7 +643,7 @@
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
-						<units>m^2/Wb</units>
+						<units>m^2.Wb^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -674,7 +652,7 @@
 			</xs:element>
 			<xs:element name="Surface">
 				<xs:annotation>
-					<xs:documentation>Surface area of the flux surface</xs:documentation>
+					<xs:documentation>Surface area of the toroidal flux surface</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -701,7 +679,7 @@
 			</xs:element>
 			<xs:element name="gm1">
 				<xs:annotation>
-					<xs:documentation>average(1/R^2)</xs:documentation>
+					<xs:documentation>Flux surface averaged 1/R^2</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -715,7 +693,7 @@
 			</xs:element>
 			<xs:element name="gm2">
 				<xs:annotation>
-					<xs:documentation>average(grad_rho^2/R^2)</xs:documentation>
+					<xs:documentation>Flux surface averaged grad_rho^2/R^2</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -729,7 +707,7 @@
 			</xs:element>
 			<xs:element name="gm3">
 				<xs:annotation>
-					<xs:documentation>average(grad_rho^2)</xs:documentation>
+					<xs:documentation>Flux surface averaged grad_rho^2</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -742,7 +720,7 @@
 			</xs:element>
 			<xs:element name="gm4">
 				<xs:annotation>
-					<xs:documentation>average(1/B^2)</xs:documentation>
+					<xs:documentation>Flux surface averaged 1/B^2</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -756,7 +734,7 @@
 			</xs:element>
 			<xs:element name="gm5">
 				<xs:annotation>
-					<xs:documentation>average(B^2)</xs:documentation>
+					<xs:documentation>Flux surface averaged B^2</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -770,7 +748,7 @@
 			</xs:element>
 			<xs:element name="gm6">
 				<xs:annotation>
-					<xs:documentation>average(grad_rho^2/B^2)</xs:documentation>
+					<xs:documentation>Flux surface averaged grad_rho^2/B^2</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -784,7 +762,7 @@
 			</xs:element>
 			<xs:element name="gm7">
 				<xs:annotation>
-					<xs:documentation>average(grad_rho)</xs:documentation>
+					<xs:documentation>Flux surface averaged grad_rho</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -797,7 +775,7 @@
 			</xs:element>
 			<xs:element name="gm8">
 				<xs:annotation>
-					<xs:documentation>average(R)</xs:documentation>
+					<xs:documentation>Flux surface averaged R</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -811,7 +789,7 @@
 			</xs:element>
 			<xs:element name="gm9">
 				<xs:annotation>
-					<xs:documentation>average(1/R)</xs:documentation>
+					<xs:documentation>Flux surface averaged 1/R</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -825,7 +803,7 @@
 			</xs:element>
 			<xs:element name="B_Average">
 				<xs:annotation>
-					<xs:documentation>average(B)</xs:documentation>
+					<xs:documentation>Flux surface averaged B</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
@@ -858,7 +836,7 @@
 						<type>SIGNAL</type>
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
-						<units>T^-2</units>
+						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -940,7 +918,7 @@
 			</xs:element>
 			<xs:element name="Z">
 				<xs:annotation>
-					<xs:documentation>Values of the altitude on the grid</xs:documentation>
+					<xs:documentation>Values of the Height on the grid</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Grid/Dim1</axis1>
@@ -976,7 +954,7 @@
 						<axis1>../Grid/Dim1</axis1>
 						<axis2>../Grid/Dim2</axis2>
 						<axis3>../../Timebase</axis3>
-						<units>m</units>
+						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1113,7 +1091,7 @@
 			</xs:element>
 			<xs:element name="Z">
 				<xs:annotation>
-					<xs:documentation>Values of the altitude on the grid</xs:documentation>
+					<xs:documentation>Values of the Height on the grid</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
 						<axis1>../Grid/Dim1</axis1>
@@ -1149,7 +1127,7 @@
 						<axis1>../Grid/Dim1</axis1>
 						<axis2>../Grid/Dim2</axis2>
 						<axis3>../../Timebase</axis3>
-						<units>T</units>
+						<units>variable</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1164,7 +1142,7 @@
 						<axis1>../Grid/Dim1</axis1>
 						<axis2>../Grid/Dim2</axis2>
 						<axis3>../../Timebase</axis3>
-						<units>T</units>
+						<units>variable</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1179,7 +1157,7 @@
 						<axis1>../Grid/Dim1</axis1>
 						<axis2>../Grid/Dim2</axis2>
 						<axis3>../../Timebase</axis3>
-						<units>T</units>
+						<units>variable</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1189,7 +1167,17 @@
 			<xs:element name="g_22">
 				<xs:annotation>
 					<xs:documentation>metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Grid/Dim1</axis1>
+						<axis2>../Grid/Dim2</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>variable</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="g_23">
 				<xs:annotation>
@@ -1199,7 +1187,7 @@
 						<axis1>../Grid/Dim1</axis1>
 						<axis2>../Grid/Dim2</axis2>
 						<axis3>../../Timebase</axis3>
-						<units>T</units>
+						<units>variable</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1214,7 +1202,7 @@
 						<axis1>../Grid/Dim1</axis1>
 						<axis2>../Grid/Dim2</axis2>
 						<axis3>../../Timebase</axis3>
-						<units>T</units>
+						<units>variable</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

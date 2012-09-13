@@ -10,7 +10,9 @@
        </style>
 	</head>
 	<body>
-		<p class="welcome">ITER Physics Data Model Documentation for Equilibrium</p><b></b><br><table border="1">
+		<p class="welcome">ITER Physics Data Model Documentation for Equilibrium</p>
+		<p>Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.</p>
+		<table border="1">
 			<thead style="color:#ff0000">
 				<td>Full path name</td>
 				<td>Description</td>
@@ -19,7 +21,7 @@
 			</thead>
 			<tr>
 				<td>IDS_Properties</td>
-				<td>Interface Data Structure properties; it can be placed at any node, allowing this node to be identified as an IDS and to be completed automatically by applications. </td>
+				<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
 				<td>structure</td>
 				<td />
 			</tr>
@@ -37,7 +39,7 @@
 			</tr>
 			<tr>
 				<td>IDS_Properties/Source_of</td>
-				<td>Where do the data for this Data Item come from and where are they put </td>
+				<td>Where do the data for this Data Item come from</td>
 				<td>str_type</td>
 				<td />
 			</tr>
@@ -97,7 +99,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Outline/R</td>
-				<td>Major radius {SIGNAL}</td>
+				<td>Major radius {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -112,7 +114,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Outline/Z</td>
-				<td>Altitude {SIGNAL}</td>
+				<td>Height {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -133,7 +135,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Geometric_Axis/R</td>
-				<td>Major radius {SIGNAL}</td>
+				<td>Major radius {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -145,7 +147,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Geometric_Axis/Z</td>
-				<td>Altitude {SIGNAL}</td>
+				<td>Height {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -180,8 +182,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Boundary/Elongation_upper</td>
-				<td>Elongation (upper half) of the plasma boundary {SIGNAL}</td>
+				<td>Boundary/Elongation_Upper</td>
+				<td>Elongation (upper half w.r.t. geometric axis) of the plasma boundary {SIGNAL}</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -193,7 +195,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Elongation_Lower</td>
-				<td>Elongation (lower half) of the plasma boundary</td>
+				<td>Elongation (lower half w.r.t. geometric axis) of the plasma boundary</td>
 				<td>structure</td>
 				<td />
 			</tr>
@@ -211,7 +213,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Triangularity_Lower</td>
-				<td>Lower triangularity of the plasma boundary; Time-dependent; Scalar {SIGNAL}</td>
+				<td>Lower triangularity of the plasma boundary {SIGNAL}</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -241,7 +243,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/X_points/R</td>
-				<td>Major radius {SIGNAL}</td>
+				<td>Major radius {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -256,7 +258,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/X_points/Z</td>
-				<td>Altitude {SIGNAL}</td>
+				<td>Height {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -277,7 +279,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Strike_Point_Lower_Left/R</td>
-				<td>Major radius {SIGNAL}</td>
+				<td>Major radius {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -289,7 +291,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Strike_Point_Lower_Left/Z</td>
-				<td>Altitude {SIGNAL}</td>
+				<td>Height {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -307,7 +309,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Strike_Point_Upper_Left/R</td>
-				<td>Major radius {SIGNAL}</td>
+				<td>Major radius {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -319,7 +321,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Strike_Point_Upper_Left/Z</td>
-				<td>Altitude {SIGNAL}</td>
+				<td>Height {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -337,7 +339,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Strike_Point_Lower_Right/R</td>
-				<td>Major radius {SIGNAL}</td>
+				<td>Major radius {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -349,7 +351,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Strike_Point_Lower_Right/Z</td>
-				<td>Altitude {SIGNAL}</td>
+				<td>Height {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -367,7 +369,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Strike_Point_Upper_Right/R</td>
-				<td>Major radius {SIGNAL}</td>
+				<td>Major radius {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -379,7 +381,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Strike_Point_Upper_Right/Z</td>
-				<td>Altitude {SIGNAL}</td>
+				<td>Height {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -397,7 +399,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Active_Limiter_Point/R</td>
-				<td>Major radius {SIGNAL}</td>
+				<td>Major radius {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -409,7 +411,7 @@
 			</tr>
 			<tr>
 				<td>Boundary/Active_Limiter_Point/Z</td>
-				<td>Altitude {SIGNAL}</td>
+				<td>Height {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -523,7 +525,7 @@
 			</tr>
 			<tr>
 				<td>Global/Psi_Boundary</td>
-				<td>Poloidal flux at the selected plasma boundary (separatrix for a free boundary code; fixed boundary for fixed boundary code)  {SIGNAL} [Wb]</td>
+				<td>Poloidal flux at the selected plasma boundary {SIGNAL} [Wb]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -541,7 +543,7 @@
 			</tr>
 			<tr>
 				<td>Global/Magnetic_Axis/R</td>
-				<td>Major radius {SIGNAL}</td>
+				<td>Major radius {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -553,7 +555,7 @@
 			</tr>
 			<tr>
 				<td>Global/Magnetic_Axis/Z</td>
-				<td>Altitude {SIGNAL}</td>
+				<td>Height {SIGNAL} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -577,7 +579,7 @@
 			</tr>
 			<tr>
 				<td>Global/q_Axis</td>
-				<td>q at the magnetic axis {SIGNAL} [Wb]</td>
+				<td>q at the magnetic axis {SIGNAL} [-]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -589,7 +591,7 @@
 			</tr>
 			<tr>
 				<td>Global/q_95</td>
-				<td>q at the 95% poloidal flux surface {SIGNAL} [Wb]</td>
+				<td>q at the 95% poloidal flux surface {SIGNAL} [-]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -601,7 +603,7 @@
 			</tr>
 			<tr>
 				<td>Global/q_min</td>
-				<td>Minimum q value in the plasma {SIGNAL} [Wb]</td>
+				<td>Minimum q value in the plasma {SIGNAL} [-]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -612,19 +614,19 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Global/Toroidal_Field</td>
+				<td>Global/Vacuum_Toroidal_Field</td>
 				<td>Characteristics of the vacuum toroidal field</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Global/Toroidal_Field/R0</td>
+				<td>Global/Vacuum_Toroidal_Field/R0</td>
 				<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {CONSTANT} [m]</td>
 				<td>FLT_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Global/Toroidal_Field/B0</td>
+				<td>Global/Vacuum_Toroidal_Field/B0</td>
 				<td>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above {SIGNAL} [T]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -667,7 +669,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/Psi</td>
-				<td>Poloidal flux, without 1/2pi and such that Bp=|grad psi| /R/2/pi {SIGNAL} [Wb]</td>
+				<td>Poloidal flux, such that Bp=|grad psi| /R/2/pi {SIGNAL} [Wb]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -697,7 +699,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/Pressure</td>
-				<td>Pressure profile as a function of the poloidal flux {SIGNAL} [Wb]</td>
+				<td>Pressure {SIGNAL} [Pa]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -727,7 +729,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/dPressure_dPsi</td>
-				<td>Psi derivative of the pressure profile {SIGNAL} [Pa/Wb]</td>
+				<td>Derivative of Pressure w.r.t. Psi {SIGNAL} [Pa.Wb^-1]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -742,7 +744,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/F_dF_dPsi</td>
-				<td>psi derivative of F multiplied with F {SIGNAL} [T^2.m^2/Wb]</td>
+				<td>Derivative of F w.r.t. Psi, multiplied with F {SIGNAL} [T^2.m^2/Wb]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -787,7 +789,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/q</td>
-				<td>Safety factor {SIGNAL}</td>
+				<td>Safety factor {SIGNAL} [-]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -802,7 +804,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/R_Inboard</td>
-				<td>Radial coordinate (major radius) at the height and on the left of the magnetic axis {SIGNAL} [m]</td>
+				<td>Radial coordinate (major radius) on the inboard side of the magnetic axis {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -817,7 +819,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/R_Outboard</td>
-				<td>Radial coordinate (major radius) at the height and on the right of the magnetic axis {SIGNAL} [m]</td>
+				<td>Radial coordinate (major radius) on the outboard side of the magnetic axis {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -861,38 +863,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Profiles_1D/Rho_Vo_Norm</td>
-				<td>Normalised radial coordinate related to the plasma volume. Defined as sqrt(volume / volume[LCFS]) {SIGNAL}</td>
-				<td>FLT_2D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Psi</td>
-						</tr>
-						<tr>
-							<td>2- ../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Profiles_1D/Beta_Pol</td>
-				<td>Poloidal beta (inside the magnetic surface) {SIGNAL}</td>
-				<td>FLT_2D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Psi</td>
-						</tr>
-						<tr>
-							<td>2- ../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Profiles_1D/li_3</td>
-				<td>internal inductance (inside the magnetic surface) {SIGNAL}</td>
+				<td>Profiles_1D/Rho_Vol_Norm</td>
+				<td>Normalised radial coordinate related to the plasma volume. Defined as sqrt(volume / volume[LCFS]) {SIGNAL} [-]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -907,7 +879,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/Elongation</td>
-				<td>Elongation profile {SIGNAL}</td>
+				<td>Elongation {SIGNAL} [-]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -922,7 +894,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/Triangularity_Upper</td>
-				<td>Upper triangularity profile {SIGNAL}</td>
+				<td>Upper triangularity w.r.t. magnetic axis {SIGNAL} [-]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -937,7 +909,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/Triangularity_Lower</td>
-				<td>Lower triangularity profile {SIGNAL} [m]</td>
+				<td>Lower triangularity w.r.t. magnetic axis {SIGNAL} [-]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -967,7 +939,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/dVolume_dPsi</td>
-				<td>Radial derivative of the volume enclosed in the flux surface with respect to Psi {SIGNAL} [m^3/Wb]</td>
+				<td>Radial derivative of the volume enclosed in the flux surface with respect to Psi {SIGNAL} [m^3.Wb^-1]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1012,7 +984,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/dA_dPsi</td>
-				<td>Radial derivative of the cross-sectional area of the flux surface with respect to Psi {SIGNAL} [m^2/Wb]</td>
+				<td>Radial derivative of the cross-sectional area of the flux surface with respect to Psi {SIGNAL} [m^2.Wb^-1]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1027,7 +999,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/Surface</td>
-				<td>Surface area of the flux surface {SIGNAL} [m^2]</td>
+				<td>Surface area of the toroidal flux surface {SIGNAL} [m^2]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1057,7 +1029,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/gm1</td>
-				<td>average(1/R^2) {SIGNAL} [m^-2]</td>
+				<td>Flux surface averaged 1/R^2 {SIGNAL} [m^-2]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1072,7 +1044,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/gm2</td>
-				<td>average(grad_rho^2/R^2) {SIGNAL} [m^-2]</td>
+				<td>Flux surface averaged grad_rho^2/R^2 {SIGNAL} [m^-2]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1087,7 +1059,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/gm3</td>
-				<td>average(grad_rho^2) {SIGNAL}</td>
+				<td>Flux surface averaged grad_rho^2 {SIGNAL}</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1102,7 +1074,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/gm4</td>
-				<td>average(1/B^2) {SIGNAL} [T^-2]</td>
+				<td>Flux surface averaged 1/B^2 {SIGNAL} [T^-2]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1117,7 +1089,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/gm5</td>
-				<td>average(B^2) {SIGNAL} [T^2]</td>
+				<td>Flux surface averaged B^2 {SIGNAL} [T^2]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1132,7 +1104,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/gm6</td>
-				<td>average(grad_rho^2/B^2) {SIGNAL} [T^-2]</td>
+				<td>Flux surface averaged grad_rho^2/B^2 {SIGNAL} [T^-2]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1147,7 +1119,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/gm7</td>
-				<td>average(grad_rho) {SIGNAL}</td>
+				<td>Flux surface averaged grad_rho {SIGNAL}</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1162,7 +1134,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/gm8</td>
-				<td>average(R) {SIGNAL} [m]</td>
+				<td>Flux surface averaged R {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1177,7 +1149,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/gm9</td>
-				<td>average(1/R) {SIGNAL} [m^-1]</td>
+				<td>Flux surface averaged 1/R {SIGNAL} [m^-1]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1192,7 +1164,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/B_Average</td>
-				<td>average(B) {SIGNAL} [T]</td>
+				<td>Flux surface averaged B {SIGNAL} [T]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1222,7 +1194,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_1D/B_Max</td>
-				<td>Maximum(B) on the flux surface {SIGNAL} [T^-2]</td>
+				<td>Maximum(B) on the flux surface {SIGNAL} [T]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
@@ -1309,7 +1281,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_2D/Z</td>
-				<td>Values of the altitude on the grid {SIGNAL} [m]</td>
+				<td>Values of the Height on the grid {SIGNAL} [m]</td>
 				<td>FLT_3D</td>
 				<td>
 					<table>
@@ -1345,7 +1317,7 @@
 			</tr>
 			<tr>
 				<td>Profiles_2D/Theta</td>
-				<td>Values of the poloidal angle on the grid {SIGNAL} [m]</td>
+				<td>Values of the poloidal angle on the grid {SIGNAL} [rad]</td>
 				<td>FLT_3D</td>
 				<td>
 					<table>
@@ -1537,7 +1509,7 @@
 			</tr>
 			<tr>
 				<td>Coordinate_System/Z</td>
-				<td>Values of the altitude on the grid {SIGNAL} [m]</td>
+				<td>Values of the Height on the grid {SIGNAL} [m]</td>
 				<td>FLT_3D</td>
 				<td>
 					<table>
@@ -1573,7 +1545,7 @@
 			</tr>
 			<tr>
 				<td>Coordinate_System/g_11</td>
-				<td>metric coefficients g_11; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [T]</td>
+				<td>metric coefficients g_11; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
 				<td>FLT_3D</td>
 				<td>
 					<table>
@@ -1591,7 +1563,7 @@
 			</tr>
 			<tr>
 				<td>Coordinate_System/g_12</td>
-				<td>metric coefficients g_12; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [T]</td>
+				<td>metric coefficients g_12; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
 				<td>FLT_3D</td>
 				<td>
 					<table>
@@ -1609,7 +1581,7 @@
 			</tr>
 			<tr>
 				<td>Coordinate_System/g_13</td>
-				<td>metric coefficients g_13; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [T]</td>
+				<td>metric coefficients g_13; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
 				<td>FLT_3D</td>
 				<td>
 					<table>
@@ -1627,13 +1599,25 @@
 			</tr>
 			<tr>
 				<td>Coordinate_System/g_22</td>
-				<td>metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</td>
-				<td>structure</td>
-				<td />
+				<td>metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Grid/Dim1</td>
+						</tr>
+						<tr>
+							<td>2- ../Grid/Dim2</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 			<tr>
 				<td>Coordinate_System/g_23</td>
-				<td>metric coefficients g_23; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [T]</td>
+				<td>metric coefficients g_23; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
 				<td>FLT_3D</td>
 				<td>
 					<table>
@@ -1651,7 +1635,7 @@
 			</tr>
 			<tr>
 				<td>Coordinate_System/g_33</td>
-				<td>metric coefficients g_33; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [T]</td>
+				<td>metric coefficients g_33; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
 				<td>FLT_3D</td>
 				<td>
 					<table>
@@ -1687,7 +1671,7 @@
 			</tr>
 			<tr>
 				<td>Code_Parameters/Parameters</td>
-				<td>List of the code specific parameters, string expected to be in XML format. {SIGNAL}</td>
+				<td>List of the code specific parameters in XML format {SIGNAL}</td>
 				<td>STR_1D</td>
 				<td>
 					<table>
@@ -1699,7 +1683,7 @@
 			</tr>
 			<tr>
 				<td>Code_Parameters/Output_Diagnostics</td>
-				<td>List of the code specific diagnostic/output, string expected to be in XML format. {SIGNAL}</td>
+				<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
 				<td>STR_1D</td>
 				<td>
 					<table>
@@ -1711,7 +1695,7 @@
 			</tr>
 			<tr>
 				<td>Code_Parameters/Output_Flag</td>
-				<td>Output flag : 0 means the run is successful, other values meaning some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+				<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
 				<td>INT_1D</td>
 				<td>
 					<table>

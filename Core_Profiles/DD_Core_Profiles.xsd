@@ -1473,12 +1473,12 @@
 					<xs:documentation>Total source term used in the transport equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Q_Ohmic" type="Core_Profiles_Source_Term_2D_Te">
+			<xs:element name="P_Ohmic" type="Core_Profiles_Source_Term_2D_Te">
 				<xs:annotation>
 					<xs:documentation>Ohmic heating</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Q_ei" type="Core_Profiles_Source_Term_2D_Te">
+			<xs:element name="P_ei" type="Core_Profiles_Source_Term_2D_Te">
 				<xs:annotation>
 					<xs:documentation>Collisional heat transfer from electrons to (all) ions (equipartition term)</xs:documentation>
 				</xs:annotation>
@@ -1937,7 +1937,7 @@
 	</xs:complexType>
 	<xs:element name="Core_Profiles">
 		<xs:annotation>
-			<xs:documentation>Core plasma 1D profiles as a function of the normalised toroidal flux coordinate. TBD: toroidal and poloidal velocities</xs:documentation>
+			<xs:documentation>Core plasma 1D profiles as a function of the normalised toroidal flux coordinate. This IDS carries details corresponding to the output of a core transport solver, but can be used to store any set of core profiles (e.g. the output of a Profile Maker tool combining the analysis of multiple diagnostics). TBD: toroidal and poloidal velocities</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
@@ -1983,9 +1983,9 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Toroidal_Field" type="Core_Profiles_Toroidal_Field">
+				<xs:element name="Vacuum_Toroidal_Field" type="Core_Profiles_Toroidal_Field">
 					<xs:annotation>
-						<xs:documentation>Toroidal field information entering the definition of Rho_Tor, for reference only</xs:documentation>
+						<xs:documentation>Vacuum toroidal field information entering the definition of Rho_Tor</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="Plasma_Composition"/>

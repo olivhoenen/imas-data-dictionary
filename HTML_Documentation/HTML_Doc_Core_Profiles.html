@@ -10,7 +10,9 @@
        </style>
 	</head>
 	<body>
-		<p class="welcome">ITER Physics Data Model Documentation for Core_Profiles</p><b></b><br><table border="1">
+		<p class="welcome">ITER Physics Data Model Documentation for Core_Profiles</p>
+		<p>Core plasma 1D profiles as a function of the normalised toroidal flux coordinate. This IDS carries details corresponding to the output of a core transport solver, but can be used to store any set of core profiles (e.g. the output of a Profile Maker tool combining the analysis of multiple diagnostics). TBD: toroidal and poloidal velocities</p>
+		<table border="1">
 			<thead style="color:#ff0000">
 				<td>Full path name</td>
 				<td>Description</td>
@@ -19,7 +21,7 @@
 			</thead>
 			<tr>
 				<td>IDS_Properties</td>
-				<td>Interface Data Structure properties; it can be placed at any node, allowing this node to be identified as an IDS and to be completed automatically by applications. </td>
+				<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
 				<td>structure</td>
 				<td />
 			</tr>
@@ -37,7 +39,7 @@
 			</tr>
 			<tr>
 				<td>IDS_Properties/Source_of</td>
-				<td>Where do the data for this Data Item come from and where are they put </td>
+				<td>Where do the data for this Data Item come from</td>
 				<td>str_type</td>
 				<td />
 			</tr>
@@ -105,13 +107,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Toroidal_Field</td>
-				<td>Toroidal field information entering the definition of Rho_Tor, for reference only</td>
+				<td>Vacuum_Toroidal_Field</td>
+				<td>Vacuum toroidal field information entering the definition of Rho_Tor</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Toroidal_Field/B0</td>
+				<td>Vacuum_Toroidal_Field/B0</td>
 				<td>Vacuum field at R0 {SIGNAL} [T]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -123,7 +125,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Toroidal_Field/dB0_dt</td>
+				<td>Vacuum_Toroidal_Field/dB0_dt</td>
 				<td>Time derivative of the vacuum field at R0 {SIGNAL} [T/s]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -135,7 +137,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Toroidal_Field/R0</td>
+				<td>Vacuum_Toroidal_Field/R0</td>
 				<td>Characteristic major radius of the device (used in publications, usually middle of the vessel at the equatorial midplane) {CONSTANT} [m]</td>
 				<td>FLT_0D</td>
 				<td />
@@ -552,13 +554,13 @@
 				<td />
 			</tr>
 			<tr>
-				<td>Te/Q_Ohmic</td>
+				<td>Te/P_Ohmic</td>
 				<td>Ohmic heating</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Te/Q_Ohmic/Value</td>
+				<td>Te/P_Ohmic/Value</td>
 				<td>Value of the source term {SIGNAL} [W.m^-3]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -573,7 +575,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Te/Q_Ohmic/Integral</td>
+				<td>Te/P_Ohmic/Integral</td>
 				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the source term {SIGNAL} [W.m^-2]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -588,19 +590,19 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Te/Q_Ohmic/Source</td>
+				<td>Te/P_Ohmic/Source</td>
 				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
 				<td>STR_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Te/Q_ei</td>
+				<td>Te/P_ei</td>
 				<td>Collisional heat transfer from electrons to (all) ions (equipartition term)</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Te/Q_ei/Value</td>
+				<td>Te/P_ei/Value</td>
 				<td>Value of the source term {SIGNAL} [W.m^-3]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -615,7 +617,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Te/Q_ei/Integral</td>
+				<td>Te/P_ei/Integral</td>
 				<td>Integral (over dRho_Tor) from 0 to Rho_Tor of the source term {SIGNAL} [W.m^-2]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -630,7 +632,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Te/Q_ei/Source</td>
+				<td>Te/P_ei/Source</td>
 				<td>Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String {CONSTANT}</td>
 				<td>STR_0D</td>
 				<td />
@@ -2329,7 +2331,7 @@
 			</tr>
 			<tr>
 				<td>Code_Parameters/Parameters</td>
-				<td>List of the code specific parameters, string expected to be in XML format. {SIGNAL}</td>
+				<td>List of the code specific parameters in XML format {SIGNAL}</td>
 				<td>STR_1D</td>
 				<td>
 					<table>
@@ -2341,7 +2343,7 @@
 			</tr>
 			<tr>
 				<td>Code_Parameters/Output_Diagnostics</td>
-				<td>List of the code specific diagnostic/output, string expected to be in XML format. {SIGNAL}</td>
+				<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
 				<td>STR_1D</td>
 				<td>
 					<table>
@@ -2353,7 +2355,7 @@
 			</tr>
 			<tr>
 				<td>Code_Parameters/Output_Flag</td>
-				<td>Output flag : 0 means the run is successful, other values meaning some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+				<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
 				<td>INT_1D</td>
 				<td>
 					<table>

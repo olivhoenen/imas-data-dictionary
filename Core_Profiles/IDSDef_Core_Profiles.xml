@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <IDSs xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<IDS name="Core_Profiles" maxoccur="1" documentation="Core plasma 1D profiles as a function of the normalised toroidal flux coordinate. TBD: toroidal and poloidal velocities">
-		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties; it can be placed at any node, allowing this node to be identified as an IDS and to be completed automatically by applications. " data_type="structure">
+	<IDS name="Core_Profiles" maxoccur="1" documentation="Core plasma 1D profiles as a function of the normalised toroidal flux coordinate. This IDS carries details corresponding to the output of a core transport solver, but can be used to store any set of core profiles (e.g. the output of a Profile Maker tool combining the analysis of multiple diagnostics). TBD: toroidal and poloidal velocities">
+		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
 			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this Data Item come from and where are they put " data_type="str_type"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this Data Item come from" data_type="str_type"/>
 			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
 			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
@@ -12,10 +12,10 @@
 		<field name="Rho_Tor_Norm" path="Rho_Tor_Norm" documentation="Normalised toroidal flux coordinate values (= rho_tor normalised to the value at the last radial grid point, which is usually almost at the Last Closed Flux Surface)" data_type="FLT_2D" type="SIGNAL" axis1="1...N_Rho" axis2="../Timebase"/>
 		<field name="Rho_Tor" path="Rho_Tor" documentation="Toroidal flux coordinate (not normalised)" data_type="FLT_2D" type="SIGNAL" axis1="../Rho_Tor_Norm" axis2="../Timebase" units="m"/>
 		<field name="dRho_Tor_dt" path="dRho_Tor_dt" documentation="Time derivative of Rho_Tor" data_type="FLT_2D" type="SIGNAL" axis1="../Rho_Tor_Norm" axis2="../Timebase" units="m/s"/>
-		<field name="Toroidal_Field" path="Toroidal_Field" documentation="Toroidal field information entering the definition of Rho_Tor, for reference only" data_type="structure">
-			<field name="B0" path="Toroidal_Field/B0" documentation="Vacuum field at R0" data_type="FLT_1D" axis1="../../Timebase" units="T" type="SIGNAL"/>
-			<field name="dB0_dt" path="Toroidal_Field/dB0_dt" documentation="Time derivative of the vacuum field at R0" data_type="FLT_1D" axis1="../../Timebase" units="T/s" type="SIGNAL"/>
-			<field name="R0" path="Toroidal_Field/R0" documentation="Characteristic major radius of the device (used in publications, usually middle of the vessel at the equatorial midplane)" data_type="FLT_0D" units="m" type="CONSTANT"/>
+		<field name="Vacuum_Toroidal_Field" path="Vacuum_Toroidal_Field" documentation="Vacuum toroidal field information entering the definition of Rho_Tor" data_type="structure">
+			<field name="B0" path="Vacuum_Toroidal_Field/B0" documentation="Vacuum field at R0" data_type="FLT_1D" axis1="../../Timebase" units="T" type="SIGNAL"/>
+			<field name="dB0_dt" path="Vacuum_Toroidal_Field/dB0_dt" documentation="Time derivative of the vacuum field at R0" data_type="FLT_1D" axis1="../../Timebase" units="T/s" type="SIGNAL"/>
+			<field name="R0" path="Vacuum_Toroidal_Field/R0" documentation="Characteristic major radius of the device (used in publications, usually middle of the vessel at the equatorial midplane)" data_type="FLT_0D" units="m" type="CONSTANT"/>
 		</field>
 		<field name="Plasma_Composition" path="Plasma_Composition" documentation="Generic declaration of Plasma Composition for a simulation" data_type="structure">
 			<field name="Nuclei" path="Plasma_Composition/Nuclei" documentation="Array of nuclei considered." data_type="struct_array" axis1="1...N_Nuclei">
@@ -64,15 +64,15 @@
 				<field name="Integral" path="Te/Source_Term/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
 				<field name="Source" path="Te/Source_Term/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
 			</field>
-			<field name="Q_Ohmic" path="Te/Q_Ohmic" documentation="Ohmic heating" data_type="structure">
-				<field name="Value" path="Te/Q_Ohmic/Value" documentation="Value of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-3" type="SIGNAL"/>
-				<field name="Integral" path="Te/Q_Ohmic/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
-				<field name="Source" path="Te/Q_Ohmic/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
+			<field name="P_Ohmic" path="Te/P_Ohmic" documentation="Ohmic heating" data_type="structure">
+				<field name="Value" path="Te/P_Ohmic/Value" documentation="Value of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-3" type="SIGNAL"/>
+				<field name="Integral" path="Te/P_Ohmic/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Source" path="Te/P_Ohmic/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
 			</field>
-			<field name="Q_ei" path="Te/Q_ei" documentation="Collisional heat transfer from electrons to (all) ions (equipartition term)" data_type="structure">
-				<field name="Value" path="Te/Q_ei/Value" documentation="Value of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-3" type="SIGNAL"/>
-				<field name="Integral" path="Te/Q_ei/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
-				<field name="Source" path="Te/Q_ei/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
+			<field name="P_ei" path="Te/P_ei" documentation="Collisional heat transfer from electrons to (all) ions (equipartition term)" data_type="structure">
+				<field name="Value" path="Te/P_ei/Value" documentation="Value of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-3" type="SIGNAL"/>
+				<field name="Integral" path="Te/P_ei/Integral" documentation="Integral (over dRho_Tor) from 0 to Rho_Tor of the source term" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="W.m^-2" type="SIGNAL"/>
+				<field name="Source" path="Te/P_ei/Source" documentation="Source of the profile (any comment describing the origin of the profile : code, path to diagnostic signals, massaging, ...); String" data_type="STR_0D" type="CONSTANT"/>
 			</field>
 			<field name="Transport_Coefficients" path="Te/Transport_Coefficients" documentation="Total transport coefficients used in the transport equation" data_type="structure">
 				<field name="Diffusion" path="Te/Transport_Coefficients/Diffusion" documentation="Diffusion coefficient" data_type="FLT_2D" axis1="../../../Rho_Tor_Norm" axis2="../../Timebase" units="m^2.s^-1" type="SIGNAL"/>
@@ -222,9 +222,9 @@
 		<field name="Code_Parameters" path="Code_Parameters" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="Code_Name" path="Code_Parameters/Code_Name" documentation="Name of the code" data_type="STR_0D" type="CONSTANT"/>
 			<field name="Code_Version" path="Code_Parameters/Code_Version" documentation="Version of the code" data_type="STR_0D" type="CONSTANT"/>
-			<field name="Parameters" path="Code_Parameters/Parameters" documentation="List of the code specific parameters, string expected to be in XML format." data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
-			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output, string expected to be in XML format." data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
-			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values meaning some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Parameters" path="Code_Parameters/Parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
 		</field>
 		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 	</IDS>

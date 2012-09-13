@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <IDSs xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<IDS name="PF" maxoccur="1" documentation="Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems">
-		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties; it can be placed at any node, allowing this node to be identified as an IDS and to be completed automatically by applications. " data_type="structure">
+		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
 			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this Data Item come from and where are they put " data_type="str_type"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this Data Item come from" data_type="str_type"/>
 			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
 			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>

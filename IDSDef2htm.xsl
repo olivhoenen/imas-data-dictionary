@@ -16,8 +16,9 @@
       </head>
       <body>
         <p class="welcome">ITER Physics Data Model Documentation for <xsl:value-of select="IDS/@name"/></p>
-        <b></b>
-        <br />
+        <p><xsl:value-of select="IDS/@documentation"/></p> <!-- Write the IDS description -->
+        <!--<b></b>
+        <br />-->
         <table border="1">
         <thead style="color:#ff0000"><td>Full path name</td><td>Description</td><td>Data Type</td><td>Axes</td></thead>
         <xsl:apply-templates select="IDS/field"/>
