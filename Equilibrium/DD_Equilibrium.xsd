@@ -305,7 +305,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Vacuum_Toroidal_Field" type="B_Tor_Vacuum">
+			<xs:element name="Vacuum_Toroidal_Field" type="B_Tor_Vacuum_2">
 				<xs:annotation>
 					<xs:documentation>Characteristics of the vacuum toroidal field</xs:documentation>
 				</xs:annotation>
@@ -462,6 +462,20 @@
 						<axis1>../Psi</axis1>
 						<axis2>../../Timebase</axis2>
 						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Magnetic_Shear">
+				<xs:annotation>
+					<xs:documentation>Magnetic shear</xs:documentation>
+					<xs:appinfo>
+						<axis1>../Psi</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>-</units>
+						<type>SIGNAL</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

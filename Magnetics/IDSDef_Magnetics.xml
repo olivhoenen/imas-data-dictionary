@@ -9,55 +9,51 @@
 			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
 		</field>
-		<field name="Flux_Loops" path="Flux_Loops" documentation="Flux loops" data_type="structure">
-			<field name="Names" path="Flux_Loops/Names" documentation="Names of flux loops. " data_type="STR_1D" type="STATIC" axis1="N"/>
-			<field name="Identifiers" path="Flux_Loops/Identifiers" documentation="IDs of flux loops. " data_type="STR_1D" type="STATIC" axis1="../Names"/>
-			<field name="Positions" path="Flux_Loops/Positions" documentation="List of (R,Z,phi) points defining the position of the loops (see data structure documentation FLUXLOOPposition.pdf)" data_type="struct_array" type="STATIC" axis1="../Names">
-				<field name="R" path="Flux_Loops/Positions/R" documentation="Major radius" data_type="FLT_1D" type="STATIC" units="m" axis1="1...N_Points"/>
-				<field name="Z" path="Flux_Loops/Positions/Z" documentation="Height" data_type="FLT_1D" type="STATIC" units="m" axis1="../R"/>
-				<field name="Phi" path="Flux_Loops/Positions/Phi" documentation="Toroidal angle" data_type="FLT_1D" type="STATIC" units="rad" axis1="../R"/>
+		<field name="Flux_Loops" path="Flux_Loops" documentation="Flux loops" data_type="struct_array" axis1="1...N_Flux_Loops">
+			<field name="Name" path="Flux_Loops/Name" documentation="Name of the flux loop" data_type="STR_0D" type="STATIC"/>
+			<field name="Identifier" path="Flux_Loops/Identifier" documentation="ID of the flux loop" data_type="STR_0D" type="STATIC"/>
+			<field name="Position" path="Flux_Loops/Position" documentation="List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)" data_type="structure">
+				<field name="R" path="Flux_Loops/Position/R" documentation="Major radius" data_type="FLT_1D" type="STATIC" units="m" axis1="1...N_Points"/>
+				<field name="Z" path="Flux_Loops/Position/Z" documentation="Height" data_type="FLT_1D" type="STATIC" units="m" axis1="../R"/>
+				<field name="Phi" path="Flux_Loops/Position/Phi" documentation="Toroidal angle" data_type="FLT_1D" type="STATIC" units="rad" axis1="../R"/>
 			</field>
-			<field name="Flux_Loop" path="Flux_Loops/Flux_Loop" documentation="Measurements by a given Flux Loop. " data_type="struct_array" axis1="../Names">
-				<field name="Flux" path="Flux_Loops/Flux_Loop/Flux" documentation="Measured flux." data_type="structure">
-					<field name="Data" path="Flux_Loops/Flux_Loop/Flux/Data" documentation="Measured flux." data_type="FLT_1D" axis1="../../Timebase" units="Wb" type="SIGNAL"/>
-					<field name="Timebase" path="Flux_Loops/Flux_Loop/Flux/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
-				</field>
-				<field name="Flux_Error" path="Flux_Loops/Flux_Loop/Flux_Error" documentation="Absolute error on measured flux." data_type="structure">
-					<field name="Type" path="Flux_Loops/Flux_Loop/Flux_Error/Type" documentation="Type of errorbar description which is used. Refers to the name of the sibling fields." data_type="STR_0D"/>
-					<field name="Signal" path="Flux_Loops/Flux_Loop/Flux_Error/Signal" documentation="Absolute error provided as a Signal of same dimension as the related field." data_type="FLT_1D" type="SIGNAL"/>
-					<field name="Constant" path="Flux_Loops/Flux_Loop/Flux_Error/Constant" documentation="Relative error in % provided as a constant" data_type="FLT_0D" type="CONSTANT"/>
-					<field name="Expression" path="Flux_Loops/Flux_Loop/Flux_Error/Expression" documentation="Absolute error provided as an Expression." data_type="STR_0D"/>
-				</field>
+			<field name="Flux" path="Flux_Loops/Flux" documentation="Measured flux." data_type="structure">
+				<field name="Data" path="Flux_Loops/Flux/Data" documentation="Measured flux." data_type="FLT_1D" axis1="../Timebase" units="Wb" type="SIGNAL"/>
+				<field name="Timebase" path="Flux_Loops/Flux/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+			</field>
+			<field name="Flux_Error" path="Flux_Loops/Flux_Error" documentation="Absolute error on measured flux." data_type="structure">
+				<field name="Type" path="Flux_Loops/Flux_Error/Type" documentation="Type of errorbar description which is used. Refers to the name of the sibling fields." data_type="STR_0D"/>
+				<field name="Signal" path="Flux_Loops/Flux_Error/Signal" documentation="Absolute error provided as a Signal of same dimension as the related field." data_type="FLT_1D" type="SIGNAL"/>
+				<field name="Constant" path="Flux_Loops/Flux_Error/Constant" documentation="Relative error in % provided as a constant" data_type="FLT_0D" type="CONSTANT"/>
+				<field name="Expression" path="Flux_Loops/Flux_Error/Expression" documentation="Absolute error provided as an Expression." data_type="STR_0D"/>
 			</field>
 		</field>
-		<field name="Bpol_Probes" path="Bpol_Probes" documentation="Poloidal field probes" data_type="structure">
-			<field name="Names" path="Bpol_Probes/Names" documentation="Names of the probes" data_type="STR_1D" type="STATIC" axis1="N"/>
-			<field name="Identifiers" path="Bpol_Probes/Identifiers" documentation="IDs of probes" data_type="STR_1D" type="STATIC" axis1="../Names"/>
-			<field name="Centre_Positions" path="Bpol_Probes/Centre_Positions" documentation="Position of coil centre. Note we should develop a generic RZPHI1D capable of inheriting Axis property from its parent." data_type="structure" type="STATIC" axis1="../Names" units="m">
-				<field name="R" path="Bpol_Probes/Centre_Positions/R" documentation="Major radius" data_type="FLT_1D" type="STATIC" units="m" axis1="1...N_Points"/>
-				<field name="Z" path="Bpol_Probes/Centre_Positions/Z" documentation="Height" data_type="FLT_1D" type="STATIC" units="m" axis1="../R"/>
-				<field name="Phi" path="Bpol_Probes/Centre_Positions/Phi" documentation="Toroidal angle" data_type="FLT_1D" type="STATIC" units="rad" axis1="../R"/>
+		<field name="Bpol_Probes" path="Bpol_Probes" documentation="Poloidal field probes" data_type="struct_array" axis1="1...N_Bpol_Probes">
+			<field name="Name" path="Bpol_Probes/Name" documentation="Name of the probe" data_type="STR_0D" type="STATIC"/>
+			<field name="Identifier" path="Bpol_Probes/Identifier" documentation="ID of the probe" data_type="STR_0D" type="STATIC"/>
+			<field name="Centre_Position" path="Bpol_Probes/Centre_Position" documentation="Position of coil centre" data_type="structure">
+				<field name="R" path="Bpol_Probes/Centre_Position/R" documentation="Major radius" data_type="FLT_0D" type="STATIC" units="m"/>
+				<field name="Z" path="Bpol_Probes/Centre_Position/Z" documentation="Height" data_type="FLT_0D" type="STATIC" units="m"/>
+				<field name="Phi" path="Bpol_Probes/Centre_Position/Phi" documentation="Toroidal angle" data_type="FLT_0D" type="STATIC" units="rad"/>
 			</field>
-			<field name="Poloidal_Angles" path="Bpol_Probes/Poloidal_Angles" documentation="Poloidal angles of coil orientation" data_type="FLT_1D" type="STATIC" units="rad" axis1="../Names"/>
-			<field name="Toroidal_Angles" path="Bpol_Probes/Toroidal_Angles" documentation="Toroidal angles of coil orientation (0 if fully in the poloidal plane) " data_type="FLT_1D" type="STATIC" units="rad" axis1="../Names"/>
-			<field name="Areas" path="Bpol_Probes/Areas" documentation="Area of coils" data_type="FLT_1D" type="STATIC" units="m^2" axis1="../Names"/>
-			<field name="Lengths" path="Bpol_Probes/Lengths" documentation="Lengths of coils" data_type="FLT_1D" type="STATIC" units="m" axis1="../Names"/>
-			<field name="Turns" path="Bpol_Probes/Turns" documentation="Turns in the coils" data_type="INT_1D" type="STATIC" axis1="../Names"/>
-			<field name="Bpol_Probe" path="Bpol_Probes/Bpol_Probe" documentation="Measurements by a given Bpol_Probe" data_type="struct_array" axis1="../Names">
-				<field name="Magnetic_Field" path="Bpol_Probes/Bpol_Probe/Magnetic_Field" documentation="Measured flux" data_type="structure">
-					<field name="Data" path="Bpol_Probes/Bpol_Probe/Magnetic_Field/Data" documentation="Measured flux" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL" units="T"/>
-					<field name="Timebase" path="Bpol_Probes/Bpol_Probe/Magnetic_Field/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
-				</field>
-				<field name="Magnetic_Field_Error" path="Bpol_Probes/Bpol_Probe/Magnetic_Field_Error" documentation="Absolute error on measured magnetic field." data_type="structure">
-					<field name="Type" path="Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Type" documentation="Type of errorbar description which is used. Refers to the name of the sibling fields." data_type="STR_0D"/>
-					<field name="Signal" path="Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Signal" documentation="Absolute error provided as a Signal of same dimension as the related field." data_type="FLT_1D" type="SIGNAL"/>
-					<field name="Constant" path="Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Constant" documentation="Relative error in % provided as a constant" data_type="FLT_0D" type="CONSTANT"/>
-					<field name="Expression" path="Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Expression" documentation="Absolute error provided as an Expression." data_type="STR_0D"/>
-				</field>
+			<field name="Poloidal_Angle" path="Bpol_Probes/Poloidal_Angle" documentation="Poloidal angle of coil orientation" data_type="FLT_0D" type="STATIC" units="rad"/>
+			<field name="Toroidal_Angle" path="Bpol_Probes/Toroidal_Angle" documentation="Toroidal angle of coil orientation (0 if fully in the poloidal plane) " data_type="FLT_0D" type="STATIC" units="rad"/>
+			<field name="Area" path="Bpol_Probes/Area" documentation="Area of the coil" data_type="FLT_0D" type="STATIC" units="m^2"/>
+			<field name="Length" path="Bpol_Probes/Length" documentation="Length of the coil" data_type="FLT_0D" type="STATIC" units="m"/>
+			<field name="Turns" path="Bpol_Probes/Turns" documentation="Turns in the coil" data_type="INT_0D" type="STATIC"/>
+			<field name="Magnetic_Field" path="Bpol_Probes/Magnetic_Field" documentation="Measured magnetic field" data_type="structure">
+				<field name="Data" path="Bpol_Probes/Magnetic_Field/Data" documentation="Measured magnetic field" data_type="FLT_1D" axis1="../Timebase" type="SIGNAL" units="T"/>
+				<field name="Timebase" path="Bpol_Probes/Magnetic_Field/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+			</field>
+			<field name="Magnetic_Field_Error" path="Bpol_Probes/Magnetic_Field_Error" documentation="Absolute error on measured magnetic field." data_type="structure">
+				<field name="Type" path="Bpol_Probes/Magnetic_Field_Error/Type" documentation="Type of errorbar description which is used. Refers to the name of the sibling fields." data_type="STR_0D"/>
+				<field name="Signal" path="Bpol_Probes/Magnetic_Field_Error/Signal" documentation="Absolute error provided as a Signal of same dimension as the related field." data_type="FLT_1D" type="SIGNAL"/>
+				<field name="Constant" path="Bpol_Probes/Magnetic_Field_Error/Constant" documentation="Relative error in % provided as a constant" data_type="FLT_0D" type="CONSTANT"/>
+				<field name="Expression" path="Bpol_Probes/Magnetic_Field_Error/Expression" documentation="Absolute error provided as an Expression." data_type="STR_0D"/>
 			</field>
 		</field>
-		<field name="Processing_Methods" path="Processing_Methods" documentation="List of data processing methods" data_type="STR_1D" axis1="N" type="STATIC"/>
-		<field name="Processed_Data" path="Processed_Data" documentation="Processed quantities derived from the magnetic measurements." data_type="struct_array" axis1="../Processing_Method">
+		<field name="Processed_Data" path="Processed_Data" documentation="Processed quantities derived from the magnetic measurements." data_type="struct_array" axis1="1...N_Processed_Data">
+			<field name="Method" path="Processed_Data/Method" documentation="Name of the data processing method" data_type="STR_0D" type="STATIC"/>
 			<field name="Timebase" path="Processed_Data/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 			<field name="Ip" path="Processed_Data/Ip" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="SIGNAL" axis1="../Timebase" units="A"/>
 			<field name="Ip_Error" path="Processed_Data/Ip_Error" documentation="Error on plasma current " data_type="structure">

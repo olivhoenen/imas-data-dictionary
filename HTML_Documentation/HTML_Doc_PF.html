@@ -64,13 +64,7 @@
 			<tr>
 				<td>Coils</td>
 				<td>Active PF coils</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Coils/Names</td>
-				<td>Names of PF coils {STATIC}</td>
-				<td>STR_1D</td>
+				<td>struct_array</td>
 				<td>
 					<table>
 						<tr>
@@ -80,57 +74,33 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Coils/Identifiers</td>
-				<td>Alphanumeric identifiers of coils used for convenience {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Coils/Name</td>
+				<td>Name of the coil {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Coils/Resistances</td>
-				<td>Coil resistances {STATIC} [Ohm]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Coils/Identifier</td>
+				<td>Alphanumeric identifier of coils used for convenience {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Coils/Energy_Max_Limits</td>
-				<td>Maximum Energy to be dissipated in coils {STATIC} [Joule]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Coils/Resistance</td>
+				<td>Coil resistance {STATIC} [Ohm]</td>
+				<td>FLT_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Coils/Coil</td>
-				<td>Axisymmetric conductor description of each coil; each is comprised of a number of cross-section elements described  individually</td>
+				<td>Coils/Energy_Max_Limit</td>
+				<td>Maximum Energy to be dissipated in the coil {STATIC} [J]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Coils/Elements</td>
+				<td>Each PF coil is comprised of a number of cross-section elements described  individually</td>
 				<td>struct_array</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Coils/Coil/Element_Names</td>
-				<td>Names of the elements of this coil {STATIC}</td>
-				<td>STR_1D</td>
 				<td>
 					<table>
 						<tr>
@@ -140,101 +110,77 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Coils/Coil/Element_Identifiers</td>
-				<td>Identifiers of the elements of this coil {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Coils/Elements/Name</td>
+				<td>Name of this element of this coil {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Coils/Coil/Element_Turns_With_Sign</td>
-				<td>Number of effective turns in the elements for calculating magnetic fields of the coil; includes the sign of the number of turns {STATIC}</td>
-				<td>INT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Coils/Elements/Identifier</td>
+				<td>Identifier of this element of this coil {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Coils/Coil/Element_Areas</td>
-				<td>Cross-sectional areas of the elements {STATIC} [m^2]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Element_Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Coils/Coil/Element_Geometry</td>
-				<td>Cross-sectional shape of each of the coil elements</td>
-				<td>struct_array</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Element_Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Coils/Coil/Element_Geometry/Geometry_Type</td>
-				<td>Type used to describe a coil shape (0 for 'rzcoordinates' or 1 for 'rzdrdz')  {STATIC}</td>
+				<td>Coils/Elements/Turns_With_Sign</td>
+				<td>Number of effective turns in the element for calculating magnetic fields of the coil; includes the sign of the number of turns {STATIC}</td>
 				<td>INT_0D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Element_Names</td>
-						</tr>
-					</table>
-				</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Coils/Coil/Element_Geometry/RZ_Coordinates</td>
-				<td>Irregular outline {STATIC} [m]</td>
+				<td>Coils/Elements/Area</td>
+				<td>Cross-sectional areas of the element {STATIC} [m^2]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Coils/Elements/Geometry</td>
+				<td>Cross-sectional shape of the element</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Coils/Elements/Geometry/Description_Type</td>
+				<td>Type used to describe the element shape (0 for 'RZ_Coordinates' or 1 for 'RZDRDZ')  {STATIC}</td>
+				<td>INT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Coils/Elements/Geometry/RZ_Coordinates</td>
+				<td>Irregular outline of the element {STATIC} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- 2</td>
+							<td>1- 1...2</td>
 						</tr>
 						<tr>
-							<td>2- ../Element_Names</td>
+							<td>2- 1...N_Points</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Coils/Coil/Element_Geometry/RZDRDZ</td>
+				<td>Coils/Elements/Geometry/RZDRDZ</td>
 				<td>4-Vector defining Centre R,Z and full extents dR, dZ  {STATIC} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- 4</td>
+							<td>1- 1...4</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Coils/Coil/Current</td>
+				<td>Coils/Current</td>
 				<td>Current in the coil</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Coils/Coil/Current/Data</td>
-				<td>Current in the coil {SIGNAL} [Amp]</td>
+				<td>Coils/Current/Data</td>
+				<td>Current in the coil {SIGNAL} [A]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -245,7 +191,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Coils/Coil/Current/Timebase</td>
+				<td>Coils/Current/Timebase</td>
 				<td>Generic timebase [s]</td>
 				<td>flt_1d_type</td>
 				<td>
@@ -257,14 +203,14 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Coils/Coil/Voltage</td>
+				<td>Coils/Voltage</td>
 				<td>Voltage on the coil terminals</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Coils/Coil/Voltage/Data</td>
-				<td>Voltage on the coil terminals {SIGNAL} [Volt]</td>
+				<td>Coils/Voltage/Data</td>
+				<td>Voltage on the coil terminals {SIGNAL} [V]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
@@ -275,7 +221,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Coils/Coil/Voltage/Timebase</td>
+				<td>Coils/Voltage/Timebase</td>
 				<td>Generic timebase [s]</td>
 				<td>flt_1d_type</td>
 				<td>
@@ -289,89 +235,53 @@
 			<tr>
 				<td>Vertical_Forces</td>
 				<td>Vertical forces on the axisymmetric PF coil system</td>
-				<td>structure</td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Forces</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Vertical_Forces/Name</td>
+				<td>Name of the Force combination {STATIC}</td>
+				<td>STR_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Vertical_Forces/Names</td>
-				<td>Names of Force combinations {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- 1...N_Force_Combinations</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Vertical_Forces/Combinations</td>
-				<td>Combinations of forces {STATIC}</td>
-				<td>FLT_2D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../Coils/Names</td>
-						</tr>
-						<tr>
-							<td>2- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Vertical_Forces/Max_Limits</td>
-				<td>Vertical Force combination limits {STATIC} [N]</td>
+				<td>Vertical_Forces/Combination</td>
+				<td>Coils involved in this Force combination {STATIC}</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Names</td>
+							<td>1- ../../Coils</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Vertical_Forces/Min_Limits</td>
-				<td>Vertical Force combination limits {STATIC} [N]</td>
+				<td>Vertical_Forces/Max_Limit</td>
+				<td>Vertical Force combination limit {STATIC} [N]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Vertical_Forces/Min_Limit</td>
+				<td>Vertical Force combination limit {STATIC} [N]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Vertical_Forces/Force</td>
+				<td>Force combination {SIGNAL} [N]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Vertical_Forces/Forces</td>
-				<td>Force combinations</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Vertical_Forces/Forces/Data</td>
-				<td>Force combinations {SIGNAL} [N]</td>
-				<td>FLT_2D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../Names</td>
-						</tr>
-						<tr>
-							<td>2- ../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Vertical_Forces/Forces/Timebase</td>
-				<td>Generic timebase [s]</td>
-				<td>flt_1d_type</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- 1...N_Times</td>
+							<td>1- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
@@ -379,13 +289,7 @@
 			<tr>
 				<td>Circuits</td>
 				<td>Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Circuits/Names</td>
-				<td>Names of circuits {STATIC}</td>
-				<td>STR_1D</td>
+				<td>struct_array</td>
 				<td>
 					<table>
 						<tr>
@@ -395,43 +299,34 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Circuits/Identifiers</td>
-				<td>IDs of circuits {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Circuits/Name</td>
+				<td>Name of the circuit {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Circuits/Types</td>
-				<td>Types of circuit {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Circuits/Identifier</td>
+				<td>ID of the circuit {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Circuits/Type</td>
+				<td>Type of the circuit {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
 			</tr>
 			<tr>
 				<td>Circuits/Connections</td>
-				<td>Description of the supplies and coils connections (nodes) across each circuit. Array-3D (N_Circuits,max_nnodes,2*ncomponents), describing for each node which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the third dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD) {STATIC}</td>
-				<td>FLT_3D</td>
+				<td>Description of the supplies and coils connections (nodes) across the circuit. The matrix describing for each node (first dimension) which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the second dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD) {STATIC}</td>
+				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- TBD</td>
+							<td>1- 1...N_Nodes</td>
 						</tr>
 						<tr>
-							<td>2- TBD</td>
-						</tr>
-						<tr>
-							<td>3- TBD</td>
+							<td>2- 1...2*N_components</td>
 						</tr>
 					</table>
 				</td>
@@ -439,11 +334,17 @@
 			<tr>
 				<td>Circuits/Voltage</td>
 				<td>Voltage on the circuit</td>
-				<td>struct_array</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Circuits/Voltage/Data</td>
+				<td>Voltage on the circuit {SIGNAL} [V]</td>
+				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- Timebase</td>
+							<td>1- ../Timebase</td>
 						</tr>
 					</table>
 				</td>
@@ -463,11 +364,17 @@
 			<tr>
 				<td>Circuits/Current</td>
 				<td>Current in the circuit</td>
-				<td>struct_array</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Circuits/Current/Data</td>
+				<td>Current in the circuit {SIGNAL} [V]</td>
+				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- Timebase</td>
+							<td>1- ../Timebase</td>
 						</tr>
 					</table>
 				</td>
@@ -487,13 +394,7 @@
 			<tr>
 				<td>Supplies</td>
 				<td>PF power supplies</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Supplies/Names</td>
-				<td>Names of the PF supplies {STATIC}</td>
-				<td>STR_1D</td>
+				<td>struct_array</td>
 				<td>
 					<table>
 						<tr>
@@ -503,9 +404,33 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Supplies/Identifiers</td>
-				<td>Identifiers of the supplies {STATIC}</td>
-				<td>STR_1D</td>
+				<td>Supplies/Name</td>
+				<td>Name of the PF supply {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Supplies/Identifier</td>
+				<td>Identifier of the supply {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Supplies/Type</td>
+				<td>Type of the supply; TBD add free description of non-linear power supplies {STATIC}</td>
+				<td>INT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Supplies/Resistance</td>
+				<td>Power supply internal resistance {STATIC} [Ohm]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Supplies/Delay</td>
+				<td>Pure delay in the supply {STATIC} [s]</td>
+				<td>FLT_0D</td>
 				<td>
 					<table>
 						<tr>
@@ -515,163 +440,79 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Supplies/Types</td>
-				<td>Types of supplies; TBD add free description of non-linear power supplies {STATIC}</td>
-				<td>INT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Supplies/Resistances</td>
-				<td>Power supply internal resistances {STATIC} [Ohm]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Supplies/Delays</td>
-				<td>Pure delays in the supplies {STATIC} [Sec]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Supplies/Filters_Numerators</td>
+				<td>Supplies/Filter_Numerator</td>
 				<td>Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description {STATIC}</td>
-				<td>FLT_2D</td>
+				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Names</td>
-						</tr>
-						<tr>
-							<td>2- 1...N_Numerator_Coefficients</td>
+							<td>1- 1...N_Numerator_Coefficients</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Supplies/Filters_Denominators</td>
+				<td>Supplies/Filter_Denominator</td>
 				<td>Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description {STATIC}</td>
-				<td>FLT_2D</td>
+				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Names</td>
-						</tr>
-						<tr>
-							<td>2- 1...N_Denominator_Coefficients</td>
+							<td>1- 1...N_Denominator_Coefficients</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Supplies/Current_Max_Limits</td>
-				<td>Maximum currents in the supplies {STATIC} [A]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Supplies/Current_Max_Limit</td>
+				<td>Maximum current in the supply {STATIC} [A]</td>
+				<td>FLT_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Supplies/Current_Min_Limits</td>
-				<td>Minimum currents in the supplies {STATIC} [Amp]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Supplies/Current_Min_Limit</td>
+				<td>Minimum current in the supply {STATIC} [A]</td>
+				<td>FLT_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Supplies/Voltage_Max_Limits</td>
-				<td>Minimum voltages from the supplies {STATIC} [Volt]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Supplies/Voltage_Max_Limit</td>
+				<td>Maximum voltage from the supply {STATIC} [V]</td>
+				<td>FLT_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Supplies/Voltage_Min_Limits</td>
-				<td>Maximum voltages from the supplies {STATIC} [V]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Supplies/Voltage_Min_Limit</td>
+				<td>Minimum voltage from the supply {STATIC} [V]</td>
+				<td>FLT_0D</td>
+				<td />
 			</tr>
 			<tr>
 				<td>Supplies/Current_Limiter_Gain</td>
-				<td>Gains to prevent overcurrent in a linear model of the supplies {STATIC} [V]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Gain to prevent overcurrent in a linear model of the supply {STATIC} [V]</td>
+				<td>FLT_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Supplies/Energy_Max_Limits</td>
-				<td>Maximum energies to be dissipated in the supplies during a pulse {STATIC} [J]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Supplies/Energy_Max_Limit</td>
+				<td>Maximum energy to be dissipated in the supply during a pulse {STATIC} [J]</td>
+				<td>FLT_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Supplies/Supply</td>
-				<td>Each of the power supplies; the supply index follows the supply name list</td>
-				<td>struct_array</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Supplies/Nonlinear_Model</td>
+				<td>Description of the nonlinear transfer function of the supply</td>
+				<td>STR_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Supplies/Supply/Voltage</td>
+				<td>Supplies/Voltage</td>
 				<td>Voltages at the supply output</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Supplies/Supply/Voltage/Data</td>
+				<td>Supplies/Voltage/Data</td>
 				<td>Voltages at the supply output {SIGNAL} [V]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -683,7 +524,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Supplies/Supply/Voltage/Timebase</td>
+				<td>Supplies/Voltage/Timebase</td>
 				<td>Generic timebase [s]</td>
 				<td>flt_1d_type</td>
 				<td>
@@ -695,13 +536,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Supplies/Supply/Current</td>
+				<td>Supplies/Current</td>
 				<td>Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Supplies/Supply/Current/Data</td>
+				<td>Supplies/Current/Data</td>
 				<td>Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description {SIGNAL} [A]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -713,7 +554,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Supplies/Supply/Current/Timebase</td>
+				<td>Supplies/Current/Timebase</td>
 				<td>Generic timebase [s]</td>
 				<td>flt_1d_type</td>
 				<td>
@@ -725,21 +566,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Supplies/Supply/Nonlinear_Model</td>
-				<td>Description of the nonlinear transfer function of the supply</td>
-				<td>STR_0D</td>
-				<td />
-			</tr>
-			<tr>
 				<td>Passive_Loops</td>
 				<td>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Passive_Loops/Names</td>
-				<td>Names of loops {STATIC}</td>
-				<td>STR_1D</td>
+				<td>struct_array</td>
 				<td>
 					<table>
 						<tr>
@@ -749,103 +578,70 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Passive_Loops/Areas</td>
-				<td>Surface areas of the passive loops {STATIC} [m^2]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Passive_Loops/Name</td>
+				<td>Name of the loop {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Passive_Loops/Resistances</td>
-				<td>Passive element resistances {STATIC} [Ohm]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Passive_Loops/Area</td>
+				<td>Surface area of the passive loop {STATIC} [m^2]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Passive_Loops/Resistance</td>
+				<td>Passive element resistance {STATIC} [Ohm]</td>
+				<td>FLT_0D</td>
+				<td />
 			</tr>
 			<tr>
 				<td>Passive_Loops/Geometry</td>
-				<td>Shape of each Passive Loop</td>
-				<td>struct_array</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
+				<td>Shape of the Passive Loop</td>
+				<td>structure</td>
+				<td />
 			</tr>
 			<tr>
-				<td>Passive_Loops/Geometry/Type</td>
-				<td>Type used to describe a coil shape (0 for 'rzcoordinates' or 1 for 'rzdrdz') {STATIC}</td>
+				<td>Passive_Loops/Geometry/Description_Type</td>
+				<td>Type used to describe the element shape (0 for 'RZ_Coordinates' or 1 for 'RZDRDZ')  {STATIC}</td>
 				<td>INT_0D</td>
 				<td />
 			</tr>
 			<tr>
 				<td>Passive_Loops/Geometry/RZ_Coordinates</td>
-				<td>Irregular outline {STATIC} [m]</td>
+				<td>Irregular outline of the element {STATIC} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Names</td>
+							<td>1- 1...2</td>
 						</tr>
 						<tr>
-							<td>2- 2</td>
+							<td>2- 1...N_Points</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td>Passive_Loops/Geometry/RZDRDZ</td>
-				<td>4-Vector defining Centre R,Z and full extents dR, dZ {STATIC} [m]</td>
+				<td>4-Vector defining Centre R,Z and full extents dR, dZ  {STATIC} [m]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- 4</td>
+							<td>1- 1...4</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Passive_Loops/Currents</td>
-				<td>Passive Loop currents (assumed to share their timebase)</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Passive_Loops/Currents/Data</td>
-				<td>Passive Loop currents (assumed to share their timebase) {SIGNAL} [Amp]</td>
-				<td>FLT_2D</td>
+				<td>Passive_Loops/Current</td>
+				<td>Passive Loop current (all Passive Loops are assumed to share the same timebase) {SIGNAL} [A]</td>
+				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../Names</td>
-						</tr>
-						<tr>
-							<td>2- ../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Passive_Loops/Currents/Timebase</td>
-				<td>Generic timebase [s]</td>
-				<td>flt_1d_type</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- 1...N_Times</td>
+							<td>1- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
@@ -891,6 +687,72 @@
 					<table>
 						<tr>
 							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Code_Parameters</td>
+				<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Code_Name</td>
+				<td>Name of the code {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Code_Version</td>
+				<td>Version of the code {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Parameters</td>
+				<td>List of the code specific parameters in XML format {SIGNAL}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Code_Parameters/Output_Diagnostics</td>
+				<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Code_Parameters/Output_Flag</td>
+				<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
 						</tr>
 					</table>
 				</td>

@@ -64,47 +64,35 @@
 			<tr>
 				<td>Flux_Loops</td>
 				<td>Flux loops</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Flux_Loops/Names</td>
-				<td>Names of flux loops.  {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- N</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Flux_Loops/Identifiers</td>
-				<td>IDs of flux loops.  {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Flux_Loops/Positions</td>
-				<td>List of (R,Z,phi) points defining the position of the loops (see data structure documentation FLUXLOOPposition.pdf) {STATIC}</td>
 				<td>struct_array</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Names</td>
+							<td>1- 1...N_Flux_Loops</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Flux_Loops/Positions/R</td>
+				<td>Flux_Loops/Name</td>
+				<td>Name of the flux loop {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops/Identifier</td>
+				<td>ID of the flux loop {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops/Position</td>
+				<td>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Flux_Loops/Position/R</td>
 				<td>Major radius {STATIC} [m]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -116,7 +104,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Flux_Loops/Positions/Z</td>
+				<td>Flux_Loops/Position/Z</td>
 				<td>Height {STATIC} [m]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -128,7 +116,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Flux_Loops/Positions/Phi</td>
+				<td>Flux_Loops/Position/Phi</td>
 				<td>Toroidal angle {STATIC} [rad]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -140,37 +128,25 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Flux_Loops/Flux_Loop</td>
-				<td>Measurements by a given Flux Loop. </td>
-				<td>struct_array</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Flux_Loops/Flux_Loop/Flux</td>
+				<td>Flux_Loops/Flux</td>
 				<td>Measured flux.</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Flux_Loops/Flux_Loop/Flux/Data</td>
+				<td>Flux_Loops/Flux/Data</td>
 				<td>Measured flux. {SIGNAL} [Wb]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../Timebase</td>
+							<td>1- ../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Flux_Loops/Flux_Loop/Flux/Timebase</td>
+				<td>Flux_Loops/Flux/Timebase</td>
 				<td>Generic timebase [s]</td>
 				<td>flt_1d_type</td>
 				<td>
@@ -182,31 +158,31 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Flux_Loops/Flux_Loop/Flux_Error</td>
+				<td>Flux_Loops/Flux_Error</td>
 				<td>Absolute error on measured flux.</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Flux_Loops/Flux_Loop/Flux_Error/Type</td>
+				<td>Flux_Loops/Flux_Error/Type</td>
 				<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
 				<td>STR_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Flux_Loops/Flux_Loop/Flux_Error/Signal</td>
+				<td>Flux_Loops/Flux_Error/Signal</td>
 				<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
 				<td>FLT_1D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Flux_Loops/Flux_Loop/Flux_Error/Constant</td>
+				<td>Flux_Loops/Flux_Error/Constant</td>
 				<td>Relative error in % provided as a constant {CONSTANT}</td>
 				<td>FLT_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Flux_Loops/Flux_Loop/Flux_Error/Expression</td>
+				<td>Flux_Loops/Flux_Error/Expression</td>
 				<td>Absolute error provided as an Expression.</td>
 				<td>STR_0D</td>
 				<td />
@@ -214,173 +190,101 @@
 			<tr>
 				<td>Bpol_Probes</td>
 				<td>Poloidal field probes</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Names</td>
-				<td>Names of the probes {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- N</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Identifiers</td>
-				<td>IDs of probes {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Centre_Positions</td>
-				<td>Position of coil centre. Note we should develop a generic RZPHI1D capable of inheriting Axis property from its parent. {STATIC} [m]</td>
-				<td>structure</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Centre_Positions/R</td>
-				<td>Major radius {STATIC} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- 1...N_Points</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Centre_Positions/Z</td>
-				<td>Height {STATIC} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../R</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Centre_Positions/Phi</td>
-				<td>Toroidal angle {STATIC} [rad]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../R</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Poloidal_Angles</td>
-				<td>Poloidal angles of coil orientation {STATIC} [rad]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Toroidal_Angles</td>
-				<td>Toroidal angles of coil orientation (0 if fully in the poloidal plane)  {STATIC} [rad]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Areas</td>
-				<td>Area of coils {STATIC} [m^2]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Lengths</td>
-				<td>Lengths of coils {STATIC} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Turns</td>
-				<td>Turns in the coils {STATIC}</td>
-				<td>INT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Names</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Bpol_Probe</td>
-				<td>Measurements by a given Bpol_Probe</td>
 				<td>struct_array</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Names</td>
+							<td>1- 1...N_Bpol_Probes</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field</td>
-				<td>Measured flux</td>
+				<td>Bpol_Probes/Name</td>
+				<td>Name of the probe {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Identifier</td>
+				<td>ID of the probe {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Centre_Position</td>
+				<td>Position of coil centre</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field/Data</td>
-				<td>Measured flux {SIGNAL} [T]</td>
+				<td>Bpol_Probes/Centre_Position/R</td>
+				<td>Major radius {STATIC} [m]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Centre_Position/Z</td>
+				<td>Height {STATIC} [m]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Centre_Position/Phi</td>
+				<td>Toroidal angle {STATIC} [rad]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Poloidal_Angle</td>
+				<td>Poloidal angle of coil orientation {STATIC} [rad]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Toroidal_Angle</td>
+				<td>Toroidal angle of coil orientation (0 if fully in the poloidal plane)  {STATIC} [rad]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Area</td>
+				<td>Area of the coil {STATIC} [m^2]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Length</td>
+				<td>Length of the coil {STATIC} [m]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Turns</td>
+				<td>Turns in the coil {STATIC}</td>
+				<td>INT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Magnetic_Field</td>
+				<td>Measured magnetic field</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Bpol_Probes/Magnetic_Field/Data</td>
+				<td>Measured magnetic field {SIGNAL} [T]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../Timebase</td>
+							<td>1- ../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field/Timebase</td>
+				<td>Bpol_Probes/Magnetic_Field/Timebase</td>
 				<td>Generic timebase [s]</td>
 				<td>flt_1d_type</td>
 				<td>
@@ -392,46 +296,34 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error</td>
+				<td>Bpol_Probes/Magnetic_Field_Error</td>
 				<td>Absolute error on measured magnetic field.</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Type</td>
+				<td>Bpol_Probes/Magnetic_Field_Error/Type</td>
 				<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
 				<td>STR_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Signal</td>
+				<td>Bpol_Probes/Magnetic_Field_Error/Signal</td>
 				<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
 				<td>FLT_1D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Constant</td>
+				<td>Bpol_Probes/Magnetic_Field_Error/Constant</td>
 				<td>Relative error in % provided as a constant {CONSTANT}</td>
 				<td>FLT_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Bpol_Probe/Magnetic_Field_Error/Expression</td>
+				<td>Bpol_Probes/Magnetic_Field_Error/Expression</td>
 				<td>Absolute error provided as an Expression.</td>
 				<td>STR_0D</td>
 				<td />
-			</tr>
-			<tr>
-				<td>Processing_Methods</td>
-				<td>List of data processing methods {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- N</td>
-						</tr>
-					</table>
-				</td>
 			</tr>
 			<tr>
 				<td>Processed_Data</td>
@@ -440,10 +332,16 @@
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Processing_Method</td>
+							<td>1- 1...N_Processed_Data</td>
 						</tr>
 					</table>
 				</td>
+			</tr>
+			<tr>
+				<td>Processed_Data/Method</td>
+				<td>Name of the data processing method {STATIC}</td>
+				<td>STR_0D</td>
+				<td />
 			</tr>
 			<tr>
 				<td>Processed_Data/Timebase</td>

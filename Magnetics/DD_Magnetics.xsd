@@ -10,6 +10,230 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:complexType name="Magnetics_Flux_Loops">
+		<xs:annotation>
+			<xs:documentation>Flux loops</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:annotation>
+					<xs:documentation>Name of the flux loop</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Identifier">
+				<xs:annotation>
+					<xs:documentation>ID of the flux loop</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Position" type="RZPhi1D_STATIC">
+				<xs:annotation>
+					<xs:documentation>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Flux">
+				<xs:annotation>
+					<xs:documentation>Measured flux.</xs:documentation>
+					<xs:appinfo>
+						<axis1>Timebase</axis1>
+						<units>Wb</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="Timebase"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Flux_Error" type="Errorbar">
+				<xs:annotation>
+					<xs:documentation>Absolute error on measured flux.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Magnetics_Bpol_Probes">
+		<xs:annotation>
+			<xs:documentation>Poloidal field probes</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:annotation>
+					<xs:documentation>Name of the probe</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Identifier">
+				<xs:annotation>
+					<xs:documentation>ID of the probe</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Centre_Position" type="RZPhi0D_STATIC">
+				<xs:annotation>
+					<xs:documentation>Position of coil centre</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Poloidal_Angle">
+				<xs:annotation>
+					<xs:documentation>Poloidal angle of coil orientation</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Toroidal_Angle">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle of coil orientation (0 if fully in the poloidal plane) </xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Area">
+				<xs:annotation>
+					<xs:documentation>Area of the coil</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Length">
+				<xs:annotation>
+					<xs:documentation>Length of the coil</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Turns">
+				<xs:annotation>
+					<xs:documentation>Turns in the coil</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Magnetic_Field">
+				<xs:annotation>
+					<xs:documentation>Measured magnetic field</xs:documentation>
+					<xs:appinfo>
+						<axis1>Timebase</axis1>
+						<type>SIGNAL</type>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="Timebase"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Magnetic_Field_Error" type="Errorbar">
+				<xs:annotation>
+					<xs:documentation>Absolute error on measured magnetic field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Magnetics_Processed_Data">
+		<xs:annotation>
+			<xs:documentation>Processed quantities derived from the magnetic measurements.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Method">
+				<xs:annotation>
+					<xs:documentation>Name of the data processing method</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="Timebase"/>
+			<xs:element name="Ip">
+				<xs:annotation>
+					<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Timebase</axis1>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ip_Error" type="Errorbar">
+				<xs:annotation>
+					<xs:documentation>Error on plasma current </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Diamagnetic_Flux">
+				<xs:annotation>
+					<xs:documentation>Diamagnetic flux</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../Timebase</axis1>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Diamagnetic_Flux_Error" type="Errorbar">
+				<xs:annotation>
+					<xs:documentation>Error on diamagnetic flux</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="Magnetics">
 		<xs:annotation>
 			<xs:documentation>Magnetic diagnostics for equilibrium identification and plasma shape control.</xs:documentation>
@@ -17,284 +241,31 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="IDS_Properties"/>
-				<xs:element name="Flux_Loops">
+				<xs:element name="Flux_Loops" type="Magnetics_Flux_Loops" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Flux loops</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="Names">
-								<xs:annotation>
-									<xs:documentation>Names of flux loops. </xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="STR_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Identifiers">
-								<xs:annotation>
-									<xs:documentation>IDs of flux loops. </xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="STR_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Positions" type="RZPhi1D_STATIC" maxOccurs="unbounded">
-								<xs:annotation>
-									<xs:documentation>List of (R,Z,phi) points defining the position of the loops (see data structure documentation FLUXLOOPposition.pdf)</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="Flux_Loop" maxOccurs="unbounded">
-								<xs:annotation>
-									<xs:documentation>Measurements by a given Flux Loop. </xs:documentation>
-									<xs:appinfo>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="Flux">
-											<xs:annotation>
-												<xs:documentation>Measured flux.</xs:documentation>
-												<xs:appinfo>
-													<axis1>../Timebase</axis1>
-													<units>Wb</units>
-													<type>SIGNAL</type>
-												</xs:appinfo>
-											</xs:annotation>
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element ref="Timebase"/>
-													<xs:group ref="FLT_1D"/>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="Flux_Error" type="Errorbar">
-											<xs:annotation>
-												<xs:documentation>Absolute error on measured flux.</xs:documentation>
-												<xs:appinfo>
-												</xs:appinfo>
-											</xs:annotation>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Bpol_Probes">
-					<xs:annotation>
-						<xs:documentation>Poloidal field probes</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="Names">
-								<xs:annotation>
-									<xs:documentation>Names of the probes</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="STR_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Identifiers">
-								<xs:annotation>
-									<xs:documentation>IDs of probes</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="STR_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Centre_Positions" type="RZPhi1D_STATIC">
-								<xs:annotation>
-									<xs:documentation>Position of coil centre. Note we should develop a generic RZPHI1D capable of inheriting Axis property from its parent.</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-										<units>m</units>
-									</xs:appinfo>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="Poloidal_Angles">
-								<xs:annotation>
-									<xs:documentation>Poloidal angles of coil orientation</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<units>rad</units>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="FLT_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Toroidal_Angles">
-								<xs:annotation>
-									<xs:documentation>Toroidal angles of coil orientation (0 if fully in the poloidal plane) </xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<units>rad</units>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="FLT_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Areas">
-								<xs:annotation>
-									<xs:documentation>Area of coils</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<units>m^2</units>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="FLT_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Lengths">
-								<xs:annotation>
-									<xs:documentation>Lengths of coils</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<units>m</units>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="FLT_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Turns">
-								<xs:annotation>
-									<xs:documentation>Turns in the coils</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="INT_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Bpol_Probe" maxOccurs="unbounded">
-								<xs:annotation>
-									<xs:documentation>Measurements by a given Bpol_Probe</xs:documentation>
-									<xs:appinfo>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="Magnetic_Field">
-											<xs:annotation>
-												<xs:documentation>Measured flux</xs:documentation>
-												<xs:appinfo>
-													<axis1>../Timebase</axis1>
-													<type>SIGNAL</type>
-													<units>T</units>
-												</xs:appinfo>
-											</xs:annotation>
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element ref="Timebase"/>
-													<xs:group ref="FLT_1D"/>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="Magnetic_Field_Error" type="Errorbar">
-											<xs:annotation>
-												<xs:documentation>Absolute error on measured magnetic field.</xs:documentation>
-											</xs:annotation>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Processing_Methods">
-					<xs:annotation>
-						<xs:documentation>List of data processing methods</xs:documentation>
 						<xs:appinfo>
-							<axis1>N</axis1>
-							<type>STATIC</type>
+							<axis1>1...N_Flux_Loops</axis1>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="STR_1D"/>
-					</xs:complexType>
 				</xs:element>
-				<xs:element name="Processed_Data" maxOccurs="unbounded">
+				<xs:element name="Bpol_Probes" type="Magnetics_Bpol_Probes" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Poloidal field probes</xs:documentation>
+						<xs:appinfo>
+							<axis1>1...N_Bpol_Probes</axis1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Processed_Data" type="Magnetics_Processed_Data" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Processed quantities derived from the magnetic measurements.</xs:documentation>
 						<xs:appinfo>
-							<axis1>../Processing_Method</axis1>
+							<axis1>1...N_Processed_Data</axis1>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="Timebase"/>
-							<xs:element name="Ip">
-								<xs:annotation>
-									<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above</xs:documentation>
-									<xs:appinfo>
-										<type>SIGNAL</type>
-										<axis1>../Timebase</axis1>
-										<units>A</units>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="FLT_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Ip_Error" type="Errorbar">
-								<xs:annotation>
-									<xs:documentation>Error on plasma current </xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="Diamagnetic_Flux">
-								<xs:annotation>
-									<xs:documentation>Diamagnetic flux</xs:documentation>
-									<xs:appinfo>
-										<type>SIGNAL</type>
-										<axis1>../Timebase</axis1>
-										<units>Wb</units>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="FLT_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Diamagnetic_Flux_Error" type="Errorbar">
-								<xs:annotation>
-									<xs:documentation>Error on diamagnetic flux</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
+				<xs:element ref="Code_Parameters"/>
 				<xs:element ref="Timebase"/>
 			</xs:sequence>
 		</xs:complexType>
