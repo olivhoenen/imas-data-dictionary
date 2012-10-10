@@ -62,6 +62,12 @@
 				<td />
 			</tr>
 			<tr>
+				<td>IDS_Properties/cocos</td>
+				<td>Coordinate conventions of this IDS</td>
+				<td>int_type</td>
+				<td />
+			</tr>
+			<tr>
 				<td>Coils</td>
 				<td>Active PF coils</td>
 				<td>struct_array</td>
@@ -141,12 +147,12 @@
 			</tr>
 			<tr>
 				<td>Coils/Elements/Geometry/Description_Type</td>
-				<td>Type used to describe the element shape (0 for 'RZ_Coordinates' or 1 for 'RZDRDZ')  {STATIC}</td>
+				<td>Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ')  {STATIC}</td>
 				<td>INT_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Coils/Elements/Geometry/RZ_Coordinates</td>
+				<td>Coils/Elements/Geometry/Coordinates_RZ</td>
 				<td>Irregular outline of the element {STATIC} [m]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -235,7 +241,13 @@
 			<tr>
 				<td>Vertical_Forces</td>
 				<td>Vertical forces on the axisymmetric PF coil system</td>
-				<td>struct_array</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Vertical_Forces/Names</td>
+				<td>Names of the Force combinations {STATIC}</td>
+				<td>STR_1D</td>
 				<td>
 					<table>
 						<tr>
@@ -245,43 +257,67 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Vertical_Forces/Name</td>
-				<td>Name of the Force combination {STATIC}</td>
-				<td>STR_0D</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Vertical_Forces/Combination</td>
-				<td>Coils involved in this Force combination {STATIC}</td>
-				<td>FLT_1D</td>
+				<td>Vertical_Forces/Combinations</td>
+				<td>Coils involved in the Force combinations {STATIC}</td>
+				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../Coils</td>
+							<td>1- ../Names</td>
+						</tr>
+						<tr>
+							<td>2- ../../Coils</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Vertical_Forces/Max_Limit</td>
-				<td>Vertical Force combination limit {STATIC} [N]</td>
-				<td>FLT_0D</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Vertical_Forces/Min_Limit</td>
-				<td>Vertical Force combination limit {STATIC} [N]</td>
-				<td>FLT_0D</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Vertical_Forces/Force</td>
-				<td>Force combination {SIGNAL} [N]</td>
+				<td>Vertical_Forces/Max_Limits</td>
+				<td>Vertical Force combinations limits {STATIC} [N]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../Timebase</td>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Vertical_Forces/Min_Limits</td>
+				<td>Vertical Force combination limit {STATIC} [N]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Vertical_Forces/Forces</td>
+				<td>Force combinations. All forces are assumed to be on the same timebase {SIGNAL} [N]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Vertical_Forces/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
 						</tr>
 					</table>
 				</td>
@@ -568,47 +604,65 @@
 			<tr>
 				<td>Passive_Loops</td>
 				<td>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</td>
-				<td>struct_array</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Passive_Loops/Names</td>
+				<td>Names of the loops {STATIC}</td>
+				<td>STR_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- N_Passive_Loops</td>
+							<td>1- 1...N_Passive_Loops</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Passive_Loops/Name</td>
-				<td>Name of the loop {STATIC}</td>
-				<td>STR_0D</td>
-				<td />
+				<td>Passive_Loops/Areas</td>
+				<td>Surface areas of the passive loops {STATIC} [m^2]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 			<tr>
-				<td>Passive_Loops/Area</td>
-				<td>Surface area of the passive loop {STATIC} [m^2]</td>
-				<td>FLT_0D</td>
-				<td />
+				<td>Passive_Loops/Resistances</td>
+				<td>Passive elements resistances {STATIC} [Ohm]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 			<tr>
-				<td>Passive_Loops/Resistance</td>
-				<td>Passive element resistance {STATIC} [Ohm]</td>
-				<td>FLT_0D</td>
-				<td />
+				<td>Passive_Loops/Geometries</td>
+				<td>Shapes of the Passive Loops</td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Names</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 			<tr>
-				<td>Passive_Loops/Geometry</td>
-				<td>Shape of the Passive Loop</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Passive_Loops/Geometry/Description_Type</td>
-				<td>Type used to describe the element shape (0 for 'RZ_Coordinates' or 1 for 'RZDRDZ')  {STATIC}</td>
+				<td>Passive_Loops/Geometries/Description_Type</td>
+				<td>Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ')  {STATIC}</td>
 				<td>INT_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Passive_Loops/Geometry/RZ_Coordinates</td>
+				<td>Passive_Loops/Geometries/Coordinates_RZ</td>
 				<td>Irregular outline of the element {STATIC} [m]</td>
 				<td>FLT_2D</td>
 				<td>
@@ -623,7 +677,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Passive_Loops/Geometry/RZDRDZ</td>
+				<td>Passive_Loops/Geometries/RZDRDZ</td>
 				<td>4-Vector defining Centre R,Z and full extents dR, dZ  {STATIC} [m]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -635,13 +689,28 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Passive_Loops/Current</td>
-				<td>Passive Loop current (all Passive Loops are assumed to share the same timebase) {SIGNAL} [A]</td>
-				<td>FLT_1D</td>
+				<td>Passive_Loops/Currents</td>
+				<td>Passive Loops currents (all Passive Loops are assumed to share the same timebase) {SIGNAL} [A]</td>
+				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../Timebase</td>
+							<td>1- ../Timebase</td>
+						</tr>
+						<tr>
+							<td>2- ../Names</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Passive_Loops/Timebase</td>
+				<td>Generic timebase [s]</td>
+				<td>flt_1d_type</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Times</td>
 						</tr>
 					</table>
 				</td>

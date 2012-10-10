@@ -62,6 +62,12 @@
 				<td />
 			</tr>
 			<tr>
+				<td>IDS_Properties/cocos</td>
+				<td>Coordinate conventions of this IDS</td>
+				<td>int_type</td>
+				<td />
+			</tr>
+			<tr>
 				<td>Boundary</td>
 				<td>Description of the plasma boundary</td>
 				<td>structure</td>
@@ -80,79 +86,46 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Boundary/Outline</td>
-				<td>RZ description of the plasma boundary</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Boundary/Outline/N_Points</td>
-				<td>Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points)). {SIGNAL}</td>
+				<td>Boundary/N_Outline_Points</td>
+				<td>Number of meaningful Outline points in R and Z at a given time. {SIGNAL}</td>
 				<td>INT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../../Timebase</td>
+							<td>1- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Boundary/Outline/R</td>
-				<td>Major radius {SIGNAL} [m]</td>
+				<td>Boundary/Outline_RZ</td>
+				<td>RZ description of the plasma boundary. The second dimension is oversized to fit the maximum number of (R,Z) points over the time range {SIGNAL} [m]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...2</td>
+						</tr>
+						<tr>
+							<td>2- 1...Max_N_Outline_Points</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Boundary/Geometric_Axis_RZ</td>
+				<td>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary) {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- 1...max(N_Points)</td>
+							<td>1- 1...2</td>
 						</tr>
 						<tr>
-							<td>2- ../../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Outline/Z</td>
-				<td>Height {SIGNAL} [m]</td>
-				<td>FLT_2D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../R</td>
-						</tr>
-						<tr>
-							<td>2- ../../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Geometric_Axis</td>
-				<td>Position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Boundary/Geometric_Axis/R</td>
-				<td>Major radius {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Geometric_Axis/Z</td>
-				<td>Height {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../../Timebase</td>
+							<td>2- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
@@ -224,199 +197,106 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Boundary/X_points</td>
-				<td>Position of the X points, first is the active X point if diverted</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Boundary/X_points/N_Points</td>
-				<td>Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points)). {SIGNAL}</td>
+				<td>Boundary/N_X_Points</td>
+				<td>Number of X points at a given time {SIGNAL}</td>
 				<td>INT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../../Timebase</td>
+							<td>1- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Boundary/X_points/R</td>
-				<td>Major radius {SIGNAL} [m]</td>
+				<td>Boundary/X_Points_RZ</td>
+				<td>RZ position of the X points, first is the active X point if diverted. The second dimension is oversized to fit the maximum number of X points over the time range {SIGNAL} [m]</td>
+				<td>FLT_3D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...2</td>
+						</tr>
+						<tr>
+							<td>2- 1...Max_N_X_Points</td>
+						</tr>
+						<tr>
+							<td>3- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Boundary/Strike_Point_Lower_Left_RZ</td>
+				<td>RZ position of the lower left strike point {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- 1...max(N_Points)</td>
+							<td>1- 1...2</td>
 						</tr>
 						<tr>
-							<td>2- ../../../Timebase</td>
+							<td>2- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Boundary/X_points/Z</td>
-				<td>Height {SIGNAL} [m]</td>
+				<td>Boundary/Strike_Point_Upper_Left_RZ</td>
+				<td>RZ position of the upper left strike point {SIGNAL} [m]</td>
 				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../R</td>
+							<td>1- 1...2</td>
 						</tr>
 						<tr>
-							<td>2- ../../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Strike_Point_Lower_Left</td>
-				<td>Position of the lower left strike point</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Boundary/Strike_Point_Lower_Left/R</td>
-				<td>Major radius {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../../Timebase</td>
+							<td>2- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Boundary/Strike_Point_Lower_Left/Z</td>
-				<td>Height {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
+				<td>Boundary/Strike_Point_Lower_Right_RZ</td>
+				<td>RZ position of the lower right strike point {SIGNAL} [m]</td>
+				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../../Timebase</td>
+							<td>1- 1...2</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Boundary/Strike_Point_Upper_Left</td>
-				<td>Position of the upper left strike point</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Boundary/Strike_Point_Upper_Left/R</td>
-				<td>Major radius {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
+				<td>Boundary/Strike_Point_Upper_Right_RZ</td>
+				<td>RZ position of the upper right strike point {SIGNAL} [m]</td>
+				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../../Timebase</td>
+							<td>1- 1...2</td>
+						</tr>
+						<tr>
+							<td>2- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Boundary/Strike_Point_Upper_Left/Z</td>
-				<td>Height {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
+				<td>Boundary/Active_Limiter_Point_RZ</td>
+				<td>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter) {SIGNAL} [m]</td>
+				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../../../Timebase</td>
+							<td>1- 1...2</td>
 						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Strike_Point_Lower_Right</td>
-				<td>Position of the lower right strike point</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Boundary/Strike_Point_Lower_Right/R</td>
-				<td>Major radius {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
 						<tr>
-							<td>1- ../../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Strike_Point_Lower_Right/Z</td>
-				<td>Height {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Strike_Point_Upper_Right</td>
-				<td>Position of the upper right strike point</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Boundary/Strike_Point_Upper_Right/R</td>
-				<td>Major radius {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Strike_Point_Upper_Right/Z</td>
-				<td>Height {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Active_Limiter_Point</td>
-				<td>Position of the active limiter point (point of the plasma boundary in contact with the limiter)</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Boundary/Active_Limiter_Point/R</td>
-				<td>Major radius {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../../Timebase</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Boundary/Active_Limiter_Point/Z</td>
-				<td>Height {SIGNAL} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../../../Timebase</td>
+							<td>2- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>

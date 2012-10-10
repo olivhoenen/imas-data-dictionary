@@ -165,83 +165,87 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Vertical_Forces" maxOccurs="unbounded">
+				<xs:element name="Vertical_Forces">
 					<xs:annotation>
 						<xs:documentation>Vertical forces on the axisymmetric PF coil system</xs:documentation>
-						<xs:appinfo>
-							<axis1>1...N_Forces</axis1>
-						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="Name">
+							<xs:element name="Names">
 								<xs:annotation>
-									<xs:documentation>Name of the Force combination</xs:documentation>
+									<xs:documentation>Names of the Force combinations</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
+										<axis1>1...N_Forces</axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
-									<xs:group ref="STR_0D"/>
+									<xs:group ref="STR_1D"/>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="Combination">
+							<xs:element name="Combinations">
 								<xs:annotation>
-									<xs:documentation>Coils involved in this Force combination</xs:documentation>
+									<xs:documentation>Coils involved in the Force combinations</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
-										<Axis1>../../Coils</Axis1>
+										<axis1>../Names</axis1>
+										<Axis2>../../Coils</Axis2>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:group ref="FLT_2D"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Max_Limits">
+								<xs:annotation>
+									<xs:documentation>Vertical Force combinations limits</xs:documentation>
+									<xs:appinfo>
+										<Type>STATIC</Type>
+										<axis1>../Names</axis1>
+										<Units>N</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:group ref="FLT_1D"/>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="Max_Limit">
+							<xs:element name="Min_Limits">
 								<xs:annotation>
 									<xs:documentation>Vertical Force combination limit</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
+										<axis1>../Names</axis1>
 										<Units>N</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
-									<xs:group ref="FLT_0D"/>
+									<xs:group ref="FLT_1D"/>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="Min_Limit">
+							<xs:element name="Forces">
 								<xs:annotation>
-									<xs:documentation>Vertical Force combination limit</xs:documentation>
-									<xs:appinfo>
-										<Type>STATIC</Type>
-										<Units>N</Units>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="FLT_0D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Force">
-								<xs:annotation>
-									<xs:documentation>Force combination</xs:documentation>
+									<xs:documentation>Force combinations. All forces are assumed to be on the same timebase</xs:documentation>
 									<xs:appinfo>
 										<Type>SIGNAL</Type>
-										<Axis1>../../Timebase</Axis1>
+										<axis1>../Names</axis1>
+										<Axis2>../Timebase</Axis2>
 										<Units>N</Units>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
-									<xs:group ref="FLT_1D"/>
+									<xs:group ref="FLT_2D"/>
 								</xs:complexType>
 							</xs:element>
+							<xs:element ref="Timebase"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="Circuits" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system</xs:documentation>
-<xs:appinfo>										<Axis1>1...N_Circuits</Axis1>
-					</xs:appinfo>
+						<xs:appinfo>
+							<Axis1>1...N_Circuits</Axis1>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
@@ -532,68 +536,73 @@
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Passive_Loops" maxOccurs="unbounded">
+				<xs:element name="Passive_Loops">
 					<xs:annotation>
 						<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
-						<xs:appinfo>
-							<Axis1>N_Passive_Loops</Axis1>
-						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="Name">
+							<xs:element name="Names">
 								<xs:annotation>
-									<xs:documentation>Name of the loop</xs:documentation>
+									<xs:documentation>Names of the loops</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
+										<axis1>1...N_Passive_Loops</axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
-									<xs:group ref="STR_0D"/>
+									<xs:group ref="STR_1D"/>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="Area">
+							<xs:element name="Areas">
 								<xs:annotation>
-									<xs:documentation>Surface area of the passive loop</xs:documentation>
+									<xs:documentation>Surface areas of the passive loops</xs:documentation>
 									<xs:appinfo>
 										<Type>STATIC</Type>
 										<Units>m^2</Units>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="FLT_0D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Resistance">
-								<xs:annotation>
-									<xs:documentation>Passive element resistance</xs:documentation>
-									<xs:appinfo>
-										<Type>STATIC</Type>
-										<Units>Ohm</Units>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="FLT_0D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Geometry" type="Outline_2D_Geometry_STATIC">
-								<xs:annotation>
-									<xs:documentation>Shape of the Passive Loop</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="Current">
-								<xs:annotation>
-									<xs:documentation>Passive Loop current (all Passive Loops are assumed to share the same timebase)</xs:documentation>
-									<xs:appinfo>
-										<Type>SIGNAL</Type>
-										<Axis1>../../Timebase</Axis1>
-										<Units>A</Units>
+										<axis1>../Names</axis1>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:group ref="FLT_1D"/>
 								</xs:complexType>
 							</xs:element>
+							<xs:element name="Resistances">
+								<xs:annotation>
+									<xs:documentation>Passive elements resistances</xs:documentation>
+									<xs:appinfo>
+										<Type>STATIC</Type>
+										<Units>Ohm</Units>
+										<axis1>../Names</axis1>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:group ref="FLT_1D"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Geometries" type="Outline_2D_Geometry_STATIC" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Shapes of the Passive Loops</xs:documentation>
+									<xs:appinfo>
+										<axis1>../Names</axis1>
+									</xs:appinfo>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Currents">
+								<xs:annotation>
+									<xs:documentation>Passive Loops currents (all Passive Loops are assumed to share the same timebase)</xs:documentation>
+									<xs:appinfo>
+										<Type>SIGNAL</Type>
+										<Axis1>../Timebase</Axis1>
+										<axis2>../Names</axis2>
+										<Units>A</Units>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:group ref="FLT_2D"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element ref="Timebase"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>

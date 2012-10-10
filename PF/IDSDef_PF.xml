@@ -8,6 +8,7 @@
 			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
 			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
 		</field>
 		<field name="Coils" path="Coils" documentation="Active PF coils" data_type="struct_array" axis1="1...N_PF_Coils">
 			<field name="Name" path="Coils/Name" documentation="Name of the coil" data_type="STR_0D" Type="STATIC"/>
@@ -20,8 +21,8 @@
 				<field name="Turns_With_Sign" path="Coils/Elements/Turns_With_Sign" documentation="Number of effective turns in the element for calculating magnetic fields of the coil; includes the sign of the number of turns" data_type="INT_0D" Type="STATIC"/>
 				<field name="Area" path="Coils/Elements/Area" documentation="Cross-sectional areas of the element" data_type="FLT_0D" Type="STATIC" Units="m^2"/>
 				<field name="Geometry" path="Coils/Elements/Geometry" documentation="Cross-sectional shape of the element" data_type="structure">
-					<field name="Description_Type" path="Coils/Elements/Geometry/Description_Type" documentation="Type used to describe the element shape (0 for 'RZ_Coordinates' or 1 for 'RZDRDZ') " data_type="INT_0D" Type="STATIC"/>
-					<field name="RZ_Coordinates" path="Coils/Elements/Geometry/RZ_Coordinates" documentation="Irregular outline of the element" data_type="FLT_2D" Type="STATIC" Axis1="1...2" axis2="1...N_Points" Units="m"/>
+					<field name="Description_Type" path="Coils/Elements/Geometry/Description_Type" documentation="Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ') " data_type="INT_0D" Type="STATIC"/>
+					<field name="Coordinates_RZ" path="Coils/Elements/Geometry/Coordinates_RZ" documentation="Irregular outline of the element" data_type="FLT_2D" Type="STATIC" Axis1="1...2" axis2="1...N_Points" Units="m"/>
 					<field name="RZDRDZ" path="Coils/Elements/Geometry/RZDRDZ" documentation="4-Vector defining Centre R,Z and full extents dR, dZ " data_type="FLT_1D" Type="STATIC" Axis1="1...4" Units="m"/>
 				</field>
 			</field>
@@ -34,12 +35,13 @@
 				<field name="Timebase" path="Coils/Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 			</field>
 		</field>
-		<field name="Vertical_Forces" path="Vertical_Forces" documentation="Vertical forces on the axisymmetric PF coil system" data_type="struct_array" axis1="1...N_Forces">
-			<field name="Name" path="Vertical_Forces/Name" documentation="Name of the Force combination" data_type="STR_0D" Type="STATIC"/>
-			<field name="Combination" path="Vertical_Forces/Combination" documentation="Coils involved in this Force combination" data_type="FLT_1D" Type="STATIC" Axis1="../../Coils"/>
-			<field name="Max_Limit" path="Vertical_Forces/Max_Limit" documentation="Vertical Force combination limit" data_type="FLT_0D" Type="STATIC" Units="N"/>
-			<field name="Min_Limit" path="Vertical_Forces/Min_Limit" documentation="Vertical Force combination limit" data_type="FLT_0D" Type="STATIC" Units="N"/>
-			<field name="Force" path="Vertical_Forces/Force" documentation="Force combination" data_type="FLT_1D" Type="SIGNAL" Axis1="../../Timebase" Units="N"/>
+		<field name="Vertical_Forces" path="Vertical_Forces" documentation="Vertical forces on the axisymmetric PF coil system" data_type="structure">
+			<field name="Names" path="Vertical_Forces/Names" documentation="Names of the Force combinations" data_type="STR_1D" Type="STATIC" axis1="1...N_Forces"/>
+			<field name="Combinations" path="Vertical_Forces/Combinations" documentation="Coils involved in the Force combinations" data_type="FLT_2D" Type="STATIC" axis1="../Names" Axis2="../../Coils"/>
+			<field name="Max_Limits" path="Vertical_Forces/Max_Limits" documentation="Vertical Force combinations limits" data_type="FLT_1D" Type="STATIC" axis1="../Names" Units="N"/>
+			<field name="Min_Limits" path="Vertical_Forces/Min_Limits" documentation="Vertical Force combination limit" data_type="FLT_1D" Type="STATIC" axis1="../Names" Units="N"/>
+			<field name="Forces" path="Vertical_Forces/Forces" documentation="Force combinations. All forces are assumed to be on the same timebase" data_type="FLT_2D" Type="SIGNAL" axis1="../Names" Axis2="../Timebase" Units="N"/>
+			<field name="Timebase" path="Vertical_Forces/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 		</field>
 		<field name="Circuits" path="Circuits" documentation="Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system" data_type="struct_array" axis1="1...N_Circuits">
 			<field name="Name" path="Circuits/Name" documentation="Name of the circuit" data_type="STR_0D" Type="STATIC"/>
@@ -79,16 +81,17 @@
 				<field name="Timebase" path="Supplies/Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 			</field>
 		</field>
-		<field name="Passive_Loops" path="Passive_Loops" documentation="Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached." data_type="struct_array" axis1="N_Passive_Loops">
-			<field name="Name" path="Passive_Loops/Name" documentation="Name of the loop" data_type="STR_0D" Type="STATIC"/>
-			<field name="Area" path="Passive_Loops/Area" documentation="Surface area of the passive loop" data_type="FLT_0D" Type="STATIC" Units="m^2"/>
-			<field name="Resistance" path="Passive_Loops/Resistance" documentation="Passive element resistance" data_type="FLT_0D" Type="STATIC" Units="Ohm"/>
-			<field name="Geometry" path="Passive_Loops/Geometry" documentation="Shape of the Passive Loop" data_type="structure">
-				<field name="Description_Type" path="Passive_Loops/Geometry/Description_Type" documentation="Type used to describe the element shape (0 for 'RZ_Coordinates' or 1 for 'RZDRDZ') " data_type="INT_0D" Type="STATIC"/>
-				<field name="RZ_Coordinates" path="Passive_Loops/Geometry/RZ_Coordinates" documentation="Irregular outline of the element" data_type="FLT_2D" Type="STATIC" Axis1="1...2" axis2="1...N_Points" Units="m"/>
-				<field name="RZDRDZ" path="Passive_Loops/Geometry/RZDRDZ" documentation="4-Vector defining Centre R,Z and full extents dR, dZ " data_type="FLT_1D" Type="STATIC" Axis1="1...4" Units="m"/>
+		<field name="Passive_Loops" path="Passive_Loops" documentation="Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached." data_type="structure">
+			<field name="Names" path="Passive_Loops/Names" documentation="Names of the loops" data_type="STR_1D" Type="STATIC" axis1="1...N_Passive_Loops"/>
+			<field name="Areas" path="Passive_Loops/Areas" documentation="Surface areas of the passive loops" data_type="FLT_1D" Type="STATIC" Units="m^2" axis1="../Names"/>
+			<field name="Resistances" path="Passive_Loops/Resistances" documentation="Passive elements resistances" data_type="FLT_1D" Type="STATIC" Units="Ohm" axis1="../Names"/>
+			<field name="Geometries" path="Passive_Loops/Geometries" documentation="Shapes of the Passive Loops" data_type="struct_array" axis1="../Names">
+				<field name="Description_Type" path="Passive_Loops/Geometries/Description_Type" documentation="Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ') " data_type="INT_0D" Type="STATIC"/>
+				<field name="Coordinates_RZ" path="Passive_Loops/Geometries/Coordinates_RZ" documentation="Irregular outline of the element" data_type="FLT_2D" Type="STATIC" Axis1="1...2" axis2="1...N_Points" Units="m"/>
+				<field name="RZDRDZ" path="Passive_Loops/Geometries/RZDRDZ" documentation="4-Vector defining Centre R,Z and full extents dR, dZ " data_type="FLT_1D" Type="STATIC" Axis1="1...4" Units="m"/>
 			</field>
-			<field name="Current" path="Passive_Loops/Current" documentation="Passive Loop current (all Passive Loops are assumed to share the same timebase)" data_type="FLT_1D" Type="SIGNAL" Axis1="../../Timebase" Units="A"/>
+			<field name="Currents" path="Passive_Loops/Currents" documentation="Passive Loops currents (all Passive Loops are assumed to share the same timebase)" data_type="FLT_2D" Type="SIGNAL" Axis1="../Timebase" axis2="../Names" Units="A"/>
+			<field name="Timebase" path="Passive_Loops/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 		</field>
 		<field name="Vacuum_Model" path="Vacuum_Model" documentation="Electromagnetic Vacuum Model of the PF System, including both active and passive coils" data_type="structure">
 			<field name="Names" path="Vacuum_Model/Names" documentation="Names of circuits [Active;Passive]" data_type="STR_1D" Type="STATIC" Axis1="1...N_Active_Passive_Circuits"/>

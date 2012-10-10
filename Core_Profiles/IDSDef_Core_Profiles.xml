@@ -8,9 +8,13 @@
 			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
 			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
 		</field>
 		<field name="Rho_Tor_Norm" path="Rho_Tor_Norm" documentation="Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_2D" type="SIGNAL" axis1="1...N_Rho_Tor_Norm" axis2="../Timebase"/>
-		<field name="Vacuum_Toroidal_Field" path="Vacuum_Toroidal_Field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure"/>
+		<field name="Vacuum_Toroidal_Field" path="Vacuum_Toroidal_Field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure">
+			<field name="R0" path="Vacuum_Toroidal_Field/R0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="CONSTANT" units="m"/>
+			<field name="B0" path="Vacuum_Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="SIGNAL" units="T" axis1="../../Timebase"/>
+		</field>
 		<field name="Plasma_Composition" path="Plasma_Composition" documentation="Generic declaration of Plasma Composition for a simulation" data_type="structure">
 			<field name="Nuclei" path="Plasma_Composition/Nuclei" documentation="Array of nuclei considered." data_type="struct_array" axis1="1...N_Nuclei">
 				<field name="Zn" path="Plasma_Composition/Nuclei/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
@@ -51,10 +55,10 @@
 		<field name="Momentum_Tor" path="Momentum_Tor" documentation="Toroidal momentum of the various ion species" data_type="FLT_3D" axis1="../Rho_Tor_Norm" axis2="../Plasma_Composition/Ions" axis3="../Timebase" units="kg.m^-2.s^-1" type="SIGNAL"/>
 		<field name="Rotation_Frequency_Tor" path="Rotation_Frequency_Tor" documentation="Angular toroidal rotation frequency of the various ion species" data_type="FLT_3D" axis1="../Rho_Tor_Norm" axis2="../Plasma_Composition/Ions" axis3="../Timebase" units="s^-1" type="SIGNAL"/>
 		<field name="Global" path="Global" documentation="Various global quantities derived from the Core_Profiles" data_type="structure">
-			<field name="Current_Total" path="Global/Current_Total" documentation="Total plasma current" data_type="FLT_1D" axis1="../../Timebase" units="A" type="SIGNAL"/>
+			<field name="Ip" path="Global/Ip" documentation="Total plasma current" data_type="FLT_1D" axis1="../../Timebase" units="A" type="SIGNAL"/>
 			<field name="Current_Non_Inductive" path="Global/Current_Non_Inductive" documentation="Total non-inductive parallel current" data_type="FLT_1D" axis1="../../Timebase" units="A" type="SIGNAL"/>
 			<field name="Current_Bootstrap" path="Global/Current_Bootstrap" documentation="Bootstrap parallel current" data_type="FLT_1D" axis1="../../Timebase" units="A" type="SIGNAL"/>
-			<field name="V_Loop" path="Global/V_Loop" documentation="Toroidal loop voltage" data_type="FLT_1D" axis1="../../Timebase" units="V" type="SIGNAL"/>
+			<field name="V_Loop" path="Global/V_Loop" documentation="LCFS loop voltage" data_type="FLT_1D" axis1="../../Timebase" units="V" type="SIGNAL"/>
 			<field name="li_3" path="Global/li_3" documentation="Internal inductance" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
 			<field name="Beta_Tor" path="Global/Beta_Tor" documentation="Toroidal beta (ratio of kinetic to magnetic pressure)" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
 			<field name="Beta_Tor_Norm" path="Global/Beta_Tor_Norm" documentation="Normalised toroidal beta" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>

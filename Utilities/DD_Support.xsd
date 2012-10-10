@@ -565,47 +565,47 @@
 		<xs:annotation>
 			<xs:documentation>Description of 2D geometric outline</xs:documentation>
 		</xs:annotation>
-			<xs:sequence>
-				<xs:element name="Description_Type">
-					<xs:annotation>
-						<xs:documentation>Type used to describe the element shape (0 for 'RZ_Coordinates' or 1 for 'RZDRDZ') </xs:documentation>
-						<xs:appinfo>
-							<Type>STATIC</Type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="INT_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="RZ_Coordinates">
-					<xs:annotation>
-						<xs:documentation>Irregular outline of the element</xs:documentation>
-						<xs:appinfo>
-							<Type>STATIC</Type>
-							<Axis1>1...2</Axis1>
-							<axis2>1...N_Points</axis2>
-							<Units>m</Units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="RZDRDZ">
-					<xs:annotation>
-						<xs:documentation>4-Vector defining Centre R,Z and full extents dR, dZ </xs:documentation>
-						<xs:appinfo>
-							<Type>STATIC</Type>
-							<Axis1>1...4</Axis1>
-							<Units>m</Units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_1D"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
+		<xs:sequence>
+			<xs:element name="Description_Type">
+				<xs:annotation>
+					<xs:documentation>Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ') </xs:documentation>
+					<xs:appinfo>
+						<Type>STATIC</Type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Coordinates_RZ">
+				<xs:annotation>
+					<xs:documentation>Irregular outline of the element</xs:documentation>
+					<xs:appinfo>
+						<Type>STATIC</Type>
+						<Axis1>1...2</Axis1>
+						<axis2>1...N_Points</axis2>
+						<Units>m</Units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RZDRDZ">
+				<xs:annotation>
+					<xs:documentation>4-Vector defining Centre R,Z and full extents dR, dZ </xs:documentation>
+					<xs:appinfo>
+						<Type>STATIC</Type>
+						<Axis1>1...4</Axis1>
+						<Units>m</Units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="IDS_Properties">
 		<xs:annotation>
 			<xs:documentation>Interface Data Structure properties. This element identifies the node above as an IDS</xs:documentation>
@@ -641,6 +641,11 @@
 				<xs:element name="Homogeneous_Timebase" type="int_type">
 					<xs:annotation>
 						<xs:documentation>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="cocos" type="int_type">
+					<xs:annotation>
+						<xs:documentation>Coordinate conventions of this IDS</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>

@@ -8,49 +8,26 @@
 			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
 			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
 		</field>
 		<field name="Boundary" path="Boundary" documentation="Description of the plasma boundary" data_type="structure">
 			<field name="Type" path="Boundary/Type" documentation="0 (limiter) or 1 (diverted)" data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
-			<field name="Outline" path="Boundary/Outline" documentation="RZ description of the plasma boundary" data_type="structure">
-				<field name="N_Points" path="Boundary/Outline/N_Points" documentation="Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points))." data_type="INT_1D" type="SIGNAL" axis1="../../../Timebase"/>
-				<field name="R" path="Boundary/Outline/R" documentation="Major radius" data_type="FLT_2D" type="SIGNAL" units="m" axis1="1...max(N_Points)" axis2="../../../Timebase"/>
-				<field name="Z" path="Boundary/Outline/Z" documentation="Height" data_type="FLT_2D" type="SIGNAL" units="m" axis1="../R" axis2="../../../Timebase"/>
-			</field>
-			<field name="Geometric_Axis" path="Boundary/Geometric_Axis" documentation="Position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)" data_type="structure">
-				<field name="R" path="Boundary/Geometric_Axis/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-				<field name="Z" path="Boundary/Geometric_Axis/Z" documentation="Height" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-			</field>
+			<field name="N_Outline_Points" path="Boundary/N_Outline_Points" documentation="Number of meaningful Outline points in R and Z at a given time." data_type="INT_1D" type="SIGNAL" axis1="../../Timebase"/>
+			<field name="Outline_RZ" path="Boundary/Outline_RZ" documentation="RZ description of the plasma boundary. The second dimension is oversized to fit the maximum number of (R,Z) points over the time range" data_type="FLT_3D" type="SIGNAL" axis1="1...2" axis2="1...Max_N_Outline_Points" axis3="../../Timebase" units="m"/>
+			<field name="Geometric_Axis_RZ" path="Boundary/Geometric_Axis_RZ" documentation="RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)" data_type="FLT_2D" type="SIGNAL" axis1="1...2" axis2="../../Timebase" units="m"/>
 			<field name="a_minor" path="Boundary/a_minor" documentation="Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL" units="m"/>
 			<field name="Elongation" path="Boundary/Elongation" documentation="Elongation of the plasma boundary" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
 			<field name="Elongation_Upper" path="Boundary/Elongation_Upper" documentation="Elongation (upper half w.r.t. geometric axis) of the plasma boundary" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
 			<field name="Elongation_Lower" path="Boundary/Elongation_Lower" documentation="Elongation (lower half w.r.t. geometric axis) of the plasma boundary" data_type="structure"/>
 			<field name="Triangularity_Upper" path="Boundary/Triangularity_Upper" documentation="Upper triangularity of the plasma boundary" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
 			<field name="Triangularity_Lower" path="Boundary/Triangularity_Lower" documentation="Lower triangularity of the plasma boundary" data_type="FLT_1D" axis1="../../Timebase" type="SIGNAL"/>
-			<field name="X_points" path="Boundary/X_points" documentation="Position of the X points, first is the active X point if diverted" data_type="structure">
-				<field name="N_Points" path="Boundary/X_points/N_Points" documentation="Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points))." data_type="INT_1D" type="SIGNAL" axis1="../../../Timebase"/>
-				<field name="R" path="Boundary/X_points/R" documentation="Major radius" data_type="FLT_2D" type="SIGNAL" units="m" axis1="1...max(N_Points)" axis2="../../../Timebase"/>
-				<field name="Z" path="Boundary/X_points/Z" documentation="Height" data_type="FLT_2D" type="SIGNAL" units="m" axis1="../R" axis2="../../../Timebase"/>
-			</field>
-			<field name="Strike_Point_Lower_Left" path="Boundary/Strike_Point_Lower_Left" documentation="Position of the lower left strike point" data_type="structure">
-				<field name="R" path="Boundary/Strike_Point_Lower_Left/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-				<field name="Z" path="Boundary/Strike_Point_Lower_Left/Z" documentation="Height" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-			</field>
-			<field name="Strike_Point_Upper_Left" path="Boundary/Strike_Point_Upper_Left" documentation="Position of the upper left strike point" data_type="structure">
-				<field name="R" path="Boundary/Strike_Point_Upper_Left/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-				<field name="Z" path="Boundary/Strike_Point_Upper_Left/Z" documentation="Height" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-			</field>
-			<field name="Strike_Point_Lower_Right" path="Boundary/Strike_Point_Lower_Right" documentation="Position of the lower right strike point" data_type="structure">
-				<field name="R" path="Boundary/Strike_Point_Lower_Right/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-				<field name="Z" path="Boundary/Strike_Point_Lower_Right/Z" documentation="Height" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-			</field>
-			<field name="Strike_Point_Upper_Right" path="Boundary/Strike_Point_Upper_Right" documentation="Position of the upper right strike point" data_type="structure">
-				<field name="R" path="Boundary/Strike_Point_Upper_Right/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-				<field name="Z" path="Boundary/Strike_Point_Upper_Right/Z" documentation="Height" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-			</field>
-			<field name="Active_Limiter_Point" path="Boundary/Active_Limiter_Point" documentation="Position of the active limiter point (point of the plasma boundary in contact with the limiter)" data_type="structure">
-				<field name="R" path="Boundary/Active_Limiter_Point/R" documentation="Major radius" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-				<field name="Z" path="Boundary/Active_Limiter_Point/Z" documentation="Height" data_type="FLT_1D" type="SIGNAL" units="m" axis1="../../../Timebase"/>
-			</field>
+			<field name="N_X_Points" path="Boundary/N_X_Points" documentation="Number of X points at a given time" data_type="INT_1D" type="SIGNAL" axis1="../../Timebase"/>
+			<field name="X_Points_RZ" path="Boundary/X_Points_RZ" documentation="RZ position of the X points, first is the active X point if diverted. The second dimension is oversized to fit the maximum number of X points over the time range" data_type="FLT_3D" type="SIGNAL" axis1="1...2" axis2="1...Max_N_X_Points" axis3="../../Timebase" units="m"/>
+			<field name="Strike_Point_Lower_Left_RZ" path="Boundary/Strike_Point_Lower_Left_RZ" documentation="RZ position of the lower left strike point" data_type="FLT_2D" type="SIGNAL" axis1="1...2" axis2="../../Timebase" units="m"/>
+			<field name="Strike_Point_Upper_Left_RZ" path="Boundary/Strike_Point_Upper_Left_RZ" documentation="RZ position of the upper left strike point" data_type="FLT_2D" type="SIGNAL" axis1="1...2" axis2="../../Timebase" units="m"/>
+			<field name="Strike_Point_Lower_Right_RZ" path="Boundary/Strike_Point_Lower_Right_RZ" documentation="RZ position of the lower right strike point" data_type="FLT_2D" type="SIGNAL" axis1="1...2" axis2="../../Timebase" units="m"/>
+			<field name="Strike_Point_Upper_Right_RZ" path="Boundary/Strike_Point_Upper_Right_RZ" documentation="RZ position of the upper right strike point" data_type="FLT_2D" type="SIGNAL" axis1="1...2" axis2="../../Timebase" units="m"/>
+			<field name="Active_Limiter_Point_RZ" path="Boundary/Active_Limiter_Point_RZ" documentation="RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)" data_type="FLT_2D" type="SIGNAL" axis1="1...2" axis2="../../Timebase" units="m"/>
 		</field>
 		<field name="Global" path="Global" documentation="0D parameters of the equilibrium" data_type="structure">
 			<field name="Beta_Pol" path="Global/Beta_Pol" documentation="Poloidal beta" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase"/>

@@ -21,15 +21,46 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Outline" type="RZ2D_SIGNAL_Npoints">
+			<xs:element name="N_Outline_Points">
 				<xs:annotation>
-					<xs:documentation>RZ description of the plasma boundary</xs:documentation>
+					<xs:documentation>Number of meaningful Outline points in R and Z at a given time.</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="Geometric_Axis" type="RZ1D_SIGNAL">
+			<xs:element name="Outline_RZ">
 				<xs:annotation>
-					<xs:documentation>Position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)</xs:documentation>
+					<xs:documentation>RZ description of the plasma boundary. The second dimension is oversized to fit the maximum number of (R,Z) points over the time range</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...2</axis1>
+						<axis2>1...Max_N_Outline_Points</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>m</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Geometric_Axis_RZ">
+				<xs:annotation>
+					<xs:documentation>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...2</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="a_minor">
 				<xs:annotation>
@@ -98,35 +129,102 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="X_points" type="RZ2D_SIGNAL_Npoints">
+			<xs:element name="N_X_Points">
 				<xs:annotation>
-					<xs:documentation>Position of the X points, first is the active X point if diverted</xs:documentation>
+					<xs:documentation>Number of X points at a given time</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>../../Timebase</axis1>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="Strike_Point_Lower_Left" type="RZ1D_SIGNAL">
+			<xs:element name="X_Points_RZ">
 				<xs:annotation>
-					<xs:documentation>Position of the lower left strike point</xs:documentation>
+					<xs:documentation>RZ position of the X points, first is the active X point if diverted. The second dimension is oversized to fit the maximum number of X points over the time range</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...2</axis1>
+						<axis2>1...Max_N_X_Points</axis2>
+						<axis3>../../Timebase</axis3>
+						<units>m</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="Strike_Point_Upper_Left" type="RZ1D_SIGNAL">
+			<xs:element name="Strike_Point_Lower_Left_RZ">
 				<xs:annotation>
-					<xs:documentation>Position of the upper left strike point</xs:documentation>
+					<xs:documentation>RZ position of the lower left strike point</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...2</axis1>
+						<axis2>../../Timebase</axis2>						<units>m</units>
+
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="Strike_Point_Lower_Right" type="RZ1D_SIGNAL">
+			<xs:element name="Strike_Point_Upper_Left_RZ">
 				<xs:annotation>
-					<xs:documentation>Position of the lower right strike point</xs:documentation>
+					<xs:documentation>RZ position of the upper left strike point</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...2</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="Strike_Point_Upper_Right" type="RZ1D_SIGNAL">
+			<xs:element name="Strike_Point_Lower_Right_RZ">
 				<xs:annotation>
-					<xs:documentation>Position of the upper right strike point</xs:documentation>
+					<xs:documentation>RZ position of the lower right strike point</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...2</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="Active_Limiter_Point" type="RZ1D_SIGNAL">
+			<xs:element name="Strike_Point_Upper_Right_RZ">
 				<xs:annotation>
-					<xs:documentation>Position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
+					<xs:documentation>RZ position of the upper right strike point</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...2</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Active_Limiter_Point_RZ">
+				<xs:annotation>
+					<xs:documentation>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
+					<xs:appinfo>
+						<type>SIGNAL</type>
+						<axis1>1...2</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

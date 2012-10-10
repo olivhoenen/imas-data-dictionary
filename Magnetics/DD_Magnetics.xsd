@@ -37,11 +37,20 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Position" type="RZPhi1D_STATIC">
+			<xs:element name="Position_RZPhi">
 				<xs:annotation>
 					<xs:documentation>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)</xs:documentation>
+<xs:appinfo>
+						<type>STATIC</type>
+						<axis1>1...3</axis1>
+						<axis2>1...N_Points</axis2>
+						<units>m, m, rad</units>
+					</xs:appinfo>
 				</xs:annotation>
-			</xs:element>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>			
+				</xs:element>
 			<xs:element name="Flux">
 				<xs:annotation>
 					<xs:documentation>Measured flux.</xs:documentation>
@@ -92,10 +101,18 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Centre_Position" type="RZPhi0D_STATIC">
+			<xs:element name="Centre_Position_RZPhi">
 				<xs:annotation>
-					<xs:documentation>Position of coil centre</xs:documentation>
+					<xs:documentation>R, Z, Phi position of coil centre</xs:documentation>
+<xs:appinfo>
+						<type>STATIC</type>
+						<axis1>1...3</axis1>
+						<units>m, m, rad</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>			
 			</xs:element>
 			<xs:element name="Poloidal_Angle">
 				<xs:annotation>
@@ -156,7 +173,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Magnetic_Field">
+			<xs:element name="Field">
 				<xs:annotation>
 					<xs:documentation>Measured magnetic field</xs:documentation>
 					<xs:appinfo>
@@ -172,7 +189,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Magnetic_Field_Error" type="Errorbar">
+			<xs:element name="Field_Error" type="Errorbar">
 				<xs:annotation>
 					<xs:documentation>Absolute error on measured magnetic field.</xs:documentation>
 				</xs:annotation>

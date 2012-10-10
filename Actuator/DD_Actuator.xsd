@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
+<?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./%24GET%5Bstylesheet%5D" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
+<?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:element name="Actuator">
+		<xs:annotation>
+			<xs:documentation>Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="IDS_Properties"/>
+				<xs:element name="Name">
+					<xs:annotation>
+						<xs:documentation>Name of the actuator (IC, EC, NBI, LH)</xs:documentation>
+						<xs:appinfo>
+							<type>STATIC</type>
+							<units>-</units>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Channels">
+					<xs:annotation>
+						<xs:documentation>ID of the multiple channels of the actuator: Beam boxes for NBI, EC or IC launcher, ...</xs:documentation>
+						<xs:appinfo>
+							<type>STATIC</type>
+							<units>-</units>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_1D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Power">
+					<xs:annotation>
+						<xs:documentation>Power delivered by the actuator to the plasma (NB this is before the coupling / shine through / orbit losses calculations) </xs:documentation>
+						<xs:appinfo>
+							<type>SIGNAL</type>
+							<units>W</units>
+							<axis1>../Channels</axis1>
+							<axis2>../Timebase</axis2>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_2D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="Code_Parameters"/>
+				<xs:element ref="Timebase"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

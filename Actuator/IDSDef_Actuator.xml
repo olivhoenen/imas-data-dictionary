@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IDSs xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<IDS name="Actuator" maxoccur="1" documentation="Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component">
+		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this Data Item come from" data_type="str_type"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
+		</field>
+		<field name="Name" path="Name" documentation="Name of the actuator (IC, EC, NBI, LH)" data_type="STR_0D" type="STATIC" units="-"/>
+		<field name="Channels" path="Channels" documentation="ID of the multiple channels of the actuator: Beam boxes for NBI, EC or IC launcher, ..." data_type="STR_1D" type="STATIC" units="-"/>
+		<field name="Power" path="Power" documentation="Power delivered by the actuator to the plasma (NB this is before the coupling / shine through / orbit losses calculations) " data_type="FLT_2D" type="SIGNAL" units="W" axis1="../Channels" axis2="../Timebase"/>
+		<field name="Code_Parameters" path="Code_Parameters" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="Code_Name" path="Code_Parameters/Code_Name" documentation="Name of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Code_Version" path="Code_Parameters/Code_Version" documentation="Version of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Parameters" path="Code_Parameters/Parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" axis1="../../Timebase" type="SIGNAL"/>
+			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="../../Timebase" type="SIGNAL"/>
+		</field>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+	</IDS>
+</IDSs>

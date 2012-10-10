@@ -62,6 +62,12 @@
 				<td />
 			</tr>
 			<tr>
+				<td>IDS_Properties/cocos</td>
+				<td>Coordinate conventions of this IDS</td>
+				<td>int_type</td>
+				<td />
+			</tr>
+			<tr>
 				<td>Rho_Tor_Norm</td>
 				<td>Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {SIGNAL}</td>
 				<td>FLT_2D</td>
@@ -81,6 +87,24 @@
 				<td>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</td>
 				<td>structure</td>
 				<td />
+			</tr>
+			<tr>
+				<td>Vacuum_Toroidal_Field/R0</td>
+				<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {CONSTANT} [m]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Vacuum_Toroidal_Field/B0</td>
+				<td>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above {SIGNAL} [T]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 			<tr>
 				<td>Plasma_Composition</td>
@@ -569,7 +593,7 @@
 				<td />
 			</tr>
 			<tr>
-				<td>Global/Current_Total</td>
+				<td>Global/Ip</td>
 				<td>Total plasma current {SIGNAL} [A]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -606,7 +630,7 @@
 			</tr>
 			<tr>
 				<td>Global/V_Loop</td>
-				<td>Toroidal loop voltage {SIGNAL} [V]</td>
+				<td>LCFS loop voltage {SIGNAL} [V]</td>
 				<td>FLT_1D</td>
 				<td>
 					<table>

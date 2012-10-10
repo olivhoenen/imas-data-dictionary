@@ -62,6 +62,12 @@
 				<td />
 			</tr>
 			<tr>
+				<td>IDS_Properties/cocos</td>
+				<td>Coordinate conventions of this IDS</td>
+				<td>int_type</td>
+				<td />
+			</tr>
+			<tr>
 				<td>Flux_Loops</td>
 				<td>Flux loops</td>
 				<td>struct_array</td>
@@ -86,43 +92,16 @@
 				<td />
 			</tr>
 			<tr>
-				<td>Flux_Loops/Position</td>
-				<td>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Flux_Loops/Position/R</td>
-				<td>Major radius {STATIC} [m]</td>
-				<td>FLT_1D</td>
+				<td>Flux_Loops/Position_RZPhi</td>
+				<td>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf) {STATIC} [m, m, rad]</td>
+				<td>FLT_2D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- 1...N_Points</td>
+							<td>1- 1...3</td>
 						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Flux_Loops/Position/Z</td>
-				<td>Height {STATIC} [m]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
 						<tr>
-							<td>1- ../R</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Flux_Loops/Position/Phi</td>
-				<td>Toroidal angle {STATIC} [rad]</td>
-				<td>FLT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../R</td>
+							<td>2- 1...N_Points</td>
 						</tr>
 					</table>
 				</td>
@@ -212,28 +191,16 @@
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Centre_Position</td>
-				<td>Position of coil centre</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Centre_Position/R</td>
-				<td>Major radius {STATIC} [m]</td>
-				<td>FLT_0D</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Centre_Position/Z</td>
-				<td>Height {STATIC} [m]</td>
-				<td>FLT_0D</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Bpol_Probes/Centre_Position/Phi</td>
-				<td>Toroidal angle {STATIC} [rad]</td>
-				<td>FLT_0D</td>
-				<td />
+				<td>Bpol_Probes/Centre_Position_RZPhi</td>
+				<td>R, Z, Phi position of coil centre {STATIC} [m, m, rad]</td>
+				<td>FLT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...3</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 			<tr>
 				<td>Bpol_Probes/Poloidal_Angle</td>
@@ -266,13 +233,13 @@
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Magnetic_Field</td>
+				<td>Bpol_Probes/Field</td>
 				<td>Measured magnetic field</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Magnetic_Field/Data</td>
+				<td>Bpol_Probes/Field/Data</td>
 				<td>Measured magnetic field {SIGNAL} [T]</td>
 				<td>FLT_1D</td>
 				<td>
@@ -284,7 +251,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Magnetic_Field/Timebase</td>
+				<td>Bpol_Probes/Field/Timebase</td>
 				<td>Generic timebase [s]</td>
 				<td>flt_1d_type</td>
 				<td>
@@ -296,31 +263,31 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Magnetic_Field_Error</td>
+				<td>Bpol_Probes/Field_Error</td>
 				<td>Absolute error on measured magnetic field.</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Magnetic_Field_Error/Type</td>
+				<td>Bpol_Probes/Field_Error/Type</td>
 				<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
 				<td>STR_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Magnetic_Field_Error/Signal</td>
+				<td>Bpol_Probes/Field_Error/Signal</td>
 				<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
 				<td>FLT_1D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Magnetic_Field_Error/Constant</td>
+				<td>Bpol_Probes/Field_Error/Constant</td>
 				<td>Relative error in % provided as a constant {CONSTANT}</td>
 				<td>FLT_0D</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Bpol_Probes/Magnetic_Field_Error/Expression</td>
+				<td>Bpol_Probes/Field_Error/Expression</td>
 				<td>Absolute error provided as an Expression.</td>
 				<td>STR_0D</td>
 				<td />
@@ -438,6 +405,60 @@
 				<td>Absolute error provided as an Expression.</td>
 				<td>STR_0D</td>
 				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters</td>
+				<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+				<td>structure</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Code_Name</td>
+				<td>Name of the code {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Code_Version</td>
+				<td>Version of the code {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Parameters</td>
+				<td>List of the code specific parameters in XML format {SIGNAL}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Code_Parameters/Output_Diagnostics</td>
+				<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
+				<td>STR_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Code_Parameters/Output_Flag</td>
+				<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+				<td>INT_1D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../../Timebase</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 			<tr>
 				<td>Timebase</td>

@@ -10,8 +10,8 @@
        </style>
 	</head>
 	<body>
-		<p class="welcome">ITER Physics Data Model Documentation for SDN</p>
-		<p>Description of the Synchronous Data Network parameters and the signals on it</p>
+		<p class="welcome">ITER Physics Data Model Documentation for Actuator</p>
+		<p>Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component</p>
 		<table border="1">
 			<thead style="color:#ff0000">
 				<td>Full path name</td>
@@ -68,52 +68,85 @@
 				<td />
 			</tr>
 			<tr>
-				<td>Allocatable_Signals</td>
-				<td>Dictionary of the signal names and definitions which can be allocated to the SDN</td>
+				<td>Name</td>
+				<td>Name of the actuator (IC, EC, NBI, LH) {STATIC} [-]</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Channels</td>
+				<td>ID of the multiple channels of the actuator: Beam boxes for NBI, EC or IC launcher, ... {STATIC} [-]</td>
+				<td>STR_1D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Power</td>
+				<td>Power delivered by the actuator to the plasma (NB this is before the coupling / shine through / orbit losses calculations)  {SIGNAL} [W]</td>
+				<td>FLT_2D</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- ../Channels</td>
+						</tr>
+						<tr>
+							<td>2- ../Timebase</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Code_Parameters</td>
+				<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
 				<td>structure</td>
 				<td />
 			</tr>
 			<tr>
-				<td>Allocatable_Signals/Names</td>
-				<td>Names of all the allocatable signals {STATIC}</td>
+				<td>Code_Parameters/Code_Name</td>
+				<td>Name of the code {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Code_Version</td>
+				<td>Version of the code {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Code_Parameters/Parameters</td>
+				<td>List of the code specific parameters in XML format {SIGNAL}</td>
 				<td>STR_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- N</td>
+							<td>1- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Allocatable_Signals/Definitions </td>
-				<td>Definitions of the allocatable signals {STATIC}</td>
+				<td>Code_Parameters/Output_Diagnostics</td>
+				<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
 				<td>STR_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Names</td>
+							<td>1- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>Allocatable_Signals/Ip_Normalise</td>
-				<td>Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops {STATIC}</td>
+				<td>Code_Parameters/Output_Flag</td>
+				<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
 				<td>INT_1D</td>
 				<td>
 					<table>
 						<tr>
-							<td>1- ../Names</td>
+							<td>1- ../../Timebase</td>
 						</tr>
 					</table>
 				</td>
-			</tr>
-			<tr>
-				<td>Allocated_Signals</td>
-				<td>Allocation of signal names to positions in the SDN {STATIC}</td>
-				<td>STR_1D</td>
-				<td />
 			</tr>
 			<tr>
 				<td>Timebase</td>
@@ -123,57 +156,6 @@
 					<table>
 						<tr>
 							<td>1- 1...N_Times</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Signals</td>
-				<td>Data on the SDN {SIGNAL} [Mixed]</td>
-				<td>FLT_2D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- ../Timebase</td>
-						</tr>
-						<tr>
-							<td>2- ../Allocated_Signals</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>N_Topic_List</td>
-				<td>Number items in the vector of structures</td>
-				<td>int_type</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Topic_List</td>
-				<td>List of the groups of signals used at different reading and writing points</td>
-				<td>structure</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Topic_List/Names</td>
-				<td>Names of the group of SDN signals {STATIC}</td>
-				<td>STR_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- N</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Topic_List/Indices</td>
-				<td>Indices into the current SDN allocated list; it must be updated when the allocated list is changed {STATIC}</td>
-				<td>INT_1D</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- N</td>
 						</tr>
 					</table>
 				</td>

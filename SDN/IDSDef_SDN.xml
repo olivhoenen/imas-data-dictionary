@@ -8,6 +8,7 @@
 			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
 			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
 		</field>
 		<field name="Allocatable_Signals" path="Allocatable_Signals" documentation="Dictionary of the signal names and definitions which can be allocated to the SDN" data_type="structure">
 			<field name="Names" path="Allocatable_Signals/Names" documentation="Names of all the allocatable signals" data_type="STR_1D" type="STATIC" axis1="N"/>
@@ -17,10 +18,10 @@
 		<field name="Allocated_Signals" path="Allocated_Signals" documentation="Allocation of signal names to positions in the SDN" data_type="STR_1D" type="STATIC"/>
 		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 		<field name="Signals" path="Signals" documentation="Data on the SDN" data_type="FLT_2D" type="SIGNAL" axis1="../Timebase" axis2="../Allocated_Signals" units="Mixed"/>
-		<field name="N_List" path="N_List" documentation="Number items in the vector of structures" data_type="int_type"/>
-		<field name="List" path="List" documentation="List of the groups of signals used at different reading and writing points" data_type="structure">
-			<field name="Names" path="List/Names" documentation="Names of the group of SDN signals" data_type="STR_1D" type="STATIC" axis1="N"/>
-			<field name="Indices" path="List/Indices" documentation="Indices into the current SDN allocated list; it must be updated when the allocated list is changed" data_type="INT_1D" type="STATIC" axis1="N"/>
+		<field name="N_Topic_List" path="N_Topic_List" documentation="Number items in the vector of structures" data_type="int_type"/>
+		<field name="Topic_List" path="Topic_List" documentation="List of the groups of signals used at different reading and writing points" data_type="structure">
+			<field name="Names" path="Topic_List/Names" documentation="Names of the group of SDN signals" data_type="STR_1D" type="STATIC" axis1="N"/>
+			<field name="Indices" path="Topic_List/Indices" documentation="Indices into the current SDN allocated list; it must be updated when the allocated list is changed" data_type="INT_1D" type="STATIC" axis1="N"/>
 		</field>
 	</IDS>
 </IDSs>
