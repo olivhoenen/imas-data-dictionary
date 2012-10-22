@@ -4,9 +4,10 @@
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
 			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this Data Item come from" data_type="str_type"/>
-			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
 			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes" data_type="str_type"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type"/>
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
 			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
 		</field>
@@ -14,7 +15,7 @@
 			<field name="Name" path="Coils/Name" documentation="Name of the coil" data_type="STR_0D" Type="STATIC"/>
 			<field name="Identifier" path="Coils/Identifier" documentation="Alphanumeric identifier of coils used for convenience" data_type="STR_0D" Type="STATIC"/>
 			<field name="Resistance" path="Coils/Resistance" documentation="Coil resistance" data_type="FLT_0D" Type="STATIC" Units="Ohm"/>
-			<field name="Energy_Max_Limit" path="Coils/Energy_Max_Limit" documentation="Maximum Energy to be dissipated in the coil" data_type="FLT_0D" Type="STATIC" Units="J"/>
+			<field name="Energy_Limit_Max" path="Coils/Energy_Limit_Max" documentation="Maximum Energy to be dissipated in the coil" data_type="FLT_0D" Type="STATIC" Units="J"/>
 			<field name="Elements" path="Coils/Elements" documentation="Each PF coil is comprised of a number of cross-section elements described  individually" data_type="struct_array" axis1="1...N_Elements">
 				<field name="Name" path="Coils/Elements/Name" documentation="Name of this element of this coil" data_type="STR_0D" Type="STATIC"/>
 				<field name="Identifier" path="Coils/Elements/Identifier" documentation="Identifier of this element of this coil" data_type="STR_0D" Type="STATIC"/>
@@ -38,8 +39,8 @@
 		<field name="Vertical_Forces" path="Vertical_Forces" documentation="Vertical forces on the axisymmetric PF coil system" data_type="structure">
 			<field name="Names" path="Vertical_Forces/Names" documentation="Names of the Force combinations" data_type="STR_1D" Type="STATIC" axis1="1...N_Forces"/>
 			<field name="Combinations" path="Vertical_Forces/Combinations" documentation="Coils involved in the Force combinations" data_type="FLT_2D" Type="STATIC" axis1="../Names" Axis2="../../Coils"/>
-			<field name="Max_Limits" path="Vertical_Forces/Max_Limits" documentation="Vertical Force combinations limits" data_type="FLT_1D" Type="STATIC" axis1="../Names" Units="N"/>
-			<field name="Min_Limits" path="Vertical_Forces/Min_Limits" documentation="Vertical Force combination limit" data_type="FLT_1D" Type="STATIC" axis1="../Names" Units="N"/>
+			<field name="Limits_Max" path="Vertical_Forces/Limits_Max" documentation="Vertical Force combinations limits" data_type="FLT_1D" Type="STATIC" axis1="../Names" Units="N"/>
+			<field name="Limits_Min" path="Vertical_Forces/Limits_Min" documentation="Vertical Force combination limit" data_type="FLT_1D" Type="STATIC" axis1="../Names" Units="N"/>
 			<field name="Forces" path="Vertical_Forces/Forces" documentation="Force combinations. All forces are assumed to be on the same timebase" data_type="FLT_2D" Type="SIGNAL" axis1="../Names" Axis2="../Timebase" Units="N"/>
 			<field name="Timebase" path="Vertical_Forces/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
 		</field>
@@ -65,12 +66,12 @@
 			<field name="Delay" path="Supplies/Delay" documentation="Pure delay in the supply" data_type="FLT_0D" Type="STATIC" Axis1="../Names" Units="s"/>
 			<field name="Filter_Numerator" path="Supplies/Filter_Numerator" documentation="Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description" data_type="FLT_1D" Type="STATIC" Axis1="1...N_Numerator_Coefficients"/>
 			<field name="Filter_Denominator" path="Supplies/Filter_Denominator" documentation="Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description" data_type="FLT_1D" Axis1="1...N_Denominator_Coefficients" Type="STATIC"/>
-			<field name="Current_Max_Limit" path="Supplies/Current_Max_Limit" documentation="Maximum current in the supply" data_type="FLT_0D" Type="STATIC" Units="A"/>
-			<field name="Current_Min_Limit" path="Supplies/Current_Min_Limit" documentation="Minimum current in the supply" data_type="FLT_0D" Type="STATIC" Units="A"/>
-			<field name="Voltage_Max_Limit" path="Supplies/Voltage_Max_Limit" documentation="Maximum voltage from the supply" data_type="FLT_0D" Type="STATIC" Units="V"/>
-			<field name="Voltage_Min_Limit" path="Supplies/Voltage_Min_Limit" documentation="Minimum voltage from the supply" data_type="FLT_0D" Type="STATIC" Units="V"/>
+			<field name="Current_Limit_Max" path="Supplies/Current_Limit_Max" documentation="Maximum current in the supply" data_type="FLT_0D" Type="STATIC" Units="A"/>
+			<field name="Current_Limit_Min" path="Supplies/Current_Limit_Min" documentation="Minimum current in the supply" data_type="FLT_0D" Type="STATIC" Units="A"/>
+			<field name="Voltage_Limit_Max" path="Supplies/Voltage_Limit_Max" documentation="Maximum voltage from the supply" data_type="FLT_0D" Type="STATIC" Units="V"/>
+			<field name="Voltage_Limit_Min" path="Supplies/Voltage_Limit_Min" documentation="Minimum voltage from the supply" data_type="FLT_0D" Type="STATIC" Units="V"/>
 			<field name="Current_Limiter_Gain" path="Supplies/Current_Limiter_Gain" documentation="Gain to prevent overcurrent in a linear model of the supply" data_type="FLT_0D" Type="STATIC" Units="V"/>
-			<field name="Energy_Max_Limit" path="Supplies/Energy_Max_Limit" documentation="Maximum energy to be dissipated in the supply during a pulse" data_type="FLT_0D" Type="STATIC" Units="J"/>
+			<field name="Energy_Limit_Max" path="Supplies/Energy_Limit_Max" documentation="Maximum energy to be dissipated in the supply during a pulse" data_type="FLT_0D" Type="STATIC" Units="J"/>
 			<field name="Nonlinear_Model" path="Supplies/Nonlinear_Model" documentation="Description of the nonlinear transfer function of the supply" data_type="STR_0D"/>
 			<field name="Voltage" path="Supplies/Voltage" documentation="Voltages at the supply output" data_type="structure">
 				<field name="Data" path="Supplies/Voltage/Data" documentation="Voltages at the supply output" data_type="FLT_1D" Type="SIGNAL" Axis1="../Timebase" Units="V"/>

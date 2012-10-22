@@ -4,9 +4,10 @@
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
 			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this Data Item come from" data_type="str_type"/>
-			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
 			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes" data_type="str_type"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type"/>
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
 			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
 		</field>
@@ -16,16 +17,26 @@
 			<field name="B0" path="Vacuum_Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="SIGNAL" units="T" axis1="../../Timebase"/>
 		</field>
 		<field name="Plasma_Composition" path="Plasma_Composition" documentation="Generic declaration of Plasma Composition for a simulation" data_type="structure">
-			<field name="Nuclei" path="Plasma_Composition/Nuclei" documentation="Array of nuclei considered." data_type="struct_array" axis1="1...N_Nuclei">
-				<field name="Zn" path="Plasma_Composition/Nuclei/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
-				<field name="A" path="Plasma_Composition/Nuclei/A" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="CONSTANT"/>
-				<field name="Label" path="Plasma_Composition/Nuclei/Label" documentation="String identifying element (e.g. H, D, T, He, C, ...)" data_type="STR_0D" type="CONSTANT"/>
-			</field>
-			<field name="Ions" path="Plasma_Composition/Ions" documentation="Array of main plasma ions." data_type="struct_array" axis1="1...N_Ions">
-				<field name="Nucleus_Index" path="Plasma_Composition/Ions/Nucleus_Index" documentation="Index into list of nuclei" data_type="INT_0D" type="CONSTANT" index_into="../../Nuclei"/>
+			<field name="Ions" path="Plasma_Composition/Ions" documentation="Array of plasma ions" data_type="struct_array" axis1="1...N_Ions">
+				<field name="A" path="Plasma_Composition/Ions/A" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="CONSTANT"/>
 				<field name="Zion" path="Plasma_Composition/Ions/Zion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="CONSTANT" units="Elementary Charge Unit"/>
-				<field name="Multiple_Charge_State_Flag" path="Plasma_Composition/Ions/Multiple_Charge_State_Flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Impurities structure TBD" data_type="INT_0D" type="CONSTANT"/>
+				<field name="Zn" path="Plasma_Composition/Ions/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
 				<field name="Label" path="Plasma_Composition/Ions/Label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="CONSTANT"/>
+				<field name="Multiple_Charge_State_Flag" path="Plasma_Composition/Ions/Multiple_Charge_State_Flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure" data_type="INT_0D" type="CONSTANT"/>
+				<field name="Charge_States" path="Plasma_Composition/Ions/Charge_States" documentation="Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)" data_type="struct_array" axis1="1...N_Charge_States">
+					<field name="Z_Min" path="Plasma_Composition/Ions/Charge_States/Z_Min" documentation="Minimum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+					<field name="Z_Max" path="Plasma_Composition/Ions/Charge_States/Z_Max" documentation="Maximum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+					<field name="Label" path="Plasma_Composition/Ions/Charge_States/Label" documentation="String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)" data_type="STR_0D" type="CONSTANT"/>
+				</field>
+			</field>
+			<field name="Neutrals" path="Plasma_Composition/Neutrals" documentation="Array of neutrals" data_type="struct_array" axis1="1...N_Neutrals">
+				<field name="Components" path="Plasma_Composition/Neutrals/Components" documentation="Array of components to the atom or molecule" data_type="struct_array">
+					<field name="A" path="Plasma_Composition/Neutrals/Components/A" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="CONSTANT"/>
+					<field name="Zn" path="Plasma_Composition/Neutrals/Components/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+					<field name="Multiplicity" path="Plasma_Composition/Neutrals/Components/Multiplicity" documentation="Multiplicity of the atom" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+				</field>
+				<field name="Energies" path="Plasma_Composition/Neutrals/Energies" documentation="Types energies considered for this neutral species : 0=cold, 1=thermal, 2= fast, 3=NBI" data_type="INT_1D" type="CONSTANT"/>
+				<field name="Label" path="Plasma_Composition/Neutrals/Label" documentation="String identifying the atom or molecule (e.g. D2, DT, CD4, ...)" data_type="STR_0D" type="CONSTANT"/>
 			</field>
 		</field>
 		<field name="Psi" path="Psi" documentation="Poloidal magnetic flux" data_type="FLT_2D" axis1="../Rho_Tor_Norm" axis2="../Timebase" units="Wb" type="SIGNAL"/>

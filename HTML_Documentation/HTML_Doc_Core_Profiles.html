@@ -38,8 +38,8 @@
 				<td />
 			</tr>
 			<tr>
-				<td>IDS_Properties/Source_of</td>
-				<td>Where do the data for this Data Item come from</td>
+				<td>IDS_Properties/Creator_of</td>
+				<td>Creator of this consistent IDS</td>
 				<td>str_type</td>
 				<td />
 			</tr>
@@ -50,8 +50,14 @@
 				<td />
 			</tr>
 			<tr>
-				<td>IDS_Properties/Creator_of</td>
-				<td>Creator of this consistent IDS</td>
+				<td>IDS_Properties/Source_of</td>
+				<td>Where do the data for this IDS come from (a procedure, a set of codes</td>
+				<td>str_type</td>
+				<td />
+			</tr>
+			<tr>
+				<td>IDS_Properties/Reference_of</td>
+				<td>Documented reference to this IDS data</td>
 				<td>str_type</td>
 				<td />
 			</tr>
@@ -113,38 +119,8 @@
 				<td />
 			</tr>
 			<tr>
-				<td>Plasma_Composition/Nuclei</td>
-				<td>Array of nuclei considered.</td>
-				<td>struct_array</td>
-				<td>
-					<table>
-						<tr>
-							<td>1- 1...N_Nuclei</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>Plasma_Composition/Nuclei/Zn</td>
-				<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
-				<td>FLT_0D</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Plasma_Composition/Nuclei/A</td>
-				<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
-				<td>FLT_0D</td>
-				<td />
-			</tr>
-			<tr>
-				<td>Plasma_Composition/Nuclei/Label</td>
-				<td>String identifying element (e.g. H, D, T, He, C, ...) {CONSTANT}</td>
-				<td>STR_0D</td>
-				<td />
-			</tr>
-			<tr>
 				<td>Plasma_Composition/Ions</td>
-				<td>Array of main plasma ions.</td>
+				<td>Array of plasma ions</td>
 				<td>struct_array</td>
 				<td>
 					<table>
@@ -155,9 +131,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Plasma_Composition/Ions/Nucleus_Index</td>
-				<td>Index into list of nuclei {CONSTANT}</td>
-				<td>INT_0D</td>
+				<td>Plasma_Composition/Ions/A</td>
+				<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
+				<td>FLT_0D</td>
 				<td />
 			</tr>
 			<tr>
@@ -167,14 +143,98 @@
 				<td />
 			</tr>
 			<tr>
-				<td>Plasma_Composition/Ions/Multiple_Charge_State_Flag</td>
-				<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Impurities structure TBD {CONSTANT}</td>
-				<td>INT_0D</td>
+				<td>Plasma_Composition/Ions/Zn</td>
+				<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
+				<td>FLT_0D</td>
 				<td />
 			</tr>
 			<tr>
 				<td>Plasma_Composition/Ions/Label</td>
 				<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions/Multiple_Charge_State_Flag</td>
+				<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {CONSTANT}</td>
+				<td>INT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions/Charge_States</td>
+				<td>Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)</td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Charge_States</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions/Charge_States/Z_Min</td>
+				<td>Minimum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions/Charge_States/Z_Max</td>
+				<td>Maximum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Ions/Charge_States/Label</td>
+				<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {CONSTANT}</td>
+				<td>STR_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Neutrals</td>
+				<td>Array of neutrals</td>
+				<td>struct_array</td>
+				<td>
+					<table>
+						<tr>
+							<td>1- 1...N_Neutrals</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Neutrals/Components</td>
+				<td>Array of components to the atom or molecule</td>
+				<td>struct_array</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Neutrals/Components/A</td>
+				<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Neutrals/Components/Zn</td>
+				<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Neutrals/Components/Multiplicity</td>
+				<td>Multiplicity of the atom {CONSTANT} [Elementary Charge Unit]</td>
+				<td>FLT_0D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Neutrals/Energies</td>
+				<td>Types energies considered for this neutral species : 0=cold, 1=thermal, 2= fast, 3=NBI {CONSTANT}</td>
+				<td>INT_1D</td>
+				<td />
+			</tr>
+			<tr>
+				<td>Plasma_Composition/Neutrals/Label</td>
+				<td>String identifying the atom or molecule (e.g. D2, DT, CD4, ...) {CONSTANT}</td>
 				<td>STR_0D</td>
 				<td />
 			</tr>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:complexType name="Plasma_Composition_Nuclei">
+	<xs:complexType name="Plasma_Composition_Charge_States">
 		<xs:annotation>
-			<xs:documentation>Array of nuclei considered.</xs:documentation>
+			<xs:documentation>Array of charge states considered</xs:documentation>
 			<xs:appinfo>
 				<axis1>1...N_Nuclei</axis1>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Zn">
+			<xs:element name="Z_Min">
 				<xs:annotation>
-					<xs:documentation>Nuclear charge</xs:documentation>
+					<xs:documentation>Minimum Z of the charge state bundle</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>CONSTANT</type>
@@ -21,11 +21,11 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="A">
+			<xs:element name="Z_Max">
 				<xs:annotation>
-					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:documentation>Maximum Z of the charge state bundle</xs:documentation>
 					<xs:appinfo>
-						<units>Atomic Mass Unit</units>
+						<units>Elementary Charge Unit</units>
 						<type>CONSTANT</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -35,7 +35,7 @@
 			</xs:element>
 			<xs:element name="Label">
 				<xs:annotation>
-					<xs:documentation>String identifying element (e.g. H, D, T, He, C, ...)</xs:documentation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>CONSTANT</type>
 					</xs:appinfo>
@@ -48,22 +48,22 @@
 	</xs:complexType>
 	<xs:complexType name="Plasma_Composition_Ions">
 		<xs:annotation>
-			<xs:documentation>Array of main plasma ions.</xs:documentation>
+			<xs:documentation>Array of plasma ions.</xs:documentation>
 			<xs:appinfo>
 				<axis1>1...N_Ions</axis1>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Nucleus_Index">
+			<xs:element name="A">
 				<xs:annotation>
-					<xs:documentation>Index into list of nuclei</xs:documentation>
+					<xs:documentation>Mass of atom</xs:documentation>
 					<xs:appinfo>
+						<units>Atomic Mass Unit</units>
 						<type>CONSTANT</type>
-						<index_into>../../Nuclei</index_into>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_0D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="Zion">
@@ -78,9 +78,32 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="Zn">
+				<xs:annotation>
+					<xs:documentation>Nuclear charge</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Label">
+				<xs:annotation>
+					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="Multiple_Charge_State_Flag">
 				<xs:annotation>
-					<xs:documentation>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Impurities structure TBD</xs:documentation>
+					<xs:documentation>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure</xs:documentation>
 					<xs:appinfo>
 						<type>CONSTANT</type>
 					</xs:appinfo>
@@ -89,9 +112,86 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="Charge_States" type="Plasma_Composition_Charge_States" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)</xs:documentation>
+					<xs:appinfo>
+						<axis1>1...N_Charge_States</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Plasma_Composition_Neutrals_Components">
+		<xs:annotation>
+			<xs:documentation>Components to the atom or molecule</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="A">
+				<xs:annotation>
+					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:appinfo>
+						<units>Atomic Mass Unit</units>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Zn">
+				<xs:annotation>
+					<xs:documentation>Nuclear charge</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Multiplicity">
+				<xs:annotation>
+					<xs:documentation>Multiplicity of the atom</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Plasma_Composition_Neutrals">
+		<xs:annotation>
+			<xs:documentation>Array of neutral atoms or molecules</xs:documentation>
+			<xs:appinfo>
+				<axis1>1...N_Ions</axis1>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Components" type="Plasma_Composition_Neutrals_Components" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Array of components to the atom or molecule</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Energies">
+				<xs:annotation>
+					<xs:documentation>Types energies considered for this neutral species : 0=cold, 1=thermal, 2= fast, 3=NBI</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="Label">
 				<xs:annotation>
-					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:documentation>String identifying the atom or molecule (e.g. D2, DT, CD4, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>CONSTANT</type>
 					</xs:appinfo>
@@ -108,19 +208,19 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="Nuclei" type="Plasma_Composition_Nuclei" maxOccurs="unbounded">
+				<xs:element name="Ions" type="Plasma_Composition_Ions" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Array of nuclei considered.</xs:documentation>
+						<xs:documentation>Array of plasma ions</xs:documentation>
 						<xs:appinfo>
-							<axis1>1...N_Nuclei</axis1>
+							<axis1>1...N_Ions</axis1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Ions" type="Plasma_Composition_Ions" maxOccurs="unbounded">
+				<xs:element name="Neutrals" type="Plasma_Composition_Neutrals" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Array of main plasma ions.</xs:documentation>
+						<xs:documentation>Array of neutrals</xs:documentation>
 						<xs:appinfo>
-							<axis1>1...N_Ions</axis1>
+							<axis1>1...N_Neutrals</axis1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -623,9 +723,9 @@
 						<xs:appinfo>machine description</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Source_of" type="str_type">
+				<xs:element name="Creator_of" type="str_type">
 					<xs:annotation>
-						<xs:documentation>Where do the data for this Data Item come from</xs:documentation>
+						<xs:documentation>Creator of this consistent IDS</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="Date_of" type="str_type">
@@ -633,9 +733,14 @@
 						<xs:documentation>Date of consistent creation of this IDS</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Creator_of" type="str_type">
+				<xs:element name="Source_of" type="str_type">
 					<xs:annotation>
-						<xs:documentation>Creator of this consistent IDS</xs:documentation>
+						<xs:documentation>Where do the data for this IDS come from (a procedure, a set of codes</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Reference_of" type="str_type">
+					<xs:annotation>
+						<xs:documentation>Documented reference to this IDS data</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="Homogeneous_Timebase" type="int_type">
@@ -661,16 +766,6 @@
 					<xs:documentation>Free string carrying a comment on the Data Item</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Source_of" type="str_type">
-				<xs:annotation>
-					<xs:documentation>Where do the data for this Data Item come from (string expression)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Shape_of" type="int_1d_type">
-				<xs:annotation>
-					<xs:documentation>What is the shape of this Data Item e.g. (3,4,2)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="Creator_of" type="str_type">
 				<xs:annotation>
 					<xs:documentation>Who created this Data Item</xs:documentation>
@@ -679,6 +774,21 @@
 			<xs:element name="Date_of" type="str_type">
 				<xs:annotation>
 					<xs:documentation>Date of the Data Item, can be reference to a higher structure date (date pattern)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Reference_of" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Documented reference to this data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Shape_of" type="int_1d_type">
+				<xs:annotation>
+					<xs:documentation>What is the shape of this Data Item e.g. (3,4,2)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Source_of" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Where do the data for this Data Item come from (a procedure, a set of codes, ...)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
