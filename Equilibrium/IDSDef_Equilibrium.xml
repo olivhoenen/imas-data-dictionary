@@ -47,10 +47,10 @@
 			<field name="B_Tor_Axis" path="Global/B_Tor_Axis" documentation="Total toroidal magnetic field at the magnetic axis" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="T"/>
 			<field name="q_Axis" path="Global/q_Axis" documentation="q at the magnetic axis" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="-"/>
 			<field name="q_95" path="Global/q_95" documentation="q at the 95% poloidal flux surface" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="-"/>
-			<field name="q_min" path="Global/q_min" documentation="Minimum q value in the plasma" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="-"/>
+			<field name="q_Min" path="Global/q_Min" documentation="Minimum q value in the plasma" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="-"/>
 			<field name="Vacuum_Toroidal_Field" path="Global/Vacuum_Toroidal_Field" documentation="Characteristics of the vacuum toroidal field" data_type="structure">
 				<field name="R0" path="Global/Vacuum_Toroidal_Field/R0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="CONSTANT" units="m"/>
-				<field name="B0" path="Global/Vacuum_Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="SIGNAL" units="T" axis1="../../../Timebase"/>
+				<field name="B0" path="Global/Vacuum_Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the B_Tor_Vacuum_R field of the TF IDS." data_type="FLT_1D" type="SIGNAL" units="T" axis1="../../../Timebase"/>
 			</field>
 			<field name="W_MHD" path="Global/W_MHD" documentation="Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase" units="J"/>
 			<field name="Gamma" path="Global/Gamma" documentation="Adiabatic index" data_type="FLT_1D" type="SIGNAL" axis1="../../Timebase"/>
@@ -78,7 +78,7 @@
 			<field name="dVolume_dPsi" path="Profiles_1D/dVolume_dPsi" documentation="Radial derivative of the volume enclosed in the flux surface with respect to Psi" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^3.Wb^-1"/>
 			<field name="dVolume_dRho_Tor" path="Profiles_1D/dVolume_dRho_Tor" documentation="Radial derivative of the volume enclosed in the flux surface with respect to Rho_Tor" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^2"/>
 			<field name="Area" path="Profiles_1D/Area" documentation="Cross-sectional area of the flux surface" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^2"/>
-			<field name="dA_dPsi" path="Profiles_1D/dA_dPsi" documentation="Radial derivative of the cross-sectional area of the flux surface with respect to Psi" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^2.Wb^-1"/>
+			<field name="dArea_dPsi" path="Profiles_1D/dArea_dPsi" documentation="Radial derivative of the cross-sectional area of the flux surface with respect to Psi" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^2.Wb^-1"/>
 			<field name="Surface" path="Profiles_1D/Surface" documentation="Surface area of the toroidal flux surface" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^2"/>
 			<field name="Trapped_Fraction" path="Profiles_1D/Trapped_Fraction" documentation="Trapped particle fraction" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase"/>
 			<field name="gm1" path="Profiles_1D/gm1" documentation="Flux surface averaged 1/R^2" data_type="FLT_2D" type="SIGNAL" axis1="../Psi" axis2="../../Timebase" units="m^-2"/>

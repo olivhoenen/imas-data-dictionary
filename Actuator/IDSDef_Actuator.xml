@@ -13,7 +13,8 @@
 		</field>
 		<field name="Name" path="Name" documentation="Name of the actuator (IC, EC, NBI, LH)" data_type="STR_0D" type="STATIC" units="-"/>
 		<field name="Channels" path="Channels" documentation="ID of the multiple channels of the actuator: Beam boxes for NBI, EC or IC launcher, ..." data_type="STR_1D" type="STATIC" units="-"/>
-		<field name="Power" path="Power" documentation="Power delivered by the actuator to the plasma (NB this is before the coupling / shine through / orbit losses calculations) " data_type="FLT_2D" type="SIGNAL" units="W" axis1="../Channels" axis2="../Timebase"/>
+		<field name="Power" path="Power" documentation="Power delivered at the output of the actuator, in the vessel (NB this is before the coupling / beam blocking / shine through / orbit losses calculations) " data_type="FLT_2D" type="SIGNAL" units="W" axis1="../Channels" axis2="../Timebase"/>
+		<field name="Generic_Signal" path="Generic_Signal" documentation="Generic 2D signal slot for storing an actuator control parameter (e.g. the angle of an ECRH mirror)" data_type="FLT_2D" type="SIGNAL" units="W" axis1="../Channels" axis2="../Timebase"/>
 		<field name="Code_Parameters" path="Code_Parameters" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="Code_Name" path="Code_Parameters/Code_Name" documentation="Name of the code" data_type="STR_0D" type="CONSTANT"/>
 			<field name="Code_Version" path="Code_Parameters/Code_Version" documentation="Version of the code" data_type="STR_0D" type="CONSTANT"/>

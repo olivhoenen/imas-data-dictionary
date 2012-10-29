@@ -37,7 +37,21 @@
 				</xs:element>
 				<xs:element name="Power">
 					<xs:annotation>
-						<xs:documentation>Power delivered by the actuator to the plasma (NB this is before the coupling / shine through / orbit losses calculations) </xs:documentation>
+						<xs:documentation>Power delivered at the output of the actuator, in the vessel (NB this is before the coupling / beam blocking / shine through / orbit losses calculations) </xs:documentation>
+						<xs:appinfo>
+							<type>SIGNAL</type>
+							<units>W</units>
+							<axis1>../Channels</axis1>
+							<axis2>../Timebase</axis2>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_2D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Generic_Signal">
+					<xs:annotation>
+						<xs:documentation>Generic 2D signal slot for storing an actuator control parameter (e.g. the angle of an ECRH mirror)</xs:documentation>
 						<xs:appinfo>
 							<type>SIGNAL</type>
 							<units>W</units>

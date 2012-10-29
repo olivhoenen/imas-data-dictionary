@@ -14,7 +14,7 @@
 		<field name="Rho_Tor_Norm" path="Rho_Tor_Norm" documentation="Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_2D" type="SIGNAL" axis1="1...N_Rho_Tor_Norm" axis2="../Timebase"/>
 		<field name="Vacuum_Toroidal_Field" path="Vacuum_Toroidal_Field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure">
 			<field name="R0" path="Vacuum_Toroidal_Field/R0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="CONSTANT" units="m"/>
-			<field name="B0" path="Vacuum_Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="SIGNAL" units="T" axis1="../../Timebase"/>
+			<field name="B0" path="Vacuum_Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the B_Tor_Vacuum_R field of the TF IDS." data_type="FLT_1D" type="SIGNAL" units="T" axis1="../../Timebase"/>
 		</field>
 		<field name="Plasma_Composition" path="Plasma_Composition" documentation="Generic declaration of Plasma Composition for a simulation" data_type="structure">
 			<field name="Ions" path="Plasma_Composition/Ions" documentation="Array of plasma ions" data_type="struct_array" axis1="1...N_Ions">
