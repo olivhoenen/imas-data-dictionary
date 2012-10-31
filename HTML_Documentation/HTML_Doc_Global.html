@@ -1,0 +1,4299 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Data Dictionary HTML documentation</title>
+		<style type="text/css">
+			p {color:black;font-size:12pt;font-weight:normal;}
+			p.name {color:red;font-size:18pt;font-weight:bold;}
+			p.welcome {color:#3333aa; font-size:20pt; font-weight:bold; text-align:center;}
+			span.head {color:#3333aa; font-size:12pt; font-weight:bold; }
+       </style>
+	</head>
+	<body>
+		<p class="welcome">ITER Physics Data Model Documentation : Top level (list of all IDSs)</p>
+		<table border="1">
+			<thead style="color:#ff0000">
+				<td>IDS name</td>
+				<td>Description</td>
+				<td>Max. occurrence number</td>
+			</thead>
+			<tr>
+				<td><a href="#Actuator">Actuator</a></td>
+				<td>Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td><a href="#Core_Profiles">Core_Profiles</a></td>
+				<td>Core plasma 1D profiles. TBD: toroidal and poloidal velocities. Errorbars to be added.</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td><a href="#Equilibrium">Equilibrium</a></td>
+				<td>Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td><a href="#Magnetics">Magnetics</a></td>
+				<td>Magnetic diagnostics for equilibrium identification and plasma shape control.</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td><a href="#PF">PF</a></td>
+				<td>Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td><a href="#SDN">SDN</a></td>
+				<td>Description of the Synchronous Data Network parameters and the signals on it</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td><a href="#TF">TF</a></td>
+				<td>Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in PF IDS.</td>
+				<td>6</td>
+			</tr>
+		</table><a name="Actuator"><p class="welcome">ITER Physics Data Model Documentation for Actuator</p>
+			<p>Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Axes</td>
+				</thead>
+				<tr>
+					<td>IDS_Properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Comment_of</td>
+					<td>Any additional comment from the source application</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Creator_of</td>
+					<td>Creator of this consistent IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Date_of</td>
+					<td>Date of consistent creation of this IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Reference_of</td>
+					<td>Documented reference to this IDS data</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Homogeneous_Timebase</td>
+					<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/cocos</td>
+					<td>Coordinate conventions of this IDS</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td>Name of the actuator (IC, EC, NBI, LH) {STATIC} [-]</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Channels</td>
+					<td>ID of the multiple channels of the actuator: Beam boxes for NBI, EC or IC launcher, ... {STATIC} [-]</td>
+					<td>STR_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Power</td>
+					<td>Power delivered at the output of the actuator, in the vessel (NB this is before the coupling / beam blocking / shine through / orbit losses calculations)  {SIGNAL} [W]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Channels</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Generic_Signal</td>
+					<td>Generic 2D signal slot for storing an actuator control parameter (e.g. the angle of an ECRH mirror) {SIGNAL} [W]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Channels</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Name</td>
+					<td>Name of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Version</td>
+					<td>Version of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Parameters</td>
+					<td>List of the code specific parameters in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Diagnostics</td>
+					<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="Core_Profiles"><p class="welcome">ITER Physics Data Model Documentation for Core_Profiles</p>
+			<p>Core plasma 1D profiles. TBD: toroidal and poloidal velocities. Errorbars to be added.</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Axes</td>
+				</thead>
+				<tr>
+					<td>IDS_Properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Comment_of</td>
+					<td>Any additional comment from the source application</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Creator_of</td>
+					<td>Creator of this consistent IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Date_of</td>
+					<td>Date of consistent creation of this IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Reference_of</td>
+					<td>Documented reference to this IDS data</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Homogeneous_Timebase</td>
+					<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/cocos</td>
+					<td>Coordinate conventions of this IDS</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Rho_Tor_Norm</td>
+					<td>Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {SIGNAL}</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vacuum_Toroidal_Field</td>
+					<td>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Vacuum_Toroidal_Field/R0</td>
+					<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {CONSTANT} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Vacuum_Toroidal_Field/B0</td>
+					<td>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the B_Tor_Vacuum_R field of the TF IDS. {SIGNAL} [T]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Plasma_Composition</td>
+					<td>Generic declaration of Plasma Composition for a simulation</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions</td>
+					<td>Array of plasma ions</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Ions</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions/A</td>
+					<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions/Zion</td>
+					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions/Zn</td>
+					<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions/Label</td>
+					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions/Multiple_Charge_State_Flag</td>
+					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {CONSTANT}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions/Charge_States</td>
+					<td>Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Charge_States</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions/Charge_States/Z_Min</td>
+					<td>Minimum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions/Charge_States/Z_Max</td>
+					<td>Maximum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Ions/Charge_States/Label</td>
+					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Neutrals</td>
+					<td>Array of neutrals</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Neutrals</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Neutrals/Components</td>
+					<td>Array of components to the atom or molecule</td>
+					<td>struct_array</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Neutrals/Components/A</td>
+					<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Neutrals/Components/Zn</td>
+					<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Neutrals/Components/Multiplicity</td>
+					<td>Multiplicity of the atom {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Neutrals/Energies</td>
+					<td>Types energies considered for this neutral species : 0=cold, 1=thermal, 2= fast, 3=NBI {CONSTANT}</td>
+					<td>INT_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Plasma_Composition/Neutrals/Label</td>
+					<td>String identifying the atom or molecule (e.g. D2, DT, CD4, ...) {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Psi</td>
+					<td>Poloidal magnetic flux {SIGNAL} [Wb]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Te</td>
+					<td>Electron temperature {SIGNAL} [eV]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ti</td>
+					<td>Ion temperature {SIGNAL} [eV]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Plasma_Composition/Ions</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ne</td>
+					<td>Electron density (thermal+non-thermal) {SIGNAL} [m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ne_Fast</td>
+					<td>Density of fast (non-thermal) electrons {SIGNAL} [m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ni</td>
+					<td>Ion density (thermal+non-thermal) {SIGNAL} [m^-3]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Plasma_Composition/Ions</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ni_Fast</td>
+					<td>Density of fast (non-thermal) ions, for the various ion species {SIGNAL} [m^-3]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Plasma_Composition/Ions</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ni_Total_Over_Ne</td>
+					<td>Ratio of total ion density (sum over species) over electron density. (thermal+non-thermal) {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Zeff</td>
+					<td>Effective charge {SIGNAL}</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Pe</td>
+					<td>Electron pressure {SIGNAL} [Pa]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Pi</td>
+					<td>Ion pressure (per ion species) {SIGNAL} [Pa]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Plasma_Composition/Ions</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Pi_Total</td>
+					<td>Total ion pressure (sum over the ion species) {SIGNAL} [Pa]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Pressure_Thermal</td>
+					<td>Thermal pressure (electrons+ions) {SIGNAL} [Pa]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Pressure_Perpendicular</td>
+					<td>Total perpendicular pressure (electrons+ions, thermal+non-thermal) {SIGNAL} [Pa]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Pressure_Parallel</td>
+					<td>Total parallel pressure (electrons+ions, thermal+non-thermal) {SIGNAL} [Pa]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>J_Total</td>
+					<td>Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>J_Tor</td>
+					<td>Total toroidal current density = average(J_Tor/R) / average(1/R) {SIGNAL} [A/m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>J_Ohmic</td>
+					<td>Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>J_Non_Inductive</td>
+					<td>Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>J_Bootstrap</td>
+					<td>Bootstrap parallel current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {SIGNAL} [A/m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Conductivity_Parallel</td>
+					<td>Parallel conductivity {SIGNAL} [ohm^-1.m^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>E_Parallel</td>
+					<td>Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0 {SIGNAL} [V.m^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>q</td>
+					<td>Safety factor {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Magnetic_Shear</td>
+					<td>Magnetic shear {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Momentum_Tor</td>
+					<td>Toroidal momentum of the various ion species {SIGNAL} [kg.m^-2.s^-1]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Plasma_Composition/Ions</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Rotation_Frequency_Tor</td>
+					<td>Angular toroidal rotation frequency of the various ion species {SIGNAL} [s^-1]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Plasma_Composition/Ions</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global</td>
+					<td>Various global quantities derived from the Core_Profiles</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Global/Ip</td>
+					<td>Total plasma current {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Current_Non_Inductive</td>
+					<td>Total non-inductive parallel current {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Current_Bootstrap</td>
+					<td>Bootstrap parallel current {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/V_Loop</td>
+					<td>LCFS loop voltage {SIGNAL} [V]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/li_3</td>
+					<td>Internal inductance {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Beta_Tor</td>
+					<td>Toroidal beta (ratio of kinetic to magnetic pressure) {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Beta_Tor_Norm</td>
+					<td>Normalised toroidal beta {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Beta_Pol</td>
+					<td>Poloidal beta {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Energy_Diamagnetic</td>
+					<td>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (Pressure_Thermal + Pressure_Perpendicular) {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Name</td>
+					<td>Name of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Version</td>
+					<td>Version of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Parameters</td>
+					<td>List of the code specific parameters in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Diagnostics</td>
+					<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="Equilibrium"><p class="welcome">ITER Physics Data Model Documentation for Equilibrium</p>
+			<p>Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Axes</td>
+				</thead>
+				<tr>
+					<td>IDS_Properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Comment_of</td>
+					<td>Any additional comment from the source application</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Creator_of</td>
+					<td>Creator of this consistent IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Date_of</td>
+					<td>Date of consistent creation of this IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Reference_of</td>
+					<td>Documented reference to this IDS data</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Homogeneous_Timebase</td>
+					<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/cocos</td>
+					<td>Coordinate conventions of this IDS</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Boundary</td>
+					<td>Description of the plasma boundary</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Boundary/Type</td>
+					<td>0 (limiter) or 1 (diverted) {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/N_Outline_Points</td>
+					<td>Number of meaningful Outline points in R and Z at a given time. {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Outline_RZ</td>
+					<td>RZ description of the plasma boundary. The second dimension is oversized to fit the maximum number of (R,Z) points over the time range {SIGNAL} [m]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- 1...Max_N_Outline_Points</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Geometric_Axis_RZ</td>
+					<td>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary) {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/a_minor</td>
+					<td>Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary) {SIGNAL} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Elongation</td>
+					<td>Elongation of the plasma boundary {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Elongation_Upper</td>
+					<td>Elongation (upper half w.r.t. geometric axis) of the plasma boundary {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Elongation_Lower</td>
+					<td>Elongation (lower half w.r.t. geometric axis) of the plasma boundary</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Boundary/Triangularity_Upper</td>
+					<td>Upper triangularity of the plasma boundary {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Triangularity_Lower</td>
+					<td>Lower triangularity of the plasma boundary {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/N_X_Points</td>
+					<td>Number of X points at a given time {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/X_Points_RZ</td>
+					<td>RZ position of the X points, first is the active X point if diverted. The second dimension is oversized to fit the maximum number of X points over the time range {SIGNAL} [m]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- 1...Max_N_X_Points</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Strike_Point_Lower_Left_RZ</td>
+					<td>RZ position of the lower left strike point {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Strike_Point_Upper_Left_RZ</td>
+					<td>RZ position of the upper left strike point {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Strike_Point_Lower_Right_RZ</td>
+					<td>RZ position of the lower right strike point {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Strike_Point_Upper_Right_RZ</td>
+					<td>RZ position of the upper right strike point {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Boundary/Active_Limiter_Point_RZ</td>
+					<td>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter) {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global</td>
+					<td>0D parameters of the equilibrium</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Global/Beta_Pol</td>
+					<td>Poloidal beta {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Beta_Tor</td>
+					<td>Toroidal beta {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Beta_Normal</td>
+					<td>Normalised toroidal beta {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Ip</td>
+					<td>Plasma current. Positive sign means anti-clockwise when viewed from above. {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/li_3</td>
+					<td>Internal inductance {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Volume</td>
+					<td>Total plasma volume {SIGNAL} [m^3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Area</td>
+					<td>Area of the poloidal cross section {SIGNAL} [m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Psi_Axis</td>
+					<td>Poloidal flux at the magnetic axis {SIGNAL} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Psi_Boundary</td>
+					<td>Poloidal flux at the selected plasma boundary {SIGNAL} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Magnetic_Axis</td>
+					<td>Magnetic axis position</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Global/Magnetic_Axis/R</td>
+					<td>Major radius {SIGNAL} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Magnetic_Axis/Z</td>
+					<td>Height {SIGNAL} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/B_Tor_Axis</td>
+					<td>Total toroidal magnetic field at the magnetic axis {SIGNAL} [T]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/q_Axis</td>
+					<td>q at the magnetic axis {SIGNAL} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/q_95</td>
+					<td>q at the 95% poloidal flux surface {SIGNAL} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/q_Min</td>
+					<td>Minimum q value in the plasma {SIGNAL} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Vacuum_Toroidal_Field</td>
+					<td>Characteristics of the vacuum toroidal field</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Global/Vacuum_Toroidal_Field/R0</td>
+					<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {CONSTANT} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Global/Vacuum_Toroidal_Field/B0</td>
+					<td>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the B_Tor_Vacuum_R field of the TF IDS. {SIGNAL} [T]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/W_MHD</td>
+					<td>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar {SIGNAL} [J]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Global/Gamma</td>
+					<td>Adiabatic index {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D</td>
+					<td>Equilibrium profiles (1D radial grid) as a function of the poloidal flux</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Profiles_1D/Psi</td>
+					<td>Poloidal flux, such that Bp=|grad psi| /R/2/pi {SIGNAL} [Wb]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Phi</td>
+					<td>Toroidal flux {SIGNAL} [Wb]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Pressure</td>
+					<td>Pressure {SIGNAL} [Pa]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/F</td>
+					<td>Diamagnetic function (F=R B_Phi) {SIGNAL} [T.m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/dPressure_dPsi</td>
+					<td>Derivative of Pressure w.r.t. Psi {SIGNAL} [Pa.Wb^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/F_dF_dPsi</td>
+					<td>Derivative of F w.r.t. Psi, multiplied with F {SIGNAL} [T^2.m^2/Wb]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/J_Tor</td>
+					<td>Flux surface averaged toroidal current density = average(J_TorR) / average(1/R) {SIGNAL} [A/m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/J_Parallel</td>
+					<td>Flux surface averaged parallel current density = average(j.B) / B0, where B0 = Equilibrium/Global/Toroidal_Field/B0 {SIGNAL} [A/m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/q</td>
+					<td>Safety factor {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Magnetic_Shear</td>
+					<td>Magnetic shear {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/R_Inboard</td>
+					<td>Radial coordinate (major radius) on the inboard side of the magnetic axis {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/R_Outboard</td>
+					<td>Radial coordinate (major radius) on the outboard side of the magnetic axis {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Rho_Tor</td>
+					<td>Toroidal flux coordinate, defined as sqrt(Phi/pi/B0), where B0 = Equilibrium/Global/Toroidal_Field/B0 {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/dPsi_dRho_Tor</td>
+					<td>Derivative of Psi with respect to Rho_Tor {SIGNAL} [Wb/m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Rho_Vol_Norm</td>
+					<td>Normalised radial coordinate related to the plasma volume. Defined as sqrt(volume / volume[LCFS]) {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Elongation</td>
+					<td>Elongation {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Triangularity_Upper</td>
+					<td>Upper triangularity w.r.t. magnetic axis {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Triangularity_Lower</td>
+					<td>Lower triangularity w.r.t. magnetic axis {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Volume</td>
+					<td>Volume enclosed in the flux surface {SIGNAL} [m^3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/dVolume_dPsi</td>
+					<td>Radial derivative of the volume enclosed in the flux surface with respect to Psi {SIGNAL} [m^3.Wb^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/dVolume_dRho_Tor</td>
+					<td>Radial derivative of the volume enclosed in the flux surface with respect to Rho_Tor {SIGNAL} [m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Area</td>
+					<td>Cross-sectional area of the flux surface {SIGNAL} [m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/dArea_dPsi</td>
+					<td>Radial derivative of the cross-sectional area of the flux surface with respect to Psi {SIGNAL} [m^2.Wb^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Surface</td>
+					<td>Surface area of the toroidal flux surface {SIGNAL} [m^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/Trapped_Fraction</td>
+					<td>Trapped particle fraction {SIGNAL}</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/gm1</td>
+					<td>Flux surface averaged 1/R^2 {SIGNAL} [m^-2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/gm2</td>
+					<td>Flux surface averaged grad_rho^2/R^2 {SIGNAL} [m^-2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/gm3</td>
+					<td>Flux surface averaged grad_rho^2 {SIGNAL}</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/gm4</td>
+					<td>Flux surface averaged 1/B^2 {SIGNAL} [T^-2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/gm5</td>
+					<td>Flux surface averaged B^2 {SIGNAL} [T^2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/gm6</td>
+					<td>Flux surface averaged grad_rho^2/B^2 {SIGNAL} [T^-2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/gm7</td>
+					<td>Flux surface averaged grad_rho {SIGNAL}</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/gm8</td>
+					<td>Flux surface averaged R {SIGNAL} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/gm9</td>
+					<td>Flux surface averaged 1/R {SIGNAL} [m^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/B_Average</td>
+					<td>Flux surface averaged B {SIGNAL} [T]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/B_Min</td>
+					<td>Minimum(B) on the flux surface {SIGNAL} [T]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_1D/B_Max</td>
+					<td>Maximum(B) on the flux surface {SIGNAL} [T]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_1D/Psi</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D</td>
+					<td>Equilibrium 2D profiles in the poloidal plane. Multiple 2D representations of the equilibrium can be stored here.</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Representations</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/Grid_Type</td>
+					<td>Selection of one of a set of grid types. 1-rectangular (R,Z) grid, in this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2. {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Profiles_2D/Grid</td>
+					<td>Definition of the 2D grid</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Profiles_2D/Grid/Dim1</td>
+					<td>First dimension values {SIGNAL} [variable]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/Grid/Dim2</td>
+					<td>Second dimension values {SIGNAL} [variable]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Dim2</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/R</td>
+					<td>Values of the major radius on the grid {SIGNAL} [m]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/Z</td>
+					<td>Values of the Height on the grid {SIGNAL} [m]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/Psi</td>
+					<td>Values of the poloidal flux at the grid in the poloidal plane {SIGNAL} [Wb]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/Theta</td>
+					<td>Values of the poloidal angle on the grid {SIGNAL} [rad]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/Phi</td>
+					<td>Toroidal flux {SIGNAL} [Wb]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/J_Tor</td>
+					<td>Toroidal plasma current density {SIGNAL} [A.m^-2]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/J_Parallel</td>
+					<td>Parallel (to magnetic field) plasma current density {SIGNAL} [A.m^-2]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/B_R</td>
+					<td>R component of the poloidal magnetic field {SIGNAL} [T]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/B_Z</td>
+					<td>Z component of the poloidal magnetic field {SIGNAL} [T]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Profiles_2D/B_Tor</td>
+					<td>Toroidal component of the magnetic field {SIGNAL} [T]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Profiles_2D/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Profiles_2D/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System</td>
+					<td>Flux surface coordinate system on a square grid of flux and poloidal angle</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coordinate_System/Grid_Type</td>
+					<td>Type of coordinate system {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coordinate_System/Grid</td>
+					<td>Definition of the 2D grid</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coordinate_System/Grid/Dim1</td>
+					<td>First dimension values {SIGNAL} [variable]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/Grid/Dim2</td>
+					<td>Second dimension values {SIGNAL} [variable]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Dim2</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/R</td>
+					<td>Values of the major radius on the grid {SIGNAL} [m]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coordinate_System/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Coordinate_System/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/Z</td>
+					<td>Values of the Height on the grid {SIGNAL} [m]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coordinate_System/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Coordinate_System/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/Jacobian</td>
+					<td>Jacobian of the coordinate system {SIGNAL} [variable]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coordinate_System/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Coordinate_System/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/g_11</td>
+					<td>metric coefficients g_11; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coordinate_System/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Coordinate_System/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/g_12</td>
+					<td>metric coefficients g_12; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coordinate_System/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Coordinate_System/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/g_13</td>
+					<td>metric coefficients g_13; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coordinate_System/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Coordinate_System/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/g_22</td>
+					<td>metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coordinate_System/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Coordinate_System/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/g_23</td>
+					<td>metric coefficients g_23; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coordinate_System/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Coordinate_System/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coordinate_System/g_33</td>
+					<td>metric coefficients g_33; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {SIGNAL} [variable]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coordinate_System/Grid/Dim1</td>
+							</tr>
+							<tr>
+								<td>2- Coordinate_System/Grid/Dim2</td>
+							</tr>
+							<tr>
+								<td>3- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Name</td>
+					<td>Name of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Version</td>
+					<td>Version of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Parameters</td>
+					<td>List of the code specific parameters in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Diagnostics</td>
+					<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="Magnetics"><p class="welcome">ITER Physics Data Model Documentation for Magnetics</p>
+			<p>Magnetic diagnostics for equilibrium identification and plasma shape control.</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Axes</td>
+				</thead>
+				<tr>
+					<td>IDS_Properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Comment_of</td>
+					<td>Any additional comment from the source application</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Creator_of</td>
+					<td>Creator of this consistent IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Date_of</td>
+					<td>Date of consistent creation of this IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Reference_of</td>
+					<td>Documented reference to this IDS data</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Homogeneous_Timebase</td>
+					<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/cocos</td>
+					<td>Coordinate conventions of this IDS</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Flux_Loops</td>
+					<td>Flux loops</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Flux_Loops</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Flux_Loops/Name</td>
+					<td>Name of the flux loop {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Flux_Loops/Identifier</td>
+					<td>ID of the flux loop {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Flux_Loops/Position_RZPhi</td>
+					<td>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf) {STATIC} [m, m, rad]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...3</td>
+							</tr>
+							<tr>
+								<td>2- 1...N_Points</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Flux_Loops/Flux</td>
+					<td>Measured flux.</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Flux_Loops/Flux/Data</td>
+					<td>Measured flux. {SIGNAL} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Flux_Loops/Flux/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Flux_Loops/Flux/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Flux_Loops/Flux_Error</td>
+					<td>Absolute error on measured flux.</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Flux_Loops/Flux_Error/Type</td>
+					<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Flux_Loops/Flux_Error/Signal</td>
+					<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Flux_Loops/Flux_Error/Constant</td>
+					<td>Relative error in % provided as a constant {CONSTANT}</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Flux_Loops/Flux_Error/Expression</td>
+					<td>Absolute error provided as an Expression.</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes</td>
+					<td>Poloidal field probes</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Bpol_Probes</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Name</td>
+					<td>Name of the probe {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Identifier</td>
+					<td>ID of the probe {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Centre_Position_RZPhi</td>
+					<td>R, Z, Phi position of coil centre {STATIC} [m, m, rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...3</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Poloidal_Angle</td>
+					<td>Poloidal angle of coil orientation {STATIC} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Toroidal_Angle</td>
+					<td>Toroidal angle of coil orientation (0 if fully in the poloidal plane)  {STATIC} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Area</td>
+					<td>Area of the coil {STATIC} [m^2]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Length</td>
+					<td>Length of the coil {STATIC} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Turns</td>
+					<td>Turns in the coil {STATIC}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Field</td>
+					<td>Measured magnetic field</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Field/Data</td>
+					<td>Measured magnetic field {SIGNAL} [T]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Bpol_Probes/Field/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Field/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Field_Error</td>
+					<td>Absolute error on measured magnetic field.</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Field_Error/Type</td>
+					<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Field_Error/Signal</td>
+					<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Field_Error/Constant</td>
+					<td>Relative error in % provided as a constant {CONSTANT}</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Bpol_Probes/Field_Error/Expression</td>
+					<td>Absolute error provided as an Expression.</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data</td>
+					<td>Processed quantities derived from the magnetic measurements.</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Processed_Data</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Processed_Data/Method</td>
+					<td>Name of the data processing method {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Processed_Data/Ip</td>
+					<td>Plasma current. Positive sign means anti-clockwise when viewed from above {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Processed_Data/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Processed_Data/Ip_Error</td>
+					<td>Error on plasma current </td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Ip_Error/Type</td>
+					<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Ip_Error/Signal</td>
+					<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Ip_Error/Constant</td>
+					<td>Relative error in % provided as a constant {CONSTANT}</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Ip_Error/Expression</td>
+					<td>Absolute error provided as an Expression.</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Diamagnetic_Flux</td>
+					<td>Diamagnetic flux {SIGNAL} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Processed_Data/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Processed_Data/Diamagnetic_Flux_Error</td>
+					<td>Error on diamagnetic flux</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Diamagnetic_Flux_Error/Type</td>
+					<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Diamagnetic_Flux_Error/Signal</td>
+					<td>Absolute error provided as a Signal of same dimension as the related field. {SIGNAL}</td>
+					<td>FLT_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Diamagnetic_Flux_Error/Constant</td>
+					<td>Relative error in % provided as a constant {CONSTANT}</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Diamagnetic_Flux_Error/Expression</td>
+					<td>Absolute error provided as an Expression.</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Name</td>
+					<td>Name of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Version</td>
+					<td>Version of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Parameters</td>
+					<td>List of the code specific parameters in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Diagnostics</td>
+					<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="PF"><p class="welcome">ITER Physics Data Model Documentation for PF</p>
+			<p>Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Axes</td>
+				</thead>
+				<tr>
+					<td>IDS_Properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Comment_of</td>
+					<td>Any additional comment from the source application</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Creator_of</td>
+					<td>Creator of this consistent IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Date_of</td>
+					<td>Date of consistent creation of this IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Reference_of</td>
+					<td>Documented reference to this IDS data</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Homogeneous_Timebase</td>
+					<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/cocos</td>
+					<td>Coordinate conventions of this IDS</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils</td>
+					<td>Active PF coils</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_PF_Coils</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coils/Name</td>
+					<td>Name of the coil {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Identifier</td>
+					<td>Alphanumeric identifier of coils used for convenience {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Resistance</td>
+					<td>Coil resistance {STATIC} [Ohm]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Energy_Limit_Max</td>
+					<td>Maximum Energy to be dissipated in the coil {STATIC} [J]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Elements</td>
+					<td>Each PF coil is comprised of a number of cross-section elements described  individually</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Elements</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coils/Elements/Name</td>
+					<td>Name of this element of this coil {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Elements/Identifier</td>
+					<td>Identifier of this element of this coil {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Elements/Turns_With_Sign</td>
+					<td>Number of effective turns in the element for calculating magnetic fields of the coil; includes the sign of the number of turns {STATIC}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Elements/Area</td>
+					<td>Cross-sectional areas of the element {STATIC} [m^2]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Elements/Geometry</td>
+					<td>Cross-sectional shape of the element</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Elements/Geometry/Description_Type</td>
+					<td>Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ')  {STATIC}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Elements/Geometry/Coordinates_RZ</td>
+					<td>Irregular outline of the element {STATIC} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- 1...N_Points</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coils/Elements/Geometry/RZDRDZ</td>
+					<td>4-Vector defining Centre R,Z and full extents dR, dZ  {STATIC} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...4</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coils/Current</td>
+					<td>Current in the coil</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Current/Data</td>
+					<td>Current in the coil {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coils/Current/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coils/Current/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coils/Voltage</td>
+					<td>Voltage on the coil terminals</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Coils/Voltage/Data</td>
+					<td>Voltage on the coil terminals {SIGNAL} [V]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Coils/Voltage/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Coils/Voltage/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vertical_Forces</td>
+					<td>Vertical forces on the axisymmetric PF coil system</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Vertical_Forces/Names</td>
+					<td>Names of the Force combinations {STATIC}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Forces</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vertical_Forces/Combinations</td>
+					<td>Coils involved in the Force combinations {STATIC}</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Vertical_Forces/Names</td>
+							</tr>
+							<tr>
+								<td>2- Coils</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vertical_Forces/Limits_Max</td>
+					<td>Vertical Force combinations limits {STATIC} [N]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Vertical_Forces/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vertical_Forces/Limits_Min</td>
+					<td>Vertical Force combination limit {STATIC} [N]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Vertical_Forces/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vertical_Forces/Forces</td>
+					<td>Force combinations. All forces are assumed to be on the same timebase {SIGNAL} [N]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Vertical_Forces/Names</td>
+							</tr>
+							<tr>
+								<td>2- Vertical_Forces/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vertical_Forces/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Circuits</td>
+					<td>Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Circuits</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Circuits/Name</td>
+					<td>Name of the circuit {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Circuits/Identifier</td>
+					<td>ID of the circuit {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Circuits/Type</td>
+					<td>Type of the circuit {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Circuits/Connections</td>
+					<td>Description of the supplies and coils connections (nodes) across the circuit. The matrix describing for each node (first dimension) which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the second dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD) {STATIC}</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Nodes</td>
+							</tr>
+							<tr>
+								<td>2- 1...2*N_components</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Circuits/Voltage</td>
+					<td>Voltage on the circuit</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Circuits/Voltage/Data</td>
+					<td>Voltage on the circuit {SIGNAL} [V]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Circuits/Voltage/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Circuits/Voltage/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Circuits/Current</td>
+					<td>Current in the circuit</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Circuits/Current/Data</td>
+					<td>Current in the circuit {SIGNAL} [V]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Circuits/Current/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Circuits/Current/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Supplies</td>
+					<td>PF power supplies</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_PF_Supplies</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Supplies/Name</td>
+					<td>Name of the PF supply {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Identifier</td>
+					<td>Identifier of the supply {STATIC}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Type</td>
+					<td>Type of the supply; TBD add free description of non-linear power supplies {STATIC}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Resistance</td>
+					<td>Power supply internal resistance {STATIC} [Ohm]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Delay</td>
+					<td>Pure delay in the supply {STATIC} [s]</td>
+					<td>FLT_0D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Supplies/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Supplies/Filter_Numerator</td>
+					<td>Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description {STATIC}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Numerator_Coefficients</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Supplies/Filter_Denominator</td>
+					<td>Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description {STATIC}</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Denominator_Coefficients</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Supplies/Current_Limit_Max</td>
+					<td>Maximum current in the supply {STATIC} [A]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Current_Limit_Min</td>
+					<td>Minimum current in the supply {STATIC} [A]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Voltage_Limit_Max</td>
+					<td>Maximum voltage from the supply {STATIC} [V]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Voltage_Limit_Min</td>
+					<td>Minimum voltage from the supply {STATIC} [V]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Current_Limiter_Gain</td>
+					<td>Gain to prevent overcurrent in a linear model of the supply {STATIC} [V]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Energy_Limit_Max</td>
+					<td>Maximum energy to be dissipated in the supply during a pulse {STATIC} [J]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Nonlinear_Model</td>
+					<td>Description of the nonlinear transfer function of the supply  STATIC</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Voltage</td>
+					<td>Voltages at the supply output</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Voltage/Data</td>
+					<td>Voltages at the supply output {SIGNAL} [V]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Supplies/Voltage/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Supplies/Voltage/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Supplies/Current</td>
+					<td>Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Supplies/Current/Data</td>
+					<td>Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Supplies/Current/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Supplies/Current/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Passive_Loops</td>
+					<td>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Passive_Loops/Names</td>
+					<td>Names of the loops {STATIC}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Passive_Loops</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Passive_Loops/Areas</td>
+					<td>Surface areas of the passive loops {STATIC} [m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Passive_Loops/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Passive_Loops/Resistances</td>
+					<td>Passive elements resistances {STATIC} [Ohm]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Passive_Loops/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Passive_Loops/Geometries</td>
+					<td>Shapes of the Passive Loops</td>
+					<td>struct_array</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Passive_Loops/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Passive_Loops/Geometries/Description_Type</td>
+					<td>Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ')  {STATIC}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Passive_Loops/Geometries/Coordinates_RZ</td>
+					<td>Irregular outline of the element {STATIC} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- 1...N_Points</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Passive_Loops/Geometries/RZDRDZ</td>
+					<td>4-Vector defining Centre R,Z and full extents dR, dZ  {STATIC} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...4</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Passive_Loops/Currents</td>
+					<td>Passive Loops currents (all Passive Loops are assumed to share the same timebase) {SIGNAL} [A]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Passive_Loops/Timebase</td>
+							</tr>
+							<tr>
+								<td>2- Passive_Loops/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Passive_Loops/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vacuum_Model</td>
+					<td>Electromagnetic Vacuum Model of the PF System, including both active and passive coils</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Vacuum_Model/Names</td>
+					<td>Names of circuits [Active;Passive] {STATIC}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Active_Passive_Circuits</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vacuum_Model/Inductance_Matrix</td>
+					<td>Inductance matrix between circuits {STATIC} [Henry]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Vacuum_Model/Names</td>
+							</tr>
+							<tr>
+								<td>2- Vacuum_Model/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vacuum_Model/Resistance_Vector</td>
+					<td>Resistances of PF coils {STATIC} [Ohm]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Vacuum_Model/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Name</td>
+					<td>Name of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Version</td>
+					<td>Version of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Parameters</td>
+					<td>List of the code specific parameters in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Diagnostics</td>
+					<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="SDN"><p class="welcome">ITER Physics Data Model Documentation for SDN</p>
+			<p>Description of the Synchronous Data Network parameters and the signals on it</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Axes</td>
+				</thead>
+				<tr>
+					<td>IDS_Properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Comment_of</td>
+					<td>Any additional comment from the source application</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Creator_of</td>
+					<td>Creator of this consistent IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Date_of</td>
+					<td>Date of consistent creation of this IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Reference_of</td>
+					<td>Documented reference to this IDS data</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Homogeneous_Timebase</td>
+					<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/cocos</td>
+					<td>Coordinate conventions of this IDS</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Allocatable_Signals</td>
+					<td>Dictionary of the signal names and definitions which can be allocated to the SDN</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Allocatable_Signals/Names</td>
+					<td>Names of all the allocatable signals {STATIC}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Allocatable_Signals/Names/N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Allocatable_Signals/Definitions </td>
+					<td>Definitions of the allocatable signals {STATIC}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Allocatable_Signals/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Allocatable_Signals/Ip_Normalise</td>
+					<td>Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops {STATIC}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Allocatable_Signals/Names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Allocated_Signals</td>
+					<td>Allocation of signal names to positions in the SDN {STATIC}</td>
+					<td>STR_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Signals</td>
+					<td>Data on the SDN {SIGNAL} [Mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+							<tr>
+								<td>2- Allocated_Signals</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>N_Topic_List</td>
+					<td>Number items in the vector of structures</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Topic_List</td>
+					<td>List of the groups of signals used at different reading and writing points</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Topic_List/Names</td>
+					<td>Names of the group of SDN signals {STATIC}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Topic_List/Names/N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Topic_List/Indices</td>
+					<td>Indices into the current SDN allocated list; it must be updated when the allocated list is changed {STATIC}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Topic_List/Indices/N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="TF"><p class="welcome">ITER Physics Data Model Documentation for TF</p>
+			<p>Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in PF IDS.</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Axes</td>
+				</thead>
+				<tr>
+					<td>IDS_Properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Comment_of</td>
+					<td>Any additional comment from the source application</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Creator_of</td>
+					<td>Creator of this consistent IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Date_of</td>
+					<td>Date of consistent creation of this IDS</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Reference_of</td>
+					<td>Documented reference to this IDS data</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Homogeneous_Timebase</td>
+					<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree.</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/cocos</td>
+					<td>Coordinate conventions of this IDS</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>N_Turns</td>
+					<td>Number of total turns in a toroidal field coil {STATIC}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>N_Coils</td>
+					<td>Number of coils around the tokamak {STATIC}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Current</td>
+					<td>Current in the coil</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Current/Data</td>
+					<td>Current in the coil {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Current/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Current/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Voltage</td>
+					<td>Voltage on the coil terminals</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Voltage/Data</td>
+					<td>Voltage on the coil terminals {SIGNAL} [V]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Voltage/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Voltage/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>B_Tor_Vacuum_R</td>
+					<td>Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>B_Tor_Vacuum_R/Data</td>
+					<td>Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above {SIGNAL} [T.m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- B_Tor_Vacuum_R/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>B_Tor_Vacuum_R/Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Timebase</td>
+					<td>Generic timebase [s]</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a></body>
+</html>

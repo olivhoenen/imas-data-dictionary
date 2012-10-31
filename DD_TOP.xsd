@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
+<?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./%24GET%5Bstylesheet%5D" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
+<?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
+<!--  -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--   Here we must declare all included schemas, not only those directly below TOP but also all those used at any sublevel (makes it easier for the recursive XSL transformation generating the type definitions) -->
+	<xs:include schemaLocation="Utilities/DD_Support.xsd"/>
+	<xs:include schemaLocation="Actuator/DD_Actuator.xsd"/>
+	<xs:include schemaLocation="Core_Profiles/DD_Core_Profiles.xsd"/>
+	<xs:include schemaLocation="Equilibrium/DD_Equilibrium.xsd"/>
+	<xs:include schemaLocation="Magnetics/DD_Magnetics.xsd"/>
+	<xs:include schemaLocation="PF/DD_PF.xsd"/>
+	<xs:include schemaLocation="SDN/DD_SDN.xsd"/>
+	<xs:include schemaLocation="TF/DD_TF.xsd"/>
+	<xs:element name="Physics_Data_Model">
+		<xs:annotation>
+			<xs:documentation>Root of the Physics Data Model</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Actuator" maxOccurs="6"/>
+				<xs:element ref="Core_Profiles" maxOccurs="6"/>
+				<xs:element ref="Equilibrium" maxOccurs="6"/>
+				<xs:element ref="Magnetics" maxOccurs="6"/>
+				<xs:element ref="PF" maxOccurs="6"/>
+				<xs:element ref="SDN" maxOccurs="6"/>
+				<xs:element ref="TF" maxOccurs="6"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
