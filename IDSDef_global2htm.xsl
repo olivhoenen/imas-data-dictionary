@@ -60,7 +60,7 @@
                     <xsl:if test="@Units"> [<xsl:value-of select="@Units"/>]</xsl:if>
 
            </td>
-           <td><xsl:value-of select="@data_type"/></td>  
+           <td><xsl:value-of select="@data_type"/><xsl:if test="@maxoccur"> [max_size=<xsl:value-of select="@maxoccur"/>]</xsl:if></td>  
   
 <td>
 <xsl:if test="@axis1 or @Axis1"> <!--If there is at least one axis-->

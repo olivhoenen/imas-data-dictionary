@@ -53,7 +53,7 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Elements" maxOccurs="unbounded">
+			<xs:element name="Elements" maxOccurs="20">
 				<xs:annotation>
 					<xs:documentation>Each PF coil is comprised of a number of cross-section elements described  individually</xs:documentation>
 					<xs:appinfo>
@@ -157,7 +157,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="IDS_Properties"/>
-				<xs:element name="Coils" type="PF_Coils" maxOccurs="unbounded">
+				<xs:element name="Coils" type="PF_Coils" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>Active PF coils</xs:documentation>
 						<xs:appinfo>
@@ -240,7 +240,7 @@
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Circuits" maxOccurs="unbounded">
+				<xs:element name="Circuits" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system</xs:documentation>
 						<xs:appinfo>
@@ -330,7 +330,7 @@
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Supplies" maxOccurs="unbounded">
+				<xs:element name="Supplies" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>PF power supplies</xs:documentation>
 						<xs:appinfo>
@@ -584,7 +584,7 @@
 									<xs:group ref="FLT_1D"/>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="Geometries" type="Outline_2D_Geometry_STATIC" maxOccurs="unbounded">
+							<xs:element name="Geometries" type="Outline_2D_Geometry_STATIC" maxOccurs="20">
 								<xs:annotation>
 									<xs:documentation>Shapes of the Passive Loops</xs:documentation>
 									<xs:appinfo>

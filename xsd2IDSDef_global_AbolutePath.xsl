@@ -220,8 +220,9 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 									<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
 									<xsl:choose>
 										<!-- It is an array of structures -->
-										<xsl:when test="@maxOccurs='unbounded'">
+										<xsl:when test="@maxOccurs='unbounded' or @maxOccurs &gt; 1">
 											<xsl:attribute name="data_type">struct_array</xsl:attribute>
+																						<xsl:attribute name="maxoccur"><xsl:value-of select="@maxOccurs"/></xsl:attribute> 
 										</xsl:when>
 										<!-- It is a regular structure -->
 										<xsl:otherwise>
@@ -263,8 +264,9 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 									<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
 									<xsl:choose>
 										<!-- It is an array of structures -->
-										<xsl:when test="@maxOccurs='unbounded'">
+										<xsl:when test="@maxOccurs='unbounded' or @maxOccurs &gt; 1">
 											<xsl:attribute name="data_type">struct_array</xsl:attribute>
+																						<xsl:attribute name="maxoccur"><xsl:value-of select="@maxOccurs"/></xsl:attribute> 
 											<xsl:if test="xs:annotation/xs:appinfo/axis1 or xs:annotation/xs:appinfo/Axis1">
 												<xsl:attribute name="axis1"><xsl:value-of select="xs:annotation/xs:appinfo/axis1"/><xsl:value-of select="xs:annotation/xs:appinfo/Axis1"/></xsl:attribute>
 											</xsl:if>

@@ -112,7 +112,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Charge_States" type="Plasma_Composition_Charge_States" maxOccurs="unbounded">
+			<xs:element name="Charge_States" type="Plasma_Composition_Charge_States" maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation>Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)</xs:documentation>
 					<xs:appinfo>
@@ -173,7 +173,7 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Components" type="Plasma_Composition_Neutrals_Components" maxOccurs="unbounded">
+			<xs:element name="Components" type="Plasma_Composition_Neutrals_Components" maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation>Array of components to the atom or molecule</xs:documentation>
 				</xs:annotation>
@@ -208,7 +208,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="Ions" type="Plasma_Composition_Ions" maxOccurs="unbounded">
+				<xs:element name="Ions" type="Plasma_Composition_Ions" maxOccurs="5">
 					<xs:annotation>
 						<xs:documentation>Array of plasma ions</xs:documentation>
 						<xs:appinfo>
@@ -216,7 +216,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Neutrals" type="Plasma_Composition_Neutrals" maxOccurs="unbounded">
+				<xs:element name="Neutrals" type="Plasma_Composition_Neutrals" maxOccurs="5">
 					<xs:annotation>
 						<xs:documentation>Array of neutrals</xs:documentation>
 						<xs:appinfo>

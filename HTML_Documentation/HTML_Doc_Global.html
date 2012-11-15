@@ -335,7 +335,7 @@
 				<tr>
 					<td>Plasma_Composition/Ions</td>
 					<td>Array of plasma ions</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=5]</td>
 					<td>
 						<table>
 							<tr>
@@ -377,7 +377,7 @@
 				<tr>
 					<td>Plasma_Composition/Ions/Charge_States</td>
 					<td>Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=10]</td>
 					<td>
 						<table>
 							<tr>
@@ -407,7 +407,7 @@
 				<tr>
 					<td>Plasma_Composition/Neutrals</td>
 					<td>Array of neutrals</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=5]</td>
 					<td>
 						<table>
 							<tr>
@@ -419,7 +419,7 @@
 				<tr>
 					<td>Plasma_Composition/Neutrals/Components</td>
 					<td>Array of components to the atom or molecule</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=10]</td>
 					<td />
 				</tr>
 				<tr>
@@ -2142,7 +2142,7 @@
 				<tr>
 					<td>Profiles_2D</td>
 					<td>Equilibrium 2D profiles in the poloidal plane. Multiple 2D representations of the equilibrium can be stored here.</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=4]</td>
 					<td>
 						<table>
 							<tr>
@@ -2716,7 +2716,7 @@
 				<tr>
 					<td>Flux_Loops</td>
 					<td>Flux loops</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=200]</td>
 					<td>
 						<table>
 							<tr>
@@ -2815,7 +2815,7 @@
 				<tr>
 					<td>Bpol_Probes</td>
 					<td>Poloidal field probes</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=200]</td>
 					<td>
 						<table>
 							<tr>
@@ -2941,7 +2941,7 @@
 				<tr>
 					<td>Processed_Data</td>
 					<td>Processed quantities derived from the magnetic measurements.</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=10]</td>
 					<td>
 						<table>
 							<tr>
@@ -3185,7 +3185,7 @@
 				<tr>
 					<td>Coils</td>
 					<td>Active PF coils</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=20]</td>
 					<td>
 						<table>
 							<tr>
@@ -3221,7 +3221,7 @@
 				<tr>
 					<td>Coils/Elements</td>
 					<td>Each PF coil is comprised of a number of cross-section elements described  individually</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=20]</td>
 					<td>
 						<table>
 							<tr>
@@ -3440,7 +3440,7 @@
 				<tr>
 					<td>Circuits</td>
 					<td>Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=20]</td>
 					<td>
 						<table>
 							<tr>
@@ -3545,7 +3545,7 @@
 				<tr>
 					<td>Supplies</td>
 					<td>PF power supplies</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=20]</td>
 					<td>
 						<table>
 							<tr>
@@ -3761,7 +3761,7 @@
 				<tr>
 					<td>Passive_Loops/Geometries</td>
 					<td>Shapes of the Passive Loops</td>
-					<td>struct_array</td>
+					<td>struct_array [max_size=20]</td>
 					<td>
 						<table>
 							<tr>
@@ -4089,8 +4089,14 @@
 				<tr>
 					<td>Topic_List</td>
 					<td>List of the groups of signals used at different reading and writing points</td>
-					<td>structure</td>
-					<td />
+					<td>struct_array [max_size=30]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>Topic_List/Names</td>
