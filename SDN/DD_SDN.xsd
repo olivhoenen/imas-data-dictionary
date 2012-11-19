@@ -2,6 +2,83 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:complexType name="SDN_Topic_List">
+		<xs:annotation>
+			<xs:documentation>List of the groups of signals used at different reading and writing points</xs:documentation>
+			<xs:appinfo>
+				<type>STATIC</type>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Names">
+				<xs:annotation>
+					<xs:documentation>Names of the group of SDN signals</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+						<axis1>N</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Indices">
+				<xs:annotation>
+					<xs:documentation>Indices into the current SDN allocated list; it must be updated when the allocated list is changed</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+						<axis1>N</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SDN_Allocatable_Signals">
+		<xs:annotation>
+			<xs:documentation>Dictionary of the signal names and definitions which can be allocated to the SDN</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Names">
+				<xs:annotation>
+					<xs:documentation>Names of all the allocatable signals</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+						<axis1>N</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Definitions ">
+				<xs:annotation>
+					<xs:documentation>Definitions of the allocatable signals</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+						<axis1>../Names</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ip_Normalise">
+				<xs:annotation>
+					<xs:documentation>Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops</xs:documentation>
+					<xs:appinfo>
+						<type>STATIC</type>
+						<axis1>../Names</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="SDN">
 		<xs:annotation>
 			<xs:documentation>Description of the Synchronous Data Network parameters and the signals on it</xs:documentation>
@@ -10,50 +87,10 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="IDS_Properties"/>
-				<xs:element name="Allocatable_Signals">
+				<xs:element name="Allocatable_Signals" type="SDN_Allocatable_Signals">
 					<xs:annotation>
 						<xs:documentation>Dictionary of the signal names and definitions which can be allocated to the SDN</xs:documentation>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="Names">
-								<xs:annotation>
-									<xs:documentation>Names of all the allocatable signals</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="STR_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Definitions ">
-								<xs:annotation>
-									<xs:documentation>Definitions of the allocatable signals</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="STR_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Ip_Normalise">
-								<xs:annotation>
-									<xs:documentation>Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>../Names</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="INT_1D"/>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
 				<xs:element name="Allocated_Signals">
 					<xs:annotation>
@@ -86,7 +123,7 @@
 						<xs:documentation>Number items in the vector of structures</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Topic_List" maxOccurs="30">
+				<xs:element name="Topic_List" type="SDN_Topic_List" maxOccurs="30">
 					<xs:annotation>
 						<xs:documentation>List of the groups of signals used at different reading and writing points</xs:documentation>
 						<xs:appinfo>
@@ -94,34 +131,6 @@
 							<axis1>N</axis1>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="Names">
-								<xs:annotation>
-									<xs:documentation>Names of the group of SDN signals</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="STR_1D"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Indices">
-								<xs:annotation>
-									<xs:documentation>Indices into the current SDN allocated list; it must be updated when the allocated list is changed</xs:documentation>
-									<xs:appinfo>
-										<type>STATIC</type>
-										<axis1>N</axis1>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:group ref="INT_1D"/>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
