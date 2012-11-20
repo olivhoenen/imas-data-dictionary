@@ -22,7 +22,7 @@
 			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" axis1="Timebase" type="SIGNAL"/>
 			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="Timebase" type="SIGNAL"/>
 		</field>
-		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 	</IDS>
 	<IDS name="Core_Profiles" maxoccur="6" documentation="Core plasma 1D profiles. TBD: toroidal and poloidal velocities. Errorbars to be added.">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -107,7 +107,7 @@
 			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" axis1="Timebase" type="SIGNAL"/>
 			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="Timebase" type="SIGNAL"/>
 		</field>
-		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 	</IDS>
 	<IDS name="Equilibrium" maxoccur="6" documentation="Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -243,7 +243,7 @@
 			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" axis1="Timebase" type="SIGNAL"/>
 			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="Timebase" type="SIGNAL"/>
 		</field>
-		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 	</IDS>
 	<IDS name="Magnetics" maxoccur="6" documentation="Magnetic diagnostics for equilibrium identification and plasma shape control.">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -262,7 +262,7 @@
 			<field name="Position_RZPhi" path="Flux_Loops/Position_RZPhi" documentation="List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)" data_type="FLT_2D" type="STATIC" axis1="1...3" axis2="1...N_Points" units="m, m, rad"/>
 			<field name="Flux" path="Flux_Loops/Flux" documentation="Measured flux." data_type="structure">
 				<field name="Data" path="Flux_Loops/Flux/Data" documentation="Measured flux." data_type="FLT_1D" axis1="Flux_Loops/Flux/Timebase" units="Wb" type="SIGNAL"/>
-				<field name="Timebase" path="Flux_Loops/Flux/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+				<field name="Timebase" path="Flux_Loops/Flux/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 			<field name="Flux_Error" path="Flux_Loops/Flux_Error" documentation="Absolute error on measured flux." data_type="structure">
 				<field name="Type" path="Flux_Loops/Flux_Error/Type" documentation="Type of errorbar description which is used. Refers to the name of the sibling fields." data_type="STR_0D"/>
@@ -282,7 +282,7 @@
 			<field name="Turns" path="Bpol_Probes/Turns" documentation="Turns in the coil" data_type="INT_0D" type="STATIC"/>
 			<field name="Field" path="Bpol_Probes/Field" documentation="Measured magnetic field" data_type="structure">
 				<field name="Data" path="Bpol_Probes/Field/Data" documentation="Measured magnetic field" data_type="FLT_1D" axis1="Bpol_Probes/Field/Timebase" type="SIGNAL" units="T"/>
-				<field name="Timebase" path="Bpol_Probes/Field/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+				<field name="Timebase" path="Bpol_Probes/Field/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 			<field name="Field_Error" path="Bpol_Probes/Field_Error" documentation="Absolute error on measured magnetic field." data_type="structure">
 				<field name="Type" path="Bpol_Probes/Field_Error/Type" documentation="Type of errorbar description which is used. Refers to the name of the sibling fields." data_type="STR_0D"/>
@@ -293,7 +293,7 @@
 		</field>
 		<field name="Processed_Data" path="Processed_Data" documentation="Processed quantities derived from the magnetic measurements." data_type="struct_array" maxoccur="10" axis1="1...N_Processed_Data">
 			<field name="Method" path="Processed_Data/Method" documentation="Name of the data processing method" data_type="STR_0D" type="STATIC"/>
-			<field name="Timebase" path="Processed_Data/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+			<field name="Timebase" path="Processed_Data/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			<field name="Ip" path="Processed_Data/Ip" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="SIGNAL" axis1="Processed_Data/Timebase" units="A"/>
 			<field name="Ip_Error" path="Processed_Data/Ip_Error" documentation="Error on plasma current " data_type="structure">
 				<field name="Type" path="Processed_Data/Ip_Error/Type" documentation="Type of errorbar description which is used. Refers to the name of the sibling fields." data_type="STR_0D"/>
@@ -316,7 +316,7 @@
 			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" axis1="Timebase" type="SIGNAL"/>
 			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="Timebase" type="SIGNAL"/>
 		</field>
-		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 	</IDS>
 	<IDS name="PF" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -347,11 +347,11 @@
 			</field>
 			<field name="Current" path="Coils/Current" documentation="Current in the coil" data_type="structure">
 				<field name="Data" path="Coils/Current/Data" documentation="Current in the coil" data_type="FLT_1D" type="SIGNAL" axis1="Coils/Current/Timebase" units="A"/>
-				<field name="Timebase" path="Coils/Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+				<field name="Timebase" path="Coils/Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 			<field name="Voltage" path="Coils/Voltage" documentation="Voltage on the coil terminals" data_type="structure">
 				<field name="Data" path="Coils/Voltage/Data" documentation="Voltage on the coil terminals" data_type="FLT_1D" type="SIGNAL" axis1="Coils/Voltage/Timebase" units="V"/>
-				<field name="Timebase" path="Coils/Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+				<field name="Timebase" path="Coils/Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 		</field>
 		<field name="Vertical_Forces" path="Vertical_Forces" documentation="Vertical forces on the axisymmetric PF coil system" data_type="structure">
@@ -360,7 +360,7 @@
 			<field name="Limits_Max" path="Vertical_Forces/Limits_Max" documentation="Vertical Force combinations limits" data_type="FLT_1D" type="STATIC" axis1="Vertical_Forces/Names" units="N"/>
 			<field name="Limits_Min" path="Vertical_Forces/Limits_Min" documentation="Vertical Force combination limit" data_type="FLT_1D" type="STATIC" axis1="Vertical_Forces/Names" units="N"/>
 			<field name="Forces" path="Vertical_Forces/Forces" documentation="Force combinations. All forces are assumed to be on the same timebase" data_type="FLT_2D" type="SIGNAL" axis1="Vertical_Forces/Names" axis2="Vertical_Forces/Timebase" units="N"/>
-			<field name="Timebase" path="Vertical_Forces/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+			<field name="Timebase" path="Vertical_Forces/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 		</field>
 		<field name="Circuits" path="Circuits" documentation="Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system" data_type="struct_array" maxoccur="20" axis1="1...N_Circuits">
 			<field name="Name" path="Circuits/Name" documentation="Name of the circuit" data_type="STR_0D" type="STATIC"/>
@@ -369,11 +369,11 @@
 			<field name="Connections" path="Circuits/Connections" documentation="Description of the supplies and coils connections (nodes) across the circuit. The matrix describing for each node (first dimension) which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the second dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD)" data_type="FLT_2D" type="STATIC" axis1="1...N_Nodes" axis2="1...2*N_components"/>
 			<field name="Voltage" path="Circuits/Voltage" documentation="Voltage on the circuit" data_type="structure">
 				<field name="Data" path="Circuits/Voltage/Data" documentation="Voltage on the circuit" data_type="FLT_1D" type="SIGNAL" axis1="Circuits/Voltage/Timebase" units="V"/>
-				<field name="Timebase" path="Circuits/Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+				<field name="Timebase" path="Circuits/Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 			<field name="Current" path="Circuits/Current" documentation="Current in the circuit" data_type="structure">
 				<field name="Data" path="Circuits/Current/Data" documentation="Current in the circuit" data_type="FLT_1D" type="SIGNAL" axis1="Circuits/Current/Timebase" units="V"/>
-				<field name="Timebase" path="Circuits/Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+				<field name="Timebase" path="Circuits/Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 		</field>
 		<field name="Supplies" path="Supplies" documentation="PF power supplies" data_type="struct_array" maxoccur="20" axis1="1...N_PF_Supplies">
@@ -393,11 +393,11 @@
 			<field name="Nonlinear_Model" path="Supplies/Nonlinear_Model" documentation="Description of the nonlinear transfer function of the supply  STATIC" data_type="STR_0D"/>
 			<field name="Voltage" path="Supplies/Voltage" documentation="Voltages at the supply output" data_type="structure">
 				<field name="Data" path="Supplies/Voltage/Data" documentation="Voltages at the supply output" data_type="FLT_1D" type="SIGNAL" axis1="Supplies/Voltage/Timebase" units="V"/>
-				<field name="Timebase" path="Supplies/Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+				<field name="Timebase" path="Supplies/Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 			<field name="Current" path="Supplies/Current" documentation="Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description" data_type="structure">
 				<field name="Data" path="Supplies/Current/Data" documentation="Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description" data_type="FLT_1D" type="SIGNAL" axis1="Supplies/Current/Timebase" units="A"/>
-				<field name="Timebase" path="Supplies/Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+				<field name="Timebase" path="Supplies/Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 		</field>
 		<field name="Passive_Loops" path="Passive_Loops" documentation="Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached." data_type="structure">
@@ -410,7 +410,7 @@
 				<field name="RZDRDZ" path="Passive_Loops/Geometries/RZDRDZ" documentation="4-Vector defining Centre R,Z and full extents dR, dZ " data_type="FLT_1D" type="STATIC" axis1="1...4" units="m"/>
 			</field>
 			<field name="Currents" path="Passive_Loops/Currents" documentation="Passive Loops currents (all Passive Loops are assumed to share the same timebase)" data_type="FLT_2D" type="SIGNAL" axis1="Passive_Loops/Timebase" axis2="Passive_Loops/Names" units="A"/>
-			<field name="Timebase" path="Passive_Loops/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+			<field name="Timebase" path="Passive_Loops/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 		</field>
 		<field name="Vacuum_Model" path="Vacuum_Model" documentation="Electromagnetic Vacuum Model of the PF System, including both active and passive coils" data_type="structure">
 			<field name="Names" path="Vacuum_Model/Names" documentation="Names of circuits [Active;Passive]" data_type="STR_1D" type="STATIC" axis1="1...N_Active_Passive_Circuits"/>
@@ -424,7 +424,7 @@
 			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" axis1="Timebase" type="SIGNAL"/>
 			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="Timebase" type="SIGNAL"/>
 		</field>
-		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 	</IDS>
 	<IDS name="SDN" maxoccur="6" documentation="Description of the Synchronous Data Network parameters and the signals on it">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -443,10 +443,10 @@
 			<field name="Ip_Normalise" path="Allocatable_Signals/Ip_Normalise" documentation="Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops" data_type="INT_1D" type="STATIC" axis1="Allocatable_Signals/Names"/>
 		</field>
 		<field name="Allocated_Signals" path="Allocated_Signals" documentation="Allocation of signal names to positions in the SDN" data_type="STR_1D" type="STATIC"/>
-		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 		<field name="Signals" path="Signals" documentation="Data on the SDN" data_type="FLT_2D" type="SIGNAL" axis1="Timebase" axis2="Allocated_Signals" units="Mixed"/>
 		<field name="N_Topic_List" path="N_Topic_List" documentation="Number items in the vector of structures" data_type="int_type"/>
-		<field name="Topic_List" path="Topic_List" documentation="List of the groups of signals used at different reading and writing points" data_type="struct_array" maxoccur="30" axis1="N">
+		<field name="Topic_List" path="Topic_List" documentation="List of the groups of signals used at different reading and writing points" data_type="struct_array" maxoccur="30" axis1="1...N_Topic_List">
 			<field name="Names" path="Topic_List/Names" documentation="Names of the group of SDN signals" data_type="STR_1D" type="STATIC" axis1="Topic_List/Names/N"/>
 			<field name="Indices" path="Topic_List/Indices" documentation="Indices into the current SDN allocated list; it must be updated when the allocated list is changed" data_type="INT_1D" type="STATIC" axis1="Topic_List/Indices/N"/>
 		</field>
@@ -466,16 +466,16 @@
 		<field name="N_Coils" path="N_Coils" documentation="Number of coils around the tokamak" data_type="INT_0D" type="STATIC"/>
 		<field name="Current" path="Current" documentation="Current in the coil" data_type="structure">
 			<field name="Data" path="Current/Data" documentation="Current in the coil" data_type="FLT_1D" type="SIGNAL" axis1="Current/Timebase" units="A"/>
-			<field name="Timebase" path="Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+			<field name="Timebase" path="Current/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 		</field>
 		<field name="Voltage" path="Voltage" documentation="Voltage on the coil terminals" data_type="structure">
 			<field name="Data" path="Voltage/Data" documentation="Voltage on the coil terminals" data_type="FLT_1D" type="SIGNAL" axis1="Voltage/Timebase" units="V"/>
-			<field name="Timebase" path="Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+			<field name="Timebase" path="Voltage/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 		</field>
 		<field name="B_Tor_Vacuum_R" path="B_Tor_Vacuum_R" documentation="Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above" data_type="structure">
 			<field name="Data" path="B_Tor_Vacuum_R/Data" documentation="Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="SIGNAL" axis1="B_Tor_Vacuum_R/Timebase" units="T.m"/>
-			<field name="Timebase" path="B_Tor_Vacuum_R/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+			<field name="Timebase" path="B_Tor_Vacuum_R/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 		</field>
-		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times"/>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 	</IDS>
 </IDSs>
