@@ -202,18 +202,20 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element ref="Timebase"/>
 			<xs:element name="Ip">
 				<xs:annotation>
 					<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
-						<axis1>../Timebase</axis1>
+						<axis1>Timebase</axis1>
 						<units>A</units>
 					</xs:appinfo>
-				</xs:annotation>
+				</xs:annotation>	
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:sequence>
+						<xs:element ref="Timebase"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="Diamagnetic_Flux">
@@ -221,12 +223,15 @@
 					<xs:documentation>Diamagnetic flux</xs:documentation>
 					<xs:appinfo>
 						<type>SIGNAL</type>
-						<axis1>../Timebase</axis1>
+						<axis1>Timebase</axis1>
 						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:sequence>
+						<xs:element ref="Timebase"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

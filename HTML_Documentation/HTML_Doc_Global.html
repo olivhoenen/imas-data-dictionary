@@ -34,7 +34,7 @@
 			</tr>
 			<tr>
 				<td><a href="#Magnetics">Magnetics</a></td>
-				<td></td>
+				<td>Magnetic diagnostics for equilibrium identification and plasma shape control.</td>
 				<td>6</td>
 			</tr>
 			<tr>
@@ -2657,7 +2657,7 @@
 				</tr>
 			</table>
 		</a><a name="Magnetics"><p class="welcome">ITER Physics Data Model Documentation for Magnetics</p>
-			<p></p>
+			<p>Magnetic diagnostics for equilibrium identification and plasma shape control.</p>
 			<table border="1">
 				<thead style="color:#ff0000">
 					<td>Full path name</td>
@@ -2721,57 +2721,57 @@
 				</tr>
 				<tr>
 					<td>Flux_Loops</td>
-					<td></td>
+					<td>Flux loops</td>
 					<td>struct_array [max_size=200]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Flux_Loops/</td>
+								<td>1- 1...N_Flux_Loops</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>Flux_Loops/Name</td>
-					<td> {}</td>
+					<td>Name of the flux loop {STATIC}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Flux_Loops/Identifier</td>
-					<td> {}</td>
+					<td>ID of the flux loop {STATIC}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Flux_Loops/Position_RZPhi</td>
-					<td> {} []</td>
+					<td>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf) {STATIC} [m, m, rad]</td>
 					<td>FLT_2D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Flux_Loops/Position_RZPhi/</td>
+								<td>1- 1...3</td>
 							</tr>
 							<tr>
-								<td>2- Flux_Loops/Position_RZPhi/</td>
+								<td>2- 1...N_Points</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>Flux_Loops/Flux</td>
-					<td></td>
+					<td>Measured flux.</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Flux_Loops/Flux/Data</td>
-					<td> {} []</td>
+					<td>Measured flux. {SIGNAL} [Wb]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Flux_Loops/Flux/</td>
+								<td>1- Flux_Loops/Flux/Timebase</td>
 							</tr>
 						</table>
 					</td>
@@ -2790,84 +2790,84 @@
 				</tr>
 				<tr>
 					<td>Bpol_Probes</td>
-					<td></td>
+					<td>Poloidal field probes</td>
 					<td>struct_array [max_size=200]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Bpol_Probes/</td>
+								<td>1- 1...N_Bpol_Probes</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Name</td>
-					<td> {}</td>
+					<td>Name of the probe {STATIC}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Identifier</td>
-					<td> {}</td>
+					<td>ID of the probe {STATIC}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Centre_Position_RZPhi</td>
-					<td> {} []</td>
+					<td>R, Z, Phi position of coil centre {STATIC} [m, m, rad]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Bpol_Probes/Centre_Position_RZPhi/</td>
+								<td>1- 1...3</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Poloidal_Angle</td>
-					<td> {} []</td>
+					<td>Poloidal angle of coil orientation {STATIC} [rad]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Toroidal_Angle</td>
-					<td> {} []</td>
+					<td>Toroidal angle of coil orientation (0 if fully in the poloidal plane)  {STATIC} [rad]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Area</td>
-					<td> {} []</td>
+					<td>Area of the coil {STATIC} [m^2]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Length</td>
-					<td> {} []</td>
+					<td>Length of the coil {STATIC} [m]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Turns</td>
-					<td> {}</td>
+					<td>Turns in the coil {STATIC}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Field</td>
-					<td></td>
+					<td>Measured magnetic field</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
 					<td>Bpol_Probes/Field/Data</td>
-					<td> {} []</td>
+					<td>Measured magnetic field {SIGNAL} [T]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Bpol_Probes/Field/</td>
+								<td>1- Bpol_Probes/Field/Timebase</td>
 							</tr>
 						</table>
 					</td>
@@ -2886,24 +2886,42 @@
 				</tr>
 				<tr>
 					<td>Processed_Data</td>
-					<td></td>
+					<td>Processed quantities derived from the magnetic measurements.</td>
 					<td>struct_array [max_size=10]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Processed_Data/</td>
+								<td>1- 1...N_Processed_Data</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>Processed_Data/Method</td>
-					<td> {}</td>
+					<td>Name of the data processing method {STATIC}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>Processed_Data/Timebase</td>
+					<td>Processed_Data/Ip</td>
+					<td>Plasma current. Positive sign means anti-clockwise when viewed from above</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Ip/Data</td>
+					<td>Plasma current. Positive sign means anti-clockwise when viewed from above {SIGNAL} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Processed_Data/Ip/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Processed_Data/Ip/Timebase</td>
 					<td>Generic timebase [s] {SIGNAL}</td>
 					<td>flt_1d_type</td>
 					<td>
@@ -2915,25 +2933,31 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Processed_Data/Ip</td>
-					<td> {} []</td>
+					<td>Processed_Data/Diamagnetic_Flux</td>
+					<td>Diamagnetic flux</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Processed_Data/Diamagnetic_Flux/Data</td>
+					<td>Diamagnetic flux {SIGNAL} [Wb]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Processed_Data/Ip/</td>
+								<td>1- Processed_Data/Diamagnetic_Flux/Timebase</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>Processed_Data/Diamagnetic_Flux</td>
-					<td> {} []</td>
-					<td>FLT_1D</td>
+					<td>Processed_Data/Diamagnetic_Flux/Timebase</td>
+					<td>Generic timebase [s] {SIGNAL}</td>
+					<td>flt_1d_type</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Processed_Data/Diamagnetic_Flux/</td>
+								<td>1- 1...N_Times</td>
 							</tr>
 						</table>
 					</td>

@@ -245,7 +245,7 @@
 		</field>
 		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 	</IDS>
-	<IDS name="Magnetics" maxoccur="6" documentation="">
+	<IDS name="Magnetics" maxoccur="6" documentation="Magnetic diagnostics for equilibrium identification and plasma shape control.">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
 			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
@@ -256,34 +256,39 @@
 			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
 			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
 		</field>
-		<field name="Flux_Loops" path="Flux_Loops" documentation="" data_type="struct_array" maxoccur="200" axis1="Flux_Loops/">
-			<field name="Name" path="Flux_Loops/Name" documentation="" data_type="STR_0D" type=""/>
-			<field name="Identifier" path="Flux_Loops/Identifier" documentation="" data_type="STR_0D" type=""/>
-			<field name="Position_RZPhi" path="Flux_Loops/Position_RZPhi" documentation="" data_type="FLT_2D" type="" axis1="Flux_Loops/Position_RZPhi/" axis2="Flux_Loops/Position_RZPhi/" units=""/>
-			<field name="Flux" path="Flux_Loops/Flux" documentation="" data_type="structure">
-				<field name="Data" path="Flux_Loops/Flux/Data" documentation="" data_type="FLT_1D" axis1="Flux_Loops/Flux/" units="" type=""/>
+		<field name="Flux_Loops" path="Flux_Loops" documentation="Flux loops" data_type="struct_array" maxoccur="200" axis1="1...N_Flux_Loops">
+			<field name="Name" path="Flux_Loops/Name" documentation="Name of the flux loop" data_type="STR_0D" type="STATIC"/>
+			<field name="Identifier" path="Flux_Loops/Identifier" documentation="ID of the flux loop" data_type="STR_0D" type="STATIC"/>
+			<field name="Position_RZPhi" path="Flux_Loops/Position_RZPhi" documentation="List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)" data_type="FLT_2D" type="STATIC" axis1="1...3" axis2="1...N_Points" units="m, m, rad"/>
+			<field name="Flux" path="Flux_Loops/Flux" documentation="Measured flux." data_type="structure">
+				<field name="Data" path="Flux_Loops/Flux/Data" documentation="Measured flux." data_type="FLT_1D" axis1="Flux_Loops/Flux/Timebase" units="Wb" type="SIGNAL"/>
 				<field name="Timebase" path="Flux_Loops/Flux/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 		</field>
-		<field name="Bpol_Probes" path="Bpol_Probes" documentation="" data_type="struct_array" maxoccur="200" axis1="Bpol_Probes/">
-			<field name="Name" path="Bpol_Probes/Name" documentation="" data_type="STR_0D" type=""/>
-			<field name="Identifier" path="Bpol_Probes/Identifier" documentation="" data_type="STR_0D" type=""/>
-			<field name="Centre_Position_RZPhi" path="Bpol_Probes/Centre_Position_RZPhi" documentation="" data_type="FLT_1D" type="" axis1="Bpol_Probes/Centre_Position_RZPhi/" units=""/>
-			<field name="Poloidal_Angle" path="Bpol_Probes/Poloidal_Angle" documentation="" data_type="FLT_0D" type="" units=""/>
-			<field name="Toroidal_Angle" path="Bpol_Probes/Toroidal_Angle" documentation="" data_type="FLT_0D" type="" units=""/>
-			<field name="Area" path="Bpol_Probes/Area" documentation="" data_type="FLT_0D" type="" units=""/>
-			<field name="Length" path="Bpol_Probes/Length" documentation="" data_type="FLT_0D" type="" units=""/>
-			<field name="Turns" path="Bpol_Probes/Turns" documentation="" data_type="INT_0D" type=""/>
-			<field name="Field" path="Bpol_Probes/Field" documentation="" data_type="structure">
-				<field name="Data" path="Bpol_Probes/Field/Data" documentation="" data_type="FLT_1D" axis1="Bpol_Probes/Field/" type="" units=""/>
+		<field name="Bpol_Probes" path="Bpol_Probes" documentation="Poloidal field probes" data_type="struct_array" maxoccur="200" axis1="1...N_Bpol_Probes">
+			<field name="Name" path="Bpol_Probes/Name" documentation="Name of the probe" data_type="STR_0D" type="STATIC"/>
+			<field name="Identifier" path="Bpol_Probes/Identifier" documentation="ID of the probe" data_type="STR_0D" type="STATIC"/>
+			<field name="Centre_Position_RZPhi" path="Bpol_Probes/Centre_Position_RZPhi" documentation="R, Z, Phi position of coil centre" data_type="FLT_1D" type="STATIC" axis1="1...3" units="m, m, rad"/>
+			<field name="Poloidal_Angle" path="Bpol_Probes/Poloidal_Angle" documentation="Poloidal angle of coil orientation" data_type="FLT_0D" type="STATIC" units="rad"/>
+			<field name="Toroidal_Angle" path="Bpol_Probes/Toroidal_Angle" documentation="Toroidal angle of coil orientation (0 if fully in the poloidal plane) " data_type="FLT_0D" type="STATIC" units="rad"/>
+			<field name="Area" path="Bpol_Probes/Area" documentation="Area of the coil" data_type="FLT_0D" type="STATIC" units="m^2"/>
+			<field name="Length" path="Bpol_Probes/Length" documentation="Length of the coil" data_type="FLT_0D" type="STATIC" units="m"/>
+			<field name="Turns" path="Bpol_Probes/Turns" documentation="Turns in the coil" data_type="INT_0D" type="STATIC"/>
+			<field name="Field" path="Bpol_Probes/Field" documentation="Measured magnetic field" data_type="structure">
+				<field name="Data" path="Bpol_Probes/Field/Data" documentation="Measured magnetic field" data_type="FLT_1D" axis1="Bpol_Probes/Field/Timebase" type="SIGNAL" units="T"/>
 				<field name="Timebase" path="Bpol_Probes/Field/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 			</field>
 		</field>
-		<field name="Processed_Data" path="Processed_Data" documentation="" data_type="struct_array" maxoccur="10" axis1="Processed_Data/">
-			<field name="Method" path="Processed_Data/Method" documentation="" data_type="STR_0D" type=""/>
-			<field name="Timebase" path="Processed_Data/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
-			<field name="Ip" path="Processed_Data/Ip" documentation="" data_type="FLT_1D" type="" axis1="Processed_Data/Ip/" units=""/>
-			<field name="Diamagnetic_Flux" path="Processed_Data/Diamagnetic_Flux" documentation="" data_type="FLT_1D" type="" axis1="Processed_Data/Diamagnetic_Flux/" units=""/>
+		<field name="Processed_Data" path="Processed_Data" documentation="Processed quantities derived from the magnetic measurements." data_type="struct_array" maxoccur="10" axis1="1...N_Processed_Data">
+			<field name="Method" path="Processed_Data/Method" documentation="Name of the data processing method" data_type="STR_0D" type="STATIC"/>
+			<field name="Ip" path="Processed_Data/Ip" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above" data_type="structure">
+				<field name="Data" path="Processed_Data/Ip/Data" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="SIGNAL" axis1="Processed_Data/Ip/Timebase" units="A"/>
+				<field name="Timebase" path="Processed_Data/Ip/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
+			</field>
+			<field name="Diamagnetic_Flux" path="Processed_Data/Diamagnetic_Flux" documentation="Diamagnetic flux" data_type="structure">
+				<field name="Data" path="Processed_Data/Diamagnetic_Flux/Data" documentation="Diamagnetic flux" data_type="FLT_1D" type="SIGNAL" axis1="Processed_Data/Diamagnetic_Flux/Timebase" units="Wb"/>
+				<field name="Timebase" path="Processed_Data/Diamagnetic_Flux/Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
+			</field>
 		</field>
 		<field name="Code_Parameters" path="Code_Parameters" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="Code_Name" path="Code_Parameters/Code_Name" documentation="Name of the code" data_type="STR_0D" type="CONSTANT"/>
