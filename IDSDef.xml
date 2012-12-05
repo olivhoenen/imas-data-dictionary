@@ -2,14 +2,14 @@
 <IDSs xmlns:fn="http://www.w3.org/2005/02/xpath-functions">
 	<IDS name="Actuator" maxoccur="6" documentation="Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
-			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
-			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
-			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes" data_type="str_type"/>
-			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type"/>
-			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
-			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="CONSTANT"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="CONSTANT"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type" type="CONSTANT"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="CONSTANT"/>
 		</field>
 		<field name="Name" path="Name" documentation="Name of the actuator (IC, EC, NBI, LH)" data_type="STR_0D" type="STATIC" units="-"/>
 		<field name="Channels" path="Channels" documentation="ID of the multiple channels of the actuator: Beam boxes for NBI, EC or IC launcher, ..." data_type="STR_1D" type="STATIC" units="-"/>
@@ -26,14 +26,14 @@
 	</IDS>
 	<IDS name="Core_Profiles" maxoccur="6" documentation="Core plasma 1D profiles. TBD: toroidal and poloidal velocities. Errorbars to be added.">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
-			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
-			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
-			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes" data_type="str_type"/>
-			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type"/>
-			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
-			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="CONSTANT"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="CONSTANT"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type" type="CONSTANT"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="CONSTANT"/>
 		</field>
 		<field name="Rho_Tor_Norm" path="Rho_Tor_Norm" documentation="Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_2D" type="SIGNAL" axis1="1...N_Rho_Tor_Norm" axis2="Timebase"/>
 		<field name="Vacuum_Toroidal_Field" path="Vacuum_Toroidal_Field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure">
@@ -111,14 +111,14 @@
 	</IDS>
 	<IDS name="Equilibrium" maxoccur="6" documentation="Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
-			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
-			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
-			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes" data_type="str_type"/>
-			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type"/>
-			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
-			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="CONSTANT"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="CONSTANT"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type" type="CONSTANT"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="CONSTANT"/>
 		</field>
 		<field name="Boundary" path="Boundary" documentation="Description of the plasma boundary" data_type="structure">
 			<field name="Type" path="Boundary/Type" documentation="0 (limiter) or 1 (diverted)" data_type="INT_1D" axis1="Timebase" type="SIGNAL"/>
@@ -247,14 +247,14 @@
 	</IDS>
 	<IDS name="Magnetics" maxoccur="6" documentation="Magnetic diagnostics for equilibrium identification and plasma shape control.">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
-			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
-			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
-			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes" data_type="str_type"/>
-			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type"/>
-			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
-			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="CONSTANT"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="CONSTANT"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type" type="CONSTANT"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="CONSTANT"/>
 		</field>
 		<field name="Flux_Loops" path="Flux_Loops" documentation="Flux loops" data_type="struct_array" maxoccur="200" axis1="1...N_Flux_Loops">
 			<field name="Name" path="Flux_Loops/Name" documentation="Name of the flux loop" data_type="STR_0D" type="STATIC"/>
@@ -301,14 +301,14 @@
 	</IDS>
 	<IDS name="PF" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
-			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
-			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
-			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes" data_type="str_type"/>
-			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type"/>
-			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
-			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="CONSTANT"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="CONSTANT"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type" type="CONSTANT"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="CONSTANT"/>
 		</field>
 		<field name="Coils" path="Coils" documentation="Active PF coils" data_type="struct_array" maxoccur="20" axis1="1...N_PF_Coils">
 			<field name="Name" path="Coils/Name" documentation="Name of the coil" data_type="STR_0D" type="STATIC"/>
@@ -409,14 +409,14 @@
 	</IDS>
 	<IDS name="SDN" maxoccur="6" documentation="Description of the Synchronous Data Network parameters and the signals on it">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
-			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
-			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
-			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes" data_type="str_type"/>
-			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type"/>
-			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
-			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="CONSTANT"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="CONSTANT"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type" type="CONSTANT"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="CONSTANT"/>
 		</field>
 		<field name="Allocatable_Signals" path="Allocatable_Signals" documentation="Dictionary of the signal names and definitions which can be allocated to the SDN" data_type="structure">
 			<field name="Names" path="Allocatable_Signals/Names" documentation="Names of all the allocatable signals" data_type="STR_1D" type="STATIC" axis1="Allocatable_Signals/Names/N"/>
@@ -434,14 +434,14 @@
 	</IDS>
 	<IDS name="TF" maxoccur="6" documentation="Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in PF IDS.">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
-			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type"/>
-			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type"/>
-			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type"/>
-			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type"/>
-			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes" data_type="str_type"/>
-			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type"/>
-			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type"/>
-			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type"/>
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="CONSTANT"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="CONSTANT"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type" type="CONSTANT"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="CONSTANT"/>
 		</field>
 		<field name="N_Turns" path="N_Turns" documentation="Number of total turns in a toroidal field coil" data_type="INT_0D" type="STATIC"/>
 		<field name="N_Coils" path="N_Coils" documentation="Number of coils around the tokamak" data_type="INT_0D" type="STATIC"/>
