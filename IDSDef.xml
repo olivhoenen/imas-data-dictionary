@@ -24,7 +24,7 @@
 		</field>
 		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
 	</IDS>
-	<IDS name="Core_Profiles" maxoccur="6" documentation="Core plasma 1D profiles. TBD: toroidal and poloidal velocities. Errorbars to be added.">
+	<IDS name="Core_Profiles" maxoccur="6" documentation="Core plasma radial profiles">
 		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
 			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
@@ -40,40 +40,38 @@
 			<field name="R0" path="Vacuum_Toroidal_Field/R0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="CONSTANT" units="m"/>
 			<field name="B0" path="Vacuum_Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the B_Tor_Vacuum_R field of the TF IDS." data_type="FLT_1D" type="SIGNAL" units="T" axis1="Timebase"/>
 		</field>
-		<field name="Plasma_Composition" path="Plasma_Composition" documentation="Generic declaration of Plasma Composition for a simulation" data_type="structure">
-			<field name="Ions" path="Plasma_Composition/Ions" documentation="Array of plasma ions" data_type="struct_array" maxoccur="5" axis1="1...N_Ions">
-				<field name="A" path="Plasma_Composition/Ions/A" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="CONSTANT"/>
-				<field name="Zion" path="Plasma_Composition/Ions/Zion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="CONSTANT" units="Elementary Charge Unit"/>
-				<field name="Zn" path="Plasma_Composition/Ions/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
-				<field name="Label" path="Plasma_Composition/Ions/Label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="CONSTANT"/>
-				<field name="Multiple_Charge_State_Flag" path="Plasma_Composition/Ions/Multiple_Charge_State_Flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure" data_type="INT_0D" type="CONSTANT"/>
-				<field name="Charge_States" path="Plasma_Composition/Ions/Charge_States" documentation="Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)" data_type="struct_array" maxoccur="10" axis1="1...N_Charge_States">
-					<field name="Z_Min" path="Plasma_Composition/Ions/Charge_States/Z_Min" documentation="Minimum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
-					<field name="Z_Max" path="Plasma_Composition/Ions/Charge_States/Z_Max" documentation="Maximum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
-					<field name="Label" path="Plasma_Composition/Ions/Charge_States/Label" documentation="String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)" data_type="STR_0D" type="CONSTANT"/>
-				</field>
-			</field>
-			<field name="Neutrals" path="Plasma_Composition/Neutrals" documentation="Array of neutrals" data_type="struct_array" maxoccur="5" axis1="1...N_Neutrals">
-				<field name="Components" path="Plasma_Composition/Neutrals/Components" documentation="Array of components to the atom or molecule" data_type="struct_array" maxoccur="10">
-					<field name="A" path="Plasma_Composition/Neutrals/Components/A" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="CONSTANT"/>
-					<field name="Zn" path="Plasma_Composition/Neutrals/Components/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
-					<field name="Multiplicity" path="Plasma_Composition/Neutrals/Components/Multiplicity" documentation="Multiplicity of the atom" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
-				</field>
-				<field name="Energies" path="Plasma_Composition/Neutrals/Energies" documentation="Types energies considered for this neutral species : 0=cold, 1=thermal, 2= fast, 3=NBI" data_type="INT_1D" type="CONSTANT"/>
-				<field name="Label" path="Plasma_Composition/Neutrals/Label" documentation="String identifying the atom or molecule (e.g. D2, DT, CD4, ...)" data_type="STR_0D" type="CONSTANT"/>
-			</field>
-		</field>
 		<field name="Psi" path="Psi" documentation="Poloidal magnetic flux" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="Wb" type="SIGNAL"/>
 		<field name="Te" path="Te" documentation="Electron temperature" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="eV" type="SIGNAL"/>
-		<field name="Ti" path="Ti" documentation="Ion temperature" data_type="FLT_3D" axis1="Rho_Tor_Norm" axis2="Plasma_Composition/Ions" axis3="Timebase" units="eV" type="SIGNAL"/>
+		<field name="Ti_Average" path="Ti_Average" documentation="Ion temperature (averaged on charge states and ion species)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="eV" type="SIGNAL"/>
 		<field name="Ne" path="Ne" documentation="Electron density (thermal+non-thermal)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m^-3" type="SIGNAL"/>
 		<field name="Ne_Fast" path="Ne_Fast" documentation="Density of fast (non-thermal) electrons" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m^-3" type="SIGNAL"/>
-		<field name="Ni" path="Ni" documentation="Ion density (thermal+non-thermal)" data_type="FLT_3D" axis1="Rho_Tor_Norm" axis2="Plasma_Composition/Ions" axis3="Timebase" units="m^-3" type="SIGNAL"/>
-		<field name="Ni_Fast" path="Ni_Fast" documentation="Density of fast (non-thermal) ions, for the various ion species" data_type="FLT_3D" axis1="Rho_Tor_Norm" axis2="Plasma_Composition/Ions" axis3="Timebase" units="m^-3" type="SIGNAL"/>
-		<field name="Ni_Total_Over_Ne" path="Ni_Total_Over_Ne" documentation="Ratio of total ion density (sum over species) over electron density. (thermal+non-thermal)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="-" type="SIGNAL"/>
+		<field name="Ions" path="Ions" documentation="Quantities related to the different ion species" data_type="struct_array" maxoccur="5" axis1="1...N_Ions">
+			<field name="A" path="Ions/A" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="CONSTANT"/>
+			<field name="Zion" path="Ions/Zion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="CONSTANT" units="Elementary Charge Unit"/>
+			<field name="Zn" path="Ions/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+			<field name="Label" path="Ions/Label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Ni" path="Ions/Ni" documentation="Ion density (thermal+non-thermal)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m^-3" type="SIGNAL"/>
+			<field name="Ni_Fast" path="Ions/Ni_Fast" documentation="Density of fast (non-thermal) ions, for the ion species considered" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m^-3" type="SIGNAL"/>
+			<field name="Ti" path="Ions/Ti" documentation="Ion temperature of that ion species" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="eV" type="SIGNAL"/>
+			<field name="Pi" path="Ions/Pi" documentation="Ion pressure for that ion species" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="Pa" type="SIGNAL"/>
+			<field name="V_Tor_i" path="Ions/V_Tor_i" documentation="Toroidal velocity of that ion species" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m.s^-1" type="SIGNAL"/>
+			<field name="V_Pol_i" path="Ions/V_Pol_i" documentation="Poloidal velocity of that ion species" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m.s^-1" type="SIGNAL"/>
+			<field name="Multiple_Charge_State_Flag" path="Ions/Multiple_Charge_State_Flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure" data_type="INT_0D" type="CONSTANT"/>
+			<field name="Charge_States" path="Ions/Charge_States" documentation="Quantities related to the different charge states of the ion species" data_type="struct_array" maxoccur="10" axis1="1...N_Charge_States">
+				<field name="Z_Min" path="Ions/Charge_States/Z_Min" documentation="Minimum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+				<field name="Z_Max" path="Ions/Charge_States/Z_Max" documentation="Maximum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+				<field name="Label" path="Ions/Charge_States/Label" documentation="String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)" data_type="STR_0D" type="CONSTANT"/>
+				<field name="Nz" path="Ions/Charge_States/Nz" documentation="Density of the charge state considered (thermal+non-thermal)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m^-3" type="SIGNAL"/>
+				<field name="Nz_Fast" path="Ions/Charge_States/Nz_Fast" documentation="Density of fast (non-thermal) ions, for the charge state considered" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m^-3" type="SIGNAL"/>
+				<field name="Tz" path="Ions/Charge_States/Tz" documentation="Temperature of the charge state considered" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m^-3" type="SIGNAL"/>
+				<field name="V_Tor_z" path="Ions/Charge_States/V_Tor_z" documentation="Toroidal velocity of the charge state considered" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m.s^-1" type="SIGNAL"/>
+				<field name="V_Pol_z" path="Ions/Charge_States/V_Pol_z" documentation="Poloidal velocity of the charge state considered" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="m.s^-1" type="SIGNAL"/>
+			</field>
+		</field>
+		<field name="Ni_Total_Over_Ne" path="Ni_Total_Over_Ne" documentation="Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="-" type="SIGNAL"/>
+		<field name="Momentum_Tor" path="Momentum_Tor" documentation="Total plasma toroidal momentum, summed over ion species and electrons " data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" type="SIGNAL"/>
 		<field name="Zeff" path="Zeff" documentation="Effective charge" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" type="SIGNAL"/>
 		<field name="Pe" path="Pe" documentation="Electron pressure" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="Pa" type="SIGNAL"/>
-		<field name="Pi" path="Pi" documentation="Ion pressure (per ion species)" data_type="FLT_3D" axis1="Rho_Tor_Norm" axis2="Plasma_Composition/Ions" axis3="Timebase" units="Pa" type="SIGNAL"/>
 		<field name="Pi_Total" path="Pi_Total" documentation="Total ion pressure (sum over the ion species)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="Pa" type="SIGNAL"/>
 		<field name="Pressure_Thermal" path="Pressure_Thermal" documentation="Thermal pressure (electrons+ions)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="Pa" type="SIGNAL"/>
 		<field name="Pressure_Perpendicular" path="Pressure_Perpendicular" documentation="Total perpendicular pressure (electrons+ions, thermal+non-thermal)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="Pa" type="SIGNAL"/>
@@ -87,8 +85,6 @@
 		<field name="E_Parallel" path="E_Parallel" documentation="Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="V.m^-1" type="SIGNAL"/>
 		<field name="q" path="q" documentation="Safety factor" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" type="SIGNAL" units="-"/>
 		<field name="Magnetic_Shear" path="Magnetic_Shear" documentation="Magnetic shear" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="-" type="SIGNAL"/>
-		<field name="Momentum_Tor" path="Momentum_Tor" documentation="Toroidal momentum of the various ion species" data_type="FLT_3D" axis1="Rho_Tor_Norm" axis2="Plasma_Composition/Ions" axis3="Timebase" units="kg.m^-2.s^-1" type="SIGNAL"/>
-		<field name="Rotation_Frequency_Tor" path="Rotation_Frequency_Tor" documentation="Angular toroidal rotation frequency of the various ion species" data_type="FLT_3D" axis1="Rho_Tor_Norm" axis2="Plasma_Composition/Ions" axis3="Timebase" units="s^-1" type="SIGNAL"/>
 		<field name="Global" path="Global" documentation="Various global quantities derived from the Core_Profiles" data_type="structure">
 			<field name="Ip" path="Global/Ip" documentation="Total plasma current" data_type="FLT_1D" axis1="Timebase" units="A" type="SIGNAL"/>
 			<field name="Current_Non_Inductive" path="Global/Current_Non_Inductive" documentation="Total non-inductive parallel current" data_type="FLT_1D" axis1="Timebase" units="A" type="SIGNAL"/>
@@ -99,6 +95,128 @@
 			<field name="Beta_Tor_Norm" path="Global/Beta_Tor_Norm" documentation="Normalised toroidal beta" data_type="FLT_1D" axis1="Timebase" type="SIGNAL"/>
 			<field name="Beta_Pol" path="Global/Beta_Pol" documentation="Poloidal beta" data_type="FLT_1D" axis1="Timebase" type="SIGNAL"/>
 			<field name="Energy_Diamagnetic" path="Global/Energy_Diamagnetic" documentation="Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (Pressure_Thermal + Pressure_Perpendicular)" data_type="FLT_1D" axis1="Timebase" units="A" type="SIGNAL"/>
+		</field>
+		<field name="Code_Parameters" path="Code_Parameters" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="Code_Name" path="Code_Parameters/Code_Name" documentation="Name of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Code_Version" path="Code_Parameters/Code_Version" documentation="Version of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Parameters" path="Code_Parameters/Parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" axis1="Timebase" type="SIGNAL"/>
+			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" axis1="Timebase" type="SIGNAL"/>
+			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="Timebase" type="SIGNAL"/>
+		</field>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
+	</IDS>
+	<IDS name="Core_Sources" maxoccur="6" documentation="Core plasma source terms (for the transport equations)">
+		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="CONSTANT"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="CONSTANT"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type" type="CONSTANT"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="CONSTANT"/>
+		</field>
+		<field name="Rho_Tor_Norm" path="Rho_Tor_Norm" documentation="Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_2D" type="SIGNAL" axis1="1...N_Rho_Tor_Norm" axis2="Timebase"/>
+		<field name="Vacuum_Toroidal_Field" path="Vacuum_Toroidal_Field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure">
+			<field name="R0" path="Vacuum_Toroidal_Field/R0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="CONSTANT" units="m"/>
+			<field name="B0" path="Vacuum_Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the B_Tor_Vacuum_R field of the TF IDS." data_type="FLT_1D" type="SIGNAL" units="T" axis1="Timebase"/>
+		</field>
+		<field name="Actuators" path="Actuators" documentation="Source is described by a combination of various actuators. All actuators provide their values on the same Rho_Tor_Norm and Timebase grids." data_type="struct_array" maxoccur="10" axis1="1...N_Actuators">
+			<field name="Name" path="Actuators/Name" documentation="Name of the actuator" data_type="STR_0D" units="-" type="CONSTANT"/>
+			<field name="Conductivity_Parallel" path="Actuators/Conductivity_Parallel" documentation="Parallel conductivity induced by this actuator" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="ohm^-1.m^-1" type="SIGNAL"/>
+			<field name="Ne_Source" path="Actuators/Ne_Source" documentation="Source term for electron density equation" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="s^-1.m^-3" type="SIGNAL"/>
+			<field name="Te_Source" path="Actuators/Te_Source" documentation="Source term for electron energy equation" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="W.m^-3" type="SIGNAL"/>
+			<field name="Ti_Average_Source" path="Actuators/Ti_Average_Source" documentation="Source term for the total ion energy equation" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="W.m^-3" type="SIGNAL"/>
+			<field name="Momentum_Tor_Source" path="Actuators/Momentum_Tor_Source" documentation="Source term for total toroidal momentum equation" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="kg.m^-1.s^-2" type="SIGNAL"/>
+			<field name="Ions" path="Actuators/Ions" documentation="Source terms related to the different ions species" data_type="struct_array" maxoccur="5" axis1="1...N_Ions">
+				<field name="A" path="Actuators/Ions/A" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="CONSTANT"/>
+				<field name="Zion" path="Actuators/Ions/Zion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="CONSTANT" units="Elementary Charge Unit"/>
+				<field name="Zn" path="Actuators/Ions/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+				<field name="Label" path="Actuators/Ions/Label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="CONSTANT"/>
+				<field name="Ni_Source" path="Actuators/Ions/Ni_Source" documentation="Source term for ion density equation" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="s^-1.m^-3" type="SIGNAL"/>
+				<field name="Ti_Source" path="Actuators/Ions/Ti_Source" documentation="Source term for the ion energy transport equation." data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="W.m^-3" type="SIGNAL"/>
+				<field name="Multiple_Charge_State_Flag" path="Actuators/Ions/Multiple_Charge_State_Flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure" data_type="INT_0D" type="CONSTANT"/>
+				<field name="Charge_States" path="Actuators/Ions/Charge_States" documentation="Source terms related to the different charge states of the ion species" data_type="struct_array" maxoccur="10" axis1="1...N_Charge_States">
+					<field name="Z_Min" path="Actuators/Ions/Charge_States/Z_Min" documentation="Minimum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+					<field name="Z_Max" path="Actuators/Ions/Charge_States/Z_Max" documentation="Maximum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+					<field name="Label" path="Actuators/Ions/Charge_States/Label" documentation="String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)" data_type="STR_0D" type="CONSTANT"/>
+					<field name="Nz_Source" path="Actuators/Ions/Charge_States/Nz_Source" documentation="Density of the charge state considered (thermal+non-thermal)" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="s^-1.m^-3" type="SIGNAL"/>
+					<field name="Tz_Source" path="Actuators/Ions/Charge_States/Tz_Source" documentation="Temperature of the charge state considered" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="W.m^-3" type="SIGNAL"/>
+				</field>
+			</field>
+		</field>
+		<field name="Code_Parameters" path="Code_Parameters" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="Code_Name" path="Code_Parameters/Code_Name" documentation="Name of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Code_Version" path="Code_Parameters/Code_Version" documentation="Version of the code" data_type="STR_0D" type="CONSTANT"/>
+			<field name="Parameters" path="Code_Parameters/Parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" axis1="Timebase" type="SIGNAL"/>
+			<field name="Output_Diagnostics" path="Code_Parameters/Output_Diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" axis1="Timebase" type="SIGNAL"/>
+			<field name="Output_Flag" path="Code_Parameters/Output_Flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" axis1="Timebase" type="SIGNAL"/>
+		</field>
+		<field name="Timebase" path="Timebase" documentation="Generic timebase [s]" data_type="flt_1d_type" axis1="1...N_Times" type="SIGNAL"/>
+	</IDS>
+	<IDS name="Core_Transport" maxoccur="6" documentation="Core plasma transport">
+		<field name="IDS_Properties" path="IDS_Properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="Status_of" path="IDS_Properties/Status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent " data_type="str_type" type="CONSTANT"/>
+			<field name="Comment_of" path="IDS_Properties/Comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="CONSTANT"/>
+			<field name="Creator_of" path="IDS_Properties/Creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Date_of" path="IDS_Properties/Date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="CONSTANT"/>
+			<field name="Source_of" path="IDS_Properties/Source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="CONSTANT"/>
+			<field name="Reference_of" path="IDS_Properties/Reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="CONSTANT"/>
+			<field name="Homogeneous_Timebase" path="IDS_Properties/Homogeneous_Timebase" documentation="1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree." data_type="int_type" type="CONSTANT"/>
+			<field name="cocos" path="IDS_Properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="CONSTANT"/>
+		</field>
+		<field name="Rho_Tor_Norm" path="Rho_Tor_Norm" documentation="Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_2D" type="SIGNAL" axis1="1...N_Rho_Tor_Norm" axis2="Timebase"/>
+		<field name="Vacuum_Toroidal_Field" path="Vacuum_Toroidal_Field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure">
+			<field name="R0" path="Vacuum_Toroidal_Field/R0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="CONSTANT" units="m"/>
+			<field name="B0" path="Vacuum_Toroidal_Field/B0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the B_Tor_Vacuum_R field of the TF IDS." data_type="FLT_1D" type="SIGNAL" units="T" axis1="Timebase"/>
+		</field>
+		<field name="Models" path="Models" documentation="Transport is described by a combination of various transport models. All models provide their values on the same Rho_Tor_Norm and Timebase grids." data_type="struct_array" maxoccur="5" axis1="1...N_Models">
+			<field name="Name" path="Models/Name" documentation="Name of the transport model" data_type="STR_0D" units="-" type="CONSTANT"/>
+			<field name="Conductivity_Parallel" path="Models/Conductivity_Parallel" documentation="Parallel conductivity" data_type="FLT_2D" axis1="Rho_Tor_Norm" axis2="Timebase" units="ohm^-1.m^-1" type="SIGNAL"/>
+			<field name="Ne_Transport" path="Models/Ne_Transport" documentation="Transport coefficients for electron density equation" data_type="structure">
+				<field name="D" path="Models/Ne_Transport/D" documentation="Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions." data_type="FLT_3D" axis1="Models/Rho_Tor_Norm" axis2="1...3" axis3="Models/Timebase" units="m^2.s^-1" type="SIGNAL"/>
+				<field name="V" path="Models/Ne_Transport/V" documentation="Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions." data_type="FLT_3D" axis1="Models/Rho_Tor_Norm" axis2="1...3" axis3="Models/Timebase" units="m.s^-1" type="SIGNAL"/>
+			</field>
+			<field name="Te_Transport" path="Models/Te_Transport" documentation="Transport coefficients for electron energy equation" data_type="structure">
+				<field name="D" path="Models/Te_Transport/D" documentation="Effective diffusivity" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m^2.s^-1" type="SIGNAL"/>
+				<field name="V" path="Models/Te_Transport/V" documentation="Effective convection" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m.s^-1" type="SIGNAL"/>
+			</field>
+			<field name="Ti_Average_Transport" path="Models/Ti_Average_Transport" documentation="Transport coefficients for averaged (over ion species) ion energy equation" data_type="structure">
+				<field name="D" path="Models/Ti_Average_Transport/D" documentation="Effective diffusivity" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m^2.s^-1" type="SIGNAL"/>
+				<field name="V" path="Models/Ti_Average_Transport/V" documentation="Effective convection" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m.s^-1" type="SIGNAL"/>
+			</field>
+			<field name="Momentum_Tor_Transport" path="Models/Momentum_Tor_Transport" documentation="Transport coefficients for total toroidal momentum equation" data_type="structure">
+				<field name="D" path="Models/Momentum_Tor_Transport/D" documentation="Effective diffusivity" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m^2.s^-1" type="SIGNAL"/>
+				<field name="V" path="Models/Momentum_Tor_Transport/V" documentation="Effective convection" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m.s^-1" type="SIGNAL"/>
+			</field>
+			<field name="Ions" path="Models/Ions" documentation="Transport coefficients related to the different ions species" data_type="struct_array" maxoccur="5" axis1="1...N_Ions">
+				<field name="A" path="Models/Ions/A" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="CONSTANT"/>
+				<field name="Zion" path="Models/Ions/Zion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="CONSTANT" units="Elementary Charge Unit"/>
+				<field name="Zn" path="Models/Ions/Zn" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+				<field name="Label" path="Models/Ions/Label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="CONSTANT"/>
+				<field name="Ni_Transport" path="Models/Ions/Ni_Transport" documentation="Transport coefficients for ion density equation" data_type="structure" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m^-3" type="SIGNAL">
+					<field name="D" path="Models/Ions/Ni_Transport/D" documentation="Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions." data_type="FLT_3D" axis1="Models/Rho_Tor_Norm" axis2="1...3" axis3="Models/Timebase" units="m^2.s^-1" type="SIGNAL"/>
+					<field name="V" path="Models/Ions/Ni_Transport/V" documentation="Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions." data_type="FLT_3D" axis1="Models/Rho_Tor_Norm" axis2="1...3" axis3="Models/Timebase" units="m.s^-1" type="SIGNAL"/>
+				</field>
+				<field name="Ti_Transport" path="Models/Ions/Ti_Transport" documentation="Transport coefficients for ion energy equation" data_type="structure" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="eV" type="SIGNAL">
+					<field name="D" path="Models/Ions/Ti_Transport/D" documentation="Effective diffusivity" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m^2.s^-1" type="SIGNAL"/>
+					<field name="V" path="Models/Ions/Ti_Transport/V" documentation="Effective convection" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m.s^-1" type="SIGNAL"/>
+				</field>
+				<field name="Multiple_Charge_State_Flag" path="Models/Ions/Multiple_Charge_State_Flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure" data_type="INT_0D" type="CONSTANT"/>
+				<field name="Charge_States" path="Models/Ions/Charge_States" documentation="Transport coefficients related to the different charge states of the ion species" data_type="struct_array" maxoccur="10" axis1="1...N_Charge_States">
+					<field name="Z_Min" path="Models/Ions/Charge_States/Z_Min" documentation="Minimum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+					<field name="Z_Max" path="Models/Ions/Charge_States/Z_Max" documentation="Maximum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="CONSTANT"/>
+					<field name="Label" path="Models/Ions/Charge_States/Label" documentation="String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)" data_type="STR_0D" type="CONSTANT"/>
+					<field name="Nz_Transport" path="Models/Ions/Charge_States/Nz_Transport" documentation="Transport coefficients of for the density of the charge state considered (thermal+non-thermal)" data_type="structure" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m^-3" type="SIGNAL">
+						<field name="D" path="Models/Ions/Charge_States/Nz_Transport/D" documentation="Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions." data_type="FLT_3D" axis1="Models/Rho_Tor_Norm" axis2="1...3" axis3="Models/Timebase" units="m^2.s^-1" type="SIGNAL"/>
+						<field name="V" path="Models/Ions/Charge_States/Nz_Transport/V" documentation="Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions." data_type="FLT_3D" axis1="Models/Rho_Tor_Norm" axis2="1...3" axis3="Models/Timebase" units="m.s^-1" type="SIGNAL"/>
+					</field>
+					<field name="Tz_Transport" path="Models/Ions/Charge_States/Tz_Transport" documentation="Transport coefficients of for the energy of the charge state considered " data_type="structure" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m^-3" type="SIGNAL">
+						<field name="D" path="Models/Ions/Charge_States/Tz_Transport/D" documentation="Effective diffusivity" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m^2.s^-1" type="SIGNAL"/>
+						<field name="V" path="Models/Ions/Charge_States/Tz_Transport/V" documentation="Effective convection" data_type="FLT_2D" axis1="Models/Rho_Tor_Norm" axis2="Models/Timebase" units="m.s^-1" type="SIGNAL"/>
+					</field>
+				</field>
+			</field>
 		</field>
 		<field name="Code_Parameters" path="Code_Parameters" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="Code_Name" path="Code_Parameters/Code_Name" documentation="Name of the code" data_type="STR_0D" type="CONSTANT"/>

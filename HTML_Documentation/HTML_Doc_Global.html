@@ -24,7 +24,17 @@
 			</tr>
 			<tr>
 				<td><a href="#Core_Profiles">Core_Profiles</a></td>
-				<td>Core plasma 1D profiles. TBD: toroidal and poloidal velocities. Errorbars to be added.</td>
+				<td>Core plasma radial profiles</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td><a href="#Core_Sources">Core_Sources</a></td>
+				<td>Core plasma source terms (for the transport equations)</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td><a href="#Core_Transport">Core_Transport</a></td>
+				<td>Core plasma transport</td>
 				<td>6</td>
 			</tr>
 			<tr>
@@ -225,7 +235,7 @@
 				</tr>
 			</table>
 		</a><a name="Core_Profiles"><p class="welcome">ITER Physics Data Model Documentation for Core_Profiles</p>
-			<p>Core plasma 1D profiles. TBD: toroidal and poloidal velocities. Errorbars to be added.</p>
+			<p>Core plasma radial profiles</p>
 			<table border="1">
 				<thead style="color:#ff0000">
 					<td>Full path name</td>
@@ -327,132 +337,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Plasma_Composition</td>
-					<td>Generic declaration of Plasma Composition for a simulation</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions</td>
-					<td>Array of plasma ions</td>
-					<td>struct_array [max_size=5]</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N_Ions</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions/A</td>
-					<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions/Zion</td>
-					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {CONSTANT} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions/Zn</td>
-					<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions/Label</td>
-					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {CONSTANT}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions/Multiple_Charge_State_Flag</td>
-					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {CONSTANT}</td>
-					<td>INT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions/Charge_States</td>
-					<td>Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)</td>
-					<td>struct_array [max_size=10]</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N_Charge_States</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions/Charge_States/Z_Min</td>
-					<td>Minimum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions/Charge_States/Z_Max</td>
-					<td>Maximum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Ions/Charge_States/Label</td>
-					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {CONSTANT}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Neutrals</td>
-					<td>Array of neutrals</td>
-					<td>struct_array [max_size=5]</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N_Neutrals</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Neutrals/Components</td>
-					<td>Array of components to the atom or molecule</td>
-					<td>struct_array [max_size=10]</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Neutrals/Components/A</td>
-					<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Neutrals/Components/Zn</td>
-					<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Neutrals/Components/Multiplicity</td>
-					<td>Multiplicity of the atom {CONSTANT} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Neutrals/Energies</td>
-					<td>Types energies considered for this neutral species : 0=cold, 1=thermal, 2= fast, 3=NBI {CONSTANT}</td>
-					<td>INT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>Plasma_Composition/Neutrals/Label</td>
-					<td>String identifying the atom or molecule (e.g. D2, DT, CD4, ...) {CONSTANT}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
 					<td>Psi</td>
 					<td>Poloidal magnetic flux {SIGNAL} [Wb]</td>
 					<td>FLT_2D</td>
@@ -483,19 +367,16 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Ti</td>
-					<td>Ion temperature {SIGNAL} [eV]</td>
-					<td>FLT_3D</td>
+					<td>Ti_Average</td>
+					<td>Ion temperature (averaged on charge states and ion species) {SIGNAL} [eV]</td>
+					<td>FLT_2D</td>
 					<td>
 						<table>
 							<tr>
 								<td>1- Rho_Tor_Norm</td>
 							</tr>
 							<tr>
-								<td>2- Plasma_Composition/Ions</td>
-							</tr>
-							<tr>
-								<td>3- Timebase</td>
+								<td>2- Timebase</td>
 							</tr>
 						</table>
 					</td>
@@ -531,44 +412,260 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Ni</td>
-					<td>Ion density (thermal+non-thermal) {SIGNAL} [m^-3]</td>
-					<td>FLT_3D</td>
+					<td>Ions</td>
+					<td>Quantities related to the different ion species</td>
+					<td>struct_array [max_size=5]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- Rho_Tor_Norm</td>
-							</tr>
-							<tr>
-								<td>2- Plasma_Composition/Ions</td>
-							</tr>
-							<tr>
-								<td>3- Timebase</td>
+								<td>1- 1...N_Ions</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>Ni_Fast</td>
-					<td>Density of fast (non-thermal) ions, for the various ion species {SIGNAL} [m^-3]</td>
-					<td>FLT_3D</td>
+					<td>Ions/A</td>
+					<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Ions/Zion</td>
+					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Ions/Zn</td>
+					<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Ions/Label</td>
+					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Ions/Ni</td>
+					<td>Ion density (thermal+non-thermal) {SIGNAL} [m^-3]</td>
+					<td>FLT_2D</td>
 					<td>
 						<table>
 							<tr>
 								<td>1- Rho_Tor_Norm</td>
 							</tr>
 							<tr>
-								<td>2- Plasma_Composition/Ions</td>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/Ni_Fast</td>
+					<td>Density of fast (non-thermal) ions, for the ion species considered {SIGNAL} [m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
 							</tr>
 							<tr>
-								<td>3- Timebase</td>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/Ti</td>
+					<td>Ion temperature of that ion species {SIGNAL} [eV]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/Pi</td>
+					<td>Ion pressure for that ion species {SIGNAL} [Pa]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/V_Tor_i</td>
+					<td>Toroidal velocity of that ion species {SIGNAL} [m.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/V_Pol_i</td>
+					<td>Poloidal velocity of that ion species {SIGNAL} [m.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/Multiple_Charge_State_Flag</td>
+					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {CONSTANT}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Ions/Charge_States</td>
+					<td>Quantities related to the different charge states of the ion species</td>
+					<td>struct_array [max_size=10]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Charge_States</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/Charge_States/Z_Min</td>
+					<td>Minimum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Ions/Charge_States/Z_Max</td>
+					<td>Maximum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Ions/Charge_States/Label</td>
+					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Ions/Charge_States/Nz</td>
+					<td>Density of the charge state considered (thermal+non-thermal) {SIGNAL} [m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/Charge_States/Nz_Fast</td>
+					<td>Density of fast (non-thermal) ions, for the charge state considered {SIGNAL} [m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/Charge_States/Tz</td>
+					<td>Temperature of the charge state considered {SIGNAL} [m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/Charge_States/V_Tor_z</td>
+					<td>Toroidal velocity of the charge state considered {SIGNAL} [m.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Ions/Charge_States/V_Pol_z</td>
+					<td>Poloidal velocity of the charge state considered {SIGNAL} [m.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>Ni_Total_Over_Ne</td>
-					<td>Ratio of total ion density (sum over species) over electron density. (thermal+non-thermal) {SIGNAL} [-]</td>
+					<td>Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal) {SIGNAL} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Momentum_Tor</td>
+					<td>Total plasma toroidal momentum, summed over ion species and electrons  {SIGNAL}</td>
 					<td>FLT_2D</td>
 					<td>
 						<table>
@@ -607,24 +704,6 @@
 							</tr>
 							<tr>
 								<td>2- Timebase</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>Pi</td>
-					<td>Ion pressure (per ion species) {SIGNAL} [Pa]</td>
-					<td>FLT_3D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- Rho_Tor_Norm</td>
-							</tr>
-							<tr>
-								<td>2- Plasma_Composition/Ions</td>
-							</tr>
-							<tr>
-								<td>3- Timebase</td>
 							</tr>
 						</table>
 					</td>
@@ -825,42 +904,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Momentum_Tor</td>
-					<td>Toroidal momentum of the various ion species {SIGNAL} [kg.m^-2.s^-1]</td>
-					<td>FLT_3D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- Rho_Tor_Norm</td>
-							</tr>
-							<tr>
-								<td>2- Plasma_Composition/Ions</td>
-							</tr>
-							<tr>
-								<td>3- Timebase</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>Rotation_Frequency_Tor</td>
-					<td>Angular toroidal rotation frequency of the various ion species {SIGNAL} [s^-1]</td>
-					<td>FLT_3D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- Rho_Tor_Norm</td>
-							</tr>
-							<tr>
-								<td>2- Plasma_Composition/Ions</td>
-							</tr>
-							<tr>
-								<td>3- Timebase</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
 					<td>Global</td>
 					<td>Various global quantities derived from the Core_Profiles</td>
 					<td>structure</td>
@@ -970,6 +1013,1016 @@
 						<table>
 							<tr>
 								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Name</td>
+					<td>Name of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Version</td>
+					<td>Version of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Parameters</td>
+					<td>List of the code specific parameters in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Diagnostics</td>
+					<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Timebase</td>
+					<td>Generic timebase [s] {SIGNAL}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="Core_Sources"><p class="welcome">ITER Physics Data Model Documentation for Core_Sources</p>
+			<p>Core plasma source terms (for the transport equations)</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Axes</td>
+				</thead>
+				<tr>
+					<td>IDS_Properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent  {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Comment_of</td>
+					<td>Any additional comment from the source application {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Creator_of</td>
+					<td>Creator of this consistent IDS {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Date_of</td>
+					<td>Date of consistent creation of this IDS {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes) {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Reference_of</td>
+					<td>Documented reference to this IDS data {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Homogeneous_Timebase</td>
+					<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree. {CONSTANT}</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/cocos</td>
+					<td>Coordinate conventions of this IDS {CONSTANT}</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Rho_Tor_Norm</td>
+					<td>Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {SIGNAL}</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vacuum_Toroidal_Field</td>
+					<td>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Vacuum_Toroidal_Field/R0</td>
+					<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {CONSTANT} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Vacuum_Toroidal_Field/B0</td>
+					<td>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the B_Tor_Vacuum_R field of the TF IDS. {SIGNAL} [T]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators</td>
+					<td>Source is described by a combination of various actuators. All actuators provide their values on the same Rho_Tor_Norm and Timebase grids.</td>
+					<td>struct_array [max_size=10]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Actuators</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Name</td>
+					<td>Name of the actuator {CONSTANT} [-]</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Actuators/Conductivity_Parallel</td>
+					<td>Parallel conductivity induced by this actuator {SIGNAL} [ohm^-1.m^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Ne_Source</td>
+					<td>Source term for electron density equation {SIGNAL} [s^-1.m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Te_Source</td>
+					<td>Source term for electron energy equation {SIGNAL} [W.m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Ti_Average_Source</td>
+					<td>Source term for the total ion energy equation {SIGNAL} [W.m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Momentum_Tor_Source</td>
+					<td>Source term for total toroidal momentum equation {SIGNAL} [kg.m^-1.s^-2]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Ions</td>
+					<td>Source terms related to the different ions species</td>
+					<td>struct_array [max_size=5]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Ions</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Ions/A</td>
+					<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Zion</td>
+					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Zn</td>
+					<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Label</td>
+					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Ni_Source</td>
+					<td>Source term for ion density equation {SIGNAL} [s^-1.m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Ti_Source</td>
+					<td>Source term for the ion energy transport equation. {SIGNAL} [W.m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Multiple_Charge_State_Flag</td>
+					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {CONSTANT}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Charge_States</td>
+					<td>Source terms related to the different charge states of the ion species</td>
+					<td>struct_array [max_size=10]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Charge_States</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Charge_States/Z_Min</td>
+					<td>Minimum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Charge_States/Z_Max</td>
+					<td>Maximum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Charge_States/Label</td>
+					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Charge_States/Nz_Source</td>
+					<td>Density of the charge state considered (thermal+non-thermal) {SIGNAL} [s^-1.m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Actuators/Ions/Charge_States/Tz_Source</td>
+					<td>Temperature of the charge state considered {SIGNAL} [W.m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Name</td>
+					<td>Name of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Code_Version</td>
+					<td>Version of the code {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Code_Parameters/Parameters</td>
+					<td>List of the code specific parameters in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Diagnostics</td>
+					<td>List of the code specific diagnostic/output in XML format {SIGNAL}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Code_Parameters/Output_Flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {SIGNAL}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Timebase</td>
+					<td>Generic timebase [s] {SIGNAL}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Times</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="Core_Transport"><p class="welcome">ITER Physics Data Model Documentation for Core_Transport</p>
+			<p>Core plasma transport</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Axes</td>
+				</thead>
+				<tr>
+					<td>IDS_Properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent  {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Comment_of</td>
+					<td>Any additional comment from the source application {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Creator_of</td>
+					<td>Creator of this consistent IDS {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Date_of</td>
+					<td>Date of consistent creation of this IDS {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes) {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Reference_of</td>
+					<td>Documented reference to this IDS data {CONSTANT}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/Homogeneous_Timebase</td>
+					<td>1 if the Timebase of this IDS is homogeneous. In this case, the Timebase values for this IDS are stored in ../Timebase just below the root of this IDS. Otherwise, the time values are stored in the various Timebase fields at lower levels in the tree. {CONSTANT}</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>IDS_Properties/cocos</td>
+					<td>Coordinate conventions of this IDS {CONSTANT}</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Rho_Tor_Norm</td>
+					<td>Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {SIGNAL}</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Vacuum_Toroidal_Field</td>
+					<td>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Vacuum_Toroidal_Field/R0</td>
+					<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {CONSTANT} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Vacuum_Toroidal_Field/B0</td>
+					<td>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the B_Tor_Vacuum_R field of the TF IDS. {SIGNAL} [T]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models</td>
+					<td>Transport is described by a combination of various transport models. All models provide their values on the same Rho_Tor_Norm and Timebase grids.</td>
+					<td>struct_array [max_size=5]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Models</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Name</td>
+					<td>Name of the transport model {CONSTANT} [-]</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Conductivity_Parallel</td>
+					<td>Parallel conductivity {SIGNAL} [ohm^-1.m^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ne_Transport</td>
+					<td>Transport coefficients for electron density equation</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ne_Transport/D</td>
+					<td>Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions. {SIGNAL} [m^2.s^-1]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- 1...3</td>
+							</tr>
+							<tr>
+								<td>3- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ne_Transport/V</td>
+					<td>Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions. {SIGNAL} [m.s^-1]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- 1...3</td>
+							</tr>
+							<tr>
+								<td>3- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Te_Transport</td>
+					<td>Transport coefficients for electron energy equation</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Te_Transport/D</td>
+					<td>Effective diffusivity {SIGNAL} [m^2.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Te_Transport/V</td>
+					<td>Effective convection {SIGNAL} [m.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ti_Average_Transport</td>
+					<td>Transport coefficients for averaged (over ion species) ion energy equation</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ti_Average_Transport/D</td>
+					<td>Effective diffusivity {SIGNAL} [m^2.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ti_Average_Transport/V</td>
+					<td>Effective convection {SIGNAL} [m.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Momentum_Tor_Transport</td>
+					<td>Transport coefficients for total toroidal momentum equation</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Momentum_Tor_Transport/D</td>
+					<td>Effective diffusivity {SIGNAL} [m^2.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Momentum_Tor_Transport/V</td>
+					<td>Effective convection {SIGNAL} [m.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions</td>
+					<td>Transport coefficients related to the different ions species</td>
+					<td>struct_array [max_size=5]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Ions</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/A</td>
+					<td>Mass of atom {CONSTANT} [Atomic Mass Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ions/Zion</td>
+					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ions/Zn</td>
+					<td>Nuclear charge {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ions/Label</td>
+					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ions/Ni_Transport</td>
+					<td>Transport coefficients for ion density equation {SIGNAL} [m^-3]</td>
+					<td>structure</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Ni_Transport/D</td>
+					<td>Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions. {SIGNAL} [m^2.s^-1]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- 1...3</td>
+							</tr>
+							<tr>
+								<td>3- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Ni_Transport/V</td>
+					<td>Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions. {SIGNAL} [m.s^-1]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- 1...3</td>
+							</tr>
+							<tr>
+								<td>3- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Ti_Transport</td>
+					<td>Transport coefficients for ion energy equation {SIGNAL} [eV]</td>
+					<td>structure</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Ti_Transport/D</td>
+					<td>Effective diffusivity {SIGNAL} [m^2.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Ti_Transport/V</td>
+					<td>Effective convection {SIGNAL} [m.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Multiple_Charge_State_Flag</td>
+					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {CONSTANT}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States</td>
+					<td>Transport coefficients related to the different charge states of the ion species</td>
+					<td>struct_array [max_size=10]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N_Charge_States</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States/Z_Min</td>
+					<td>Minimum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States/Z_Max</td>
+					<td>Maximum Z of the charge state bundle {CONSTANT} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States/Label</td>
+					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {CONSTANT}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States/Nz_Transport</td>
+					<td>Transport coefficients of for the density of the charge state considered (thermal+non-thermal) {SIGNAL} [m^-3]</td>
+					<td>structure</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States/Nz_Transport/D</td>
+					<td>Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions. {SIGNAL} [m^2.s^-1]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- 1...3</td>
+							</tr>
+							<tr>
+								<td>3- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States/Nz_Transport/V</td>
+					<td>Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions. {SIGNAL} [m.s^-1]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- 1...3</td>
+							</tr>
+							<tr>
+								<td>3- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States/Tz_Transport</td>
+					<td>Transport coefficients of for the energy of the charge state considered  {SIGNAL} [m^-3]</td>
+					<td>structure</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States/Tz_Transport/D</td>
+					<td>Effective diffusivity {SIGNAL} [m^2.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Models/Ions/Charge_States/Tz_Transport/V</td>
+					<td>Effective convection {SIGNAL} [m.s^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- Models/Rho_Tor_Norm</td>
+							</tr>
+							<tr>
+								<td>2- Models/Timebase</td>
 							</tr>
 						</table>
 					</td>

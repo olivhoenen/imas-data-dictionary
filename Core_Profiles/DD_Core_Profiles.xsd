@@ -10,6 +10,275 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:complexType name="Core_Profiles_Ions_Charge_States">
+		<xs:annotation>
+			<xs:documentation>Quantities related to the a given charge state of the ion species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Z_Min">
+				<xs:annotation>
+					<xs:documentation>Minimum Z of the charge state bundle</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Z_Max">
+				<xs:annotation>
+					<xs:documentation>Maximum Z of the charge state bundle</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Label">
+				<xs:annotation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Nz">
+				<xs:annotation>
+					<xs:documentation>Density of the charge state considered (thermal+non-thermal)</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../../Rho_Tor_Norm</axis1>
+						<axis2>../../../Timebase</axis2>
+						<units>m^-3</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Nz_Fast">
+				<xs:annotation>
+					<xs:documentation>Density of fast (non-thermal) ions, for the charge state considered</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../../Rho_Tor_Norm</axis1>
+						<axis2>../../../Timebase</axis2>
+						<units>m^-3</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Tz">
+				<xs:annotation>
+					<xs:documentation>Temperature of the charge state considered</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../../Rho_Tor_Norm</axis1>
+						<axis2>../../../Timebase</axis2>
+						<units>m^-3</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="V_Tor_z">
+				<xs:annotation>
+					<xs:documentation>Toroidal velocity of the charge state considered</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../../Rho_Tor_Norm</axis1>
+						<axis2>../../../Timebase</axis2>
+						<units>m.s^-1</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="V_Pol_z">
+				<xs:annotation>
+					<xs:documentation>Poloidal velocity of the charge state considered</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../../Rho_Tor_Norm</axis1>
+						<axis2>../../../Timebase</axis2>
+						<units>m.s^-1</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Core_Profile_Ions">
+		<xs:annotation>
+			<xs:documentation>Quantities related to a given ion species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="A">
+				<xs:annotation>
+					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:appinfo>
+						<units>Atomic Mass Unit</units>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Zion">
+				<xs:annotation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+						<units>Elementary Charge Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Zn">
+				<xs:annotation>
+					<xs:documentation>Nuclear charge</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Label">
+				<xs:annotation>
+					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ni">
+				<xs:annotation>
+					<xs:documentation>Ion density (thermal+non-thermal)</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Rho_Tor_Norm</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^-3</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ni_Fast">
+				<xs:annotation>
+					<xs:documentation>Density of fast (non-thermal) ions, for the ion species considered</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Rho_Tor_Norm</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m^-3</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ti">
+				<xs:annotation>
+					<xs:documentation>Ion temperature of that ion species</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Rho_Tor_Norm</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>eV</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Pi">
+				<xs:annotation>
+					<xs:documentation>Ion pressure for that ion species</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Rho_Tor_Norm</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>Pa</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="V_Tor_i">
+				<xs:annotation>
+					<xs:documentation>Toroidal velocity of that ion species</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Rho_Tor_Norm</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m.s^-1</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="V_Pol_i">
+				<xs:annotation>
+					<xs:documentation>Poloidal velocity of that ion species</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../Rho_Tor_Norm</axis1>
+						<axis2>../../Timebase</axis2>
+						<units>m.s^-1</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Multiple_Charge_State_Flag">
+				<xs:annotation>
+					<xs:documentation>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Charge_States" type="Core_Profiles_Ions_Charge_States" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different charge states of the ion species</xs:documentation>
+					<xs:appinfo>
+						<axis1>1...N_Charge_States</axis1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="Core_Profiles_Global">
 		<xs:annotation>
 			<xs:documentation>Various global quantities calculated from the fields solved in the transport equations and from the Derived Profiles</xs:documentation>
@@ -132,7 +401,7 @@
 	</xs:complexType>
 	<xs:element name="Core_Profiles">
 		<xs:annotation>
-			<xs:documentation>Core plasma 1D profiles. TBD: toroidal and poloidal velocities. Errorbars to be added.</xs:documentation>
+			<xs:documentation>Core plasma radial profiles</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
@@ -155,7 +424,6 @@
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="Plasma_Composition"/>
 				<xs:element name="Psi">
 					<xs:annotation>
 						<xs:documentation>Poloidal magnetic flux</xs:documentation>
@@ -184,19 +452,18 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Ti">
+				<xs:element name="Ti_Average">
 					<xs:annotation>
-						<xs:documentation>Ion temperature</xs:documentation>
+						<xs:documentation>Ion temperature (averaged on charge states and ion species)</xs:documentation>
 						<xs:appinfo>
 							<axis1>../Rho_Tor_Norm</axis1>
-							<axis2>../Plasma_Composition/Ions</axis2>
-							<axis3>../Timebase</axis3>
+							<axis2>../Timebase</axis2>
 							<units>eV</units>
 							<type>SIGNAL</type>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:group ref="FLT_3D"/>
+						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="Ne">
@@ -227,43 +494,34 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Ni">
+				<xs:element name="Ions" type="Core_Profile_Ions" maxOccurs="5">
 					<xs:annotation>
-						<xs:documentation>Ion density (thermal+non-thermal)</xs:documentation>
+						<xs:documentation>Quantities related to the different ion species</xs:documentation>
 						<xs:appinfo>
-							<axis1>../Rho_Tor_Norm</axis1>
-							<axis2>../Plasma_Composition/Ions</axis2>
-							<axis3>../Timebase</axis3>
-							<units>m^-3</units>
-							<type>SIGNAL</type>
+							<axis1>1...N_Ions</axis1>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_3D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Ni_Fast">
-					<xs:annotation>
-						<xs:documentation>Density of fast (non-thermal) ions, for the various ion species</xs:documentation>
-						<xs:appinfo>
-							<axis1>../Rho_Tor_Norm</axis1>
-							<axis2>../Plasma_Composition/Ions</axis2>
-							<axis3>../Timebase</axis3>
-							<units>m^-3</units>
-							<type>SIGNAL</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_3D"/>
-					</xs:complexType>
 				</xs:element>
 				<xs:element name="Ni_Total_Over_Ne">
 					<xs:annotation>
-						<xs:documentation>Ratio of total ion density (sum over species) over electron density. (thermal+non-thermal)</xs:documentation>
+						<xs:documentation>Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)</xs:documentation>
 						<xs:appinfo>
 							<axis1>../Rho_Tor_Norm</axis1>
 							<axis2>../Timebase</axis2>
 							<units>-</units>
+							<type>SIGNAL</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_2D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Momentum_Tor">
+					<xs:annotation>
+						<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons </xs:documentation>
+						<xs:appinfo>
+							<axis1>../Rho_Tor_Norm</axis1>
+							<axis2>../Timebase</axis2>
 							<type>SIGNAL</type>
 						</xs:appinfo>
 					</xs:annotation>
@@ -296,21 +554,6 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Pi">
-					<xs:annotation>
-						<xs:documentation>Ion pressure (per ion species)</xs:documentation>
-						<xs:appinfo>
-							<axis1>../Rho_Tor_Norm</axis1>
-							<axis2>../Plasma_Composition/Ions</axis2>
-							<axis3>../Timebase</axis3>
-							<units>Pa</units>
-							<type>SIGNAL</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_3D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="Pi_Total">
@@ -493,36 +736,6 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Momentum_Tor">
-					<xs:annotation>
-						<xs:documentation>Toroidal momentum of the various ion species</xs:documentation>
-						<xs:appinfo>
-							<axis1>../Rho_Tor_Norm</axis1>
-							<axis2>../Plasma_Composition/Ions</axis2>
-							<axis3>../Timebase</axis3>
-							<units>kg.m^-2.s^-1</units>
-							<type>SIGNAL</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_3D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Rotation_Frequency_Tor">
-					<xs:annotation>
-						<xs:documentation>Angular toroidal rotation frequency of the various ion species</xs:documentation>
-						<xs:appinfo>
-							<axis1>../Rho_Tor_Norm</axis1>
-							<axis2>../Plasma_Composition/Ions</axis2>
-							<axis3>../Timebase</axis3>
-							<units>s^-1</units>
-							<type>SIGNAL</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_3D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="Global" type="Core_Profiles_Global">
