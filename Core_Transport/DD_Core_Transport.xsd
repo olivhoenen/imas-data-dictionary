@@ -121,6 +121,43 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="Core_Transport_Models_Density_4">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients for density equations. Axes four levels above.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="D">
+				<xs:annotation>
+					<xs:documentation>Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../../../../Rho_Tor_Norm</axis1>
+						<axis2>1...3</axis2>
+						<axis3>../../../../../Timebase</axis3>
+						<units>m^2.s^-1</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="V">
+				<xs:annotation>
+					<xs:documentation>Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../../../../Rho_Tor_Norm</axis1>
+						<axis2>1...3</axis2>
+						<axis3>../../../../../Timebase</axis3>
+						<units>m.s^-1</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="Core_Transport_Models_Energy_TorMom_1">
 		<xs:annotation>
 			<xs:documentation>Transport coefficients for energy or total toroidal momentum equations. Axes one level above.</xs:documentation>
@@ -226,6 +263,41 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="Core_Transport_Models_Energy_TorMom_4">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients for energy or total toroidal momentum equations. Axes four levels above.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="D">
+				<xs:annotation>
+					<xs:documentation>Effective diffusivity</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../../../../Rho_Tor_Norm</axis1>
+						<axis2>../../../../../Timebase</axis2>
+						<units>m^2.s^-1</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="V">
+				<xs:annotation>
+					<xs:documentation>Effective convection</xs:documentation>
+					<xs:appinfo>
+						<axis1>../../../../../Rho_Tor_Norm</axis1>
+						<axis2>../../../../../Timebase</axis2>
+						<units>m.s^-1</units>
+						<type>SIGNAL</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="Core_Transport_Models_Ions_Charge_States">
 		<xs:annotation>
 			<xs:documentation>Transport coefficients related to the a given charge state of the ion species</xs:documentation>
@@ -266,26 +338,16 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Nz_Transport" type="Core_Transport_Models_Density_3">
+			<xs:element name="Nz_Transport" type="Core_Transport_Models_Density_4">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients of for the density of the charge state considered (thermal+non-thermal)</xs:documentation>
-					<xs:appinfo>
-						<axis1>../../../Rho_Tor_Norm</axis1>
-						<axis2>../../../Timebase</axis2>
-						<units>m^-3</units>
-						<type>SIGNAL</type>
-					</xs:appinfo>
+
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Tz_Transport" type="Core_Transport_Models_Energy_TorMom_3">
+			<xs:element name="Tz_Transport" type="Core_Transport_Models_Energy_TorMom_4">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients of for the energy of the charge state considered </xs:documentation>
-					<xs:appinfo>
-						<axis1>../../../Rho_Tor_Norm</axis1>
-						<axis2>../../../Timebase</axis2>
-						<units>m^-3</units>
-						<type>SIGNAL</type>
-					</xs:appinfo>
+
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -342,26 +404,14 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Ni_Transport" type="Core_Transport_Models_Density_2">
+			<xs:element name="Ni_Transport" type="Core_Transport_Models_Density_3">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients for ion density equation</xs:documentation>
-					<xs:appinfo>
-						<axis1>../../Rho_Tor_Norm</axis1>
-						<axis2>../../Timebase</axis2>
-						<units>m^-3</units>
-						<type>SIGNAL</type>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Ti_Transport" type="Core_Transport_Models_Energy_TorMom_2">
+			<xs:element name="Ti_Transport" type="Core_Transport_Models_Energy_TorMom_3">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients for ion energy equation</xs:documentation>
-					<xs:appinfo>
-						<axis1>../../Rho_Tor_Norm</axis1>
-						<axis2>../../Timebase</axis2>
-						<units>eV</units>
-						<type>SIGNAL</type>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Multiple_Charge_State_Flag">
@@ -416,22 +466,22 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Ne_Transport" type="Core_Transport_Models_Density_1">
+			<xs:element name="Ne_Transport" type="Core_Transport_Models_Density_2">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients for electron density equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Te_Transport" type="Core_Transport_Models_Energy_TorMom_1">
+			<xs:element name="Te_Transport" type="Core_Transport_Models_Energy_TorMom_2">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients for electron energy equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Ti_Average_Transport" type="Core_Transport_Models_Energy_TorMom_1">
+			<xs:element name="Ti_Average_Transport" type="Core_Transport_Models_Energy_TorMom_2">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients for averaged (over ion species) ion energy equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Momentum_Tor_Transport" type="Core_Transport_Models_Energy_TorMom_1">
+			<xs:element name="Momentum_Tor_Transport" type="Core_Transport_Models_Energy_TorMom_2">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients for total toroidal momentum equation</xs:documentation>
 				</xs:annotation>
