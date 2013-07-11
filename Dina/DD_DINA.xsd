@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by CRPP (EPFL-DIT-SB) -->
+<?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./$GET[stylesheet]" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
+<?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:element name="dina">
+		<xs:annotation>
+			<xs:documentation>Simulation-specific parametrisation for the DINA-IMAS code; more and more of these will be transferred to the core_profiles and equilibrium IDS as we develop them</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="version">
+					<xs:annotation>
+							<xs:appinfo>
+							<type>STATIC</type>
+						</xs:appinfo>					<xs:documentation>Version of the DINA solver to be used</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="static_group_1">
+					<xs:annotation>
+						<xs:appinfo>
+							<type>STATIC</type>
+						</xs:appinfo>
+						<xs:documentation>Group I static data</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="key">
+								<xs:annotation>
+							<xs:appinfo>
+							<type>STATIC</type>
+						</xs:appinfo>								<xs:documentation>Dina "key" parameters</xs:documentation>
+									<xs:appinfo>
+										<type>STATIC</type>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:group ref="INT_1D"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="vec">
+								<xs:annotation>
+							<xs:appinfo>
+							<type>STATIC</type>
+						</xs:appinfo>								<xs:documentation>Dina "vec" parameters</xs:documentation>
+									<xs:appinfo>
+										<type>STATIC</type>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:group ref="FLT_1D"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="indpf">
+								<xs:annotation>
+							<xs:appinfo>
+							<type>STATIC</type>
+						</xs:appinfo>								<xs:documentation>Dina "indpf" parameters</xs:documentation>
+									<xs:appinfo>
+										<type>STATIC</type>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:group ref="FLT_1D"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:sequence>
+					<xs:element name="static_group_2">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="rectangular_grid_limits">
+									<xs:annotation>
+																<xs:appinfo>
+							<type>STATIC</type>
+						</xs:appinfo><xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="limiter_rz">
+									<xs:annotation>
+																<xs:appinfo>
+							<type>STATIC</type>
+						</xs:appinfo><xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ext_transp">
+									<xs:annotation>
+																<xs:appinfo>
+							<type>STATIC</type>
+						</xs:appinfo><xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="INT_0D"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="input_group_2">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="plasma_density">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_0D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ohmic_compensation">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_0D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="boundary_density_ratio">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_0D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="itb_rho">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_0D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="tau_e_anomaly">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_0D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="sawtooth_q0">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_0D"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="input_group_4">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="particle_diffusion">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="chi_electrons">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="chi_ions">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="bootstrap_current">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="psi_normalised">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="inward_pinch_velocity">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="input_group_5">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="p_e">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="p_i">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="j_cd">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="n_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="te_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ti_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="sigma_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="pres_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ro_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_1D"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="output_group_5">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="storage">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="output_group_6">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="gra1">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="psi_tran">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="che_neo">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="chi_neo">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="r_m">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="j_ech">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ro_con">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ppx_con">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="pffx_con">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="dmn_con">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="pdo_con">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="pto_con">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="gge_con">
+									<xs:complexType>									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ggt_con">
+									<xs:complexType>
+										<xs:annotation>
+											<xs:documentation>Dina "" parameters</xs:documentation>
+											<xs:appinfo>
+												<type>DYNAMIC</type>
+											</xs:appinfo>
+										</xs:annotation>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="pprime_dina">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ffprime_dina">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="p_e">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="p_i">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="j_cd">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="n_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="te_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ti_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="pres_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="sigma_ex">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>STATIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="p_ohm">
+									<xs:annotation>
+										<xs:documentation>Dina "" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="output_group_7">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="shape">
+									<xs:annotation>
+										<xs:documentation>Dina "shape" parameters</xs:documentation>
+										<xs:appinfo>
+											<type>DYNAMIC</type>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:group ref="FLT_2D"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
