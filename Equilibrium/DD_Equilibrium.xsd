@@ -33,6 +33,48 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:sequence>
+				<xs:element name="n_points">
+					<xs:annotation>
+						<xs:documentation>Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points)).</xs:documentation>
+						<xs:appinfo>
+							<type>DYNAMIC</type>
+							<coordinate1>../../../time</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="INT_1D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="r">
+					<xs:annotation>
+						<xs:documentation>Major radius</xs:documentation>
+						<xs:appinfo>
+							<type>DYNAMIC</type>
+							<units>m</units>
+							<coordinate1>1...max(n_points)</coordinate1>
+							<coordinate2>../../../time</coordinate2>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_2D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="z">
+					<xs:annotation>
+						<xs:documentation>Height</xs:documentation>
+						<xs:appinfo>
+							<type>DYNAMIC</type>
+							<units>m</units>
+							<coordinate1>../r</coordinate1>
+							<coordinate2>../../../time</coordinate2>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_2D"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
 			<xs:element name="lcfs" type="rz2d_dynamic_npoints">
 				<xs:annotation>
 					<xs:documentation>RZ description of the plasma boundary. The second dimension is oversized to fit the maximum number of (R,Z) points over the time range</xs:documentation>
