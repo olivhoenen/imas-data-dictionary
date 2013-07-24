@@ -14,88 +14,21 @@
 					<xs:documentation>0 (limiter) or 1 (diverted)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="NOTNEEDEDn_outline_points">
-				<xs:annotation>
-					<xs:documentation>Number of meaningful Outline points in R and Z at a given time.</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:sequence>
-				<xs:element name="n_points">
-					<xs:annotation>
-						<xs:documentation>Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points)).</xs:documentation>
-						<xs:appinfo>
-							<type>DYNAMIC</type>
-							<coordinate1>../../../time</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="INT_1D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="r">
-					<xs:annotation>
-						<xs:documentation>Major radius</xs:documentation>
-						<xs:appinfo>
-							<type>DYNAMIC</type>
-							<units>m</units>
-							<coordinate1>1...max(n_points)</coordinate1>
-							<coordinate2>../../../time</coordinate2>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="z">
-					<xs:annotation>
-						<xs:documentation>Height</xs:documentation>
-						<xs:appinfo>
-							<type>DYNAMIC</type>
-							<units>m</units>
-							<coordinate1>../r</coordinate1>
-							<coordinate2>../../../time</coordinate2>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
 			<xs:element name="lcfs" type="rz2d_dynamic_npoints">
 				<xs:annotation>
 					<xs:documentation>RZ description of the plasma boundary. The second dimension is oversized to fit the maximum number of (R,Z) points over the time range</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>1...max_n_outline_points</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="geometric_axis" type="rz1d_dynamic">
 				<xs:annotation>
 					<xs:documentation>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../time</coordinate2>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="a_minor">
@@ -103,7 +36,7 @@
 					<xs:documentation>Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -116,7 +49,7 @@
 					<xs:documentation>Elongation of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -128,7 +61,7 @@
 					<xs:documentation>Elongation (upper half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -140,7 +73,7 @@
 					<xs:documentation>Elongation (lower half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -152,7 +85,7 @@
 					<xs:documentation>Upper triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -164,7 +97,7 @@
 					<xs:documentation>Lower triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -175,7 +108,7 @@
 				<xs:annotation>
 					<xs:documentation>Number of X points at a given time</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -186,85 +119,41 @@
 			<xs:element name="x_point_inner" type="rz1d_dynamic">
 				<xs:annotation>
 					<xs:documentation>RZ position of the innermost X point, the active X point if diverted.</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>1...Max_N_X_points</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="x_point_outer" type="rz1d_dynamic">
 				<xs:annotation>
 					<xs:documentation>RZ position of the second Xpoint</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>1...Max_N_X_points</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="strike_point_lower_left" type="rz1d_dynamic">
 				<xs:annotation>
 					<xs:documentation>RZ position of the lower left strike point</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../time</coordinate2>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="strike_point_upper_left" type="rz1d_dynamic">
 				<xs:annotation>
 					<xs:documentation>RZ position of the upper left strike point</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../time</coordinate2>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="strike_point_lower_right" type="rz1d_dynamic">
 				<xs:annotation>
 					<xs:documentation>RZ position of the lower right strike point</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../time</coordinate2>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="strike_point_upper_right" type="rz1d_dynamic">
 				<xs:annotation>
 					<xs:documentation>RZ position of the upper right strike point</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../time</coordinate2>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="active_limiter_point" type="rz1d_dynamic">
 				<xs:annotation>
 					<xs:documentation>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
-					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../time</coordinate2>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="equlibrium_global">
+	<xs:complexType name="equlibrium_global_quantities">
 		<xs:annotation>
 			<xs:documentation>0D parameters of the equilibrium</xs:documentation>
 		</xs:annotation>
@@ -273,7 +162,7 @@
 				<xs:annotation>
 					<xs:documentation>Poloidal beta</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -285,7 +174,7 @@
 				<xs:annotation>
 					<xs:documentation>Toroidal beta</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -297,7 +186,7 @@
 				<xs:annotation>
 					<xs:documentation>Normalised toroidal beta</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -309,7 +198,7 @@
 				<xs:annotation>
 					<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above.</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>A</units>
 					</xs:appinfo>
@@ -322,7 +211,7 @@
 				<xs:annotation>
 					<xs:documentation>Internal inductance</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -334,7 +223,7 @@
 				<xs:annotation>
 					<xs:documentation>Total plasma volume</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>m^3</units>
 					</xs:appinfo>
@@ -347,7 +236,7 @@
 				<xs:annotation>
 					<xs:documentation>Area of the LCFS poloidal cross section</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>m^2</units>
 					</xs:appinfo>
@@ -360,7 +249,7 @@
 				<xs:annotation>
 					<xs:documentation>Poloidal flux at the magnetic axis</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>Wb</units>
 					</xs:appinfo>
@@ -373,7 +262,7 @@
 				<xs:annotation>
 					<xs:documentation>Poloidal flux at the selected plasma boundary </xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>Wb</units>
 					</xs:appinfo>
@@ -391,7 +280,7 @@
 				<xs:annotation>
 					<xs:documentation>Total toroidal magnetic field at the magnetic axis</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>T</units>
 					</xs:appinfo>
@@ -404,7 +293,7 @@
 				<xs:annotation>
 					<xs:documentation>q at the magnetic axis</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>-</units>
 					</xs:appinfo>
@@ -417,7 +306,7 @@
 				<xs:annotation>
 					<xs:documentation>q at the 95% poloidal flux surface</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>-</units>
 					</xs:appinfo>
@@ -430,7 +319,7 @@
 				<xs:annotation>
 					<xs:documentation>Minimum q value in the plasma</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>-</units>
 					</xs:appinfo>
@@ -448,7 +337,7 @@
 				<xs:annotation>
 					<xs:documentation>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 						<units>J</units>
 					</xs:appinfo>
@@ -461,7 +350,7 @@
 				<xs:annotation>
 					<xs:documentation>Adiabatic index</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -480,7 +369,7 @@
 				<xs:annotation>
 					<xs:documentation>Poloidal flux, such that Bp=|grad psi| /R/2/pi</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>1...n_psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>Wb</units>
@@ -494,7 +383,7 @@
 				<xs:annotation>
 					<xs:documentation>Toroidal flux</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>Wb</units>
@@ -508,7 +397,7 @@
 				<xs:annotation>
 					<xs:documentation>Pressure</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>Pa</units>
@@ -522,7 +411,7 @@
 				<xs:annotation>
 					<xs:documentation>Diamagnetic function (F=R B_Phi)</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>T.m</units>
@@ -536,7 +425,7 @@
 				<xs:annotation>
 					<xs:documentation>Derivative of Pressure w.r.t. Psi</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>Pa.Wb^-1</units>
@@ -550,7 +439,7 @@
 				<xs:annotation>
 					<xs:documentation>Derivative of F w.r.t. Psi, multiplied with F</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>T^2.m^2/Wb</units>
@@ -564,7 +453,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged toroidal current density = average(J_TorR) / average(1/R)</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>A/m^2</units>
@@ -578,7 +467,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged parallel current density = average(j.B) / B0, where B0 = Equilibrium/Global/Toroidal_Field/B0</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>A/m^2</units>
@@ -592,7 +481,7 @@
 				<xs:annotation>
 					<xs:documentation>Safety factor</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>-</units>
@@ -609,7 +498,7 @@
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>-</units>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -620,7 +509,7 @@
 				<xs:annotation>
 					<xs:documentation>Radial coordinate (major radius) on the inboard side of the magnetic axis</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m</units>
@@ -634,7 +523,7 @@
 				<xs:annotation>
 					<xs:documentation>Radial coordinate (major radius) on the outboard side of the magnetic axis</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m</units>
@@ -648,7 +537,7 @@
 				<xs:annotation>
 					<xs:documentation>Toroidal flux coordinate, defined as sqrt(Phi/pi/B0), where B0 = Equilibrium/Global/Toroidal_Field/B0</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m</units>
@@ -662,7 +551,7 @@
 				<xs:annotation>
 					<xs:documentation>Derivative of Psi with respect to Rho_Tor</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>Wb/m</units>
@@ -676,7 +565,7 @@
 				<xs:annotation>
 					<xs:documentation>Normalised radial coordinate related to the plasma volume. Defined as sqrt(volume / volume[LCFS])</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>-</units>
@@ -690,7 +579,7 @@
 				<xs:annotation>
 					<xs:documentation>Elongation</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>-</units>
@@ -704,7 +593,7 @@
 				<xs:annotation>
 					<xs:documentation>Upper triangularity w.r.t. magnetic axis</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>-</units>
@@ -718,7 +607,7 @@
 				<xs:annotation>
 					<xs:documentation>Lower triangularity w.r.t. magnetic axis</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>-</units>
@@ -732,7 +621,7 @@
 				<xs:annotation>
 					<xs:documentation>Volume enclosed in the flux surface</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m^3</units>
@@ -746,7 +635,7 @@
 				<xs:annotation>
 					<xs:documentation>Radial derivative of the volume enclosed in the flux surface with respect to Psi</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m^3.Wb^-1</units>
@@ -760,7 +649,7 @@
 				<xs:annotation>
 					<xs:documentation>Radial derivative of the volume enclosed in the flux surface with respect to Rho_Tor</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m^2</units>
@@ -774,7 +663,7 @@
 				<xs:annotation>
 					<xs:documentation>Cross-sectional area of the flux surface</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m^2</units>
@@ -788,7 +677,7 @@
 				<xs:annotation>
 					<xs:documentation>Radial derivative of the cross-sectional area of the flux surface with respect to Psi</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m^2.Wb^-1</units>
@@ -802,7 +691,7 @@
 				<xs:annotation>
 					<xs:documentation>Surface area of the toroidal flux surface</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m^2</units>
@@ -816,7 +705,7 @@
 				<xs:annotation>
 					<xs:documentation>Trapped particle fraction</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 					</xs:appinfo>
@@ -829,7 +718,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged 1/R^2</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m^-2</units>
@@ -843,7 +732,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged grad_rho^2/R^2</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m^-2</units>
@@ -857,7 +746,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged grad_rho^2</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 					</xs:appinfo>
@@ -870,7 +759,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged 1/B^2</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>T^-2</units>
@@ -884,7 +773,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged B^2</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>T^2</units>
@@ -898,7 +787,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged grad_rho^2/B^2</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>T^-2</units>
@@ -912,7 +801,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged grad_rho</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 					</xs:appinfo>
@@ -925,7 +814,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged R</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m</units>
@@ -939,7 +828,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged 1/R</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>m^-1</units>
@@ -953,7 +842,7 @@
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged B</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>T</units>
@@ -967,7 +856,7 @@
 				<xs:annotation>
 					<xs:documentation>Minimum(B) on the flux surface</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>T</units>
@@ -981,7 +870,7 @@
 				<xs:annotation>
 					<xs:documentation>Maximum(B) on the flux surface</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<coordinate2>../../time</coordinate2>
 						<units>T</units>
@@ -1002,7 +891,7 @@
 				<xs:annotation>
 					<xs:documentation>First dimension values</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>1...n_dim1</coordinate1>
 						<coordinate2>../../../time</coordinate2>
 						<units>variable</units>
@@ -1016,7 +905,7 @@
 				<xs:annotation>
 					<xs:documentation>Second dimension values</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>1...n_dim2</coordinate1>
 						<coordinate2>../../../time</coordinate2>
 						<units>variable</units>
@@ -1037,7 +926,7 @@
 				<xs:annotation>
 					<xs:documentation>Selection of one of a set of grid types. 1-rectangular (R,Z) grid, in this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1053,7 +942,7 @@
 				<xs:annotation>
 					<xs:documentation>Values of the major radius on the grid</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1068,7 +957,7 @@
 				<xs:annotation>
 					<xs:documentation>Values of the Height on the grid</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1083,7 +972,7 @@
 				<xs:annotation>
 					<xs:documentation>Values of the poloidal flux at the grid in the poloidal plane</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1098,7 +987,7 @@
 				<xs:annotation>
 					<xs:documentation>Values of the poloidal angle on the grid</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1113,7 +1002,7 @@
 				<xs:annotation>
 					<xs:documentation>Toroidal flux</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1128,7 +1017,7 @@
 				<xs:annotation>
 					<xs:documentation>Toroidal plasma current density</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1143,7 +1032,7 @@
 				<xs:annotation>
 					<xs:documentation>Parallel (to magnetic field) plasma current density</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1158,7 +1047,7 @@
 				<xs:annotation>
 					<xs:documentation>R component of the poloidal magnetic field</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1173,7 +1062,7 @@
 				<xs:annotation>
 					<xs:documentation>Z component of the poloidal magnetic field</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1188,7 +1077,7 @@
 				<xs:annotation>
 					<xs:documentation>Toroidal component of the magnetic field</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1210,7 +1099,7 @@
 				<xs:annotation>
 					<xs:documentation>Type of coordinate system</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1226,7 +1115,7 @@
 				<xs:annotation>
 					<xs:documentation>Values of the major radius on the grid</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1241,7 +1130,7 @@
 				<xs:annotation>
 					<xs:documentation>Values of the Height on the grid</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1256,7 +1145,7 @@
 				<xs:annotation>
 					<xs:documentation>Jacobian of the coordinate system</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1271,7 +1160,7 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g_11; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1286,7 +1175,7 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g_12; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1301,7 +1190,7 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g_13; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1316,7 +1205,7 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1331,7 +1220,7 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g_23; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1346,7 +1235,7 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g_33; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<coordinate3>../../time</coordinate3>
@@ -1371,7 +1260,7 @@
 						<xs:documentation>Description of the plasma boundary</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="global" type="equlibrium_global">
+				<xs:element name="global_quantities" type="equlibrium_global_quantities">
 					<xs:annotation>
 						<xs:documentation>0D parameters of the equilibrium</xs:documentation>
 					</xs:annotation>

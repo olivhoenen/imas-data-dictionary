@@ -14,7 +14,7 @@
 					<xs:documentation>Minimum Z of the charge state bundle</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -26,7 +26,7 @@
 					<xs:documentation>Maximum Z of the charge state bundle</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -37,7 +37,7 @@
 				<xs:annotation>
 					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -59,7 +59,7 @@
 					<xs:documentation>Mass of atom</xs:documentation>
 					<xs:appinfo>
 						<units>Atomic Mass Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -70,7 +70,7 @@
 				<xs:annotation>
 					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>Elementary Charge Unit</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -83,7 +83,7 @@
 					<xs:documentation>Nuclear charge</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -94,7 +94,7 @@
 				<xs:annotation>
 					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -105,7 +105,7 @@
 				<xs:annotation>
 					<xs:documentation>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -132,7 +132,7 @@
 					<xs:documentation>Mass of atom</xs:documentation>
 					<xs:appinfo>
 						<units>Atomic Mass Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -144,7 +144,7 @@
 					<xs:documentation>Nuclear charge</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -156,7 +156,7 @@
 					<xs:documentation>Multiplicity of the atom</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -182,7 +182,7 @@
 				<xs:annotation>
 					<xs:documentation>Types energies considered for this neutral species : 0=cold, 1=thermal, 2= fast, 3=NBI</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -193,7 +193,7 @@
 				<xs:annotation>
 					<xs:documentation>String identifying the atom or molecule (e.g. D2, DT, CD4, ...)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -237,22 +237,24 @@
 					<xs:annotation>
 						<xs:documentation>Name of the code</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<coordinate1>../../time</coordinate1>
+							<type>dynamic</type>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:group ref="STR_0D"/>
+						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="version">
 					<xs:annotation>
 						<xs:documentation>Version of the code</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<coordinate1>../../time</coordinate1>
+							<type>dynamic</type>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:group ref="STR_0D"/>
+						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="parameters">
@@ -260,7 +262,7 @@
 						<xs:documentation>List of the code specific parameters in XML format</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>../../time</coordinate1>
-							<type>DYNAMIC</type>
+							<type>dynamic</type>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
@@ -272,19 +274,19 @@
 						<xs:documentation>List of the code specific diagnostic/output in XML format</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>../../time</coordinate1>
-							<type>DYNAMIC</type>
+							<type>dynamic</type>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="flag">
+				<xs:element name="output_flag">
 					<xs:annotation>
 						<xs:documentation>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>../../time</coordinate1>
-							<type>DYNAMIC</type>
+							<type>dynamic</type>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
@@ -304,7 +306,7 @@
 					<xs:annotation>
 						<xs:documentation>Actual value of the code parameters (instance of Code_Parameters/Parameters in XML format)</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -312,7 +314,7 @@
 					<xs:annotation>
 						<xs:documentation>Default value of the code parameters (instance of Code_Parameters/Parameters in XML format)</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -320,7 +322,7 @@
 					<xs:annotation>
 						<xs:documentation>Code parameters schema</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -329,7 +331,7 @@
 	</xs:element>
 	<xs:complexType name="errorbar">
 		<xs:annotation>
-			<xs:documentation>Structure for 1D signal errorbar</xs:documentation>
+			<xs:documentation>Structure for 1D dynamic errorbar</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="type">
@@ -340,11 +342,11 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="signal">
+			<xs:element name="dynamic">
 				<xs:annotation>
-					<xs:documentation>Absolute error provided as a Signal of same dimension as the related field.</xs:documentation>
+					<xs:documentation>Absolute error provided as a dynamic of same dimension as the related field.</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -355,7 +357,7 @@
 				<xs:annotation>
 					<xs:documentation>Relative error in % provided as a constant</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -372,18 +374,18 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="signal_type">
+	<xs:complexType name="dynamic_type">
 		<xs:annotation>
-			<xs:documentation>Structure for 1D signal (prototype to be evaluated)</xs:documentation>
+			<xs:documentation>Structure for 1D dynamic (prototype to be evaluated)</xs:documentation>
 			<xs:appinfo>parent-dependent</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element ref="time"/>
 			<xs:element name="value">
 				<xs:annotation>
-					<xs:documentation>Value of the signal. Value/Data is ugly. Moreover the metadata are not at the right place. </xs:documentation>
+					<xs:documentation>Value of the dynamic. Value/Data is ugly. Moreover the metadata are not at the right place. </xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<unit>Defined by its parent</unit>
 						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
@@ -404,7 +406,7 @@
 				<xs:annotation>
 					<xs:documentation>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -416,7 +418,7 @@
 				<xs:annotation>
 					<xs:documentation>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<units>T</units>
 						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
@@ -436,7 +438,7 @@
 				<xs:annotation>
 					<xs:documentation>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -448,7 +450,7 @@
 				<xs:annotation>
 					<xs:documentation>Vacuum toroidal field at b0; Positive sign means anti-clockwise when viewed from above. The product r0*b0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<units>T</units>
 						<coordinate1>../../../time</coordinate1>
 					</xs:appinfo>
@@ -461,14 +463,14 @@
 	</xs:complexType>
 	<xs:complexType name="rzphi0d_static">
 		<xs:annotation>
-			<xs:documentation>Structure for R, Z, Phi positions (0D, STATIC)</xs:documentation>
+			<xs:documentation>Structure for R, Z, Phi positions (0D, static)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -480,7 +482,7 @@
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -492,7 +494,7 @@
 				<xs:annotation>
 					<xs:documentation>Toroidal angle</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -504,14 +506,14 @@
 	</xs:complexType>
 	<xs:complexType name="rzphi1d_static">
 		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z, Phi positions (1D, STATIC)</xs:documentation>
+			<xs:documentation>Structure for list of R, Z, Phi positions (1D, static)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>m</units>
 						<coordinate1>1...n_points</coordinate1>
 					</xs:appinfo>
@@ -524,7 +526,7 @@
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>m</units>
 						<coordinate1>../R</coordinate1>
 					</xs:appinfo>
@@ -537,7 +539,7 @@
 				<xs:annotation>
 					<xs:documentation>Toroidal angle</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>rad</units>
 						<coordinate1>../R</coordinate1>
 					</xs:appinfo>
@@ -550,14 +552,14 @@
 	</xs:complexType>
 	<xs:complexType name="rz1d_constant">
 		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (1D, CONSTANT)</xs:documentation>
+			<xs:documentation>Structure for list of R, Z positions (1D, constant)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>m</units>
 						<coordinate1>1...n_points</coordinate1>
 					</xs:appinfo>
@@ -570,7 +572,7 @@
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>m</units>
 						<coordinate1>../r</coordinate1>
 					</xs:appinfo>
@@ -583,14 +585,14 @@
 	</xs:complexType>
 	<xs:complexType name="rz1d_dynamic">
 		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (1D, DYNAMIC), time assumed to be 2 levels above</xs:documentation>
+			<xs:documentation>Structure for list of R, Z positions (1D, dynamic), time assumed to be 2 levels above</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>../../../time</coordinate1>
 					</xs:appinfo>
@@ -603,7 +605,7 @@
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>../../../time</coordinate1>
 					</xs:appinfo>
@@ -614,16 +616,49 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rz0d_static">
+	<xs:complexType name="rz1d_static">
 		<xs:annotation>
-			<xs:documentation>Structure for a single R, Z position (0D, CONSTANT)</xs:documentation>
+			<xs:documentation>Structure for list of R, Z positions (1D, constant)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>1...n_points</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rz0d_static">
+		<xs:annotation>
+			<xs:documentation>Structure for a single R, Z position (0D, constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -635,7 +670,7 @@
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -647,14 +682,14 @@
 	</xs:complexType>
 	<xs:complexType name="rz2d_dynamic_npoints">
 		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (2D, DYNAMIC), with an N_Points indicator of the number of active points in each list. This could be improved later, making the parent a vector of structure indexed on a time, when the PUAL allows for it. time assumed to be 2 levels above</xs:documentation>
+			<xs:documentation>Structure for list of R, Z positions (2D, dynamic), with an N_Points indicator of the number of active points in each list. This could be improved later, making the parent a vector of structure indexed on a time, when the PUAL allows for it. time assumed to be 2 levels above</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="n_points">
 				<xs:annotation>
 					<xs:documentation>Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points)).</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -666,7 +701,7 @@
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>1...max(n_points)</coordinate1>
 						<coordinate2>../../../time</coordinate2>
@@ -680,7 +715,7 @@
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>../r</coordinate1>
 						<coordinate2>../../../time</coordinate2>
@@ -694,14 +729,14 @@
 	</xs:complexType>
 	<xs:complexType name="rz2d_dynamic">
 		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (2D, DYNAMIC), with an N_Points indicator of the number of active points in each list. This could be improved later, making the parent a vector of structure indexed on a time, when the PUAL allows for it. time assumed to be 2 levels above</xs:documentation>
+			<xs:documentation>Structure for list of R, Z positions (2D, dynamic), with an N_Points indicator of the number of active points in each list. This could be improved later, making the parent a vector of structure indexed on a time, when the PUAL allows for it. time assumed to be 2 levels above</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="n_points">
 				<xs:annotation>
 					<xs:documentation>Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points)).</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<coordinate1>../../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -713,7 +748,7 @@
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>1...max(n_points)</coordinate1>
 						<coordinate2>../../../time</coordinate2>
@@ -727,7 +762,7 @@
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>../r</coordinate1>
 						<coordinate2>../../../time</coordinate2>
@@ -735,6 +770,61 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rectangle_static">
+		<xs:annotation>
+			<xs:documentation>Rectangular description of a 2D object</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>centre R</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>centre Z</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="width">
+				<xs:annotation>
+					<xs:documentation>horizontal full width</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="height">
+				<xs:annotation>
+					<xs:documentation>vertical full height</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -748,70 +838,22 @@
 				<xs:annotation>
 					<xs:documentation>Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ') </xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
+						<Type>static</Type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="outline" type="rz1d_constant">
+			<xs:element name="outline" type="rz1d_static">
 				<xs:annotation>
 					<xs:documentation>Irregular outline of the element</xs:documentation>
-					<xs:appinfo>
-						<Type>STATIC</Type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>1...n_points</coordinate2>
-						<Units>m</Units>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="rectangle">
+			<xs:element name="rectangle" type="rectangle_static">
 				<xs:annotation>
 					<xs:documentation>Rectangular description of the element</xs:documentation>
-					<xs:appinfo>
-						<Type>STATIC</Type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>1...n_points</coordinate2>
-						<Units>m</Units>
-					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="r">
-							<xs:annotation>
-								<xs:documentation>centre R</xs:documentation>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_0D"/>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="z">
-							<xs:annotation>
-								<xs:documentation>centre Z</xs:documentation>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_0D"/>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="width">
-							<xs:annotation>
-								<xs:documentation>horizontal full width</xs:documentation>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_0D"/>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="height">
-							<xs:annotation>
-								<xs:documentation>vertical full height</xs:documentation>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_0D"/>
-							</xs:complexType>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -823,9 +865,9 @@
 			<xs:sequence>
 				<xs:element name="status_of" type="str_type">
 					<xs:annotation>
-						<xs:documentation>Status of this structure 'OK' if the structure was created consistently, 'PARTIAL' if not complete, 'INCONSISTENT' if complete but not guaranteed consistent </xs:documentation>
+						<xs:documentation>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent </xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -833,7 +875,7 @@
 					<xs:annotation>
 						<xs:documentation>Any additional comment from the source application</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -841,7 +883,7 @@
 					<xs:annotation>
 						<xs:documentation>Creator of this consistent IDS</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -849,7 +891,7 @@
 					<xs:annotation>
 						<xs:documentation>Date of consistent creation of this IDS</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -857,7 +899,7 @@
 					<xs:annotation>
 						<xs:documentation>Where do the data for this IDS come from (a procedure, a set of codes)</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -865,7 +907,7 @@
 					<xs:annotation>
 						<xs:documentation>Documented reference to this IDS data</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -873,7 +915,7 @@
 					<xs:annotation>
 						<xs:documentation>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -881,7 +923,7 @@
 					<xs:annotation>
 						<xs:documentation>Coordinate conventions of this IDS</xs:documentation>
 						<xs:appinfo>
-							<type>CONSTANT</type>
+							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -897,7 +939,7 @@
 				<xs:annotation>
 					<xs:documentation>Free string carrying a comment on the Data Item</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -905,7 +947,7 @@
 				<xs:annotation>
 					<xs:documentation>Who created this Data Item</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -913,7 +955,7 @@
 				<xs:annotation>
 					<xs:documentation>Date of the Data Item, can be reference to a higher structure date (date pattern)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -921,7 +963,7 @@
 				<xs:annotation>
 					<xs:documentation>Documented reference to this data</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -929,7 +971,7 @@
 				<xs:annotation>
 					<xs:documentation>What is the shape of this Data Item e.g. (3,4,2)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -937,7 +979,7 @@
 				<xs:annotation>
 					<xs:documentation>Where do the data for this Data Item come from (a procedure, a set of codes, ...)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -948,7 +990,7 @@
 			<xs:documentation>Generic time [s]</xs:documentation>
 			<xs:appinfo>
 				<coordinate1>1...n_times</coordinate1>
-				<type>DYNAMIC</type>
+				<type>dynamic</type>
 			</xs:appinfo>
 		</xs:annotation>
 	</xs:element>

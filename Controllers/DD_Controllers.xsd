@@ -86,7 +86,7 @@
 					<xs:group ref="STR_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="statespace">
+			<xs:element name="statespace" type="controllers_statespace">
 				<xs:annotation>
 					<xs:documentation>Statespace controller in discrete time</xs:documentation>
 					<xs:appinfo>
@@ -94,67 +94,15 @@
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="a">
-							<xs:annotation>
-								<xs:documentation>A matrix</xs:documentation>
-								<xs:appinfo>
-									<Type>STATIC</Type>
-									<units>-</units>
-								</xs:appinfo>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_2D"/>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="b">
-							<xs:annotation>
-								<xs:documentation>B matrix</xs:documentation>
-								<xs:appinfo>
-									<Type>STATIC</Type>
-									<units>-</units>
-								</xs:appinfo>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_2D"/>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="c">
-							<xs:annotation>
-								<xs:documentation>C matrix</xs:documentation>
-								<xs:appinfo>
-									<Type>STATIC</Type>
-									<units>-</units>
-								</xs:appinfo>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_2D"/>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="d">
-							<xs:annotation>
-								<xs:documentation>D matrix</xs:documentation>
-								<xs:appinfo>
-									<Type>STATIC</Type>
-									<units>-</units>
-								</xs:appinfo>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_2D"/>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="deltat">
-							<xs:annotation>
-								<xs:documentation>Discrete time sampling interval ; if 0, the controller is continuous time</xs:documentation>
-								<xs:appinfo>
-									<Type>STATIC</Type>
-									<units>-</units>
-								</xs:appinfo>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
+			</xs:element>
+			<xs:element name="pid" type="controllers_pid">
+				<xs:annotation>
+					<xs:documentation>Statespace controller in discrete time</xs:documentation>
+					<xs:appinfo>
+						<Type>STATIC</Type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="inputs">
 				<xs:annotation>
@@ -251,6 +199,125 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="controllers_statespace">
+		<xs:annotation>
+			<xs:documentation>type for a statespace controller</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="a">
+				<xs:annotation>
+					<xs:documentation>A matrix</xs:documentation>
+					<xs:appinfo>
+						<Type>STATIC</Type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b">
+				<xs:annotation>
+					<xs:documentation>B matrix</xs:documentation>
+					<xs:appinfo>
+						<Type>STATIC</Type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="c">
+				<xs:annotation>
+					<xs:documentation>C matrix</xs:documentation>
+					<xs:appinfo>
+						<Type>STATIC</Type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d">
+				<xs:annotation>
+					<xs:documentation>D matrix</xs:documentation>
+					<xs:appinfo>
+						<Type>STATIC</Type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="deltat">
+				<xs:annotation>
+					<xs:documentation>Discrete time sampling interval ; if 0, the controller is continuous time</xs:documentation>
+					<xs:appinfo>
+						<Type>STATIC</Type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="controllers_pid">
+		<xs:annotation>
+			<xs:documentation>type for a PID controller</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="p">
+				<xs:annotation>
+					<xs:documentation>Proportional term</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="i">
+				<xs:annotation>
+					<xs:documentation>Integral term</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d">
+				<xs:annotation>
+					<xs:documentation>Derivative term</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tau">
+				<xs:annotation>
+					<xs:documentation>Filter time-constant for the D-term</xs:documentation>
+					<xs:appinfo>
+						<type>CONSTANT</type>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

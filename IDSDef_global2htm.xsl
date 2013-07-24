@@ -37,7 +37,7 @@
         <!--<b></b>
         <br />-->
         <table border="1">
-        <thead style="color:#ff0000"><td>Full path name</td><td>Description</td><td>Data Type</td><td>Axes</td></thead>
+        <thead style="color:#ff0000"><td>Full path name</td><td>Description</td><td>Data Type</td><td>Coordinates</td></thead>
         <xsl:apply-templates select="field"/>
         </table>
         </a>
@@ -63,15 +63,15 @@
            <td><xsl:value-of select="@data_type"/><xsl:if test="@maxoccur"> [max_size=<xsl:value-of select="@maxoccur"/>]</xsl:if></td>  
   
 <td>
-<xsl:if test="@axis1 or @Axis1"> <!--If there is at least one axis-->
+<xsl:if test="@coordinate1"> <!--If there is at least one axis-->
 <table>
-<tr><td>1- <xsl:value-of select="@axis1"/> <xsl:value-of select="@Axis1"/>
+<tr><td>1- <xsl:value-of select="@coordinate1"/>
 </td></tr>
-<xsl:if test="@axis2 or @Axis2">
-<tr><td>2- <xsl:value-of select="@axis2"/> <xsl:value-of select="@Axis2"/>
+<xsl:if test="@coordinate2">
+<tr><td>2- <xsl:value-of select="@coordinate2"/>
 </td></tr>
-<xsl:if test="@axis3 or @Axis3">
-<tr><td>3- <xsl:value-of select="@axis3"/> <xsl:value-of select="@Axis3"/>
+<xsl:if test="@coordinate3">
+<tr><td>3- <xsl:value-of select="@coordinate3"/>
 </td></tr>
 </xsl:if>
 </xsl:if>

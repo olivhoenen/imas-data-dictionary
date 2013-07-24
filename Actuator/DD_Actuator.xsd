@@ -4,18 +4,18 @@
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:element name="Actuator">
+	<xs:element name="actuator">
 		<xs:annotation>
 			<xs:documentation>Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="IDS_Properties"/>
-				<xs:element name="Name">
+				<xs:element ref="ids_properties"/>
+				<xs:element name="name">
 					<xs:annotation>
 						<xs:documentation>Name of the actuator (IC, EC, NBI, LH)</xs:documentation>
 						<xs:appinfo>
-							<type>STATIC</type>
+							<type>static</type>
 							<units>-</units>
 						</xs:appinfo>
 					</xs:annotation>
@@ -23,11 +23,11 @@
 						<xs:group ref="STR_0D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Channels">
+				<xs:element name="channels">
 					<xs:annotation>
 						<xs:documentation>ID of the multiple channels of the actuator: Beam boxes for NBI, EC or IC launcher, ...</xs:documentation>
 						<xs:appinfo>
-							<type>STATIC</type>
+							<type>static</type>
 							<units>-</units>
 						</xs:appinfo>
 					</xs:annotation>
@@ -35,36 +35,36 @@
 						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Power">
+				<xs:element name="power">
 					<xs:annotation>
 						<xs:documentation>Power delivered at the output of the actuator, in the vessel (NB this is before the coupling / beam blocking / shine through / orbit losses calculations) </xs:documentation>
 						<xs:appinfo>
-							<type>SIGNAL</type>
+							<type>dynamic</type>
 							<units>W</units>
-							<axis1>../Channels</axis1>
-							<axis2>../Timebase</axis2>
+							<coordinate1>../channels</coordinate1>
+							<coordinate2>../time</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Generic_Signal">
+				<xs:element name="generic_dynamic">
 					<xs:annotation>
-						<xs:documentation>Generic 2D signal slot for storing an actuator control parameter (e.g. the angle of an ECRH mirror)</xs:documentation>
+						<xs:documentation>Generic 2D dynamic slot for storing an actuator control parameter (e.g. the angle of an ECRH mirror)</xs:documentation>
 						<xs:appinfo>
-							<type>SIGNAL</type>
-							<units>W</units>
-							<axis1>../Channels</axis1>
-							<axis2>../Timebase</axis2>
+							<type>dynamic</type>
+							<units>mixed</units>
+							<coordinate1>../channels</coordinate1>
+							<coordinate2>../time</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element ref="Code_Parameters"/>
-				<xs:element ref="Timebase"/>
+				<xs:element ref="code"/>
+				<xs:element ref="time"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

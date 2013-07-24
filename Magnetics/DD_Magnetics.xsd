@@ -10,7 +10,7 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:complexType name="magnetics_flux_loops">
+	<xs:complexType name="magnetics_flux_loop">
 		<xs:annotation>
 			<xs:documentation>Flux loops</xs:documentation>
 		</xs:annotation>
@@ -19,7 +19,7 @@
 				<xs:annotation>
 					<xs:documentation>Name of the flux loop</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -30,7 +30,7 @@
 				<xs:annotation>
 					<xs:documentation>ID of the flux loop</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -41,9 +41,9 @@
 				<xs:annotation>
 					<xs:documentation>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
-						<axis1>1...3</axis1>
-						<axis2>1...n_points</axis2>
+						<type>static</type>
+						<coordinate1>1...3</coordinate1>
+						<coordinate2>1...n_points</coordinate2>
 						<units>m, m, rad</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -52,9 +52,9 @@
 				<xs:annotation>
 					<xs:documentation>Measured flux</xs:documentation>
 					<xs:appinfo>
-						<axis1>time</axis1>
+						<coordinate1>time</coordinate1>
 						<units>Wb</units>
-						<type>DYNAMIC</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -75,7 +75,7 @@
 				<xs:annotation>
 					<xs:documentation>Name of the probe</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -86,7 +86,7 @@
 				<xs:annotation>
 					<xs:documentation>ID of the probe</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -97,8 +97,8 @@
 				<xs:annotation>
 					<xs:documentation>R, Z, Phi position of coil centre</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
-						<axis1>1...3</axis1>
+						<type>static</type>
+						<coordinate1>1...3</coordinate1>
 						<units>m, m, rad</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -107,7 +107,7 @@
 				<xs:annotation>
 					<xs:documentation>Poloidal angle of coil orientation</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -119,7 +119,7 @@
 				<xs:annotation>
 					<xs:documentation>Toroidal angle of coil orientation (0 if fully in the poloidal plane) </xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -131,7 +131,7 @@
 				<xs:annotation>
 					<xs:documentation>Area of the coil</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>m^2</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -143,7 +143,7 @@
 				<xs:annotation>
 					<xs:documentation>Length of the coil</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -151,23 +151,23 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="turns">
+			<xs:element name="turns_n">
 				<xs:annotation>
 					<xs:documentation>Turns in the coil</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="field">
+			<xs:element name="b_field">
 				<xs:annotation>
 					<xs:documentation>Measured magnetic field</xs:documentation>
 					<xs:appinfo>
-						<axis1>time</axis1>
-						<type>DYNAMIC</type>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -189,7 +189,7 @@
 				<xs:annotation>
 					<xs:documentation>Name of the data processing method</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -199,8 +199,8 @@
 			<xs:element name="value_TBD">
 				<xs:annotation>
 					<xs:appinfo>
-						<type>DYNAMIC</type>
-						<axis1>time</axis1>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -220,11 +220,11 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="flux_loop" type="magnetics_flux_loops" maxOccurs="200">
+				<xs:element name="flux_loop" type="magnetics_flux_loop" maxOccurs="200">
 					<xs:annotation>
 						<xs:documentation>Flux loops</xs:documentation>
 						<xs:appinfo>
-							<axis1>1...n_flux_loops</axis1>
+							<coordinate1>1...n_flux_loops</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -232,7 +232,7 @@
 					<xs:annotation>
 						<xs:documentation>Poloidal field probes</xs:documentation>
 						<xs:appinfo>
-							<axis1>1...n_bpol_probe</axis1>
+							<coordinate1>1...n_bpol_probe</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -240,7 +240,7 @@
 					<xs:annotation>
 						<xs:documentation>Processed quantities derived from the magnetic measurements.</xs:documentation>
 						<xs:appinfo>
-							<axis1>1...n_processed_data</axis1>
+							<coordinate1>1...n_processed_data</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>

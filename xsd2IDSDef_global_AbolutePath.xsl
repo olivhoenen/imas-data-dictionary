@@ -76,7 +76,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:when test="@name">
 				<xsl:choose>
 					<!-- If it is declared as a IDS -->
-					<xsl:when test="*/*/xs:element[@ref='IDS_Properties']">
+					<xsl:when test="*/*/xs:element[@ref='ids_properties']">
 						<IDS>
 							<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
 							<xsl:choose>
@@ -198,7 +198,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
 							<xsl:for-each select="xs:annotation/xs:appinfo/*">
 								<!-- Generic method for declaring all appinfo as attributes-->
-								<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'axis')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="axis" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="axisPath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="axis" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath,'/',../../../@name)"/><xsl:with-param name="axisPath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+								<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 							</xsl:for-each>
 						</field>
 					</xsl:when>
@@ -231,7 +231,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 									</xsl:choose>
 									<xsl:for-each select="xs:annotation/xs:appinfo/*">
 										<!-- Generic method for declaring all appinfo as attributes-->
-	<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'axis')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="axis" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="axisPath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="axis" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath,'/',../../../@name)"/><xsl:with-param name="axisPath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>									</xsl:for-each>
+	<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>									</xsl:for-each>
 									<!-- Handle type definition via template doImplementType. Need to pass an appropriate path definition -->
 									<xsl:choose>
 										<xsl:when test="$currPath=''">
@@ -267,8 +267,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:when test="@maxOccurs='unbounded' or @maxOccurs &gt; 1">
 											<xsl:attribute name="data_type">struct_array</xsl:attribute>
 																						<xsl:attribute name="maxoccur"><xsl:value-of select="@maxOccurs"/></xsl:attribute> 
-											<xsl:if test="xs:annotation/xs:appinfo/axis1 or xs:annotation/xs:appinfo/Axis1">
-												<xsl:attribute name="axis1"><xsl:value-of select="xs:annotation/xs:appinfo/axis1"/><xsl:value-of select="xs:annotation/xs:appinfo/Axis1"/></xsl:attribute>
+											<xsl:if test="xs:annotation/xs:appinfo/coordinate1">
+												<xsl:attribute name="coordinate1"><xsl:value-of select="xs:annotation/xs:appinfo/coordinate1"/></xsl:attribute>
 											</xsl:if>
 										</xsl:when>
 										<!-- It is a regular structure -->
@@ -277,24 +277,24 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<!-- TREAT HERE THE CASE OF DIRECT BRANCHING OF A GROUP BELOW A STRUCTURE, OCCURS FOR SOME SIGNALS, NEED TO ADD A DATA CHILD -->
 											<xsl:if test="xs:complexType/xs:sequence/xs:group">
 												<field>
-													<xsl:attribute name="name">Data</xsl:attribute>
+													<xsl:attribute name="name">data</xsl:attribute>
 													<xsl:choose>
 														<xsl:when test="$currPath=''">
-															<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/Data')"/></xsl:attribute>
+															<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data')"/></xsl:attribute>
 														</xsl:when>
 														<xsl:otherwise>
-															<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/Data')"/></xsl:attribute>
+															<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data')"/></xsl:attribute>
 														</xsl:otherwise>
 													</xsl:choose>
 													<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
 													<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:attribute>
 													<xsl:for-each select="xs:annotation/xs:appinfo/*">
 														<!-- Generic method for declaring all appinfo as attributes-->
-	<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'axis')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="axis" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/Data')"/><xsl:with-param name="axisPath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="axis" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath,'/',../../../@name,'/Data')"/><xsl:with-param name="axisPath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>														
+	<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>														
 														
 														
 														
-														<!--<xsl:attribute name="{name(.)}"><xsl:if test="contains(name(.),'Axis') or contains(name(.),'axis') ">../</xsl:if>--><!-- We just add ../ to all Axes since their are viewed from Data, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
+														<!--<xsl:attribute name="{name(.)}"><xsl:if test="contains(name(.),'coordinate') or contains(name(.),'coordinate') ">../</xsl:if>--><!-- We just add ../ to all Axes since their are viewed from Data, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
 													</xsl:for-each>
 												</field>
 											</xsl:if>
@@ -501,23 +501,23 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	<!-- Below is the template dedicated to building absolute Path from the relative path, for the Axis attributes-->
+	<!-- Below is the template dedicated to building absolute Path from the relative path, for the coordinate attributes-->
 	<xsl:template name="BuildAbsolutePath">
-		<xsl:param name="axis"/>
+		<xsl:param name="coordinate"/>
 		<xsl:param name="currPath"/>
-		<xsl:param name="axisPath"/>
+		<xsl:param name="coordinatePath"/>
 		<xsl:choose>
-			<xsl:when test="contains($axisPath,'...')">
-				<!-- Case of a main axis, directly print the 1...N prescription -->
-				<xsl:value-of select="$axisPath"/>
+			<xsl:when test="contains($coordinatePath,'...')">
+				<!-- Case of a main coordinate, directly print the 1...N prescription -->
+				<xsl:value-of select="$coordinatePath"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:choose>
-					<xsl:when test="contains($axisPath,'../')">
-						<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',$axisPath))"/>
+					<xsl:when test="contains($coordinatePath,'../')">
+						<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',$coordinatePath))"/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat($currPath,'/',$axisPath)"/>
+						<xsl:value-of select="concat($currPath,'/',$coordinatePath)"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:otherwise>

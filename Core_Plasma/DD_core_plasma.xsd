@@ -20,7 +20,7 @@
 					<xs:documentation>Minimum Z of the charge state bundle</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>constant</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -32,7 +32,7 @@
 					<xs:documentation>Maximum Z of the charge state bundle</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>constant</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -43,7 +43,7 @@
 				<xs:annotation>
 					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -55,13 +55,12 @@
 					<xs:documentation>Density of the charge state considered (thermal+non-thermal)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../time</coordinate2>
 						<units>m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="n_z_fast">
@@ -69,13 +68,12 @@
 					<xs:documentation>Density of fast (non-thermal) ions, for the charge state considered</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../time</coordinate2>
 						<units>m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="t_z">
@@ -83,13 +81,12 @@
 					<xs:documentation>Temperature of the charge state considered</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../time</coordinate2>
 						<units>m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v_tor_z">
@@ -97,13 +94,12 @@
 					<xs:documentation>Toroidal velocity of the charge state considered</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../time</coordinate2>
 						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v_pol_z">
@@ -111,13 +107,12 @@
 					<xs:documentation>Poloidal velocity of the charge state considered</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../time</coordinate2>
 						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -132,7 +127,7 @@
 					<xs:documentation>Mass of atom</xs:documentation>
 					<xs:appinfo>
 						<units>Atomic Mass Unit</units>
-						<type>constant</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -143,7 +138,7 @@
 				<xs:annotation>
 					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
+						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -167,7 +162,7 @@
 				<xs:annotation>
 					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -179,13 +174,12 @@
 					<xs:documentation>Ion density (thermal+non-thermal)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="n_i_fast">
@@ -193,13 +187,12 @@
 					<xs:documentation>Density of fast (non-thermal) ions, for the ion species considered</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="t_i">
@@ -207,13 +200,12 @@
 					<xs:documentation>Ion temperature of that ion species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>eV</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="p_i">
@@ -221,13 +213,12 @@
 					<xs:documentation>Ion pressure for that ion species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>Pa</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v_tor_i">
@@ -235,13 +226,12 @@
 					<xs:documentation>Toroidal velocity of that ion species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v_pol_i">
@@ -249,13 +239,12 @@
 					<xs:documentation>Poloidal velocity of that ion species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="multiple_charge_state_flag">
@@ -399,348 +388,338 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="core_profiles">
+	<xs:complexType name="core_profiles_profiles_1d">
+		<xs:sequence>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N_rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal magnetic flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Wb</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="t_e">
+				<xs:annotation>
+					<xs:documentation>Electron temperature</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="t_i_average">
+				<xs:annotation>
+					<xs:documentation>Ion temperature (averaged on charge states and ion species)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_e">
+				<xs:annotation>
+					<xs:documentation>Electron density (thermal+non-thermal)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_e_fast">
+				<xs:annotation>
+					<xs:documentation>Density of fast (non-thermal) electrons</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ions" type="core_profile_ions" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N_Ions</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_i_total_over_n_e">
+				<xs:annotation>
+					<xs:documentation>Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="momentum_tor">
+				<xs:annotation>
+					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons </xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="zeff">
+				<xs:annotation>
+					<xs:documentation>Effective charge</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="p_e">
+				<xs:annotation>
+					<xs:documentation>Electron pressure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="p_i_total">
+				<xs:annotation>
+					<xs:documentation>Total ion pressure (sum over the ion species)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_thermal">
+				<xs:annotation>
+					<xs:documentation>Thermal pressure (electrons+ions)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_perpendicular">
+				<xs:annotation>
+					<xs:documentation>Total perpendicular pressure (electrons+ions, thermal+non-thermal)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_parallel">
+				<xs:annotation>
+					<xs:documentation>Total parallel pressure (electrons+ions, thermal+non-thermal)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_total">
+				<xs:annotation>
+					<xs:documentation>Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>A/m^2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_tor">
+				<xs:annotation>
+					<xs:documentation>Total toroidal current density = average(J_Tor/R) / average(1/R)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>A/m^2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_ohmic">
+				<xs:annotation>
+					<xs:documentation>Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>A/m^2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_non_inductive">
+				<xs:annotation>
+					<xs:documentation>Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>A/m^2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_bootstrap">
+				<xs:annotation>
+					<xs:documentation>Bootstrap parallel current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>A/m^2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="conductivity_parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel conductivity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>ohm^-1.m^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="e_field_parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="q">
+				<xs:annotation>
+					<xs:documentation>Safety factor</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="magnetic_shear">
+				<xs:annotation>
+					<xs:documentation>Magnetic shear</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="core_plasma">
 		<xs:annotation>
-			<xs:documentation>Core plasma radial profiles</xs:documentation>
+			<xs:documentation>Core plasma fluid description</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="rho_tor_norm">
+				<xs:element name="profiles_1d" type="core_profiles_profiles_1d" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+						<xs:documentation>Core plasma radial profiles</xs:documentation>
 						<xs:appinfo>
+							<coordinate1>../time</coordinate1>
 							<type>dynamic</type>
-							<coordinate1>1...N_rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
+				</xs:element>
+				<xs:element name="global_quantities" type="core_profiles_global_quantities">
+					<xs:annotation>
+						<xs:documentation>Various global quantities derived from the profiles</xs:documentation>
+					</xs:annotation>
 				</xs:element>
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="psi">
-					<xs:annotation>
-						<xs:documentation>Poloidal magnetic flux</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>Wb</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="t_e">
-					<xs:annotation>
-						<xs:documentation>Electron temperature</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>eV</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="t_i_average">
-					<xs:annotation>
-						<xs:documentation>Ion temperature (averaged on charge states and ion species)</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>eV</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="n_e">
-					<xs:annotation>
-						<xs:documentation>Electron density (thermal+non-thermal)</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>m^-3</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="n_e_fast">
-					<xs:annotation>
-						<xs:documentation>Density of fast (non-thermal) electrons</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>m^-3</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="ions" type="core_profile_ions" maxOccurs="5">
-					<xs:annotation>
-						<xs:documentation>Quantities related to the different ion species</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N_Ions</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="n_i_total_over_n_e">
-					<xs:annotation>
-						<xs:documentation>Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>-</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="momentum_tor">
-					<xs:annotation>
-						<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons </xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="zeff">
-					<xs:annotation>
-						<xs:documentation>Effective charge</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="p_e">
-					<xs:annotation>
-						<xs:documentation>Electron pressure</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>Pa</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="p_i_total">
-					<xs:annotation>
-						<xs:documentation>Total ion pressure (sum over the ion species)</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>Pa</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="pressure_thermal">
-					<xs:annotation>
-						<xs:documentation>Thermal pressure (electrons+ions)</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>Pa</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="pressure_perpendicular">
-					<xs:annotation>
-						<xs:documentation>Total perpendicular pressure (electrons+ions, thermal+non-thermal)</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>Pa</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="pressure_parallel">
-					<xs:annotation>
-						<xs:documentation>Total parallel pressure (electrons+ions, thermal+non-thermal)</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>Pa</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="j_total">
-					<xs:annotation>
-						<xs:documentation>Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>A/m^2</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="j_tor">
-					<xs:annotation>
-						<xs:documentation>Total toroidal current density = average(J_Tor/R) / average(1/R)</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>A/m^2</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="j_ohmic">
-					<xs:annotation>
-						<xs:documentation>Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>A/m^2</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="j_non_inductive">
-					<xs:annotation>
-						<xs:documentation>Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>A/m^2</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="j_bootstrap">
-					<xs:annotation>
-						<xs:documentation>Bootstrap parallel current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>A/m^2</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="conductivity_parallel">
-					<xs:annotation>
-						<xs:documentation>Parallel conductivity</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>ohm^-1.m^-1</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="e_field_parallel">
-					<xs:annotation>
-						<xs:documentation>Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>V.m^-1</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="q">
-					<xs:annotation>
-						<xs:documentation>Safety factor</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<type>dynamic</type>
-							<units>-</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="magnetic_shear">
-					<xs:annotation>
-						<xs:documentation>Magnetic shear</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-							<units>-</units>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="global_quantities" type="core_profiles_global_quantities">
-					<xs:annotation>
-						<xs:documentation>Various global quantities derived from the Core_Profiles</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>

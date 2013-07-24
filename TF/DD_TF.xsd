@@ -10,85 +10,85 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
-	<xs:element name="TF">
+	<xs:element name="tf">
 		<xs:annotation>
-			<xs:documentation>Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in PF IDS.</xs:documentation>
+			<xs:documentation>Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS.</xs:documentation>
 			<xs:appinfo>machine description</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="IDS_Properties"/>
-				<xs:element name="N_Turns">
+				<xs:element ref="ids_properties"/>
+				<xs:element name="turns_n">
 					<xs:annotation>
 						<xs:documentation>Number of total turns in a toroidal field coil</xs:documentation>
 						<xs:appinfo>
-							<type>STATIC</type>
+							<type>static</type>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="INT_0D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="N_Coils">
+				<xs:element name="coils_n">
 					<xs:annotation>
 						<xs:documentation>Number of coils around the tokamak</xs:documentation>
 						<xs:appinfo>
-							<type>STATIC</type>
+							<type>static</type>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="INT_0D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Current">
+				<xs:element name="current">
 					<xs:annotation>
 						<xs:documentation>Current in the coil</xs:documentation>
 						<xs:appinfo>
-							<type>SIGNAL</type>
-							<axis1>Timebase</axis1>
+							<type>dynamic</type>
+							<coordinate1>time</coordinate1>
 							<units>A</units>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element ref="Timebase"/>
+							<xs:element ref="time"/>
 							<xs:group ref="FLT_1D"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Voltage">
+				<xs:element name="voltage">
 					<xs:annotation>
 						<xs:documentation>Voltage on the coil terminals</xs:documentation>
 						<xs:appinfo>
-							<type>SIGNAL</type>
-							<axis1>Timebase</axis1>
+							<type>dynamic</type>
+							<coordinate1>time</coordinate1>
 							<units>V</units>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element ref="Timebase"/>
+							<xs:element ref="time"/>
 							<xs:group ref="FLT_1D"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="B_Tor_Vacuum_R">
+				<xs:element name="b_tor_vacuum_r">
 					<xs:annotation>
 						<xs:documentation>Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above</xs:documentation>
 						<xs:appinfo>
-							<type>SIGNAL</type>
-							<axis1>Timebase</axis1>
+							<type>dynamic</type>
+							<coordinate1>time</coordinate1>
 							<units>T.m</units>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element ref="Timebase"/>
+							<xs:element ref="time"/>
 							<xs:group ref="FLT_1D"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element ref="Timebase"/>
+				<xs:element ref="time"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

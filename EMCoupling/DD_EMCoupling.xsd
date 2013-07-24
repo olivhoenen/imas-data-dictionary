@@ -4,14 +4,6 @@
 	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
 	<xs:complexType name="em_coupling">
 		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>Name of this coupling matrix</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="matrix">
 				<xs:annotation>
 					<xs:documentation>Value of the coupling matrix</xs:documentation>
@@ -46,12 +38,11 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element ref="code"/>
 				<xs:element name="mutual_active_active" type="em_coupling">
 					<xs:annotation>
 						<xs:documentation>Mutual inductance coupling between active coils and active coils</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>H</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -62,7 +53,7 @@
 					<xs:annotation>
 						<xs:documentation>Mutual inductance coupling between active coils and passive coils</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>H</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -73,7 +64,7 @@
 					<xs:annotation>
 						<xs:documentation>Poloidal field coupling between active coils and poloidal field probes</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>T/A</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -84,7 +75,7 @@
 					<xs:annotation>
 						<xs:documentation>Poloidal field coupling between passive coils and poloidal field probes</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>T/A</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -95,7 +86,7 @@
 					<xs:annotation>
 						<xs:documentation>Mutual between active coils and poloidal flux loops</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>H</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -106,7 +97,7 @@
 					<xs:annotation>
 						<xs:documentation>Mutual between passive coils and poloidal flux loops</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>H</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -117,7 +108,7 @@
 					<xs:annotation>
 						<xs:documentation>Mutual between active coils and equilibrium grid</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>H</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -128,7 +119,7 @@
 					<xs:annotation>
 						<xs:documentation>Mutual inductance between passive coils and equilibrium grid</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>H</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -139,7 +130,7 @@
 					<xs:annotation>
 						<xs:documentation>Field between equilibrium grid and poloidal field probes</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>T/A</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -150,7 +141,7 @@
 					<xs:annotation>
 						<xs:documentation>Mutual inductance between equilibrium grid and poloidal flux loops </xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>H</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
@@ -161,13 +152,14 @@
 					<xs:annotation>
 						<xs:documentation>Mutual inductance between equilibrium grid and itself</xs:documentation>
 						<xs:appinfo>
-							<Type>STATIC</Type>
+							<Type>static</Type>
 							<units>H</units>
 							<coordinate1>coordinate1</coordinate1>
 							<coordinate2>coordinate2</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
+				<xs:element ref="code"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

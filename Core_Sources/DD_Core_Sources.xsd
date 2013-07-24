@@ -10,68 +10,68 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:complexType name="Core_Sources_Actuators_Ions_Charge_States">
+	<xs:complexType name="core_sources_actuator_ions_charge_states">
 		<xs:annotation>
 			<xs:documentation>Source terms related to the a given charge state of the ion species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Z_Min">
+			<xs:element name="z_min">
 				<xs:annotation>
 					<xs:documentation>Minimum Z of the charge state bundle</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Z_Max">
+			<xs:element name="z_max">
 				<xs:annotation>
 					<xs:documentation>Maximum Z of the charge state bundle</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Label">
+			<xs:element name="label">
 				<xs:annotation>
 					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Nz_Source">
+			<xs:element name="n_z_source">
 				<xs:annotation>
 					<xs:documentation>Density of the charge state considered (thermal+non-thermal)</xs:documentation>
 					<xs:appinfo>
-						<axis1>../../../../Rho_Tor_Norm</axis1>
-						<axis2>../../../../Timebase</axis2>
+						<coordinate1>../../../../rho_tor_norm</coordinate1>
+						<coordinate2>../../../../time</coordinate2>
 						<units>s^-1.m^-3</units>
-						<type>SIGNAL</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Tz_Source">
+			<xs:element name="t_z_source">
 				<xs:annotation>
 					<xs:documentation>Temperature of the charge state considered</xs:documentation>
 					<xs:appinfo>
-						<axis1>../../../../Rho_Tor_Norm</axis1>
-						<axis2>../../../../Timebase</axis2>
+						<coordinate1>../../../../rho_tor_norm</coordinate1>
+						<coordinate2>../../../../time</coordinate2>
 						<units>W.m^-3</units>
-						<type>SIGNAL</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -80,28 +80,28 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="Core_Sources_Actuators_Ions">
+	<xs:complexType name="core_sources_actuator_ions">
 		<xs:annotation>
 			<xs:documentation>Source terms related to a given ion species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="A">
+			<xs:element name="a">
 				<xs:annotation>
 					<xs:documentation>Mass of atom</xs:documentation>
 					<xs:appinfo>
 						<units>Atomic Mass Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Zion">
+			<xs:element name="z_ion">
 				<xs:annotation>
 					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>Elementary Charge Unit</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -109,210 +109,210 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Zn">
+			<xs:element name="z_n">
 				<xs:annotation>
 					<xs:documentation>Nuclear charge</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Label">
+			<xs:element name="label">
 				<xs:annotation>
 					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Ni_Source">
+			<xs:element name="n_i_source">
 				<xs:annotation>
 					<xs:documentation>Source term for ion density equation</xs:documentation>
 					<xs:appinfo>
-						<axis1>../../../Rho_Tor_Norm</axis1>
-						<axis2>../../../Timebase</axis2>
+						<coordinate1>../../../rho_tor_norm</coordinate1>
+						<coordinate2>../../../time</coordinate2>
 						<units>s^-1.m^-3</units>
-						<type>SIGNAL</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Ti_Source">
+			<xs:element name="t_i_source">
 				<xs:annotation>
 					<xs:documentation>Source term for the ion energy transport equation.</xs:documentation>
 					<xs:appinfo>
-						<axis1>../../../Rho_Tor_Norm</axis1>
-						<axis2>../../../Timebase</axis2>
+						<coordinate1>../../../rho_tor_norm</coordinate1>
+						<coordinate2>../../../time</coordinate2>
 						<units>W.m^-3</units>
-						<type>SIGNAL</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Multiple_Charge_State_Flag">
+			<xs:element name="multiple_charge_state_flag">
 				<xs:annotation>
 					<xs:documentation>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Charge_States" type="Core_Sources_Actuators_Ions_Charge_States" maxOccurs="10">
+			<xs:element name="charge_states" type="core_sources_actuator_ions_charge_states" maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation>Source terms related to the different charge states of the ion species</xs:documentation>
 					<xs:appinfo>
-						<axis1>1...N_Charge_States</axis1>
+						<coordinate1>1...N_Charge_States</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="Core_Sources_Actuators">
+	<xs:complexType name="core_sources_actuator">
 		<xs:annotation>
 			<xs:documentation>Source terms for a given model</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Name">
+			<xs:element name="name">
 				<xs:annotation>
 					<xs:documentation>Name of the actuator</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
-						<type>CONSTANT</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Conductivity_Parallel">
+			<xs:element name="conductivity_parallel">
 				<xs:annotation>
 					<xs:documentation>Parallel conductivity induced by this actuator</xs:documentation>
 					<xs:appinfo>
-						<axis1>../../Rho_Tor_Norm</axis1>
-						<axis2>../../Timebase</axis2>
+						<coordinate1>../../rho_tor_norm</coordinate1>
+						<coordinate2>../../time</coordinate2>
 						<units>ohm^-1.m^-1</units>
-						<type>SIGNAL</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Ne_Source">
+			<xs:element name="n_e_source">
 				<xs:annotation>
 					<xs:documentation>Source term for electron density equation</xs:documentation>
 					<xs:appinfo>
-						<axis1>../../Rho_Tor_Norm</axis1>
-						<axis2>../../Timebase</axis2>
+						<coordinate1>../../rho_tor_norm</coordinate1>
+						<coordinate2>../../time</coordinate2>
 						<units>s^-1.m^-3</units>
-						<type>SIGNAL</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Te_Source">
+			<xs:element name="t_e_source">
 				<xs:annotation>
 					<xs:documentation>Source term for electron energy equation</xs:documentation>
 					<xs:appinfo>
-						<axis1>../../Rho_Tor_Norm</axis1>
-						<axis2>../../Timebase</axis2>
+						<coordinate1>../../rho_tor_norm</coordinate1>
+						<coordinate2>../../time</coordinate2>
 						<units>W.m^-3</units>
-						<type>SIGNAL</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Ti_Average_Source">
+			<xs:element name="t_i_average_source">
 				<xs:annotation>
 					<xs:documentation>Source term for the total ion energy equation</xs:documentation>
 					<xs:appinfo>
-						<axis1>../../Rho_Tor_Norm</axis1>
-						<axis2>../../Timebase</axis2>
+						<coordinate1>../../rho_tor_norm</coordinate1>
+						<coordinate2>../../time</coordinate2>
 						<units>W.m^-3</units>
-						<type>SIGNAL</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Momentum_Tor_Source">
+			<xs:element name="momentum_tor_source">
 				<xs:annotation>
 					<xs:documentation>Source term for total toroidal momentum equation</xs:documentation>
 					<xs:appinfo>
-						<axis1>../../Rho_Tor_Norm</axis1>
-						<axis2>../../Timebase</axis2>
+						<coordinate1>../../rho_tor_norm</coordinate1>
+						<coordinate2>../../time</coordinate2>
 						<units>kg.m^-1.s^-2</units>
-						<type>SIGNAL</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="Ions" type="Core_Sources_Actuators_Ions" maxOccurs="5">
+			<xs:element name="ions" type="core_sources_actuator_ions" maxOccurs="5">
 				<xs:annotation>
 					<xs:documentation>Source terms related to the different ions species</xs:documentation>
 					<xs:appinfo>
-						<axis1>1...N_Ions</axis1>
+						<coordinate1>1...N_Ions</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="Core_Sources">
+	<xs:element name="core_sources">
 		<xs:annotation>
 			<xs:documentation>Core plasma source terms (for the transport equations)</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="IDS_Properties"/>
-				<xs:element name="Rho_Tor_Norm">
+				<xs:element ref="ids_properties"/>
+				<xs:element name="rho_tor_norm">
 					<xs:annotation>
-						<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for Rho_Tor_Norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+						<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
 						<xs:appinfo>
-							<type>SIGNAL</type>
-							<axis1>1...N_Rho_Tor_Norm</axis1>
-							<axis2>../Timebase</axis2>
+							<type>dynamic</type>
+							<coordinate1>1...N_rho_tor_norm</coordinate1>
+							<coordinate2>../time</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="Vacuum_Toroidal_Field" type="B_Tor_Vacuum_1">
+				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Actuators" type="Core_Sources_Actuators" maxOccurs="10">
+				<xs:element name="actuator" type="core_sources_actuator" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>Source is described by a combination of various actuators. All actuators provide their values on the same Rho_Tor_Norm and Timebase grids.</xs:documentation>
+						<xs:documentation>Source is described by a combination of various actuators. All actuators provide their values on the same rho_tor_norm and time grids.</xs:documentation>
 						<xs:appinfo>
-							<axis1>1...N_Actuators</axis1>
+							<coordinate1>1...N_Actuators</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="Code_Parameters"/>
-				<xs:element ref="Timebase"/>
+				<xs:element ref="code"/>
+				<xs:element ref="time"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
