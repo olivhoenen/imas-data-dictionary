@@ -4,6 +4,74 @@
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:element name="dina">
+		<xs:annotation>
+			<xs:documentation>Simulation-specific parametrisation for the DINA-IMAS code; more and more of these will be transferred to the core_profiles and equilibrium IDS as we develop them</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="version">
+					<xs:annotation>
+						<xs:appinfo>
+							<type>dynamic</type>
+						</xs:appinfo>
+						<xs:documentation>Version of the DINA solver to be used</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="static_group_1" type="dina_static_group_1">
+					<xs:annotation>
+						<xs:appinfo>
+							<type>static</type>
+						</xs:appinfo>
+						<xs:documentation>Group I static data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="static_group_2" type="dina_static_group_2">
+					<xs:annotation>
+						<xs:appinfo>
+							<type>static</type>
+						</xs:appinfo>
+						<xs:documentation>Group II static data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="input_group_1" type="dina_input_group_1">
+					<xs:annotation>
+						<xs:documentation>Group I input data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="input_group_4" type="dina_input_group_4">
+					<xs:annotation>
+						<xs:documentation>Group IV input data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="input_group_5" type="dina_input_group_5">
+					<xs:annotation>
+						<xs:documentation>Group V input data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="output_group_5" type="dina_output_group_5">
+					<xs:annotation>
+						<xs:documentation>Group V output data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="output_group_6" type="dina_output_group_6">
+					<xs:annotation>
+						<xs:documentation>Group VI input data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="output_group_7" type="dina_output_group_7">
+					<xs:annotation>
+						<xs:documentation>Group VII output data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	<xs:complexType name="dina_static_group_1">
 		<xs:annotation>
 			<xs:documentation>type for static group 1</xs:documentation>
@@ -48,7 +116,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -97,7 +165,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_0D"/>
+					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="active0">
@@ -139,7 +207,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -150,7 +218,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -161,7 +229,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -172,7 +240,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -183,7 +251,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -194,7 +262,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -212,7 +280,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -223,7 +291,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -234,7 +302,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -245,7 +313,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -256,7 +324,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -267,7 +335,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -285,7 +353,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -296,7 +364,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -307,7 +375,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -318,7 +386,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -329,7 +397,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -340,7 +408,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -351,7 +419,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -362,7 +430,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -373,7 +441,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -640,7 +708,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -651,7 +719,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -662,7 +730,7 @@
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -692,48 +760,15 @@
 					<xs:documentation>Dina "shape" parameters</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<coordinate1>1..n</coordinate1>
+						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="dina">
-		<xs:annotation>
-			<xs:documentation>Simulation-specific parametrisation for the DINA-IMAS code; more and more of these will be transferred to the core_profiles and equilibrium IDS as we develop them</xs:documentation>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="ids_properties"/>
-				<xs:element name="version">
-					<xs:annotation>
-						<xs:appinfo>
-							<type>static</type>
-						</xs:appinfo>
-						<xs:documentation>Version of the DINA solver to be used</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="STR_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="static_group_1" type="dina_static_group_1">
-					<xs:annotation>
-						<xs:appinfo>
-							<type>static</type>
-						</xs:appinfo>
-						<xs:documentation>Group I static data</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="static_group_2" type="dina_static_group_2"/>
-				<xs:element name="input_group_1" type="dina_input_group_1"/>
-				<xs:element name="input_group_4" type="dina_input_group_4"/>
-				<xs:element name="input_group_5" type="dina_input_group_5"/>
-				<xs:element name="output_group_5" type="dina_output_group_5"/>
-				<xs:element name="output_group_6" type="dina_output_group_6"/>
-				<xs:element name="output_group_7" type="dina_output_group_7"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
 </xs:schema>

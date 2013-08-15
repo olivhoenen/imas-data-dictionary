@@ -2,6 +2,23 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:element name="schedule">
+		<xs:annotation>
+			<xs:documentation>Description of Pulse Schedule, to be enhanced as we go</xs:documentation>
+			<xs:appinfo/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="waveform" type="schedule_waveform" maxOccurs="50">
+					<xs:annotation>
+						<xs:documentation>Reference waveform to be used to drive feedback or feedforward controllers, or to control the controller switching itself</xs:documentation>
+						<xs:appinfo><coordinate1>1...N</coordinate1></xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	<xs:complexType name="schedule_waveform">
 		<xs:sequence>
 			<xs:element name="name">
@@ -16,9 +33,9 @@
 				<xs:annotation>
 					<xs:documentation>Values of the reference for the timebase</xs:documentation>
 					<xs:appinfo>
-<coordinate1>../time</coordinate1>
-<units>mixed</units>
-<type>dynamic</type>				
+						<coordinate1>../time</coordinate1>
+						<units>mixed</units>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -28,21 +45,4 @@
 			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="schedule">
-		<xs:annotation>
-			<xs:documentation>Description of Pulse Schedule, to be enhanced as we go</xs:documentation>
-			<xs:appinfo/>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="ids_properties"/>
-				<xs:element name="waveform" type="schedule_waveform" maxOccurs="50">
-					<xs:annotation>
-						<xs:documentation>Reference waveforms to be used to drive feedback or feedforward controllers, or to control the controller switching itself</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element ref="time"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
 </xs:schema>

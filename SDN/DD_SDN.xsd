@@ -2,6 +2,52 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:element name="sdn">
+		<xs:annotation>
+			<xs:documentation>Description of the Synchronous Data Network parameters and the signals on it</xs:documentation>
+			<xs:appinfo/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="allocatable_signal" type="sdn_allocatable_signals" maxOccurs="150">
+					<xs:annotation>
+						<xs:documentation>Dictionary of the signal names and definitions which can be allocated to the SDN</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="allocated_signals">
+					<xs:annotation>
+						<xs:documentation>Allocation of signal names to positions in the SDN</xs:documentation>
+						<xs:appinfo>
+							<type>static</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_1D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="signal" type="sdn_signals" maxOccurs="30">
+					<xs:annotation>
+						<xs:documentation>Data on the SDN</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="topic_list" type="sdn_topic_list" maxOccurs="30">
+					<xs:annotation>
+						<xs:documentation>List of the groups of signals used at different reading and writing points</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	<xs:complexType name="sdn_topic_list">
 		<xs:annotation>
 			<xs:documentation>List of the groups of signals used at different reading and writing points</xs:documentation>
@@ -11,8 +57,8 @@
 				<xs:annotation>
 					<xs:documentation>Names of the group of SDN signals</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
-						<coordinate1>N</coordinate1>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -23,8 +69,8 @@
 				<xs:annotation>
 					<xs:documentation>Indices into the current SDN allocated list; it must be updated when the allocated list is changed</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
-						<coordinate1>n</coordinate1>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -38,40 +84,37 @@
 			<xs:documentation>Dictionary of the signal names and definitions which can be allocated to the SDN</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="names">
+			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Names of all the allocatable signals</xs:documentation>
+					<xs:documentation>Name of the allocatable signal</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
-						<coordinate1>n</coordinate1>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="STR_1D"/>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="definitions ">
+			<xs:element name="definition">
 				<xs:annotation>
-					<xs:documentation>Definitions of the allocatable signals</xs:documentation>
+					<xs:documentation>Definition of the allocatable signal</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
-						<coordinate1>../names</coordinate1>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="STR_1D"/>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ip_normalise">
 				<xs:annotation>
 					<xs:documentation>Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops</xs:documentation>
 					<xs:appinfo>
-						<type>STATIC</type>
-						<coordinate1>../names</coordinate1>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_1D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -83,62 +126,6 @@
 		<xs:sequence>
 			<xs:element ref="time"/>
 			<xs:group ref="FLT_2D"/>
-			<xs:element name="name">
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="sdn">
-		<xs:annotation>
-			<xs:documentation>Description of the Synchronous Data Network parameters and the signals on it</xs:documentation>
-			<xs:appinfo/>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="ids_properties"/>
-				<xs:element name="allocatable_signals" type="sdn_allocatable_signals">
-					<xs:annotation>
-						<xs:documentation>Dictionary of the signal names and definitions which can be allocated to the SDN</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="allocated_signals">
-					<xs:annotation>
-						<xs:documentation>Allocation of signal names to positions in the SDN</xs:documentation>
-						<xs:appinfo>
-							<type>STATIC</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="STR_1D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="signal" type="sdn_signals" maxOccurs="30">
-					<xs:annotation>
-						<xs:documentation>Data on the SDN</xs:documentation>
-						<xs:appinfo>
-							<type>DYNAMIC</type>
-							<coordinate1>../time</coordinate1>
-							<coordinate2>../allocated_signals</coordinate2>
-							<units>Mixed</units>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="TBDREMOVEn_topic_list" type="int_type" fixed="200">
-					<xs:annotation>
-						<xs:documentation>Number items in the vector of structures</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="topic_list" type="sdn_topic_list" maxOccurs="30">
-					<xs:annotation>
-						<xs:documentation>List of the groups of signals used at different reading and writing points</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...n_topic_list</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
 </xs:schema>

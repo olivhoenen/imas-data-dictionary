@@ -13,7 +13,11 @@
 				<xs:element ref="ids_properties"/>
 				<xs:element name="comment_before">
 					<xs:annotation>
-						<xs:documentation>comment made when launching a simulation</xs:documentation>
+						<xs:documentation>Comment made when launching a simulation</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>-</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_0D"/>
@@ -21,7 +25,11 @@
 				</xs:element>
 				<xs:element name="comment_after">
 					<xs:annotation>
-						<xs:documentation>comment madeat the end of a simulation</xs:documentation>
+						<xs:documentation>Comment made at the end of a simulation</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>-</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_0D"/>
@@ -29,55 +37,83 @@
 				</xs:element>
 				<xs:element name="time_begin">
 					<xs:annotation>
-						<xs:documentation>start time</xs:documentation>
+						<xs:documentation>Start time</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>s</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:group ref="FLT_1D"/>
+						<xs:group ref="FLT_0D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="time_step">
 					<xs:annotation>
-						<xs:documentation>time interval between steps</xs:documentation>
+						<xs:documentation>Time interval between steps</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>s</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:group ref="FLT_1D"/>
+						<xs:group ref="FLT_0D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="time_end">
 					<xs:annotation>
-						<xs:documentation>stop time</xs:documentation>
+						<xs:documentation>Stop time</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>s</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:group ref="FLT_1D"/>
+						<xs:group ref="FLT_0D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="time_restart">
 					<xs:annotation>
-						<xs:documentation>time to restart an old simulation</xs:documentation>
+						<xs:documentation>Time to restart an old simulation</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>s</units>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="time_begun">
+					<xs:annotation>
+						<xs:documentation>Actual wall-clock time simulation started</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<units>UTC</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_0D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="time_begun">
-					<xs:annotation>
-						<xs:documentation>Actual time simulation started</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_0D"/>
-					</xs:complexType>
-				</xs:element>
 				<xs:element name="time_ended">
 					<xs:annotation>
-						<xs:documentation>Actual time simulation finished</xs:documentation>
+						<xs:documentation>Actual wall-clock time simulation finished</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<units>UTC</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:group ref="FLT_0D"/>
+						<xs:group ref="STR_0D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="time_pf_supplies_start">
 					<xs:annotation>
-						<xs:documentation>Time to enable PF limits</xs:documentation>
+						<xs:documentation>Time to enable PF supply limits</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>s</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="FLT_0D"/>
@@ -86,6 +122,10 @@
 				<xs:element name="iterations_max">
 					<xs:annotation>
 						<xs:documentation>Maximum number of simulation loops allowed</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>s</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="INT_0D"/>
@@ -94,6 +134,10 @@
 				<xs:element name="iterations_used">
 					<xs:annotation>
 						<xs:documentation>Number of simulation loops used</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<units>s</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="INT_0D"/>
@@ -102,6 +146,10 @@
 				<xs:element name="termination_condition">
 					<xs:annotation>
 						<xs:documentation>Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>-</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_0D"/>
@@ -110,6 +158,10 @@
 				<xs:element name="rate_plot_equilibrium">
 					<xs:annotation>
 						<xs:documentation>Plot the 2D images each N iterations</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>-</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="INT_0D"/>
@@ -121,19 +173,31 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="Name">
+							<xs:element name="name">
+								<xs:annotation>
+									<xs:documentation>Name of the simulation model</xs:documentation>
+									<xs:appinfo><type>constant</type></xs:appinfo>
+								</xs:annotation>
 								<xs:complexType>
 									<xs:group ref="STR_0D"/>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="Version">
+							<xs:element name="version">
+								<xs:annotation>
+									<xs:documentation>Version of the code being run</xs:documentation>
+										<xs:appinfo><type>dynamic</type></xs:appinfo>
+							</xs:annotation>
 								<xs:complexType>
 									<xs:group ref="STR_0D"/>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="Mode">
+							<xs:element name="mode">
+								<xs:annotation>
+									<xs:documentation>One of multiple modes which can be run</xs:documentation>
+										<xs:appinfo><type>constant</type></xs:appinfo>
+							</xs:annotation>
 								<xs:complexType>
-									<xs:group ref="STR_0D"/>
+									<xs:group ref="INT_0D"/>
 								</xs:complexType>
 							</xs:element>
 						</xs:sequence>
@@ -142,6 +206,10 @@
 				<xs:element name="device_name">
 					<xs:annotation>
 						<xs:documentation>Name of the device being simulated</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>-</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_0D"/>
@@ -150,12 +218,52 @@
 				<xs:element name="restart_simulation">
 					<xs:annotation>
 						<xs:documentation>Identifier of the simulation to be restarted</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>-</units>
+						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_0D"/>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="subsampling" type="subsamplingtype" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Subsampling during the simulation; it is useful to define a variety of subsampling types which can be varied</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:complexType name="subsamplingtype">
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Short name of this subsampling</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Description of the usage of this subsampling</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="interval">
+				<xs:annotation>
+					<xs:documentation>Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>

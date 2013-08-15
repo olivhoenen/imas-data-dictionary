@@ -2,73 +2,6 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
-	<xs:complexType name="pf_passive_loops">
-		<xs:annotation>
-			<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>Names of the loop</xs:documentation>
-					<xs:appinfo>
-						<Type>STATIC</Type>
-						<coordinate1>1...n_passive_loops</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="area">
-				<xs:annotation>
-					<xs:documentation>Surface area of the passive loop</xs:documentation>
-					<xs:appinfo>
-						<Type>STATIC</Type>
-						<Units>m^2</Units>
-						<coordinate1>../names</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="resistance">
-				<xs:annotation>
-					<xs:documentation>Passive loop resistance</xs:documentation>
-					<xs:appinfo>
-						<Type>STATIC</Type>
-						<Units>Ohm</Units>
-						<coordinate1>../names</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="geometry" type="outline_2d_geometry_static">
-				<xs:annotation>
-					<xs:documentation>Shape of the Passive Loop</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../names</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="current">
-				<xs:annotation>
-					<xs:documentation>Passive Loop current (all Passive Loops are assumed to share the same timebase)</xs:documentation>
-					<xs:appinfo>
-						<Type>DYNAMIC</Type>
-						<coordinate1>../time</coordinate1>
-						<coordinate2>../names</coordinate2>
-						<Units>A</Units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:element name="pfpassive">
 		<xs:annotation>
 			<xs:documentation>Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</xs:documentation>
@@ -80,6 +13,9 @@
 				<xs:element name="loop" type="pf_passive_loops" maxOccurs="300">
 					<xs:annotation>
 						<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
@@ -87,4 +23,64 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:complexType name="pf_passive_loops">
+		<xs:annotation>
+			<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the loop</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="area">
+				<xs:annotation>
+					<xs:documentation>Surface area of the passive loop</xs:documentation>
+					<xs:appinfo>
+						<Type>static</Type>
+						<Units>m^2</Units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="resistance">
+				<xs:annotation>
+					<xs:documentation>Passive loop resistance</xs:documentation>
+					<xs:appinfo>
+						<Type>static</Type>
+						<Units>Ohm</Units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometry" type="outline_2d_geometry_static">
+				<xs:annotation>
+					<xs:documentation>Shape of the passive loop</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="current">
+				<xs:annotation>
+					<xs:documentation>Passive loop current</xs:documentation>
+					<xs:appinfo>
+						<Type>dynamic</Type>
+						<coordinate1>../../time</coordinate1>
+						<Units>A</Units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>

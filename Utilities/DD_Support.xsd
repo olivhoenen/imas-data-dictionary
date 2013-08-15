@@ -627,7 +627,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
-						<coordinate1>1...n_points</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -640,7 +640,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
-						<coordinate1>../r</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -774,14 +774,14 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rectangle_static">
+	<xs:complexType name="oblique_static">
 		<xs:annotation>
 			<xs:documentation>Rectangular description of a 2D object</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
 				<xs:annotation>
-					<xs:documentation>centre R</xs:documentation>
+					<xs:documentation>Geometric centre R</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -793,7 +793,86 @@
 			</xs:element>
 			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>centre Z</xs:documentation>
+					<xs:documentation>Geometric centre Z</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="length">
+				<xs:annotation>
+					<xs:documentation>Length</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="thickness">
+				<xs:annotation>
+					<xs:documentation>Thickness</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="alpha">
+				<xs:annotation>
+					<xs:documentation>Inclination of first angle TBD</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="beta">
+				<xs:annotation>
+					<xs:documentation>Inclination of second angle TBD</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rectangle_static">
+		<xs:annotation>
+			<xs:documentation>Rectangular description of a 2D object</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Geometric centre R</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Geometric centre Z</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -805,7 +884,7 @@
 			</xs:element>
 			<xs:element name="width">
 				<xs:annotation>
-					<xs:documentation>horizontal full width</xs:documentation>
+					<xs:documentation>Horizontal full width</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -817,7 +896,7 @@
 			</xs:element>
 			<xs:element name="height">
 				<xs:annotation>
-					<xs:documentation>vertical full height</xs:documentation>
+					<xs:documentation>Vertical full height</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -851,6 +930,11 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="rectangle" type="rectangle_static">
+				<xs:annotation>
+					<xs:documentation>Rectangular description of the element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oblique" type="oblique_static">
 				<xs:annotation>
 					<xs:documentation>Rectangular description of the element</xs:documentation>
 				</xs:annotation>

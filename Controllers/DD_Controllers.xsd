@@ -6,7 +6,7 @@
 	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
 	<xs:element name="controllers">
 		<xs:annotation>
-			<xs:documentation>Feedback controllers</xs:documentation>
+			<xs:documentation>Feedback and feedforward controllers</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
@@ -14,14 +14,19 @@
 				<xs:element name="linear_controller" type="controllers_linear_controller" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>A linear controller, this is rather conventional</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="nonlinear_controller" type="controllers_nonlinear_controller" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>A non-linear controller, this is less conventional</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="time"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -34,7 +39,7 @@
 				<xs:annotation>
 					<xs:documentation>Name of this controller</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
+						<type>static</type>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -44,9 +49,9 @@
 			</xs:element>
 			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Name of this controller</xs:documentation>
+					<xs:documentation>Description of this controller</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
+						<type>static</type>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -58,7 +63,7 @@
 				<xs:annotation>
 					<xs:documentation>One of a known class of controllers</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
+						<type>static</type>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -70,8 +75,7 @@
 				<xs:annotation>
 					<xs:documentation>Names of the input signals, following the SDN convention</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
-						<units>-</units>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -80,7 +84,10 @@
 			</xs:element>
 			<xs:element name="output_names">
 				<xs:annotation>
-					<xs:documentation>names of the output signals following the SDN convention</xs:documentation>
+					<xs:documentation>Names of the output signals following the SDN convention</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_1D"/>
@@ -88,25 +95,23 @@
 			</xs:element>
 			<xs:element name="statespace" type="controllers_statespace">
 				<xs:annotation>
-					<xs:documentation>Statespace controller in discrete time</xs:documentation>
-					<xs:appinfo>
-						<Type>STATIC</Type>
-						<units>-</units>
-					</xs:appinfo>
+					<xs:documentation>Statespace controller in discrete or continuous time</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="pid" type="controllers_pid">
 				<xs:annotation>
-					<xs:documentation>Statespace controller in discrete time</xs:documentation>
-					<xs:appinfo>
-						<Type>STATIC</Type>
-						<units>-</units>
-					</xs:appinfo>
+					<xs:documentation>Filtered PID controller</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="inputs">
 				<xs:annotation>
-					<xs:documentation>Input signals, following the SDN convention</xs:documentation>
+					<xs:documentation>Input signals, following the SDN convention; the timebase is common</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>../../input_names</coordinate1>
+						<coordinate2>time</coordinate2>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -117,7 +122,13 @@
 			</xs:element>
 			<xs:element name="outputs">
 				<xs:annotation>
-					<xs:documentation>Output signals, following the SDN convention</xs:documentation>
+					<xs:documentation>Output signals, following the SDN convention; the timebase is common</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>../../output_names</coordinate1>
+						<coordinate2>time</coordinate2>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -130,7 +141,7 @@
 	</xs:complexType>
 	<xs:complexType name="controllers_nonlinear_controller">
 		<xs:annotation>
-			<xs:documentation>type for a nonlinear controller</xs:documentation>
+			<xs:documentation>Type for a nonlinear controller</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
@@ -143,9 +154,9 @@
 			</xs:element>
 			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Name of this controller</xs:documentation>
+					<xs:documentation>Description of this controller</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
+						<type>static</type>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -157,7 +168,7 @@
 				<xs:annotation>
 					<xs:documentation>One of a known class of controllers</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
+						<type>static</type>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -165,24 +176,22 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="inputs">
+			<xs:element name="input_names">
 				<xs:annotation>
 					<xs:documentation>Names of the input signals, following the SDN convention</xs:documentation>
 					<xs:appinfo>
-						<Type>DYNAMIC</Type>
-						<units>mixed</units>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="outputs">
+			<xs:element name="output_names">
 				<xs:annotation>
-					<xs:documentation>Output signals following the SDN convention</xs:documentation>
+					<xs:documentation>Output signal names following the SDN convention</xs:documentation>
 					<xs:appinfo>
-						<Type>DYNAMIC</Type>
-						<units>mixed</units>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -193,12 +202,45 @@
 				<xs:annotation>
 					<xs:documentation>Method to be defined</xs:documentation>
 					<xs:appinfo>
-						<Type>DYNAMIC</Type>
-						<units>mixed</units>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inputs">
+				<xs:annotation>
+					<xs:documentation>Input signals, following the SDN convention; the timebase is common</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>mixed</units>
+						<coordinate1>../../input_names</coordinate1>
+						<coordinate2>time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outputs">
+				<xs:annotation>
+					<xs:documentation>Output signals, following the SDN convention; the timebase is common</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>../../output_names</coordinate1>
+						<coordinate2>time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -212,8 +254,8 @@
 				<xs:annotation>
 					<xs:documentation>A matrix</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
-						<units>-</units>
+						<type>constant</type>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -224,8 +266,8 @@
 				<xs:annotation>
 					<xs:documentation>B matrix</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
-						<units>-</units>
+						<type>constant</type>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -236,8 +278,8 @@
 				<xs:annotation>
 					<xs:documentation>C matrix</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
-						<units>-</units>
+						<type>constant</type>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -248,8 +290,8 @@
 				<xs:annotation>
 					<xs:documentation>D matrix</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
-						<units>-</units>
+						<type>constant</type>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -258,12 +300,15 @@
 			</xs:element>
 			<xs:element name="deltat">
 				<xs:annotation>
-					<xs:documentation>Discrete time sampling interval ; if 0, the controller is continuous time</xs:documentation>
+					<xs:documentation>Discrete time sampling interval ; if less than 1e-10, the controller is considered to be expressed in continuous time</xs:documentation>
 					<xs:appinfo>
-						<Type>STATIC</Type>
-						<units>-</units>
+						<type>constant</type>
+						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -276,7 +321,7 @@
 				<xs:annotation>
 					<xs:documentation>Proportional term</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -288,7 +333,7 @@
 				<xs:annotation>
 					<xs:documentation>Integral term</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -300,7 +345,7 @@
 				<xs:annotation>
 					<xs:documentation>Derivative term</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
+						<type>constant</type>
 						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -312,8 +357,8 @@
 				<xs:annotation>
 					<xs:documentation>Filter time-constant for the D-term</xs:documentation>
 					<xs:appinfo>
-						<type>CONSTANT</type>
-						<units>mixed</units>
+						<type>constant</type>
+						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
