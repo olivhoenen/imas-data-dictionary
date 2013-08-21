@@ -3,7 +3,7 @@
 <?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./$GET[stylesheet]" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
 	<xs:element name="controllers">
 		<xs:annotation>
 			<xs:documentation>Feedback and feedforward controllers</xs:documentation>
@@ -21,12 +21,13 @@
 				</xs:element>
 				<xs:element name="nonlinear_controller" type="controllers_nonlinear_controller" maxOccurs="20">
 					<xs:annotation>
-						<xs:documentation>A non-linear controller, this is less conventional</xs:documentation>
+						<xs:documentation>A non-linear controller, this is less conventional and will have to be developed</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
+				<xs:element ref="time"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -40,7 +41,7 @@
 					<xs:documentation>Name of this controller</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>-</units>
+						<units></units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -52,7 +53,7 @@
 					<xs:documentation>Description of this controller</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>-</units>
+						<units></units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -64,7 +65,7 @@
 					<xs:documentation>One of a known class of controllers</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>-</units>
+						<units></units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -105,38 +106,37 @@
 			</xs:element>
 			<xs:element name="inputs">
 				<xs:annotation>
-					<xs:documentation>Input signals, following the SDN convention; the timebase is common</xs:documentation>
+					<xs:documentation>Input signals; the timebase is common to inputs and outputs for any particular controller</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>mixed</units>
-						<coordinate1>../../input_names</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate1>../input_names</coordinate1>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element ref="time"/>
 						<xs:group ref="FLT_2D"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="outputs">
 				<xs:annotation>
-					<xs:documentation>Output signals, following the SDN convention; the timebase is common</xs:documentation>
+					<xs:documentation>Output signals; the timebase is common to inputs and outputs for any particular controller</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>mixed</units>
-						<coordinate1>../../output_names</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate1>../output_names</coordinate1>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element ref="time"/>
 						<xs:group ref="FLT_2D"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="controllers_nonlinear_controller">
@@ -157,7 +157,7 @@
 					<xs:documentation>Description of this controller</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>-</units>
+						<units></units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -169,7 +169,7 @@
 					<xs:documentation>One of a known class of controllers</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>-</units>
+						<units></units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -211,38 +211,33 @@
 			</xs:element>
 			<xs:element name="inputs">
 				<xs:annotation>
-					<xs:documentation>Input signals, following the SDN convention; the timebase is common</xs:documentation>
+					<xs:documentation>Input signals; the timebase is common  to inputs and outputs for any particular controller</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>mixed</units>
-						<coordinate1>../../input_names</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate1>../input_names</coordinate1>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="outputs">
 				<xs:annotation>
-					<xs:documentation>Output signals, following the SDN convention; the timebase is common</xs:documentation>
+					<xs:documentation>Output signals; the timebase is common  to inputs and outputs for any particular controller</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>mixed</units>
-						<coordinate1>../../output_names</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate1>../output_names</coordinate1>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="controllers_statespace">
