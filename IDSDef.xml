@@ -22,9 +22,9 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="controllers" maxoccur="1" documentation="Feedback controllers">
+	<IDS name="controllers" maxoccur="1" documentation="">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -35,43 +35,48 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="linear_controller" path="linear_controller" documentation="A linear controller, this is rather conventional" data_type="struct_array" maxoccur="20">
-			<field name="name" path="linear_controller/name" documentation="Name of this controller" data_type="STR_0D" type="STATIC" units="-"/>
-			<field name="description" path="linear_controller/description" documentation="Name of this controller" data_type="STR_0D" type="STATIC" units="-"/>
-			<field name="class" path="linear_controller/class" documentation="One of a known class of controllers" data_type="STR_0D" type="STATIC" units="-"/>
-			<field name="input_names" path="linear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="STATIC" units="-"/>
-			<field name="output_names" path="linear_controller/output_names" documentation="names of the output signals following the SDN convention" data_type="STR_1D"/>
-			<field name="statespace" path="linear_controller/statespace" documentation="Statespace controller in discrete time" data_type="structure" type="STATIC" units="-">
-				<field name="a" path="linear_controller/statespace/a" documentation="A matrix" data_type="FLT_2D" type="STATIC" units="-"/>
-				<field name="b" path="linear_controller/statespace/b" documentation="B matrix" data_type="FLT_2D" type="STATIC" units="-"/>
-				<field name="c" path="linear_controller/statespace/c" documentation="C matrix" data_type="FLT_2D" type="STATIC" units="-"/>
-				<field name="d" path="linear_controller/statespace/d" documentation="D matrix" data_type="FLT_2D" type="STATIC" units="-"/>
-				<field name="deltat" path="linear_controller/statespace/deltat" documentation="Discrete time sampling interval ; if 0, the controller is continuous time" data_type="structure"/>
+		<field name="linear_controller" path="linear_controller" documentation="" data_type="struct_array" maxoccur="20" coordinate1="linear_controller/">
+			<field name="name" path="linear_controller/name" documentation="" data_type="STR_0D" type="" units=""/>
+			<field name="description" path="linear_controller/description" documentation="" data_type="STR_0D" type="" units=""/>
+			<field name="class" path="linear_controller/class" documentation="" data_type="STR_0D" type="" units=""/>
+			<field name="input_names" path="linear_controller/input_names" documentation="" data_type="STR_1D" type=""/>
+			<field name="output_names" path="linear_controller/output_names" documentation="" data_type="STR_1D" type=""/>
+			<field name="statespace" path="linear_controller/statespace" documentation="" data_type="structure">
+				<field name="a" path="linear_controller/statespace/a" documentation="" data_type="FLT_2D" type="" units=""/>
+				<field name="b" path="linear_controller/statespace/b" documentation="" data_type="FLT_2D" type="" units=""/>
+				<field name="c" path="linear_controller/statespace/c" documentation="" data_type="FLT_2D" type="" units=""/>
+				<field name="d" path="linear_controller/statespace/d" documentation="" data_type="FLT_2D" type="" units=""/>
+				<field name="deltat" path="linear_controller/statespace/deltat" documentation="" data_type="FLT_0D" type="" units=""/>
 			</field>
-			<field name="pid" path="linear_controller/pid" documentation="Statespace controller in discrete time" data_type="structure" type="STATIC" units="-">
-				<field name="p" path="linear_controller/pid/p" documentation="Proportional term" data_type="FLT_2D" type="CONSTANT" units="mixed"/>
-				<field name="i" path="linear_controller/pid/i" documentation="Integral term" data_type="FLT_2D" type="CONSTANT" units="mixed"/>
-				<field name="d" path="linear_controller/pid/d" documentation="Derivative term" data_type="FLT_2D" type="CONSTANT" units="mixed"/>
-				<field name="tau" path="linear_controller/pid/tau" documentation="Filter time-constant for the D-term" data_type="FLT_0D" type="CONSTANT" units="mixed"/>
+			<field name="pid" path="linear_controller/pid" documentation="" data_type="structure">
+				<field name="p" path="linear_controller/pid/p" documentation="" data_type="FLT_2D" type="" units=""/>
+				<field name="i" path="linear_controller/pid/i" documentation="" data_type="FLT_2D" type="" units=""/>
+				<field name="d" path="linear_controller/pid/d" documentation="" data_type="FLT_2D" type="" units=""/>
+				<field name="tau" path="linear_controller/pid/tau" documentation="" data_type="FLT_0D" type="" units=""/>
 			</field>
-			<field name="inputs" path="linear_controller/inputs" documentation="Input signals, following the SDN convention" data_type="structure">
-				<field name="data" path="linear_controller/inputs/data" documentation="Input signals, following the SDN convention" data_type="FLT_2D"/>
-				<field name="time" path="linear_controller/inputs/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
-			</field>
-			<field name="outputs" path="linear_controller/outputs" documentation="Output signals, following the SDN convention" data_type="structure">
-				<field name="data" path="linear_controller/outputs/data" documentation="Output signals, following the SDN convention" data_type="FLT_2D"/>
-				<field name="time" path="linear_controller/outputs/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
-			</field>
+			<field name="inputs" path="linear_controller/inputs" documentation="" data_type="FLT_2D" type="" units="" coordinate1="linear_controller/inputs/" coordinate2="linear_controller/inputs/"/>
+			<field name="outputs" path="linear_controller/outputs" documentation="" data_type="FLT_2D" type="" units="" coordinate1="linear_controller/outputs/" coordinate2="linear_controller/outputs/"/>
+			<field name="time" path="linear_controller/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
-		<field name="nonlinear_controller" path="nonlinear_controller" documentation="A non-linear controller, this is less conventional" data_type="struct_array" maxoccur="20">
-			<field name="name" path="nonlinear_controller/name" documentation="Name of this controller" data_type="STR_0D"/>
-			<field name="description" path="nonlinear_controller/description" documentation="Name of this controller" data_type="STR_0D" type="STATIC" units="-"/>
-			<field name="class" path="nonlinear_controller/class" documentation="One of a known class of controllers" data_type="STR_0D" type="STATIC" units="-"/>
-			<field name="inputs" path="nonlinear_controller/inputs" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="DYNAMIC" units="mixed"/>
-			<field name="outputs" path="nonlinear_controller/outputs" documentation="Output signals following the SDN convention" data_type="STR_1D" type="DYNAMIC" units="mixed"/>
-			<field name="function" path="nonlinear_controller/function" documentation="Method to be defined" data_type="STR_0D" type="DYNAMIC" units="mixed"/>
+		<field name="nonlinear_controller" path="nonlinear_controller" documentation="" data_type="struct_array" maxoccur="20" coordinate1="nonlinear_controller/">
+			<field name="name" path="nonlinear_controller/name" documentation="" data_type="STR_0D"/>
+			<field name="description" path="nonlinear_controller/description" documentation="" data_type="STR_0D" type="" units=""/>
+			<field name="class" path="nonlinear_controller/class" documentation="" data_type="STR_0D" type="" units=""/>
+			<field name="input_names" path="nonlinear_controller/input_names" documentation="" data_type="STR_1D" type=""/>
+			<field name="output_names" path="nonlinear_controller/output_names" documentation="" data_type="STR_1D" type=""/>
+			<field name="function" path="nonlinear_controller/function" documentation="" data_type="STR_0D" type=""/>
+			<field name="inputs" path="nonlinear_controller/inputs" documentation="" data_type="FLT_2D" type="" units="" coordinate1="nonlinear_controller/inputs/" coordinate2="nonlinear_controller/inputs/"/>
+			<field name="outputs" path="nonlinear_controller/outputs" documentation="" data_type="FLT_2D" type="" units="" coordinate1="nonlinear_controller/outputs/" coordinate2="nonlinear_controller/outputs/"/>
+			<field name="time" path="nonlinear_controller/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="version" path="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="parameters" path="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="core_profiles" maxoccur="6" documentation="Core plasma radial profiles">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -152,7 +157,7 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="core_plasma" maxoccur="6" documentation="Core plasma fluid description">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -235,7 +240,7 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="core_sources" maxoccur="6" documentation="Core plasma source terms (for the transport equations)">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -284,7 +289,7 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="core_transport" maxoccur="6" documentation="Core plasma transport">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -357,7 +362,7 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="dina" maxoccur="1" documentation="Simulation-specific parametrisation for the DINA-IMAS code; more and more of these will be transferred to the core_profiles and equilibrium IDS as we develop them">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -370,50 +375,50 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="version" path="version" documentation="Version of the DINA solver to be used" data_type="STR_0D" type="static"/>
+		<field name="version" path="version" documentation="Version of the DINA solver to be used" data_type="STR_0D" type="dynamic"/>
 		<field name="static_group_1" path="static_group_1" documentation="Group I static data" data_type="structure" type="static">
 			<field name="key" path="static_group_1/key" documentation="Dina &quot;key&quot; parameters" data_type="INT_1D" type="static"/>
 			<field name="vec" path="static_group_1/vec" documentation="Dina &quot;vec&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="indpf" path="static_group_1/indpf" documentation="Dina &quot;indpf&quot; parameters" data_type="FLT_1D" type="static"/>
+			<field name="indpf" path="static_group_1/indpf" documentation="Dina &quot;indpf&quot; parameters" data_type="INT_1D" type="static"/>
 		</field>
-		<field name="static_group_2" path="static_group_2" documentation="" data_type="structure">
+		<field name="static_group_2" path="static_group_2" documentation="Group II static data" data_type="structure" type="static">
 			<field name="rectangular_grid_limits" path="static_group_2/rectangular_grid_limits" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
 			<field name="limiter_rz" path="static_group_2/limiter_rz" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="static"/>
-			<field name="ext_transp" path="static_group_2/ext_transp" documentation="Dina &quot;&quot; parameters" data_type="INT_0D" type="static"/>
+			<field name="ext_transp" path="static_group_2/ext_transp" documentation="Dina &quot;&quot; parameters" data_type="INT_1D" type="static"/>
 			<field name="active0" path="static_group_2/active0" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
 			<field name="passive0" path="static_group_2/passive0" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
 		</field>
-		<field name="input_group_1" path="input_group_1" documentation="" data_type="structure">
-			<field name="plasma_density" path="input_group_1/plasma_density" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="static"/>
-			<field name="ohmic_compensation" path="input_group_1/ohmic_compensation" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="static"/>
-			<field name="boundary_density_ratio" path="input_group_1/boundary_density_ratio" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="static"/>
-			<field name="itb_rho" path="input_group_1/itb_rho" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="static"/>
-			<field name="tau_e_anomaly" path="input_group_1/tau_e_anomaly" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="static"/>
-			<field name="sawtooth_q0" path="input_group_1/sawtooth_q0" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="static"/>
+		<field name="input_group_1" path="input_group_1" documentation="Group I input data" data_type="structure">
+			<field name="plasma_density" path="input_group_1/plasma_density" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="dynamic"/>
+			<field name="ohmic_compensation" path="input_group_1/ohmic_compensation" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="dynamic"/>
+			<field name="boundary_density_ratio" path="input_group_1/boundary_density_ratio" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="dynamic"/>
+			<field name="itb_rho" path="input_group_1/itb_rho" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="dynamic"/>
+			<field name="tau_e_anomaly" path="input_group_1/tau_e_anomaly" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="dynamic"/>
+			<field name="sawtooth_q0" path="input_group_1/sawtooth_q0" documentation="Dina &quot;&quot; parameters" data_type="FLT_0D" type="dynamic"/>
 		</field>
-		<field name="input_group_4" path="input_group_4" documentation="" data_type="structure">
-			<field name="particle_diffusion" path="input_group_4/particle_diffusion" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="chi_electrons" path="input_group_4/chi_electrons" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="chi_ions" path="input_group_4/chi_ions" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="bootstrap_current" path="input_group_4/bootstrap_current" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="psi_normalised" path="input_group_4/psi_normalised" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="inward_pinch_velocity" path="input_group_4/inward_pinch_velocity" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
+		<field name="input_group_4" path="input_group_4" documentation="Group IV input data" data_type="structure">
+			<field name="particle_diffusion" path="input_group_4/particle_diffusion" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="chi_electrons" path="input_group_4/chi_electrons" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="chi_ions" path="input_group_4/chi_ions" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="bootstrap_current" path="input_group_4/bootstrap_current" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="psi_normalised" path="input_group_4/psi_normalised" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="inward_pinch_velocity" path="input_group_4/inward_pinch_velocity" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
 		</field>
-		<field name="input_group_5" path="input_group_5" documentation="" data_type="structure">
-			<field name="p_e" path="input_group_5/p_e" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="p_i" path="input_group_5/p_i" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="j_cd" path="input_group_5/j_cd" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="n_ex" path="input_group_5/n_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="te_ex" path="input_group_5/te_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="ti_ex" path="input_group_5/ti_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="sigma_ex" path="input_group_5/sigma_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="pres_ex" path="input_group_5/pres_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
-			<field name="ro_ex" path="input_group_5/ro_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
+		<field name="input_group_5" path="input_group_5" documentation="Group V input data" data_type="structure">
+			<field name="p_e" path="input_group_5/p_e" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="p_i" path="input_group_5/p_i" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="j_cd" path="input_group_5/j_cd" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="n_ex" path="input_group_5/n_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="te_ex" path="input_group_5/te_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="ti_ex" path="input_group_5/ti_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="sigma_ex" path="input_group_5/sigma_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="pres_ex" path="input_group_5/pres_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="ro_ex" path="input_group_5/ro_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
 		</field>
-		<field name="output_group_5" path="output_group_5" documentation="" data_type="structure">
+		<field name="output_group_5" path="output_group_5" documentation="Group V output data" data_type="structure">
 			<field name="storage" path="output_group_5/storage" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 		</field>
-		<field name="output_group_6" path="output_group_6" documentation="" data_type="structure">
+		<field name="output_group_6" path="output_group_6" documentation="Group VI input data" data_type="structure">
 			<field name="gra1" path="output_group_6/gra1" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 			<field name="psi_tran" path="output_group_6/psi_tran" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 			<field name="che_neo" path="output_group_6/che_neo" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
@@ -435,16 +440,18 @@
 			<field name="j_cd" path="output_group_6/j_cd" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 			<field name="n_ex" path="output_group_6/n_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 			<field name="te_ex" path="output_group_6/te_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
-			<field name="ti_ex" path="output_group_6/ti_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="static"/>
-			<field name="pres_ex" path="output_group_6/pres_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="static"/>
-			<field name="sigma_ex" path="output_group_6/sigma_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="static"/>
+			<field name="ti_ex" path="output_group_6/ti_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
+			<field name="pres_ex" path="output_group_6/pres_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
+			<field name="sigma_ex" path="output_group_6/sigma_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 			<field name="p_ohm" path="output_group_6/p_ohm" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 		</field>
-		<field name="output_group_7" path="output_group_7" documentation="" data_type="structure">
-			<field name="shape" path="output_group_7/shape" documentation="Dina &quot;shape&quot; parameters" data_type="FLT_2D" type="dynamic"/>
+		<field name="output_group_7" path="output_group_7" documentation="Group VII output data" data_type="structure">
+			<field name="shape" path="output_group_7/shape" documentation="Dina &quot;shape&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="output_group_7/shape/1..n" coordinate2="output_group_7/shape/time"/>
+			<field name="time" path="output_group_7/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="emcoupling" maxoccur="6" documentation="Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems">
+	<IDS name="em_coupling" maxoccur="6" documentation="Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -455,61 +462,18 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="mutual_active_active" path="mutual_active_active" documentation="Mutual inductance coupling between active coils and active coils" data_type="structure" type="static" units="H" coordinate1="mutual_active_active/coordinate1" coordinate2="mutual_active_active/coordinate2">
-			<field name="matrix" path="mutual_active_active/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="mutual_active_active/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="mutual_active_active/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="mutual_active_passive" path="mutual_active_passive" documentation="Mutual inductance coupling between active coils and passive coils" data_type="structure" type="static" units="H" coordinate1="mutual_active_passive/coordinate1" coordinate2="mutual_active_passive/coordinate2">
-			<field name="matrix" path="mutual_active_passive/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="mutual_active_passive/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="mutual_active_passive/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="field_active_probes" path="field_active_probes" documentation="Poloidal field coupling between active coils and poloidal field probes" data_type="structure" type="static" units="T/A" coordinate1="field_active_probes/coordinate1" coordinate2="field_active_probes/coordinate2">
-			<field name="matrix" path="field_active_probes/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="field_active_probes/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="field_active_probes/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="field_passive_probes" path="field_passive_probes" documentation="Poloidal field coupling between passive coils and poloidal field probes" data_type="structure" type="static" units="T/A" coordinate1="field_passive_probes/coordinate1" coordinate2="field_passive_probes/coordinate2">
-			<field name="matrix" path="field_passive_probes/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="field_passive_probes/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="field_passive_probes/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="mutual_active_loops" path="mutual_active_loops" documentation="Mutual between active coils and poloidal flux loops" data_type="structure" type="static" units="H" coordinate1="mutual_active_loops/coordinate1" coordinate2="mutual_active_loops/coordinate2">
-			<field name="matrix" path="mutual_active_loops/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="mutual_active_loops/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="mutual_active_loops/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="mutual_passive_loops" path="mutual_passive_loops" documentation="Mutual between passive coils and poloidal flux loops" data_type="structure" type="static" units="H" coordinate1="mutual_passive_loops/coordinate1" coordinate2="mutual_passive_loops/coordinate2">
-			<field name="matrix" path="mutual_passive_loops/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="mutual_passive_loops/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="mutual_passive_loops/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="mutual_active_grid" path="mutual_active_grid" documentation="Mutual between active coils and equilibrium grid" data_type="structure" type="static" units="H" coordinate1="mutual_active_grid/coordinate1" coordinate2="mutual_active_grid/coordinate2">
-			<field name="matrix" path="mutual_active_grid/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="mutual_active_grid/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="mutual_active_grid/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="mutual_passive_grid" path="mutual_passive_grid" documentation="Mutual inductance between passive coils and equilibrium grid" data_type="structure" type="static" units="H" coordinate1="mutual_passive_grid/coordinate1" coordinate2="mutual_passive_grid/coordinate2">
-			<field name="matrix" path="mutual_passive_grid/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="mutual_passive_grid/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="mutual_passive_grid/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="field_grid_probes" path="field_grid_probes" documentation="Field between equilibrium grid and poloidal field probes" data_type="structure" type="static" units="T/A" coordinate1="field_grid_probes/coordinate1" coordinate2="field_grid_probes/coordinate2">
-			<field name="matrix" path="field_grid_probes/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="field_grid_probes/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="field_grid_probes/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="mutual_grid_loops" path="mutual_grid_loops" documentation="Mutual inductance between equilibrium grid and poloidal flux loops " data_type="structure" type="static" units="H" coordinate1="mutual_grid_loops/coordinate1" coordinate2="mutual_grid_loops/coordinate2">
-			<field name="matrix" path="mutual_grid_loops/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="mutual_grid_loops/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="mutual_grid_loops/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
-		<field name="mutual_grid_grid" path="mutual_grid_grid" documentation="Mutual inductance between equilibrium grid and itself" data_type="structure" type="static" units="H" coordinate1="mutual_grid_grid/coordinate1" coordinate2="mutual_grid_grid/coordinate2">
-			<field name="matrix" path="mutual_grid_grid/matrix" documentation="Value of the coupling matrix" data_type="FLT_2D"/>
-			<field name="coordinate1" path="mutual_grid_grid/coordinate1" documentation="identity of the first coordinate" data_type="STR_0D"/>
-			<field name="coordinate2" path="mutual_grid_grid/coordinate2" documentation="identity of the second coordinate" data_type="STR_0D"/>
-		</field>
+		<field name="mutual_active_active" path="mutual_active_active" documentation="Mutual inductance coupling from active coils to active coils" data_type="FLT_2D" type="static" units="H" coordinate1="active_coils" coordinate2="active_coils"/>
+		<field name="mutual_passive_active" path="mutual_passive_active" documentation="Mutual inductance coupling from active coils to passive loops" data_type="FLT_2D" type="static" units="H" coordinate1="passive_loops" coordinate2="active_coils"/>
+		<field name="mutual_loops_active" path="mutual_loops_active" documentation="Mutual inductance coupling from active coils to poloidal flux loops" data_type="FLT_2D" type="static" units="H" coordinate1="flux_loops" coordinate2="active_coils"/>
+		<field name="field_probes_active" path="field_probes_active" documentation="Poloidal field coupling from active coils to poloidal field probes" data_type="FLT_2D" type="static" units="T/A" coordinate1="poloidal_probes" coordinate2="active_coils"/>
+		<field name="mutual_passive_passive" path="mutual_passive_passive" documentation="Mutual inductance coupling from passive loops to passive loops" data_type="FLT_2D" type="static" units="H" coordinate1="passive_loops" coordinate2="passive_loops"/>
+		<field name="mutual_loops_passive" path="mutual_loops_passive" documentation="Mutual  inductance coupling from passive  loops to poloidal flux loops" data_type="FLT_2D" type="static" units="H" coordinate1="flux_loops" coordinate2="passive_loops"/>
+		<field name="field_probes_passive" path="field_probes_passive" documentation="Poloidal field coupling from passive loops to poloidal field probes" data_type="FLT_2D" type="static" units="T/A" coordinate1="poloidal_probes" coordinate2="passive_loops"/>
+		<field name="mutual_grid_grid" path="mutual_grid_grid" documentation="Mutual inductance from equilibrium grid to itself" data_type="FLT_2D" type="static" units="H" coordinate1="grid_points" coordinate2="grid_points"/>
+		<field name="mutual_grid_active" path="mutual_grid_active" documentation="Mutual inductance coupling from active coils to equilibrium grid  " data_type="FLT_2D" type="static" units="H" coordinate1="grid_points" coordinate2="active_coils"/>
+		<field name="mutual_grid_passive" path="mutual_grid_passive" documentation="Mutual inductance coupling from passive loops to equilibrium grid" data_type="FLT_2D" type="static" units="H" coordinate1="grid_points" coordinate2="passive_loops"/>
+		<field name="field_probes_grid" path="field_probes_grid" documentation="Poloidal field coupling from equilibrium grid to poloidal field probes" data_type="FLT_2D" type="static" units="T/A" coordinate1="poloidal_probes" coordinate2="grid_points"/>
+		<field name="mutual_loops_grid" path="mutual_loops_grid" documentation="Mutual inductance from equilibrium grid to poloidal flux loops " data_type="FLT_2D" type="static" units="H" coordinate1="flux_loops" coordinate2="grid_points"/>
 		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="version" path="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
@@ -517,6 +481,11 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
+		<field name="active_coils" path="active_coils" documentation="List of the names of the active PF+CS coils" data_type="STR_1D" type="static"/>
+		<field name="passive_loops" path="passive_loops" documentation="List of the names of the passive loops" data_type="STR_1D" type="static"/>
+		<field name="poloidal_probes" path="poloidal_probes" documentation="List of the names of poloidal field probes" data_type="STR_1D" type="static"/>
+		<field name="flux_loops" path="flux_loops" documentation="List of the names of the axisymmetric flux loops" data_type="STR_1D" type="static"/>
+		<field name="grid_points" path="grid_points" documentation="List of the names of the plasma region grid points" data_type="STR_1D" type="static"/>
 	</IDS>
 	<IDS name="equilibrium" maxoccur="6" documentation="Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -680,7 +649,7 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="magnetics" maxoccur="6" documentation="Magnetic diagnostics for equilibrium identification and plasma shape control.">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -693,43 +662,43 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="flux_loop" path="flux_loop" documentation="Flux loops" data_type="struct_array" maxoccur="200" coordinate1="1...n_flux_loops">
+		<field name="flux_loop" path="flux_loop" documentation="Flux loops; partial flux loops can be described" data_type="struct_array" maxoccur="200" coordinate1="1...N">
 			<field name="name" path="flux_loop/name" documentation="Name of the flux loop" data_type="STR_0D" type="static"/>
 			<field name="identifier" path="flux_loop/identifier" documentation="ID of the flux loop" data_type="STR_0D" type="static"/>
-			<field name="position" path="flux_loop/position" documentation="List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)" data_type="struct_array" maxoccur="unbounded" type="static" coordinate1="1...3" coordinate2="1...n_points" units="m, m, rad">
+			<field name="position" path="flux_loop/position" documentation="List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)" data_type="struct_array" maxoccur="10" type="static" coordinate1="1...N">
 				<field name="r" path="flux_loop/position/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
 				<field name="z" path="flux_loop/position/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
 				<field name="phi" path="flux_loop/position/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
 			</field>
 			<field name="flux" path="flux_loop/flux" documentation="Measured flux" data_type="structure">
 				<field name="data" path="flux_loop/flux/data" documentation="Measured flux" data_type="FLT_1D" coordinate1="flux_loop/flux/time" units="Wb" type="dynamic"/>
-				<field name="time" path="flux_loop/flux/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+				<field name="time" path="flux_loop/flux/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 		</field>
-		<field name="bpol_probe" path="bpol_probe" documentation="Poloidal field probes" data_type="struct_array" maxoccur="200" coordinate1="1...n_bpol_probe">
+		<field name="bpol_probe" path="bpol_probe" documentation="Poloidal field probes" data_type="struct_array" maxoccur="200" coordinate1="1...N">
 			<field name="name" path="bpol_probe/name" documentation="Name of the probe" data_type="STR_0D" type="static"/>
 			<field name="identifier" path="bpol_probe/identifier" documentation="ID of the probe" data_type="STR_0D" type="static"/>
-			<field name="position" path="bpol_probe/position" documentation="R, Z, Phi position of coil centre" data_type="structure" type="static" coordinate1="1...3" units="m, m, rad">
+			<field name="position" path="bpol_probe/position" documentation="R, Z, Phi position of the coil centre" data_type="structure">
 				<field name="r" path="bpol_probe/position/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
 				<field name="z" path="bpol_probe/position/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
 				<field name="phi" path="bpol_probe/position/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
 			</field>
-			<field name="poloidal_angle" path="bpol_probe/poloidal_angle" documentation="Poloidal angle of coil orientation" data_type="FLT_0D" type="static" units="rad"/>
+			<field name="poloidal_angle" path="bpol_probe/poloidal_angle" documentation="Poloidal angle of the coil orientation" data_type="FLT_0D" type="static" units="rad"/>
 			<field name="toroidal_angle" path="bpol_probe/toroidal_angle" documentation="Toroidal angle of coil orientation (0 if fully in the poloidal plane) " data_type="FLT_0D" type="static" units="rad"/>
-			<field name="area" path="bpol_probe/area" documentation="Area of the coil" data_type="FLT_0D" type="static" units="m^2"/>
+			<field name="area" path="bpol_probe/area" documentation="Area of each turn of the coil" data_type="FLT_0D" type="static" units="m^2"/>
 			<field name="length" path="bpol_probe/length" documentation="Length of the coil" data_type="FLT_0D" type="static" units="m"/>
-			<field name="turns_n" path="bpol_probe/turns_n" documentation="Turns in the coil" data_type="INT_0D" type="static"/>
-			<field name="b_field" path="bpol_probe/b_field" documentation="Measured magnetic field" data_type="structure">
-				<field name="data" path="bpol_probe/b_field/data" documentation="Measured magnetic field" data_type="FLT_1D" coordinate1="bpol_probe/b_field/time" type="dynamic" units="T"/>
-				<field name="time" path="bpol_probe/b_field/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+			<field name="turns" path="bpol_probe/turns" documentation="Turns in the coil, including sign" data_type="INT_0D" type="static"/>
+			<field name="field" path="bpol_probe/field" documentation="Measured magnetic field" data_type="structure">
+				<field name="data" path="bpol_probe/field/data" documentation="Measured magnetic field" data_type="FLT_1D" coordinate1="bpol_probe/field/time" type="dynamic" units="T"/>
+				<field name="time" path="bpol_probe/field/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 		</field>
-		<field name="processed_data" path="processed_data" documentation="Processed quantities derived from the magnetic measurements." data_type="struct_array" maxoccur="10" coordinate1="1...n_processed_data">
+		<field name="processed_data" path="processed_data" documentation="Processed quantities derived from the magnetic measurements." data_type="struct_array" maxoccur="10" coordinate1="1...N">
 			<field name="method" path="processed_data/method" documentation="Name of the data processing method" data_type="STR_0D" type="static"/>
 			<field name="value_TBD" path="processed_data/value_TBD" documentation="" data_type="structure">
 				<field name="data" path="processed_data/value_TBD/data" documentation="" data_type="FLT_1D" type="dynamic" coordinate1="processed_data/value_TBD/time" units="A"/>
 			</field>
-			<field name="time" path="processed_data/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+			<field name="time" path="processed_data/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
 		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
@@ -738,7 +707,7 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="pfactive" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -751,82 +720,93 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="coil" path="coil" documentation="Active PF coils" data_type="struct_array" maxoccur="20" coordinate1="1...n_pf_coils">
-			<field name="name" path="coil/name" documentation="Name of the coil" data_type="STR_0D" type="STATIC"/>
-			<field name="identifier" path="coil/identifier" documentation="Alphanumeric identifier of coils used for convenience" data_type="STR_0D" type="STATIC"/>
-			<field name="resistance" path="coil/resistance" documentation="Coil resistance" data_type="FLT_0D" type="STATIC" units="Ohm"/>
-			<field name="energy_limit_max" path="coil/energy_limit_max" documentation="Maximum Energy to be dissipated in the coil" data_type="FLT_0D" type="STATIC" units="J"/>
-			<field name="element" path="coil/element" documentation="Each PF coil is comprised of a number of cross-section elements described  individually" data_type="struct_array" maxoccur="20" coordinate1="1...n_elements">
-				<field name="name" path="coil/element/name" documentation="Name of this element of this coil" data_type="STR_0D" type="STATIC"/>
-				<field name="identifier" path="coil/element/identifier" documentation="Identifier of this element of this coil" data_type="STR_0D" type="STATIC"/>
-				<field name="turns_with_sign" path="coil/element/turns_with_sign" documentation="Number of effective turns in the element for calculating magnetic fields of the coil; includes the sign of the number of turns" data_type="INT_0D" type="STATIC"/>
-				<field name="area" path="coil/element/area" documentation="Cross-sectional areas of the element" data_type="FLT_0D" type="STATIC" units="m^2"/>
+		<field name="coil" path="coil" documentation="Active PF coils" data_type="struct_array" maxoccur="20" coordinate1="1...N">
+			<field name="name" path="coil/name" documentation="Name of the coil" data_type="STR_0D" type="static"/>
+			<field name="identifier" path="coil/identifier" documentation="Alphanumeric identifier of coils used for convenience" data_type="STR_0D" type="static"/>
+			<field name="resistance" path="coil/resistance" documentation="Coil resistance" data_type="FLT_0D" type="static" units="Ohm"/>
+			<field name="energy_limit_max" path="coil/energy_limit_max" documentation="Maximum Energy to be dissipated in the coil" data_type="FLT_0D" type="static" units="J"/>
+			<field name="element" path="coil/element" documentation="Each PF coil is comprised of a number of cross-section elements described  individually" data_type="struct_array" maxoccur="20" coordinate1="1...N">
+				<field name="name" path="coil/element/name" documentation="Name of this element of this coil" data_type="STR_0D" type="static"/>
+				<field name="identifier" path="coil/element/identifier" documentation="Identifier of this element of this coil" data_type="STR_0D" type="static"/>
+				<field name="turns_with_sign" path="coil/element/turns_with_sign" documentation="Number of effective turns in the element for calculating magnetic fields of the coil; includes the sign of the number of turns" data_type="INT_0D" type="static"/>
+				<field name="area" path="coil/element/area" documentation="Cross-sectional areas of the element" data_type="FLT_0D" type="static" units="m^2"/>
 				<field name="geometry" path="coil/element/geometry" documentation="Cross-sectional shape of the element" data_type="structure">
 					<field name="geometry_type" path="coil/element/geometry/geometry_type" documentation="Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ') " data_type="INT_0D" type="static"/>
 					<field name="outline" path="coil/element/geometry/outline" documentation="Irregular outline of the element" data_type="structure">
-						<field name="r" path="coil/element/geometry/outline/r" documentation="Major radius" data_type="FLT_1D" type="static" units="m" coordinate1="1...n_points"/>
-						<field name="z" path="coil/element/geometry/outline/z" documentation="Height" data_type="FLT_1D" type="static" units="m" coordinate1="coil/element/geometry/outline/r"/>
+						<field name="r" path="coil/element/geometry/outline/r" documentation="Major radius" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
+						<field name="z" path="coil/element/geometry/outline/z" documentation="Height" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
 					</field>
 					<field name="rectangle" path="coil/element/geometry/rectangle" documentation="Rectangular description of the element" data_type="structure">
-						<field name="r" path="coil/element/geometry/rectangle/r" documentation="centre R" data_type="FLT_0D" type="static" units="m"/>
-						<field name="z" path="coil/element/geometry/rectangle/z" documentation="centre Z" data_type="FLT_0D" type="static" units="m"/>
-						<field name="width" path="coil/element/geometry/rectangle/width" documentation="horizontal full width" data_type="FLT_0D" type="static" units="m"/>
-						<field name="height" path="coil/element/geometry/rectangle/height" documentation="vertical full height" data_type="FLT_0D" type="static" units="m"/>
+						<field name="r" path="coil/element/geometry/rectangle/r" documentation="Geometric centre R" data_type="FLT_0D" type="static" units="m"/>
+						<field name="z" path="coil/element/geometry/rectangle/z" documentation="Geometric centre Z" data_type="FLT_0D" type="static" units="m"/>
+						<field name="width" path="coil/element/geometry/rectangle/width" documentation="Horizontal full width" data_type="FLT_0D" type="static" units="m"/>
+						<field name="height" path="coil/element/geometry/rectangle/height" documentation="Vertical full height" data_type="FLT_0D" type="static" units="m"/>
+					</field>
+					<field name="oblique" path="coil/element/geometry/oblique" documentation="Rectangular description of the element" data_type="structure">
+						<field name="r" path="coil/element/geometry/oblique/r" documentation="Geometric centre R" data_type="FLT_0D" type="static" units="m"/>
+						<field name="z" path="coil/element/geometry/oblique/z" documentation="Geometric centre Z" data_type="FLT_0D" type="static" units="m"/>
+						<field name="length" path="coil/element/geometry/oblique/length" documentation="Length" data_type="FLT_0D" type="static" units="m"/>
+						<field name="thickness" path="coil/element/geometry/oblique/thickness" documentation="Thickness" data_type="FLT_0D" type="static" units="m"/>
+						<field name="alpha" path="coil/element/geometry/oblique/alpha" documentation="Inclination of first angle TBD" data_type="FLT_0D" type="static" units="m"/>
+						<field name="beta" path="coil/element/geometry/oblique/beta" documentation="Inclination of second angle TBD" data_type="FLT_0D" type="static" units="m"/>
 					</field>
 				</field>
 			</field>
 			<field name="current" path="coil/current" documentation="Current in the coil" data_type="structure">
-				<field name="data" path="coil/current/data" documentation="Current in the coil" data_type="FLT_1D" type="DYNAMIC" coordinate1="coil/current/time" units="A"/>
-				<field name="time" path="coil/current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+				<field name="data" path="coil/current/data" documentation="Current in the coil" data_type="FLT_1D" type="dynamic" coordinate1="coil/current/time" units="A"/>
+				<field name="time" path="coil/current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 			<field name="voltage" path="coil/voltage" documentation="Voltage on the coil terminals" data_type="structure">
-				<field name="data" path="coil/voltage/data" documentation="Voltage on the coil terminals" data_type="FLT_1D" type="DYNAMIC" coordinate1="coil/voltage/time" units="V"/>
-				<field name="time" path="coil/voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+				<field name="data" path="coil/voltage/data" documentation="Voltage on the coil terminals" data_type="FLT_1D" type="dynamic" coordinate1="coil/voltage/time" units="V"/>
+				<field name="time" path="coil/voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 		</field>
-		<field name="vertical_force" path="vertical_force" documentation="Vertical forces on the axisymmetric PF coil system; All forces are assumed to be on the same timebase" data_type="struct_array" maxoccur="10">
-			<field name="name" path="vertical_force/name" documentation="Name of the Force combination" data_type="STR_1D" type="STATIC" coordinate1="1...n_forces"/>
-			<field name="combination" path="vertical_force/combination" documentation="Coils involved in the Force combinations" data_type="FLT_2D" type="STATIC" coordinate1="vertical_force/names" coordinate2="coils"/>
-			<field name="limit_max" path="vertical_force/limit_max" documentation="Vertical Force combinations limits" data_type="FLT_1D" type="STATIC" coordinate1="vertical_force/names" units="N"/>
-			<field name="limit_min" path="vertical_force/limit_min" documentation="Vertical Force combination limit" data_type="FLT_1D" type="STATIC" coordinate1="vertical_force/names" units="N"/>
-			<field name="force" path="vertical_force/force" documentation="Force combinations." data_type="FLT_2D" type="DYNAMIC" coordinate1="vertical_force/names" coordinate2="vertical_force/time" units="N"/>
+		<field name="vertical_force" path="vertical_force" documentation="Vertical forces on the axisymmetric PF coil system" data_type="struct_array" maxoccur="10" coordinate1="1...N">
+			<field name="name" path="vertical_force/name" documentation="Name of the force combination" data_type="STR_0D" type="static"/>
+			<field name="combination" path="vertical_force/combination" documentation="Coils involved in the force combinations ???" data_type="INT_1D" type="static" coordinate1="1...N"/>
+			<field name="limit_max" path="vertical_force/limit_max" documentation="Vertical force combination limit" data_type="FLT_0D" type="static" units="N"/>
+			<field name="limit_min" path="vertical_force/limit_min" documentation="Vertical force combination limit" data_type="FLT_0D" type="static" units="N"/>
+			<field name="force" path="vertical_force/force" documentation="Force " data_type="structure">
+				<field name="data" path="vertical_force/force/data" documentation="Force " data_type="FLT_1D" type="dynamic" coordinate1="vertical_force/time" units="N"/>
+				<field name="time" path="vertical_force/force/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
 		</field>
-		<field name="circuit" path="circuit" documentation="Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system" data_type="struct_array" maxoccur="20" coordinate1="1...n_circuits">
-			<field name="name" path="circuit/name" documentation="Name of the circuit" data_type="STR_0D" type="STATIC"/>
-			<field name="identifier" path="circuit/identifier" documentation="ID of the circuit" data_type="STR_0D" type="STATIC"/>
-			<field name="type" path="circuit/type" documentation="Type of the circuit" data_type="STR_0D" type="STATIC"/>
-			<field name="connections" path="circuit/connections" documentation="Description of the supplies and coils connections (nodes) across the circuit. The matrix describing for each node (first dimension) which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the second dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD)" data_type="FLT_2D" type="STATIC" coordinate1="1...n_nodes" coordinate2="1...2*n_components"/>
+		<field name="circuit" path="circuit" documentation="Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system" data_type="struct_array" maxoccur="20" coordinate1="1...N">
+			<field name="name" path="circuit/name" documentation="Name of the circuit" data_type="STR_0D" type="static"/>
+			<field name="identifier" path="circuit/identifier" documentation="ID of the circuit" data_type="STR_0D" type="static"/>
+			<field name="type" path="circuit/type" documentation="Type of the circuit" data_type="STR_0D" type="static"/>
+			<field name="connections" path="circuit/connections" documentation="Description of the supplies and coils connections (nodes) across the circuit. The matrix describing for each node (first dimension) which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the second dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD)" data_type="FLT_2D" type="static" coordinate1="1...N" coordinate2="1...2*N"/>
 			<field name="voltage" path="circuit/voltage" documentation="Voltage on the circuit" data_type="structure">
-				<field name="data" path="circuit/voltage/data" documentation="Voltage on the circuit" data_type="FLT_1D" type="DYNAMIC" coordinate1="circuit/voltage/time" units="V"/>
-				<field name="time" path="circuit/voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+				<field name="data" path="circuit/voltage/data" documentation="Voltage on the circuit" data_type="FLT_1D" type="dynamic" coordinate1="circuit/voltage/time" units="V"/>
+				<field name="time" path="circuit/voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 			<field name="current" path="circuit/current" documentation="Current in the circuit" data_type="structure">
-				<field name="data" path="circuit/current/data" documentation="Current in the circuit" data_type="FLT_1D" type="DYNAMIC" coordinate1="circuit/current/time" units="V"/>
-				<field name="time" path="circuit/current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+				<field name="data" path="circuit/current/data" documentation="Current in the circuit" data_type="FLT_1D" type="dynamic" coordinate1="circuit/current/time" units="V"/>
+				<field name="time" path="circuit/current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 		</field>
-		<field name="supply" path="supply" documentation="PF power supplies" data_type="struct_array" maxoccur="20" coordinate1="1...n_pf_supplies">
-			<field name="name" path="supply/name" documentation="Name of the PF supply" data_type="STR_0D" type="STATIC"/>
-			<field name="identifier" path="supply/identifier" documentation="Identifier of the supply" data_type="STR_0D" type="STATIC"/>
-			<field name="type" path="supply/type" documentation="Type of the supply; TBD add free description of non-linear power supplies" data_type="INT_0D" type="STATIC"/>
-			<field name="resistance" path="supply/resistance" documentation="Power supply internal resistance" data_type="FLT_0D" type="STATIC" units="Ohm"/>
-			<field name="delay" path="supply/delay" documentation="Pure delay in the supply" data_type="FLT_0D" type="STATIC" coordinate1="supply/names" units="s"/>
-			<field name="filter_numerator" path="supply/filter_numerator" documentation="Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description" data_type="FLT_1D" type="STATIC" coordinate1="1...n_numerator_coefficients"/>
-			<field name="filter_denominator" path="supply/filter_denominator" documentation="Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description" data_type="FLT_1D" coordinate1="1...n_denominator_coefficients" type="STATIC"/>
-			<field name="current_limit_max" path="supply/current_limit_max" documentation="Maximum current in the supply" data_type="FLT_0D" type="STATIC" units="A"/>
-			<field name="current_limit_min" path="supply/current_limit_min" documentation="Minimum current in the supply" data_type="FLT_0D" type="STATIC" units="A"/>
-			<field name="voltage_limit_max" path="supply/voltage_limit_max" documentation="Maximum voltage from the supply" data_type="FLT_0D" type="STATIC" units="V"/>
-			<field name="voltage_limit_min" path="supply/voltage_limit_min" documentation="Minimum voltage from the supply" data_type="FLT_0D" type="STATIC" units="V"/>
-			<field name="current_limiter_gain" path="supply/current_limiter_gain" documentation="Gain to prevent overcurrent in a linear model of the supply" data_type="FLT_0D" type="STATIC" units="V"/>
-			<field name="energy_limit_max" path="supply/energy_limit_max" documentation="Maximum energy to be dissipated in the supply during a pulse" data_type="FLT_0D" type="STATIC" units="J"/>
-			<field name="nonlinear_model" path="supply/nonlinear_model" documentation="Description of the nonlinear transfer function of the supply  STATIC" data_type="STR_0D"/>
+		<field name="supply" path="supply" documentation="PF power supplies" data_type="struct_array" maxoccur="20" coordinate1="1...N">
+			<field name="name" path="supply/name" documentation="Name of the PF supply" data_type="STR_0D" type="static"/>
+			<field name="identifier" path="supply/identifier" documentation="Identifier of the supply" data_type="STR_0D" type="static"/>
+			<field name="type" path="supply/type" documentation="Type of the supply; TBD add free description of non-linear power supplies" data_type="INT_0D" type="static"/>
+			<field name="resistance" path="supply/resistance" documentation="Power supply internal resistance" data_type="FLT_0D" type="static" units="Ohm"/>
+			<field name="delay" path="supply/delay" documentation="Pure delay in the supply" data_type="FLT_0D" type="static" units="s"/>
+			<field name="filter_numerator" path="supply/filter_numerator" documentation="Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description" data_type="FLT_1D" type="static" coordinate1="1...N"/>
+			<field name="filter_denominator" path="supply/filter_denominator" documentation="Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description" data_type="FLT_1D" coordinate1="1...N" type="static"/>
+			<field name="current_limit_max" path="supply/current_limit_max" documentation="Maximum current in the supply" data_type="FLT_0D" type="static" units="A"/>
+			<field name="current_limit_min" path="supply/current_limit_min" documentation="Minimum current in the supply" data_type="FLT_0D" type="static" units="A"/>
+			<field name="voltage_limit_max" path="supply/voltage_limit_max" documentation="Maximum voltage from the supply" data_type="FLT_0D" type="static" units="V"/>
+			<field name="voltage_limit_min" path="supply/voltage_limit_min" documentation="Minimum voltage from the supply" data_type="FLT_0D" type="static" units="V"/>
+			<field name="current_limiter_gain" path="supply/current_limiter_gain" documentation="Gain to prevent overcurrent in a linear model of the supply" data_type="FLT_0D" type="static" units="V"/>
+			<field name="energy_limit_max" path="supply/energy_limit_max" documentation="Maximum energy to be dissipated in the supply during a pulse" data_type="FLT_0D" type="static" units="J"/>
+			<field name="nonlinear_model" path="supply/nonlinear_model" documentation="Description of the nonlinear transfer function of the supply" data_type="STR_0D" type="static"/>
 			<field name="voltage" path="supply/voltage" documentation="Voltage at the supply output" data_type="structure">
-				<field name="data" path="supply/voltage/data" documentation="Voltage at the supply output" data_type="FLT_1D" type="DYNAMIC" coordinate1="supply/voltage/time" units="V"/>
-				<field name="time" path="supply/voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+				<field name="data" path="supply/voltage/data" documentation="Voltage at the supply output" data_type="FLT_1D" type="dynamic" coordinate1="supply/voltage/time" units="V"/>
+				<field name="time" path="supply/voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 			<field name="current" path="supply/current" documentation="Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description" data_type="structure">
-				<field name="data" path="supply/current/data" documentation="Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description" data_type="FLT_1D" type="DYNAMIC" coordinate1="supply/current/time" units="A"/>
-				<field name="time" path="supply/current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+				<field name="data" path="supply/current/data" documentation="Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description" data_type="FLT_1D" type="dynamic" coordinate1="supply/current/time" units="A"/>
+				<field name="time" path="supply/current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 		</field>
 		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
@@ -836,7 +816,7 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="pfpassive" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -849,24 +829,32 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="loop" path="loop" documentation="Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached." data_type="struct_array" maxoccur="300">
-			<field name="name" path="loop/name" documentation="Names of the loop" data_type="STR_1D" type="STATIC" coordinate1="1...n_passive_loops"/>
-			<field name="area" path="loop/area" documentation="Surface area of the passive loop" data_type="FLT_1D" type="STATIC" units="m^2" coordinate1="loop/names"/>
-			<field name="resistance" path="loop/resistance" documentation="Passive loop resistance" data_type="FLT_1D" type="STATIC" units="Ohm" coordinate1="loop/names"/>
-			<field name="geometry" path="loop/geometry" documentation="Shape of the Passive Loop" data_type="structure" coordinate1="loop/names">
+		<field name="loop" path="loop" documentation="Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached." data_type="struct_array" maxoccur="300" coordinate1="1...N">
+			<field name="name" path="loop/name" documentation="Name of the loop" data_type="STR_0D" type="static"/>
+			<field name="area" path="loop/area" documentation="Surface area of the passive loop" data_type="FLT_0D" type="static" units="m^2"/>
+			<field name="resistance" path="loop/resistance" documentation="Passive loop resistance" data_type="FLT_0D" type="static" units="Ohm"/>
+			<field name="geometry" path="loop/geometry" documentation="Shape of the passive loop" data_type="structure">
 				<field name="geometry_type" path="loop/geometry/geometry_type" documentation="Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ') " data_type="INT_0D" type="static"/>
 				<field name="outline" path="loop/geometry/outline" documentation="Irregular outline of the element" data_type="structure">
-					<field name="r" path="loop/geometry/outline/r" documentation="Major radius" data_type="FLT_1D" type="static" units="m" coordinate1="1...n_points"/>
-					<field name="z" path="loop/geometry/outline/z" documentation="Height" data_type="FLT_1D" type="static" units="m" coordinate1="loop/geometry/outline/r"/>
+					<field name="r" path="loop/geometry/outline/r" documentation="Major radius" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
+					<field name="z" path="loop/geometry/outline/z" documentation="Height" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
 				</field>
 				<field name="rectangle" path="loop/geometry/rectangle" documentation="Rectangular description of the element" data_type="structure">
-					<field name="r" path="loop/geometry/rectangle/r" documentation="centre R" data_type="FLT_0D" type="static" units="m"/>
-					<field name="z" path="loop/geometry/rectangle/z" documentation="centre Z" data_type="FLT_0D" type="static" units="m"/>
-					<field name="width" path="loop/geometry/rectangle/width" documentation="horizontal full width" data_type="FLT_0D" type="static" units="m"/>
-					<field name="height" path="loop/geometry/rectangle/height" documentation="vertical full height" data_type="FLT_0D" type="static" units="m"/>
+					<field name="r" path="loop/geometry/rectangle/r" documentation="Geometric centre R" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="loop/geometry/rectangle/z" documentation="Geometric centre Z" data_type="FLT_0D" type="static" units="m"/>
+					<field name="width" path="loop/geometry/rectangle/width" documentation="Horizontal full width" data_type="FLT_0D" type="static" units="m"/>
+					<field name="height" path="loop/geometry/rectangle/height" documentation="Vertical full height" data_type="FLT_0D" type="static" units="m"/>
+				</field>
+				<field name="oblique" path="loop/geometry/oblique" documentation="Rectangular description of the element" data_type="structure">
+					<field name="r" path="loop/geometry/oblique/r" documentation="Geometric centre R" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="loop/geometry/oblique/z" documentation="Geometric centre Z" data_type="FLT_0D" type="static" units="m"/>
+					<field name="length" path="loop/geometry/oblique/length" documentation="Length" data_type="FLT_0D" type="static" units="m"/>
+					<field name="thickness" path="loop/geometry/oblique/thickness" documentation="Thickness" data_type="FLT_0D" type="static" units="m"/>
+					<field name="alpha" path="loop/geometry/oblique/alpha" documentation="Inclination of first angle TBD" data_type="FLT_0D" type="static" units="m"/>
+					<field name="beta" path="loop/geometry/oblique/beta" documentation="Inclination of second angle TBD" data_type="FLT_0D" type="static" units="m"/>
 				</field>
 			</field>
-			<field name="current" path="loop/current" documentation="Passive Loop current (all Passive Loops are assumed to share the same timebase)" data_type="FLT_2D" type="DYNAMIC" coordinate1="loop/time" coordinate2="loop/names" units="A"/>
+			<field name="current" path="loop/current" documentation="Passive loop current" data_type="FLT_1D" type="dynamic" coordinate1="time" units="A"/>
 		</field>
 		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
@@ -875,7 +863,7 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="schedule" maxoccur="1" documentation="Description of Pulse Schedule, to be enhanced as we go">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -888,12 +876,11 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="waveform" path="waveform" documentation="Reference waveforms to be used to drive feedback or feedforward controllers, or to control the controller switching itself" data_type="struct_array" maxoccur="50">
+		<field name="waveform" path="waveform" documentation="Reference waveform to be used to drive feedback or feedforward controllers, or to control the controller switching itself" data_type="struct_array" maxoccur="50" coordinate1="1...N">
 			<field name="name" path="waveform/name" documentation="Reference name" data_type="STR_0D"/>
 			<field name="value" path="waveform/value" documentation="Values of the reference for the timebase" data_type="FLT_1D" coordinate1="waveform/time" units="mixed" type="dynamic"/>
-			<field name="time" path="waveform/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+			<field name="time" path="waveform/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
 	</IDS>
 	<IDS name="sdn" maxoccur="6" documentation="Description of the Synchronous Data Network parameters and the signals on it">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -906,20 +893,18 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="allocatable_signals" path="allocatable_signals" documentation="Dictionary of the signal names and definitions which can be allocated to the SDN" data_type="structure">
-			<field name="names" path="allocatable_signals/names" documentation="Names of all the allocatable signals" data_type="STR_1D" type="STATIC" coordinate1="allocatable_signals/names/n"/>
-			<field name="definitions " path="allocatable_signals/definitions " documentation="Definitions of the allocatable signals" data_type="STR_1D" type="STATIC" coordinate1="allocatable_signals/names"/>
-			<field name="ip_normalise" path="allocatable_signals/ip_normalise" documentation="Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops" data_type="INT_1D" type="STATIC" coordinate1="allocatable_signals/names"/>
+		<field name="allocatable_signal" path="allocatable_signal" documentation="Dictionary of the signal names and definitions which can be allocated to the SDN" data_type="struct_array" maxoccur="150" coordinate1="1...N">
+			<field name="name" path="allocatable_signal/name" documentation="Name of the allocatable signal" data_type="STR_0D" type="static"/>
+			<field name="definition" path="allocatable_signal/definition" documentation="Definition of the allocatable signal" data_type="STR_0D" type="static"/>
+			<field name="ip_normalise" path="allocatable_signal/ip_normalise" documentation="Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops" data_type="INT_0D" type="static"/>
 		</field>
-		<field name="allocated_signals" path="allocated_signals" documentation="Allocation of signal names to positions in the SDN" data_type="STR_1D" type="STATIC"/>
-		<field name="signal" path="signal" documentation="Data on the SDN" data_type="struct_array" maxoccur="30" type="DYNAMIC" coordinate1="time" coordinate2="allocated_signals" units="Mixed">
-			<field name="time" path="signal/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
-			<field name="name" path="signal/name" documentation="" data_type="STR_0D"/>
+		<field name="allocated_signals" path="allocated_signals" documentation="Allocation of signal names to positions in the SDN" data_type="STR_1D" type="static"/>
+		<field name="signal" path="signal" documentation="Data on the SDN" data_type="struct_array" maxoccur="30" coordinate1="1...N">
+			<field name="time" path="signal/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
-		<field name="TBDREMOVEn_topic_list" path="TBDREMOVEn_topic_list" documentation="Number items in the vector of structures" data_type="int_type"/>
-		<field name="topic_list" path="topic_list" documentation="List of the groups of signals used at different reading and writing points" data_type="struct_array" maxoccur="30" coordinate1="1...n_topic_list">
-			<field name="names" path="topic_list/names" documentation="Names of the group of SDN signals" data_type="STR_1D" type="STATIC" coordinate1="topic_list/names/N"/>
-			<field name="indices" path="topic_list/indices" documentation="Indices into the current SDN allocated list; it must be updated when the allocated list is changed" data_type="INT_1D" type="STATIC" coordinate1="topic_list/indices/n"/>
+		<field name="topic_list" path="topic_list" documentation="List of the groups of signals used at different reading and writing points" data_type="struct_array" maxoccur="30" coordinate1="1...N">
+			<field name="names" path="topic_list/names" documentation="Names of the group of SDN signals" data_type="STR_1D" type="static" coordinate1="1...N"/>
+			<field name="indices" path="topic_list/indices" documentation="Indices into the current SDN allocated list; it must be updated when the allocated list is changed" data_type="INT_1D" type="static" coordinate1="1...N"/>
 		</field>
 	</IDS>
 	<IDS name="simulation" maxoccur="1" documentation="Simulation parameters for a simulation">
@@ -933,26 +918,31 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="comment_before" path="comment_before" documentation="comment made when launching a simulation" data_type="STR_0D"/>
-		<field name="comment_after" path="comment_after" documentation="comment madeat the end of a simulation" data_type="STR_0D"/>
-		<field name="time_begin" path="time_begin" documentation="start time" data_type="FLT_1D"/>
-		<field name="time_step" path="time_step" documentation="time interval between steps" data_type="FLT_1D"/>
-		<field name="time_end" path="time_end" documentation="stop time" data_type="FLT_1D"/>
-		<field name="time_restart" path="time_restart" documentation="time to restart an old simulation" data_type="STR_0D"/>
-		<field name="time_begun" path="time_begun" documentation="Actual time simulation started" data_type="FLT_0D"/>
-		<field name="time_ended" path="time_ended" documentation="Actual time simulation finished" data_type="FLT_0D"/>
-		<field name="time_pf_supplies_start" path="time_pf_supplies_start" documentation="Time to enable PF limits" data_type="FLT_0D"/>
-		<field name="iterations_max" path="iterations_max" documentation="Maximum number of simulation loops allowed" data_type="INT_0D"/>
-		<field name="iterations_used" path="iterations_used" documentation="Number of simulation loops used" data_type="INT_0D"/>
-		<field name="termination_condition" path="termination_condition" documentation="Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate" data_type="STR_0D"/>
-		<field name="rate_plot_equilibrium" path="rate_plot_equilibrium" documentation="Plot the 2D images each N iterations" data_type="INT_0D"/>
+		<field name="comment_before" path="comment_before" documentation="Comment made when launching a simulation" data_type="STR_0D" type="constant" units="-"/>
+		<field name="comment_after" path="comment_after" documentation="Comment made at the end of a simulation" data_type="STR_0D" type="constant" units="-"/>
+		<field name="time_begin" path="time_begin" documentation="Start time" data_type="FLT_0D" type="constant" units="s"/>
+		<field name="time_step" path="time_step" documentation="Time interval between steps" data_type="FLT_0D" type="constant" units="s"/>
+		<field name="time_end" path="time_end" documentation="Stop time" data_type="FLT_0D" type="constant" units="s"/>
+		<field name="time_restart" path="time_restart" documentation="Time to restart an old simulation" data_type="FLT_0D" type="constant" units="s"/>
+		<field name="time_begun" path="time_begun" documentation="Actual wall-clock time simulation started" data_type="STR_0D" type="dynamic" units="UTC"/>
+		<field name="time_ended" path="time_ended" documentation="Actual wall-clock time simulation finished" data_type="STR_0D" type="dynamic" units="UTC"/>
+		<field name="time_pf_supplies_start" path="time_pf_supplies_start" documentation="Time to enable PF supply limits" data_type="FLT_0D" type="constant" units="s"/>
+		<field name="iterations_max" path="iterations_max" documentation="Maximum number of simulation loops allowed" data_type="INT_0D" type="constant" units="s"/>
+		<field name="iterations_used" path="iterations_used" documentation="Number of simulation loops used" data_type="INT_0D" type="dynamic" units="s"/>
+		<field name="termination_condition" path="termination_condition" documentation="Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate" data_type="STR_0D" type="constant" units="-"/>
+		<field name="rate_plot_equilibrium" path="rate_plot_equilibrium" documentation="Plot the 2D images each N iterations" data_type="INT_0D" type="constant" units="-"/>
 		<field name="simulation_model" path="simulation_model" documentation="Identity of the model to be executed" data_type="structure">
-			<field name="Name" path="simulation_model/Name" documentation="" data_type="STR_0D"/>
-			<field name="Version" path="simulation_model/Version" documentation="" data_type="STR_0D"/>
-			<field name="Mode" path="simulation_model/Mode" documentation="" data_type="STR_0D"/>
+			<field name="name" path="simulation_model/name" documentation="Name of the simulation model" data_type="STR_0D" type="constant"/>
+			<field name="version" path="simulation_model/version" documentation="Version of the code being run" data_type="STR_0D" type="dynamic"/>
+			<field name="mode" path="simulation_model/mode" documentation="One of multiple modes which can be run" data_type="INT_0D" type="constant"/>
 		</field>
-		<field name="device_name" path="device_name" documentation="Name of the device being simulated" data_type="STR_0D"/>
-		<field name="restart_simulation" path="restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D"/>
+		<field name="device_name" path="device_name" documentation="Name of the device being simulated" data_type="STR_0D" type="constant" units="-"/>
+		<field name="restart_simulation" path="restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D" type="constant" units="-"/>
+		<field name="subsampling" path="subsampling" documentation="Subsampling during the simulation; it is useful to define a variety of subsampling types which can be varied" data_type="struct_array" maxoccur="20" coordinate1="1...N">
+			<field name="name" path="subsampling/name" documentation="Short name of this subsampling" data_type="STR_0D"/>
+			<field name="description" path="subsampling/description" documentation="Description of the usage of this subsampling" data_type="STR_0D"/>
+			<field name="interval" path="subsampling/interval" documentation="Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory" data_type="INT_0D"/>
+		</field>
 	</IDS>
 	<IDS name="tf" maxoccur="6" documentation="Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS.">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -969,16 +959,16 @@
 		<field name="coils_n" path="coils_n" documentation="Number of coils around the tokamak" data_type="INT_0D" type="static"/>
 		<field name="current" path="current" documentation="Current in the coil" data_type="structure">
 			<field name="data" path="current/data" documentation="Current in the coil" data_type="FLT_1D" type="dynamic" coordinate1="current/time" units="A"/>
-			<field name="time" path="current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+			<field name="time" path="current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
 		<field name="voltage" path="voltage" documentation="Voltage on the coil terminals" data_type="structure">
 			<field name="data" path="voltage/data" documentation="Voltage on the coil terminals" data_type="FLT_1D" type="dynamic" coordinate1="voltage/time" units="V"/>
-			<field name="time" path="voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+			<field name="time" path="voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
 		<field name="b_tor_vacuum_r" path="b_tor_vacuum_r" documentation="Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above" data_type="structure">
 			<field name="data" path="b_tor_vacuum_r/data" documentation="Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="dynamic" coordinate1="b_tor_vacuum_r/time" units="T.m"/>
-			<field name="time" path="b_tor_vacuum_r/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+			<field name="time" path="b_tor_vacuum_r/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...n_times" type="dynamic"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 </IDSs>
