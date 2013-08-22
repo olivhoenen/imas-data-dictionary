@@ -9,7 +9,7 @@
   -* Thanks to http://www.masobit.net/ for paying me while working on mod-xslt
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
 	<xs:element name="tf">
 		<xs:annotation>
 			<xs:documentation>Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS.</xs:documentation>
@@ -18,18 +18,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="turns_n">
-					<xs:annotation>
-						<xs:documentation>Number of total turns in a toroidal field coil</xs:documentation>
-						<xs:appinfo>
-							<type>static</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="INT_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="coils_n">
+				<xs:element name="coil" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>Number of coils around the tokamak</xs:documentation>
 						<xs:appinfo>
@@ -37,38 +26,50 @@
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:group ref="INT_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="current">
-					<xs:annotation>
-						<xs:documentation>Current in the coil</xs:documentation>
-						<xs:appinfo>
-							<type>dynamic</type>
-							<coordinate1>time</coordinate1>
-							<units>A</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
 						<xs:sequence>
-							<xs:element ref="time"/>
-							<xs:group ref="FLT_1D"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="voltage">
-					<xs:annotation>
-						<xs:documentation>Voltage on the coil terminals</xs:documentation>
-						<xs:appinfo>
-							<type>dynamic</type>
-							<coordinate1>time</coordinate1>
-							<units>V</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="time"/>
-							<xs:group ref="FLT_1D"/>
+							<xs:element name="turns">
+								<xs:annotation>
+									<xs:documentation>Number of total turns in a toroidal field coil</xs:documentation>
+									<xs:appinfo>
+										<type>static</type>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:group ref="INT_0D"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="current">
+								<xs:annotation>
+									<xs:documentation>Current in the coil</xs:documentation>
+									<xs:appinfo>
+										<type>dynamic</type>
+										<coordinate1>time</coordinate1>
+										<units>A</units>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="time"/>
+										<xs:group ref="FLT_1D"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="voltage">
+								<xs:annotation>
+									<xs:documentation>Voltage on the coil terminals</xs:documentation>
+									<xs:appinfo>
+										<type>dynamic</type>
+										<coordinate1>time</coordinate1>
+										<units>V</units>
+									</xs:appinfo>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="time"/>
+										<xs:group ref="FLT_1D"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>

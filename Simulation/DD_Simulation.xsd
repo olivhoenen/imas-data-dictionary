@@ -3,7 +3,7 @@
 <?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./$GET[stylesheet]" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
 	<xs:element name="simulation">
 		<xs:annotation>
 			<xs:documentation>Simulation parameters for a simulation</xs:documentation>
@@ -176,7 +176,9 @@
 							<xs:element name="name">
 								<xs:annotation>
 									<xs:documentation>Name of the simulation model</xs:documentation>
-									<xs:appinfo><type>constant</type></xs:appinfo>
+									<xs:appinfo>
+										<type>constant</type>
+									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:group ref="STR_0D"/>
@@ -185,8 +187,10 @@
 							<xs:element name="version">
 								<xs:annotation>
 									<xs:documentation>Version of the code being run</xs:documentation>
-										<xs:appinfo><type>dynamic</type></xs:appinfo>
-							</xs:annotation>
+									<xs:appinfo>
+										<type>dynamic</type>
+									</xs:appinfo>
+								</xs:annotation>
 								<xs:complexType>
 									<xs:group ref="STR_0D"/>
 								</xs:complexType>
@@ -194,8 +198,10 @@
 							<xs:element name="mode">
 								<xs:annotation>
 									<xs:documentation>One of multiple modes which can be run</xs:documentation>
-										<xs:appinfo><type>constant</type></xs:appinfo>
-							</xs:annotation>
+									<xs:appinfo>
+										<type>constant</type>
+									</xs:appinfo>
+								</xs:annotation>
 								<xs:complexType>
 									<xs:group ref="INT_0D"/>
 								</xs:complexType>
@@ -227,43 +233,7 @@
 						<xs:group ref="STR_0D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="subsampling" type="subsamplingtype" maxOccurs="20">
-					<xs:annotation>
-						<xs:documentation>Subsampling during the simulation; it is useful to define a variety of subsampling types which can be varied</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:complexType name="subsamplingtype">
-		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>Short name of this subsampling</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="description">
-				<xs:annotation>
-					<xs:documentation>Description of the usage of this subsampling</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="interval">
-				<xs:annotation>
-					<xs:documentation>Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 </xs:schema>

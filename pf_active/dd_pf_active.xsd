@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
 	<xs:complexType name="pf_supplies">
 		<xs:annotation>
 			<xs:documentation>PF power supplies</xs:documentation>
@@ -458,14 +458,14 @@
 			</xs:element>
 			<xs:element name="combination">
 				<xs:annotation>
-					<xs:documentation>Coils involved in the force combinations ???</xs:documentation>
+					<xs:documentation>Coils involved in the force combinations. Normally the vertical force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_1D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="limit_max">
@@ -502,15 +502,13 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="pfactive">
+	<xs:element name="pf_active">
 		<xs:annotation>
 			<xs:documentation>Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</xs:documentation>
 			<xs:appinfo/>

@@ -9,43 +9,7 @@
   -* Thanks to http://www.masobit.net/ for paying me while working on mod-xslt
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:element name="magnetics">
-		<xs:annotation>
-			<xs:documentation>Magnetic diagnostics for equilibrium identification and plasma shape control.</xs:documentation>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="ids_properties"/>
-				<xs:element name="flux_loop" type="magnetics_flux_loop" maxOccurs="200">
-					<xs:annotation>
-						<xs:documentation>Flux loops; partial flux loops can be described</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="bpol_probe" type="magnetics_bpol_probe" maxOccurs="200">
-					<xs:annotation>
-						<xs:documentation>Poloidal field probes</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="processed_data" type="magnetics_processed_data" maxOccurs="10">
-					<xs:annotation>
-						<xs:documentation>Processed quantities derived from the magnetic measurements.</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element ref="code"/>
-				<xs:element ref="time"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
 	<xs:complexType name="magnetics_flux_loop">
 		<xs:annotation>
 			<xs:documentation>Flux loops</xs:documentation>
@@ -215,32 +179,87 @@
 			<xs:documentation>Processed quantities derived from the magnetic measurements.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="method">
+			<xs:element name="name">
 				<xs:annotation>
 					<xs:documentation>Name of the data processing method</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="value_TBD">
+			<xs:element name="ip">
 				<xs:annotation>
+					<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above</xs:documentation>
 					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
 						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="ip_error" type="errorbar">
+				<xs:annotation>
+					<xs:documentation>Error on plasma current </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="diamagnetic_flux">
+				<xs:annotation>
+					<xs:documentation>Diamagnetic flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
+						<type>dynamic</type>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="diamagnetic_flux_error" type="errorbar">
+				<xs:annotation>
+					<xs:documentation>Error on diamagnetic flux</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="magnetics">
+		<xs:annotation>
+			<xs:documentation>Magnetic diagnostics for equilibrium identification and plasma shape control.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="flux_loop" type="magnetics_flux_loop" maxOccurs="200">
+					<xs:annotation>
+						<xs:documentation>Flux loops; partial flux loops can be described</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="bpol_probe" type="magnetics_bpol_probe" maxOccurs="200">
+					<xs:annotation>
+						<xs:documentation>Poloidal field probes</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="method" type="magnetics_processed_data" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>A method generating processed quantities derived from the magnetic measurements</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="code"/>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>

@@ -9,7 +9,7 @@
   -* Thanks to http://www.masobit.net/ for paying me while working on mod-xslt
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
 	<xs:element name="temporary">
 		<xs:annotation>
 			<xs:documentation>Storage of undeclared data model components</xs:documentation>
@@ -22,8 +22,8 @@
 					<xs:annotation>
 						<xs:documentation>Temporary Binary_1D</xs:documentation>
 						<xs:appinfo>
-							<type>dynamic</type>
-							<axis1>time</axis1>
+							<type>SIGNAL</type>
+							<axis1>Timebase</axis1>
 							<units>T.m</units>
 						</xs:appinfo>
 					</xs:annotation>
@@ -55,7 +55,7 @@
 				</xs:element>
 				<xs:element name="constant">
 					<xs:annotation>
-						<xs:documentation>constant quantities</xs:documentation>
+						<xs:documentation>Constant quantities</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
@@ -63,7 +63,7 @@
 								<xs:annotation>
 									<xs:documentation>Temporary Float_0D</xs:documentation>
 									<xs:appinfo>
-										<type>constant</type>
+										<Type>CONSTANT</Type>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -72,7 +72,7 @@
 											<xs:annotation>
 												<xs:documentation>Value</xs:documentation>
 												<xs:appinfo>
-													<type>constant</type>
+													<Type>CONSTANT</Type>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -85,7 +85,7 @@
 											<xs:annotation>
 												<xs:documentation>Description</xs:documentation>
 												<xs:appinfo>
-													<type>constant</type>
+													<Type>CONSTANT</Type>
 												</xs:appinfo>
 											</xs:annotation>
 										</xs:element>
@@ -96,7 +96,7 @@
 								<xs:annotation>
 									<xs:documentation>Temporary Float_1D</xs:documentation>
 									<xs:appinfo>
-										<type>constant</type>
+										<Type>CONSTANT</Type>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -105,7 +105,7 @@
 											<xs:annotation>
 												<xs:documentation>Value</xs:documentation>
 												<xs:appinfo>
-													<type>constant</type>
+													<Type>CONSTANT</Type>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -118,7 +118,7 @@
 											<xs:annotation>
 												<xs:documentation>Description</xs:documentation>
 												<xs:appinfo>
-													<type>constant</type>
+													<Type>CONSTANT</Type>
 												</xs:appinfo>
 											</xs:annotation>
 										</xs:element>
@@ -129,7 +129,7 @@
 								<xs:annotation>
 									<xs:documentation>Temporary String_0D</xs:documentation>
 									<xs:appinfo>
-										<type>constant</type>
+										<Type>CONSTANT</Type>
 									</xs:appinfo>
 								</xs:annotation>
 								<xs:complexType>
@@ -138,7 +138,7 @@
 											<xs:annotation>
 												<xs:documentation>Value</xs:documentation>
 												<xs:appinfo>
-													<type>constant</type>
+													<Type>CONSTANT</Type>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
@@ -151,7 +151,7 @@
 											<xs:annotation>
 												<xs:documentation>Description</xs:documentation>
 												<xs:appinfo>
-													<type>constant</type>
+													<Type>CONSTANT</Type>
 												</xs:appinfo>
 											</xs:annotation>
 										</xs:element>
@@ -173,17 +173,17 @@
 								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="dynamic">
+										<xs:element name="Signal">
 											<xs:annotation>
 												<xs:documentation>Value</xs:documentation>
 												<xs:appinfo>
-													<type>dynamic</type>
+													<Type>SIGNAL</Type>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
 												<xs:sequence>
 													<xs:group ref="FLT_1D"/>
-													<xs:element ref="time"/>
+													<xs:element ref="Timebase"/>
 												</xs:sequence>
 											</xs:complexType>
 										</xs:element>
@@ -191,7 +191,7 @@
 											<xs:annotation>
 												<xs:documentation>Description</xs:documentation>
 												<xs:appinfo>
-													<type>constant</type>
+													<Type>CONSTANT</Type>
 												</xs:appinfo>
 											</xs:annotation>
 										</xs:element>
@@ -204,17 +204,17 @@
 								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="dynamic">
+										<xs:element name="Signal">
 											<xs:annotation>
 												<xs:documentation>Value</xs:documentation>
 												<xs:appinfo>
-													<type>dynamic</type>
+													<Type>SIGNAL</Type>
 												</xs:appinfo>
 											</xs:annotation>
 											<xs:complexType>
 												<xs:sequence>
 													<xs:group ref="FLT_2D"/>
-													<xs:element ref="time"/>
+													<xs:element ref="Timebase"/>
 												</xs:sequence>
 											</xs:complexType>
 										</xs:element>
@@ -222,7 +222,7 @@
 											<xs:annotation>
 												<xs:documentation>Description</xs:documentation>
 												<xs:appinfo>
-													<type>constant</type>
+													<Type>CONSTANT</Type>
 												</xs:appinfo>
 											</xs:annotation>
 										</xs:element>

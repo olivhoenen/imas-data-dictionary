@@ -5,7 +5,7 @@
 		<xs:annotation>
 			<xs:documentation>Array of charge states considered</xs:documentation>
 			<xs:appinfo>
-				<coordinate1>1...n_nuclei</coordinate1>
+				<coordinate1>1...N</coordinate1>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
@@ -50,7 +50,7 @@
 		<xs:annotation>
 			<xs:documentation>Array of plasma ions.</xs:documentation>
 			<xs:appinfo>
-				<coordinate1>1...n_ions</coordinate1>
+				<coordinate1>1...N</coordinate1>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
@@ -116,7 +116,7 @@
 				<xs:annotation>
 					<xs:documentation>Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...n_charge_states</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -169,7 +169,7 @@
 		<xs:annotation>
 			<xs:documentation>Array of neutral atoms or molecules</xs:documentation>
 			<xs:appinfo>
-				<coordinate1>1...n_ions</coordinate1>
+				<coordinate1>1...N</coordinate1>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
@@ -212,7 +212,7 @@
 					<xs:annotation>
 						<xs:documentation>Array of plasma ions</xs:documentation>
 						<xs:appinfo>
-							<coordinate1>1...n_ions</coordinate1>
+							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -220,7 +220,7 @@
 					<xs:annotation>
 						<xs:documentation>Array of neutrals</xs:documentation>
 						<xs:appinfo>
-							<coordinate1>1...n_neutrals</coordinate1>
+							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -329,6 +329,35 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:complexType name="schedule_waveform">
+		<xs:annotation>
+			<xs:documentation>description of a named waveform, normally for scheduling</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Reference name</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Values of the reference for the timebase</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
+						<units>mixed</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="time"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="errorbar">
 		<xs:annotation>
 			<xs:documentation>Structure for 1D dynamic errorbar</xs:documentation>
@@ -347,6 +376,7 @@
 					<xs:documentation>Absolute error provided as a dynamic of same dimension as the related field.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1129,9 +1159,7 @@
 		</xs:sequence>
 	</xs:group>
 	<xs:simpleType name="int_1d_type">
-		<xs:restriction base="xs:string">
-			<xs:pattern value="\[(\+|-)?\d+(,(\+|-)?\d+)*\]"/>
-		</xs:restriction>
+		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
 	<xs:group name="INT_2D">
 		<xs:annotation>

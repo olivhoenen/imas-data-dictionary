@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="..\Utilities\DD_Support.xsd"/>
-	<xs:element name="pfpassive">
-		<xs:annotation>
-			<xs:documentation>Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</xs:documentation>
-			<xs:appinfo/>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="ids_properties"/>
-				<xs:element name="loop" type="pf_passive_loops" maxOccurs="300">
-					<xs:annotation>
-						<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element ref="code"/>
-				<xs:element ref="time"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
 	<xs:complexType name="pf_passive_loops">
 		<xs:annotation>
 			<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
@@ -83,4 +62,25 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="pf_passive">
+		<xs:annotation>
+			<xs:documentation>Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</xs:documentation>
+			<xs:appinfo/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="loop" type="pf_passive_loops" maxOccurs="300">
+					<xs:annotation>
+						<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="code"/>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>
