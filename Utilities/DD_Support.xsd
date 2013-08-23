@@ -331,7 +331,7 @@
 	</xs:element>
 	<xs:complexType name="schedule_waveform">
 		<xs:annotation>
-			<xs:documentation>description of a named waveform, normally for scheduling</xs:documentation>
+			<xs:documentation>Description of a named waveform, normally for scheduling</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
@@ -806,7 +806,7 @@
 	</xs:complexType>
 	<xs:complexType name="oblique_static">
 		<xs:annotation>
-			<xs:documentation>Rectangular description of a 2D object</xs:documentation>
+			<xs:documentation>Oblique description of a 2D object</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
@@ -1036,6 +1036,26 @@
 				<xs:element name="cocos" type="int_type">
 					<xs:annotation>
 						<xs:documentation>Coordinate conventions of this IDS</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="lifecycle_status" type="str_type">
+					<xs:annotation>
+						<xs:documentation>Lifecycle status is a)	“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;
+b)	“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support
+c)	“Temporary” covers the “Personal Temporary IDS” case;
+d)	“Obsolete” for IDS that are obsolete
+</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="lifecycle_version" type="str_type">
+					<xs:annotation>
+						<xs:documentation>The version for which the IDS possesses the given status</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
 						</xs:appinfo>
