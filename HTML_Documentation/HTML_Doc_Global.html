@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td><a href="#controllers">controllers</a></td>
-				<td>Feedback controllers</td>
+				<td></td>
 				<td>1</td>
 			</tr>
 			<tr>
@@ -53,8 +53,8 @@
 				<td>1</td>
 			</tr>
 			<tr>
-				<td><a href="#emcoupling">emcoupling</a></td>
-				<td>Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems</td>
+				<td><a href="#em_coupling">em_coupling</a></td>
+				<td>Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source</td>
 				<td>6</td>
 			</tr>
 			<tr>
@@ -275,14 +275,14 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 			</table>
 		</a><a name="controllers"><p class="welcome">ITER Physics Data Model Documentation for controllers</p>
-			<p>Feedback controllers</p>
+			<p></p>
 			<table border="1">
 				<thead style="color:#ff0000">
 					<td>Full path name</td>
@@ -346,195 +346,309 @@
 				</tr>
 				<tr>
 					<td>linear_controller</td>
-					<td>A linear controller, this is rather conventional</td>
+					<td></td>
 					<td>struct_array [max_size=20]</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller/</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller/name</td>
-					<td>Name of this controller {STATIC} [-]</td>
+					<td> {} []</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/description</td>
-					<td>Name of this controller {STATIC} [-]</td>
+					<td> {} []</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/class</td>
-					<td>One of a known class of controllers {STATIC} [-]</td>
+					<td> {} []</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/input_names</td>
-					<td>Names of the input signals, following the SDN convention {STATIC} [-]</td>
+					<td> {}</td>
 					<td>STR_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/output_names</td>
-					<td>names of the output signals following the SDN convention</td>
+					<td> {}</td>
 					<td>STR_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/statespace</td>
-					<td>Statespace controller in discrete time {STATIC} [-]</td>
+					<td></td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/statespace/a</td>
-					<td>A matrix {STATIC} [-]</td>
+					<td> {} []</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/statespace/b</td>
-					<td>B matrix {STATIC} [-]</td>
+					<td> {} []</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/statespace/c</td>
-					<td>C matrix {STATIC} [-]</td>
+					<td> {} []</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/statespace/d</td>
-					<td>D matrix {STATIC} [-]</td>
+					<td> {} []</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/statespace/deltat</td>
-					<td>Discrete time sampling interval ; if 0, the controller is continuous time</td>
-					<td>structure</td>
+					<td> {} []</td>
+					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/pid</td>
-					<td>Statespace controller in discrete time {STATIC} [-]</td>
+					<td></td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/pid/p</td>
-					<td>Proportional term {CONSTANT} [mixed]</td>
+					<td> {} []</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/pid/i</td>
-					<td>Integral term {CONSTANT} [mixed]</td>
+					<td> {} []</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/pid/d</td>
-					<td>Derivative term {CONSTANT} [mixed]</td>
+					<td> {} []</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/pid/tau</td>
-					<td>Filter time-constant for the D-term {CONSTANT} [mixed]</td>
+					<td> {} []</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>linear_controller/inputs</td>
-					<td>Input signals, following the SDN convention</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>linear_controller/inputs/data</td>
-					<td>Input signals, following the SDN convention</td>
+					<td> {} []</td>
 					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>linear_controller/inputs/time</td>
-					<td>Generic time [s] {dynamic}</td>
-					<td>flt_1d_type</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- linear_controller/inputs/</td>
+							</tr>
+							<tr>
+								<td>2- linear_controller/inputs/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>linear_controller/outputs</td>
-					<td>Output signals, following the SDN convention</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>linear_controller/outputs/data</td>
-					<td>Output signals, following the SDN convention</td>
+					<td> {} []</td>
 					<td>FLT_2D</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller/outputs/</td>
+							</tr>
+							<tr>
+								<td>2- linear_controller/outputs/</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
-					<td>linear_controller/outputs/time</td>
+					<td>linear_controller/time</td>
 					<td>Generic time [s] {dynamic}</td>
 					<td>flt_1d_type</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>nonlinear_controller</td>
-					<td>A non-linear controller, this is less conventional</td>
+					<td></td>
 					<td>struct_array [max_size=20]</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- nonlinear_controller/</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>nonlinear_controller/name</td>
-					<td>Name of this controller</td>
+					<td></td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>nonlinear_controller/description</td>
-					<td>Name of this controller {STATIC} [-]</td>
+					<td> {} []</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>nonlinear_controller/class</td>
-					<td>One of a known class of controllers {STATIC} [-]</td>
+					<td> {} []</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>nonlinear_controller/inputs</td>
-					<td>Names of the input signals, following the SDN convention {DYNAMIC} [mixed]</td>
+					<td>nonlinear_controller/input_names</td>
+					<td> {}</td>
 					<td>STR_1D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>nonlinear_controller/outputs</td>
-					<td>Output signals following the SDN convention {DYNAMIC} [mixed]</td>
+					<td>nonlinear_controller/output_names</td>
+					<td> {}</td>
 					<td>STR_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>nonlinear_controller/function</td>
-					<td>Method to be defined {DYNAMIC} [mixed]</td>
+					<td> {}</td>
 					<td>STR_0D</td>
 					<td />
+				</tr>
+				<tr>
+					<td>nonlinear_controller/inputs</td>
+					<td> {} []</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- nonlinear_controller/inputs/</td>
+							</tr>
+							<tr>
+								<td>2- nonlinear_controller/inputs/</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>nonlinear_controller/outputs</td>
+					<td> {} []</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- nonlinear_controller/outputs/</td>
+							</tr>
+							<tr>
+								<td>2- nonlinear_controller/outputs/</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>nonlinear_controller/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {dynamic}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {dynamic}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {dynamic}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code/output_diagnostics</td>
+					<td>List of the code specific diagnostic/output in XML format {dynamic}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>time</td>
@@ -543,7 +657,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -1405,7 +1519,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -2177,7 +2291,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -2583,7 +2697,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -3175,7 +3289,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -3246,7 +3360,7 @@
 				</tr>
 				<tr>
 					<td>version</td>
-					<td>Version of the DINA solver to be used {static}</td>
+					<td>Version of the DINA solver to be used {dynamic}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
@@ -3271,12 +3385,12 @@
 				<tr>
 					<td>static_group_1/indpf</td>
 					<td>Dina "indpf" parameters {static}</td>
-					<td>FLT_1D</td>
+					<td>INT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>static_group_2</td>
-					<td></td>
+					<td>Group II static data {static}</td>
 					<td>structure</td>
 					<td />
 				</tr>
@@ -3295,7 +3409,7 @@
 				<tr>
 					<td>static_group_2/ext_transp</td>
 					<td>Dina "" parameters {static}</td>
-					<td>INT_0D</td>
+					<td>INT_1D</td>
 					<td />
 				</tr>
 				<tr>
@@ -3312,151 +3426,151 @@
 				</tr>
 				<tr>
 					<td>input_group_1</td>
-					<td></td>
+					<td>Group I input data</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_1/plasma_density</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_1/ohmic_compensation</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_1/boundary_density_ratio</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_1/itb_rho</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_1/tau_e_anomaly</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_1/sawtooth_q0</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_4</td>
-					<td></td>
+					<td>Group IV input data</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_4/particle_diffusion</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_4/chi_electrons</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_4/chi_ions</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_4/bootstrap_current</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_4/psi_normalised</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_4/inward_pinch_velocity</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5</td>
-					<td></td>
+					<td>Group V input data</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5/p_e</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5/p_i</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5/j_cd</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5/n_ex</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5/te_ex</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5/ti_ex</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5/sigma_ex</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5/pres_ex</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>input_group_5/ro_ex</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>output_group_5</td>
-					<td></td>
+					<td>Group V output data</td>
 					<td>structure</td>
 					<td />
 				</tr>
@@ -3468,7 +3582,7 @@
 				</tr>
 				<tr>
 					<td>output_group_6</td>
-					<td></td>
+					<td>Group VI input data</td>
 					<td>structure</td>
 					<td />
 				</tr>
@@ -3600,19 +3714,19 @@
 				</tr>
 				<tr>
 					<td>output_group_6/ti_ex</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>output_group_6/pres_ex</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>output_group_6/sigma_ex</td>
-					<td>Dina "" parameters {static}</td>
+					<td>Dina "" parameters {dynamic}</td>
 					<td>FLT_2D</td>
 					<td />
 				</tr>
@@ -3624,7 +3738,7 @@
 				</tr>
 				<tr>
 					<td>output_group_7</td>
-					<td></td>
+					<td>Group VII output data</td>
 					<td>structure</td>
 					<td />
 				</tr>
@@ -3632,11 +3746,44 @@
 					<td>output_group_7/shape</td>
 					<td>Dina "shape" parameters {dynamic}</td>
 					<td>FLT_2D</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- output_group_7/shape/1..n</td>
+							</tr>
+							<tr>
+								<td>2- output_group_7/shape/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>output_group_7/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 			</table>
-		</a><a name="emcoupling"><p class="welcome">ITER Physics Data Model Documentation for emcoupling</p>
-			<p>Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems</p>
+		</a><a name="em_coupling"><p class="welcome">ITER Physics Data Model Documentation for em_coupling</p>
+			<p>Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source</p>
 			<table border="1">
 				<thead style="color:#ff0000">
 					<td>Full path name</td>
@@ -3700,366 +3847,183 @@
 				</tr>
 				<tr>
 					<td>mutual_active_active</td>
-					<td>Mutual inductance coupling between active coils and active coils {static} [H]</td>
-					<td>structure</td>
+					<td>Mutual inductance coupling from active coils to active coils {static} [H]</td>
+					<td>FLT_2D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- mutual_active_active/coordinate1</td>
+								<td>1- active_coils</td>
 							</tr>
 							<tr>
-								<td>2- mutual_active_active/coordinate2</td>
+								<td>2- active_coils</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>mutual_active_active/matrix</td>
-					<td>Value of the coupling matrix</td>
+					<td>mutual_passive_active</td>
+					<td>Mutual inductance coupling from active coils to passive loops {static} [H]</td>
 					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_active/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_active/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_passive</td>
-					<td>Mutual inductance coupling between active coils and passive coils {static} [H]</td>
-					<td>structure</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- mutual_active_passive/coordinate1</td>
+								<td>1- passive_loops</td>
 							</tr>
 							<tr>
-								<td>2- mutual_active_passive/coordinate2</td>
+								<td>2- active_coils</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>mutual_active_passive/matrix</td>
-					<td>Value of the coupling matrix</td>
+					<td>mutual_loops_active</td>
+					<td>Mutual inductance coupling from active coils to poloidal flux loops {static} [H]</td>
 					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_passive/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_passive/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>field_active_probes</td>
-					<td>Poloidal field coupling between active coils and poloidal field probes {static} [T/A]</td>
-					<td>structure</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- field_active_probes/coordinate1</td>
+								<td>1- flux_loops</td>
 							</tr>
 							<tr>
-								<td>2- field_active_probes/coordinate2</td>
+								<td>2- active_coils</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>field_active_probes/matrix</td>
-					<td>Value of the coupling matrix</td>
+					<td>field_probes_active</td>
+					<td>Poloidal field coupling from active coils to poloidal field probes {static} [T/A]</td>
 					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>field_active_probes/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>field_active_probes/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>field_passive_probes</td>
-					<td>Poloidal field coupling between passive coils and poloidal field probes {static} [T/A]</td>
-					<td>structure</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- field_passive_probes/coordinate1</td>
+								<td>1- poloidal_probes</td>
 							</tr>
 							<tr>
-								<td>2- field_passive_probes/coordinate2</td>
+								<td>2- active_coils</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>field_passive_probes/matrix</td>
-					<td>Value of the coupling matrix</td>
+					<td>mutual_passive_passive</td>
+					<td>Mutual inductance coupling from passive loops to passive loops {static} [H]</td>
 					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>field_passive_probes/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>field_passive_probes/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_loops</td>
-					<td>Mutual between active coils and poloidal flux loops {static} [H]</td>
-					<td>structure</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- mutual_active_loops/coordinate1</td>
+								<td>1- passive_loops</td>
 							</tr>
 							<tr>
-								<td>2- mutual_active_loops/coordinate2</td>
+								<td>2- passive_loops</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>mutual_active_loops/matrix</td>
-					<td>Value of the coupling matrix</td>
+					<td>mutual_loops_passive</td>
+					<td>Mutual  inductance coupling from passive  loops to poloidal flux loops {static} [H]</td>
 					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_loops/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_loops/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_passive_loops</td>
-					<td>Mutual between passive coils and poloidal flux loops {static} [H]</td>
-					<td>structure</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- mutual_passive_loops/coordinate1</td>
+								<td>1- flux_loops</td>
 							</tr>
 							<tr>
-								<td>2- mutual_passive_loops/coordinate2</td>
+								<td>2- passive_loops</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>mutual_passive_loops/matrix</td>
-					<td>Value of the coupling matrix</td>
+					<td>field_probes_passive</td>
+					<td>Poloidal field coupling from passive loops to poloidal field probes {static} [T/A]</td>
 					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_passive_loops/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_passive_loops/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_grid</td>
-					<td>Mutual between active coils and equilibrium grid {static} [H]</td>
-					<td>structure</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- mutual_active_grid/coordinate1</td>
+								<td>1- poloidal_probes</td>
 							</tr>
 							<tr>
-								<td>2- mutual_active_grid/coordinate2</td>
+								<td>2- passive_loops</td>
 							</tr>
 						</table>
 					</td>
-				</tr>
-				<tr>
-					<td>mutual_active_grid/matrix</td>
-					<td>Value of the coupling matrix</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_grid/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_active_grid/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_passive_grid</td>
-					<td>Mutual inductance between passive coils and equilibrium grid {static} [H]</td>
-					<td>structure</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- mutual_passive_grid/coordinate1</td>
-							</tr>
-							<tr>
-								<td>2- mutual_passive_grid/coordinate2</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>mutual_passive_grid/matrix</td>
-					<td>Value of the coupling matrix</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_passive_grid/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_passive_grid/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>field_grid_probes</td>
-					<td>Field between equilibrium grid and poloidal field probes {static} [T/A]</td>
-					<td>structure</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- field_grid_probes/coordinate1</td>
-							</tr>
-							<tr>
-								<td>2- field_grid_probes/coordinate2</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>field_grid_probes/matrix</td>
-					<td>Value of the coupling matrix</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>field_grid_probes/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>field_grid_probes/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_grid_loops</td>
-					<td>Mutual inductance between equilibrium grid and poloidal flux loops  {static} [H]</td>
-					<td>structure</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- mutual_grid_loops/coordinate1</td>
-							</tr>
-							<tr>
-								<td>2- mutual_grid_loops/coordinate2</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>mutual_grid_loops/matrix</td>
-					<td>Value of the coupling matrix</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_grid_loops/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>mutual_grid_loops/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
 				</tr>
 				<tr>
 					<td>mutual_grid_grid</td>
-					<td>Mutual inductance between equilibrium grid and itself {static} [H]</td>
-					<td>structure</td>
+					<td>Mutual inductance from equilibrium grid to itself {static} [H]</td>
+					<td>FLT_2D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- mutual_grid_grid/coordinate1</td>
+								<td>1- grid_points</td>
 							</tr>
 							<tr>
-								<td>2- mutual_grid_grid/coordinate2</td>
+								<td>2- grid_points</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>mutual_grid_grid/matrix</td>
-					<td>Value of the coupling matrix</td>
+					<td>mutual_grid_active</td>
+					<td>Mutual inductance coupling from active coils to equilibrium grid   {static} [H]</td>
 					<td>FLT_2D</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- grid_points</td>
+							</tr>
+							<tr>
+								<td>2- active_coils</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
-					<td>mutual_grid_grid/coordinate1</td>
-					<td>identity of the first coordinate</td>
-					<td>STR_0D</td>
-					<td />
+					<td>mutual_grid_passive</td>
+					<td>Mutual inductance coupling from passive loops to equilibrium grid {static} [H]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- grid_points</td>
+							</tr>
+							<tr>
+								<td>2- passive_loops</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
-					<td>mutual_grid_grid/coordinate2</td>
-					<td>identity of the second coordinate</td>
-					<td>STR_0D</td>
-					<td />
+					<td>field_probes_grid</td>
+					<td>Poloidal field coupling from equilibrium grid to poloidal field probes {static} [T/A]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- poloidal_probes</td>
+							</tr>
+							<tr>
+								<td>2- grid_points</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>mutual_loops_grid</td>
+					<td>Mutual inductance from equilibrium grid to poloidal flux loops  {static} [H]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- flux_loops</td>
+							</tr>
+							<tr>
+								<td>2- grid_points</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>code</td>
@@ -4126,6 +4090,36 @@
 							</tr>
 						</table>
 					</td>
+				</tr>
+				<tr>
+					<td>active_coils</td>
+					<td>List of the names of the active PF+CS coils {static}</td>
+					<td>STR_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>passive_loops</td>
+					<td>List of the names of the passive loops {static}</td>
+					<td>STR_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>poloidal_probes</td>
+					<td>List of the names of poloidal field probes {static}</td>
+					<td>STR_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>flux_loops</td>
+					<td>List of the names of the axisymmetric flux loops {static}</td>
+					<td>STR_1D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>grid_points</td>
+					<td>List of the names of the plasma region grid points {static}</td>
+					<td>STR_1D</td>
+					<td />
 				</tr>
 			</table>
 		</a><a name="equilibrium"><p class="welcome">ITER Physics Data Model Documentation for equilibrium</p>
@@ -5899,7 +5893,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -5970,12 +5964,12 @@
 				</tr>
 				<tr>
 					<td>flux_loop</td>
-					<td>Flux loops</td>
+					<td>Flux loops; partial flux loops can be described</td>
 					<td>struct_array [max_size=200]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_flux_loops</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -5994,15 +5988,12 @@
 				</tr>
 				<tr>
 					<td>flux_loop/position</td>
-					<td>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf) {static} [m, m, rad]</td>
-					<td>struct_array [max_size=unbounded]</td>
+					<td>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf) {static}</td>
+					<td>struct_array [max_size=10]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...3</td>
-							</tr>
-							<tr>
-								<td>2- 1...n_points</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6050,7 +6041,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6062,7 +6053,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_bpol_probe</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6081,15 +6072,9 @@
 				</tr>
 				<tr>
 					<td>bpol_probe/position</td>
-					<td>R, Z, Phi position of coil centre {static} [m, m, rad]</td>
+					<td>R, Z, Phi position of the coil centre</td>
 					<td>structure</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...3</td>
-							</tr>
-						</table>
-					</td>
+					<td />
 				</tr>
 				<tr>
 					<td>bpol_probe/position/r</td>
@@ -6111,7 +6096,7 @@
 				</tr>
 				<tr>
 					<td>bpol_probe/poloidal_angle</td>
-					<td>Poloidal angle of coil orientation {static} [rad]</td>
+					<td>Poloidal angle of the coil orientation {static} [rad]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
@@ -6123,7 +6108,7 @@
 				</tr>
 				<tr>
 					<td>bpol_probe/area</td>
-					<td>Area of the coil {static} [m^2]</td>
+					<td>Area of each turn of the coil {static} [m^2]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
@@ -6134,37 +6119,37 @@
 					<td />
 				</tr>
 				<tr>
-					<td>bpol_probe/turns_n</td>
-					<td>Turns in the coil {static}</td>
+					<td>bpol_probe/turns</td>
+					<td>Turns in the coil, including sign {static}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>bpol_probe/b_field</td>
+					<td>bpol_probe/field</td>
 					<td>Measured magnetic field</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>bpol_probe/b_field/data</td>
+					<td>bpol_probe/field/data</td>
 					<td>Measured magnetic field {dynamic} [T]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- bpol_probe/b_field/time</td>
+								<td>1- bpol_probe/field/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>bpol_probe/b_field/time</td>
+					<td>bpol_probe/field/time</td>
 					<td>Generic time [s] {dynamic}</td>
 					<td>flt_1d_type</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6176,7 +6161,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_processed_data</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6212,7 +6197,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6290,7 +6275,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6366,32 +6351,32 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_pf_coils</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>coil/name</td>
-					<td>Name of the coil {STATIC}</td>
+					<td>Name of the coil {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>coil/identifier</td>
-					<td>Alphanumeric identifier of coils used for convenience {STATIC}</td>
+					<td>Alphanumeric identifier of coils used for convenience {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>coil/resistance</td>
-					<td>Coil resistance {STATIC} [Ohm]</td>
+					<td>Coil resistance {static} [Ohm]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>coil/energy_limit_max</td>
-					<td>Maximum Energy to be dissipated in the coil {STATIC} [J]</td>
+					<td>Maximum Energy to be dissipated in the coil {static} [J]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
@@ -6402,32 +6387,32 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_elements</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>coil/element/name</td>
-					<td>Name of this element of this coil {STATIC}</td>
+					<td>Name of this element of this coil {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>coil/element/identifier</td>
-					<td>Identifier of this element of this coil {STATIC}</td>
+					<td>Identifier of this element of this coil {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>coil/element/turns_with_sign</td>
-					<td>Number of effective turns in the element for calculating magnetic fields of the coil; includes the sign of the number of turns {STATIC}</td>
+					<td>Number of effective turns in the element for calculating magnetic fields of the coil; includes the sign of the number of turns {static}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>coil/element/area</td>
-					<td>Cross-sectional areas of the element {STATIC} [m^2]</td>
+					<td>Cross-sectional areas of the element {static} [m^2]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
@@ -6456,7 +6441,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_points</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6468,7 +6453,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- coil/element/geometry/outline/r</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6481,25 +6466,67 @@
 				</tr>
 				<tr>
 					<td>coil/element/geometry/rectangle/r</td>
-					<td>centre R {static} [m]</td>
+					<td>Geometric centre R {static} [m]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>coil/element/geometry/rectangle/z</td>
-					<td>centre Z {static} [m]</td>
+					<td>Geometric centre Z {static} [m]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>coil/element/geometry/rectangle/width</td>
-					<td>horizontal full width {static} [m]</td>
+					<td>Horizontal full width {static} [m]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>coil/element/geometry/rectangle/height</td>
-					<td>vertical full height {static} [m]</td>
+					<td>Vertical full height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coil/element/geometry/oblique</td>
+					<td>Rectangular description of the element</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coil/element/geometry/oblique/r</td>
+					<td>Geometric centre R {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coil/element/geometry/oblique/z</td>
+					<td>Geometric centre Z {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coil/element/geometry/oblique/length</td>
+					<td>Length {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coil/element/geometry/oblique/thickness</td>
+					<td>Thickness {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coil/element/geometry/oblique/alpha</td>
+					<td>Inclination of first angle TBD {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coil/element/geometry/oblique/beta</td>
+					<td>Inclination of second angle TBD {static} [m]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
@@ -6511,7 +6538,7 @@
 				</tr>
 				<tr>
 					<td>coil/current/data</td>
-					<td>Current in the coil {DYNAMIC} [A]</td>
+					<td>Current in the coil {dynamic} [A]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -6528,7 +6555,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6541,7 +6568,7 @@
 				</tr>
 				<tr>
 					<td>coil/voltage/data</td>
-					<td>Voltage on the coil terminals {DYNAMIC} [V]</td>
+					<td>Voltage on the coil terminals {dynamic} [V]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -6558,79 +6585,79 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>vertical_force</td>
-					<td>Vertical forces on the axisymmetric PF coil system; All forces are assumed to be on the same timebase</td>
+					<td>Vertical forces on the axisymmetric PF coil system</td>
 					<td>struct_array [max_size=10]</td>
-					<td />
-				</tr>
-				<tr>
-					<td>vertical_force/name</td>
-					<td>Name of the Force combination {STATIC}</td>
-					<td>STR_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_forces</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
+					<td>vertical_force/name</td>
+					<td>Name of the force combination {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
 					<td>vertical_force/combination</td>
-					<td>Coils involved in the Force combinations {STATIC}</td>
-					<td>FLT_2D</td>
+					<td>Coils involved in the force combinations ??? {static}</td>
+					<td>INT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- vertical_force/names</td>
-							</tr>
-							<tr>
-								<td>2- coils</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>vertical_force/limit_max</td>
-					<td>Vertical Force combinations limits {STATIC} [N]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- vertical_force/names</td>
-							</tr>
-						</table>
-					</td>
+					<td>Vertical force combination limit {static} [N]</td>
+					<td>FLT_0D</td>
+					<td />
 				</tr>
 				<tr>
 					<td>vertical_force/limit_min</td>
-					<td>Vertical Force combination limit {STATIC} [N]</td>
+					<td>Vertical force combination limit {static} [N]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vertical_force/force</td>
+					<td>Force </td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vertical_force/force/data</td>
+					<td>Force  {dynamic} [N]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- vertical_force/names</td>
+								<td>1- vertical_force/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>vertical_force/force</td>
-					<td>Force combinations. {DYNAMIC} [N]</td>
-					<td>FLT_2D</td>
+					<td>vertical_force/force/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- vertical_force/names</td>
-							</tr>
-							<tr>
-								<td>2- vertical_force/time</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6642,40 +6669,40 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_circuits</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>circuit/name</td>
-					<td>Name of the circuit {STATIC}</td>
+					<td>Name of the circuit {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>circuit/identifier</td>
-					<td>ID of the circuit {STATIC}</td>
+					<td>ID of the circuit {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>circuit/type</td>
-					<td>Type of the circuit {STATIC}</td>
+					<td>Type of the circuit {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>circuit/connections</td>
-					<td>Description of the supplies and coils connections (nodes) across the circuit. The matrix describing for each node (first dimension) which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the second dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD) {STATIC}</td>
+					<td>Description of the supplies and coils connections (nodes) across the circuit. The matrix describing for each node (first dimension) which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the second dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD) {static}</td>
 					<td>FLT_2D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_nodes</td>
+								<td>1- 1...N</td>
 							</tr>
 							<tr>
-								<td>2- 1...2*n_components</td>
+								<td>2- 1...2*N</td>
 							</tr>
 						</table>
 					</td>
@@ -6688,7 +6715,7 @@
 				</tr>
 				<tr>
 					<td>circuit/voltage/data</td>
-					<td>Voltage on the circuit {DYNAMIC} [V]</td>
+					<td>Voltage on the circuit {dynamic} [V]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -6705,7 +6732,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6718,7 +6745,7 @@
 				</tr>
 				<tr>
 					<td>circuit/current/data</td>
-					<td>Current in the circuit {DYNAMIC} [V]</td>
+					<td>Current in the circuit {dynamic} [V]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -6735,7 +6762,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6747,110 +6774,104 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_pf_supplies</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>supply/name</td>
-					<td>Name of the PF supply {STATIC}</td>
+					<td>Name of the PF supply {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/identifier</td>
-					<td>Identifier of the supply {STATIC}</td>
+					<td>Identifier of the supply {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/type</td>
-					<td>Type of the supply; TBD add free description of non-linear power supplies {STATIC}</td>
+					<td>Type of the supply; TBD add free description of non-linear power supplies {static}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/resistance</td>
-					<td>Power supply internal resistance {STATIC} [Ohm]</td>
+					<td>Power supply internal resistance {static} [Ohm]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/delay</td>
-					<td>Pure delay in the supply {STATIC} [s]</td>
+					<td>Pure delay in the supply {static} [s]</td>
 					<td>FLT_0D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- supply/names</td>
-							</tr>
-						</table>
-					</td>
+					<td />
 				</tr>
 				<tr>
 					<td>supply/filter_numerator</td>
-					<td>Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description {STATIC}</td>
+					<td>Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description {static}</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_numerator_coefficients</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>supply/filter_denominator</td>
-					<td>Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description {STATIC}</td>
+					<td>Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description {static}</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_denominator_coefficients</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>supply/current_limit_max</td>
-					<td>Maximum current in the supply {STATIC} [A]</td>
+					<td>Maximum current in the supply {static} [A]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/current_limit_min</td>
-					<td>Minimum current in the supply {STATIC} [A]</td>
+					<td>Minimum current in the supply {static} [A]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/voltage_limit_max</td>
-					<td>Maximum voltage from the supply {STATIC} [V]</td>
+					<td>Maximum voltage from the supply {static} [V]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/voltage_limit_min</td>
-					<td>Minimum voltage from the supply {STATIC} [V]</td>
+					<td>Minimum voltage from the supply {static} [V]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/current_limiter_gain</td>
-					<td>Gain to prevent overcurrent in a linear model of the supply {STATIC} [V]</td>
+					<td>Gain to prevent overcurrent in a linear model of the supply {static} [V]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/energy_limit_max</td>
-					<td>Maximum energy to be dissipated in the supply during a pulse {STATIC} [J]</td>
+					<td>Maximum energy to be dissipated in the supply during a pulse {static} [J]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>supply/nonlinear_model</td>
-					<td>Description of the nonlinear transfer function of the supply  STATIC</td>
+					<td>Description of the nonlinear transfer function of the supply {static}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
@@ -6862,7 +6883,7 @@
 				</tr>
 				<tr>
 					<td>supply/voltage/data</td>
-					<td>Voltage at the supply output {DYNAMIC} [V]</td>
+					<td>Voltage at the supply output {dynamic} [V]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -6879,7 +6900,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6892,7 +6913,7 @@
 				</tr>
 				<tr>
 					<td>supply/current/data</td>
-					<td>Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description {DYNAMIC} [A]</td>
+					<td>Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description {dynamic} [A]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -6909,7 +6930,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -6987,7 +7008,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7060,55 +7081,37 @@
 					<td>loop</td>
 					<td>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</td>
 					<td>struct_array [max_size=300]</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>loop/name</td>
-					<td>Names of the loop {STATIC}</td>
-					<td>STR_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...n_passive_loops</td>
-							</tr>
-						</table>
-					</td>
+					<td>Name of the loop {static}</td>
+					<td>STR_0D</td>
+					<td />
 				</tr>
 				<tr>
 					<td>loop/area</td>
-					<td>Surface area of the passive loop {STATIC} [m^2]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- loop/names</td>
-							</tr>
-						</table>
-					</td>
+					<td>Surface area of the passive loop {static} [m^2]</td>
+					<td>FLT_0D</td>
+					<td />
 				</tr>
 				<tr>
 					<td>loop/resistance</td>
-					<td>Passive loop resistance {STATIC} [Ohm]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- loop/names</td>
-							</tr>
-						</table>
-					</td>
+					<td>Passive loop resistance {static} [Ohm]</td>
+					<td>FLT_0D</td>
+					<td />
 				</tr>
 				<tr>
 					<td>loop/geometry</td>
-					<td>Shape of the Passive Loop</td>
+					<td>Shape of the passive loop</td>
 					<td>structure</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- loop/names</td>
-							</tr>
-						</table>
-					</td>
+					<td />
 				</tr>
 				<tr>
 					<td>loop/geometry/geometry_type</td>
@@ -7129,7 +7132,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_points</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7141,7 +7144,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- loop/geometry/outline/r</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7154,39 +7157,78 @@
 				</tr>
 				<tr>
 					<td>loop/geometry/rectangle/r</td>
-					<td>centre R {static} [m]</td>
+					<td>Geometric centre R {static} [m]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>loop/geometry/rectangle/z</td>
-					<td>centre Z {static} [m]</td>
+					<td>Geometric centre Z {static} [m]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>loop/geometry/rectangle/width</td>
-					<td>horizontal full width {static} [m]</td>
+					<td>Horizontal full width {static} [m]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>loop/geometry/rectangle/height</td>
-					<td>vertical full height {static} [m]</td>
+					<td>Vertical full height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>loop/geometry/oblique</td>
+					<td>Rectangular description of the element</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>loop/geometry/oblique/r</td>
+					<td>Geometric centre R {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>loop/geometry/oblique/z</td>
+					<td>Geometric centre Z {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>loop/geometry/oblique/length</td>
+					<td>Length {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>loop/geometry/oblique/thickness</td>
+					<td>Thickness {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>loop/geometry/oblique/alpha</td>
+					<td>Inclination of first angle TBD {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>loop/geometry/oblique/beta</td>
+					<td>Inclination of second angle TBD {static} [m]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>loop/current</td>
-					<td>Passive Loop current (all Passive Loops are assumed to share the same timebase) {DYNAMIC} [A]</td>
-					<td>FLT_2D</td>
+					<td>Passive loop current {dynamic} [A]</td>
+					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- loop/time</td>
-							</tr>
-							<tr>
-								<td>2- loop/names</td>
+								<td>1- time</td>
 							</tr>
 						</table>
 					</td>
@@ -7264,7 +7306,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7335,9 +7377,15 @@
 				</tr>
 				<tr>
 					<td>waveform</td>
-					<td>Reference waveforms to be used to drive feedback or feedforward controllers, or to control the controller switching itself</td>
+					<td>Reference waveform to be used to drive feedback or feedforward controllers, or to control the controller switching itself</td>
 					<td>struct_array [max_size=50]</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>waveform/name</td>
@@ -7364,19 +7412,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>time</td>
-					<td>Generic time [s] {dynamic}</td>
-					<td>flt_1d_type</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7446,64 +7482,49 @@
 					<td />
 				</tr>
 				<tr>
-					<td>allocatable_signals</td>
+					<td>allocatable_signal</td>
 					<td>Dictionary of the signal names and definitions which can be allocated to the SDN</td>
-					<td>structure</td>
+					<td>struct_array [max_size=150]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>allocatable_signal/name</td>
+					<td>Name of the allocatable signal {static}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>allocatable_signals/names</td>
-					<td>Names of all the allocatable signals {STATIC}</td>
-					<td>STR_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- allocatable_signals/names/n</td>
-							</tr>
-						</table>
-					</td>
+					<td>allocatable_signal/definition</td>
+					<td>Definition of the allocatable signal {static}</td>
+					<td>STR_0D</td>
+					<td />
 				</tr>
 				<tr>
-					<td>allocatable_signals/definitions </td>
-					<td>Definitions of the allocatable signals {STATIC}</td>
-					<td>STR_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- allocatable_signals/names</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>allocatable_signals/ip_normalise</td>
-					<td>Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops {STATIC}</td>
-					<td>INT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- allocatable_signals/names</td>
-							</tr>
-						</table>
-					</td>
+					<td>allocatable_signal/ip_normalise</td>
+					<td>Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops {static}</td>
+					<td>INT_0D</td>
+					<td />
 				</tr>
 				<tr>
 					<td>allocated_signals</td>
-					<td>Allocation of signal names to positions in the SDN {STATIC}</td>
+					<td>Allocation of signal names to positions in the SDN {static}</td>
 					<td>STR_1D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>signal</td>
-					<td>Data on the SDN {DYNAMIC} [Mixed]</td>
+					<td>Data on the SDN</td>
 					<td>struct_array [max_size=30]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
-							</tr>
-							<tr>
-								<td>2- allocated_signals</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7515,22 +7536,10 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
-				</tr>
-				<tr>
-					<td>signal/name</td>
-					<td></td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>TBDREMOVEn_topic_list</td>
-					<td>Number items in the vector of structures</td>
-					<td>int_type</td>
-					<td />
 				</tr>
 				<tr>
 					<td>topic_list</td>
@@ -7539,31 +7548,31 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_topic_list</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>topic_list/names</td>
-					<td>Names of the group of SDN signals {STATIC}</td>
+					<td>Names of the group of SDN signals {static}</td>
 					<td>STR_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- topic_list/names/N</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>topic_list/indices</td>
-					<td>Indices into the current SDN allocated list; it must be updated when the allocated list is changed {STATIC}</td>
+					<td>Indices into the current SDN allocated list; it must be updated when the allocated list is changed {static}</td>
 					<td>INT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- topic_list/indices/n</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7634,79 +7643,79 @@
 				</tr>
 				<tr>
 					<td>comment_before</td>
-					<td>comment made when launching a simulation</td>
+					<td>Comment made when launching a simulation {constant} [-]</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>comment_after</td>
-					<td>comment madeat the end of a simulation</td>
+					<td>Comment made at the end of a simulation {constant} [-]</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>time_begin</td>
-					<td>start time</td>
-					<td>FLT_1D</td>
+					<td>Start time {constant} [s]</td>
+					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>time_step</td>
-					<td>time interval between steps</td>
-					<td>FLT_1D</td>
+					<td>Time interval between steps {constant} [s]</td>
+					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>time_end</td>
-					<td>stop time</td>
-					<td>FLT_1D</td>
+					<td>Stop time {constant} [s]</td>
+					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>time_restart</td>
-					<td>time to restart an old simulation</td>
-					<td>STR_0D</td>
+					<td>Time to restart an old simulation {constant} [s]</td>
+					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>time_begun</td>
-					<td>Actual time simulation started</td>
-					<td>FLT_0D</td>
+					<td>Actual wall-clock time simulation started {dynamic} [UTC]</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>time_ended</td>
-					<td>Actual time simulation finished</td>
-					<td>FLT_0D</td>
+					<td>Actual wall-clock time simulation finished {dynamic} [UTC]</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>time_pf_supplies_start</td>
-					<td>Time to enable PF limits</td>
+					<td>Time to enable PF supply limits {constant} [s]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>iterations_max</td>
-					<td>Maximum number of simulation loops allowed</td>
+					<td>Maximum number of simulation loops allowed {constant} [s]</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>iterations_used</td>
-					<td>Number of simulation loops used</td>
+					<td>Number of simulation loops used {dynamic} [s]</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>termination_condition</td>
-					<td>Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate</td>
+					<td>Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate {constant} [-]</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>rate_plot_equilibrium</td>
-					<td>Plot the 2D images each N iterations</td>
+					<td>Plot the 2D images each N iterations {constant} [-]</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
@@ -7717,33 +7726,63 @@
 					<td />
 				</tr>
 				<tr>
-					<td>simulation_model/Name</td>
-					<td></td>
+					<td>simulation_model/name</td>
+					<td>Name of the simulation model {constant}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>simulation_model/Version</td>
-					<td></td>
+					<td>simulation_model/version</td>
+					<td>Version of the code being run {dynamic}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>simulation_model/Mode</td>
-					<td></td>
-					<td>STR_0D</td>
+					<td>simulation_model/mode</td>
+					<td>One of multiple modes which can be run {constant}</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>device_name</td>
-					<td>Name of the device being simulated</td>
+					<td>Name of the device being simulated {constant} [-]</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>restart_simulation</td>
-					<td>Identifier of the simulation to be restarted</td>
+					<td>Identifier of the simulation to be restarted {constant} [-]</td>
 					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>subsampling</td>
+					<td>Subsampling during the simulation; it is useful to define a variety of subsampling types which can be varied</td>
+					<td>struct_array [max_size=20]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>subsampling/name</td>
+					<td>Short name of this subsampling</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>subsampling/description</td>
+					<td>Description of the usage of this subsampling</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>subsampling/interval</td>
+					<td>Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 			</table>
@@ -7847,7 +7886,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7877,7 +7916,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7907,7 +7946,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -7919,7 +7958,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...n_times</td>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
