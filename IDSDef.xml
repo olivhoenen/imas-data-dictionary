@@ -943,7 +943,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="simulation" maxoccur="1" documentation="Simulation parameters for a general simulation" lifecycle_status="" lifecycle_version="">
+	<IDS name="simulation" maxoccur="1" documentation="" lifecycle_status="" lifecycle_version="">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -954,26 +954,21 @@
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
-		<field name="comment_before" path="comment_before" documentation="Comment made when launching a simulation" data_type="STR_0D" type="constant"/>
-		<field name="comment_after" path="comment_after" documentation="Comment made at the end of a simulation" data_type="STR_0D" type="constant"/>
-		<field name="time_begin" path="time_begin" documentation="Start time" data_type="FLT_0D" type="constant" units="s"/>
-		<field name="time_step" path="time_step" documentation="Time interval between steps" data_type="FLT_0D" type="constant" units="s"/>
-		<field name="time_end" path="time_end" documentation="Stop time" data_type="FLT_0D" type="constant" units="s"/>
-		<field name="time_restart" path="time_restart" documentation="Time to restart an old simulation" data_type="FLT_0D" type="constant" units="s"/>
-		<field name="time_begun" path="time_begun" documentation="Actual wall-clock time simulation started" data_type="STR_0D" type="dynamic" units="UTC"/>
-		<field name="time_ended" path="time_ended" documentation="Actual wall-clock time simulation finished" data_type="STR_0D" type="dynamic" units="UTC"/>
-		<field name="time_pf_supplies_start" path="time_pf_supplies_start" documentation="Time to enable PF supply limits" data_type="FLT_0D" type="constant" units="s"/>
-		<field name="iterations_max" path="iterations_max" documentation="Maximum number of simulation loops allowed" data_type="INT_0D" type="constant" units="s"/>
-		<field name="iterations_used" path="iterations_used" documentation="Number of simulation loops used" data_type="INT_0D" type="dynamic" units="s"/>
-		<field name="termination_condition" path="termination_condition" documentation="Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate" data_type="STR_0D" type="constant"/>
-		<field name="rate_plot_equilibrium" path="rate_plot_equilibrium" documentation="Plot the 2D images each N iterations" data_type="INT_0D" type="constant" units="-"/>
-		<field name="simulation_model" path="simulation_model" documentation="Identity of the model to be executed" data_type="structure">
-			<field name="name" path="simulation_model/name" documentation="Name of the simulation model" data_type="STR_0D" type="constant"/>
-			<field name="version" path="simulation_model/version" documentation="Version of the code being run" data_type="STR_0D" type="dynamic"/>
-			<field name="mode" path="simulation_model/mode" documentation="One of multiple modes which can be run" data_type="INT_0D" type="constant"/>
-		</field>
-		<field name="device_name" path="device_name" documentation="Name of the device being simulated" data_type="STR_0D" type="constant"/>
-		<field name="restart_simulation" path="restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D" type="constant"/>
+		<field name="comment_before" path="comment_before" documentation="" data_type="STR_0D" type=""/>
+		<field name="comment_after" path="comment_after" documentation="" data_type="STR_0D" type=""/>
+		<field name="time_begin" path="time_begin" documentation="" data_type="FLT_0D" type="" units=""/>
+		<field name="time_step" path="time_step" documentation="" data_type="FLT_0D" type="" units=""/>
+		<field name="time_end" path="time_end" documentation="" data_type="FLT_0D" type="" units=""/>
+		<field name="time_restart" path="time_restart" documentation="" data_type="FLT_0D" type="" units=""/>
+		<field name="time_begun" path="time_begun" documentation="" data_type="STR_0D" type="" units=""/>
+		<field name="time_ended" path="time_ended" documentation="" data_type="STR_0D" type="" units=""/>
+		<field name="time_pf_supplies_start" path="time_pf_supplies_start" documentation="" data_type="FLT_0D" type="" units=""/>
+		<field name="iterations_max" path="iterations_max" documentation="" data_type="INT_0D" type="" units=""/>
+		<field name="iterations_used" path="iterations_used" documentation="" data_type="INT_0D" type="" units=""/>
+		<field name="termination_condition" path="termination_condition" documentation="" data_type="STR_0D" type=""/>
+		<field name="rate_plot_equilibrium" path="rate_plot_equilibrium" documentation="" data_type="INT_0D" type="" units=""/>
+		<field name="device_name" path="device_name" documentation="" data_type="STR_0D" type=""/>
+		<field name="restart_simulation" path="restart_simulation" documentation="" data_type="STR_0D" type=""/>
 	</IDS>
 	<IDS name="tf" maxoccur="6" documentation="Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS." lifecycle_status="" lifecycle_version="">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
