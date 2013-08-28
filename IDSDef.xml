@@ -54,12 +54,8 @@
 				<field name="d" path="linear_controller/pid/d" documentation="Derivative term" data_type="FLT_2D" type="constant" units="mixed"/>
 				<field name="tau" path="linear_controller/pid/tau" documentation="Filter time-constant for the D-term" data_type="FLT_0D" type="constant" units="s"/>
 			</field>
-			<field name="inputs" path="linear_controller/inputs" documentation="Input signals; the timebase is common to inputs and outputs for any particular controller" data_type="structure">
-				<field name="data" path="linear_controller/inputs/data" documentation="Input signals; the timebase is common to inputs and outputs for any particular controller" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="linear_controller/input_names" coordinate2="linear_controller/time"/>
-			</field>
-			<field name="outputs" path="linear_controller/outputs" documentation="Output signals; the timebase is common to inputs and outputs for any particular controller" data_type="structure">
-				<field name="data" path="linear_controller/outputs/data" documentation="Output signals; the timebase is common to inputs and outputs for any particular controller" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="linear_controller/output_names" coordinate2="linear_controller/time"/>
-			</field>
+			<field name="inputs" path="linear_controller/inputs" documentation="Input signals; the timebase is common to inputs and outputs for any particular controller" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="linear_controller/input_names" coordinate2="linear_controller/time"/>
+			<field name="outputs" path="linear_controller/outputs" documentation="Output signals; the timebase is common to inputs and outputs for any particular controller" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="linear_controller/output_names" coordinate2="linear_controller/time"/>
 			<field name="time" path="linear_controller/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
 		<field name="nonlinear_controller" path="nonlinear_controller" documentation="A non-linear controller, this is less conventional and will have to be developed" data_type="struct_array" maxoccur="20" coordinate1="1...N">
@@ -453,7 +449,6 @@
 			<field name="shape" path="output_group_7/shape" documentation="Dina &quot;shape&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="output_group_7/shape/1..n" coordinate2="output_group_7/shape/time"/>
 			<field name="time" path="output_group_7/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		<field name="simulation" path="simulation" documentation="" data_type="structure">
 			<field name="comment_before" path="simulation/comment_before" documentation="Comment made when launching a simulation" data_type="STR_0D" type="constant" units="-"/>
 			<field name="comment_after" path="simulation/comment_after" documentation="Comment made at the end of a simulation" data_type="STR_0D" type="constant" units="-"/>
@@ -468,10 +463,10 @@
 			<field name="iterations_used" path="simulation/iterations_used" documentation="Number of simulation loops used" data_type="INT_0D" type="dynamic" units="s"/>
 			<field name="termination_condition" path="simulation/termination_condition" documentation="Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate" data_type="STR_0D" type="constant" units="-"/>
 			<field name="rate_plot_equilibrium" path="simulation/rate_plot_equilibrium" documentation="Plot the 2D images each N iterations" data_type="INT_0D" type="constant" units="-"/>
-			<field name="simulation_model" path="simulation/simulation_model" documentation="Identity of the model to be executed" data_type="structure">
-				<field name="name" path="simulation/simulation_model/name" documentation="Name of the simulation model" data_type="STR_0D" type="constant"/>
-				<field name="version" path="simulation/simulation_model/version" documentation="Version of the code being run" data_type="STR_0D" type="dynamic"/>
-				<field name="mode" path="simulation/simulation_model/mode" documentation="One of multiple modes which can be run" data_type="INT_0D" type="constant"/>
+			<field name="model" path="simulation/model" documentation="Identity of the model to be executed" data_type="structure">
+				<field name="name" path="simulation/model/name" documentation="Name of the simulation model" data_type="STR_0D" type="constant"/>
+				<field name="version" path="simulation/model/version" documentation="Version of the code being run" data_type="STR_0D" type="dynamic"/>
+				<field name="mode" path="simulation/model/mode" documentation="One of multiple modes which can be run" data_type="INT_0D" type="constant"/>
 			</field>
 			<field name="device_name" path="simulation/device_name" documentation="Name of the device being simulated" data_type="STR_0D" type="constant" units="-"/>
 			<field name="restart_simulation" path="simulation/restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D" type="constant" units="-"/>
@@ -481,6 +476,7 @@
 				<field name="interval" path="simulation/subsampling/interval" documentation="Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory" data_type="INT_0D"/>
 			</field>
 		</field>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="em_coupling" maxoccur="6" documentation="Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source" lifecycle_status="" lifecycle_version="">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
