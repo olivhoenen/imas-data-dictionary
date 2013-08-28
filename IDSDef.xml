@@ -10,6 +10,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="name" path="name" documentation="Name of the actuator (IC, EC, NBI, LH)" data_type="STR_0D" type="static" units="-"/>
 		<field name="channels" path="channels" documentation="ID of the multiple channels of the actuator: Beam boxes for NBI, EC or IC launcher, ..." data_type="STR_1D" type="static" units="-"/>
@@ -24,7 +26,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="controllers" maxoccur="1" documentation="">
+	<IDS name="controllers" maxoccur="1" documentation="Feedback and feedforward controllers">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -34,41 +36,48 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
-		<field name="linear_controller" path="linear_controller" documentation="" data_type="struct_array" maxoccur="20" coordinate1="linear_controller/">
-			<field name="name" path="linear_controller/name" documentation="" data_type="STR_0D" type="" units=""/>
-			<field name="description" path="linear_controller/description" documentation="" data_type="STR_0D" type="" units=""/>
-			<field name="class" path="linear_controller/class" documentation="" data_type="STR_0D" type="" units=""/>
-			<field name="input_names" path="linear_controller/input_names" documentation="" data_type="STR_1D" type=""/>
-			<field name="output_names" path="linear_controller/output_names" documentation="" data_type="STR_1D" type=""/>
-			<field name="statespace" path="linear_controller/statespace" documentation="" data_type="structure">
-				<field name="a" path="linear_controller/statespace/a" documentation="" data_type="FLT_2D" type="" units=""/>
-				<field name="b" path="linear_controller/statespace/b" documentation="" data_type="FLT_2D" type="" units=""/>
-				<field name="c" path="linear_controller/statespace/c" documentation="" data_type="FLT_2D" type="" units=""/>
-				<field name="d" path="linear_controller/statespace/d" documentation="" data_type="FLT_2D" type="" units=""/>
-				<field name="deltat" path="linear_controller/statespace/deltat" documentation="" data_type="FLT_0D" type="" units=""/>
+		<field name="linear_controller" path="linear_controller" documentation="A linear controller, this is rather conventional" data_type="struct_array" maxoccur="20" coordinate1="1...N">
+			<field name="name" path="linear_controller/name" documentation="Name of this controller" data_type="STR_0D" type="static"/>
+			<field name="description" path="linear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="static"/>
+			<field name="class" path="linear_controller/class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
+			<field name="input_names" path="linear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="static"/>
+			<field name="output_names" path="linear_controller/output_names" documentation="Names of the output signals following the SDN convention" data_type="STR_1D" type="static"/>
+			<field name="statespace" path="linear_controller/statespace" documentation="Statespace controller in discrete or continuous time" data_type="structure">
+				<field name="a" path="linear_controller/statespace/a" documentation="A matrix" data_type="FLT_2D" type="constant" units="mixed"/>
+				<field name="b" path="linear_controller/statespace/b" documentation="B matrix" data_type="FLT_2D" type="constant" units="mixed"/>
+				<field name="c" path="linear_controller/statespace/c" documentation="C matrix" data_type="FLT_2D" type="constant" units="mixed"/>
+				<field name="d" path="linear_controller/statespace/d" documentation="D matrix" data_type="FLT_2D" type="constant" units="mixed"/>
+				<field name="deltat" path="linear_controller/statespace/deltat" documentation="Discrete time sampling interval ; if less than 1e-10, the controller is considered to be expressed in continuous time" data_type="FLT_0D" type="constant" units="s"/>
 			</field>
-			<field name="pid" path="linear_controller/pid" documentation="" data_type="structure">
-				<field name="p" path="linear_controller/pid/p" documentation="" data_type="FLT_2D" type="" units=""/>
-				<field name="i" path="linear_controller/pid/i" documentation="" data_type="FLT_2D" type="" units=""/>
-				<field name="d" path="linear_controller/pid/d" documentation="" data_type="FLT_2D" type="" units=""/>
-				<field name="tau" path="linear_controller/pid/tau" documentation="" data_type="FLT_0D" type="" units=""/>
+			<field name="pid" path="linear_controller/pid" documentation="Filtered PID controller" data_type="structure">
+				<field name="p" path="linear_controller/pid/p" documentation="Proportional term" data_type="FLT_2D" type="constant" units="mixed"/>
+				<field name="i" path="linear_controller/pid/i" documentation="Integral term" data_type="FLT_2D" type="constant" units="mixed"/>
+				<field name="d" path="linear_controller/pid/d" documentation="Derivative term" data_type="FLT_2D" type="constant" units="mixed"/>
+				<field name="tau" path="linear_controller/pid/tau" documentation="Filter time-constant for the D-term" data_type="FLT_0D" type="constant" units="s"/>
 			</field>
-			<field name="inputs" path="linear_controller/inputs" documentation="" data_type="FLT_2D" type="" units="" coordinate1="linear_controller/inputs/" coordinate2="linear_controller/inputs/"/>
-			<field name="outputs" path="linear_controller/outputs" documentation="" data_type="FLT_2D" type="" units="" coordinate1="linear_controller/outputs/" coordinate2="linear_controller/outputs/"/>
+			<field name="inputs" path="linear_controller/inputs" documentation="Input signals; the timebase is common to inputs and outputs for any particular controller" data_type="structure">
+				<field name="data" path="linear_controller/inputs/data" documentation="Input signals; the timebase is common to inputs and outputs for any particular controller" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="linear_controller/input_names" coordinate2="linear_controller/time"/>
+			</field>
+			<field name="outputs" path="linear_controller/outputs" documentation="Output signals; the timebase is common to inputs and outputs for any particular controller" data_type="structure">
+				<field name="data" path="linear_controller/outputs/data" documentation="Output signals; the timebase is common to inputs and outputs for any particular controller" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="linear_controller/output_names" coordinate2="linear_controller/time"/>
+			</field>
 			<field name="time" path="linear_controller/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
-		<field name="nonlinear_controller" path="nonlinear_controller" documentation="" data_type="struct_array" maxoccur="20" coordinate1="nonlinear_controller/">
-			<field name="name" path="nonlinear_controller/name" documentation="" data_type="STR_0D"/>
-			<field name="description" path="nonlinear_controller/description" documentation="" data_type="STR_0D" type="" units=""/>
-			<field name="class" path="nonlinear_controller/class" documentation="" data_type="STR_0D" type="" units=""/>
-			<field name="input_names" path="nonlinear_controller/input_names" documentation="" data_type="STR_1D" type=""/>
-			<field name="output_names" path="nonlinear_controller/output_names" documentation="" data_type="STR_1D" type=""/>
-			<field name="function" path="nonlinear_controller/function" documentation="" data_type="STR_0D" type=""/>
-			<field name="inputs" path="nonlinear_controller/inputs" documentation="" data_type="FLT_2D" type="" units="" coordinate1="nonlinear_controller/inputs/" coordinate2="nonlinear_controller/inputs/"/>
-			<field name="outputs" path="nonlinear_controller/outputs" documentation="" data_type="FLT_2D" type="" units="" coordinate1="nonlinear_controller/outputs/" coordinate2="nonlinear_controller/outputs/"/>
+		<field name="nonlinear_controller" path="nonlinear_controller" documentation="A non-linear controller, this is less conventional and will have to be developed" data_type="struct_array" maxoccur="20" coordinate1="1...N">
+			<field name="name" path="nonlinear_controller/name" documentation="Name of this controller" data_type="STR_0D"/>
+			<field name="description" path="nonlinear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="static"/>
+			<field name="class" path="nonlinear_controller/class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
+			<field name="input_names" path="nonlinear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="static"/>
+			<field name="output_names" path="nonlinear_controller/output_names" documentation="Output signal names following the SDN convention" data_type="STR_1D" type="static"/>
+			<field name="function" path="nonlinear_controller/function" documentation="Method to be defined" data_type="STR_0D" type="static"/>
+			<field name="inputs" path="nonlinear_controller/inputs" documentation="Input signals; the timebase is common  to inputs and outputs for any particular controller" data_type="FLT_2D" type="static" units="mixed" coordinate1="nonlinear_controller/input_names" coordinate2="nonlinear_controller/time"/>
+			<field name="outputs" path="nonlinear_controller/outputs" documentation="Output signals; the timebase is common  to inputs and outputs for any particular controller" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="nonlinear_controller/output_names" coordinate2="nonlinear_controller/time"/>
 			<field name="time" path="nonlinear_controller/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="version" path="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
@@ -76,7 +85,6 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="core_profiles" maxoccur="6" documentation="Core plasma radial profiles">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -88,6 +96,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="rho_tor_norm" path="rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_2D" type="dynamic" coordinate1="1...N_rho_tor_norm" coordinate2="time"/>
 		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)" data_type="structure">
@@ -169,6 +179,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="profiles_1d" path="profiles_1d" documentation="Core plasma radial profiles" data_type="struct_array" maxoccur="unbounded" coordinate1="time" type="dynamic">
 			<field name="rho_tor_norm" path="profiles_1d/rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_1D" type="dynamic" coordinate1="1...N_rho_tor_norm"/>
@@ -252,6 +264,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="rho_tor_norm" path="rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_2D" type="dynamic" coordinate1="1...N_rho_tor_norm" coordinate2="time"/>
 		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure">
@@ -301,6 +315,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="rho_tor_norm" path="rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_2D" type="dynamic" coordinate1="1...N_rho_tor_norm" coordinate2="time"/>
 		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure">
@@ -374,6 +390,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="version" path="version" documentation="Version of the DINA solver to be used" data_type="STR_0D" type="dynamic"/>
 		<field name="static_group_1" path="static_group_1" documentation="Group I static data" data_type="structure" type="static">
@@ -409,10 +427,10 @@
 			<field name="p_i" path="input_group_5/p_i" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
 			<field name="j_cd" path="input_group_5/j_cd" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
 			<field name="n_ex" path="input_group_5/n_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
-			<field name="te_ex" path="input_group_5/te_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
-			<field name="ti_ex" path="input_group_5/ti_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="t_e_ex" path="input_group_5/t_e_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="t_i_ex" path="input_group_5/t_i_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
 			<field name="sigma_ex" path="input_group_5/sigma_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
-			<field name="pres_ex" path="input_group_5/pres_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
+			<field name="p_ex" path="input_group_5/p_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
 			<field name="ro_ex" path="input_group_5/ro_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic"/>
 		</field>
 		<field name="output_group_5" path="output_group_5" documentation="Group V output data" data_type="structure">
@@ -439,9 +457,9 @@
 			<field name="p_i" path="output_group_6/p_i" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 			<field name="j_cd" path="output_group_6/j_cd" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 			<field name="n_ex" path="output_group_6/n_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
-			<field name="te_ex" path="output_group_6/te_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
-			<field name="ti_ex" path="output_group_6/ti_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
-			<field name="pres_ex" path="output_group_6/pres_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
+			<field name="t_e_ex" path="output_group_6/t_e_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
+			<field name="t_i_ex" path="output_group_6/t_i_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
+			<field name="p_ex" path="output_group_6/p_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 			<field name="sigma_ex" path="output_group_6/sigma_ex" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 			<field name="p_ohm" path="output_group_6/p_ohm" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic"/>
 		</field>
@@ -450,6 +468,33 @@
 			<field name="time" path="output_group_7/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+		<field name="simulation" path="simulation" documentation="" data_type="structure">
+			<field name="comment_before" path="simulation/comment_before" documentation="Comment made when launching a simulation" data_type="STR_0D" type="constant" units="-"/>
+			<field name="comment_after" path="simulation/comment_after" documentation="Comment made at the end of a simulation" data_type="STR_0D" type="constant" units="-"/>
+			<field name="time_begin" path="simulation/time_begin" documentation="Start time" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="time_step" path="simulation/time_step" documentation="Time interval between steps" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="time_end" path="simulation/time_end" documentation="Stop time" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="time_restart" path="simulation/time_restart" documentation="Time to restart an old simulation" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="time_begun" path="simulation/time_begun" documentation="Actual wall-clock time simulation started" data_type="STR_0D" type="dynamic" units="UTC"/>
+			<field name="time_ended" path="simulation/time_ended" documentation="Actual wall-clock time simulation finished" data_type="STR_0D" type="dynamic" units="UTC"/>
+			<field name="time_pf_supplies_start" path="simulation/time_pf_supplies_start" documentation="Time to enable PF supply limits" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="iterations_max" path="simulation/iterations_max" documentation="Maximum number of simulation loops allowed" data_type="INT_0D" type="constant" units="s"/>
+			<field name="iterations_used" path="simulation/iterations_used" documentation="Number of simulation loops used" data_type="INT_0D" type="dynamic" units="s"/>
+			<field name="termination_condition" path="simulation/termination_condition" documentation="Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate" data_type="STR_0D" type="constant" units="-"/>
+			<field name="rate_plot_equilibrium" path="simulation/rate_plot_equilibrium" documentation="Plot the 2D images each N iterations" data_type="INT_0D" type="constant" units="-"/>
+			<field name="simulation_model" path="simulation/simulation_model" documentation="Identity of the model to be executed" data_type="structure">
+				<field name="name" path="simulation/simulation_model/name" documentation="Name of the simulation model" data_type="STR_0D" type="constant"/>
+				<field name="version" path="simulation/simulation_model/version" documentation="Version of the code being run" data_type="STR_0D" type="dynamic"/>
+				<field name="mode" path="simulation/simulation_model/mode" documentation="One of multiple modes which can be run" data_type="INT_0D" type="constant"/>
+			</field>
+			<field name="device_name" path="simulation/device_name" documentation="Name of the device being simulated" data_type="STR_0D" type="constant" units="-"/>
+			<field name="restart_simulation" path="simulation/restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D" type="constant" units="-"/>
+			<field name="subsampling" path="simulation/subsampling" documentation="Subsampling during the simulation; it is useful to define a variety of subsampling types which can be varied" data_type="struct_array" maxoccur="20" coordinate1="1...N">
+				<field name="name" path="simulation/subsampling/name" documentation="Short name of this subsampling" data_type="STR_0D"/>
+				<field name="description" path="simulation/subsampling/description" documentation="Description of the usage of this subsampling" data_type="STR_0D"/>
+				<field name="interval" path="simulation/subsampling/interval" documentation="Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory" data_type="INT_0D"/>
+			</field>
+		</field>
 	</IDS>
 	<IDS name="em_coupling" maxoccur="6" documentation="Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -461,6 +506,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="mutual_active_active" path="mutual_active_active" documentation="Mutual inductance coupling from active coils to active coils" data_type="FLT_2D" type="static" units="H" coordinate1="active_coils" coordinate2="active_coils"/>
 		<field name="mutual_passive_active" path="mutual_passive_active" documentation="Mutual inductance coupling from active coils to passive loops" data_type="FLT_2D" type="static" units="H" coordinate1="passive_loops" coordinate2="active_coils"/>
@@ -474,6 +521,11 @@
 		<field name="mutual_grid_passive" path="mutual_grid_passive" documentation="Mutual inductance coupling from passive loops to equilibrium grid" data_type="FLT_2D" type="static" units="H" coordinate1="grid_points" coordinate2="passive_loops"/>
 		<field name="field_probes_grid" path="field_probes_grid" documentation="Poloidal field coupling from equilibrium grid to poloidal field probes" data_type="FLT_2D" type="static" units="T/A" coordinate1="poloidal_probes" coordinate2="grid_points"/>
 		<field name="mutual_loops_grid" path="mutual_loops_grid" documentation="Mutual inductance from equilibrium grid to poloidal flux loops " data_type="FLT_2D" type="static" units="H" coordinate1="flux_loops" coordinate2="grid_points"/>
+		<field name="active_coils" path="active_coils" documentation="List of the names of the active PF+CS coils" data_type="STR_1D" type="static"/>
+		<field name="passive_loops" path="passive_loops" documentation="List of the names of the passive loops" data_type="STR_1D" type="static"/>
+		<field name="poloidal_probes" path="poloidal_probes" documentation="List of the names of poloidal field probes" data_type="STR_1D" type="static"/>
+		<field name="flux_loops" path="flux_loops" documentation="List of the names of the axisymmetric flux loops" data_type="STR_1D" type="static"/>
+		<field name="grid_points" path="grid_points" documentation="List of the names of the plasma region grid points" data_type="STR_1D" type="static"/>
 		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="version" path="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
@@ -481,11 +533,7 @@
 			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
-		<field name="active_coils" path="active_coils" documentation="List of the names of the active PF+CS coils" data_type="STR_1D" type="static"/>
-		<field name="passive_loops" path="passive_loops" documentation="List of the names of the passive loops" data_type="STR_1D" type="static"/>
-		<field name="poloidal_probes" path="poloidal_probes" documentation="List of the names of poloidal field probes" data_type="STR_1D" type="static"/>
-		<field name="flux_loops" path="flux_loops" documentation="List of the names of the axisymmetric flux loops" data_type="STR_1D" type="static"/>
-		<field name="grid_points" path="grid_points" documentation="List of the names of the plasma region grid points" data_type="STR_1D" type="static"/>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="equilibrium" maxoccur="6" documentation="Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -497,6 +545,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="boundary" path="boundary" documentation="Description of the plasma boundary" data_type="structure">
 			<field name="type" path="boundary/type" documentation="0 (limiter) or 1 (diverted)" data_type="INT_1D" coordinate1="time" type="dynamic"/>
@@ -661,6 +711,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="flux_loop" path="flux_loop" documentation="Flux loops; partial flux loops can be described" data_type="struct_array" maxoccur="200" coordinate1="1...N">
 			<field name="name" path="flux_loop/name" documentation="Name of the flux loop" data_type="STR_0D" type="static"/>
@@ -693,12 +745,23 @@
 				<field name="time" path="bpol_probe/field/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 		</field>
-		<field name="processed_data" path="processed_data" documentation="Processed quantities derived from the magnetic measurements." data_type="struct_array" maxoccur="10" coordinate1="1...N">
-			<field name="method" path="processed_data/method" documentation="Name of the data processing method" data_type="STR_0D" type="static"/>
-			<field name="value_TBD" path="processed_data/value_TBD" documentation="" data_type="structure">
-				<field name="data" path="processed_data/value_TBD/data" documentation="" data_type="FLT_1D" type="dynamic" coordinate1="processed_data/value_TBD/time" units="A"/>
+		<field name="method" path="method" documentation="A method generating processed quantities derived from the magnetic measurements" data_type="struct_array" maxoccur="10" coordinate1="1...N">
+			<field name="name" path="method/name" documentation="Name of the data processing method" data_type="STR_0D"/>
+			<field name="ip" path="method/ip" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" coordinate1="method/time" type="dynamic" units="A"/>
+			<field name="ip_error" path="method/ip_error" documentation="Error on plasma current " data_type="structure">
+				<field name="type" path="method/ip_error/type" documentation="Type of errorbar description which is used. Refers to the name of the sibling fields." data_type="STR_0D"/>
+				<field name="dynamic" path="method/ip_error/dynamic" documentation="Absolute error provided as a dynamic of same dimension as the related field." data_type="FLT_1D" type="dynamic" coordinate1="method/time"/>
+				<field name="constant" path="method/ip_error/constant" documentation="Relative error in % provided as a constant" data_type="FLT_0D" type="constant" units="-"/>
+				<field name="expression" path="method/ip_error/expression" documentation="Absolute error provided as an Expression." data_type="STR_0D"/>
 			</field>
-			<field name="time" path="processed_data/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			<field name="diamagnetic_flux" path="method/diamagnetic_flux" documentation="Diamagnetic flux" data_type="FLT_1D" coordinate1="method/time" type="dynamic" units="Wb"/>
+			<field name="diamagnetic_flux_error" path="method/diamagnetic_flux_error" documentation="Error on diamagnetic flux" data_type="structure">
+				<field name="type" path="method/diamagnetic_flux_error/type" documentation="Type of errorbar description which is used. Refers to the name of the sibling fields." data_type="STR_0D"/>
+				<field name="dynamic" path="method/diamagnetic_flux_error/dynamic" documentation="Absolute error provided as a dynamic of same dimension as the related field." data_type="FLT_1D" type="dynamic" coordinate1="method/time"/>
+				<field name="constant" path="method/diamagnetic_flux_error/constant" documentation="Relative error in % provided as a constant" data_type="FLT_0D" type="constant" units="-"/>
+				<field name="expression" path="method/diamagnetic_flux_error/expression" documentation="Absolute error provided as an Expression." data_type="STR_0D"/>
+			</field>
+			<field name="time" path="method/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
 		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
@@ -709,7 +772,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="pfactive" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems">
+	<IDS name="pf_active" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -719,6 +782,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="coil" path="coil" documentation="Active PF coils" data_type="struct_array" maxoccur="20" coordinate1="1...N">
 			<field name="name" path="coil/name" documentation="Name of the coil" data_type="STR_0D" type="static"/>
@@ -763,13 +828,11 @@
 		</field>
 		<field name="vertical_force" path="vertical_force" documentation="Vertical forces on the axisymmetric PF coil system" data_type="struct_array" maxoccur="10" coordinate1="1...N">
 			<field name="name" path="vertical_force/name" documentation="Name of the force combination" data_type="STR_0D" type="static"/>
-			<field name="combination" path="vertical_force/combination" documentation="Coils involved in the force combinations ???" data_type="INT_1D" type="static" coordinate1="1...N"/>
+			<field name="combination" path="vertical_force/combination" documentation="Coils involved in the force combinations. Normally the vertical force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination" data_type="FLT_1D" type="static" coordinate1="1...N"/>
 			<field name="limit_max" path="vertical_force/limit_max" documentation="Vertical force combination limit" data_type="FLT_0D" type="static" units="N"/>
 			<field name="limit_min" path="vertical_force/limit_min" documentation="Vertical force combination limit" data_type="FLT_0D" type="static" units="N"/>
-			<field name="force" path="vertical_force/force" documentation="Force " data_type="structure">
-				<field name="data" path="vertical_force/force/data" documentation="Force " data_type="FLT_1D" type="dynamic" coordinate1="vertical_force/time" units="N"/>
-				<field name="time" path="vertical_force/force/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
-			</field>
+			<field name="force" path="vertical_force/force" documentation="Force " data_type="FLT_1D" type="dynamic" coordinate1="vertical_force/time" units="N"/>
+			<field name="time" path="vertical_force/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
 		<field name="circuit" path="circuit" documentation="Circuits, connecting multiple PF coils to multiple supplies, defining the current and voltage relationships in the system" data_type="struct_array" maxoccur="20" coordinate1="1...N">
 			<field name="name" path="circuit/name" documentation="Name of the circuit" data_type="STR_0D" type="static"/>
@@ -791,8 +854,8 @@
 			<field name="type" path="supply/type" documentation="Type of the supply; TBD add free description of non-linear power supplies" data_type="INT_0D" type="static"/>
 			<field name="resistance" path="supply/resistance" documentation="Power supply internal resistance" data_type="FLT_0D" type="static" units="Ohm"/>
 			<field name="delay" path="supply/delay" documentation="Pure delay in the supply" data_type="FLT_0D" type="static" units="s"/>
-			<field name="filter_numerator" path="supply/filter_numerator" documentation="Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description" data_type="FLT_1D" type="static" coordinate1="1...N"/>
-			<field name="filter_denominator" path="supply/filter_denominator" documentation="Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description" data_type="FLT_1D" coordinate1="1...N" type="static"/>
+			<field name="filter_numerator" path="supply/filter_numerator" documentation="Coefficients of the numerator, in increasing order : a0 + a1*s + ... + an*s^n; used for a linear supply description" data_type="FLT_1D" type="static" coordinate1="1...N" units="mixed"/>
+			<field name="filter_denominator" path="supply/filter_denominator" documentation="Coefficients of the denominator, in increasing order : b0 + b1*s + ... + bm*s^m; used for a linear supply description" data_type="FLT_1D" coordinate1="1...N" type="static" units="mixed"/>
 			<field name="current_limit_max" path="supply/current_limit_max" documentation="Maximum current in the supply" data_type="FLT_0D" type="static" units="A"/>
 			<field name="current_limit_min" path="supply/current_limit_min" documentation="Minimum current in the supply" data_type="FLT_0D" type="static" units="A"/>
 			<field name="voltage_limit_max" path="supply/voltage_limit_max" documentation="Maximum voltage from the supply" data_type="FLT_0D" type="static" units="V"/>
@@ -818,7 +881,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="pfpassive" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils, passive conductors, currents flowing in those and mutual electromagnetics effects; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems">
+	<IDS name="pf_passive" maxoccur="6" documentation="Description of the axisymmetric passive conductors, currents flowing in them">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -828,6 +891,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="loop" path="loop" documentation="Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached." data_type="struct_array" maxoccur="300" coordinate1="1...N">
 			<field name="name" path="loop/name" documentation="Name of the loop" data_type="STR_0D" type="static"/>
@@ -865,7 +930,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="schedule" maxoccur="1" documentation="Description of Pulse Schedule, to be enhanced as we go">
+	<IDS name="schedule" maxoccur="1" documentation="Description of Pulse Schedule, to be enhanced as we go; we have chosen initially to have the controllers, schedule and SN defined separately">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -875,6 +940,8 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
 		<field name="waveform" path="waveform" documentation="Reference waveform to be used to drive feedback or feedforward controllers, or to control the controller switching itself" data_type="struct_array" maxoccur="50" coordinate1="1...N">
 			<field name="name" path="waveform/name" documentation="Reference name" data_type="STR_0D"/>
@@ -892,22 +959,23 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
-		<field name="allocatable_signal" path="allocatable_signal" documentation="Dictionary of the signal names and definitions which can be allocated to the SDN" data_type="struct_array" maxoccur="150" coordinate1="1...N">
-			<field name="name" path="allocatable_signal/name" documentation="Name of the allocatable signal" data_type="STR_0D" type="static"/>
-			<field name="definition" path="allocatable_signal/definition" documentation="Definition of the allocatable signal" data_type="STR_0D" type="static"/>
-			<field name="ip_normalise" path="allocatable_signal/ip_normalise" documentation="Is this signal multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops" data_type="INT_0D" type="static"/>
+		<field name="signal" path="signal" documentation="Dictionary of the signal names and definitions which can be allocated to the SDN" data_type="struct_array" maxoccur="150" coordinate1="1...N">
+			<field name="name" path="signal/name" documentation="Name of the allocatable signal" data_type="STR_0D" type="static"/>
+			<field name="definition" path="signal/definition" documentation="Definition of the allocatable signal" data_type="STR_0D" type="static"/>
+			<field name="ip_normalise" path="signal/ip_normalise" documentation="0 or 1 if this signal is multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops" data_type="INT_0D" type="static"/>
+			<field name="allocated_position" path="signal/allocated_position" documentation="Allocation of signal to a position in the SDN (1..N); this will be implementation specific" data_type="INT_0D" type="constant"/>
+			<field name="value" path="signal/value" documentation="Signal value" data_type="FLT_1D" units="mixed" type="dynamic" coordinate1="time"/>
 		</field>
-		<field name="allocated_signals" path="allocated_signals" documentation="Allocation of signal names to positions in the SDN" data_type="STR_1D" type="static"/>
-		<field name="signal" path="signal" documentation="Data on the SDN" data_type="struct_array" maxoccur="30" coordinate1="1...N">
-			<field name="time" path="signal/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
-		</field>
-		<field name="topic_list" path="topic_list" documentation="List of the groups of signals used at different reading and writing points" data_type="struct_array" maxoccur="30" coordinate1="1...N">
+		<field name="topic_list" path="topic_list" documentation="List of the groups of signals used at different reading and writing points; this is an implementation detail which might change" data_type="struct_array" maxoccur="30" coordinate1="1...N">
 			<field name="names" path="topic_list/names" documentation="Names of the group of SDN signals" data_type="STR_1D" type="static" coordinate1="1...N"/>
 			<field name="indices" path="topic_list/indices" documentation="Indices into the current SDN allocated list; it must be updated when the allocated list is changed" data_type="INT_1D" type="static" coordinate1="1...N"/>
 		</field>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="simulation" maxoccur="1" documentation="Simulation parameters for a simulation">
+	<IDS name="simulation" maxoccur="1" documentation="Simulation parameters for a general simulation">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -917,9 +985,11 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
-		<field name="comment_before" path="comment_before" documentation="Comment made when launching a simulation" data_type="STR_0D" type="constant" units="-"/>
-		<field name="comment_after" path="comment_after" documentation="Comment made at the end of a simulation" data_type="STR_0D" type="constant" units="-"/>
+		<field name="comment_before" path="comment_before" documentation="Comment made when launching a simulation" data_type="STR_0D" type="constant"/>
+		<field name="comment_after" path="comment_after" documentation="Comment made at the end of a simulation" data_type="STR_0D" type="constant"/>
 		<field name="time_begin" path="time_begin" documentation="Start time" data_type="FLT_0D" type="constant" units="s"/>
 		<field name="time_step" path="time_step" documentation="Time interval between steps" data_type="FLT_0D" type="constant" units="s"/>
 		<field name="time_end" path="time_end" documentation="Stop time" data_type="FLT_0D" type="constant" units="s"/>
@@ -929,20 +999,15 @@
 		<field name="time_pf_supplies_start" path="time_pf_supplies_start" documentation="Time to enable PF supply limits" data_type="FLT_0D" type="constant" units="s"/>
 		<field name="iterations_max" path="iterations_max" documentation="Maximum number of simulation loops allowed" data_type="INT_0D" type="constant" units="s"/>
 		<field name="iterations_used" path="iterations_used" documentation="Number of simulation loops used" data_type="INT_0D" type="dynamic" units="s"/>
-		<field name="termination_condition" path="termination_condition" documentation="Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate" data_type="STR_0D" type="constant" units="-"/>
+		<field name="termination_condition" path="termination_condition" documentation="Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate" data_type="STR_0D" type="constant"/>
 		<field name="rate_plot_equilibrium" path="rate_plot_equilibrium" documentation="Plot the 2D images each N iterations" data_type="INT_0D" type="constant" units="-"/>
 		<field name="simulation_model" path="simulation_model" documentation="Identity of the model to be executed" data_type="structure">
 			<field name="name" path="simulation_model/name" documentation="Name of the simulation model" data_type="STR_0D" type="constant"/>
 			<field name="version" path="simulation_model/version" documentation="Version of the code being run" data_type="STR_0D" type="dynamic"/>
 			<field name="mode" path="simulation_model/mode" documentation="One of multiple modes which can be run" data_type="INT_0D" type="constant"/>
 		</field>
-		<field name="device_name" path="device_name" documentation="Name of the device being simulated" data_type="STR_0D" type="constant" units="-"/>
-		<field name="restart_simulation" path="restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D" type="constant" units="-"/>
-		<field name="subsampling" path="subsampling" documentation="Subsampling during the simulation; it is useful to define a variety of subsampling types which can be varied" data_type="struct_array" maxoccur="20" coordinate1="1...N">
-			<field name="name" path="subsampling/name" documentation="Short name of this subsampling" data_type="STR_0D"/>
-			<field name="description" path="subsampling/description" documentation="Description of the usage of this subsampling" data_type="STR_0D"/>
-			<field name="interval" path="subsampling/interval" documentation="Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory" data_type="INT_0D"/>
-		</field>
+		<field name="device_name" path="device_name" documentation="Name of the device being simulated" data_type="STR_0D" type="constant"/>
+		<field name="restart_simulation" path="restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D" type="constant"/>
 	</IDS>
 	<IDS name="tf" maxoccur="6" documentation="Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS.">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -954,16 +1019,19 @@
 			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+			<field name="lifecycle_status" path="ids_properties/lifecycle_status" documentation="Lifecycle status is a)&#x9;“Active” is a valid IDS for public usage: full support guaranteed by the system, backward compatibility and so on;&#xA;b)&#x9;“Draft” is a public IDS under construction – suggest not to use it outside of testing purposes because it may change fast without full compatibility support&#xA;c)&#x9;“Temporary” covers the “Personal Temporary IDS” case;&#xA;d)&#x9;“Obsolete” for IDS that are obsolete&#xA;" data_type="str_type" type="constant"/>
+			<field name="lifecycle_version" path="ids_properties/lifecycle_version" documentation="The version for which the IDS possesses the given status" data_type="str_type" type="constant"/>
 		</field>
-		<field name="turns_n" path="turns_n" documentation="Number of total turns in a toroidal field coil" data_type="INT_0D" type="static"/>
-		<field name="coils_n" path="coils_n" documentation="Number of coils around the tokamak" data_type="INT_0D" type="static"/>
-		<field name="current" path="current" documentation="Current in the coil" data_type="structure">
-			<field name="data" path="current/data" documentation="Current in the coil" data_type="FLT_1D" type="dynamic" coordinate1="current/time" units="A"/>
-			<field name="time" path="current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
-		</field>
-		<field name="voltage" path="voltage" documentation="Voltage on the coil terminals" data_type="structure">
-			<field name="data" path="voltage/data" documentation="Voltage on the coil terminals" data_type="FLT_1D" type="dynamic" coordinate1="voltage/time" units="V"/>
-			<field name="time" path="voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+		<field name="coil" path="coil" documentation="Number of coils around the tokamak" data_type="struct_array" maxoccur="20" type="static" coordinate1="1...N">
+			<field name="turns" path="coil/turns" documentation="Number of total turns in a toroidal field coil" data_type="INT_0D" type="static"/>
+			<field name="current" path="coil/current" documentation="Current in the coil" data_type="structure">
+				<field name="data" path="coil/current/data" documentation="Current in the coil" data_type="FLT_1D" type="dynamic" coordinate1="coil/current/time" units="A"/>
+				<field name="time" path="coil/current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="voltage" path="coil/voltage" documentation="Voltage on the coil terminals" data_type="structure">
+				<field name="data" path="coil/voltage/data" documentation="Voltage on the coil terminals" data_type="FLT_1D" type="dynamic" coordinate1="coil/voltage/time" units="V"/>
+				<field name="time" path="coil/voltage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
 		</field>
 		<field name="b_tor_vacuum_r" path="b_tor_vacuum_r" documentation="Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above" data_type="structure">
 			<field name="data" path="b_tor_vacuum_r/data" documentation="Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" type="dynamic" coordinate1="b_tor_vacuum_r/time" units="T.m"/>
