@@ -91,6 +91,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							</xsl:choose>
 							<!-- Replicate DOCUMENTATION as an attribute-->
 							<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
+  						    <!-- Replicate LIFECYCLE information as an attribute-->
+							<xsl:attribute name="lifecycle_status"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_status"/></xsl:attribute>
+														<xsl:attribute name="lifecycle_version"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_version"/></xsl:attribute>
+
 							<!-- Scan its components in IMPLEMENT mode -->
 							<xsl:apply-templates select="xs:complexType" mode="IMPLEMENT">
 								<xsl:with-param name="currPath" select="''"/>

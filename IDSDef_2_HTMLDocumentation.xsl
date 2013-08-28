@@ -21,7 +21,6 @@
         <thead style="color:#ff0000"><td>IDS name</td><td>Description</td><td>Max. occurrence number</td></thead>
 <xsl:for-each select="IDS">
 <tr>
-	
 	<td><a href="#{@name}"><xsl:value-of select="@name"/></a></td>
 	<td><xsl:value-of select="@documentation"/></td>
 	<td><xsl:value-of select="@maxoccur"/></td>
@@ -34,6 +33,7 @@
 <a name="{@name}">
         <p class="welcome">ITER Physics Data Model Documentation for <xsl:value-of select="@name"/></p>
         <p><xsl:value-of select="@documentation"/></p> <!-- Write the IDS description -->
+        <p>Lifecycle status: <xsl:value-of select="@lifecycle_status"/> since version <xsl:value-of select="@lifecycle_version"/></p> <!-- Write the IDS Lifecycle information -->
         <!--<b></b>
         <br />-->
         <table border="1">
