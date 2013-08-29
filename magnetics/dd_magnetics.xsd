@@ -174,9 +174,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="magnetics_processed_data">
+	<xs:complexType name="magnetics_method">
 		<xs:annotation>
-			<xs:documentation>Processed quantities derived from the magnetic measurements.</xs:documentation>
+			<xs:documentation>Processed quantities derived from the magnetic measurements, using various methods</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
@@ -197,13 +197,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="ip_error" type="errorbar">
-				<xs:annotation>
-					<xs:documentation>Error on plasma current </xs:documentation>
-				</xs:annotation>
 			</xs:element>
 			<xs:element name="diamagnetic_flux">
 				<xs:annotation>
@@ -215,15 +213,12 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="diamagnetic_flux_error" type="errorbar">
-				<xs:annotation>
-					<xs:documentation>Error on diamagnetic flux</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="magnetics">
@@ -249,7 +244,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="method" type="magnetics_processed_data" maxOccurs="10">
+				<xs:element name="method" type="magnetics_method" maxOccurs="10">
 					<xs:annotation>
 						<xs:documentation>A method generating processed quantities derived from the magnetic measurements</xs:documentation>
 						<xs:appinfo>
