@@ -346,16 +346,19 @@
 				<xs:annotation>
 					<xs:documentation>Values of the reference for the timebase</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
+						<coordinate1>time</coordinate1>
 						<units>mixed</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
+<xs:sequence>
+							<xs:element ref="time"/>
+
 					<xs:group ref="FLT_1D"/>
+				</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="errorbar">

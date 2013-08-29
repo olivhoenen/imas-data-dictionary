@@ -203,11 +203,16 @@
 						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../input_names</coordinate1>
-						<coordinate2>../time</coordinate2>
+						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-						<xs:group ref="FLT_2D"/>
+				<xs:sequence>
+
+							<xs:element ref="time"/>
+
+					<xs:group ref="FLT_2D"/>
+</xs:sequence>				
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="outputs">
@@ -217,14 +222,17 @@
 						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../output_names</coordinate1>
-						<coordinate2>../time</coordinate2>
+						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-						<xs:group ref="FLT_2D"/>
+				<xs:sequence>
+							<xs:element ref="time"/>
+
+					<xs:group ref="FLT_2D"/>
+</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="controllers_nonlinear_controller">
@@ -302,12 +310,15 @@
 						<type>static</type>
 						<units>mixed</units>
 						<coordinate1>../input_names</coordinate1>
-						<coordinate2>../time</coordinate2>
+						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
+<xs:sequence>
+							<xs:element ref="time"/>
+
 					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
+</xs:sequence>				</xs:complexType>
 			</xs:element>
 			<xs:element name="outputs">
 				<xs:annotation>
@@ -316,12 +327,15 @@
 						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../output_names</coordinate1>
-						<coordinate2>../time</coordinate2>
+						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
+<xs:sequence>
+							<xs:element ref="time"/>
+
 					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
+</xs:sequence>				</xs:complexType>
 			</xs:element>
 			<xs:element ref="time"/>
 		</xs:sequence>

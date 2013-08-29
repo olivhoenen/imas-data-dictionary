@@ -25,16 +25,11 @@
 			<tr>
 				<td><a href="#controllers">controllers</a></td>
 				<td>Feedback and feedforward controllers</td>
-				<td>1</td>
+				<td>2</td>
 			</tr>
 			<tr>
 				<td><a href="#core_profiles">core_profiles</a></td>
 				<td>Core plasma radial profiles</td>
-				<td>6</td>
-			</tr>
-			<tr>
-				<td><a href="#core_plasma">core_plasma</a></td>
-				<td>Core plasma fluid description</td>
 				<td>6</td>
 			</tr>
 			<tr>
@@ -46,11 +41,6 @@
 				<td><a href="#core_transport">core_transport</a></td>
 				<td>Core plasma transport</td>
 				<td>6</td>
-			</tr>
-			<tr>
-				<td><a href="#dina">dina</a></td>
-				<td>Simulation-specific parametrisation for the DINA-IMAS code; more and more of these will be transferred to the core_profiles and equilibrium IDS as we develop them</td>
-				<td>1</td>
 			</tr>
 			<tr>
 				<td><a href="#em_coupling">em_coupling</a></td>
@@ -470,7 +460,19 @@
 								<td>1- linear_controller/input_names</td>
 							</tr>
 							<tr>
-								<td>2- linear_controller/time</td>
+								<td>2- linear_controller/inputs/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>linear_controller/inputs/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -491,13 +493,13 @@
 								<td>1- linear_controller/output_names</td>
 							</tr>
 							<tr>
-								<td>2- linear_controller/time</td>
+								<td>2- linear_controller/outputs/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>linear_controller/time</td>
+					<td>linear_controller/outputs/time</td>
 					<td>Generic time [s] {dynamic}</td>
 					<td>flt_1d_type</td>
 					<td>
@@ -558,6 +560,12 @@
 				</tr>
 				<tr>
 					<td>nonlinear_controller/inputs</td>
+					<td>Input signals; the timebase is common  to inputs and outputs for any particular controller</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>nonlinear_controller/inputs/data</td>
 					<td>Input signals; the timebase is common  to inputs and outputs for any particular controller {static} [mixed]</td>
 					<td>FLT_2D</td>
 					<td>
@@ -566,13 +574,31 @@
 								<td>1- nonlinear_controller/input_names</td>
 							</tr>
 							<tr>
-								<td>2- nonlinear_controller/time</td>
+								<td>2- nonlinear_controller/inputs/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>nonlinear_controller/inputs/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>nonlinear_controller/outputs</td>
+					<td>Output signals; the timebase is common  to inputs and outputs for any particular controller</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>nonlinear_controller/outputs/data</td>
 					<td>Output signals; the timebase is common  to inputs and outputs for any particular controller {dynamic} [mixed]</td>
 					<td>FLT_2D</td>
 					<td>
@@ -581,7 +607,19 @@
 								<td>1- nonlinear_controller/output_names</td>
 							</tr>
 							<tr>
-								<td>2- nonlinear_controller/time</td>
+								<td>2- nonlinear_controller/outputs/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>nonlinear_controller/outputs/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -1452,779 +1490,6 @@
 				<tr>
 					<td>global_quantities/energy_diamagnetic</td>
 					<td>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (Pressure_Thermal + Pressure_Perpendicular) {dynamic} [A]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>code</td>
-					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>code/name</td>
-					<td>Name of the code {dynamic}</td>
-					<td>STR_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>code/version</td>
-					<td>Version of the code {dynamic}</td>
-					<td>STR_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>code/parameters</td>
-					<td>List of the code specific parameters in XML format {dynamic}</td>
-					<td>STR_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>code/output_diagnostics</td>
-					<td>List of the code specific diagnostic/output in XML format {dynamic}</td>
-					<td>STR_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>code/output_flag</td>
-					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
-					<td>INT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>time</td>
-					<td>Generic time [s] {dynamic}</td>
-					<td>flt_1d_type</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</a><a name="core_plasma"><p class="welcome">ITER Physics Data Model Documentation for core_plasma</p>
-			<p>Core plasma fluid description</p>
-			<p>Lifecycle status:  since version </p>
-			<table border="1">
-				<thead style="color:#ff0000">
-					<td>Full path name</td>
-					<td>Description</td>
-					<td>Data Type</td>
-					<td>Coordinates</td>
-				</thead>
-				<tr>
-					<td>ids_properties</td>
-					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/homogeneous_time</td>
-					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/cocos</td>
-					<td>Coordinate conventions of this IDS {constant}</td>
-					<td>int_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>profiles_1d</td>
-					<td>Core plasma radial profiles {dynamic}</td>
-					<td>struct_array [max_size=unbounded]</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/rho_tor_norm</td>
-					<td>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {dynamic}</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N_rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/psi</td>
-					<td>Poloidal magnetic flux {dynamic} [Wb]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/t_e</td>
-					<td>Electron temperature {dynamic} [eV]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/t_i_average</td>
-					<td>Ion temperature (averaged on charge states and ion species) {dynamic} [eV]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/n_e</td>
-					<td>Electron density (thermal+non-thermal) {dynamic} [m^-3]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/n_e_fast</td>
-					<td>Density of fast (non-thermal) electrons {dynamic} [m^-3]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions</td>
-					<td>Quantities related to the different ion species</td>
-					<td>struct_array [max_size=5]</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N_Ions</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/a</td>
-					<td>Mass of atom {dynamic} [Atomic Mass Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/z_ion</td>
-					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {dynamic} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/z_n</td>
-					<td>Nuclear charge {constant} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/label</td>
-					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {dynamic}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/n_i</td>
-					<td>Ion density (thermal+non-thermal) {dynamic} [m^-3]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/n_i_fast</td>
-					<td>Density of fast (non-thermal) ions, for the ion species considered {dynamic} [m^-3]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/t_i</td>
-					<td>Ion temperature of that ion species {dynamic} [eV]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/p_i</td>
-					<td>Ion pressure for that ion species {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/v_tor_i</td>
-					<td>Toroidal velocity of that ion species {dynamic} [m.s^-1]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/v_pol_i</td>
-					<td>Poloidal velocity of that ion species {dynamic} [m.s^-1]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/multiple_charge_state_flag</td>
-					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {constant}</td>
-					<td>INT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/charge_states</td>
-					<td>Quantities related to the different charge states of the ion species</td>
-					<td>struct_array [max_size=10]</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N_charge_states</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/charge_states/z_min</td>
-					<td>Minimum Z of the charge state bundle {dynamic} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/charge_states/z_max</td>
-					<td>Maximum Z of the charge state bundle {dynamic} [Elementary Charge Unit]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/charge_states/label</td>
-					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {dynamic}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/charge_states/n_z</td>
-					<td>Density of the charge state considered (thermal+non-thermal) {dynamic} [m^-3]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/charge_states/n_z_fast</td>
-					<td>Density of fast (non-thermal) ions, for the charge state considered {dynamic} [m^-3]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/charge_states/t_z</td>
-					<td>Temperature of the charge state considered {dynamic} [m^-3]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/charge_states/v_tor_z</td>
-					<td>Toroidal velocity of the charge state considered {dynamic} [m.s^-1]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/ions/charge_states/v_pol_z</td>
-					<td>Poloidal velocity of the charge state considered {dynamic} [m.s^-1]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/n_i_total_over_n_e</td>
-					<td>Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal) {dynamic} [-]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/momentum_tor</td>
-					<td>Total plasma toroidal momentum, summed over ion species and electrons  {dynamic}</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/zeff</td>
-					<td>Effective charge {dynamic}</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/p_e</td>
-					<td>Electron pressure {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/p_i_total</td>
-					<td>Total ion pressure (sum over the ion species) {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/pressure_thermal</td>
-					<td>Thermal pressure (electrons+ions) {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/pressure_perpendicular</td>
-					<td>Total perpendicular pressure (electrons+ions, thermal+non-thermal) {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/pressure_parallel</td>
-					<td>Total parallel pressure (electrons+ions, thermal+non-thermal) {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/j_total</td>
-					<td>Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/j_tor</td>
-					<td>Total toroidal current density = average(J_Tor/R) / average(1/R) {dynamic} [A/m^2]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/j_ohmic</td>
-					<td>Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/j_non_inductive</td>
-					<td>Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/j_bootstrap</td>
-					<td>Bootstrap parallel current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/conductivity_parallel</td>
-					<td>Parallel conductivity {dynamic} [ohm^-1.m^-1]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/e_field_parallel</td>
-					<td>Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [V.m^-1]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/q</td>
-					<td>Safety factor {dynamic} [-]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d/magnetic_shear</td>
-					<td>Magnetic shear {dynamic} [-]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>global_quantities</td>
-					<td>Various global quantities derived from the profiles</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>global_quantities/ip</td>
-					<td>Total plasma current {dynamic} [A]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>global_quantities/current_non_inductive</td>
-					<td>Total non-inductive parallel current {dynamic} [A]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>global_quantities/current_bootstrap</td>
-					<td>Bootstrap parallel current {dynamic} [A]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>global_quantities/v_loop</td>
-					<td>LCFS loop voltage {dynamic} [V]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>global_quantities/li_3</td>
-					<td>Internal inductance {dynamic}</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>global_quantities/beta_tor</td>
-					<td>Toroidal beta (ratio of kinetic to magnetic pressure) {dynamic}</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>global_quantities/beta_tor_norm</td>
-					<td>Normalised toroidal beta {dynamic}</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>global_quantities/beta_pol</td>
-					<td>Poloidal beta {dynamic}</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>global_quantities/energy_diamagnetic</td>
-					<td>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (Pressure_Thermal + Pressure_Perpendicular) {dynamic} [A]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>vacuum_toroidal_field</td>
-					<td>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>vacuum_toroidal_field/r0</td>
-					<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {constant} [m]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>vacuum_toroidal_field/b0</td>
-					<td>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS. {dynamic} [T]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3311,644 +2576,6 @@
 							</tr>
 						</table>
 					</td>
-				</tr>
-			</table>
-		</a><a name="dina"><p class="welcome">ITER Physics Data Model Documentation for dina</p>
-			<p>Simulation-specific parametrisation for the DINA-IMAS code; more and more of these will be transferred to the core_profiles and equilibrium IDS as we develop them</p>
-			<p>Lifecycle status:  since version </p>
-			<table border="1">
-				<thead style="color:#ff0000">
-					<td>Full path name</td>
-					<td>Description</td>
-					<td>Data Type</td>
-					<td>Coordinates</td>
-				</thead>
-				<tr>
-					<td>ids_properties</td>
-					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/homogeneous_time</td>
-					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/cocos</td>
-					<td>Coordinate conventions of this IDS {constant}</td>
-					<td>int_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>version</td>
-					<td>Version of the DINA solver to be used {dynamic}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_1</td>
-					<td>Group I static data {static}</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_1/key</td>
-					<td>Dina "key" parameters {static}</td>
-					<td>INT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_1/vec</td>
-					<td>Dina "vec" parameters {static}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_1/indpf</td>
-					<td>Dina "indpf" parameters {static}</td>
-					<td>INT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_2</td>
-					<td>Group II static data {static}</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_2/rectangular_grid_limits</td>
-					<td>Dina "" parameters {static}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_2/limiter_rz</td>
-					<td>Dina "" parameters {static}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_2/ext_transp</td>
-					<td>Dina "" parameters {static}</td>
-					<td>INT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_2/active0</td>
-					<td>Dina "" parameters {static}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>static_group_2/passive0</td>
-					<td>Dina "" parameters {static}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_1</td>
-					<td>Group I input data</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_1/plasma_density</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_1/ohmic_compensation</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_1/boundary_density_ratio</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_1/itb_rho</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_1/tau_e_anomaly</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_1/sawtooth_q0</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_4</td>
-					<td>Group IV input data</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_4/particle_diffusion</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_4/chi_electrons</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_4/chi_ions</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_4/bootstrap_current</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_4/psi_normalised</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_4/inward_pinch_velocity</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5</td>
-					<td>Group V input data</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5/p_e</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5/p_i</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5/j_cd</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5/n_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5/t_e_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5/t_i_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5/sigma_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5/p_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>input_group_5/ro_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_1D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_5</td>
-					<td>Group V output data</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_5/storage</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6</td>
-					<td>Group VI input data</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/gra1</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/psi_tran</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/che_neo</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/chi_neo</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/r_m</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/j_ech</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/ro_con</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/ppx_con</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/pffx_con</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/dmn_con</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/pdo_con</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/pto_con</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/gge_con</td>
-					<td></td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/ggt_con</td>
-					<td></td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/pprime_dina</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/ffprime_dina</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/p_e</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/p_i</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/j_cd</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/n_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/t_e_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/t_i_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/p_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/sigma_ex</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_6/p_ohm</td>
-					<td>Dina "" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_7</td>
-					<td>Group VII output data</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>output_group_7/shape</td>
-					<td>Dina "shape" parameters {dynamic}</td>
-					<td>FLT_2D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- output_group_7/shape/1..n</td>
-							</tr>
-							<tr>
-								<td>2- output_group_7/shape/time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>output_group_7/time</td>
-					<td>Generic time [s] {dynamic}</td>
-					<td>flt_1d_type</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>time</td>
-					<td>Generic time [s] {dynamic}</td>
-					<td>flt_1d_type</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>simulation</td>
-					<td></td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/comment_before</td>
-					<td>Comment made when launching a simulation {constant} [-]</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/comment_after</td>
-					<td>Comment made at the end of a simulation {constant} [-]</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/time_begin</td>
-					<td>Start time {constant} [s]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/time_step</td>
-					<td>Time interval between steps {constant} [s]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/time_end</td>
-					<td>Stop time {constant} [s]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/time_restart</td>
-					<td>Time to restart an old simulation {constant} [s]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/time_begun</td>
-					<td>Actual wall-clock time simulation started {dynamic} [UTC]</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/time_ended</td>
-					<td>Actual wall-clock time simulation finished {dynamic} [UTC]</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/time_pf_supplies_start</td>
-					<td>Time to enable PF supply limits {constant} [s]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/iterations_max</td>
-					<td>Maximum number of simulation loops allowed {constant} [s]</td>
-					<td>INT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/iterations_used</td>
-					<td>Number of simulation loops used {dynamic} [s]</td>
-					<td>INT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/termination_condition</td>
-					<td>Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate {constant} [-]</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/rate_plot_equilibrium</td>
-					<td>Plot the 2D images each N iterations {constant} [-]</td>
-					<td>INT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/simulation_model</td>
-					<td>Identity of the model to be executed</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/simulation_model/name</td>
-					<td>Name of the simulation model {constant}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/simulation_model/version</td>
-					<td>Version of the code being run {dynamic}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/simulation_model/mode</td>
-					<td>One of multiple modes which can be run {constant}</td>
-					<td>INT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/device_name</td>
-					<td>Name of the device being simulated {constant} [-]</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/restart_simulation</td>
-					<td>Identifier of the simulation to be restarted {constant} [-]</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/subsampling</td>
-					<td>Subsampling during the simulation; it is useful to define a variety of subsampling types which can be varied</td>
-					<td>struct_array [max_size=20]</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>simulation/subsampling/name</td>
-					<td>Short name of this subsampling</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/subsampling/description</td>
-					<td>Description of the usage of this subsampling</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation/subsampling/interval</td>
-					<td>Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory</td>
-					<td>INT_0D</td>
-					<td />
 				</tr>
 			</table>
 		</a><a name="em_coupling"><p class="welcome">ITER Physics Data Model Documentation for em_coupling</p>
@@ -6358,102 +4985,54 @@
 				</tr>
 				<tr>
 					<td>method/ip</td>
+					<td>Plasma current. Positive sign means anti-clockwise when viewed from above</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>method/ip/data</td>
 					<td>Plasma current. Positive sign means anti-clockwise when viewed from above {dynamic} [A]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- method/time</td>
+								<td>1- method/ip/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>method/ip_error</td>
-					<td>Error on plasma current </td>
+					<td>method/ip/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>method/diamagnetic_flux</td>
+					<td>Diamagnetic flux</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>method/ip_error/type</td>
-					<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>method/ip_error/dynamic</td>
-					<td>Absolute error provided as a dynamic of same dimension as the related field. {dynamic}</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- method/time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>method/ip_error/constant</td>
-					<td>Relative error in % provided as a constant {constant} [-]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>method/ip_error/expression</td>
-					<td>Absolute error provided as an Expression.</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>method/diamagnetic_flux</td>
+					<td>method/diamagnetic_flux/data</td>
 					<td>Diamagnetic flux {dynamic} [Wb]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- method/time</td>
+								<td>1- method/diamagnetic_flux/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>method/diamagnetic_flux_error</td>
-					<td>Error on diamagnetic flux</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>method/diamagnetic_flux_error/type</td>
-					<td>Type of errorbar description which is used. Refers to the name of the sibling fields.</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>method/diamagnetic_flux_error/dynamic</td>
-					<td>Absolute error provided as a dynamic of same dimension as the related field. {dynamic}</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- method/time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>method/diamagnetic_flux_error/constant</td>
-					<td>Relative error in % provided as a constant {constant} [-]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>method/diamagnetic_flux_error/expression</td>
-					<td>Absolute error provided as an Expression.</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>method/time</td>
+					<td>method/diamagnetic_flux/time</td>
 					<td>Generic time [s] {dynamic}</td>
 					<td>flt_1d_type</td>
 					<td>
@@ -6897,18 +5476,24 @@
 				</tr>
 				<tr>
 					<td>vertical_force/force</td>
+					<td>Force </td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vertical_force/force/data</td>
 					<td>Force  {dynamic} [N]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- vertical_force/time</td>
+								<td>1- vertical_force/force/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>vertical_force/time</td>
+					<td>vertical_force/force/time</td>
 					<td>Generic time [s] {dynamic}</td>
 					<td>flt_1d_type</td>
 					<td>
@@ -7654,18 +6239,24 @@
 				</tr>
 				<tr>
 					<td>waveform/value</td>
+					<td>Values of the reference for the timebase</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>waveform/value/data</td>
 					<td>Values of the reference for the timebase {dynamic} [mixed]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- waveform/time</td>
+								<td>1- waveform/value/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>waveform/time</td>
+					<td>waveform/value/time</td>
 					<td>Generic time [s] {dynamic}</td>
 					<td>flt_1d_type</td>
 					<td>
@@ -7977,30 +6568,6 @@
 				<tr>
 					<td>rate_plot_equilibrium</td>
 					<td>Plot the 2D images each N iterations {constant} [-]</td>
-					<td>INT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation_model</td>
-					<td>Identity of the model to be executed</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation_model/name</td>
-					<td>Name of the simulation model {constant}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation_model/version</td>
-					<td>Version of the code being run {dynamic}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>simulation_model/mode</td>
-					<td>One of multiple modes which can be run {constant}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
