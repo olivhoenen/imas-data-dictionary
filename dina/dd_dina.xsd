@@ -24,7 +24,7 @@
 				<xs:annotation>
 					<xs:documentation>Version of the code being run</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -153,7 +153,7 @@
 				<xs:annotation>
 					<xs:documentation>Actual wall-clock time simulation started</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
+						<type>constant</type>
 						<units>UTC</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -165,7 +165,7 @@
 				<xs:annotation>
 					<xs:documentation>Actual wall-clock time simulation finished</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
+						<type>constant</type>
 						<units>UTC</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -201,7 +201,7 @@
 				<xs:annotation>
 					<xs:documentation>Number of simulation loops used</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
+						<type>constant</type>
 						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -412,11 +412,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-				<xs:sequence>
-					<xs:element ref="time"/>				
-					<xs:group ref="FLT_1D"/>
-				</xs:sequence>
-				</xs:complexType>				
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="ohmic_compensation">
 				<xs:annotation>
@@ -427,10 +427,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-<xs:sequence>
-					<xs:element ref="time"/>				
-					<xs:group ref="FLT_1D"/>
-				</xs:sequence>				</xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="boundary_density_ratio">
 				<xs:annotation>
@@ -441,10 +442,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-<xs:sequence>
-					<xs:element ref="time"/>				
-					<xs:group ref="FLT_1D"/>
-				</xs:sequence>				</xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="itb_rho">
 				<xs:annotation>
@@ -455,10 +457,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-<xs:sequence>
-					<xs:element ref="time"/>				
-					<xs:group ref="FLT_1D"/>
-				</xs:sequence>				</xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="tau_e_anomaly">
 				<xs:annotation>
@@ -469,10 +472,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-<xs:sequence>
-					<xs:element ref="time"/>				
-					<xs:group ref="FLT_1D"/>
-				</xs:sequence>				</xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="sawtooth_q0">
 				<xs:annotation>
@@ -483,10 +487,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-<xs:sequence>
-					<xs:element ref="time"/>				
-					<xs:group ref="FLT_1D"/>
-				</xs:sequence>				</xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -1159,7 +1164,7 @@
 				<xs:element name="version">
 					<xs:annotation>
 						<xs:appinfo>
-							<type>dynamic</type>
+							<type>constant</type>
 						</xs:appinfo>
 						<xs:documentation>Version of the DINA solver to be used</xs:documentation>
 					</xs:annotation>
