@@ -7,10 +7,6 @@
 	<xs:element name="simulation">
 		<xs:annotation>
 			<xs:documentation>Simulation parameters for a general simulation</xs:documentation>
-						<xs:appinfo>
-				<lifecycle_status>Draft</lifecycle_status>
-				<lifecycle_version>2.0</lifecycle_version>
-			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
@@ -89,7 +85,7 @@
 					<xs:annotation>
 						<xs:documentation>Actual wall-clock time simulation started</xs:documentation>
 						<xs:appinfo>
-							<type>constant</type>
+							<type>dynamic</type>
 							<units>UTC</units>
 						</xs:appinfo>
 					</xs:annotation>
@@ -101,12 +97,24 @@
 					<xs:annotation>
 						<xs:documentation>Actual wall-clock time simulation finished</xs:documentation>
 						<xs:appinfo>
-							<type>constant</type>
+							<type>dynamic</type>
 							<units>UTC</units>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="time_pf_supplies_start">
+					<xs:annotation>
+						<xs:documentation>Time to enable PF supply limits</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<units>s</units>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="iterations_max">
@@ -125,7 +133,7 @@
 					<xs:annotation>
 						<xs:documentation>Number of simulation loops used</xs:documentation>
 						<xs:appinfo>
-							<type>constant</type>
+							<type>dynamic</type>
 							<units>s</units>
 						</xs:appinfo>
 					</xs:annotation>

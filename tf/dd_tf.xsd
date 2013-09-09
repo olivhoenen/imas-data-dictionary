@@ -9,7 +9,44 @@
   -* Thanks to http://www.masobit.net/ for paying me while working on mod-xslt
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
+	<xs:element name="tf">
+		<xs:annotation>
+			<xs:documentation>Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS.</xs:documentation>
+			<xs:appinfo>machine description</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="coil" type="tf_coil" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Number of coils around the tokamak</xs:documentation>
+						<xs:appinfo>
+							<type>static</type>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="b_tor_vacuum_r">
+					<xs:annotation>
+						<xs:documentation>Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<coordinate1>time</coordinate1>
+							<units>T.m</units>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="time"/>
+							<xs:group ref="FLT_1D"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	<xs:complexType name="tf_coil">
 		<xs:sequence>
 			<xs:element name="turns">
@@ -57,43 +94,4 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="tf">
-		<xs:annotation>
-			<xs:documentation>Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS.</xs:documentation>
-			<xs:appinfo>
-				<lifecycle_status>Active</lifecycle_status>
-				<lifecycle_version>2.0</lifecycle_version>
-			</xs:appinfo>		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="ids_properties"/>
-				<xs:element name="coil" type="tf_coil" maxOccurs="20">
-					<xs:annotation>
-						<xs:documentation>Number of coils around the tokamak</xs:documentation>
-						<xs:appinfo>
-							<type>static</type>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="b_tor_vacuum_r">
-					<xs:annotation>
-						<xs:documentation>Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above</xs:documentation>
-						<xs:appinfo>
-							<type>dynamic</type>
-							<coordinate1>time</coordinate1>
-							<units>T.m</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="time"/>
-							<xs:group ref="FLT_1D"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element ref="time"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
 </xs:schema>

@@ -52,6 +52,9 @@
 			<xs:element name="name">
 				<xs:annotation>
 					<xs:documentation>Short name of this subsampling</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
@@ -60,6 +63,9 @@
 			<xs:element name="description">
 				<xs:annotation>
 					<xs:documentation>Description of the usage of this subsampling</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
@@ -68,6 +74,9 @@
 			<xs:element name="interval">
 				<xs:annotation>
 					<xs:documentation>Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
@@ -82,7 +91,6 @@
 					<xs:documentation>Comment made when launching a simulation</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -94,7 +102,6 @@
 					<xs:documentation>Comment made at the end of a simulation</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -190,7 +197,6 @@
 					<xs:documentation>Maximum number of simulation loops allowed</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -202,7 +208,6 @@
 					<xs:documentation>Number of simulation loops used</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -214,7 +219,6 @@
 					<xs:documentation>Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -226,7 +230,6 @@
 					<xs:documentation>Plot the 2D images each N iterations</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -243,7 +246,6 @@
 					<xs:documentation>Name of the device being simulated</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -255,7 +257,6 @@
 					<xs:documentation>Identifier of the simulation to be restarted</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -280,12 +281,9 @@
 			<xs:element name="key">
 				<xs:annotation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 					<xs:documentation>Dina "key" parameters</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_1D"/>
@@ -294,12 +292,9 @@
 			<xs:element name="vec">
 				<xs:annotation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 					<xs:documentation>Dina "vec" parameters</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
@@ -308,12 +303,9 @@
 			<xs:element name="indpf">
 				<xs:annotation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 					<xs:documentation>Dina "indpf" parameters</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_1D"/>
@@ -329,12 +321,9 @@
 			<xs:element name="rectangular_grid_limits">
 				<xs:annotation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 					<xs:documentation>Dina "" parameters</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
@@ -343,12 +332,9 @@
 			<xs:element name="limiter_rz">
 				<xs:annotation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 					<xs:documentation>Dina "" parameters</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
@@ -357,12 +343,9 @@
 			<xs:element name="ext_transp">
 				<xs:annotation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 					<xs:documentation>Dina "" parameters</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_1D"/>
@@ -371,12 +354,9 @@
 			<xs:element name="active0">
 				<xs:annotation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 					<xs:documentation>Dina "" parameters</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
@@ -385,12 +365,9 @@
 			<xs:element name="passive0">
 				<xs:annotation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 					<xs:documentation>Dina "" parameters</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
@@ -403,19 +380,17 @@
 			<xs:documentation>type for input group 1</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element ref="time"/>
 			<xs:element name="plasma_density">
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
+						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ohmic_compensation">
@@ -423,14 +398,11 @@
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
+						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="boundary_density_ratio">
@@ -438,14 +410,11 @@
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
+						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="itb_rho">
@@ -453,14 +422,11 @@
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
+						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="tau_e_anomaly">
@@ -468,14 +434,11 @@
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
+						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="sawtooth_q0">
@@ -483,14 +446,11 @@
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
+						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -500,20 +460,18 @@
 			<xs:documentation>type for input group 4</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element ref="time"/>
 			<xs:element name="particle_diffusion">
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="chi_electrons">
@@ -522,14 +480,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="chi_ions">
@@ -538,14 +493,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="bootstrap_current">
@@ -554,14 +506,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="psi_normalised">
@@ -570,14 +519,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="inward_pinch_velocity">
@@ -586,14 +532,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -603,20 +546,18 @@
 			<xs:documentation>type for input group 5</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element ref="time"/>
 			<xs:element name="p_e">
 				<xs:annotation>
 					<xs:documentation>Dina "" parameters</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="p_i">
@@ -625,14 +566,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="j_cd">
@@ -641,14 +579,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="n_ex">
@@ -657,14 +592,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="t_e_ex">
@@ -673,14 +605,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="t_i_ex">
@@ -689,14 +618,50 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sigma_ex">
+				<xs:annotation>
+					<xs:documentation>Dina "" parameters</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="p_ex">
+				<xs:annotation>
+					<xs:documentation>Dina "" parameters</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ro_ex">
+				<xs:annotation>
+					<xs:documentation>Dina "" parameters</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -735,14 +700,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="psi_tran">
@@ -751,14 +713,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="che_neo">
@@ -767,14 +726,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="chi_neo">
@@ -783,14 +739,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="r_m">
@@ -799,14 +752,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="j_ech">
@@ -815,14 +765,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ro_con">
@@ -831,14 +778,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ppx_con">
@@ -847,14 +791,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="pffx_con">
@@ -863,14 +804,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="dmn_con">
@@ -879,14 +817,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="pdo_con">
@@ -895,14 +830,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="pto_con">
@@ -911,14 +843,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gge_con">
@@ -927,14 +856,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ggt_con">
@@ -943,14 +869,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="pprime_dina">
@@ -959,14 +882,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ffprime_dina">
@@ -975,14 +895,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="p_e">
@@ -991,14 +908,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="p_i">
@@ -1007,14 +921,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="j_cd">
@@ -1023,14 +934,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="n_ex">
@@ -1039,14 +947,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="t_e_ex">
@@ -1055,14 +960,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="t_i_ex">
@@ -1071,14 +973,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="p_ex">
@@ -1087,14 +986,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="sigma_ex">
@@ -1103,14 +999,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="p_ohm">
@@ -1119,16 +1012,14 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element ref="time"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="dina_output_group_7">
@@ -1157,10 +1048,6 @@
 	<xs:element name="dina">
 		<xs:annotation>
 			<xs:documentation>Simulation-specific parametrisation for the DINA-IMAS code; more and more of these will be transferred to the core_profiles and equilibrium IDS as we develop them</xs:documentation>
-						<xs:appinfo>
-				<lifecycle_status>Temporary</lifecycle_status>
-				<lifecycle_version>2.0</lifecycle_version>
-			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
@@ -1168,7 +1055,7 @@
 				<xs:element name="version">
 					<xs:annotation>
 						<xs:appinfo>
-							<type>constant</type>
+							<type>static</type>
 						</xs:appinfo>
 						<xs:documentation>Version of the DINA solver to be used</xs:documentation>
 					</xs:annotation>
@@ -1178,17 +1065,11 @@
 				</xs:element>
 				<xs:element name="static_group_1" type="dina_static_group_1">
 					<xs:annotation>
-						<xs:appinfo>
-							<type>static</type>
-						</xs:appinfo>
 						<xs:documentation>Group I static data</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="static_group_2" type="dina_static_group_2">
 					<xs:annotation>
-						<xs:appinfo>
-							<type>static</type>
-						</xs:appinfo>
 						<xs:documentation>Group II static data</xs:documentation>
 					</xs:annotation>
 				</xs:element>
