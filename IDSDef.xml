@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <IDSs xmlns:fn="http://www.w3.org/2005/02/xpath-functions">
-	<IDS name="actuator" maxoccur="6" documentation="Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component" lifecycle_status="Draft" lifecycle_version="2.0">
+	<IDS name="actuator" maxoccur="6" documentation="Generic simple description of a heating/current drive actuator, for a first simplified version of the Plasma Simulator component" lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -24,7 +24,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="controllers" maxoccur="2" documentation="Feedback and feedforward controllers" lifecycle_status="" lifecycle_version="">
+	<IDS name="controllers" maxoccur="2" documentation="Feedback and feedforward controllers" lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -38,7 +38,7 @@
 		<field name="linear_controller" path="linear_controller" documentation="A linear controller, this is rather conventional" data_type="struct_array" maxoccur="20" coordinate1="1...N">
 			<field name="name" path="linear_controller/name" documentation="Name of this controller" data_type="STR_0D" type="static"/>
 			<field name="description" path="linear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="static"/>
-			<field name="class" path="linear_controller/class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
+			<field name="controller_class" path="linear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
 			<field name="input_names" path="linear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="static"/>
 			<field name="output_names" path="linear_controller/output_names" documentation="Names of the output signals following the SDN convention" data_type="STR_1D" type="static"/>
 			<field name="statespace" path="linear_controller/statespace" documentation="Statespace controller in discrete or continuous time" data_type="structure">
@@ -66,7 +66,7 @@
 		<field name="nonlinear_controller" path="nonlinear_controller" documentation="A non-linear controller, this is less conventional and will have to be developed" data_type="struct_array" maxoccur="20" coordinate1="1...N">
 			<field name="name" path="nonlinear_controller/name" documentation="Name of this controller" data_type="STR_0D"/>
 			<field name="description" path="nonlinear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="static"/>
-			<field name="class" path="nonlinear_controller/class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
+			<field name="controller_class" path="nonlinear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
 			<field name="input_names" path="nonlinear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="static"/>
 			<field name="output_names" path="nonlinear_controller/output_names" documentation="Output signal names following the SDN convention" data_type="STR_1D" type="static"/>
 			<field name="function" path="nonlinear_controller/function" documentation="Method to be defined" data_type="STR_0D" type="static"/>
@@ -78,7 +78,6 @@
 				<field name="data" path="nonlinear_controller/outputs/data" documentation="Output signals; the timebase is common  to inputs and outputs for any particular controller" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="nonlinear_controller/output_names" coordinate2="nonlinear_controller/outputs/time"/>
 				<field name="time" path="nonlinear_controller/outputs/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="time" path="nonlinear_controller/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
@@ -89,7 +88,259 @@
 			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 	</IDS>
-	<IDS name="core_profiles" maxoccur="6" documentation="Core plasma radial profiles" lifecycle_status="" lifecycle_version="">
+	<IDS name="dina" maxoccur="2" documentation="Simulation-specific parametrisation for the DINA-IMAS code; more and more of these will be transferred to the core_profiles and equilibrium IDS as we develop them" lifecycle_status="Temporary" lifecycle_version="2.0">
+		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
+			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
+			<field name="creator_of" path="ids_properties/creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="constant"/>
+			<field name="date_of" path="ids_properties/date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="constant"/>
+			<field name="source_of" path="ids_properties/source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="constant"/>
+			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+		</field>
+		<field name="version" path="version" documentation="Version of the DINA solver to be used" data_type="STR_0D" type="constant"/>
+		<field name="static_group_1" path="static_group_1" documentation="Group I static data" data_type="structure" type="static">
+			<field name="key" path="static_group_1/key" documentation="Dina &quot;key&quot; parameters" data_type="INT_1D" type="static"/>
+			<field name="vec" path="static_group_1/vec" documentation="Dina &quot;vec&quot; parameters" data_type="FLT_1D" type="static"/>
+			<field name="indpf" path="static_group_1/indpf" documentation="Dina &quot;indpf&quot; parameters" data_type="INT_1D" type="static"/>
+		</field>
+		<field name="static_group_2" path="static_group_2" documentation="Group II static data" data_type="structure" type="static">
+			<field name="rectangular_grid_limits" path="static_group_2/rectangular_grid_limits" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
+			<field name="limiter_rz" path="static_group_2/limiter_rz" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="static"/>
+			<field name="ext_transp" path="static_group_2/ext_transp" documentation="Dina &quot;&quot; parameters" data_type="INT_1D" type="static"/>
+			<field name="active0" path="static_group_2/active0" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
+			<field name="passive0" path="static_group_2/passive0" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="static"/>
+		</field>
+		<field name="input_group_1" path="input_group_1" documentation="Group I input data" data_type="structure">
+			<field name="plasma_density" path="input_group_1/plasma_density" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_1/plasma_density/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic" coordinate1="input_group_1/plasma_density/time"/>
+				<field name="time" path="input_group_1/plasma_density/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="ohmic_compensation" path="input_group_1/ohmic_compensation" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_1/ohmic_compensation/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic" coordinate1="input_group_1/ohmic_compensation/time"/>
+				<field name="time" path="input_group_1/ohmic_compensation/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="boundary_density_ratio" path="input_group_1/boundary_density_ratio" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_1/boundary_density_ratio/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic" coordinate1="input_group_1/boundary_density_ratio/time"/>
+				<field name="time" path="input_group_1/boundary_density_ratio/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="itb_rho" path="input_group_1/itb_rho" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_1/itb_rho/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic" coordinate1="input_group_1/itb_rho/time"/>
+				<field name="time" path="input_group_1/itb_rho/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="tau_e_anomaly" path="input_group_1/tau_e_anomaly" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_1/tau_e_anomaly/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic" coordinate1="input_group_1/tau_e_anomaly/time"/>
+				<field name="time" path="input_group_1/tau_e_anomaly/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="sawtooth_q0" path="input_group_1/sawtooth_q0" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_1/sawtooth_q0/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_1D" type="dynamic" coordinate1="input_group_1/sawtooth_q0/time"/>
+				<field name="time" path="input_group_1/sawtooth_q0/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+		</field>
+		<field name="input_group_4" path="input_group_4" documentation="Group IV input data" data_type="structure">
+			<field name="particle_diffusion" path="input_group_4/particle_diffusion" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_4/particle_diffusion/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_4/particle_diffusion/time"/>
+				<field name="time" path="input_group_4/particle_diffusion/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="chi_electrons" path="input_group_4/chi_electrons" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_4/chi_electrons/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_4/chi_electrons/time"/>
+				<field name="time" path="input_group_4/chi_electrons/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="chi_ions" path="input_group_4/chi_ions" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_4/chi_ions/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_4/chi_ions/time"/>
+				<field name="time" path="input_group_4/chi_ions/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="bootstrap_current" path="input_group_4/bootstrap_current" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_4/bootstrap_current/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_4/bootstrap_current/time"/>
+				<field name="time" path="input_group_4/bootstrap_current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="psi_normalised" path="input_group_4/psi_normalised" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_4/psi_normalised/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_4/psi_normalised/time"/>
+				<field name="time" path="input_group_4/psi_normalised/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="inward_pinch_velocity" path="input_group_4/inward_pinch_velocity" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_4/inward_pinch_velocity/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_4/inward_pinch_velocity/time"/>
+				<field name="time" path="input_group_4/inward_pinch_velocity/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+		</field>
+		<field name="input_group_5" path="input_group_5" documentation="Group V input data" data_type="structure">
+			<field name="p_e" path="input_group_5/p_e" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_5/p_e/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_5/p_e/time"/>
+				<field name="time" path="input_group_5/p_e/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="p_i" path="input_group_5/p_i" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_5/p_i/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_5/p_i/time"/>
+				<field name="time" path="input_group_5/p_i/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="j_cd" path="input_group_5/j_cd" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_5/j_cd/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_5/j_cd/time"/>
+				<field name="time" path="input_group_5/j_cd/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="n_ex" path="input_group_5/n_ex" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_5/n_ex/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_5/n_ex/time"/>
+				<field name="time" path="input_group_5/n_ex/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="t_e_ex" path="input_group_5/t_e_ex" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_5/t_e_ex/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_5/t_e_ex/time"/>
+				<field name="time" path="input_group_5/t_e_ex/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="t_i_ex" path="input_group_5/t_i_ex" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="input_group_5/t_i_ex/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="input_group_5/t_i_ex/time"/>
+				<field name="time" path="input_group_5/t_i_ex/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+		</field>
+		<field name="output_group_5" path="output_group_5" documentation="Group V output data" data_type="structure">
+			<field name="storage" path="output_group_5/storage" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_5/storage/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_5/storage/time"/>
+				<field name="time" path="output_group_5/storage/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+		</field>
+		<field name="output_group_6" path="output_group_6" documentation="Group VI input data" data_type="structure">
+			<field name="gra1" path="output_group_6/gra1" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/gra1/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/gra1/time"/>
+				<field name="time" path="output_group_6/gra1/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="psi_tran" path="output_group_6/psi_tran" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/psi_tran/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/psi_tran/time"/>
+				<field name="time" path="output_group_6/psi_tran/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="che_neo" path="output_group_6/che_neo" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/che_neo/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/che_neo/time"/>
+				<field name="time" path="output_group_6/che_neo/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="chi_neo" path="output_group_6/chi_neo" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/chi_neo/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/chi_neo/time"/>
+				<field name="time" path="output_group_6/chi_neo/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="r_m" path="output_group_6/r_m" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/r_m/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/r_m/time"/>
+				<field name="time" path="output_group_6/r_m/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="j_ech" path="output_group_6/j_ech" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/j_ech/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/j_ech/time"/>
+				<field name="time" path="output_group_6/j_ech/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="ro_con" path="output_group_6/ro_con" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/ro_con/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/ro_con/time"/>
+				<field name="time" path="output_group_6/ro_con/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="ppx_con" path="output_group_6/ppx_con" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/ppx_con/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/ppx_con/time"/>
+				<field name="time" path="output_group_6/ppx_con/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="pffx_con" path="output_group_6/pffx_con" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/pffx_con/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/pffx_con/time"/>
+				<field name="time" path="output_group_6/pffx_con/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="dmn_con" path="output_group_6/dmn_con" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/dmn_con/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/dmn_con/time"/>
+				<field name="time" path="output_group_6/dmn_con/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="pdo_con" path="output_group_6/pdo_con" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/pdo_con/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/pdo_con/time"/>
+				<field name="time" path="output_group_6/pdo_con/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="pto_con" path="output_group_6/pto_con" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/pto_con/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/pto_con/time"/>
+				<field name="time" path="output_group_6/pto_con/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="gge_con" path="output_group_6/gge_con" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/gge_con/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/gge_con/time"/>
+				<field name="time" path="output_group_6/gge_con/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="ggt_con" path="output_group_6/ggt_con" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/ggt_con/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/ggt_con/time"/>
+				<field name="time" path="output_group_6/ggt_con/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="pprime_dina" path="output_group_6/pprime_dina" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/pprime_dina/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/pprime_dina/time"/>
+				<field name="time" path="output_group_6/pprime_dina/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="ffprime_dina" path="output_group_6/ffprime_dina" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/ffprime_dina/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/ffprime_dina/time"/>
+				<field name="time" path="output_group_6/ffprime_dina/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="p_e" path="output_group_6/p_e" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/p_e/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/p_e/time"/>
+				<field name="time" path="output_group_6/p_e/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="p_i" path="output_group_6/p_i" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/p_i/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/p_i/time"/>
+				<field name="time" path="output_group_6/p_i/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="j_cd" path="output_group_6/j_cd" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/j_cd/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/j_cd/time"/>
+				<field name="time" path="output_group_6/j_cd/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="n_ex" path="output_group_6/n_ex" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/n_ex/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/n_ex/time"/>
+				<field name="time" path="output_group_6/n_ex/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="t_e_ex" path="output_group_6/t_e_ex" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/t_e_ex/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/t_e_ex/time"/>
+				<field name="time" path="output_group_6/t_e_ex/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="t_i_ex" path="output_group_6/t_i_ex" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/t_i_ex/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/t_i_ex/time"/>
+				<field name="time" path="output_group_6/t_i_ex/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="p_ex" path="output_group_6/p_ex" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/p_ex/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/p_ex/time"/>
+				<field name="time" path="output_group_6/p_ex/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="sigma_ex" path="output_group_6/sigma_ex" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/sigma_ex/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/sigma_ex/time"/>
+				<field name="time" path="output_group_6/sigma_ex/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="p_ohm" path="output_group_6/p_ohm" documentation="Dina &quot;&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_6/p_ohm/data" documentation="Dina &quot;&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_6/p_ohm/time"/>
+				<field name="time" path="output_group_6/p_ohm/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+		</field>
+		<field name="output_group_7" path="output_group_7" documentation="Group VII output data" data_type="structure">
+			<field name="shape" path="output_group_7/shape" documentation="Dina &quot;shape&quot; parameters" data_type="structure">
+				<field name="data" path="output_group_7/shape/data" documentation="Dina &quot;shape&quot; parameters" data_type="FLT_2D" type="dynamic" coordinate1="../1...N" coordinate2="output_group_7/shape/time"/>
+				<field name="time" path="output_group_7/shape/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+		</field>
+		<field name="simulation" path="simulation" documentation="List of simulation parameters, to be dealt with later" data_type="structure">
+			<field name="comment_before" path="simulation/comment_before" documentation="Comment made when launching a simulation" data_type="STR_0D" type="constant" units="-"/>
+			<field name="comment_after" path="simulation/comment_after" documentation="Comment made at the end of a simulation" data_type="STR_0D" type="constant" units="-"/>
+			<field name="time_begin" path="simulation/time_begin" documentation="Start time" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="time_step" path="simulation/time_step" documentation="Time interval between steps" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="time_end" path="simulation/time_end" documentation="Stop time" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="time_restart" path="simulation/time_restart" documentation="Time to restart an old simulation" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="time_begun" path="simulation/time_begun" documentation="Actual wall-clock time simulation started" data_type="STR_0D" type="constant" units="UTC"/>
+			<field name="time_ended" path="simulation/time_ended" documentation="Actual wall-clock time simulation finished" data_type="STR_0D" type="constant" units="UTC"/>
+			<field name="time_pf_supplies_start" path="simulation/time_pf_supplies_start" documentation="Time to enable PF supply limits" data_type="FLT_0D" type="constant" units="s"/>
+			<field name="iterations_max" path="simulation/iterations_max" documentation="Maximum number of simulation loops allowed" data_type="INT_0D" type="constant" units="s"/>
+			<field name="iterations_used" path="simulation/iterations_used" documentation="Number of simulation loops used" data_type="INT_0D" type="constant" units="s"/>
+			<field name="termination_condition" path="simulation/termination_condition" documentation="Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate" data_type="STR_0D" type="constant" units="-"/>
+			<field name="rate_plot_equilibrium" path="simulation/rate_plot_equilibrium" documentation="Plot the 2D images each N iterations" data_type="INT_0D" type="constant" units="-"/>
+			<field name="model" path="simulation/model" documentation="Identity of the model to be executed" data_type="structure">
+				<field name="name" path="simulation/model/name" documentation="Name of the simulation model" data_type="STR_0D" type="constant"/>
+				<field name="version" path="simulation/model/version" documentation="Version of the code being run" data_type="STR_0D" type="constant"/>
+				<field name="mode" path="simulation/model/mode" documentation="One of multiple modes which can be run" data_type="INT_0D" type="constant"/>
+			</field>
+			<field name="device_name" path="simulation/device_name" documentation="Name of the device being simulated" data_type="STR_0D" type="constant" units="-"/>
+			<field name="restart_simulation" path="simulation/restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D" type="constant" units="-"/>
+			<field name="subsampling" path="simulation/subsampling" documentation="Subsampling during the simulation; it is useful to define a variety of subsampling types which can be varied" data_type="struct_array" maxoccur="20" coordinate1="1...N">
+				<field name="name" path="simulation/subsampling/name" documentation="Short name of this subsampling" data_type="STR_0D"/>
+				<field name="description" path="simulation/subsampling/description" documentation="Description of the usage of this subsampling" data_type="STR_0D"/>
+				<field name="interval" path="simulation/subsampling/interval" documentation="Interval between samples as a multiple of the simulation time step; it is useful to have this as 2^n, but this is not mandatory" data_type="INT_0D"/>
+			</field>
+		</field>
+		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="version" path="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="parameters" path="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="core_profiles" maxoccur="6" documentation="Core plasma radial profiles" lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -170,7 +421,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="core_sources" maxoccur="6" documentation="Core plasma source terms (for the transport equations)" lifecycle_status="" lifecycle_version="">
+	<IDS name="core_sources" maxoccur="6" documentation="Core plasma source terms (for the transport equations)" lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -219,7 +470,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="core_transport" maxoccur="6" documentation="Core plasma transport" lifecycle_status="" lifecycle_version="">
+	<IDS name="core_transport" maxoccur="6" documentation="Core plasma transport" lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -292,7 +543,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="em_coupling" maxoccur="6" documentation="Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source" lifecycle_status="" lifecycle_version="">
+	<IDS name="em_coupling" maxoccur="6" documentation="Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source" lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -329,7 +580,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="equilibrium" maxoccur="6" documentation="Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code." lifecycle_status="" lifecycle_version="">
+	<IDS name="equilibrium" maxoccur="6" documentation="Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code." lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -493,7 +744,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="magnetics" maxoccur="6" documentation="Magnetic diagnostics for equilibrium identification and plasma shape control." lifecycle_status="" lifecycle_version="">
+	<IDS name="magnetics" maxoccur="6" documentation="Magnetic diagnostics for equilibrium identification and plasma shape control." lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -555,7 +806,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="pf_active" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems" lifecycle_status="" lifecycle_version="">
+	<IDS name="pf_active" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems" lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -664,7 +915,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="pf_passive" maxoccur="6" documentation="Description of the axisymmetric passive conductors, currents flowing in them" lifecycle_status="" lifecycle_version="">
+	<IDS name="pf_passive" maxoccur="6" documentation="Description of the axisymmetric passive conductors, currents flowing in them" lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -711,7 +962,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="schedule" maxoccur="1" documentation="Description of Pulse Schedule, to be enhanced as we go; we have chosen initially to have the controllers, schedule and SN defined separately" lifecycle_status="" lifecycle_version="">
+	<IDS name="schedule" maxoccur="1" documentation="Description of Pulse Schedule, to be enhanced as we go; we have chosen initially to have the controllers, schedule and SN defined separately" lifecycle_status="Draft" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -729,8 +980,16 @@
 				<field name="time" path="waveform/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 		</field>
+		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="version" path="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="parameters" path="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="sdn" maxoccur="6" documentation="Description of the Synchronous Data Network parameters and the signals on it" lifecycle_status="" lifecycle_version="">
+	<IDS name="sdn" maxoccur="6" documentation="Description of the Synchronous Data Network parameters and the signals on it" lifecycle_status="Draft" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -754,7 +1013,7 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="simulation" maxoccur="1" documentation="Simulation parameters for a general simulation" lifecycle_status="" lifecycle_version="">
+	<IDS name="simulation" maxoccur="1" documentation="Simulation parameters for a general simulation" lifecycle_status="Draft" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -771,17 +1030,16 @@
 		<field name="time_step" path="time_step" documentation="Time interval between steps" data_type="FLT_0D" type="constant" units="s"/>
 		<field name="time_end" path="time_end" documentation="Stop time" data_type="FLT_0D" type="constant" units="s"/>
 		<field name="time_restart" path="time_restart" documentation="Time to restart an old simulation" data_type="FLT_0D" type="constant" units="s"/>
-		<field name="time_begun" path="time_begun" documentation="Actual wall-clock time simulation started" data_type="STR_0D" type="dynamic" units="UTC"/>
-		<field name="time_ended" path="time_ended" documentation="Actual wall-clock time simulation finished" data_type="STR_0D" type="dynamic" units="UTC"/>
-		<field name="time_pf_supplies_start" path="time_pf_supplies_start" documentation="Time to enable PF supply limits" data_type="FLT_0D" type="constant" units="s"/>
+		<field name="time_begun" path="time_begun" documentation="Actual wall-clock time simulation started" data_type="STR_0D" type="constant" units="UTC"/>
+		<field name="time_ended" path="time_ended" documentation="Actual wall-clock time simulation finished" data_type="STR_0D" type="constant" units="UTC"/>
 		<field name="iterations_max" path="iterations_max" documentation="Maximum number of simulation loops allowed" data_type="INT_0D" type="constant" units="s"/>
-		<field name="iterations_used" path="iterations_used" documentation="Number of simulation loops used" data_type="INT_0D" type="dynamic" units="s"/>
+		<field name="iterations_used" path="iterations_used" documentation="Number of simulation loops used" data_type="INT_0D" type="constant" units="s"/>
 		<field name="termination_condition" path="termination_condition" documentation="Expression to terminate the simulation, to be written in the platform language in the for or if (condition) terminate" data_type="STR_0D" type="constant"/>
 		<field name="rate_plot_equilibrium" path="rate_plot_equilibrium" documentation="Plot the 2D images each N iterations" data_type="INT_0D" type="constant" units="-"/>
 		<field name="device_name" path="device_name" documentation="Name of the device being simulated" data_type="STR_0D" type="constant"/>
 		<field name="restart_simulation" path="restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D" type="constant"/>
 	</IDS>
-	<IDS name="tf" maxoccur="6" documentation="Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS." lifecycle_status="" lifecycle_version="">
+	<IDS name="tf" maxoccur="6" documentation="Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS." lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>

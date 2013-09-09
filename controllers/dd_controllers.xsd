@@ -3,7 +3,7 @@
 <?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./$GET[stylesheet]" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
+	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
 	<xs:complexType name="controllers_statespace">
 		<xs:annotation>
 			<xs:documentation>type for a statespace controller</xs:documentation>
@@ -153,7 +153,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="class">
+			<xs:element name="controller_class">
 				<xs:annotation>
 					<xs:documentation>One of a known class of controllers</xs:documentation>
 					<xs:appinfo>
@@ -207,12 +207,10 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-				<xs:sequence>
-
-							<xs:element ref="time"/>
-
-					<xs:group ref="FLT_2D"/>
-</xs:sequence>				
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="outputs">
@@ -226,11 +224,10 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-				<xs:sequence>
-							<xs:element ref="time"/>
-
-					<xs:group ref="FLT_2D"/>
-</xs:sequence>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -259,7 +256,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="class">
+			<xs:element name="controller_class">
 				<xs:annotation>
 					<xs:documentation>One of a known class of controllers</xs:documentation>
 					<xs:appinfo>
@@ -314,11 +311,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-<xs:sequence>
-							<xs:element ref="time"/>
-
-					<xs:group ref="FLT_2D"/>
-</xs:sequence>				</xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="outputs">
 				<xs:annotation>
@@ -331,17 +328,21 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-<xs:sequence>
-							<xs:element ref="time"/>
-
-					<xs:group ref="FLT_2D"/>
-</xs:sequence>				</xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="controllers">
 		<xs:annotation>
 			<xs:documentation>Feedback and feedforward controllers</xs:documentation>
+						<xs:appinfo>
+				<lifecycle_status>Active</lifecycle_status>
+				<lifecycle_version>2.0</lifecycle_version>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
