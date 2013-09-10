@@ -5,7 +5,7 @@
 	<xs:element name="schedule">
 		<xs:annotation>
 			<xs:documentation>Description of Pulse Schedule, to be enhanced as we go; we have chosen initially to have the controllers, schedule and SN defined separately</xs:documentation>
-						<xs:appinfo>
+			<xs:appinfo>
 				<lifecycle_status>Draft</lifecycle_status>
 				<lifecycle_version>2.0</lifecycle_version>
 			</xs:appinfo>
@@ -14,7 +14,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="waveform" type="waveform" maxOccurs="50">
+				<xs:element name="waveform" type="schedule_waveform" maxOccurs="50">
 					<xs:annotation>
 						<xs:documentation>Reference waveform to be used to drive feedback or feedforward controllers, or to control the controller switching itself</xs:documentation>
 						<xs:appinfo>
