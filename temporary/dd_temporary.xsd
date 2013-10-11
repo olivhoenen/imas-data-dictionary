@@ -105,6 +105,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>mixed</units>
+						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -135,6 +136,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>mixed</units>
+						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -228,14 +230,44 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="constant_quantities" type="temporary_constant_quantities">
+				<xs:element name="constant_float0d" type="temporary_constant_quantities_float_0d" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>constant quantities</xs:documentation>
+						<xs:documentation>Constant 0D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="dynamic_quantities" type="temporary_dynamic_quantities">
+				<xs:element name="constant_string0d" type="temporary_constant_quantities_string_0d" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>Dynamic quantities</xs:documentation>
+						<xs:documentation>Constant 0D string</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_float1d" type="temporary_constant_quantities_float_1d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 1D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dynamic_float1d" type="temporary_dynamic_quantities_float_1d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 1D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dynamic_float2d" type="temporary_dynamic_quantities_float_2d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 2D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
