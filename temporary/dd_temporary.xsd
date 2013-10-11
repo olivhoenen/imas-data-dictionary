@@ -10,239 +10,233 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
+	<xs:complexType name="temporary_constant_quantities_float_0d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant Float_0D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_0D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_string_0d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant STR_0D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="STR_0D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_float_1d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant Float_1D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_float_1d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic Float_1D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_1D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_float_2d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic Float_2D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_2D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities">
+		<xs:annotation>
+			<xs:documentation>constant quantities</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="float_0d" type="temporary_constant_quantities_float_0d" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Temporary Float_0D</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="float_1d" type="temporary_constant_quantities_float_1d" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Temporary Float_1D</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="string_0d" type="temporary_constant_quantities_string_0d" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Temporary String_0D</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities">
+		<xs:annotation>
+			<xs:documentation>dynamic quantities</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="float_1d" type="temporary_dynamic_quantities_float_1d" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Temporary Float_1D</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="float_2d" type="temporary_dynamic_quantities_float_2d" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Temporary Float_2D</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="temporary">
 		<xs:annotation>
 			<xs:documentation>Storage of undeclared data model components</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>Draft</lifecycle_status>
 				<lifecycle_version>2.0</lifecycle_version>
-			</xs:appinfo>		</xs:annotation>
+			</xs:appinfo>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="binary_1d" maxOccurs="10">
-					<xs:annotation>
-						<xs:documentation>Temporary Binary_1D</xs:documentation>
-						<xs:appinfo>
-							<type>dynamic</type>
-							<axis1>time</axis1>
-							<units>T.m</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:group ref="BYT_1D"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="complex_1d" maxOccurs="10">
-					<xs:annotation>
-						<xs:documentation>Temporary Complex_1D</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:group ref="CPX_1D"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="integer_1d" maxOccurs="10">
-					<xs:annotation>
-						<xs:documentation>Temporary Integer_1D</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:group ref="INT_1D"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="constant">
+				<xs:element name="constant_quantities" type="temporary_constant_quantities">
 					<xs:annotation>
 						<xs:documentation>constant quantities</xs:documentation>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="Float_0D" maxOccurs="10">
-								<xs:annotation>
-									<xs:documentation>Temporary Float_0D</xs:documentation>
-									<xs:appinfo>
-										<type>constant</type>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="Value">
-											<xs:annotation>
-												<xs:documentation>Value</xs:documentation>
-												<xs:appinfo>
-													<type>constant</type>
-												</xs:appinfo>
-											</xs:annotation>
-											<xs:complexType>
-												<xs:sequence>
-													<xs:group ref="FLT_0D"/>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="Description" type="str_type">
-											<xs:annotation>
-												<xs:documentation>Description</xs:documentation>
-												<xs:appinfo>
-													<type>constant</type>
-												</xs:appinfo>
-											</xs:annotation>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Float_1D" maxOccurs="10">
-								<xs:annotation>
-									<xs:documentation>Temporary Float_1D</xs:documentation>
-									<xs:appinfo>
-										<type>constant</type>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="Value">
-											<xs:annotation>
-												<xs:documentation>Value</xs:documentation>
-												<xs:appinfo>
-													<type>constant</type>
-												</xs:appinfo>
-											</xs:annotation>
-											<xs:complexType>
-												<xs:sequence>
-													<xs:group ref="FLT_1D"/>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="Description" type="str_type">
-											<xs:annotation>
-												<xs:documentation>Description</xs:documentation>
-												<xs:appinfo>
-													<type>constant</type>
-												</xs:appinfo>
-											</xs:annotation>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="String_0D" maxOccurs="10">
-								<xs:annotation>
-									<xs:documentation>Temporary String_0D</xs:documentation>
-									<xs:appinfo>
-										<type>constant</type>
-									</xs:appinfo>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="Value">
-											<xs:annotation>
-												<xs:documentation>Value</xs:documentation>
-												<xs:appinfo>
-													<type>constant</type>
-												</xs:appinfo>
-											</xs:annotation>
-											<xs:complexType>
-												<xs:sequence>
-													<xs:group ref="STR_0D"/>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="Description" type="str_type">
-											<xs:annotation>
-												<xs:documentation>Description</xs:documentation>
-												<xs:appinfo>
-													<type>constant</type>
-												</xs:appinfo>
-											</xs:annotation>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
-				<xs:element name="dynamic">
+				<xs:element name="dynamic_quantities" type="temporary_dynamic_quantities">
 					<xs:annotation>
 						<xs:documentation>Dynamic quantities</xs:documentation>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="float_1d" maxOccurs="10">
-								<xs:annotation>
-									<xs:documentation>Temporary Float_1D</xs:documentation>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="dynamic">
-											<xs:annotation>
-												<xs:documentation>Value</xs:documentation>
-												<xs:appinfo>
-													<type>dynamic</type>
-												</xs:appinfo>
-											</xs:annotation>
-											<xs:complexType>
-												<xs:sequence>
-													<xs:group ref="FLT_1D"/>
-													<xs:element ref="time"/>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="Description" type="str_type">
-											<xs:annotation>
-												<xs:documentation>Description</xs:documentation>
-												<xs:appinfo>
-													<type>constant</type>
-												</xs:appinfo>
-											</xs:annotation>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="float_2d" maxOccurs="10">
-								<xs:annotation>
-									<xs:documentation>Temporary Float_2D</xs:documentation>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="dynamic">
-											<xs:annotation>
-												<xs:documentation>Value</xs:documentation>
-												<xs:appinfo>
-													<type>dynamic</type>
-												</xs:appinfo>
-											</xs:annotation>
-											<xs:complexType>
-												<xs:sequence>
-													<xs:group ref="FLT_2D"/>
-													<xs:element ref="time"/>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="Description" type="str_type">
-											<xs:annotation>
-												<xs:documentation>Description</xs:documentation>
-												<xs:appinfo>
-													<type>constant</type>
-												</xs:appinfo>
-											</xs:annotation>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="string_1d" maxOccurs="10">
-					<xs:annotation>
-						<xs:documentation>Temporary String_1D</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:group ref="STR_1D"/>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
 				<xs:element ref="code"/>
 				<xs:element ref="time"/>
