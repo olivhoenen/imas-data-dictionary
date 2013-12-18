@@ -36,11 +36,11 @@
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
 		<field name="linear_controller" path="linear_controller" documentation="A linear controller, this is rather conventional" data_type="struct_array" maxoccur="20" coordinate1="1...N">
-			<field name="name" path="linear_controller/name" documentation="Name of this controller" data_type="STR_0D" type="static"/>
-			<field name="description" path="linear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="static"/>
-			<field name="controller_class" path="linear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
-			<field name="input_names" path="linear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="static"/>
-			<field name="output_names" path="linear_controller/output_names" documentation="Names of the output signals following the SDN convention" data_type="STR_1D" type="static"/>
+			<field name="name" path="linear_controller/name" documentation="Name of this controller" data_type="STR_0D" type="constant"/>
+			<field name="description" path="linear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="constant"/>
+			<field name="controller_class" path="linear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="constant"/>
+			<field name="input_names" path="linear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="constant"/>
+			<field name="output_names" path="linear_controller/output_names" documentation="Names of the output signals following the SDN convention" data_type="STR_1D" type="constant"/>
 			<field name="statespace" path="linear_controller/statespace" documentation="Statespace controller in discrete or continuous time" data_type="structure">
 				<field name="a" path="linear_controller/statespace/a" documentation="A matrix" data_type="FLT_2D" type="constant" units="mixed"/>
 				<field name="b" path="linear_controller/statespace/b" documentation="B matrix" data_type="FLT_2D" type="constant" units="mixed"/>
@@ -64,14 +64,14 @@
 			</field>
 		</field>
 		<field name="nonlinear_controller" path="nonlinear_controller" documentation="A non-linear controller, this is less conventional and will have to be developed" data_type="struct_array" maxoccur="20" coordinate1="1...N">
-			<field name="name" path="nonlinear_controller/name" documentation="Name of this controller" data_type="STR_0D"/>
-			<field name="description" path="nonlinear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="static"/>
-			<field name="controller_class" path="nonlinear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
-			<field name="input_names" path="nonlinear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="static"/>
-			<field name="output_names" path="nonlinear_controller/output_names" documentation="Output signal names following the SDN convention" data_type="STR_1D" type="static"/>
-			<field name="function" path="nonlinear_controller/function" documentation="Method to be defined" data_type="STR_0D" type="static"/>
+			<field name="name" path="nonlinear_controller/name" documentation="Name of this controller" data_type="STR_0D" type="constant"/>
+			<field name="description" path="nonlinear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="constant"/>
+			<field name="controller_class" path="nonlinear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="constant"/>
+			<field name="input_names" path="nonlinear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="constant"/>
+			<field name="output_names" path="nonlinear_controller/output_names" documentation="Output signal names following the SDN convention" data_type="STR_1D" type="constant"/>
+			<field name="function" path="nonlinear_controller/function" documentation="Method to be defined" data_type="STR_0D" type="constant"/>
 			<field name="inputs" path="nonlinear_controller/inputs" documentation="Input signals; the timebase is common  to inputs and outputs for any particular controller" data_type="structure">
-				<field name="data" path="nonlinear_controller/inputs/data" documentation="Input signals; the timebase is common  to inputs and outputs for any particular controller" data_type="FLT_2D" type="static" units="mixed" coordinate1="nonlinear_controller/input_names" coordinate2="nonlinear_controller/inputs/time"/>
+				<field name="data" path="nonlinear_controller/inputs/data" documentation="Input signals; the timebase is common  to inputs and outputs for any particular controller" data_type="FLT_2D" type="constant" units="mixed" coordinate1="nonlinear_controller/input_names" coordinate2="nonlinear_controller/inputs/time"/>
 				<field name="time" path="nonlinear_controller/inputs/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 			<field name="outputs" path="nonlinear_controller/outputs" documentation="Output signals; the timebase is common  to inputs and outputs for any particular controller" data_type="structure">
@@ -665,7 +665,7 @@
 			</field>
 		</field>
 		<field name="method" path="method" documentation="A method generating processed quantities derived from the magnetic measurements" data_type="struct_array" maxoccur="10" coordinate1="1...N">
-			<field name="name" path="method/name" documentation="Name of the data processing method" data_type="STR_0D"/>
+			<field name="name" path="method/name" documentation="Name of the data processing method" data_type="STR_0D" type="static"/>
 			<field name="ip" path="method/ip" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above" data_type="structure">
 				<field name="data" path="method/ip/data" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" coordinate1="method/ip/time" type="dynamic" units="A"/>
 				<field name="time" path="method/ip/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -852,7 +852,7 @@
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
 		<field name="waveform" path="waveform" documentation="Reference waveform to be used to drive feedback or feedforward controllers, or to control the controller switching itself" data_type="struct_array" maxoccur="50" coordinate1="1...N">
-			<field name="name" path="waveform/name" documentation="Reference name" data_type="STR_0D"/>
+			<field name="name" path="waveform/name" documentation="Reference name" data_type="STR_0D" type="constant"/>
 			<field name="value" path="waveform/value" documentation="Values of the reference for the timebase" data_type="structure">
 				<field name="data" path="waveform/value/data" documentation="Values of the reference for the timebase" data_type="FLT_1D" coordinate1="waveform/time" units="mixed" type="dynamic"/>
 				<field name="time" path="waveform/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
