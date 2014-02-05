@@ -151,7 +151,7 @@
 					<xs:documentation>Nuclear charge</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
-						<type>constant</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -251,14 +251,14 @@
 				<xs:annotation>
 					<xs:documentation>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="charge_states" type="core_profiles_ions_charge_states2" maxOccurs="10">
+			<xs:element name="charge_states" type="core_profiles_ions_charge_states2" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Quantities related to the different charge states of the ion species</xs:documentation>
 					<xs:appinfo>
@@ -395,7 +395,7 @@
 					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>1...N_rho_tor_norm</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -467,7 +467,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="ions" type="core_profile_ions" maxOccurs="5">
+			<xs:element name="ions" type="core_profile_ions" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Quantities related to the different ion species</xs:documentation>
 					<xs:appinfo>
@@ -694,12 +694,21 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="core_plasma">
 		<xs:annotation>
 			<xs:documentation>Core plasma fluid description</xs:documentation>
-						<xs:appinfo>
+			<xs:appinfo>
 				<lifecycle_status>Draft</lifecycle_status>
 				<lifecycle_version>2.0</lifecycle_version>
 			</xs:appinfo>
@@ -711,7 +720,7 @@
 					<xs:annotation>
 						<xs:documentation>Core plasma radial profiles</xs:documentation>
 						<xs:appinfo>
-							<coordinate1>../time</coordinate1>
+							<coordinate1>time</coordinate1>
 							<type>dynamic</type>
 						</xs:appinfo>
 					</xs:annotation>

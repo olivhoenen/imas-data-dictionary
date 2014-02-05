@@ -36,11 +36,11 @@
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
 		<field name="linear_controller" path="linear_controller" documentation="A linear controller, this is rather conventional" data_type="struct_array" maxoccur="20" coordinate1="1...N">
-			<field name="name" path="linear_controller/name" documentation="Name of this controller" data_type="STR_0D" type="constant"/>
-			<field name="description" path="linear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="constant"/>
-			<field name="controller_class" path="linear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="constant"/>
-			<field name="input_names" path="linear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="constant"/>
-			<field name="output_names" path="linear_controller/output_names" documentation="Names of the output signals following the SDN convention" data_type="STR_1D" type="constant"/>
+			<field name="name" path="linear_controller/name" documentation="Name of this controller" data_type="STR_0D" type="static"/>
+			<field name="description" path="linear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="static"/>
+			<field name="controller_class" path="linear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
+			<field name="input_names" path="linear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="static"/>
+			<field name="output_names" path="linear_controller/output_names" documentation="Names of the output signals following the SDN convention" data_type="STR_1D" type="static"/>
 			<field name="statespace" path="linear_controller/statespace" documentation="Statespace controller in discrete or continuous time" data_type="structure">
 				<field name="a" path="linear_controller/statespace/a" documentation="A matrix" data_type="FLT_2D" type="constant" units="mixed"/>
 				<field name="b" path="linear_controller/statespace/b" documentation="B matrix" data_type="FLT_2D" type="constant" units="mixed"/>
@@ -64,14 +64,14 @@
 			</field>
 		</field>
 		<field name="nonlinear_controller" path="nonlinear_controller" documentation="A non-linear controller, this is less conventional and will have to be developed" data_type="struct_array" maxoccur="20" coordinate1="1...N">
-			<field name="name" path="nonlinear_controller/name" documentation="Name of this controller" data_type="STR_0D" type="constant"/>
-			<field name="description" path="nonlinear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="constant"/>
-			<field name="controller_class" path="nonlinear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="constant"/>
-			<field name="input_names" path="nonlinear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="constant"/>
-			<field name="output_names" path="nonlinear_controller/output_names" documentation="Output signal names following the SDN convention" data_type="STR_1D" type="constant"/>
-			<field name="function" path="nonlinear_controller/function" documentation="Method to be defined" data_type="STR_0D" type="constant"/>
+			<field name="name" path="nonlinear_controller/name" documentation="Name of this controller" data_type="STR_0D"/>
+			<field name="description" path="nonlinear_controller/description" documentation="Description of this controller" data_type="STR_0D" type="static"/>
+			<field name="controller_class" path="nonlinear_controller/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="static"/>
+			<field name="input_names" path="nonlinear_controller/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="static"/>
+			<field name="output_names" path="nonlinear_controller/output_names" documentation="Output signal names following the SDN convention" data_type="STR_1D" type="static"/>
+			<field name="function" path="nonlinear_controller/function" documentation="Method to be defined" data_type="STR_0D" type="static"/>
 			<field name="inputs" path="nonlinear_controller/inputs" documentation="Input signals; the timebase is common  to inputs and outputs for any particular controller" data_type="structure">
-				<field name="data" path="nonlinear_controller/inputs/data" documentation="Input signals; the timebase is common  to inputs and outputs for any particular controller" data_type="FLT_2D" type="constant" units="mixed" coordinate1="nonlinear_controller/input_names" coordinate2="nonlinear_controller/inputs/time"/>
+				<field name="data" path="nonlinear_controller/inputs/data" documentation="Input signals; the timebase is common  to inputs and outputs for any particular controller" data_type="FLT_2D" type="static" units="mixed" coordinate1="nonlinear_controller/input_names" coordinate2="nonlinear_controller/inputs/time"/>
 				<field name="time" path="nonlinear_controller/inputs/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 			<field name="outputs" path="nonlinear_controller/outputs" documentation="Output signals; the timebase is common  to inputs and outputs for any particular controller" data_type="structure">
@@ -218,7 +218,91 @@
 		</field>
 		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="core_profiles" maxoccur="6" documentation="Core plasma radial profiles" lifecycle_status="Active" lifecycle_version="2.0">
+	<IDS name="core_plasma" maxoccur="6" documentation="Core plasma fluid description" lifecycle_status="Draft" lifecycle_version="2.0">
+		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
+			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
+			<field name="creator_of" path="ids_properties/creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="constant"/>
+			<field name="date_of" path="ids_properties/date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="constant"/>
+			<field name="source_of" path="ids_properties/source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="constant"/>
+			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
+		</field>
+		<field name="profiles_1d" path="profiles_1d" documentation="Core plasma radial profiles" data_type="struct_array" maxoccur="unbounded" coordinate1="profiles_1d/time" type="dynamic">
+			<field name="rho_tor_norm" path="profiles_1d/rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_1D" type="dynamic" coordinate1="1...N"/>
+			<field name="psi" path="profiles_1d/psi" documentation="Poloidal magnetic flux" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="Wb" type="dynamic"/>
+			<field name="t_e" path="profiles_1d/t_e" documentation="Electron temperature" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="eV" type="dynamic"/>
+			<field name="t_i_average" path="profiles_1d/t_i_average" documentation="Ion temperature (averaged on charge states and ion species)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="eV" type="dynamic"/>
+			<field name="n_e" path="profiles_1d/n_e" documentation="Electron density (thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m^-3" type="dynamic"/>
+			<field name="n_e_fast" path="profiles_1d/n_e_fast" documentation="Density of fast (non-thermal) electrons" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m^-3" type="dynamic"/>
+			<field name="ions" path="profiles_1d/ions" documentation="Quantities related to the different ion species" data_type="struct_array" maxoccur="unbounded" coordinate1="1...N_Ions">
+				<field name="a" path="profiles_1d/ions/a" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="dynamic"/>
+				<field name="z_ion" path="profiles_1d/ions/z_ion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="dynamic" units="Elementary Charge Unit"/>
+				<field name="z_n" path="profiles_1d/ions/z_n" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="dynamic"/>
+				<field name="label" path="profiles_1d/ions/label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="dynamic"/>
+				<field name="n_i" path="profiles_1d/ions/n_i" documentation="Ion density (thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m^-3" type="dynamic"/>
+				<field name="n_i_fast" path="profiles_1d/ions/n_i_fast" documentation="Density of fast (non-thermal) ions, for the ion species considered" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m^-3" type="dynamic"/>
+				<field name="t_i" path="profiles_1d/ions/t_i" documentation="Ion temperature of that ion species" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="eV" type="dynamic"/>
+				<field name="p_i" path="profiles_1d/ions/p_i" documentation="Ion pressure for that ion species" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="Pa" type="dynamic"/>
+				<field name="v_tor_i" path="profiles_1d/ions/v_tor_i" documentation="Toroidal velocity of that ion species" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+				<field name="v_pol_i" path="profiles_1d/ions/v_pol_i" documentation="Poloidal velocity of that ion species" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+				<field name="multiple_charge_state_flag" path="profiles_1d/ions/multiple_charge_state_flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure" data_type="INT_0D" type="dynamic"/>
+				<field name="charge_states" path="profiles_1d/ions/charge_states" documentation="Quantities related to the different charge states of the ion species" data_type="struct_array" maxoccur="unbounded" coordinate1="1...N_charge_states">
+					<field name="z_min" path="profiles_1d/ions/charge_states/z_min" documentation="Minimum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="dynamic"/>
+					<field name="z_max" path="profiles_1d/ions/charge_states/z_max" documentation="Maximum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="dynamic"/>
+					<field name="label" path="profiles_1d/ions/charge_states/label" documentation="String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)" data_type="STR_0D" type="dynamic"/>
+					<field name="n_z" path="profiles_1d/ions/charge_states/n_z" documentation="Density of the charge state considered (thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m^-3" type="dynamic"/>
+					<field name="n_z_fast" path="profiles_1d/ions/charge_states/n_z_fast" documentation="Density of fast (non-thermal) ions, for the charge state considered" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m^-3" type="dynamic"/>
+					<field name="t_z" path="profiles_1d/ions/charge_states/t_z" documentation="Temperature of the charge state considered" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m^-3" type="dynamic"/>
+					<field name="v_tor_z" path="profiles_1d/ions/charge_states/v_tor_z" documentation="Toroidal velocity of the charge state considered" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+					<field name="v_pol_z" path="profiles_1d/ions/charge_states/v_pol_z" documentation="Poloidal velocity of the charge state considered" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+				</field>
+			</field>
+			<field name="n_i_total_over_n_e" path="profiles_1d/n_i_total_over_n_e" documentation="Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="-" type="dynamic"/>
+			<field name="momentum_tor" path="profiles_1d/momentum_tor" documentation="Total plasma toroidal momentum, summed over ion species and electrons " data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" type="dynamic"/>
+			<field name="zeff" path="profiles_1d/zeff" documentation="Effective charge" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" type="dynamic"/>
+			<field name="p_e" path="profiles_1d/p_e" documentation="Electron pressure" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="p_i_total" path="profiles_1d/p_i_total" documentation="Total ion pressure (sum over the ion species)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="pressure_thermal" path="profiles_1d/pressure_thermal" documentation="Thermal pressure (electrons+ions)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="pressure_perpendicular" path="profiles_1d/pressure_perpendicular" documentation="Total perpendicular pressure (electrons+ions, thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="pressure_parallel" path="profiles_1d/pressure_parallel" documentation="Total parallel pressure (electrons+ions, thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="j_total" path="profiles_1d/j_total" documentation="Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="j_tor" path="profiles_1d/j_tor" documentation="Total toroidal current density = average(J_Tor/R) / average(1/R)" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="j_ohmic" path="profiles_1d/j_ohmic" documentation="Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="j_non_inductive" path="profiles_1d/j_non_inductive" documentation="Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="j_bootstrap" path="profiles_1d/j_bootstrap" documentation="Bootstrap parallel current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="conductivity_parallel" path="profiles_1d/conductivity_parallel" documentation="Parallel conductivity" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="ohm^-1.m^-1" type="dynamic"/>
+			<field name="e_field_parallel" path="profiles_1d/e_field_parallel" documentation="Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="V.m^-1" type="dynamic"/>
+			<field name="q" path="profiles_1d/q" documentation="Safety factor" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" type="dynamic" units="-"/>
+			<field name="magnetic_shear" path="profiles_1d/magnetic_shear" documentation="Magnetic shear" data_type="FLT_1D" coordinate1="profiles_1d/rho_tor_norm" units="-" type="dynamic"/>
+			<field name="time" path="profiles_1d/time" documentation="Time" data_type="flt_type" units="s" type="dynamic"/>
+		</field>
+		<field name="global_quantities" path="global_quantities" documentation="Various global quantities derived from the profiles" data_type="structure">
+			<field name="ip" path="global_quantities/ip" documentation="Total plasma current" data_type="FLT_1D" coordinate1="time" units="A" type="dynamic"/>
+			<field name="current_non_inductive" path="global_quantities/current_non_inductive" documentation="Total non-inductive parallel current" data_type="FLT_1D" coordinate1="time" units="A" type="dynamic"/>
+			<field name="current_bootstrap" path="global_quantities/current_bootstrap" documentation="Bootstrap parallel current" data_type="FLT_1D" coordinate1="time" units="A" type="dynamic"/>
+			<field name="v_loop" path="global_quantities/v_loop" documentation="LCFS loop voltage" data_type="FLT_1D" coordinate1="time" units="V" type="dynamic"/>
+			<field name="li_3" path="global_quantities/li_3" documentation="Internal inductance" data_type="FLT_1D" coordinate1="time" type="dynamic"/>
+			<field name="beta_tor" path="global_quantities/beta_tor" documentation="Toroidal beta (ratio of kinetic to magnetic pressure)" data_type="FLT_1D" coordinate1="time" type="dynamic"/>
+			<field name="beta_tor_norm" path="global_quantities/beta_tor_norm" documentation="Normalised toroidal beta" data_type="FLT_1D" coordinate1="time" type="dynamic"/>
+			<field name="beta_pol" path="global_quantities/beta_pol" documentation="Poloidal beta" data_type="FLT_1D" coordinate1="time" type="dynamic"/>
+			<field name="energy_diamagnetic" path="global_quantities/energy_diamagnetic" documentation="Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (Pressure_Thermal + Pressure_Perpendicular)" data_type="FLT_1D" coordinate1="time" units="A" type="dynamic"/>
+		</field>
+		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)" data_type="structure">
+			<field name="r0" path="vacuum_toroidal_field/r0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="constant" units="m"/>
+			<field name="b0" path="vacuum_toroidal_field/b0" documentation="Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS." data_type="FLT_1D" type="dynamic" units="T" coordinate1="time"/>
+		</field>
+		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="version" path="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="parameters" path="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="core_profiles" maxoccur="1" documentation="Core plasma radial profiles" lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
 			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
@@ -665,7 +749,7 @@
 			</field>
 		</field>
 		<field name="method" path="method" documentation="A method generating processed quantities derived from the magnetic measurements" data_type="struct_array" maxoccur="10" coordinate1="1...N">
-			<field name="name" path="method/name" documentation="Name of the data processing method" data_type="STR_0D" type="static"/>
+			<field name="name" path="method/name" documentation="Name of the data processing method" data_type="STR_0D"/>
 			<field name="ip" path="method/ip" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above" data_type="structure">
 				<field name="data" path="method/ip/data" documentation="Plasma current. Positive sign means anti-clockwise when viewed from above" data_type="FLT_1D" coordinate1="method/ip/time" type="dynamic" units="A"/>
 				<field name="time" path="method/ip/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -852,7 +936,7 @@
 			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
 		</field>
 		<field name="waveform" path="waveform" documentation="Reference waveform to be used to drive feedback or feedforward controllers, or to control the controller switching itself" data_type="struct_array" maxoccur="50" coordinate1="1...N">
-			<field name="name" path="waveform/name" documentation="Reference name" data_type="STR_0D" type="constant"/>
+			<field name="name" path="waveform/name" documentation="Reference name" data_type="STR_0D"/>
 			<field name="value" path="waveform/value" documentation="Values of the reference for the timebase" data_type="structure">
 				<field name="data" path="waveform/value/data" documentation="Values of the reference for the timebase" data_type="FLT_1D" coordinate1="waveform/time" units="mixed" type="dynamic"/>
 				<field name="time" path="waveform/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -916,52 +1000,6 @@
 		<field name="rate_plot_equilibrium" path="rate_plot_equilibrium" documentation="Plot the 2D images each N iterations" data_type="INT_0D" type="constant" units="-"/>
 		<field name="device_name" path="device_name" documentation="Name of the device being simulated" data_type="STR_0D" type="constant"/>
 		<field name="restart_simulation" path="restart_simulation" documentation="Identifier of the simulation to be restarted" data_type="STR_0D" type="constant"/>
-	</IDS>
-	<IDS name="temporary" maxoccur="6" documentation="Storage of undeclared data model components" lifecycle_status="Draft" lifecycle_version="2.0">
-		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
-			<field name="status_of" path="ids_properties/status_of" documentation="Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent " data_type="str_type" type="constant"/>
-			<field name="comment_of" path="ids_properties/comment_of" documentation="Any additional comment from the source application" data_type="str_type" type="constant"/>
-			<field name="creator_of" path="ids_properties/creator_of" documentation="Creator of this consistent IDS" data_type="str_type" type="constant"/>
-			<field name="date_of" path="ids_properties/date_of" documentation="Date of consistent creation of this IDS" data_type="str_type" type="constant"/>
-			<field name="source_of" path="ids_properties/source_of" documentation="Where do the data for this IDS come from (a procedure, a set of codes)" data_type="str_type" type="constant"/>
-			<field name="reference_of" path="ids_properties/reference_of" documentation="Documented reference to this IDS data" data_type="str_type" type="constant"/>
-			<field name="homogeneous_time" path="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="int_type" type="constant"/>
-			<field name="cocos" path="ids_properties/cocos" documentation="Coordinate conventions of this IDS" data_type="int_type" type="constant"/>
-		</field>
-		<field name="constant_float0d" path="constant_float0d" documentation="Constant 0D float" data_type="struct_array" maxoccur="10" coordinate1="1...N">
-			<field name="value" path="constant_float0d/value" documentation="Value" data_type="FLT_0D" type="constant"/>
-			<field name="description" path="constant_float0d/description" documentation="Description" data_type="str_type" type="constant"/>
-		</field>
-		<field name="constant_string0d" path="constant_string0d" documentation="Constant 0D string" data_type="struct_array" maxoccur="10" coordinate1="1...N">
-			<field name="value" path="constant_string0d/value" documentation="Value" data_type="STR_0D" type="constant"/>
-			<field name="description" path="constant_string0d/description" documentation="Description" data_type="str_type" type="constant"/>
-		</field>
-		<field name="constant_float1d" path="constant_float1d" documentation="Constant 1D float" data_type="struct_array" maxoccur="10" coordinate1="1...N">
-			<field name="value" path="constant_float1d/value" documentation="Value" data_type="FLT_1D" type="constant"/>
-			<field name="description" path="constant_float1d/description" documentation="Description" data_type="str_type" type="constant"/>
-		</field>
-		<field name="dynamic_float1d" path="dynamic_float1d" documentation="Dynamic 1D float" data_type="struct_array" maxoccur="10" coordinate1="1...N">
-			<field name="value" path="dynamic_float1d/value" documentation="Value" data_type="structure">
-				<field name="data" path="dynamic_float1d/value/data" documentation="Value" data_type="FLT_1D" type="dynamic" units="mixed" coordinate1="dynamic_float1d/value/time"/>
-				<field name="time" path="dynamic_float1d/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
-			</field>
-			<field name="description" path="dynamic_float1d/description" documentation="Description" data_type="str_type" type="constant"/>
-		</field>
-		<field name="dynamic_float2d" path="dynamic_float2d" documentation="Dynamic 2D float" data_type="struct_array" maxoccur="10" coordinate1="1...N">
-			<field name="value" path="dynamic_float2d/value" documentation="Value" data_type="structure">
-				<field name="data" path="dynamic_float2d/value/data" documentation="Value" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="dynamic_float2d/value/time"/>
-				<field name="time" path="dynamic_float2d/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
-			</field>
-			<field name="description" path="dynamic_float2d/description" documentation="Description" data_type="str_type" type="constant"/>
-		</field>
-		<field name="code" path="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="output_diagnostics" path="code/output_diagnostics" documentation="List of the code specific diagnostic/output in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="output_flag" path="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
-		</field>
-		<field name="time" path="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="tf" maxoccur="6" documentation="Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS." lifecycle_status="Active" lifecycle_version="2.0">
 		<field name="ids_properties" path="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
