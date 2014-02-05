@@ -27,8 +27,28 @@
 </tr>
 </xsl:for-each>
         </table>
+<!-- Second: write the list of reusable structures from Utilities -->
+ <p class="welcome">List of available Generic Structures</p>
+ <p>Generic structures are data structures that can be found in various places of the Physics Data Model, as they are useful in several contexts. Typical examples are lists of standard spatial coordinates, description of plasma ion species, traceability / provenance information, etc.</p>
+<p>This list of available generic structures is not restrictive since it can be freely expanded by Data Model designers. Note that the structure name is not the name of a Data Model node, therefore the generic structure names do not appear in the Data Dictionary HTML documentation. They are primarily used for the design of the Data Dictionary, but also they can be used in Fortran codes where they are implemented as derived types.
+</p>
+<table border="1">
+        <thead style="color:#ff0000"><td>Generic structure name</td><td>Description</td></thead>
+<xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:complexType">
+<tr>
+	<td><xsl:value-of select="@name"/></td>
+	<td><xsl:value-of select="xs:annotation/xs:documentation"/></td>
+</tr>
+</xsl:for-each>
+<xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:element">
+<tr>
+	<td><xsl:value-of select="@name"/></td>
+	<td><xsl:value-of select="xs:annotation/xs:documentation"/></td>
+</tr>
+</xsl:for-each>
+</table>
 
-<!--Second: write the detailed documentation of each IDS-->
+<!--Third: write the detailed documentation of each IDS-->
 <xsl:for-each select="IDS">
 <a name="{@name}">
         <p class="welcome">ITER Physics Data Model Documentation for <xsl:value-of select="@name"/></p>
