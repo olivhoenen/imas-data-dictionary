@@ -69,7 +69,7 @@
 
   <xsl:template match="field">
     <tr>
-<td><xsl:value-of select="@path"/>
+<td><xsl:value-of select="@path_doc"/>
 
 <xsl:if test="@maxOccurs>1 or @maxOccurs='unbounded'">{1:<xsl:value-of select="@maxOccurs"/>}</xsl:if></td>
 
