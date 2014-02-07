@@ -337,7 +337,7 @@
 			<xs:element name="name">
 				<xs:annotation>
 					<xs:documentation>Reference name</xs:documentation>
-										<xs:appinfo>
+					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -452,7 +452,7 @@
 			</xs:element>
 			<xs:element name="b0">
 				<xs:annotation>
-					<xs:documentation>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
+					<xs:documentation>Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>T</units>
@@ -484,7 +484,7 @@
 			</xs:element>
 			<xs:element name="b0">
 				<xs:annotation>
-					<xs:documentation>Vacuum toroidal field at b0; Positive sign means anti-clockwise when viewed from above. The product r0*b0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
+					<xs:documentation>Vacuum toroidal field at b0. When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product r0*b0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>T</units>
@@ -1041,7 +1041,7 @@
 				</xs:element>
 				<xs:element name="cocos" type="int_type">
 					<xs:annotation>
-						<xs:documentation>Coordinate conventions of this IDS</xs:documentation>
+						<xs:documentation>Coordinate conventions of this IDS, expected to be 11 for ITER data</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
 						</xs:appinfo>

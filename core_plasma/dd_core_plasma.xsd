@@ -89,6 +89,45 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="p_z">
+				<xs:annotation>
+					<xs:documentation>Pressure of the charge state considered</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="p_z_fast_perpendicular">
+				<xs:annotation>
+					<xs:documentation>Fast perpendicular pressure of the charge state considered</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="p_z_fast_parallel">
+				<xs:annotation>
+					<xs:documentation>Fast parallel pressure of the charge state considered</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="v_tor_z">
 				<xs:annotation>
 					<xs:documentation>Toroidal velocity of the charge state considered</xs:documentation>
@@ -221,6 +260,32 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="p_i_fast_perpendicular">
+				<xs:annotation>
+					<xs:documentation>Fast ion perpendicular pressure for that ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="p_i_fast_parallel">
+				<xs:annotation>
+					<xs:documentation>Fast ion parallel pressure for that ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="v_tor_i">
 				<xs:annotation>
 					<xs:documentation>Toroidal velocity of that ion species</xs:documentation>
@@ -301,7 +366,7 @@
 			</xs:element>
 			<xs:element name="current_bootstrap">
 				<xs:annotation>
-					<xs:documentation>Bootstrap parallel current</xs:documentation>
+					<xs:documentation>Bootstrap current</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<units>A</units>
@@ -339,7 +404,7 @@
 			</xs:element>
 			<xs:element name="beta_tor">
 				<xs:annotation>
-					<xs:documentation>Toroidal beta (ratio of kinetic to magnetic pressure)</xs:documentation>
+					<xs:documentation>Toroidal beta, defined as the volume-averaged total perpendicular pressure divided by (B0^2/(2*mu0))</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
@@ -351,7 +416,7 @@
 			</xs:element>
 			<xs:element name="beta_tor_norm">
 				<xs:annotation>
-					<xs:documentation>Normalised toroidal beta</xs:documentation>
+					<xs:documentation>Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA] </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
@@ -375,7 +440,7 @@
 			</xs:element>
 			<xs:element name="energy_diamagnetic">
 				<xs:annotation>
-					<xs:documentation>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (Pressure_Thermal + Pressure_Perpendicular)</xs:documentation>
+					<xs:documentation>Plasma energy content = 3/2 * integral over the plasma volume of the total perpendicular pressure </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<units>A</units>
@@ -402,6 +467,19 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="rho_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="psi">
 				<xs:annotation>
 					<xs:documentation>Poloidal magnetic flux</xs:documentation>
@@ -409,6 +487,19 @@
 						<coordinate1>../rho_tor_norm</coordinate1>
 						<units>Wb</units>
 						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="volume">
+				<xs:annotation>
+					<xs:documentation>Volume enclosed inside the magnetic surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m^3</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -525,9 +616,61 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="p_e_fast_perpendicular">
+				<xs:annotation>
+					<xs:documentation>Fast (non-thermal) electron perpendicular pressure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="p_e_fast_parallel">
+				<xs:annotation>
+					<xs:documentation>Fast (non-thermal) electron parallel pressure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="p_i_total">
 				<xs:annotation>
 					<xs:documentation>Total ion pressure (sum over the ion species)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="p_i_total_fast_perpendicular">
+				<xs:annotation>
+					<xs:documentation>Fast (non-thermal) total ion (sum over the ion species) perpendicular pressure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="p_i_total_fast_parallel">
+				<xs:annotation>
+					<xs:documentation>Fast (non-thermal) total ion (sum over the ion species) parallel pressure</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -631,7 +774,7 @@
 			</xs:element>
 			<xs:element name="j_bootstrap">
 				<xs:annotation>
-					<xs:documentation>Bootstrap parallel current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
+					<xs:documentation>Bootstrap current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../rho_tor_norm</coordinate1>
 						<units>A/m^2</units>
@@ -683,7 +826,7 @@
 			</xs:element>
 			<xs:element name="magnetic_shear">
 				<xs:annotation>
-					<xs:documentation>Magnetic shear</xs:documentation>
+					<xs:documentation>Magnetic shear, defined as rho_tor/q . dq/drho_tor</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../rho_tor_norm</coordinate1>
 						<units>-</units>
@@ -709,8 +852,8 @@
 		<xs:annotation>
 			<xs:documentation>Core plasma fluid description</xs:documentation>
 			<xs:appinfo>
-				<lifecycle_status>Draft</lifecycle_status>
-				<lifecycle_version>2.0</lifecycle_version>
+				<lifecycle_status>alpha</lifecycle_status>
+				<lifecycle_version>3_0.0</lifecycle_version>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
