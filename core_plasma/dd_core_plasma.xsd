@@ -390,9 +390,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="li_3">
+			<xs:element name="li">
 				<xs:annotation>
-					<xs:documentation>Internal inductance</xs:documentation>
+					<xs:documentation>Internal inductance. The li_3 definition is used, i.e. li_3 = 2/R0/mu0^2/Ip^2 * int(Bp^2 dV).</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
@@ -404,7 +404,7 @@
 			</xs:element>
 			<xs:element name="beta_tor">
 				<xs:annotation>
-					<xs:documentation>Toroidal beta, defined as the volume-averaged total perpendicular pressure divided by (B0^2/(2*mu0))</xs:documentation>
+					<xs:documentation>Toroidal beta, defined as the volume-averaged total perpendicular pressure divided by (B0^2/(2*mu0)), i.e. beta_toroidal = 2 mu0 int(p dV) / V / B0^2</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
@@ -428,7 +428,7 @@
 			</xs:element>
 			<xs:element name="beta_pol">
 				<xs:annotation>
-					<xs:documentation>Poloidal beta</xs:documentation>
+					<xs:documentation>Poloidal beta. Defined as betap = 4 int(p dV) / [R_0 * mu_0 * Ip^2]</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
