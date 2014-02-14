@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
+<?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./%24GET%5Bstylesheet%5D" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
+<?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="atomic_data_process_charge_state">
+		<xs:annotation>
+			<xs:documentation>Process tables for a given charge state. Only one table is used for that process, defined by process(:)/table_dimension</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_min">
+				<xs:annotation>
+					<xs:documentation>Minimum Z of the charge state bundle</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_max">
+				<xs:annotation>
+					<xs:documentation>Maximum Z of the charge state bundle (equal to z_min if no bundle)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table_0d">
+				<xs:annotation>
+					<xs:documentation>0D table describing the process data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>units given by process(:)/results_units</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table_1d">
+				<xs:annotation>
+					<xs:documentation>1D table describing the process data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>units given by process(:)/results_units</units>
+						<coordinate1>coordinate_system(process(:)/coordinate_index)/coordinate(1)</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table_2d">
+				<xs:annotation>
+					<xs:documentation>2D table describing the process data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>units given by process(:)/results_units</units>
+						<coordinate1>coordinate_system(process(:)/coordinate_index)/coordinate(1)</coordinate1>
+						<coordinate2>coordinate_system(process(:)/coordinate_index)/coordinate(2)</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table_3d">
+				<xs:annotation>
+					<xs:documentation>3D table describing the process data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>units given by process(:)/results_units</units>
+						<coordinate1>coordinate_system(process(:)/coordinate_index)/coordinate(1)</coordinate1>
+						<coordinate2>coordinate_system(process(:)/coordinate_index)/coordinate(2)</coordinate2>
+						<coordinate3>coordinate_system(process(:)/coordinate_index)/coordinate(3)</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table_4d">
+				<xs:annotation>
+					<xs:documentation>4D table describing the process data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>units given by process(:)/results_units</units>
+						<coordinate1>coordinate_system(process(:)/coordinate_index)/coordinate(1)</coordinate1>
+						<coordinate2>coordinate_system(process(:)/coordinate_index)/coordinate(2)</coordinate2>
+						<coordinate3>coordinate_system(process(:)/coordinate_index)/coordinate(3)</coordinate3>
+						<coordinate4>coordinate_system(process(:)/coordinate_index)/coordinate(4)</coordinate4>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_4D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table_5d">
+				<xs:annotation>
+					<xs:documentation>5D table describing the process data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>units given by process(:)/results_units</units>
+						<coordinate1>coordinate_system(process(:)/coordinate_index)/coordinate(1)</coordinate1>
+						<coordinate2>coordinate_system(process(:)/coordinate_index)/coordinate(2)</coordinate2>
+						<coordinate3>coordinate_system(process(:)/coordinate_index)/coordinate(3)</coordinate3>
+						<coordinate4>coordinate_system(process(:)/coordinate_index)/coordinate(4)</coordinate4>
+						<coordinate5>coordinate_system(process(:)/coordinate_index)/coordinate(5)</coordinate5>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_5D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table_6d">
+				<xs:annotation>
+					<xs:documentation>6D table describing the process data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>units given by process(:)/results_units</units>
+						<coordinate1>coordinate_system(process(:)/coordinate_index)/coordinate(1)</coordinate1>
+						<coordinate2>coordinate_system(process(:)/coordinate_index)/coordinate(2)</coordinate2>
+						<coordinate3>coordinate_system(process(:)/coordinate_index)/coordinate(3)</coordinate3>
+						<coordinate4>coordinate_system(process(:)/coordinate_index)/coordinate(4)</coordinate4>
+						<coordinate5>coordinate_system(process(:)/coordinate_index)/coordinate(5)</coordinate5>
+						<coordinate6>coordinate_system(process(:)/coordinate_index)/coordinate(6)</coordinate6>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_6D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="atomic_data_process">
+		<xs:annotation>
+			<xs:documentation>Definition of a process and its data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the process (e.g. EI, RC, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table_dimension">
+				<xs:annotation>
+					<xs:documentation>Table dimensionality of the process (1 to 6), valid for all charge states. Indicates which of the tables is filled (below the charge_state node)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="coordinate_index">
+				<xs:annotation>
+					<xs:documentation>Index in tables_coord, specifying what coordinate systems to use for this process (valid for all tables)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="result_label">
+				<xs:annotation>
+					<xs:documentation>Description of the process result (rate, cross section, sputtering yield, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="result_units">
+				<xs:annotation>
+					<xs:documentation>Units of the process result</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="result_transformation">
+				<xs:annotation>
+					<xs:documentation>Transformation of the process result. Integer flag: 0=no transformation; 1=10^; 2=exp()</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="charge_state" type="atomic_data_process_charge_state" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Process tables for a set of charge states. Only one table is used for that process, defined by process(:)/table_dimension</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="atomic_data_coordinate_system_coordinate">
+		<xs:annotation>
+			<xs:documentation>Description of a coordinate for atomic data tables. Can be either a range of real values or a set of discrete values (if interp_type=0)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>Description of coordinate (e.g. "Electron temperature")</xs:documentation>
+					<xs:appinfo>
+<type>static</type>					
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>Coordinate values</xs:documentation>
+					<xs:appinfo>
+						<units>units given by coordinate_system(:)/coordinate(:)/units</units>
+						<coordinate1>1...N</coordinate1>
+						<type>static</type>					
+
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="interpolation_type">
+				<xs:annotation>
+					<xs:documentation>Interpolation strategy in this coordinate direction. Integer flag: 0=discrete (no interpolation); 1=linear; ...</xs:documentation>
+										<xs:appinfo>
+<type>static</type>					
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="extrapolation_type">
+				<xs:annotation>
+					<xs:documentation>Extrapolation strategy when leaving the domain. The first value of the vector describes the behaviour at lower bound, the second describes the at upper bound. Possible values: 0=none, report error; 1=boundary value; 2=linear extrapolation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...2</coordinate1>
+<type>static</type>					
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="value_labels">
+				<xs:annotation>
+					<xs:documentation>String description of discrete coordinate values (if interpolation_type=0). E.g., for spectroscopic lines, the spectroscopic description of the transition.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../values</coordinate1>
+<type>static</type>					
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="units">
+				<xs:annotation>
+					<xs:documentation>Units of coordinate (e.g. eV)</xs:documentation>
+					<xs:appinfo>
+<type>static</type>					
+					</xs:appinfo>				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="transformation">
+				<xs:annotation>
+					<xs:documentation>Coordinate transformation applied to coordinate values stored in coord. Integer flag: 0=none; 1=log10; 2=ln</xs:documentation>
+										<xs:appinfo>
+<type>static</type>					
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spacing">
+				<xs:annotation>
+					<xs:documentation>Flag for specific coordinate spacing (for optimization purposes). Integer flag: 0=undefined; 1=uniform; ...</xs:documentation>
+									<xs:appinfo>
+<type>static</type>					
+					</xs:appinfo>
+					</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="atomic_data_coordinate_system">
+		<xs:annotation>
+			<xs:documentation>Description of a coordinate system for atomic data tables </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="coordinate" type="atomic_data_coordinate_system_coordinate" maxOccurs="6">
+				<xs:annotation>
+					<xs:documentation>Set of coordinates for that coordinate system. A coordinate an be either a range of real values or a set of discrete values (if interpolation_type=0)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="atomic_data">
+		<xs:annotation>
+			<xs:documentation>Atomic, molecular, nuclear and surface physics data. Each occurrence contains the atomic data for a given element (nuclear charge), describing various physical processes. For each process, atomic data tables are organized by charge states. The coordinate system used by the atomic data tables is described under the coordinate_system node.</xs:documentation>
+			<xs:appinfo>
+				<lifecycle_status>alpha</lifecycle_status>
+				<lifecycle_version>3_0.0</lifecycle_version>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="z_n">
+					<xs:annotation>
+						<xs:documentation>Nuclear charge</xs:documentation>
+						<xs:appinfo>
+							<units>Elementary Charge Unit</units>
+							<type>static</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="a">
+					<xs:annotation>
+						<xs:documentation>Mass of atom</xs:documentation>
+						<xs:appinfo>
+							<units>Atomic Mass Unit</units>
+							<type>static</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="process" type="atomic_data_process" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Description and data for a set of physical processes.</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="coordinate_system" type="atomic_data_coordinate_system" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Array of possible coordinate systems for process tables</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="code"/>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
