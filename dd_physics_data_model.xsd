@@ -8,6 +8,7 @@
 	<!--   Here we must declare all included schemas, not only those directly below TOP but also all those used at any sublevel (makes it easier for the recursive XSL transformation generating the type definitions) -->
 	<xs:include schemaLocation="utilities/dd_support.xsd"/>
 	<xs:include schemaLocation="actuator/dd_actuator.xsd"/>
+	<xs:include schemaLocation="atomic_data/dd_atomic_data.xsd"/>
 	<xs:include schemaLocation="controllers/dd_controllers.xsd"/>
 	<xs:include schemaLocation="core_profiles/dd_core_profiles.xsd"/>
 	<xs:include schemaLocation="core_plasma/dd_core_plasma.xsd"/>
@@ -30,6 +31,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="actuator" maxOccurs="6"/>
+				<xs:element ref="atomic_data" maxOccurs="2"/>
 				<xs:element ref="controllers" maxOccurs="2"/>
 				<xs:element ref="core_plasma" maxOccurs="6"/>
 				<xs:element ref="core_profiles"/>

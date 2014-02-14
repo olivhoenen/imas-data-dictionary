@@ -23,13 +23,18 @@
 				<td>6</td>
 			</tr>
 			<tr>
+				<td><a href="#atomic_data">atomic_data</a></td>
+				<td>Atomic, molecular, nuclear and surface physics data. Each occurrence contains the atomic data for a given element (nuclear charge), describing various physical processes. For each process, atomic data tables are organized by charge states. The coordinate system used by the atomic data tables is described under the coordinate_system node.</td>
+				<td>2</td>
+			</tr>
+			<tr>
 				<td><a href="#controllers">controllers</a></td>
 				<td>Feedback and feedforward controllers</td>
 				<td>2</td>
 			</tr>
 			<tr>
 				<td><a href="#core_plasma">core_plasma</a></td>
-				<td>Core plasma fluid description</td>
+				<td></td>
 				<td>6</td>
 			</tr>
 			<tr>
@@ -312,6 +317,428 @@
 							</tr>
 						</table>
 					</td>
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {dynamic}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {dynamic}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {dynamic}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code/output_diagnostics</td>
+					<td>List of the code specific diagnostic/output in XML format {dynamic}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="atomic_data"><p class="welcome">ITER Physics Data Model Documentation for atomic_data</p>
+			<p>Atomic, molecular, nuclear and surface physics data. Each occurrence contains the atomic data for a given element (nuclear charge), describing various physical processes. For each process, atomic data tables are organized by charge states. The coordinate system used by the atomic data tables is described under the coordinate_system node.</p>
+			<p>Lifecycle status: alpha since version 3_0.0</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/status_of</td>
+					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment_of</td>
+					<td>Any additional comment from the source application {constant}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/creator_of</td>
+					<td>Creator of this consistent IDS {constant}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/date_of</td>
+					<td>Date of consistent creation of this IDS {constant}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/source_of</td>
+					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/reference_of</td>
+					<td>Documented reference to this IDS data {constant}</td>
+					<td>str_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>int_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>z_n</td>
+					<td>Nuclear charge {static} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>a</td>
+					<td>Mass of atom {static} [Atomic Mass Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)</td>
+					<td>Description and data for a set of physical processes.</td>
+					<td>struct_array [max_size=20]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>process(:)/label</td>
+					<td>String identifying the process (e.g. EI, RC, ...) {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/table_dimension</td>
+					<td>Table dimensionality of the process (1 to 6), valid for all charge states. Indicates which of the tables is filled (below the charge_state node) {static}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/coordinate_index</td>
+					<td>Index in tables_coord, specifying what coordinate systems to use for this process (valid for all tables) {static}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/result_label</td>
+					<td>Description of the process result (rate, cross section, sputtering yield, ...) {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/result_units</td>
+					<td>Units of the process result {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/result_transformation</td>
+					<td>Transformation of the process result. Integer flag: 0=no transformation; 1=10^; 2=exp() {static}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)</td>
+					<td>Process tables for a set of charge states. Only one table is used for that process, defined by process(:)/table_dimension</td>
+					<td>struct_array [max_size=20]</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/label</td>
+					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/z_min</td>
+					<td>Minimum Z of the charge state bundle {static} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/z_max</td>
+					<td>Maximum Z of the charge state bundle (equal to z_min if no bundle) {static} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/table_0d</td>
+					<td>0D table describing the process data {static} [units given by process(:)/results_units]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/table_1d</td>
+					<td>1D table describing the process data {static} [units given by process(:)/results_units]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- process(:)/charge_state(:)/table_1d/coordinate_system(process(:)/coordinate_index)/coordinate(1)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/table_2d</td>
+					<td>2D table describing the process data {static} [units given by process(:)/results_units]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- process(:)/charge_state(:)/table_2d/coordinate_system(process(:)/coordinate_index)/coordinate(1)</td>
+							</tr>
+							<tr>
+								<td>2- process(:)/charge_state(:)/table_2d/coordinate_system(process(:)/coordinate_index)/coordinate(2)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/table_3d</td>
+					<td>3D table describing the process data {static} [units given by process(:)/results_units]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- process(:)/charge_state(:)/table_3d/coordinate_system(process(:)/coordinate_index)/coordinate(1)</td>
+							</tr>
+							<tr>
+								<td>2- process(:)/charge_state(:)/table_3d/coordinate_system(process(:)/coordinate_index)/coordinate(2)</td>
+							</tr>
+							<tr>
+								<td>3- process(:)/charge_state(:)/table_3d/coordinate_system(process(:)/coordinate_index)/coordinate(3)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/table_4d</td>
+					<td>4D table describing the process data {static} [units given by process(:)/results_units]</td>
+					<td>FLT_4D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- process(:)/charge_state(:)/table_4d/coordinate_system(process(:)/coordinate_index)/coordinate(1)</td>
+							</tr>
+							<tr>
+								<td>2- process(:)/charge_state(:)/table_4d/coordinate_system(process(:)/coordinate_index)/coordinate(2)</td>
+							</tr>
+							<tr>
+								<td>3- process(:)/charge_state(:)/table_4d/coordinate_system(process(:)/coordinate_index)/coordinate(3)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/table_5d</td>
+					<td>5D table describing the process data {static} [units given by process(:)/results_units]</td>
+					<td>FLT_5D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- process(:)/charge_state(:)/table_5d/coordinate_system(process(:)/coordinate_index)/coordinate(1)</td>
+							</tr>
+							<tr>
+								<td>2- process(:)/charge_state(:)/table_5d/coordinate_system(process(:)/coordinate_index)/coordinate(2)</td>
+							</tr>
+							<tr>
+								<td>3- process(:)/charge_state(:)/table_5d/coordinate_system(process(:)/coordinate_index)/coordinate(3)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>process(:)/charge_state(:)/table_6d</td>
+					<td>6D table describing the process data {static} [units given by process(:)/results_units]</td>
+					<td>FLT_6D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- process(:)/charge_state(:)/table_6d/coordinate_system(process(:)/coordinate_index)/coordinate(1)</td>
+							</tr>
+							<tr>
+								<td>2- process(:)/charge_state(:)/table_6d/coordinate_system(process(:)/coordinate_index)/coordinate(2)</td>
+							</tr>
+							<tr>
+								<td>3- process(:)/charge_state(:)/table_6d/coordinate_system(process(:)/coordinate_index)/coordinate(3)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>coordinate_system(:)</td>
+					<td>Array of possible coordinate systems for process tables</td>
+					<td>struct_array [max_size=20]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>coordinate_system(:)/coordinate(:)</td>
+					<td>Set of coordinates for that coordinate system. A coordinate an be either a range of real values or a set of discrete values (if interpolation_type=0)</td>
+					<td>struct_array [max_size=6]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>coordinate_system(:)/coordinate(:)/label</td>
+					<td>Description of coordinate (e.g. "Electron temperature") {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coordinate_system(:)/coordinate(:)/values</td>
+					<td>Coordinate values {static} [units given by coordinate_system(:)/coordinate(:)/units]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>coordinate_system(:)/coordinate(:)/interpolation_type</td>
+					<td>Interpolation strategy in this coordinate direction. Integer flag: 0=discrete (no interpolation); 1=linear; ... {static}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coordinate_system(:)/coordinate(:)/extrapolation_type</td>
+					<td>Extrapolation strategy when leaving the domain. The first value of the vector describes the behaviour at lower bound, the second describes the at upper bound. Possible values: 0=none, report error; 1=boundary value; 2=linear extrapolation {static}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>coordinate_system(:)/coordinate(:)/value_labels</td>
+					<td>String description of discrete coordinate values (if interpolation_type=0). E.g., for spectroscopic lines, the spectroscopic description of the transition. {static}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- coordinate_system(:)/coordinate(:)/values</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>coordinate_system(:)/coordinate(:)/units</td>
+					<td>Units of coordinate (e.g. eV) {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coordinate_system(:)/coordinate(:)/transformation</td>
+					<td>Coordinate transformation applied to coordinate values stored in coord. Integer flag: 0=none; 1=log10; 2=ln {static}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>coordinate_system(:)/coordinate(:)/spacing</td>
+					<td>Flag for specific coordinate spacing (for optimization purposes). Integer flag: 0=undefined; 1=uniform; ... {static}</td>
+					<td>INT_0D</td>
+					<td />
 				</tr>
 				<tr>
 					<td>code</td>
@@ -824,8 +1251,8 @@
 				</tr>
 			</table>
 		</a><a name="core_plasma"><p class="welcome">ITER Physics Data Model Documentation for core_plasma</p>
-			<p>Core plasma fluid description</p>
-			<p>Lifecycle status: alpha since version 3_0.0</p>
+			<p></p>
+			<p>Lifecycle status:  since version </p>
 			<table border="1">
 				<thead style="color:#ff0000">
 					<td>Full path name</td>
@@ -889,751 +1316,751 @@
 				</tr>
 				<tr>
 					<td>profiles_1d(:)</td>
-					<td>Core plasma radial profiles {dynamic}</td>
+					<td> {}</td>
 					<td>struct_array [max_size=unbounded]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/time</td>
+								<td>1- profiles_1d(:)/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/rho_tor_norm</td>
-					<td>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {dynamic}</td>
+					<td> {}</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...N</td>
+								<td>1- profiles_1d(:)/rho_tor_norm/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/rho_tor</td>
-					<td>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0 {dynamic} [m]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/rho_tor/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/psi</td>
-					<td>Poloidal magnetic flux {dynamic} [Wb]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/psi/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/volume</td>
-					<td>Volume enclosed inside the magnetic surface {dynamic} [m^3]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/volume/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/t_e</td>
-					<td>Electron temperature {dynamic} [eV]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/t_e/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/t_i_average</td>
-					<td>Ion temperature (averaged on charge states and ion species) {dynamic} [eV]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/t_i_average/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/n_e</td>
-					<td>Electron density (thermal+non-thermal) {dynamic} [m^-3]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/n_e/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/n_e_fast</td>
-					<td>Density of fast (non-thermal) electrons {dynamic} [m^-3]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/n_e_fast/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)</td>
-					<td>Quantities related to the different ion species</td>
+					<td></td>
 					<td>struct_array [max_size=unbounded]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...N_Ions</td>
+								<td>1- profiles_1d(:)/ions(:)/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/a</td>
-					<td>Mass of atom {dynamic} [Atomic Mass Unit]</td>
+					<td> {} []</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/z_ion</td>
-					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {dynamic} [Elementary Charge Unit]</td>
+					<td> {} []</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/z_n</td>
-					<td>Nuclear charge {dynamic} [Elementary Charge Unit]</td>
+					<td> {} []</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/label</td>
-					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {dynamic}</td>
+					<td> {}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/n_i</td>
-					<td>Ion density (thermal+non-thermal) {dynamic} [m^-3]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/n_i/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/n_i_fast</td>
-					<td>Density of fast (non-thermal) ions, for the ion species considered {dynamic} [m^-3]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/n_i_fast/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/t_i</td>
-					<td>Ion temperature of that ion species {dynamic} [eV]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/t_i/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/p_i</td>
-					<td>Ion pressure for that ion species {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/p_i/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/p_i_fast_perpendicular</td>
-					<td>Fast ion perpendicular pressure for that ion species {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/p_i_fast_perpendicular/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/p_i_fast_parallel</td>
-					<td>Fast ion parallel pressure for that ion species {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/p_i_fast_parallel/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/v_tor_i</td>
-					<td>Toroidal velocity of that ion species {dynamic} [m.s^-1]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/v_tor_i/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/v_pol_i</td>
-					<td>Poloidal velocity of that ion species {dynamic} [m.s^-1]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/v_pol_i/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/multiple_charge_state_flag</td>
-					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {dynamic}</td>
+					<td> {}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)</td>
-					<td>Quantities related to the different charge states of the ion species</td>
+					<td></td>
 					<td>struct_array [max_size=unbounded]</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- 1...N_charge_states</td>
+								<td>1- profiles_1d(:)/ions(:)/charge_states(:)/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/z_min</td>
-					<td>Minimum Z of the charge state bundle {dynamic} [Elementary Charge Unit]</td>
+					<td> {} []</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/z_max</td>
-					<td>Maximum Z of the charge state bundle {dynamic} [Elementary Charge Unit]</td>
+					<td> {} []</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/label</td>
-					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {dynamic}</td>
+					<td> {}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/n_z</td>
-					<td>Density of the charge state considered (thermal+non-thermal) {dynamic} [m^-3]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/charge_states(:)/n_z/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/n_z_fast</td>
-					<td>Density of fast (non-thermal) ions, for the charge state considered {dynamic} [m^-3]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/charge_states(:)/n_z_fast/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/t_z</td>
-					<td>Temperature of the charge state considered {dynamic} [m^-3]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/charge_states(:)/t_z/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/p_z</td>
-					<td>Pressure of the charge state considered {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/charge_states(:)/p_z/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/p_z_fast_perpendicular</td>
-					<td>Fast perpendicular pressure of the charge state considered {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/charge_states(:)/p_z_fast_perpendicular/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/p_z_fast_parallel</td>
-					<td>Fast parallel pressure of the charge state considered {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/charge_states(:)/p_z_fast_parallel/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/v_tor_z</td>
-					<td>Toroidal velocity of the charge state considered {dynamic} [m.s^-1]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/charge_states(:)/v_tor_z/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/ions(:)/charge_states(:)/v_pol_z</td>
-					<td>Poloidal velocity of the charge state considered {dynamic} [m.s^-1]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/ions(:)/charge_states(:)/v_pol_z/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/n_i_total_over_n_e</td>
-					<td>Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal) {dynamic} [-]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/n_i_total_over_n_e/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/momentum_tor</td>
-					<td>Total plasma toroidal momentum, summed over ion species and electrons  {dynamic}</td>
+					<td> {}</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/momentum_tor/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/zeff</td>
-					<td>Effective charge {dynamic}</td>
+					<td> {}</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/zeff/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/p_e</td>
-					<td>Electron pressure {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/p_e/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/p_e_fast_perpendicular</td>
-					<td>Fast (non-thermal) electron perpendicular pressure {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/p_e_fast_perpendicular/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/p_e_fast_parallel</td>
-					<td>Fast (non-thermal) electron parallel pressure {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/p_e_fast_parallel/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/p_i_total</td>
-					<td>Total ion pressure (sum over the ion species) {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/p_i_total/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/p_i_total_fast_perpendicular</td>
-					<td>Fast (non-thermal) total ion (sum over the ion species) perpendicular pressure {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/p_i_total_fast_perpendicular/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/p_i_total_fast_parallel</td>
-					<td>Fast (non-thermal) total ion (sum over the ion species) parallel pressure {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/p_i_total_fast_parallel/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/pressure_thermal</td>
-					<td>Thermal pressure (electrons+ions) {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/pressure_thermal/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/pressure_perpendicular</td>
-					<td>Total perpendicular pressure (electrons+ions, thermal+non-thermal) {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/pressure_perpendicular/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/pressure_parallel</td>
-					<td>Total parallel pressure (electrons+ions, thermal+non-thermal) {dynamic} [Pa]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/pressure_parallel/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/j_total</td>
-					<td>Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/j_total/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/j_tor</td>
-					<td>Total toroidal current density = average(J_Tor/R) / average(1/R) {dynamic} [A/m^2]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/j_tor/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/j_ohmic</td>
-					<td>Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/j_ohmic/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/j_non_inductive</td>
-					<td>Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/j_non_inductive/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/j_bootstrap</td>
-					<td>Bootstrap current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/j_bootstrap/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/conductivity_parallel</td>
-					<td>Parallel conductivity {dynamic} [ohm^-1.m^-1]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/conductivity_parallel/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/e_field_parallel</td>
-					<td>Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [V.m^-1]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/e_field_parallel/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/q</td>
-					<td>Safety factor {dynamic} [-]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/q/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/magnetic_shear</td>
-					<td>Magnetic shear, defined as rho_tor/q . dq/drho_tor {dynamic} [-]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/magnetic_shear/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>profiles_1d(:)/time</td>
-					<td>Time {dynamic} [s]</td>
+					<td> {} []</td>
 					<td>flt_type</td>
 					<td />
 				</tr>
 				<tr>
 					<td>global_quantities</td>
-					<td>Various global quantities derived from the profiles</td>
+					<td></td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
 					<td>global_quantities/ip</td>
-					<td>Total plasma current {dynamic} [A]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
+								<td>1- global_quantities/ip/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>global_quantities/current_non_inductive</td>
-					<td>Total non-inductive parallel current {dynamic} [A]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
+								<td>1- global_quantities/current_non_inductive/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>global_quantities/current_bootstrap</td>
-					<td>Bootstrap current {dynamic} [A]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
+								<td>1- global_quantities/current_bootstrap/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>global_quantities/v_loop</td>
-					<td>LCFS loop voltage {dynamic} [V]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
+								<td>1- global_quantities/v_loop/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>global_quantities/li_3</td>
-					<td>Internal inductance {dynamic}</td>
+					<td>global_quantities/li</td>
+					<td> {}</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
+								<td>1- global_quantities/li/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>global_quantities/beta_tor</td>
-					<td>Toroidal beta, defined as the volume-averaged total perpendicular pressure divided by (B0^2/(2*mu0)) {dynamic}</td>
+					<td> {}</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
+								<td>1- global_quantities/beta_tor/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>global_quantities/beta_tor_norm</td>
-					<td>Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA]  {dynamic}</td>
+					<td> {}</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
+								<td>1- global_quantities/beta_tor_norm/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>global_quantities/beta_pol</td>
-					<td>Poloidal beta {dynamic}</td>
+					<td> {}</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
+								<td>1- global_quantities/beta_pol/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>global_quantities/energy_diamagnetic</td>
-					<td>Plasma energy content = 3/2 * integral over the plasma volume of the total perpendicular pressure  {dynamic} [A]</td>
+					<td> {} []</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- time</td>
+								<td>1- global_quantities/energy_diamagnetic/</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<td>vacuum_toroidal_field</td>
-					<td>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</td>
+					<td></td>
 					<td>structure</td>
 					<td />
 				</tr>
