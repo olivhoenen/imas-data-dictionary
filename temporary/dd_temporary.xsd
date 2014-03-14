@@ -26,6 +26,48 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_int_0d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant INT_0D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="description" type="str_type">
 				<xs:annotation>
 					<xs:documentation>Description</xs:documentation>
@@ -52,6 +94,14 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="description" type="str_type">
 				<xs:annotation>
 					<xs:documentation>Description</xs:documentation>
@@ -72,11 +122,90 @@
 					<xs:documentation>Value</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_int_1d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant INT_1D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_string_1d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant STR_1D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="description" type="str_type">
 				<xs:annotation>
@@ -109,6 +238,166 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_int_1d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic Int_1D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="INT_1D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_str_1d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic STR_1D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="STR_1D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_float_2d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant Float_2D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_int_2d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant INT_2D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="description" type="str_type">
 				<xs:annotation>
 					<xs:documentation>Description</xs:documentation>
@@ -130,7 +419,8 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>mixed</units>
-						<coordinate1>time</coordinate1>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -139,6 +429,461 @@
 						<xs:element ref="time"/>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_int_2d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic INT_2D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="INT_2D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_float_3d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant Float_3D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_int_3d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant INT_3D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_float_3d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic Float_3D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>time</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_3D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_int_3d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic INT_3D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>time</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="INT_3D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_float_4d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic Float_4D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>time</coordinate4>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_4D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_float_4d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant Float_4D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>1...N</coordinate4>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_4D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_float_5d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic Float_5D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>1...N</coordinate4>
+						<coordinate5>time</coordinate5>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_5D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_float_5d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant Float_5D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>1...N</coordinate4>
+						<coordinate5>1...N</coordinate5>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_5D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_dynamic_quantities_float_6d">
+		<xs:annotation>
+			<xs:documentation>Temporary dynamic Float_6D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>1...N</coordinate4>
+						<coordinate5>1...N</coordinate5>
+						<coordinate6>time</coordinate6>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_6D"/>
+						<xs:element ref="time"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Description</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="temporary_constant_quantities_float_6d">
+		<xs:annotation>
+			<xs:documentation>Temporary constant Float_6D</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>1...N</coordinate4>
+						<coordinate5>1...N</coordinate5>
+						<coordinate6>1...N</coordinate6>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_6D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name" type="str_type">
+				<xs:annotation>
+					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="description" type="str_type">
 				<xs:annotation>
@@ -166,6 +911,16 @@
 						<xs:documentation>Constant 0D float</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
+													<units>mixed</units>
+
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_integer0d" type="temporary_constant_quantities_int_0d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 0D integer</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -177,11 +932,28 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="constant_integer1d" type="temporary_constant_quantities_int_1d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 1D integer</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_string1d" type="temporary_constant_quantities_string_1d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 1D string</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="constant_float1d" type="temporary_constant_quantities_float_1d" maxOccurs="10">
 					<xs:annotation>
 						<xs:documentation>Constant 1D float</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
+																				<units>mixed</units>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -193,9 +965,129 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="dynamic_string1d" type="temporary_dynamic_quantities_str_1d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 1D string</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dynamic_integer1d" type="temporary_dynamic_quantities_int_1d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 1D integer</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_float2d" type="temporary_constant_quantities_float_2d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 2D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_integer2d" type="temporary_constant_quantities_int_2d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 2D integer</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="dynamic_float2d" type="temporary_dynamic_quantities_float_2d" maxOccurs="10">
 					<xs:annotation>
 						<xs:documentation>Dynamic 2D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dynamic_integer2d" type="temporary_dynamic_quantities_int_2d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 2D integer</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_float3d" type="temporary_constant_quantities_float_3d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 3D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_integer3d" type="temporary_constant_quantities_int_3d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 3D integer</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dynamic_float3d" type="temporary_dynamic_quantities_float_3d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 3D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dynamic_integer3d" type="temporary_dynamic_quantities_int_3d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 3D integer</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_float4d" type="temporary_constant_quantities_float_4d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 4D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dynamic_float4d" type="temporary_dynamic_quantities_float_4d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 4D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_float5d" type="temporary_constant_quantities_float_5d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 5D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dynamic_float5d" type="temporary_dynamic_quantities_float_5d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 5D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="constant_float6d" type="temporary_constant_quantities_float_6d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Constant 6D float</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dynamic_float6d" type="temporary_dynamic_quantities_float_6d" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Dynamic 6D float</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>

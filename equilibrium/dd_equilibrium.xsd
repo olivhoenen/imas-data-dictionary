@@ -13,20 +13,19 @@
 				<xs:annotation>
 					<xs:documentation>0 (limiter) or 1 (diverted)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_1D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="lcfs" type="rz2d_dynamic_npoints">
+			<xs:element name="lcfs" type="rz1d_dynamic_aos">
 				<xs:annotation>
-					<xs:documentation>RZ description of the plasma boundary. The second dimension is oversized to fit the maximum number of (R,Z) points over the time range</xs:documentation>
+					<xs:documentation>RZ description of the plasma boundary</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="geometric_axis" type="rz1d_dynamic">
+			<xs:element name="geometric_axis" type="rz0d_dynamic_aos">
 				<xs:annotation>
 					<xs:documentation>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)</xs:documentation>
 				</xs:annotation>
@@ -35,121 +34,137 @@
 				<xs:annotation>
 					<xs:documentation>Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="elongation">
 				<xs:annotation>
 					<xs:documentation>Elongation of the plasma boundary</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="elongation_upper">
 				<xs:annotation>
 					<xs:documentation>Elongation (upper half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="elongation_lower">
 				<xs:annotation>
 					<xs:documentation>Elongation (lower half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="triangularity">
+				<xs:annotation>
+					<xs:documentation>Triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="triangularity_upper">
 				<xs:annotation>
 					<xs:documentation>Upper triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
+						<units>-</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="triangularity_lower">
 				<xs:annotation>
 					<xs:documentation>Lower triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
+						<units>-</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_x_points">
+			<xs:element name="x_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Number of X points at a given time</xs:documentation>
+					<xs:documentation>Array of X-points, for each of them the RZ position is given</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
+<coordinate1>1...N</coordinate1>					
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="x_point_inner" type="rz1d_dynamic">
+			<xs:element name="strike_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>RZ position of the innermost X point, the active X point if diverted.</xs:documentation>
+					<xs:documentation>Array of strike points, for each of them the RZ position is given</xs:documentation>
+										<xs:appinfo>
+<coordinate1>1...N</coordinate1>					
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="x_point_outer" type="rz1d_dynamic">
-				<xs:annotation>
-					<xs:documentation>RZ position of the second Xpoint</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="strike_point_lower_left" type="rz1d_dynamic">
-				<xs:annotation>
-					<xs:documentation>RZ position of the lower left strike point</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="strike_point_upper_left" type="rz1d_dynamic">
-				<xs:annotation>
-					<xs:documentation>RZ position of the upper left strike point</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="strike_point_lower_right" type="rz1d_dynamic">
-				<xs:annotation>
-					<xs:documentation>RZ position of the lower right strike point</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="strike_point_upper_right" type="rz1d_dynamic">
-				<xs:annotation>
-					<xs:documentation>RZ position of the upper right strike point</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="active_limiter_point" type="rz1d_dynamic">
+			<xs:element name="active_limiter_point" type="rz0d_dynamic_aos">
 				<xs:annotation>
 					<xs:documentation>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="equilibrium_global_quantities_qmin">
+		<xs:annotation>
+			<xs:documentation>Position and value of q_min</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Minimum q value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Minimum q position in normalised toroidal flux coordinate</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -160,38 +175,40 @@
 		<xs:sequence>
 			<xs:element name="beta_pol">
 				<xs:annotation>
-					<xs:documentation>Poloidal beta</xs:documentation>
+					<xs:documentation>Poloidal beta. Defined as betap = 4 int(p dV) / [R_0 * mu_0 * Ip^2]</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="beta_tor">
 				<xs:annotation>
-					<xs:documentation>Toroidal beta</xs:documentation>
+					<xs:documentation>Toroidal beta, defined as the volume-averaged total perpendicular pressure divided by (B0^2/(2*mu0)), i.e. beta_toroidal = 2 mu0 int(p dV) / V / B0^2</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
+												<units>-</units>
+
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="beta_normal">
 				<xs:annotation>
-					<xs:documentation>Normalised toroidal beta</xs:documentation>
+					<xs:documentation>Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA] </xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
+												<units>-</units>
+
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ip">
@@ -199,12 +216,11 @@
 					<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="li_3">
@@ -212,11 +228,12 @@
 					<xs:documentation>Internal inductance</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
+												<units>-</units>
+
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="volume">
@@ -224,12 +241,11 @@
 					<xs:documentation>Total plasma volume</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
 						<units>m^3</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="area">
@@ -237,12 +253,35 @@
 					<xs:documentation>Area of the LCFS poloidal cross section</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
 						<units>m^2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="surface">
+				<xs:annotation>
+					<xs:documentation>Surface area of the toroidal flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="length_pol">
+				<xs:annotation>
+					<xs:documentation>Poloidal length of the magnetic surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="psi_axis">
@@ -250,12 +289,11 @@
 					<xs:documentation>Poloidal flux at the magnetic axis</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
 						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="psi_boundary">
@@ -263,12 +301,11 @@
 					<xs:documentation>Poloidal flux at the selected plasma boundary </xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
 						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="magnetic_axis" type="rz1d_dynamic">
@@ -281,12 +318,11 @@
 					<xs:documentation>Total toroidal magnetic field at the magnetic axis</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="q_axis">
@@ -294,12 +330,11 @@
 					<xs:documentation>q at the magnetic axis</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="q_95">
@@ -307,30 +342,16 @@
 					<xs:documentation>q at the 95% poloidal flux surface</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="q_min">
+			<xs:element name="q_min" type="equilibrium_global_quantities_qmin">
 				<xs:annotation>
-					<xs:documentation>Minimum q value in the plasma</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_2">
-				<xs:annotation>
-					<xs:documentation>Characteristics of the vacuum toroidal field</xs:documentation>
+					<xs:documentation>Minimum q value and position</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="w_mhd">
@@ -338,24 +359,11 @@
 					<xs:documentation>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
 						<units>J</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="gamma">
-				<xs:annotation>
-					<xs:documentation>Adiabatic index</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -367,16 +375,15 @@
 		<xs:sequence>
 			<xs:element name="psi">
 				<xs:annotation>
-					<xs:documentation>Poloidal flux, such that Bp=|grad psi| /R/2/pi</xs:documentation>
+					<xs:documentation>Poloidal flux</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>1...n_psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
+						<coordinate1>1...N</coordinate1>
 						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="phi">
@@ -385,12 +392,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="pressure">
@@ -399,12 +405,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>Pa</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="f">
@@ -413,26 +418,24 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>T.m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="dpressure_dpsi">
 				<xs:annotation>
-					<xs:documentation>Derivative of Pressure w.r.t. Psi</xs:documentation>
+					<xs:documentation>Derivative of pressure w.r.t. psi</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>Pa.Wb^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="f_df_dpsi">
@@ -441,26 +444,24 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>T^2.m^2/Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="j_tor">
 				<xs:annotation>
-					<xs:documentation>Flux surface averaged toroidal current density = average(J_TorR) / average(1/R)</xs:documentation>
+					<xs:documentation>Flux surface averaged toroidal current density = average(j_tor/R) / average(1/R)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>A/m^2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="j_parallel">
@@ -469,12 +470,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>A/m^2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="q">
@@ -483,26 +483,24 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="magnetic_shear">
 				<xs:annotation>
-					<xs:documentation>Magnetic shear</xs:documentation>
+					<xs:documentation>Magnetic shear, defined as rho_tor/q . dq/drho_tor</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>-</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="r_inboard">
@@ -511,12 +509,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="r_outboard">
@@ -525,26 +522,37 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="rho_tor">
 				<xs:annotation>
-					<xs:documentation>Toroidal flux coordinate, defined as sqrt(Phi/pi/B0), where B0 = Equilibrium/Global/Toroidal_Field/B0</xs:documentation>
+					<xs:documentation>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../psi</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="dpsi_drho_tor">
@@ -553,26 +561,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>Wb/m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="rho_vol_norm">
-				<xs:annotation>
-					<xs:documentation>Normalised radial coordinate related to the plasma volume. Defined as sqrt(volume / volume[LCFS])</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="elongation">
@@ -581,12 +574,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="triangularity_upper">
@@ -595,12 +587,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="triangularity_lower">
@@ -609,12 +600,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="volume">
@@ -623,12 +613,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^3</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="dvolume_dpsi">
@@ -637,12 +626,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^3.Wb^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="dvolume_drho_tor">
@@ -651,12 +639,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="area">
@@ -665,12 +652,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="darea_dpsi">
@@ -679,12 +665,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^2.Wb^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="surface">
@@ -693,12 +678,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="trapped_fraction">
@@ -707,11 +691,12 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
+												<units>-</units>
+
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gm1">
@@ -720,12 +705,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gm2">
@@ -734,12 +718,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gm3">
@@ -748,11 +731,12 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
+												<units>-</units>
+
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gm4">
@@ -761,12 +745,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>T^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gm5">
@@ -775,12 +758,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>T^2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gm6">
@@ -789,12 +771,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>T^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gm7">
@@ -803,11 +784,12 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
+												<units>-</units>
+
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gm8">
@@ -816,12 +798,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="gm9">
@@ -830,12 +811,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>m^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="b_average">
@@ -844,12 +824,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="b_min">
@@ -858,12 +837,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="b_max">
@@ -872,12 +850,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<coordinate2>../../time</coordinate2>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -892,13 +869,12 @@
 					<xs:documentation>First dimension values</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>1...n_dim1</coordinate1>
-						<coordinate2>../../../time</coordinate2>
-						<units>variable</units>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="dim2">
@@ -906,13 +882,12 @@
 					<xs:documentation>Second dimension values</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>1...n_dim2</coordinate1>
-						<coordinate2>../../../time</coordinate2>
-						<units>variable</units>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -922,16 +897,10 @@
 			<xs:documentation>Equilibrium 2D profiles in the poloidal plane</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="grid_type">
+			<xs:element name="grid_type" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Selection of one of a set of grid types. 1-rectangular (R,Z) grid, in this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="grid" type="equilibrium_profiles_2d_grid">
 				<xs:annotation>
@@ -945,12 +914,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="z">
@@ -960,12 +928,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="psi">
@@ -975,12 +942,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="theta">
@@ -990,12 +956,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="phi">
@@ -1005,12 +970,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="j_tor">
@@ -1020,12 +984,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>A.m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="j_parallel">
@@ -1035,12 +998,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>A.m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="b_r">
@@ -1050,12 +1012,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="b_z">
@@ -1065,12 +1026,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="b_tor">
@@ -1080,12 +1040,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -1095,16 +1054,10 @@
 			<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="grid_type">
+			<xs:element name="grid_type" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Type of coordinate system</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="grid" type="equilibrium_profiles_2d_grid">
 				<xs:annotation>
@@ -1118,12 +1071,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="z">
@@ -1133,12 +1085,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="jacobian">
@@ -1148,12 +1099,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>variable</units>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="g_11">
@@ -1163,12 +1113,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>variable</units>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="g_12">
@@ -1178,12 +1127,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>variable</units>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="g_13">
@@ -1193,12 +1141,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>variable</units>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="g_22">
@@ -1208,12 +1155,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>variable</units>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="g_23">
@@ -1223,12 +1169,11 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>variable</units>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="g_33">
@@ -1238,13 +1183,59 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>variable</units>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="equilibrium_time_slice">
+		<xs:annotation>
+			<xs:documentation>Equilibrium at a given time slice</xs:documentation>
+			<xs:appinfo>
+				<type>dynamic</type>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="boundary" type="equilibrium_boundary">
+				<xs:annotation>
+					<xs:documentation>Description of the plasma boundary</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="global_quantities" type="equlibrium_global_quantities">
+				<xs:annotation>
+					<xs:documentation>0D parameters of the equilibrium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="profiles_1d" type="equilibrium_profiles_1d">
+				<xs:annotation>
+					<xs:documentation>Equilibrium profiles (1D radial grid) as a function of the poloidal flux</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="profiles_2d" type="equilibrium_profiles_2d" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Equilibrium 2D profiles in the poloidal plane. Multiple 2D representations of the equilibrium can be stored here.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...n_representations</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="coordinate_system" type="equilibrium_coordinate_system">
+				<xs:annotation>
+					<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -1259,32 +1250,18 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="boundary" type="equilibrium_boundary">
+				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
-						<xs:documentation>Description of the plasma boundary</xs:documentation>
+						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="global_quantities" type="equlibrium_global_quantities">
+				<xs:element name="time_slice" type="equilibrium_time_slice" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>0D parameters of the equilibrium</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="profiles_1d" type="equilibrium_profiles_1d">
-					<xs:annotation>
-						<xs:documentation>Equilibrium profiles (1D radial grid) as a function of the poloidal flux</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="profiles_2d" type="equilibrium_profiles_2d" maxOccurs="4">
-					<xs:annotation>
-						<xs:documentation>Equilibrium 2D profiles in the poloidal plane. Multiple 2D representations of the equilibrium can be stored here.</xs:documentation>
+						<xs:documentation>Set of equilibria at various time slices</xs:documentation>
 						<xs:appinfo>
-							<coordinate1>1...n_representations</coordinate1>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
 						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="coordinate_system" type="equilibrium_coordinate_system">
-					<xs:annotation>
-						<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>

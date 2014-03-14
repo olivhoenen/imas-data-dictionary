@@ -225,6 +225,9 @@
 			<xs:element name="charge_state" type="atomic_data_process_charge_state" maxOccurs="20">
 				<xs:annotation>
 					<xs:documentation>Process tables for a set of charge states. Only one table is used for that process, defined by process(:)/table_dimension</xs:documentation>
+					<xs:appinfo>
+<coordinate1>1...N</coordinate1>					
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -238,7 +241,7 @@
 				<xs:annotation>
 					<xs:documentation>Description of coordinate (e.g. "Electron temperature")</xs:documentation>
 					<xs:appinfo>
-<type>static</type>					
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -251,8 +254,7 @@
 					<xs:appinfo>
 						<units>units given by coordinate_system(:)/coordinate(:)/units</units>
 						<coordinate1>1...N</coordinate1>
-						<type>static</type>					
-
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -262,8 +264,8 @@
 			<xs:element name="interpolation_type">
 				<xs:annotation>
 					<xs:documentation>Interpolation strategy in this coordinate direction. Integer flag: 0=discrete (no interpolation); 1=linear; ...</xs:documentation>
-										<xs:appinfo>
-<type>static</type>					
+					<xs:appinfo>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -275,7 +277,7 @@
 					<xs:documentation>Extrapolation strategy when leaving the domain. The first value of the vector describes the behaviour at lower bound, the second describes the at upper bound. Possible values: 0=none, report error; 1=boundary value; 2=linear extrapolation</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...2</coordinate1>
-<type>static</type>					
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -287,7 +289,7 @@
 					<xs:documentation>String description of discrete coordinate values (if interpolation_type=0). E.g., for spectroscopic lines, the spectroscopic description of the transition.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../values</coordinate1>
-<type>static</type>					
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -298,8 +300,9 @@
 				<xs:annotation>
 					<xs:documentation>Units of coordinate (e.g. eV)</xs:documentation>
 					<xs:appinfo>
-<type>static</type>					
-					</xs:appinfo>				</xs:annotation>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
@@ -307,8 +310,8 @@
 			<xs:element name="transformation">
 				<xs:annotation>
 					<xs:documentation>Coordinate transformation applied to coordinate values stored in coord. Integer flag: 0=none; 1=log10; 2=ln</xs:documentation>
-										<xs:appinfo>
-<type>static</type>					
+					<xs:appinfo>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -318,10 +321,10 @@
 			<xs:element name="spacing">
 				<xs:annotation>
 					<xs:documentation>Flag for specific coordinate spacing (for optimization purposes). Integer flag: 0=undefined; 1=uniform; ...</xs:documentation>
-									<xs:appinfo>
-<type>static</type>					
+					<xs:appinfo>
+						<type>static</type>
 					</xs:appinfo>
-					</xs:annotation>
+				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>

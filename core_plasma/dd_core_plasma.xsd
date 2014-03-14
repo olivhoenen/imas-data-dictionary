@@ -396,6 +396,7 @@
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -408,6 +409,7 @@
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -420,6 +422,7 @@
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -432,6 +435,7 @@
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -461,6 +465,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -500,6 +505,19 @@
 						<type>dynamic</type>
 						<coordinate1>../rho_tor_norm</coordinate1>
 						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="area">
+				<xs:annotation>
+					<xs:documentation>Cross-sectional area of the flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m^2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -585,6 +603,7 @@
 					<xs:appinfo>
 						<coordinate1>../rho_tor_norm</coordinate1>
 						<type>dynamic</type>
+						<units>kg.m/s</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -597,6 +616,7 @@
 					<xs:appinfo>
 						<coordinate1>../rho_tor_norm</coordinate1>
 						<type>dynamic</type>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -861,7 +881,7 @@
 				<xs:element ref="ids_properties"/>
 				<xs:element name="profiles_1d" type="core_profiles_profiles_1d" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Core plasma radial profiles</xs:documentation>
+						<xs:documentation>Core plasma radial profiles for various time slices</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>

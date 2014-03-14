@@ -21,20 +21,58 @@
 <!-- Tests are done for each IDS -->
 <xsl:for-each select="IDS">
 <a name="{@name}">
-        <!-- First a general test here on all conditions to generate the VALID statement -->
+        <!-- First a general test here on all conditions to generate the "IDS is VALID" statement. This test consists in having success on all tests, i.e. all individual tests expressions are assembled here with AND NOT() statements.  -->
 <xsl:choose>
-<xsl:when test="not(.//field[not(@type) and not(@data_type='structure') and not(@data_type='struct_array')])">
+<xsl:when test="not(.//field[not(@type) and not(@data_type='structure') and not(@data_type='struct_array')]) 
+and not(.//field[not(@coordinate1) and (@data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_1D' or @data_type='INT_2D' or @data_type='INT_3D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' or @data_type='STR_1D' or @data_type='struct_array' )])
+and not (.//field[not(@coordinate2) and (@data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_2D' or @data_type='INT_3D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
+and not (.//field[not(@coordinate3) and (@data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_3D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
+and not (.//field[not(@coordinate4) and (@data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
+and not (.//field[not(@coordinate5) and (@data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
+and not (.//field[not(@coordinate6) and (@data_type='FLT_6D' or @data_type='CPX_6D' )])
+and not (.//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_0D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D')])
+">
 <p class="welcome">IDS <xsl:value-of select="@name"/> is valid</p>
 </xsl:when>
 <xsl:otherwise>
-<!-- Create error table and populate it with succesfull tests -->
+<!-- Create error table and populate it with results of the various tests, which are applied sequentially, each test corresponding to a particular type of error  -->
         <p class="welcome">IDS <xsl:value-of select="@name"/> has errors</p>
        <table border="1">
         <thead style="color:#ff0000"><td>Full path name</td><td>Description of the problem</td></thead>
-        <!-- Test the presence of the "type" metadata -->
+        <!-- Test the presence of the "type" metadata (R5.2) -->
         <xsl:apply-templates select=".//field[not(@type) and not(@data_type='structure') and not(@data_type='struct_array')]">
-        <xsl:with-param name="error_description" select="'This field should habe a type constant/static/dynamic'"/>
+        <xsl:with-param name="error_description" select="'This field must have a type attribute (constant/static/dynamic)'"/>
        </xsl:apply-templates>
+       <!-- Test the presence of the "coordinate1" metadata for 1D+ data (R5.4) -->
+        <xsl:apply-templates select=".//field[not(@coordinate1) and (@data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_1D' or @data_type='INT_2D' or @data_type='INT_3D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' or @data_type='STR_1D' or @data_type='struct_array' )]">
+        <xsl:with-param name="error_description" select="'This field must have a coordinate1 attribute'"/>
+       </xsl:apply-templates>
+       <!-- Test the presence of the "coordinate2" metadata for 2D+ data (R5.4) -->
+        <xsl:apply-templates select=".//field[not(@coordinate2) and (@data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_2D' or @data_type='INT_3D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )]">
+        <xsl:with-param name="error_description" select="'This field must have a coordinate2 attribute'"/>
+       </xsl:apply-templates>
+              <!-- Test the presence of the "coordinate3" metadata for 3D+ data (R5.4) -->
+        <xsl:apply-templates select=".//field[not(@coordinate3) and (@data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_3D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )]">
+        <xsl:with-param name="error_description" select="'This field must have a coordinate3 attribute'"/>
+       </xsl:apply-templates>
+              <!-- Test the presence of the "coordinate4" metadata for 4D+ data (R5.4) -->
+        <xsl:apply-templates select=".//field[not(@coordinate4) and (@data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )]">
+        <xsl:with-param name="error_description" select="'This field must have a coordinate4 attribute'"/>
+       </xsl:apply-templates>
+              <!-- Test the presence of the "coordinate5" metadata for 5D+ data (R5.4) -->
+        <xsl:apply-templates select=".//field[not(@coordinate5) and (@data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_5D' or @data_type='CPX_6D' )]">
+        <xsl:with-param name="error_description" select="'This field must have a coordinate5 attribute'"/>
+       </xsl:apply-templates>
+              <!-- Test the presence of the "coordinate6" metadata for 6D+ data (R5.4) -->
+        <xsl:apply-templates select=".//field[not(@coordinate6) and (@data_type='FLT_6D' or @data_type='CPX_6D' )]">
+        <xsl:with-param name="error_description" select="'This field must have a coordinate6 attribute'"/>
+       </xsl:apply-templates>
+       <!-- Test the presence of the "units" metadata for FLT and CPX data (R5.3) -->
+        <xsl:apply-templates select=".//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_0D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D')]">
+        <xsl:with-param name="error_description" select="'This field must have a units attribute'"/>
+       </xsl:apply-templates>
+
+
        </table>
 </xsl:otherwise>
 </xsl:choose>
@@ -45,7 +83,7 @@
   </xsl:template>
   
 
-<!-- A generic template for printing (adds a line to the HTML output table -->
+<!-- A generic template for printing the out_come of an error detection (adds a line to the HTML output table with the description of the error) -->
 <xsl:template name ="print_error" match="field">
 <xsl:param name ="error_description"/>
 <tr><td><xsl:value-of select="@path_doc"/></td><td><xsl:value-of select="$error_description"/></td></tr>

@@ -265,7 +265,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 													<xsl:attribute name="path_doc"><xsl:value-of select="@name"/></xsl:attribute>
 												</xsl:when>
 												<xsl:otherwise>
-													<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath,'/',@name)"/></xsl:attribute>
+													<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name)"/></xsl:attribute>
 												</xsl:otherwise>
 											</xsl:choose>
 									<xsl:for-each select="xs:annotation/xs:appinfo/*">
@@ -598,8 +598,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath"/>
 		<xsl:param name="coordinatePath"/>
 		<xsl:choose>
-			<xsl:when test="contains($coordinatePath,'...')">
-				<!-- Case of a main coordinate, directly print the 1...N prescription -->
+			<xsl:when test="contains($coordinatePath,'...') or contains($coordinatePath,'IDS')">
+				<!-- Case of a main coordinate, e.g. 1...N or coordinate in another IDS. In these two cases, absolute path or prescriptions are given, just reproduce them in the tag -->
 				<xsl:value-of select="$coordinatePath"/>
 			</xsl:when>
 			<xsl:otherwise>

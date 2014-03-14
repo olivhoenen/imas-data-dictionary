@@ -4,290 +4,324 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:complexType name="core_transport_model_density_1">
+	<xs:complexType name="core_transport_model_1_density">
 		<xs:annotation>
-			<xs:documentation>Transport coefficients for density equations. Axes one level above.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="d">
-				<xs:annotation>
-					<xs:documentation>Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>1...3</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>m^2.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="v">
-				<xs:annotation>
-					<xs:documentation>Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>1...3</coordinate2>
-						<coordinate3>../../time</coordinate3>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="core_transport_model_density_2">
-		<xs:annotation>
-			<xs:documentation>Transport coefficients for density equations. Axes two levels above.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="d">
-				<xs:annotation>
-					<xs:documentation>Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../rho_tor_norm</coordinate1>
-						<coordinate2>1...3</coordinate2>
-						<coordinate3>../../../time</coordinate3>
-						<units>m^2.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="v">
-				<xs:annotation>
-					<xs:documentation>Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../rho_tor_norm</coordinate1>
-						<coordinate2>1...3</coordinate2>
-						<coordinate3>../../../time</coordinate3>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="core_transport_model_density_3">
-		<xs:annotation>
-			<xs:documentation>Transport coefficients for density equations. Axes three levels above.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="d">
-				<xs:annotation>
-					<xs:documentation>Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../../rho_tor_norm</coordinate1>
-						<coordinate2>1...3</coordinate2>
-						<coordinate3>../../../../time</coordinate3>
-						<units>m^2.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="v">
-				<xs:annotation>
-					<xs:documentation>Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../../rho_tor_norm</coordinate1>
-						<coordinate2>1...3</coordinate2>
-						<coordinate3>../../../../time</coordinate3>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="core_transport_model_density_4">
-		<xs:annotation>
-			<xs:documentation>Transport coefficients for density equations. Axes four levels above.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="d">
-				<xs:annotation>
-					<xs:documentation>Effective diffusivity. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../../../rho_tor_norm</coordinate1>
-						<coordinate2>1...3</coordinate2>
-						<coordinate3>../../../../../time</coordinate3>
-						<units>m^2.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="v">
-				<xs:annotation>
-					<xs:documentation>Effective convection. The 2nd index of the array describes which multiplier should be applied to the particule flux when adding its contribution in the expression of the heat flux : position 1 is multiplied by 0, 2 is multiplied by 3/2, 3 is multiplied by 5/2. The total particle flux (for the particle transport equation) is obtained as the sum over the three positions.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../../../rho_tor_norm</coordinate1>
-						<coordinate2>1...3</coordinate2>
-						<coordinate3>../../../../../time</coordinate3>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="core_transport_model_energy_tor_mom_1">
-		<xs:annotation>
-			<xs:documentation>Transport coefficients for energy or total toroidal momentum equations. Axes one level above.</xs:documentation>
+			<xs:documentation>Transport coefficients for density equations. Coordinates one level above.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="d">
 				<xs:annotation>
 					<xs:documentation>Effective diffusivity</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>../../time</coordinate2>
+						<coordinate1>../../grid_d/rho_tor_norm</coordinate1>
 						<units>m^2.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v">
 				<xs:annotation>
 					<xs:documentation>Effective convection</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>../../time</coordinate2>
+						<coordinate1>../../grid_v/rho_tor_norm</coordinate1>
 						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="flux">
+				<xs:annotation>
+					<xs:documentation>Flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid_flux/rho_tor_norm</coordinate1>
+						<units>m^-2.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="core_transport_model_energy_tor_mom_2">
+	<xs:complexType name="core_transport_model_1_energy">
 		<xs:annotation>
-			<xs:documentation>Transport coefficients for energy or total toroidal momentum equations. Axes two levels above.</xs:documentation>
+			<xs:documentation>Transport coefficients for energy equations. Coordinates one level above.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="d">
 				<xs:annotation>
 					<xs:documentation>Effective diffusivity</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../time</coordinate2>
+						<coordinate1>../../grid_d/rho_tor_norm</coordinate1>
 						<units>m^2.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v">
 				<xs:annotation>
 					<xs:documentation>Effective convection</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../time</coordinate2>
+						<coordinate1>../../grid_v/rho_tor_norm</coordinate1>
 						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="flux">
+				<xs:annotation>
+					<xs:documentation>Flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid_flux/rho_tor_norm</coordinate1>
+						<units>W.m^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="core_transport_model_energy_tor_mom_3">
+	<xs:complexType name="core_transport_model_1_momentum">
 		<xs:annotation>
-			<xs:documentation>Transport coefficients for energy or total toroidal momentum equations. Axes three levels above.</xs:documentation>
+			<xs:documentation>Transport coefficients for momentum equations. Coordinates one level above.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="d">
 				<xs:annotation>
 					<xs:documentation>Effective diffusivity</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../../time</coordinate2>
+						<coordinate1>../../grid_d/rho_tor_norm</coordinate1>
 						<units>m^2.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v">
 				<xs:annotation>
 					<xs:documentation>Effective convection</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../../time</coordinate2>
+						<coordinate1>../../grid_v/rho_tor_norm</coordinate1>
 						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="flux">
+				<xs:annotation>
+					<xs:documentation>Flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid_flux/rho_tor_norm</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="core_transport_model_energy_tor_mom_4">
+	<xs:complexType name="core_transport_model_2_density">
 		<xs:annotation>
-			<xs:documentation>Transport coefficients for energy or total toroidal momentum equations. Axes four levels above.</xs:documentation>
+			<xs:documentation>Transport coefficients for density equations. Coordinates two levels above.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="d">
 				<xs:annotation>
 					<xs:documentation>Effective diffusivity</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../../../time</coordinate2>
+						<coordinate1>../../../grid_d/rho_tor_norm</coordinate1>
 						<units>m^2.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v">
 				<xs:annotation>
 					<xs:documentation>Effective convection</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../../../../rho_tor_norm</coordinate1>
-						<coordinate2>../../../../../time</coordinate2>
+						<coordinate1>../../../grid_v/rho_tor_norm</coordinate1>
 						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="flux">
+				<xs:annotation>
+					<xs:documentation>Flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid_flux/rho_tor_norm</coordinate1>
+						<units>m^-2.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_2_energy">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients for energy equations. Coordinates two levels above.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="d">
+				<xs:annotation>
+					<xs:documentation>Effective diffusivity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid_d/rho_tor_norm</coordinate1>
+						<units>m^2.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v">
+				<xs:annotation>
+					<xs:documentation>Effective convection</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid_v/rho_tor_norm</coordinate1>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="flux">
+				<xs:annotation>
+					<xs:documentation>Flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid_flux/rho_tor_norm</coordinate1>
+						<units>W.m^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_3_density">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients for density equations. Coordinates three levels above.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="d">
+				<xs:annotation>
+					<xs:documentation>Effective diffusivity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../grid_d/rho_tor_norm</coordinate1>
+						<units>m^2.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v">
+				<xs:annotation>
+					<xs:documentation>Effective convection</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../grid_v/rho_tor_norm</coordinate1>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="flux">
+				<xs:annotation>
+					<xs:documentation>Flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../grid_flux/rho_tor_norm</coordinate1>
+						<units>m^-2.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_3_energy">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients for energy equations. Coordinates three levels above.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="d">
+				<xs:annotation>
+					<xs:documentation>Effective diffusivity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../grid_d/rho_tor_norm</coordinate1>
+						<units>m^2.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v">
+				<xs:annotation>
+					<xs:documentation>Effective convection</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../grid_v/rho_tor_norm</coordinate1>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="flux">
+				<xs:annotation>
+					<xs:documentation>Flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../grid_flux/rho_tor_norm</coordinate1>
+						<units>W.m^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -332,12 +366,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_z_transport" type="core_transport_model_density_4">
+			<xs:element name="n_z_transport" type="core_transport_model_3_density">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients of for the density of the charge state considered (thermal+non-thermal)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_z_transport" type="core_transport_model_energy_tor_mom_4">
+			<xs:element name="t_z_transport" type="core_transport_model_3_energy">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients of for the energy of the charge state considered </xs:documentation>
 				</xs:annotation>
@@ -396,12 +430,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_i_transport" type="core_transport_model_density_3">
+			<xs:element name="n_i_transport" type="core_transport_model_2_density">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients for ion density equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_transport" type="core_transport_model_energy_tor_mom_3">
+			<xs:element name="t_i_transport" type="core_transport_model_2_energy">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients for ion energy equation</xs:documentation>
 				</xs:annotation>
@@ -421,7 +455,151 @@
 				<xs:annotation>
 					<xs:documentation>Transport coefficients related to the different charge states of the ion species</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N_Charge_States</coordinate1>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_profiles_grid">
+		<xs:annotation>
+			<xs:documentation>1D grid for transport coefficients or fluxes</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal magnetic flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Wb</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="volume">
+				<xs:annotation>
+					<xs:documentation>Volume enclosed inside the magnetic surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="area">
+				<xs:annotation>
+					<xs:documentation>Cross-sectional area of the flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_profiles">
+		<xs:annotation>
+			<xs:documentation>Transport coefficient profiles at a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_d" type="core_transport_model_profiles_grid">
+				<xs:annotation>
+					<xs:documentation>Grid for effective diffusivities and parallel conductivity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid_v" type="core_transport_model_profiles_grid">
+				<xs:annotation>
+					<xs:documentation>Grid for effective convections</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid_flux" type="core_transport_model_profiles_grid">
+				<xs:annotation>
+					<xs:documentation>Grid for fluxes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="conductivity_parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel conductivity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>ohm^-1.m^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_e_transport" type="core_transport_model_1_density">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients for electron density equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e_transport" type="core_transport_model_1_energy">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients for electron energy equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_i_average_transport" type="core_transport_model_1_energy">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients for averaged (over ion species) ion energy equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_tor_transport" type="core_transport_model_1_momentum">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients for total toroidal momentum equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ions" type="core_transport_model_ions" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients related to the various ions species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -436,7 +614,6 @@
 				<xs:annotation>
 					<xs:documentation>Name of the transport model</xs:documentation>
 					<xs:appinfo>
-						<units>-</units>
 						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -444,45 +621,23 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="conductivity_parallel">
+			<xs:element name="flux_multiplier">
 				<xs:annotation>
-					<xs:documentation>Parallel conductivity</xs:documentation>
+					<xs:documentation>Multiplier applied to the particule flux when adding its contribution in the expression of the heat flux : can be 0, 3/2 or 5/2</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../rho_tor_norm</coordinate1>
-						<coordinate2>../../time</coordinate2>
-						<units>ohm^-1.m^-1</units>
-						<type>dynamic</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_e_transport" type="core_transport_model_density_2">
+			<xs:element name="profiles" type="core_transport_model_profiles" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients for electron density equation</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="t_e_transport" type="core_transport_model_energy_tor_mom_2">
-				<xs:annotation>
-					<xs:documentation>Transport coefficients for electron energy equation</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="t_i_average_transport" type="core_transport_model_energy_tor_mom_2">
-				<xs:annotation>
-					<xs:documentation>Transport coefficients for averaged (over ion species) ion energy equation</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_tor_transport" type="core_transport_model_energy_tor_mom_2">
-				<xs:annotation>
-					<xs:documentation>Transport coefficients for total toroidal momentum equation</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="ions" type="core_transport_model_ions" maxOccurs="5">
-				<xs:annotation>
-					<xs:documentation>Transport coefficients related to the different ions species</xs:documentation>
+					<xs:documentation>Transport coefficient profiles for various time slices</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N_Ions</coordinate1>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -499,19 +654,6 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="rho_tor_norm">
-					<xs:annotation>
-						<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
-						<xs:appinfo>
-							<type>dynamic</type>
-							<coordinate1>1...N_rho_tor_norm</coordinate1>
-							<coordinate2>../time</coordinate2>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</xs:documentation>
@@ -519,7 +661,7 @@
 				</xs:element>
 				<xs:element name="model" type="core_transport_model" maxOccurs="5">
 					<xs:annotation>
-						<xs:documentation>Transport is described by a combination of various transport models. All models provide their values on the same rho_tor_norm and time grids.</xs:documentation>
+						<xs:documentation>Transport is described by a combination of various transport models</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N_Models</coordinate1>
 						</xs:appinfo>

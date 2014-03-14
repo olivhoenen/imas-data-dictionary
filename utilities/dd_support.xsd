@@ -269,18 +269,6 @@
 						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="output_diagnostics">
-					<xs:annotation>
-						<xs:documentation>List of the code specific diagnostic/output in XML format</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>../../time</coordinate1>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="STR_1D"/>
-					</xs:complexType>
-				</xs:element>
 				<xs:element name="output_flag">
 					<xs:annotation>
 						<xs:documentation>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.</xs:documentation>
@@ -619,6 +607,70 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="rz0d_dynamic_aos">
+		<xs:annotation>
+			<xs:documentation>Structure for scalar R, Z positions, dynamic within a type 3 array of structure (index on time)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rz1d_dynamic_aos">
+		<xs:annotation>
+			<xs:documentation>Structure for list of R, Z positions (1D list of Npoints, dynamic within a type 3 array of structure (index on time))</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rz1d_dynamic">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z positions (1D, dynamic), time assumed to be 2 levels above</xs:documentation>
@@ -716,97 +768,44 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rz2d_dynamic_npoints">
+	<xs:complexType name="identifier">
 		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (2D, dynamic), with an N_Points indicator of the number of active points in each list. This could be improved later, making the parent a vector of structure indexed on a time, when the PUAL allows for it. time assumed to be 2 levels above</xs:documentation>
+			<xs:documentation>Standard type for identifiers. The three fields: id, flag and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="n_points">
+			<xs:element name="id">
 				<xs:annotation>
-					<xs:documentation>Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points)).</xs:documentation>
+					<xs:documentation>Short string identifier</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../../time</coordinate1>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_1D"/>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="r">
+			<xs:element name="flag">
 				<xs:annotation>
-					<xs:documentation>Major radius</xs:documentation>
+					<xs:documentation>Integer identifier</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>1...max(n_points)</coordinate1>
-						<coordinate2>../../../time</coordinate2>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
+					<xs:documentation>Verbose description of identifier</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>../r</coordinate1>
-						<coordinate2>../../../time</coordinate2>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="rz2d_dynamic">
-		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (2D, dynamic), with an N_Points indicator of the number of active points in each list. This could be improved later, making the parent a vector of structure indexed on a time, when the PUAL allows for it. time assumed to be 2 levels above</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="n_points">
-				<xs:annotation>
-					<xs:documentation>Number of meaningful points in R and Z at a given time. R and Z are matrices oversized on their first dimension (max(N_Points)).</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="r">
-				<xs:annotation>
-					<xs:documentation>Major radius</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>1...max(n_points)</coordinate1>
-						<coordinate2>../../../time</coordinate2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>../r</coordinate1>
-						<coordinate2>../../../time</coordinate2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
+					
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
