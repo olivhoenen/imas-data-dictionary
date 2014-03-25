@@ -485,6 +485,78 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="core_radial_grid">
+		<xs:annotation>
+			<xs:documentation>1D radial grid for core* IDSs</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal magnetic flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>Wb</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="volume">
+				<xs:annotation>
+					<xs:documentation>Volume enclosed inside the magnetic surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="area">
+				<xs:annotation>
+					<xs:documentation>Cross-sectional area of the flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rzphi0d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi positions (0D, static)</xs:documentation>
@@ -805,7 +877,6 @@
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
-					
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -982,69 +1053,38 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="status_of" type="str_type">
+				<xs:element name="comment">
 					<xs:annotation>
-						<xs:documentation>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent </xs:documentation>
+						<xs:documentation>Any comment describing the content of this IDS</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
 				</xs:element>
-				<xs:element name="comment_of" type="str_type">
-					<xs:annotation>
-						<xs:documentation>Any additional comment from the source application</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="creator_of" type="str_type">
-					<xs:annotation>
-						<xs:documentation>Creator of this consistent IDS</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="date_of" type="str_type">
-					<xs:annotation>
-						<xs:documentation>Date of consistent creation of this IDS</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="source_of" type="str_type">
-					<xs:annotation>
-						<xs:documentation>Where do the data for this IDS come from (a procedure, a set of codes)</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="reference_of" type="str_type">
-					<xs:annotation>
-						<xs:documentation>Documented reference to this IDS data</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="homogeneous_time" type="int_type">
+				<xs:element name="homogeneous_time">
 					<xs:annotation>
 						<xs:documentation>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="INT_0D"/>
+					</xs:complexType>
 				</xs:element>
-				<xs:element name="cocos" type="int_type">
+				<xs:element name="cocos">
 					<xs:annotation>
 						<xs:documentation>Coordinate conventions of this IDS, expected to be 11 for ITER data</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
 						</xs:appinfo>
 					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="INT_0D"/>
+					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>

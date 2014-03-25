@@ -54,7 +54,7 @@
 				<xs:annotation>
 					<xs:documentation>Source term for the charge state density transport equation</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../../rho_tor_norm</coordinate1>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>s^-1.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -67,7 +67,7 @@
 				<xs:annotation>
 					<xs:documentation>Source terms for the charge state energy transport equation</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../../rho_tor_norm</coordinate1>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>W.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -134,7 +134,7 @@
 				<xs:annotation>
 					<xs:documentation>Source term for ion density equation</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../rho_tor_norm</coordinate1>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>s^-1.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -147,7 +147,7 @@
 				<xs:annotation>
 					<xs:documentation>Source term for the ion energy transport equation.</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../rho_tor_norm</coordinate1>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>W.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -182,75 +182,16 @@
 			<xs:documentation>Source terms for a given time slice</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="rho_tor_norm">
+			<xs:element name="grid" type="core_radial_grid">
 				<xs:annotation>
-					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
+					<xs:documentation>Radial grid</xs:documentation>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="rho_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../rho_tor_norm</coordinate1>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="psi">
-				<xs:annotation>
-					<xs:documentation>Poloidal magnetic flux</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../rho_tor_norm</coordinate1>
-						<units>Wb</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="volume">
-				<xs:annotation>
-					<xs:documentation>Volume enclosed inside the magnetic surface</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../rho_tor_norm</coordinate1>
-						<units>m^3</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="area">
-				<xs:annotation>
-					<xs:documentation>Cross-sectional area of the flux surface</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../rho_tor_norm</coordinate1>
-						<units>m^2</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="n_e_source">
 				<xs:annotation>
 					<xs:documentation>Source term for electron density equation</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../rho_tor_norm</coordinate1>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>s^-1.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -263,7 +204,7 @@
 				<xs:annotation>
 					<xs:documentation>Source term for electron energy equation</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../rho_tor_norm</coordinate1>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>W.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -276,7 +217,7 @@
 				<xs:annotation>
 					<xs:documentation>Source term for the total ion energy equation</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../rho_tor_norm</coordinate1>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>W.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -289,7 +230,7 @@
 				<xs:annotation>
 					<xs:documentation>Source term for total toroidal momentum equation</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../rho_tor_norm</coordinate1>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>kg.m^-1.s^-2</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -302,7 +243,7 @@
 				<xs:annotation>
 					<xs:documentation>Parallel conductivity induced by this actuator</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../rho_tor_norm</coordinate1>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>ohm^-1.m^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -347,7 +288,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="profiles" type="core_sources_actuator_source_profiles" maxOccurs="unbounded">
+			<xs:element name="profiles" type="core_sources_actuator_source_profiles" maxOccurs="100">
 				<xs:annotation>
 					<xs:documentation>Source profiles for various time slices</xs:documentation>
 					<xs:appinfo>

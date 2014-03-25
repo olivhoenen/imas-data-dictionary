@@ -461,94 +461,22 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="core_transport_model_profiles_grid">
-		<xs:annotation>
-			<xs:documentation>1D grid for transport coefficients or fluxes</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="rho_tor_norm">
-				<xs:annotation>
-					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="rho_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../rho_tor_norm</coordinate1>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="psi">
-				<xs:annotation>
-					<xs:documentation>Poloidal magnetic flux</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../rho_tor_norm</coordinate1>
-						<units>Wb</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="volume">
-				<xs:annotation>
-					<xs:documentation>Volume enclosed inside the magnetic surface</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../rho_tor_norm</coordinate1>
-						<units>m^3</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="area">
-				<xs:annotation>
-					<xs:documentation>Cross-sectional area of the flux surface</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../rho_tor_norm</coordinate1>
-						<units>m^2</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="core_transport_model_profiles">
 		<xs:annotation>
 			<xs:documentation>Transport coefficient profiles at a given time slice</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="grid_d" type="core_transport_model_profiles_grid">
+			<xs:element name="grid_d" type="core_radial_grid">
 				<xs:annotation>
 					<xs:documentation>Grid for effective diffusivities and parallel conductivity</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="grid_v" type="core_transport_model_profiles_grid">
+			<xs:element name="grid_v" type="core_radial_grid">
 				<xs:annotation>
 					<xs:documentation>Grid for effective convections</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="grid_flux" type="core_transport_model_profiles_grid">
+			<xs:element name="grid_flux" type="core_radial_grid">
 				<xs:annotation>
 					<xs:documentation>Grid for fluxes</xs:documentation>
 				</xs:annotation>
@@ -626,13 +554,14 @@
 					<xs:documentation>Multiplier applied to the particule flux when adding its contribution in the expression of the heat flux : can be 0, 3/2 or 5/2</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="profiles" type="core_transport_model_profiles" maxOccurs="unbounded">
+			<xs:element name="profiles" type="core_transport_model_profiles" maxOccurs="100">
 				<xs:annotation>
 					<xs:documentation>Transport coefficient profiles for various time slices</xs:documentation>
 					<xs:appinfo>

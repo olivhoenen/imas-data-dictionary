@@ -20,6 +20,7 @@
 					<xs:documentation>Value</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -122,6 +123,7 @@
 					<xs:documentation>Value</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+												<units>-</units>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -470,20 +472,9 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="name" type="str_type">
+			<xs:element name="identifier" type="identifier">
 				<xs:annotation>
-					<xs:documentation>Name of the quantity (e.g. code-specific name of an internal variable)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="description" type="str_type">
-				<xs:annotation>
-					<xs:documentation>Description</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
+					<xs:documentation>Description of the quantity using the standard identifier structure</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -911,8 +902,7 @@
 						<xs:documentation>Constant 0D float</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
-													<units>mixed</units>
-
+							<units>mixed</units>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -953,7 +943,7 @@
 						<xs:documentation>Constant 1D float</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
-																				<units>mixed</units>
+							<units>mixed</units>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
