@@ -43,7 +43,7 @@
 <xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:element">
 <tr>
 	<td><xsl:value-of select="@name"/></td>
-	<td><xsl:value-of select="xs:annotation/xs:documentation"/></td>
+	<td><xsl:value-of select="./xs:annotation/xs:documentation"/></td>
 </tr>
 </xsl:for-each>
 </table>
@@ -93,6 +93,18 @@
 <xsl:if test="@coordinate3">
 <tr><td>3- <xsl:value-of select="@coordinate3"/>
 </td></tr>
+<xsl:if test="@coordinate4">
+<tr><td>4- <xsl:value-of select="@coordinate4"/>
+</td></tr>
+<xsl:if test="@coordinate5">
+<tr><td>5- <xsl:value-of select="@coordinate5"/>
+</td></tr>
+<xsl:if test="@coordinate6">
+<tr><td>6- <xsl:value-of select="@coordinate6"/>
+</td></tr>
+</xsl:if>
+</xsl:if>
+</xsl:if>
 </xsl:if>
 </xsl:if>
 </table>

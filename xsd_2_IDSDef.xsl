@@ -598,8 +598,12 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath"/>
 		<xsl:param name="coordinatePath"/>
 		<xsl:choose>
-			<xsl:when test="contains($coordinatePath,'...') or contains($coordinatePath,'IDS')">
-				<!-- Case of a main coordinate, e.g. 1...N or coordinate in another IDS. In these two cases, absolute path or prescriptions are given, just reproduce them in the tag -->
+			<xsl:when test="contains($coordinatePath,'...')">
+				<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
+				<xsl:value-of select="replace($coordinatePath,'../','')"/>				
+				</xsl:when>
+			<xsl:when test="contains($coordinatePath,'IDS')">
+				<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
 				<xsl:value-of select="$coordinatePath"/>
 			</xsl:when>
 			<xsl:otherwise>

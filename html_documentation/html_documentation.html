@@ -34,12 +34,12 @@
 			</tr>
 			<tr>
 				<td><a href="#core_plasma">core_plasma</a></td>
-				<td>Core plasma fluid description</td>
+				<td>Core plasma radial profiles - NEW VERSION THAT WILL REPLACE core_profiles</td>
 				<td>6</td>
 			</tr>
 			<tr>
 				<td><a href="#core_profiles">core_profiles</a></td>
-				<td>Core plasma radial profiles</td>
+				<td>Core plasma radial profiles. OBSOLESCENT - will be replaced by the core_plasma structure as soon as performance tests are completed.</td>
 				<td>1</td>
 			</tr>
 			<tr>
@@ -149,6 +149,10 @@
 				<td>Characteristics of the vacuum toroidal field. time assumed to be two levels above</td>
 			</tr>
 			<tr>
+				<td>core_radial_grid</td>
+				<td>1D radial grid for core* IDSs</td>
+			</tr>
+			<tr>
 				<td>rzphi0d_static</td>
 				<td>Structure for R, Z, Phi positions (0D, static)</td>
 			</tr>
@@ -182,7 +186,7 @@
 			</tr>
 			<tr>
 				<td>identifier</td>
-				<td>Standard type for identifiers. The three fields: id, flag and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</td>
+				<td>Standard type for identifiers. The three fields: name, index and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</td>
 			</tr>
 			<tr>
 				<td>oblique_static</td>
@@ -233,51 +237,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -412,51 +386,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -615,6 +559,9 @@
 							<tr>
 								<td>3- process(:)/charge_state(:)/table_4d/coordinate_system(process(:)/coordinate_index)/coordinate(3)</td>
 							</tr>
+							<tr>
+								<td>4- process(:)/charge_state(:)/table_4d/coordinate_system(process(:)/coordinate_index)/coordinate(4)</td>
+							</tr>
 						</table>
 					</td>
 				</tr>
@@ -633,6 +580,12 @@
 							<tr>
 								<td>3- process(:)/charge_state(:)/table_5d/coordinate_system(process(:)/coordinate_index)/coordinate(3)</td>
 							</tr>
+							<tr>
+								<td>4- process(:)/charge_state(:)/table_5d/coordinate_system(process(:)/coordinate_index)/coordinate(4)</td>
+							</tr>
+							<tr>
+								<td>5- process(:)/charge_state(:)/table_5d/coordinate_system(process(:)/coordinate_index)/coordinate(5)</td>
+							</tr>
 						</table>
 					</td>
 				</tr>
@@ -650,6 +603,15 @@
 							</tr>
 							<tr>
 								<td>3- process(:)/charge_state(:)/table_6d/coordinate_system(process(:)/coordinate_index)/coordinate(3)</td>
+							</tr>
+							<tr>
+								<td>4- process(:)/charge_state(:)/table_6d/coordinate_system(process(:)/coordinate_index)/coordinate(4)</td>
+							</tr>
+							<tr>
+								<td>5- process(:)/charge_state(:)/table_6d/coordinate_system(process(:)/coordinate_index)/coordinate(5)</td>
+							</tr>
+							<tr>
+								<td>6- process(:)/charge_state(:)/table_6d/coordinate_system(process(:)/coordinate_index)/coordinate(6)</td>
 							</tr>
 						</table>
 					</td>
@@ -828,51 +790,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -909,13 +841,25 @@
 					<td>linear_controller(:)/input_names</td>
 					<td>Names of the input signals, following the SDN convention {constant}</td>
 					<td>STR_1D</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/output_names</td>
 					<td>Names of the output signals following the SDN convention {constant}</td>
 					<td>STR_1D</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/statespace</td>
@@ -924,34 +868,100 @@
 					<td />
 				</tr>
 				<tr>
+					<td>linear_controller(:)/statespace/state_names</td>
+					<td>Names of the states {constant}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
 					<td>linear_controller(:)/statespace/a</td>
-					<td>A matrix {constant} [mixed]</td>
-					<td>FLT_2D</td>
-					<td />
+					<td>A matrix {dynamic} [mixed]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller(:)/statespace/state_names</td>
+							</tr>
+							<tr>
+								<td>2- linear_controller(:)/statespace/state_names</td>
+							</tr>
+							<tr>
+								<td>3- linear_controller(:)/statespace/a/time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/statespace/b</td>
-					<td>B matrix {constant} [mixed]</td>
-					<td>FLT_2D</td>
-					<td />
+					<td>B matrix {dynamic} [mixed]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller(:)/statespace/state_names</td>
+							</tr>
+							<tr>
+								<td>2- linear_controller(:)/input_names</td>
+							</tr>
+							<tr>
+								<td>3- linear_controller(:)/statespace/b/time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/statespace/c</td>
-					<td>C matrix {constant} [mixed]</td>
-					<td>FLT_2D</td>
-					<td />
+					<td>C matrix {dynamic} [mixed]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller(:)/statespace/state_names</td>
+							</tr>
+							<tr>
+								<td>2- linear_controller(:)/output_names</td>
+							</tr>
+							<tr>
+								<td>3- linear_controller(:)/statespace/c/time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/statespace/d</td>
-					<td>D matrix {constant} [mixed]</td>
-					<td>FLT_2D</td>
-					<td />
+					<td>D matrix, normally proper and D=0 {dynamic} [mixed]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller(:)/statespace/input_names</td>
+							</tr>
+							<tr>
+								<td>2- linear_controller(:)/output_names</td>
+							</tr>
+							<tr>
+								<td>3- linear_controller(:)/statespace/d/time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/statespace/deltat</td>
-					<td>Discrete time sampling interval ; if less than 1e-10, the controller is considered to be expressed in continuous time {constant} [s]</td>
-					<td>FLT_0D</td>
-					<td />
+					<td>Discrete time sampling interval ; if less than 1e-10, the controller is considered to be expressed in continuous time {dynamic} [s]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller(:)/statespace/deltat/time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/pid</td>
@@ -961,27 +971,69 @@
 				</tr>
 				<tr>
 					<td>linear_controller(:)/pid/p</td>
-					<td>Proportional term {constant} [mixed]</td>
-					<td>FLT_2D</td>
-					<td />
+					<td>Proportional term {dynamic} [mixed]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller(:)/pid/output_names</td>
+							</tr>
+							<tr>
+								<td>2- linear_controller(:)/pid/input_names</td>
+							</tr>
+							<tr>
+								<td>3- linear_controller(:)/pid/p/time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/pid/i</td>
-					<td>Integral term {constant} [mixed]</td>
-					<td>FLT_2D</td>
-					<td />
+					<td>Integral term {dynamic} [mixed]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller(:)/pid/output_names</td>
+							</tr>
+							<tr>
+								<td>2- linear_controller(:)/pid/input_names</td>
+							</tr>
+							<tr>
+								<td>3- linear_controller(:)/pid/i/time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/pid/d</td>
-					<td>Derivative term {constant} [mixed]</td>
-					<td>FLT_2D</td>
-					<td />
+					<td>Derivative term {dynamic} [mixed]</td>
+					<td>FLT_3D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller(:)/pid/output_names</td>
+							</tr>
+							<tr>
+								<td>2- linear_controller(:)/pid/input_names</td>
+							</tr>
+							<tr>
+								<td>3- linear_controller(:)/pid/d/time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/pid/tau</td>
-					<td>Filter time-constant for the D-term {constant} [s]</td>
-					<td>FLT_0D</td>
-					<td />
+					<td>Filter time-constant for the D-term {dynamic} [s]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- linear_controller(:)/pid/tau/time</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>linear_controller(:)/inputs</td>
@@ -1083,13 +1135,25 @@
 					<td>nonlinear_controller(:)/input_names</td>
 					<td>Names of the input signals, following the SDN convention {constant}</td>
 					<td>STR_1D</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>nonlinear_controller(:)/output_names</td>
 					<td>Output signal names following the SDN convention {constant}</td>
 					<td>STR_1D</td>
-					<td />
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>nonlinear_controller(:)/function</td>
@@ -1231,7 +1295,7 @@
 				</tr>
 			</table>
 		</a><a name="core_plasma"><p class="welcome">ITER Physics Data Model Documentation for core_plasma</p>
-			<p>Core plasma fluid description</p>
+			<p>Core plasma radial profiles - NEW VERSION THAT WILL REPLACE core_profiles</p>
 			<p>Lifecycle status: alpha since version 3_0.0</p>
 			<table border="1">
 				<thead style="color:#ff0000">
@@ -1247,51 +1311,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -1307,7 +1341,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/rho_tor_norm</td>
+					<td>profiles_1d(:)/grid</td>
+					<td>Radial grid</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/grid/rho_tor_norm</td>
 					<td>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {dynamic} [-]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1319,49 +1359,49 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/rho_tor</td>
+					<td>profiles_1d(:)/grid/rho_tor</td>
 					<td>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0 {dynamic} [m]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/psi</td>
+					<td>profiles_1d(:)/grid/psi</td>
 					<td>Poloidal magnetic flux {dynamic} [Wb]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/volume</td>
+					<td>profiles_1d(:)/grid/volume</td>
 					<td>Volume enclosed inside the magnetic surface {dynamic} [m^3]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/area</td>
+					<td>profiles_1d(:)/grid/area</td>
 					<td>Cross-sectional area of the flux surface {dynamic} [m^2]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1373,7 +1413,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1385,7 +1425,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1397,7 +1437,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1409,7 +1449,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1457,7 +1497,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1469,7 +1509,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1481,7 +1521,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1493,7 +1533,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1505,7 +1545,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1517,7 +1557,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1529,7 +1569,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1541,7 +1581,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1589,7 +1629,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1601,7 +1641,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1613,7 +1653,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1625,7 +1665,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1637,7 +1677,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1649,7 +1689,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1661,7 +1701,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1673,7 +1713,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1685,7 +1725,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1697,7 +1737,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1709,7 +1749,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1721,7 +1761,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1733,7 +1773,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1745,7 +1785,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1757,7 +1797,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1769,7 +1809,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1781,7 +1821,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1793,7 +1833,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1805,7 +1845,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1817,7 +1857,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1829,7 +1869,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1841,7 +1881,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1853,7 +1893,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1865,7 +1905,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1877,7 +1917,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1889,7 +1929,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1901,7 +1941,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1913,7 +1953,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -1925,7 +1965,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- profiles_1d(:)/rho_tor_norm</td>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -2142,7 +2182,7 @@
 				</tr>
 			</table>
 		</a><a name="core_profiles"><p class="welcome">ITER Physics Data Model Documentation for core_profiles</p>
-			<p>Core plasma radial profiles</p>
+			<p>Core plasma radial profiles. OBSOLESCENT - will be replaced by the core_plasma structure as soon as performance tests are completed.</p>
 			<p>Lifecycle status: Alpha since version 3_0.0</p>
 			<table border="1">
 				<thead style="color:#ff0000">
@@ -2158,51 +2198,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -3009,51 +3019,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -3111,8 +3091,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/rho_tor_norm</td>
-					<td>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {dynamic}</td>
+					<td>source(:)/profiles(:)/grid</td>
+					<td>Radial grid</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>source(:)/profiles(:)/grid/rho_tor_norm</td>
+					<td>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {dynamic} [-]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3123,49 +3109,49 @@
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/rho_tor</td>
+					<td>source(:)/profiles(:)/grid/rho_tor</td>
 					<td>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0 {dynamic} [m]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/psi</td>
+					<td>source(:)/profiles(:)/grid/psi</td>
 					<td>Poloidal magnetic flux {dynamic} [Wb]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/volume</td>
+					<td>source(:)/profiles(:)/grid/volume</td>
 					<td>Volume enclosed inside the magnetic surface {dynamic} [m^3]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/area</td>
+					<td>source(:)/profiles(:)/grid/area</td>
 					<td>Cross-sectional area of the flux surface {dynamic} [m^2]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3177,7 +3163,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3189,7 +3175,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3201,7 +3187,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3213,7 +3199,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3225,7 +3211,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3273,7 +3259,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3285,7 +3271,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3333,7 +3319,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3345,7 +3331,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- source(:)/profiles(:)/rho_tor_norm</td>
+								<td>1- source(:)/profiles(:)/grid/rho_tor_norm</td>
 							</tr>
 						</table>
 					</td>
@@ -3440,51 +3426,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -3531,7 +3487,7 @@
 				</tr>
 				<tr>
 					<td>model(:)/flux_multiplier</td>
-					<td>Multiplier applied to the particule flux when adding its contribution in the expression of the heat flux : can be 0, 3/2 or 5/2 {constant}</td>
+					<td>Multiplier applied to the particule flux when adding its contribution in the expression of the heat flux : can be 0, 3/2 or 5/2 {constant} [-]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
@@ -4255,51 +4211,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -4626,51 +4552,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -4958,26 +4854,14 @@
 				<tr>
 					<td>time_slice(:)/global_quantities/magnetic_axis/r</td>
 					<td>Major radius {dynamic} [m]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time_slice(:)/time</td>
-							</tr>
-						</table>
-					</td>
+					<td>FLT_0D</td>
+					<td />
 				</tr>
 				<tr>
 					<td>time_slice(:)/global_quantities/magnetic_axis/z</td>
 					<td>Height {dynamic} [m]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time_slice(:)/time</td>
-							</tr>
-						</table>
-					</td>
+					<td>FLT_0D</td>
+					<td />
 				</tr>
 				<tr>
 					<td>time_slice(:)/global_quantities/b_tor_axis</td>
@@ -5490,20 +5374,20 @@
 					<td />
 				</tr>
 				<tr>
-					<td>time_slice(:)/profiles_2d(:)/grid_type/id</td>
+					<td>time_slice(:)/profiles_2d(:)/grid_type/name</td>
 					<td>Short string identifier {constant}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>time_slice(:)/profiles_2d(:)/grid_type/flag</td>
-					<td>Integer identifier {constant}</td>
+					<td>time_slice(:)/profiles_2d(:)/grid_type/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>time_slice(:)/profiles_2d(:)/grid_type/description</td>
-					<td>Verbose description of identifier {constant}</td>
+					<td>Verbose description {constant}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
@@ -5700,20 +5584,20 @@
 					<td />
 				</tr>
 				<tr>
-					<td>time_slice(:)/coordinate_system/grid_type/id</td>
+					<td>time_slice(:)/coordinate_system/grid_type/name</td>
 					<td>Short string identifier {constant}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>time_slice(:)/coordinate_system/grid_type/flag</td>
-					<td>Integer identifier {constant}</td>
+					<td>time_slice(:)/coordinate_system/grid_type/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>time_slice(:)/coordinate_system/grid_type/description</td>
-					<td>Verbose description of identifier {constant}</td>
+					<td>Verbose description {constant}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
@@ -5972,51 +5856,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -6373,51 +6227,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -7095,51 +6919,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -7382,51 +7176,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -7561,51 +7325,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -7722,51 +7456,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -7871,51 +7575,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -7932,20 +7606,32 @@
 				</tr>
 				<tr>
 					<td>constant_float0d(:)/value</td>
-					<td>Value {constant}</td>
+					<td>Value {constant} [-]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_float0d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_float0d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_float0d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_float0d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float0d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float0d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -7967,15 +7653,27 @@
 					<td />
 				</tr>
 				<tr>
-					<td>constant_integer0d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_integer0d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_integer0d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_integer0d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_integer0d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_integer0d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -7997,15 +7695,27 @@
 					<td />
 				</tr>
 				<tr>
-					<td>constant_string0d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_string0d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_string0d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_string0d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_string0d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_string0d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8033,15 +7743,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>constant_integer1d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_integer1d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_integer1d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_integer1d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_integer1d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_integer1d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8069,15 +7791,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>constant_string1d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_string1d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_string1d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_string1d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_string1d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_string1d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8094,7 +7828,7 @@
 				</tr>
 				<tr>
 					<td>constant_float1d(:)/value</td>
-					<td>Value {constant}</td>
+					<td>Value {constant} [-]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -8105,15 +7839,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>constant_float1d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_float1d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_float1d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_float1d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float1d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float1d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8159,15 +7905,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_float1d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float1d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_float1d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float1d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float1d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float1d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8213,15 +7971,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_string1d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_string1d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_string1d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_string1d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_string1d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_string1d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8267,15 +8037,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_integer1d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_integer1d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_integer1d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_integer1d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_integer1d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_integer1d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8306,15 +8088,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>constant_float2d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_float2d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_float2d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_float2d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float2d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float2d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8345,15 +8139,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>constant_integer2d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_integer2d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_integer2d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_integer2d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_integer2d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_integer2d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8381,7 +8187,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- ../1...N</td>
+								<td>1- 1...N</td>
 							</tr>
 							<tr>
 								<td>2- dynamic_float2d(:)/value/time</td>
@@ -8402,15 +8208,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_float2d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float2d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_float2d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float2d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float2d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float2d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8438,7 +8256,7 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- ../1...N</td>
+								<td>1- 1...N</td>
 							</tr>
 							<tr>
 								<td>2- dynamic_integer2d(:)/value/time</td>
@@ -8459,15 +8277,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_integer2d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_integer2d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_integer2d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_integer2d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_integer2d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_integer2d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8501,15 +8331,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>constant_float3d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_float3d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_float3d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_float3d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float3d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float3d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8543,15 +8385,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>constant_integer3d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_integer3d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_integer3d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_integer3d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_integer3d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_integer3d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8579,10 +8433,10 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- ../1...N</td>
+								<td>1- 1...N</td>
 							</tr>
 							<tr>
-								<td>2- ../1...N</td>
+								<td>2- 1...N</td>
 							</tr>
 							<tr>
 								<td>3- dynamic_float3d(:)/value/time</td>
@@ -8603,15 +8457,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_float3d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float3d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_float3d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float3d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float3d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float3d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8639,10 +8505,10 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- ../1...N</td>
+								<td>1- 1...N</td>
 							</tr>
 							<tr>
-								<td>2- ../1...N</td>
+								<td>2- 1...N</td>
 							</tr>
 							<tr>
 								<td>3- dynamic_integer3d(:)/value/time</td>
@@ -8663,15 +8529,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_integer3d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_integer3d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_integer3d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_integer3d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_integer3d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_integer3d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8701,19 +8579,34 @@
 							<tr>
 								<td>3- 1...N</td>
 							</tr>
+							<tr>
+								<td>4- 1...N</td>
+							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>constant_float4d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_float4d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_float4d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_float4d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float4d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float4d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8741,13 +8634,16 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- ../1...N</td>
+								<td>1- 1...N</td>
 							</tr>
 							<tr>
-								<td>2- ../1...N</td>
+								<td>2- 1...N</td>
 							</tr>
 							<tr>
-								<td>3- ../1...N</td>
+								<td>3- 1...N</td>
+							</tr>
+							<tr>
+								<td>4- dynamic_float4d(:)/value/time</td>
 							</tr>
 						</table>
 					</td>
@@ -8765,15 +8661,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_float4d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float4d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_float4d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float4d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float4d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float4d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8803,19 +8711,37 @@
 							<tr>
 								<td>3- 1...N</td>
 							</tr>
+							<tr>
+								<td>4- 1...N</td>
+							</tr>
+							<tr>
+								<td>5- 1...N</td>
+							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>constant_float5d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_float5d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_float5d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_float5d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float5d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float5d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8843,13 +8769,19 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- ../1...N</td>
+								<td>1- 1...N</td>
 							</tr>
 							<tr>
-								<td>2- ../1...N</td>
+								<td>2- 1...N</td>
 							</tr>
 							<tr>
-								<td>3- ../1...N</td>
+								<td>3- 1...N</td>
+							</tr>
+							<tr>
+								<td>4- 1...N</td>
+							</tr>
+							<tr>
+								<td>5- dynamic_float5d(:)/value/time</td>
 							</tr>
 						</table>
 					</td>
@@ -8867,15 +8799,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_float5d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float5d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_float5d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float5d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float5d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float5d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8905,19 +8849,40 @@
 							<tr>
 								<td>3- 1...N</td>
 							</tr>
+							<tr>
+								<td>4- 1...N</td>
+							</tr>
+							<tr>
+								<td>5- 1...N</td>
+							</tr>
+							<tr>
+								<td>6- 1...N</td>
+							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>constant_float6d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>constant_float6d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>constant_float6d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>constant_float6d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float6d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>constant_float6d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -8945,13 +8910,22 @@
 					<td>
 						<table>
 							<tr>
-								<td>1- ../1...N</td>
+								<td>1- 1...N</td>
 							</tr>
 							<tr>
-								<td>2- ../1...N</td>
+								<td>2- 1...N</td>
 							</tr>
 							<tr>
-								<td>3- ../1...N</td>
+								<td>3- 1...N</td>
+							</tr>
+							<tr>
+								<td>4- 1...N</td>
+							</tr>
+							<tr>
+								<td>5- 1...N</td>
+							</tr>
+							<tr>
+								<td>6- dynamic_float6d(:)/value/time</td>
 							</tr>
 						</table>
 					</td>
@@ -8969,15 +8943,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dynamic_float6d(:)/name</td>
-					<td>Name of the quantity (e.g. code-specific name of an internal variable) {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float6d(:)/identifier</td>
+					<td>Description of the quantity using the standard identifier structure</td>
+					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>dynamic_float6d(:)/description</td>
-					<td>Description {constant}</td>
-					<td>str_type</td>
+					<td>dynamic_float6d(:)/identifier/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float6d(:)/identifier/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>dynamic_float6d(:)/identifier/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
@@ -9064,51 +9050,21 @@
 					<td />
 				</tr>
 				<tr>
-					<td>ids_properties/status_of</td>
-					<td>Status of this structure 'OK' if the structure was created consistently, 'partial' if not complete, 'inconsistent' if complete but not guaranteed consistent  {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment_of</td>
-					<td>Any additional comment from the source application {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/creator_of</td>
-					<td>Creator of this consistent IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/date_of</td>
-					<td>Date of consistent creation of this IDS {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/source_of</td>
-					<td>Where do the data for this IDS come from (a procedure, a set of codes) {constant}</td>
-					<td>str_type</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/reference_of</td>
-					<td>Documented reference to this IDS data {constant}</td>
-					<td>str_type</td>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/homogeneous_time</td>
 					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
 					<td>ids_properties/cocos</td>
 					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>int_type</td>
+					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>

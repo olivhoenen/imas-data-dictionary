@@ -76,20 +76,21 @@
 			<field name="name" path="linear_controller/name" path_doc="linear_controller(:)/name" documentation="Name of this controller" data_type="STR_0D" type="constant"/>
 			<field name="description" path="linear_controller/description" path_doc="linear_controller(:)/description" documentation="Description of this controller" data_type="STR_0D" type="constant"/>
 			<field name="controller_class" path="linear_controller/controller_class" path_doc="linear_controller(:)/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="constant"/>
-			<field name="input_names" path="linear_controller/input_names" path_doc="linear_controller(:)/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="constant"/>
-			<field name="output_names" path="linear_controller/output_names" path_doc="linear_controller(:)/output_names" documentation="Names of the output signals following the SDN convention" data_type="STR_1D" type="constant"/>
+			<field name="input_names" path="linear_controller/input_names" path_doc="linear_controller(:)/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="constant" coordinate1="1...N"/>
+			<field name="output_names" path="linear_controller/output_names" path_doc="linear_controller(:)/output_names" documentation="Names of the output signals following the SDN convention" data_type="STR_1D" type="constant" coordinate1="1...N"/>
 			<field name="statespace" path="linear_controller/statespace" documentation="Statespace controller in discrete or continuous time" data_type="structure" path_doc="linear_controller(:)/statespace">
-				<field name="a" path="linear_controller/statespace/a" path_doc="linear_controller(:)/statespace/a" documentation="A matrix" data_type="FLT_2D" type="constant" units="mixed"/>
-				<field name="b" path="linear_controller/statespace/b" path_doc="linear_controller(:)/statespace/b" documentation="B matrix" data_type="FLT_2D" type="constant" units="mixed"/>
-				<field name="c" path="linear_controller/statespace/c" path_doc="linear_controller(:)/statespace/c" documentation="C matrix" data_type="FLT_2D" type="constant" units="mixed"/>
-				<field name="d" path="linear_controller/statespace/d" path_doc="linear_controller(:)/statespace/d" documentation="D matrix" data_type="FLT_2D" type="constant" units="mixed"/>
-				<field name="deltat" path="linear_controller/statespace/deltat" path_doc="linear_controller(:)/statespace/deltat" documentation="Discrete time sampling interval ; if less than 1e-10, the controller is considered to be expressed in continuous time" data_type="FLT_0D" type="constant" units="s"/>
+				<field name="state_names" path="linear_controller/statespace/state_names" path_doc="linear_controller(:)/statespace/state_names" documentation="Names of the states" data_type="STR_1D" type="constant" coordinate1="1...N"/>
+				<field name="a" path="linear_controller/statespace/a" path_doc="linear_controller(:)/statespace/a" documentation="A matrix" data_type="FLT_3D" type="dynamic" coordinate1="linear_controller(:)/statespace/state_names" coordinate2="linear_controller(:)/statespace/state_names" coordinate3="linear_controller(:)/statespace/a/time" units="mixed"/>
+				<field name="b" path="linear_controller/statespace/b" path_doc="linear_controller(:)/statespace/b" documentation="B matrix" data_type="FLT_3D" type="dynamic" coordinate1="linear_controller(:)/statespace/state_names" coordinate2="linear_controller(:)/input_names" coordinate3="linear_controller(:)/statespace/b/time" units="mixed"/>
+				<field name="c" path="linear_controller/statespace/c" path_doc="linear_controller(:)/statespace/c" documentation="C matrix" data_type="FLT_3D" type="dynamic" units="mixed" coordinate1="linear_controller(:)/statespace/state_names" coordinate2="linear_controller(:)/output_names" coordinate3="linear_controller(:)/statespace/c/time"/>
+				<field name="d" path="linear_controller/statespace/d" path_doc="linear_controller(:)/statespace/d" documentation="D matrix, normally proper and D=0" data_type="FLT_3D" type="dynamic" units="mixed" coordinate1="linear_controller(:)/statespace/input_names" coordinate2="linear_controller(:)/output_names" coordinate3="linear_controller(:)/statespace/d/time"/>
+				<field name="deltat" path="linear_controller/statespace/deltat" path_doc="linear_controller(:)/statespace/deltat" documentation="Discrete time sampling interval ; if less than 1e-10, the controller is considered to be expressed in continuous time" data_type="FLT_1D" type="dynamic" units="s" coordinate1="linear_controller(:)/statespace/deltat/time"/>
 			</field>
 			<field name="pid" path="linear_controller/pid" documentation="Filtered PID controller" data_type="structure" path_doc="linear_controller(:)/pid">
-				<field name="p" path="linear_controller/pid/p" path_doc="linear_controller(:)/pid/p" documentation="Proportional term" data_type="FLT_2D" type="constant" units="mixed"/>
-				<field name="i" path="linear_controller/pid/i" path_doc="linear_controller(:)/pid/i" documentation="Integral term" data_type="FLT_2D" type="constant" units="mixed"/>
-				<field name="d" path="linear_controller/pid/d" path_doc="linear_controller(:)/pid/d" documentation="Derivative term" data_type="FLT_2D" type="constant" units="mixed"/>
-				<field name="tau" path="linear_controller/pid/tau" path_doc="linear_controller(:)/pid/tau" documentation="Filter time-constant for the D-term" data_type="FLT_0D" type="constant" units="s"/>
+				<field name="p" path="linear_controller/pid/p" path_doc="linear_controller(:)/pid/p" documentation="Proportional term" data_type="FLT_3D" type="dynamic" units="mixed" coordinate1="linear_controller(:)/pid/output_names" coordinate2="linear_controller(:)/pid/input_names" coordinate3="linear_controller(:)/pid/p/time"/>
+				<field name="i" path="linear_controller/pid/i" path_doc="linear_controller(:)/pid/i" documentation="Integral term" data_type="FLT_3D" type="dynamic" units="mixed" coordinate1="linear_controller(:)/pid/output_names" coordinate2="linear_controller(:)/pid/input_names" coordinate3="linear_controller(:)/pid/i/time"/>
+				<field name="d" path="linear_controller/pid/d" path_doc="linear_controller(:)/pid/d" documentation="Derivative term" data_type="FLT_3D" type="dynamic" units="mixed" coordinate1="linear_controller(:)/pid/output_names" coordinate2="linear_controller(:)/pid/input_names" coordinate3="linear_controller(:)/pid/d/time"/>
+				<field name="tau" path="linear_controller/pid/tau" path_doc="linear_controller(:)/pid/tau" documentation="Filter time-constant for the D-term" data_type="FLT_1D" type="dynamic" coordinate1="linear_controller(:)/pid/tau/time" units="s"/>
 			</field>
 			<field name="inputs" path="linear_controller/inputs" path_doc="linear_controller(:)/inputs" documentation="Input signals; the timebase is common to inputs and outputs for any particular controller" data_type="structure">
 				<field name="data" path="linear_controller/inputs/data" path_doc="linear_controller(:)/inputs/data" documentation="Input signals; the timebase is common to inputs and outputs for any particular controller" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="linear_controller(:)/input_names" coordinate2="linear_controller(:)/inputs/time"/>
@@ -104,8 +105,8 @@
 			<field name="name" path="nonlinear_controller/name" path_doc="nonlinear_controller(:)/name" documentation="Name of this controller" data_type="STR_0D" type="constant"/>
 			<field name="description" path="nonlinear_controller/description" path_doc="nonlinear_controller(:)/description" documentation="Description of this controller" data_type="STR_0D" type="constant"/>
 			<field name="controller_class" path="nonlinear_controller/controller_class" path_doc="nonlinear_controller(:)/controller_class" documentation="One of a known class of controllers" data_type="STR_0D" type="constant"/>
-			<field name="input_names" path="nonlinear_controller/input_names" path_doc="nonlinear_controller(:)/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="constant"/>
-			<field name="output_names" path="nonlinear_controller/output_names" path_doc="nonlinear_controller(:)/output_names" documentation="Output signal names following the SDN convention" data_type="STR_1D" type="constant"/>
+			<field name="input_names" path="nonlinear_controller/input_names" path_doc="nonlinear_controller(:)/input_names" documentation="Names of the input signals, following the SDN convention" data_type="STR_1D" type="constant" coordinate1="1...N"/>
+			<field name="output_names" path="nonlinear_controller/output_names" path_doc="nonlinear_controller(:)/output_names" documentation="Output signal names following the SDN convention" data_type="STR_1D" type="constant" coordinate1="1...N"/>
 			<field name="function" path="nonlinear_controller/function" path_doc="nonlinear_controller(:)/function" documentation="Method to be defined" data_type="STR_0D" type="constant"/>
 			<field name="inputs" path="nonlinear_controller/inputs" path_doc="nonlinear_controller(:)/inputs" documentation="Input signals; the timebase is common  to inputs and outputs for any particular controller" data_type="structure">
 				<field name="data" path="nonlinear_controller/inputs/data" path_doc="nonlinear_controller(:)/inputs/data" documentation="Input signals; the timebase is common  to inputs and outputs for any particular controller" data_type="FLT_2D" type="constant" units="mixed" coordinate1="nonlinear_controller(:)/input_names" coordinate2="nonlinear_controller(:)/inputs/time"/>
@@ -124,7 +125,7 @@
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 	</IDS>
-	<IDS name="core_plasma" maxoccur="6" documentation="Core plasma fluid description" lifecycle_status="alpha" lifecycle_version="3_0.0">
+	<IDS name="core_plasma" maxoccur="6" documentation="Core plasma radial profiles - NEW VERSION THAT WILL REPLACE core_profiles" lifecycle_status="alpha" lifecycle_version="3_0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
@@ -216,7 +217,7 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="core_profiles" maxoccur="1" documentation="Core plasma radial profiles" lifecycle_status="Alpha" lifecycle_version="3_0.0">
+	<IDS name="core_profiles" maxoccur="1" documentation="Core plasma radial profiles. OBSOLESCENT - will be replaced by the core_plasma structure as soon as performance tests are completed." lifecycle_status="Alpha" lifecycle_version="3_0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
@@ -291,48 +292,48 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="core_sources" maxoccur="6" documentation="" lifecycle_status="" lifecycle_version="">
+	<IDS name="core_sources" maxoccur="6" documentation="Core plasma source terms (for the transport equations)" lifecycle_status="alpha" lifecycle_version="3_0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
 		</field>
-		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="" data_type="structure" path_doc="vacuum_toroidal_field">
+		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure" path_doc="vacuum_toroidal_field">
 			<field name="r0" path="vacuum_toroidal_field/r0" path_doc="vacuum_toroidal_field/r0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="constant" units="m"/>
 			<field name="b0" path="vacuum_toroidal_field/b0" path_doc="vacuum_toroidal_field/b0" documentation="Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS." data_type="FLT_1D" type="dynamic" units="T" coordinate1="time"/>
 		</field>
-		<field name="source" path="source" documentation="" data_type="struct_array" maxoccur="10" path_doc="source(:)" coordinate1="source(:)/">
-			<field name="name" path="source/name" path_doc="source(:)/name" documentation="" data_type="STR_0D" units="" type=""/>
-			<field name="profiles" path="source/profiles" documentation="" data_type="struct_array" maxoccur="100" path_doc="source(:)/profiles(:)" coordinate1="source(:)/profiles(:)/" type="">
-				<field name="grid" path="source/profiles/grid" documentation="" data_type="structure" path_doc="source(:)/profiles(:)/grid">
+		<field name="source" path="source" documentation="Set of source terms" data_type="struct_array" maxoccur="10" path_doc="source(:)" coordinate1="1...N">
+			<field name="name" path="source/name" path_doc="source(:)/name" documentation="Name of the source term" data_type="STR_0D" units="-" type="constant"/>
+			<field name="profiles" path="source/profiles" documentation="Source profiles for various time slices" data_type="struct_array" maxoccur="unbounded" path_doc="source(:)/profiles(:)" coordinate1="source(:)/profiles(:)/time" type="dynamic">
+				<field name="grid" path="source/profiles/grid" documentation="Radial grid" data_type="structure" path_doc="source(:)/profiles(:)/grid">
 					<field name="rho_tor_norm" path="source/profiles/grid/rho_tor_norm" path_doc="source(:)/profiles(:)/grid/rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="-"/>
 					<field name="rho_tor" path="source/profiles/grid/rho_tor" path_doc="source(:)/profiles(:)/grid/rho_tor" documentation="Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0" data_type="FLT_1D" type="dynamic" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="m"/>
 					<field name="psi" path="source/profiles/grid/psi" path_doc="source(:)/profiles(:)/grid/psi" documentation="Poloidal magnetic flux" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="Wb" type="dynamic"/>
 					<field name="volume" path="source/profiles/grid/volume" path_doc="source(:)/profiles(:)/grid/volume" documentation="Volume enclosed inside the magnetic surface" data_type="FLT_1D" type="dynamic" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="m^3"/>
 					<field name="area" path="source/profiles/grid/area" path_doc="source(:)/profiles(:)/grid/area" documentation="Cross-sectional area of the flux surface" data_type="FLT_1D" type="dynamic" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="m^2"/>
 				</field>
-				<field name="n_e_source" path="source/profiles/n_e_source" path_doc="source(:)/profiles(:)/n_e_source" documentation="" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/n_e_source/" units="" type=""/>
-				<field name="t_e_source" path="source/profiles/t_e_source" path_doc="source(:)/profiles(:)/t_e_source" documentation="" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/t_e_source/" units="" type=""/>
-				<field name="t_i_average_source" path="source/profiles/t_i_average_source" path_doc="source(:)/profiles(:)/t_i_average_source" documentation="" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/t_i_average_source/" units="" type=""/>
-				<field name="momentum_tor_source" path="source/profiles/momentum_tor_source" path_doc="source(:)/profiles(:)/momentum_tor_source" documentation="" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/momentum_tor_source/" units="" type=""/>
-				<field name="conductivity_parallel" path="source/profiles/conductivity_parallel" path_doc="source(:)/profiles(:)/conductivity_parallel" documentation="" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/conductivity_parallel/" units="" type=""/>
-				<field name="ions" path="source/profiles/ions" documentation="" data_type="struct_array" maxoccur="5" path_doc="source(:)/profiles(:)/ions(:)" coordinate1="source(:)/profiles(:)/ions(:)/">
-					<field name="a" path="source/profiles/ions/a" path_doc="source(:)/profiles(:)/ions(:)/a" documentation="" data_type="FLT_0D" units="" type=""/>
-					<field name="z_ion" path="source/profiles/ions/z_ion" path_doc="source(:)/profiles(:)/ions(:)/z_ion" documentation="" data_type="FLT_0D" type="" units=""/>
-					<field name="z_n" path="source/profiles/ions/z_n" path_doc="source(:)/profiles(:)/ions(:)/z_n" documentation="" data_type="FLT_0D" units="" type=""/>
-					<field name="label" path="source/profiles/ions/label" path_doc="source(:)/profiles(:)/ions(:)/label" documentation="" data_type="STR_0D" type=""/>
-					<field name="n_i_source" path="source/profiles/ions/n_i_source" path_doc="source(:)/profiles(:)/ions(:)/n_i_source" documentation="" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/ions(:)/n_i_source/" units="" type=""/>
-					<field name="t_i_source" path="source/profiles/ions/t_i_source" path_doc="source(:)/profiles(:)/ions(:)/t_i_source" documentation="" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/ions(:)/t_i_source/" units="" type=""/>
-					<field name="multiple_charge_state_flag" path="source/profiles/ions/multiple_charge_state_flag" path_doc="source(:)/profiles(:)/ions(:)/multiple_charge_state_flag" documentation="" data_type="INT_0D" type=""/>
-					<field name="charge_states" path="source/profiles/ions/charge_states" documentation="" data_type="struct_array" maxoccur="10" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)" coordinate1="source(:)/profiles(:)/ions(:)/charge_states(:)/">
-						<field name="z_min" path="source/profiles/ions/charge_states/z_min" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/z_min" documentation="" data_type="FLT_0D" units="" type=""/>
-						<field name="z_max" path="source/profiles/ions/charge_states/z_max" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/z_max" documentation="" data_type="FLT_0D" units="" type=""/>
-						<field name="label" path="source/profiles/ions/charge_states/label" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/label" documentation="" data_type="STR_0D" type=""/>
-						<field name="n_z_source" path="source/profiles/ions/charge_states/n_z_source" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/n_z_source" documentation="" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/ions(:)/charge_states(:)/n_z_source/" units="" type=""/>
-						<field name="t_z_source" path="source/profiles/ions/charge_states/t_z_source" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/t_z_source" documentation="" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/ions(:)/charge_states(:)/t_z_source/" units="" type=""/>
+				<field name="n_e_source" path="source/profiles/n_e_source" path_doc="source(:)/profiles(:)/n_e_source" documentation="Source term for electron density equation" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="s^-1.m^-3" type="dynamic"/>
+				<field name="t_e_source" path="source/profiles/t_e_source" path_doc="source(:)/profiles(:)/t_e_source" documentation="Source term for electron energy equation" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="W.m^-3" type="dynamic"/>
+				<field name="t_i_average_source" path="source/profiles/t_i_average_source" path_doc="source(:)/profiles(:)/t_i_average_source" documentation="Source term for the total ion energy equation" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="W.m^-3" type="dynamic"/>
+				<field name="momentum_tor_source" path="source/profiles/momentum_tor_source" path_doc="source(:)/profiles(:)/momentum_tor_source" documentation="Source term for total toroidal momentum equation" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="kg.m^-1.s^-2" type="dynamic"/>
+				<field name="conductivity_parallel" path="source/profiles/conductivity_parallel" path_doc="source(:)/profiles(:)/conductivity_parallel" documentation="Parallel conductivity induced by this actuator" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="ohm^-1.m^-1" type="dynamic"/>
+				<field name="ions" path="source/profiles/ions" documentation="Source terms related to the different ions species" data_type="struct_array" maxoccur="5" path_doc="source(:)/profiles(:)/ions(:)" coordinate1="1...N">
+					<field name="a" path="source/profiles/ions/a" path_doc="source(:)/profiles(:)/ions(:)/a" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="constant"/>
+					<field name="z_ion" path="source/profiles/ions/z_ion" path_doc="source(:)/profiles(:)/ions(:)/z_ion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="constant" units="Elementary Charge Unit"/>
+					<field name="z_n" path="source/profiles/ions/z_n" path_doc="source(:)/profiles(:)/ions(:)/z_n" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+					<field name="label" path="source/profiles/ions/label" path_doc="source(:)/profiles(:)/ions(:)/label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="constant"/>
+					<field name="n_i_source" path="source/profiles/ions/n_i_source" path_doc="source(:)/profiles(:)/ions(:)/n_i_source" documentation="Source term for ion density equation" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="s^-1.m^-3" type="dynamic"/>
+					<field name="t_i_source" path="source/profiles/ions/t_i_source" path_doc="source(:)/profiles(:)/ions(:)/t_i_source" documentation="Source term for the ion energy transport equation." data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="W.m^-3" type="dynamic"/>
+					<field name="multiple_charge_state_flag" path="source/profiles/ions/multiple_charge_state_flag" path_doc="source(:)/profiles(:)/ions(:)/multiple_charge_state_flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure" data_type="INT_0D" type="constant"/>
+					<field name="charge_states" path="source/profiles/ions/charge_states" documentation="Source terms related to the different charge states of the ion species" data_type="struct_array" maxoccur="10" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)" coordinate1="1...N">
+						<field name="z_min" path="source/profiles/ions/charge_states/z_min" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/z_min" documentation="Minimum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+						<field name="z_max" path="source/profiles/ions/charge_states/z_max" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/z_max" documentation="Maximum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+						<field name="label" path="source/profiles/ions/charge_states/label" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/label" documentation="String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)" data_type="STR_0D" type="constant"/>
+						<field name="n_z_source" path="source/profiles/ions/charge_states/n_z_source" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/n_z_source" documentation="Source term for the charge state density transport equation" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="s^-1.m^-3" type="dynamic"/>
+						<field name="t_z_source" path="source/profiles/ions/charge_states/t_z_source" path_doc="source(:)/profiles(:)/ions(:)/charge_states(:)/t_z_source" documentation="Source terms for the charge state energy transport equation" data_type="FLT_1D" coordinate1="source(:)/profiles(:)/grid/rho_tor_norm" units="W.m^-3" type="dynamic"/>
 					</field>
 				</field>
-				<field name="time" path="source/profiles/time" path_doc="source(:)/profiles(:)/time" documentation="" data_type="flt_type" units="" type=""/>
+				<field name="time" path="source/profiles/time" path_doc="source(:)/profiles(:)/time" documentation="Time" data_type="flt_type" units="s" type="dynamic"/>
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
@@ -343,95 +344,95 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="core_transport" maxoccur="6" documentation="" lifecycle_status="" lifecycle_version="">
+	<IDS name="core_transport" maxoccur="6" documentation="Core plasma transport" lifecycle_status="alpha" lifecycle_version="3_0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
 			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
 		</field>
-		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="" data_type="structure" path_doc="vacuum_toroidal_field">
+		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure" path_doc="vacuum_toroidal_field">
 			<field name="r0" path="vacuum_toroidal_field/r0" path_doc="vacuum_toroidal_field/r0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="constant" units="m"/>
 			<field name="b0" path="vacuum_toroidal_field/b0" path_doc="vacuum_toroidal_field/b0" documentation="Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS." data_type="FLT_1D" type="dynamic" units="T" coordinate1="time"/>
 		</field>
-		<field name="model" path="model" documentation="" data_type="struct_array" maxoccur="5" path_doc="model(:)" coordinate1="model(:)/">
-			<field name="name" path="model/name" path_doc="model(:)/name" documentation="" data_type="STR_0D" type=""/>
-			<field name="flux_multiplier" path="model/flux_multiplier" path_doc="model(:)/flux_multiplier" documentation="" data_type="FLT_0D" type="" units=""/>
-			<field name="profiles" path="model/profiles" documentation="" data_type="struct_array" maxoccur="100" path_doc="model(:)/profiles(:)" coordinate1="model(:)/profiles(:)/" type="">
-				<field name="grid_d" path="model/profiles/grid_d" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/grid_d">
+		<field name="model" path="model" documentation="Transport is described by a combination of various transport models" data_type="struct_array" maxoccur="5" path_doc="model(:)" coordinate1="1...N_Models">
+			<field name="name" path="model/name" path_doc="model(:)/name" documentation="Name of the transport model" data_type="STR_0D" type="constant"/>
+			<field name="flux_multiplier" path="model/flux_multiplier" path_doc="model(:)/flux_multiplier" documentation="Multiplier applied to the particule flux when adding its contribution in the expression of the heat flux : can be 0, 3/2 or 5/2" data_type="FLT_0D" type="constant" units="-"/>
+			<field name="profiles" path="model/profiles" documentation="Transport coefficient profiles for various time slices" data_type="struct_array" maxoccur="unbounded" path_doc="model(:)/profiles(:)" coordinate1="model(:)/profiles(:)/time" type="dynamic">
+				<field name="grid_d" path="model/profiles/grid_d" documentation="Grid for effective diffusivities and parallel conductivity" data_type="structure" path_doc="model(:)/profiles(:)/grid_d">
 					<field name="rho_tor_norm" path="model/profiles/grid_d/rho_tor_norm" path_doc="model(:)/profiles(:)/grid_d/rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="-"/>
 					<field name="rho_tor" path="model/profiles/grid_d/rho_tor" path_doc="model(:)/profiles(:)/grid_d/rho_tor" documentation="Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0" data_type="FLT_1D" type="dynamic" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m"/>
 					<field name="psi" path="model/profiles/grid_d/psi" path_doc="model(:)/profiles(:)/grid_d/psi" documentation="Poloidal magnetic flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="Wb" type="dynamic"/>
 					<field name="volume" path="model/profiles/grid_d/volume" path_doc="model(:)/profiles(:)/grid_d/volume" documentation="Volume enclosed inside the magnetic surface" data_type="FLT_1D" type="dynamic" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^3"/>
 					<field name="area" path="model/profiles/grid_d/area" path_doc="model(:)/profiles(:)/grid_d/area" documentation="Cross-sectional area of the flux surface" data_type="FLT_1D" type="dynamic" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^2"/>
 				</field>
-				<field name="grid_v" path="model/profiles/grid_v" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/grid_v">
+				<field name="grid_v" path="model/profiles/grid_v" documentation="Grid for effective convections" data_type="structure" path_doc="model(:)/profiles(:)/grid_v">
 					<field name="rho_tor_norm" path="model/profiles/grid_v/rho_tor_norm" path_doc="model(:)/profiles(:)/grid_v/rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="-"/>
 					<field name="rho_tor" path="model/profiles/grid_v/rho_tor" path_doc="model(:)/profiles(:)/grid_v/rho_tor" documentation="Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0" data_type="FLT_1D" type="dynamic" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m"/>
 					<field name="psi" path="model/profiles/grid_v/psi" path_doc="model(:)/profiles(:)/grid_v/psi" documentation="Poloidal magnetic flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="Wb" type="dynamic"/>
 					<field name="volume" path="model/profiles/grid_v/volume" path_doc="model(:)/profiles(:)/grid_v/volume" documentation="Volume enclosed inside the magnetic surface" data_type="FLT_1D" type="dynamic" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m^3"/>
 					<field name="area" path="model/profiles/grid_v/area" path_doc="model(:)/profiles(:)/grid_v/area" documentation="Cross-sectional area of the flux surface" data_type="FLT_1D" type="dynamic" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m^2"/>
 				</field>
-				<field name="grid_flux" path="model/profiles/grid_flux" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/grid_flux">
+				<field name="grid_flux" path="model/profiles/grid_flux" documentation="Grid for fluxes" data_type="structure" path_doc="model(:)/profiles(:)/grid_flux">
 					<field name="rho_tor_norm" path="model/profiles/grid_flux/rho_tor_norm" path_doc="model(:)/profiles(:)/grid_flux/rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="-"/>
 					<field name="rho_tor" path="model/profiles/grid_flux/rho_tor" path_doc="model(:)/profiles(:)/grid_flux/rho_tor" documentation="Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0" data_type="FLT_1D" type="dynamic" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="m"/>
 					<field name="psi" path="model/profiles/grid_flux/psi" path_doc="model(:)/profiles(:)/grid_flux/psi" documentation="Poloidal magnetic flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="Wb" type="dynamic"/>
 					<field name="volume" path="model/profiles/grid_flux/volume" path_doc="model(:)/profiles(:)/grid_flux/volume" documentation="Volume enclosed inside the magnetic surface" data_type="FLT_1D" type="dynamic" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="m^3"/>
 					<field name="area" path="model/profiles/grid_flux/area" path_doc="model(:)/profiles(:)/grid_flux/area" documentation="Cross-sectional area of the flux surface" data_type="FLT_1D" type="dynamic" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="m^2"/>
 				</field>
-				<field name="conductivity_parallel" path="model/profiles/conductivity_parallel" path_doc="model(:)/profiles(:)/conductivity_parallel" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/conductivity_parallel/" units="" type=""/>
-				<field name="n_e_transport" path="model/profiles/n_e_transport" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/n_e_transport">
-					<field name="d" path="model/profiles/n_e_transport/d" path_doc="model(:)/profiles(:)/n_e_transport/d" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/n_e_transport/d/" units="" type=""/>
-					<field name="v" path="model/profiles/n_e_transport/v" path_doc="model(:)/profiles(:)/n_e_transport/v" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/n_e_transport/v/" units="" type=""/>
-					<field name="flux" path="model/profiles/n_e_transport/flux" path_doc="model(:)/profiles(:)/n_e_transport/flux" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/n_e_transport/flux/" units="" type=""/>
+				<field name="conductivity_parallel" path="model/profiles/conductivity_parallel" path_doc="model(:)/profiles(:)/conductivity_parallel" documentation="Parallel conductivity" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/rho_tor_norm" units="ohm^-1.m^-1" type="dynamic"/>
+				<field name="n_e_transport" path="model/profiles/n_e_transport" documentation="Transport coefficients for electron density equation" data_type="structure" path_doc="model(:)/profiles(:)/n_e_transport">
+					<field name="d" path="model/profiles/n_e_transport/d" path_doc="model(:)/profiles(:)/n_e_transport/d" documentation="Effective diffusivity" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^2.s^-1" type="dynamic"/>
+					<field name="v" path="model/profiles/n_e_transport/v" path_doc="model(:)/profiles(:)/n_e_transport/v" documentation="Effective convection" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+					<field name="flux" path="model/profiles/n_e_transport/flux" path_doc="model(:)/profiles(:)/n_e_transport/flux" documentation="Flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="m^-2.s^-1" type="dynamic"/>
 				</field>
-				<field name="t_e_transport" path="model/profiles/t_e_transport" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/t_e_transport">
-					<field name="d" path="model/profiles/t_e_transport/d" path_doc="model(:)/profiles(:)/t_e_transport/d" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/t_e_transport/d/" units="" type=""/>
-					<field name="v" path="model/profiles/t_e_transport/v" path_doc="model(:)/profiles(:)/t_e_transport/v" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/t_e_transport/v/" units="" type=""/>
-					<field name="flux" path="model/profiles/t_e_transport/flux" path_doc="model(:)/profiles(:)/t_e_transport/flux" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/t_e_transport/flux/" units="" type=""/>
+				<field name="t_e_transport" path="model/profiles/t_e_transport" documentation="Transport coefficients for electron energy equation" data_type="structure" path_doc="model(:)/profiles(:)/t_e_transport">
+					<field name="d" path="model/profiles/t_e_transport/d" path_doc="model(:)/profiles(:)/t_e_transport/d" documentation="Effective diffusivity" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^2.s^-1" type="dynamic"/>
+					<field name="v" path="model/profiles/t_e_transport/v" path_doc="model(:)/profiles(:)/t_e_transport/v" documentation="Effective convection" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+					<field name="flux" path="model/profiles/t_e_transport/flux" path_doc="model(:)/profiles(:)/t_e_transport/flux" documentation="Flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="W.m^-2" type="dynamic"/>
 				</field>
-				<field name="t_i_average_transport" path="model/profiles/t_i_average_transport" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/t_i_average_transport">
-					<field name="d" path="model/profiles/t_i_average_transport/d" path_doc="model(:)/profiles(:)/t_i_average_transport/d" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/t_i_average_transport/d/" units="" type=""/>
-					<field name="v" path="model/profiles/t_i_average_transport/v" path_doc="model(:)/profiles(:)/t_i_average_transport/v" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/t_i_average_transport/v/" units="" type=""/>
-					<field name="flux" path="model/profiles/t_i_average_transport/flux" path_doc="model(:)/profiles(:)/t_i_average_transport/flux" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/t_i_average_transport/flux/" units="" type=""/>
+				<field name="t_i_average_transport" path="model/profiles/t_i_average_transport" documentation="Transport coefficients for averaged (over ion species) ion energy equation" data_type="structure" path_doc="model(:)/profiles(:)/t_i_average_transport">
+					<field name="d" path="model/profiles/t_i_average_transport/d" path_doc="model(:)/profiles(:)/t_i_average_transport/d" documentation="Effective diffusivity" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^2.s^-1" type="dynamic"/>
+					<field name="v" path="model/profiles/t_i_average_transport/v" path_doc="model(:)/profiles(:)/t_i_average_transport/v" documentation="Effective convection" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+					<field name="flux" path="model/profiles/t_i_average_transport/flux" path_doc="model(:)/profiles(:)/t_i_average_transport/flux" documentation="Flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="W.m^-2" type="dynamic"/>
 				</field>
-				<field name="momentum_tor_transport" path="model/profiles/momentum_tor_transport" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/momentum_tor_transport">
-					<field name="d" path="model/profiles/momentum_tor_transport/d" path_doc="model(:)/profiles(:)/momentum_tor_transport/d" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/momentum_tor_transport/d/" units="" type=""/>
-					<field name="v" path="model/profiles/momentum_tor_transport/v" path_doc="model(:)/profiles(:)/momentum_tor_transport/v" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/momentum_tor_transport/v/" units="" type=""/>
-					<field name="flux" path="model/profiles/momentum_tor_transport/flux" path_doc="model(:)/profiles(:)/momentum_tor_transport/flux" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/momentum_tor_transport/flux/" units="" type=""/>
+				<field name="momentum_tor_transport" path="model/profiles/momentum_tor_transport" documentation="Transport coefficients for total toroidal momentum equation" data_type="structure" path_doc="model(:)/profiles(:)/momentum_tor_transport">
+					<field name="d" path="model/profiles/momentum_tor_transport/d" path_doc="model(:)/profiles(:)/momentum_tor_transport/d" documentation="Effective diffusivity" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^2.s^-1" type="dynamic"/>
+					<field name="v" path="model/profiles/momentum_tor_transport/v" path_doc="model(:)/profiles(:)/momentum_tor_transport/v" documentation="Effective convection" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+					<field name="flux" path="model/profiles/momentum_tor_transport/flux" path_doc="model(:)/profiles(:)/momentum_tor_transport/flux" documentation="Flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="kg.m^-1.s^-2" type="dynamic"/>
 				</field>
-				<field name="ions" path="model/profiles/ions" documentation="" data_type="struct_array" maxoccur="5" path_doc="model(:)/profiles(:)/ions(:)" coordinate1="model(:)/profiles(:)/ions(:)/">
-					<field name="a" path="model/profiles/ions/a" path_doc="model(:)/profiles(:)/ions(:)/a" documentation="" data_type="FLT_0D" units="" type=""/>
-					<field name="z_ion" path="model/profiles/ions/z_ion" path_doc="model(:)/profiles(:)/ions(:)/z_ion" documentation="" data_type="FLT_0D" type="" units=""/>
-					<field name="z_n" path="model/profiles/ions/z_n" path_doc="model(:)/profiles(:)/ions(:)/z_n" documentation="" data_type="FLT_0D" units="" type=""/>
-					<field name="label" path="model/profiles/ions/label" path_doc="model(:)/profiles(:)/ions(:)/label" documentation="" data_type="STR_0D" type=""/>
-					<field name="n_i_transport" path="model/profiles/ions/n_i_transport" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/ions(:)/n_i_transport">
-						<field name="d" path="model/profiles/ions/n_i_transport/d" path_doc="model(:)/profiles(:)/ions(:)/n_i_transport/d" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/n_i_transport/d/" units="" type=""/>
-						<field name="v" path="model/profiles/ions/n_i_transport/v" path_doc="model(:)/profiles(:)/ions(:)/n_i_transport/v" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/n_i_transport/v/" units="" type=""/>
-						<field name="flux" path="model/profiles/ions/n_i_transport/flux" path_doc="model(:)/profiles(:)/ions(:)/n_i_transport/flux" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/n_i_transport/flux/" units="" type=""/>
+				<field name="ions" path="model/profiles/ions" documentation="Transport coefficients related to the various ions species" data_type="struct_array" maxoccur="5" path_doc="model(:)/profiles(:)/ions(:)" coordinate1="1...N">
+					<field name="a" path="model/profiles/ions/a" path_doc="model(:)/profiles(:)/ions(:)/a" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="constant"/>
+					<field name="z_ion" path="model/profiles/ions/z_ion" path_doc="model(:)/profiles(:)/ions(:)/z_ion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="constant" units="Elementary Charge Unit"/>
+					<field name="z_n" path="model/profiles/ions/z_n" path_doc="model(:)/profiles(:)/ions(:)/z_n" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+					<field name="label" path="model/profiles/ions/label" path_doc="model(:)/profiles(:)/ions(:)/label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="constant"/>
+					<field name="n_i_transport" path="model/profiles/ions/n_i_transport" documentation="Transport coefficients for ion density equation" data_type="structure" path_doc="model(:)/profiles(:)/ions(:)/n_i_transport">
+						<field name="d" path="model/profiles/ions/n_i_transport/d" path_doc="model(:)/profiles(:)/ions(:)/n_i_transport/d" documentation="Effective diffusivity" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^2.s^-1" type="dynamic"/>
+						<field name="v" path="model/profiles/ions/n_i_transport/v" path_doc="model(:)/profiles(:)/ions(:)/n_i_transport/v" documentation="Effective convection" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+						<field name="flux" path="model/profiles/ions/n_i_transport/flux" path_doc="model(:)/profiles(:)/ions(:)/n_i_transport/flux" documentation="Flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="m^-2.s^-1" type="dynamic"/>
 					</field>
-					<field name="t_i_transport" path="model/profiles/ions/t_i_transport" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/ions(:)/t_i_transport">
-						<field name="d" path="model/profiles/ions/t_i_transport/d" path_doc="model(:)/profiles(:)/ions(:)/t_i_transport/d" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/t_i_transport/d/" units="" type=""/>
-						<field name="v" path="model/profiles/ions/t_i_transport/v" path_doc="model(:)/profiles(:)/ions(:)/t_i_transport/v" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/t_i_transport/v/" units="" type=""/>
-						<field name="flux" path="model/profiles/ions/t_i_transport/flux" path_doc="model(:)/profiles(:)/ions(:)/t_i_transport/flux" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/t_i_transport/flux/" units="" type=""/>
+					<field name="t_i_transport" path="model/profiles/ions/t_i_transport" documentation="Transport coefficients for ion energy equation" data_type="structure" path_doc="model(:)/profiles(:)/ions(:)/t_i_transport">
+						<field name="d" path="model/profiles/ions/t_i_transport/d" path_doc="model(:)/profiles(:)/ions(:)/t_i_transport/d" documentation="Effective diffusivity" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^2.s^-1" type="dynamic"/>
+						<field name="v" path="model/profiles/ions/t_i_transport/v" path_doc="model(:)/profiles(:)/ions(:)/t_i_transport/v" documentation="Effective convection" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+						<field name="flux" path="model/profiles/ions/t_i_transport/flux" path_doc="model(:)/profiles(:)/ions(:)/t_i_transport/flux" documentation="Flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="W.m^-2" type="dynamic"/>
 					</field>
-					<field name="multiple_charge_state_flag" path="model/profiles/ions/multiple_charge_state_flag" path_doc="model(:)/profiles(:)/ions(:)/multiple_charge_state_flag" documentation="" data_type="INT_0D" type=""/>
-					<field name="charge_states" path="model/profiles/ions/charge_states" documentation="" data_type="struct_array" maxoccur="10" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)" coordinate1="model(:)/profiles(:)/ions(:)/charge_states(:)/">
-						<field name="z_min" path="model/profiles/ions/charge_states/z_min" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/z_min" documentation="" data_type="FLT_0D" units="" type=""/>
-						<field name="z_max" path="model/profiles/ions/charge_states/z_max" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/z_max" documentation="" data_type="FLT_0D" units="" type=""/>
-						<field name="label" path="model/profiles/ions/charge_states/label" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/label" documentation="" data_type="STR_0D" type=""/>
-						<field name="n_z_transport" path="model/profiles/ions/charge_states/n_z_transport" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport">
-							<field name="d" path="model/profiles/ions/charge_states/n_z_transport/d" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/d" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/d/" units="" type=""/>
-							<field name="v" path="model/profiles/ions/charge_states/n_z_transport/v" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/v" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/v/" units="" type=""/>
-							<field name="flux" path="model/profiles/ions/charge_states/n_z_transport/flux" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/flux" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/flux/" units="" type=""/>
+					<field name="multiple_charge_state_flag" path="model/profiles/ions/multiple_charge_state_flag" path_doc="model(:)/profiles(:)/ions(:)/multiple_charge_state_flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure" data_type="INT_0D" type="constant"/>
+					<field name="charge_states" path="model/profiles/ions/charge_states" documentation="Transport coefficients related to the different charge states of the ion species" data_type="struct_array" maxoccur="10" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)" coordinate1="1...N">
+						<field name="z_min" path="model/profiles/ions/charge_states/z_min" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/z_min" documentation="Minimum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+						<field name="z_max" path="model/profiles/ions/charge_states/z_max" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/z_max" documentation="Maximum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+						<field name="label" path="model/profiles/ions/charge_states/label" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/label" documentation="String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)" data_type="STR_0D" type="constant"/>
+						<field name="n_z_transport" path="model/profiles/ions/charge_states/n_z_transport" documentation="Transport coefficients of for the density of the charge state considered (thermal+non-thermal)" data_type="structure" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport">
+							<field name="d" path="model/profiles/ions/charge_states/n_z_transport/d" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/d" documentation="Effective diffusivity" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^2.s^-1" type="dynamic"/>
+							<field name="v" path="model/profiles/ions/charge_states/n_z_transport/v" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/v" documentation="Effective convection" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+							<field name="flux" path="model/profiles/ions/charge_states/n_z_transport/flux" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/flux" documentation="Flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="m^-2.s^-1" type="dynamic"/>
 						</field>
-						<field name="t_z_transport" path="model/profiles/ions/charge_states/t_z_transport" documentation="" data_type="structure" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport">
-							<field name="d" path="model/profiles/ions/charge_states/t_z_transport/d" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/d" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/d/" units="" type=""/>
-							<field name="v" path="model/profiles/ions/charge_states/t_z_transport/v" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/v" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/v/" units="" type=""/>
-							<field name="flux" path="model/profiles/ions/charge_states/t_z_transport/flux" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/flux" documentation="" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/flux/" units="" type=""/>
+						<field name="t_z_transport" path="model/profiles/ions/charge_states/t_z_transport" documentation="Transport coefficients of for the energy of the charge state considered " data_type="structure" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport">
+							<field name="d" path="model/profiles/ions/charge_states/t_z_transport/d" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/d" documentation="Effective diffusivity" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_d/rho_tor_norm" units="m^2.s^-1" type="dynamic"/>
+							<field name="v" path="model/profiles/ions/charge_states/t_z_transport/v" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/v" documentation="Effective convection" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_v/rho_tor_norm" units="m.s^-1" type="dynamic"/>
+							<field name="flux" path="model/profiles/ions/charge_states/t_z_transport/flux" path_doc="model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/flux" documentation="Flux" data_type="FLT_1D" coordinate1="model(:)/profiles(:)/grid_flux/rho_tor_norm" units="W.m^-2" type="dynamic"/>
 						</field>
 					</field>
 				</field>
-				<field name="time" path="model/profiles/time" path_doc="model(:)/profiles(:)/time" documentation="" data_type="flt_type" units="" type=""/>
+				<field name="time" path="model/profiles/time" path_doc="model(:)/profiles(:)/time" documentation="Time" data_type="flt_type" units="s" type="dynamic"/>
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
@@ -527,8 +528,8 @@
 				<field name="psi_axis" path="time_slice/global_quantities/psi_axis" path_doc="time_slice(:)/global_quantities/psi_axis" documentation="Poloidal flux at the magnetic axis" data_type="FLT_0D" type="dynamic" units="Wb"/>
 				<field name="psi_boundary" path="time_slice/global_quantities/psi_boundary" path_doc="time_slice(:)/global_quantities/psi_boundary" documentation="Poloidal flux at the selected plasma boundary " data_type="FLT_0D" type="dynamic" units="Wb"/>
 				<field name="magnetic_axis" path="time_slice/global_quantities/magnetic_axis" documentation="Magnetic axis position" data_type="structure" path_doc="time_slice(:)/global_quantities/magnetic_axis">
-					<field name="r" path="time_slice/global_quantities/magnetic_axis/r" path_doc="time_slice(:)/global_quantities/magnetic_axis/r" documentation="Major radius" data_type="FLT_1D" type="dynamic" units="m" coordinate1="time_slice(:)/time"/>
-					<field name="z" path="time_slice/global_quantities/magnetic_axis/z" path_doc="time_slice(:)/global_quantities/magnetic_axis/z" documentation="Height" data_type="FLT_1D" type="dynamic" units="m" coordinate1="time_slice(:)/time"/>
+					<field name="r" path="time_slice/global_quantities/magnetic_axis/r" path_doc="time_slice(:)/global_quantities/magnetic_axis/r" documentation="Major radius" data_type="FLT_0D" type="dynamic" units="m"/>
+					<field name="z" path="time_slice/global_quantities/magnetic_axis/z" path_doc="time_slice(:)/global_quantities/magnetic_axis/z" documentation="Height" data_type="FLT_0D" type="dynamic" units="m"/>
 				</field>
 				<field name="b_tor_axis" path="time_slice/global_quantities/b_tor_axis" path_doc="time_slice(:)/global_quantities/b_tor_axis" documentation="Total toroidal magnetic field at the magnetic axis" data_type="FLT_0D" type="dynamic" units="T"/>
 				<field name="q_axis" path="time_slice/global_quantities/q_axis" path_doc="time_slice(:)/global_quantities/q_axis" documentation="q at the magnetic axis" data_type="FLT_0D" type="dynamic" units="-"/>
@@ -580,9 +581,9 @@
 			</field>
 			<field name="profiles_2d" path="time_slice/profiles_2d" documentation="Equilibrium 2D profiles in the poloidal plane. Multiple 2D representations of the equilibrium can be stored here." data_type="struct_array" maxoccur="unbounded" path_doc="time_slice(:)/profiles_2d(:)" coordinate1="1...n_representations">
 				<field name="grid_type" path="time_slice/profiles_2d/grid_type" documentation="Selection of one of a set of grid types. 1-rectangular (R,Z) grid, in this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2." data_type="structure" path_doc="time_slice(:)/profiles_2d(:)/grid_type">
-					<field name="id" path="time_slice/profiles_2d/grid_type/id" path_doc="time_slice(:)/profiles_2d(:)/grid_type/id" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
-					<field name="flag" path="time_slice/profiles_2d/grid_type/flag" path_doc="time_slice(:)/profiles_2d(:)/grid_type/flag" documentation="Integer identifier" data_type="INT_0D" type="constant"/>
-					<field name="description" path="time_slice/profiles_2d/grid_type/description" path_doc="time_slice(:)/profiles_2d(:)/grid_type/description" documentation="Verbose description of identifier" data_type="STR_0D" type="constant"/>
+					<field name="name" path="time_slice/profiles_2d/grid_type/name" path_doc="time_slice(:)/profiles_2d(:)/grid_type/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+					<field name="index" path="time_slice/profiles_2d/grid_type/index" path_doc="time_slice(:)/profiles_2d(:)/grid_type/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+					<field name="description" path="time_slice/profiles_2d/grid_type/description" path_doc="time_slice(:)/profiles_2d(:)/grid_type/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
 				</field>
 				<field name="grid" path="time_slice/profiles_2d/grid" documentation="Definition of the 2D grid" data_type="structure" path_doc="time_slice(:)/profiles_2d(:)/grid">
 					<field name="dim1" path="time_slice/profiles_2d/grid/dim1" path_doc="time_slice(:)/profiles_2d(:)/grid/dim1" documentation="First dimension values" data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="mixed"/>
@@ -601,9 +602,9 @@
 			</field>
 			<field name="coordinate_system" path="time_slice/coordinate_system" documentation="Flux surface coordinate system on a square grid of flux and poloidal angle" data_type="structure" path_doc="time_slice(:)/coordinate_system">
 				<field name="grid_type" path="time_slice/coordinate_system/grid_type" documentation="Type of coordinate system" data_type="structure" path_doc="time_slice(:)/coordinate_system/grid_type">
-					<field name="id" path="time_slice/coordinate_system/grid_type/id" path_doc="time_slice(:)/coordinate_system/grid_type/id" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
-					<field name="flag" path="time_slice/coordinate_system/grid_type/flag" path_doc="time_slice(:)/coordinate_system/grid_type/flag" documentation="Integer identifier" data_type="INT_0D" type="constant"/>
-					<field name="description" path="time_slice/coordinate_system/grid_type/description" path_doc="time_slice(:)/coordinate_system/grid_type/description" documentation="Verbose description of identifier" data_type="STR_0D" type="constant"/>
+					<field name="name" path="time_slice/coordinate_system/grid_type/name" path_doc="time_slice(:)/coordinate_system/grid_type/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+					<field name="index" path="time_slice/coordinate_system/grid_type/index" path_doc="time_slice(:)/coordinate_system/grid_type/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+					<field name="description" path="time_slice/coordinate_system/grid_type/description" path_doc="time_slice(:)/coordinate_system/grid_type/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
 				</field>
 				<field name="grid" path="time_slice/coordinate_system/grid" documentation="Definition of the 2D grid" data_type="structure" path_doc="time_slice(:)/coordinate_system/grid">
 					<field name="dim1" path="time_slice/coordinate_system/grid/dim1" path_doc="time_slice(:)/coordinate_system/grid/dim1" documentation="First dimension values" data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="mixed"/>
@@ -898,151 +899,217 @@
 		</field>
 		<field name="constant_float0d" path="constant_float0d" documentation="Constant 0D float" data_type="struct_array" maxoccur="10" path_doc="constant_float0d(:)" coordinate1="1...N" units="mixed">
 			<field name="value" path="constant_float0d/value" path_doc="constant_float0d(:)/value" documentation="Value" data_type="FLT_0D" type="constant" units="-"/>
-			<field name="name" path="constant_float0d/name" path_doc="constant_float0d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_float0d/description" path_doc="constant_float0d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_float0d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_float0d(:)/identifier">
+				<field name="name" path="constant_float0d/identifier/name" path_doc="constant_float0d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_float0d/identifier/index" path_doc="constant_float0d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_float0d/identifier/description" path_doc="constant_float0d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_integer0d" path="constant_integer0d" documentation="Constant 0D integer" data_type="struct_array" maxoccur="10" path_doc="constant_integer0d(:)" coordinate1="1...N">
 			<field name="value" path="constant_integer0d/value" path_doc="constant_integer0d(:)/value" documentation="Value" data_type="INT_0D" type="constant"/>
-			<field name="name" path="constant_integer0d/name" path_doc="constant_integer0d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_integer0d/description" path_doc="constant_integer0d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_integer0d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_integer0d(:)/identifier">
+				<field name="name" path="constant_integer0d/identifier/name" path_doc="constant_integer0d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_integer0d/identifier/index" path_doc="constant_integer0d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_integer0d/identifier/description" path_doc="constant_integer0d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_string0d" path="constant_string0d" documentation="Constant 0D string" data_type="struct_array" maxoccur="10" path_doc="constant_string0d(:)" coordinate1="1...N">
 			<field name="value" path="constant_string0d/value" path_doc="constant_string0d(:)/value" documentation="Value" data_type="STR_0D" type="constant"/>
-			<field name="name" path="constant_string0d/name" path_doc="constant_string0d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_string0d/description" path_doc="constant_string0d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_string0d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_string0d(:)/identifier">
+				<field name="name" path="constant_string0d/identifier/name" path_doc="constant_string0d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_string0d/identifier/index" path_doc="constant_string0d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_string0d/identifier/description" path_doc="constant_string0d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_integer1d" path="constant_integer1d" documentation="Constant 1D integer" data_type="struct_array" maxoccur="10" path_doc="constant_integer1d(:)" coordinate1="1...N">
 			<field name="value" path="constant_integer1d/value" path_doc="constant_integer1d(:)/value" documentation="Value" data_type="INT_1D" type="constant" coordinate1="1...N"/>
-			<field name="name" path="constant_integer1d/name" path_doc="constant_integer1d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_integer1d/description" path_doc="constant_integer1d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_integer1d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_integer1d(:)/identifier">
+				<field name="name" path="constant_integer1d/identifier/name" path_doc="constant_integer1d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_integer1d/identifier/index" path_doc="constant_integer1d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_integer1d/identifier/description" path_doc="constant_integer1d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_string1d" path="constant_string1d" documentation="Constant 1D string" data_type="struct_array" maxoccur="10" path_doc="constant_string1d(:)" coordinate1="1...N">
 			<field name="value" path="constant_string1d/value" path_doc="constant_string1d(:)/value" documentation="Value" data_type="STR_1D" type="constant" coordinate1="1...N"/>
-			<field name="name" path="constant_string1d/name" path_doc="constant_string1d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_string1d/description" path_doc="constant_string1d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_string1d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_string1d(:)/identifier">
+				<field name="name" path="constant_string1d/identifier/name" path_doc="constant_string1d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_string1d/identifier/index" path_doc="constant_string1d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_string1d/identifier/description" path_doc="constant_string1d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_float1d" path="constant_float1d" documentation="Constant 1D float" data_type="struct_array" maxoccur="10" path_doc="constant_float1d(:)" coordinate1="1...N" units="mixed">
 			<field name="value" path="constant_float1d/value" path_doc="constant_float1d(:)/value" documentation="Value" data_type="FLT_1D" type="constant" units="-" coordinate1="1...N"/>
-			<field name="name" path="constant_float1d/name" path_doc="constant_float1d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_float1d/description" path_doc="constant_float1d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_float1d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_float1d(:)/identifier">
+				<field name="name" path="constant_float1d/identifier/name" path_doc="constant_float1d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_float1d/identifier/index" path_doc="constant_float1d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_float1d/identifier/description" path_doc="constant_float1d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_float1d" path="dynamic_float1d" documentation="Dynamic 1D float" data_type="struct_array" maxoccur="10" path_doc="dynamic_float1d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_float1d/value" path_doc="dynamic_float1d(:)/value" documentation="Value" data_type="structure">
 				<field name="data" path="dynamic_float1d/value/data" path_doc="dynamic_float1d(:)/value/data" documentation="Value" data_type="FLT_1D" type="dynamic" units="mixed" coordinate1="dynamic_float1d(:)/value/time"/>
 				<field name="time" path="dynamic_float1d/value/time" path_doc="dynamic_float1d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="name" path="dynamic_float1d/name" path_doc="dynamic_float1d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="dynamic_float1d/description" path_doc="dynamic_float1d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="dynamic_float1d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_float1d(:)/identifier">
+				<field name="name" path="dynamic_float1d/identifier/name" path_doc="dynamic_float1d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_float1d/identifier/index" path_doc="dynamic_float1d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_float1d/identifier/description" path_doc="dynamic_float1d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_string1d" path="dynamic_string1d" documentation="Dynamic 1D string" data_type="struct_array" maxoccur="10" path_doc="dynamic_string1d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_string1d/value" path_doc="dynamic_string1d(:)/value" documentation="Value" data_type="structure">
 				<field name="data" path="dynamic_string1d/value/data" path_doc="dynamic_string1d(:)/value/data" documentation="Value" data_type="STR_1D" type="dynamic" units="mixed" coordinate1="dynamic_string1d(:)/value/time"/>
 				<field name="time" path="dynamic_string1d/value/time" path_doc="dynamic_string1d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="name" path="dynamic_string1d/name" path_doc="dynamic_string1d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="dynamic_string1d/description" path_doc="dynamic_string1d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="dynamic_string1d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_string1d(:)/identifier">
+				<field name="name" path="dynamic_string1d/identifier/name" path_doc="dynamic_string1d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_string1d/identifier/index" path_doc="dynamic_string1d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_string1d/identifier/description" path_doc="dynamic_string1d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_integer1d" path="dynamic_integer1d" documentation="Dynamic 1D integer" data_type="struct_array" maxoccur="10" path_doc="dynamic_integer1d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_integer1d/value" path_doc="dynamic_integer1d(:)/value" documentation="Value" data_type="structure">
 				<field name="data" path="dynamic_integer1d/value/data" path_doc="dynamic_integer1d(:)/value/data" documentation="Value" data_type="INT_1D" type="dynamic" units="mixed" coordinate1="dynamic_integer1d(:)/value/time"/>
 				<field name="time" path="dynamic_integer1d/value/time" path_doc="dynamic_integer1d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="name" path="dynamic_integer1d/name" path_doc="dynamic_integer1d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="dynamic_integer1d/description" path_doc="dynamic_integer1d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="dynamic_integer1d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_integer1d(:)/identifier">
+				<field name="name" path="dynamic_integer1d/identifier/name" path_doc="dynamic_integer1d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_integer1d/identifier/index" path_doc="dynamic_integer1d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_integer1d/identifier/description" path_doc="dynamic_integer1d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_float2d" path="constant_float2d" documentation="Constant 2D float" data_type="struct_array" maxoccur="10" path_doc="constant_float2d(:)" coordinate1="1...N">
 			<field name="value" path="constant_float2d/value" path_doc="constant_float2d(:)/value" documentation="Value" data_type="FLT_2D" type="constant" coordinate1="1...N" coordinate2="1...N" units="mixed"/>
-			<field name="name" path="constant_float2d/name" path_doc="constant_float2d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_float2d/description" path_doc="constant_float2d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_float2d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_float2d(:)/identifier">
+				<field name="name" path="constant_float2d/identifier/name" path_doc="constant_float2d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_float2d/identifier/index" path_doc="constant_float2d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_float2d/identifier/description" path_doc="constant_float2d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_integer2d" path="constant_integer2d" documentation="Constant 2D integer" data_type="struct_array" maxoccur="10" path_doc="constant_integer2d(:)" coordinate1="1...N">
 			<field name="value" path="constant_integer2d/value" path_doc="constant_integer2d(:)/value" documentation="Value" data_type="INT_2D" type="constant" coordinate1="1...N" coordinate2="1...N" units="mixed"/>
-			<field name="name" path="constant_integer2d/name" path_doc="constant_integer2d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_integer2d/description" path_doc="constant_integer2d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_integer2d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_integer2d(:)/identifier">
+				<field name="name" path="constant_integer2d/identifier/name" path_doc="constant_integer2d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_integer2d/identifier/index" path_doc="constant_integer2d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_integer2d/identifier/description" path_doc="constant_integer2d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_float2d" path="dynamic_float2d" documentation="Dynamic 2D float" data_type="struct_array" maxoccur="10" path_doc="dynamic_float2d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_float2d/value" path_doc="dynamic_float2d(:)/value" documentation="Value" data_type="structure">
-				<field name="data" path="dynamic_float2d/value/data" path_doc="dynamic_float2d(:)/value/data" documentation="Value" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="../1...N" coordinate2="dynamic_float2d(:)/value/time"/>
+				<field name="data" path="dynamic_float2d/value/data" path_doc="dynamic_float2d(:)/value/data" documentation="Value" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="1...N" coordinate2="dynamic_float2d(:)/value/time"/>
 				<field name="time" path="dynamic_float2d/value/time" path_doc="dynamic_float2d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="name" path="dynamic_float2d/name" path_doc="dynamic_float2d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="dynamic_float2d/description" path_doc="dynamic_float2d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="dynamic_float2d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_float2d(:)/identifier">
+				<field name="name" path="dynamic_float2d/identifier/name" path_doc="dynamic_float2d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_float2d/identifier/index" path_doc="dynamic_float2d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_float2d/identifier/description" path_doc="dynamic_float2d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_integer2d" path="dynamic_integer2d" documentation="Dynamic 2D integer" data_type="struct_array" maxoccur="10" path_doc="dynamic_integer2d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_integer2d/value" path_doc="dynamic_integer2d(:)/value" documentation="Value" data_type="structure">
-				<field name="data" path="dynamic_integer2d/value/data" path_doc="dynamic_integer2d(:)/value/data" documentation="Value" data_type="INT_2D" type="dynamic" units="mixed" coordinate1="../1...N" coordinate2="dynamic_integer2d(:)/value/time"/>
+				<field name="data" path="dynamic_integer2d/value/data" path_doc="dynamic_integer2d(:)/value/data" documentation="Value" data_type="INT_2D" type="dynamic" units="mixed" coordinate1="1...N" coordinate2="dynamic_integer2d(:)/value/time"/>
 				<field name="time" path="dynamic_integer2d/value/time" path_doc="dynamic_integer2d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 			<field name="identifier" path="dynamic_integer2d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_integer2d(:)/identifier">
-				<field name="id" path="dynamic_integer2d/identifier/id" path_doc="dynamic_integer2d(:)/identifier/id" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
-				<field name="flag" path="dynamic_integer2d/identifier/flag" path_doc="dynamic_integer2d(:)/identifier/flag" documentation="Integer identifier" data_type="INT_0D" type="constant"/>
-				<field name="description" path="dynamic_integer2d/identifier/description" path_doc="dynamic_integer2d(:)/identifier/description" documentation="Verbose description of identifier" data_type="STR_0D" type="constant"/>
+				<field name="name" path="dynamic_integer2d/identifier/name" path_doc="dynamic_integer2d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_integer2d/identifier/index" path_doc="dynamic_integer2d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_integer2d/identifier/description" path_doc="dynamic_integer2d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
 			</field>
 		</field>
 		<field name="constant_float3d" path="constant_float3d" documentation="Constant 3D float" data_type="struct_array" maxoccur="10" path_doc="constant_float3d(:)" coordinate1="1...N">
 			<field name="value" path="constant_float3d/value" path_doc="constant_float3d(:)/value" documentation="Value" data_type="FLT_3D" type="constant" coordinate1="1...N" coordinate2="1...N" coordinate3="1...N" units="mixed"/>
-			<field name="name" path="constant_float3d/name" path_doc="constant_float3d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_float3d/description" path_doc="constant_float3d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_float3d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_float3d(:)/identifier">
+				<field name="name" path="constant_float3d/identifier/name" path_doc="constant_float3d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_float3d/identifier/index" path_doc="constant_float3d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_float3d/identifier/description" path_doc="constant_float3d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_integer3d" path="constant_integer3d" documentation="Constant 3D integer" data_type="struct_array" maxoccur="10" path_doc="constant_integer3d(:)" coordinate1="1...N">
 			<field name="value" path="constant_integer3d/value" path_doc="constant_integer3d(:)/value" documentation="Value" data_type="INT_3D" type="constant" coordinate1="1...N" coordinate2="1...N" coordinate3="1...N" units="mixed"/>
-			<field name="name" path="constant_integer3d/name" path_doc="constant_integer3d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_integer3d/description" path_doc="constant_integer3d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_integer3d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_integer3d(:)/identifier">
+				<field name="name" path="constant_integer3d/identifier/name" path_doc="constant_integer3d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_integer3d/identifier/index" path_doc="constant_integer3d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_integer3d/identifier/description" path_doc="constant_integer3d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_float3d" path="dynamic_float3d" documentation="Dynamic 3D float" data_type="struct_array" maxoccur="10" path_doc="dynamic_float3d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_float3d/value" path_doc="dynamic_float3d(:)/value" documentation="Value" data_type="structure">
-				<field name="data" path="dynamic_float3d/value/data" path_doc="dynamic_float3d(:)/value/data" documentation="Value" data_type="FLT_3D" type="dynamic" units="mixed" coordinate1="../1...N" coordinate2="../1...N" coordinate3="dynamic_float3d(:)/value/time"/>
+				<field name="data" path="dynamic_float3d/value/data" path_doc="dynamic_float3d(:)/value/data" documentation="Value" data_type="FLT_3D" type="dynamic" units="mixed" coordinate1="1...N" coordinate2="1...N" coordinate3="dynamic_float3d(:)/value/time"/>
 				<field name="time" path="dynamic_float3d/value/time" path_doc="dynamic_float3d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="name" path="dynamic_float3d/name" path_doc="dynamic_float3d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="dynamic_float3d/description" path_doc="dynamic_float3d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="dynamic_float3d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_float3d(:)/identifier">
+				<field name="name" path="dynamic_float3d/identifier/name" path_doc="dynamic_float3d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_float3d/identifier/index" path_doc="dynamic_float3d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_float3d/identifier/description" path_doc="dynamic_float3d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_integer3d" path="dynamic_integer3d" documentation="Dynamic 3D integer" data_type="struct_array" maxoccur="10" path_doc="dynamic_integer3d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_integer3d/value" path_doc="dynamic_integer3d(:)/value" documentation="Value" data_type="structure">
-				<field name="data" path="dynamic_integer3d/value/data" path_doc="dynamic_integer3d(:)/value/data" documentation="Value" data_type="INT_3D" type="dynamic" units="mixed" coordinate1="../1...N" coordinate2="../1...N" coordinate3="dynamic_integer3d(:)/value/time"/>
+				<field name="data" path="dynamic_integer3d/value/data" path_doc="dynamic_integer3d(:)/value/data" documentation="Value" data_type="INT_3D" type="dynamic" units="mixed" coordinate1="1...N" coordinate2="1...N" coordinate3="dynamic_integer3d(:)/value/time"/>
 				<field name="time" path="dynamic_integer3d/value/time" path_doc="dynamic_integer3d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="name" path="dynamic_integer3d/name" path_doc="dynamic_integer3d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="dynamic_integer3d/description" path_doc="dynamic_integer3d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="dynamic_integer3d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_integer3d(:)/identifier">
+				<field name="name" path="dynamic_integer3d/identifier/name" path_doc="dynamic_integer3d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_integer3d/identifier/index" path_doc="dynamic_integer3d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_integer3d/identifier/description" path_doc="dynamic_integer3d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_float4d" path="constant_float4d" documentation="Constant 4D float" data_type="struct_array" maxoccur="10" path_doc="constant_float4d(:)" coordinate1="1...N">
 			<field name="value" path="constant_float4d/value" path_doc="constant_float4d(:)/value" documentation="Value" data_type="FLT_4D" type="constant" coordinate1="1...N" coordinate2="1...N" coordinate3="1...N" coordinate4="1...N" units="mixed"/>
-			<field name="name" path="constant_float4d/name" path_doc="constant_float4d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_float4d/description" path_doc="constant_float4d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_float4d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_float4d(:)/identifier">
+				<field name="name" path="constant_float4d/identifier/name" path_doc="constant_float4d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_float4d/identifier/index" path_doc="constant_float4d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_float4d/identifier/description" path_doc="constant_float4d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_float4d" path="dynamic_float4d" documentation="Dynamic 4D float" data_type="struct_array" maxoccur="10" path_doc="dynamic_float4d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_float4d/value" path_doc="dynamic_float4d(:)/value" documentation="Value" data_type="structure">
-				<field name="data" path="dynamic_float4d/value/data" path_doc="dynamic_float4d(:)/value/data" documentation="Value" data_type="FLT_4D" type="dynamic" units="mixed" coordinate1="../1...N" coordinate2="../1...N" coordinate3="../1...N" coordinate4="dynamic_float4d(:)/value/time"/>
+				<field name="data" path="dynamic_float4d/value/data" path_doc="dynamic_float4d(:)/value/data" documentation="Value" data_type="FLT_4D" type="dynamic" units="mixed" coordinate1="1...N" coordinate2="1...N" coordinate3="1...N" coordinate4="dynamic_float4d(:)/value/time"/>
 				<field name="time" path="dynamic_float4d/value/time" path_doc="dynamic_float4d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="name" path="dynamic_float4d/name" path_doc="dynamic_float4d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="dynamic_float4d/description" path_doc="dynamic_float4d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="dynamic_float4d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_float4d(:)/identifier">
+				<field name="name" path="dynamic_float4d/identifier/name" path_doc="dynamic_float4d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_float4d/identifier/index" path_doc="dynamic_float4d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_float4d/identifier/description" path_doc="dynamic_float4d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_float5d" path="constant_float5d" documentation="Constant 5D float" data_type="struct_array" maxoccur="10" path_doc="constant_float5d(:)" coordinate1="1...N">
 			<field name="value" path="constant_float5d/value" path_doc="constant_float5d(:)/value" documentation="Value" data_type="FLT_5D" type="constant" coordinate1="1...N" coordinate2="1...N" coordinate3="1...N" coordinate4="1...N" coordinate5="1...N" units="mixed"/>
-			<field name="name" path="constant_float5d/name" path_doc="constant_float5d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_float5d/description" path_doc="constant_float5d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_float5d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_float5d(:)/identifier">
+				<field name="name" path="constant_float5d/identifier/name" path_doc="constant_float5d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_float5d/identifier/index" path_doc="constant_float5d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_float5d/identifier/description" path_doc="constant_float5d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_float5d" path="dynamic_float5d" documentation="Dynamic 5D float" data_type="struct_array" maxoccur="10" path_doc="dynamic_float5d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_float5d/value" path_doc="dynamic_float5d(:)/value" documentation="Value" data_type="structure">
-				<field name="data" path="dynamic_float5d/value/data" path_doc="dynamic_float5d(:)/value/data" documentation="Value" data_type="FLT_5D" type="dynamic" units="mixed" coordinate1="../1...N" coordinate2="../1...N" coordinate3="../1...N" coordinate4="../1...N" coordinate5="dynamic_float5d(:)/value/time"/>
+				<field name="data" path="dynamic_float5d/value/data" path_doc="dynamic_float5d(:)/value/data" documentation="Value" data_type="FLT_5D" type="dynamic" units="mixed" coordinate1="1...N" coordinate2="1...N" coordinate3="1...N" coordinate4="1...N" coordinate5="dynamic_float5d(:)/value/time"/>
 				<field name="time" path="dynamic_float5d/value/time" path_doc="dynamic_float5d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="name" path="dynamic_float5d/name" path_doc="dynamic_float5d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="dynamic_float5d/description" path_doc="dynamic_float5d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="dynamic_float5d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_float5d(:)/identifier">
+				<field name="name" path="dynamic_float5d/identifier/name" path_doc="dynamic_float5d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_float5d/identifier/index" path_doc="dynamic_float5d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_float5d/identifier/description" path_doc="dynamic_float5d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="constant_float6d" path="constant_float6d" documentation="Constant 6D float" data_type="struct_array" maxoccur="10" path_doc="constant_float6d(:)" coordinate1="1...N">
 			<field name="value" path="constant_float6d/value" path_doc="constant_float6d(:)/value" documentation="Value" data_type="FLT_6D" type="constant" coordinate1="1...N" coordinate2="1...N" coordinate3="1...N" coordinate4="1...N" coordinate5="1...N" coordinate6="1...N" units="mixed"/>
-			<field name="name" path="constant_float6d/name" path_doc="constant_float6d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="constant_float6d/description" path_doc="constant_float6d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="constant_float6d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="constant_float6d(:)/identifier">
+				<field name="name" path="constant_float6d/identifier/name" path_doc="constant_float6d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="constant_float6d/identifier/index" path_doc="constant_float6d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="constant_float6d/identifier/description" path_doc="constant_float6d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="dynamic_float6d" path="dynamic_float6d" documentation="Dynamic 6D float" data_type="struct_array" maxoccur="10" path_doc="dynamic_float6d(:)" coordinate1="1...N">
 			<field name="value" path="dynamic_float6d/value" path_doc="dynamic_float6d(:)/value" documentation="Value" data_type="structure">
-				<field name="data" path="dynamic_float6d/value/data" path_doc="dynamic_float6d(:)/value/data" documentation="Value" data_type="FLT_6D" type="dynamic" units="mixed" coordinate1="../1...N" coordinate2="../1...N" coordinate3="../1...N" coordinate4="../1...N" coordinate5="../1...N" coordinate6="dynamic_float6d(:)/value/time"/>
+				<field name="data" path="dynamic_float6d/value/data" path_doc="dynamic_float6d(:)/value/data" documentation="Value" data_type="FLT_6D" type="dynamic" units="mixed" coordinate1="1...N" coordinate2="1...N" coordinate3="1...N" coordinate4="1...N" coordinate5="1...N" coordinate6="dynamic_float6d(:)/value/time"/>
 				<field name="time" path="dynamic_float6d/value/time" path_doc="dynamic_float6d(:)/value/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
-			<field name="name" path="dynamic_float6d/name" path_doc="dynamic_float6d(:)/name" documentation="Name of the quantity (e.g. code-specific name of an internal variable)" data_type="str_type" type="constant"/>
-			<field name="description" path="dynamic_float6d/description" path_doc="dynamic_float6d(:)/description" documentation="Description" data_type="str_type" type="constant"/>
+			<field name="identifier" path="dynamic_float6d/identifier" documentation="Description of the quantity using the standard identifier structure" data_type="structure" path_doc="dynamic_float6d(:)/identifier">
+				<field name="name" path="dynamic_float6d/identifier/name" path_doc="dynamic_float6d(:)/identifier/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+				<field name="index" path="dynamic_float6d/identifier/index" path_doc="dynamic_float6d(:)/identifier/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+				<field name="description" path="dynamic_float6d/identifier/description" path_doc="dynamic_float6d(:)/identifier/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
