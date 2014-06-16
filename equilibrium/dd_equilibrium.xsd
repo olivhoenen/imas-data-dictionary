@@ -137,6 +137,49 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="equilibrium_global_quantities_magnetic_axis">
+		<xs:annotation>
+			<xs:documentation>R, Z, and Btor at magnetic axis, dynamic within a type 3 array of structure (index on time)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius of the magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height of the magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b_tor">
+				<xs:annotation>
+					<xs:documentation>Total toroidal magnetic field at the magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_global_quantities_qmin">
 		<xs:annotation>
 			<xs:documentation>Position and value of q_min</xs:documentation>
@@ -305,22 +348,10 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="magnetic_axis" type="rz0d_dynamic_aos">
+			<xs:element name="magnetic_axis" type="equilibrium_global_quantities_magnetic_axis">
 				<xs:annotation>
-					<xs:documentation>Magnetic axis position</xs:documentation>
+					<xs:documentation>Magnetic axis position and toroidal field</xs:documentation>
 				</xs:annotation>
-			</xs:element>
-			<xs:element name="b_tor_axis">
-				<xs:annotation>
-					<xs:documentation>Total toroidal magnetic field at the magnetic axis</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>T</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="q_axis">
 				<xs:annotation>
@@ -1237,8 +1268,8 @@
 		<xs:annotation>
 			<xs:documentation>Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.</xs:documentation>
 			<xs:appinfo>
-				<lifecycle_status>alpha</lifecycle_status>
-				<lifecycle_version>3_0.0</lifecycle_version>
+				<lifecycle_status>beta</lifecycle_status>
+				<lifecycle_version>3.0.1</lifecycle_version>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
