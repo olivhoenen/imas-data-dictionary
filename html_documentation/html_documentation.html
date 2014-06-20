@@ -1612,7 +1612,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)</td>
+					<td>profiles_1d(:)/ion(:)</td>
 					<td>Quantities related to the different ion species</td>
 					<td>struct_array [max_size=unbounded]</td>
 					<td>
@@ -1624,31 +1624,31 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/a</td>
+					<td>profiles_1d(:)/ion(:)/a</td>
 					<td>Mass of atom {dynamic} [Atomic Mass Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/z_ion</td>
+					<td>profiles_1d(:)/ion(:)/z_ion</td>
 					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {dynamic} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/z_n</td>
+					<td>profiles_1d(:)/ion(:)/z_n</td>
 					<td>Nuclear charge {dynamic} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/label</td>
+					<td>profiles_1d(:)/ion(:)/label</td>
 					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {dynamic}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/n_i</td>
+					<td>profiles_1d(:)/ion(:)/n_i</td>
 					<td>Ion density (thermal+non-thermal) {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1660,7 +1660,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/n_i_fast</td>
+					<td>profiles_1d(:)/ion(:)/n_i_fast</td>
 					<td>Density of fast (non-thermal) ions, for the ion species considered {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1672,7 +1672,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/t_i</td>
+					<td>profiles_1d(:)/ion(:)/t_i</td>
 					<td>Ion temperature of that ion species {dynamic} [eV]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1684,7 +1684,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/p_i</td>
+					<td>profiles_1d(:)/ion(:)/p_i</td>
 					<td>Ion pressure for that ion species {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1696,7 +1696,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/p_i_fast_perpendicular</td>
+					<td>profiles_1d(:)/ion(:)/p_i_fast_perpendicular</td>
 					<td>Fast ion perpendicular pressure for that ion species {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1708,7 +1708,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/p_i_fast_parallel</td>
+					<td>profiles_1d(:)/ion(:)/p_i_fast_parallel</td>
 					<td>Fast ion parallel pressure for that ion species {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1720,7 +1720,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/v_tor_i</td>
+					<td>profiles_1d(:)/ion(:)/v_tor_i</td>
 					<td>Toroidal velocity of that ion species {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1732,7 +1732,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/v_pol_i</td>
+					<td>profiles_1d(:)/ion(:)/v_pol_i</td>
 					<td>Poloidal velocity of that ion species {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1744,13 +1744,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/multiple_charge_state_flag</td>
-					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {dynamic}</td>
+					<td>profiles_1d(:)/ion(:)/multiple_charge_states_flag</td>
+					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge states are considered and are described in the charge_state structure {dynamic}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)</td>
 					<td>Quantities related to the different charge states of the ion species</td>
 					<td>struct_array [max_size=unbounded]</td>
 					<td>
@@ -1762,25 +1762,25 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/z_min</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/z_min</td>
 					<td>Minimum Z of the charge state bundle {dynamic} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/z_max</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/z_max</td>
 					<td>Maximum Z of the charge state bundle (equal to z_min if no bundle) {dynamic} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/label</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/label</td>
 					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {dynamic}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/n_z</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/n_z</td>
 					<td>Density of the charge state considered (thermal+non-thermal) {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1792,7 +1792,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/n_z_fast</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/n_z_fast</td>
 					<td>Density of fast (non-thermal) ions, for the charge state considered {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1804,7 +1804,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/t_z</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/t_z</td>
 					<td>Temperature of the charge state considered {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1816,7 +1816,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/p_z</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/p_z</td>
 					<td>Pressure of the charge state considered {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1828,7 +1828,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/p_z_fast_perpendicular</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/p_z_fast_perpendicular</td>
 					<td>Fast perpendicular pressure of the charge state considered {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1840,7 +1840,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/p_z_fast_parallel</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/p_z_fast_parallel</td>
 					<td>Fast parallel pressure of the charge state considered {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1852,7 +1852,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/v_tor_z</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/v_tor_z</td>
 					<td>Toroidal velocity of the charge state considered {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -1864,7 +1864,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ions(:)/charge_states(:)/v_pol_z</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/v_pol_z</td>
 					<td>Poloidal velocity of the charge state considered {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -2553,7 +2553,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)</td>
+					<td>source(:)/profiles(:)/ion(:)</td>
 					<td>Source terms related to the different ions species</td>
 					<td>struct_array [max_size=unbounded]</td>
 					<td>
@@ -2565,31 +2565,31 @@
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/a</td>
+					<td>source(:)/profiles(:)/ion(:)/a</td>
 					<td>Mass of atom {constant} [Atomic Mass Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/z_ion</td>
+					<td>source(:)/profiles(:)/ion(:)/z_ion</td>
 					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {constant} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/z_n</td>
+					<td>source(:)/profiles(:)/ion(:)/z_n</td>
 					<td>Nuclear charge {constant} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/label</td>
+					<td>source(:)/profiles(:)/ion(:)/label</td>
 					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {constant}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/n_i_source</td>
+					<td>source(:)/profiles(:)/ion(:)/n_i_source</td>
 					<td>Source term for ion density equation {dynamic} [s^-1.m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -2601,7 +2601,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/t_i_source</td>
+					<td>source(:)/profiles(:)/ion(:)/t_i_source</td>
 					<td>Source term for the ion energy transport equation. {dynamic} [W.m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -2613,13 +2613,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/multiple_charge_state_flag</td>
-					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {constant}</td>
+					<td>source(:)/profiles(:)/ion(:)/multiple_charge_states_flag</td>
+					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge states are considered and are described in the charge_state structure {constant}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/charge_states(:)</td>
+					<td>source(:)/profiles(:)/ion(:)/charge_state(:)</td>
 					<td>Source terms related to the different charge states of the ion species</td>
 					<td>struct_array [max_size=unbounded]</td>
 					<td>
@@ -2631,25 +2631,25 @@
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/charge_states(:)/z_min</td>
+					<td>source(:)/profiles(:)/ion(:)/charge_state(:)/z_min</td>
 					<td>Minimum Z of the charge state bundle {constant} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/charge_states(:)/z_max</td>
+					<td>source(:)/profiles(:)/ion(:)/charge_state(:)/z_max</td>
 					<td>Maximum Z of the charge state bundle {constant} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/charge_states(:)/label</td>
+					<td>source(:)/profiles(:)/ion(:)/charge_state(:)/label</td>
 					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {constant}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/charge_states(:)/n_z_source</td>
+					<td>source(:)/profiles(:)/ion(:)/charge_state(:)/n_z_source</td>
 					<td>Source term for the charge state density transport equation {dynamic} [s^-1.m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -2661,7 +2661,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>source(:)/profiles(:)/ions(:)/charge_states(:)/t_z_source</td>
+					<td>source(:)/profiles(:)/ion(:)/charge_state(:)/t_z_source</td>
 					<td>Source terms for the charge state energy transport equation {dynamic} [W.m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3218,7 +3218,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)</td>
+					<td>model(:)/profiles(:)/ion(:)</td>
 					<td>Transport coefficients related to the various ions species</td>
 					<td>struct_array [max_size=unbounded]</td>
 					<td>
@@ -3230,37 +3230,37 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/a</td>
+					<td>model(:)/profiles(:)/ion(:)/a</td>
 					<td>Mass of atom {constant} [Atomic Mass Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/z_ion</td>
+					<td>model(:)/profiles(:)/ion(:)/z_ion</td>
 					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {constant} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/z_n</td>
+					<td>model(:)/profiles(:)/ion(:)/z_n</td>
 					<td>Nuclear charge {constant} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/label</td>
+					<td>model(:)/profiles(:)/ion(:)/label</td>
 					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {constant}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/n_i_transport</td>
+					<td>model(:)/profiles(:)/ion(:)/n_i_transport</td>
 					<td>Transport coefficients for ion density equation</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/n_i_transport/d</td>
+					<td>model(:)/profiles(:)/ion(:)/n_i_transport/d</td>
 					<td>Effective diffusivity {dynamic} [m^2.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3272,7 +3272,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/n_i_transport/v</td>
+					<td>model(:)/profiles(:)/ion(:)/n_i_transport/v</td>
 					<td>Effective convection {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3284,7 +3284,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/n_i_transport/flux</td>
+					<td>model(:)/profiles(:)/ion(:)/n_i_transport/flux</td>
 					<td>Flux {dynamic} [m^-2.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3296,13 +3296,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/t_i_transport</td>
+					<td>model(:)/profiles(:)/ion(:)/t_i_transport</td>
 					<td>Transport coefficients for ion energy equation</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/t_i_transport/d</td>
+					<td>model(:)/profiles(:)/ion(:)/t_i_transport/d</td>
 					<td>Effective diffusivity {dynamic} [m^2.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3314,7 +3314,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/t_i_transport/v</td>
+					<td>model(:)/profiles(:)/ion(:)/t_i_transport/v</td>
 					<td>Effective convection {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3326,7 +3326,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/t_i_transport/flux</td>
+					<td>model(:)/profiles(:)/ion(:)/t_i_transport/flux</td>
 					<td>Flux {dynamic} [W.m^-2]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3338,13 +3338,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/multiple_charge_state_flag</td>
-					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure {constant}</td>
+					<td>model(:)/profiles(:)/ion(:)/multiple_charge_states_flag</td>
+					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge states are considered and are described in the charge_state structure {constant}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)</td>
 					<td>Transport coefficients related to the different charge states of the ion species</td>
 					<td>struct_array [max_size=unbounded]</td>
 					<td>
@@ -3356,31 +3356,31 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/z_min</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/z_min</td>
 					<td>Minimum Z of the charge state bundle {constant} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/z_max</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/z_max</td>
 					<td>Maximum Z of the charge state bundle {constant} [Elementary Charge Unit]</td>
 					<td>FLT_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/label</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/label</td>
 					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {constant}</td>
 					<td>STR_0D</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/n_z_transport</td>
 					<td>Transport coefficients of for the density of the charge state considered (thermal+non-thermal)</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/d</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/n_z_transport/d</td>
 					<td>Effective diffusivity {dynamic} [m^2.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3392,7 +3392,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/v</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/n_z_transport/v</td>
 					<td>Effective convection {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3404,7 +3404,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/n_z_transport/flux</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/n_z_transport/flux</td>
 					<td>Flux {dynamic} [m^-2.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3416,13 +3416,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/t_z_transport</td>
 					<td>Transport coefficients of for the energy of the charge state considered </td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/d</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/t_z_transport/d</td>
 					<td>Effective diffusivity {dynamic} [m^2.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3434,7 +3434,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/v</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/t_z_transport/v</td>
 					<td>Effective convection {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
@@ -3446,7 +3446,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>model(:)/profiles(:)/ions(:)/charge_states(:)/t_z_transport/flux</td>
+					<td>model(:)/profiles(:)/ion(:)/charge_state(:)/t_z_transport/flux</td>
 					<td>Flux {dynamic} [W.m^-2]</td>
 					<td>FLT_1D</td>
 					<td>
