@@ -11,9 +11,9 @@
 		<field name="power" path="power" path_doc="power" documentation="Power delivered at the output of the actuator, in the vessel (NB this is before the coupling / beam blocking / shine through / orbit losses calculations) " data_type="FLT_2D" type="dynamic" units="W" coordinate1="channels" coordinate2="time"/>
 		<field name="generic_dynamic" path="generic_dynamic" path_doc="generic_dynamic" documentation="Generic 2D dynamic slot for storing an actuator control parameter (e.g. the angle of an ECRH mirror)" data_type="FLT_2D" type="dynamic" units="mixed" coordinate1="channels" coordinate2="time"/>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -59,9 +59,9 @@
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -146,9 +146,9 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 	</IDS>
@@ -237,9 +237,9 @@
 			<field name="b0" path="vacuum_toroidal_field/b0" path_doc="vacuum_toroidal_field/b0" documentation="Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS." data_type="FLT_1D" type="dynamic" units="T" coordinate1="time"/>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -289,9 +289,9 @@
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -388,9 +388,9 @@
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -419,9 +419,9 @@
 		<field name="flux_loops" path="flux_loops" path_doc="flux_loops" documentation="List of the names of the axisymmetric flux loops" data_type="STR_1D" type="static" coordinate1="IDS:magnetics/flux_loop"/>
 		<field name="grid_points" path="grid_points" path_doc="grid_points" documentation="List of the names of the plasma region grid points" data_type="STR_1D" type="constant" coordinate1="1...N"/>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -575,9 +575,9 @@
 			<field name="time" path="time_slice/time" path_doc="time_slice(:)/time" documentation="Time" data_type="flt_type" units="s" type="dynamic"/>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -631,9 +631,9 @@
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -734,9 +734,9 @@
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -775,9 +775,9 @@
 			<field name="current" path="loop/current" path_doc="loop(:)/current" documentation="Passive loop current" data_type="FLT_1D" type="dynamic" coordinate1="time" units="A"/>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -796,9 +796,9 @@
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
@@ -1064,9 +1064,9 @@
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_1D" coordinate1="time" type="dynamic"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_1D" coordinate1="time" type="dynamic"/>
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
