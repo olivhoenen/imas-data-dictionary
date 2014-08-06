@@ -23,14 +23,29 @@
 				<td>6</td>
 			</tr>
 			<tr>
+				<td><a href="#antennas">antennas</a></td>
+				<td>Antenna systems for heating and current drive in the electron cyclotron (EC) and ion cylcotron (IC) frequencies.</td>
+				<td>2</td>
+			</tr>
+			<tr>
 				<td><a href="#atomic_data">atomic_data</a></td>
 				<td>Atomic, molecular, nuclear and surface physics data. Each occurrence contains the atomic data for a given element (nuclear charge), describing various physical processes. For each process, atomic data tables are organized by charge states. The coordinate system used by the atomic data tables is described under the coordinate_system node.</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td><a href="#charge_exchange">charge_exchange</a></td>
+				<td>Charge exchange spectroscopy diagnostic</td>
 				<td>2</td>
 			</tr>
 			<tr>
 				<td><a href="#controllers">controllers</a></td>
 				<td>Feedback and feedforward controllers</td>
 				<td>2</td>
+			</tr>
+			<tr>
+				<td><a href="#core_instant_changes">core_instant_changes</a></td>
+				<td>Instant changes of the radial core plasma profiles due to pellet, MHD, ... </td>
+				<td>3</td>
 			</tr>
 			<tr>
 				<td><a href="#core_profiles">core_profiles</a></td>
@@ -50,27 +65,57 @@
 			<tr>
 				<td><a href="#em_coupling">em_coupling</a></td>
 				<td>Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source</td>
-				<td>6</td>
+				<td>3</td>
 			</tr>
 			<tr>
 				<td><a href="#equilibrium">equilibrium</a></td>
 				<td>Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.</td>
-				<td>6</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td><a href="#interferometer">interferometer</a></td>
+				<td>Interferometer diagnostic</td>
+				<td>1</td>
 			</tr>
 			<tr>
 				<td><a href="#magnetics">magnetics</a></td>
 				<td>Magnetic diagnostics for equilibrium identification and plasma shape control.</td>
-				<td>6</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td><a href="#mhd_linear">mhd_linear</a></td>
+				<td>Magnetohydronamic linear stability</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td><a href="#nbi">nbi</a></td>
+				<td>Neutral Beam Injection systems and description of the fast neutrals that arrive into the torus</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td><a href="#pellets">pellets</a></td>
+				<td>Description of pellets launched into the plasma</td>
+				<td>2</td>
 			</tr>
 			<tr>
 				<td><a href="#pf_active">pf_active</a></td>
 				<td>Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</td>
-				<td>6</td>
+				<td>3</td>
 			</tr>
 			<tr>
 				<td><a href="#pf_passive">pf_passive</a></td>
 				<td>Description of the axisymmetric passive conductors, currents flowing in them</td>
-				<td>6</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td><a href="#polarimeter">polarimeter</a></td>
+				<td>Polarimeter diagnostic</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td><a href="#sawteeth">sawteeth</a></td>
+				<td>Description of sawtooth events</td>
+				<td>2</td>
 			</tr>
 			<tr>
 				<td><a href="#schedule">schedule</a></td>
@@ -80,7 +125,7 @@
 			<tr>
 				<td><a href="#sdn">sdn</a></td>
 				<td>Description of the Synchronous Data Network parameters and the signals on it</td>
-				<td>6</td>
+				<td>3</td>
 			</tr>
 			<tr>
 				<td><a href="#simulation">simulation</a></td>
@@ -93,9 +138,14 @@
 				<td>6</td>
 			</tr>
 			<tr>
+				<td><a href="#thomson_scattering">thomson_scattering</a></td>
+				<td>Thomson scattering diagnostic</td>
+				<td>3</td>
+			</tr>
+			<tr>
 				<td><a href="#tf">tf</a></td>
 				<td>Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS.</td>
-				<td>6</td>
+				<td>3</td>
 			</tr>
 		</table>
 		<p class="welcome">List of available Generic Structures</p>
@@ -116,6 +166,10 @@
 				<td>Array of plasma ions.</td>
 			</tr>
 			<tr>
+				<td>plasma_composition_species</td>
+				<td>Description of simple species (elements) without declaration of their ionisation state</td>
+			</tr>
+			<tr>
 				<td>plasma_composition_neutrals_components</td>
 				<td>Components to the atom or molecule</td>
 			</tr>
@@ -132,10 +186,6 @@
 				<td>Structure for 1D dynamic errorbar</td>
 			</tr>
 			<tr>
-				<td>dynamic_type</td>
-				<td>Structure for 1D dynamic (prototype to be evaluated)</td>
-			</tr>
-			<tr>
 				<td>b_tor_vacuum_1</td>
 				<td>Characteristics of the vacuum toroidal field. time assumed to be one level above</td>
 			</tr>
@@ -148,12 +198,32 @@
 				<td>1D radial grid for core* IDSs</td>
 			</tr>
 			<tr>
+				<td>equilibrium_profiles_2d_grid</td>
+				<td>Definition of the 2D grid</td>
+			</tr>
+			<tr>
+				<td>equilibrium_coordinate_system</td>
+				<td>Flux surface coordinate system on a square grid of flux and poloidal angle</td>
+			</tr>
+			<tr>
 				<td>rzphi0d_static</td>
 				<td>Structure for R, Z, Phi positions (0D, static)</td>
 			</tr>
 			<tr>
+				<td>rzphi0d_dynamic_aos3</td>
+				<td>Structure for R, Z, Phi positions (0D, dynamic within a type 3 array of structure (index on time))</td>
+			</tr>
+			<tr>
 				<td>rzphi1d_static</td>
 				<td>Structure for list of R, Z, Phi positions (1D, static)</td>
+			</tr>
+			<tr>
+				<td>rzphi1d_dynamic_aos1</td>
+				<td>Structure for list of R, Z, Phi positions (1D, dynamic within a type 1 array of structure (indexed on objects, data/time structure)</td>
+			</tr>
+			<tr>
+				<td>rzphi1d_dynamic_aos3</td>
+				<td>Structure for R, Z, Phi positions (1D, dynamic within a type 3 array of structure (index on time))</td>
 			</tr>
 			<tr>
 				<td>rz1d_constant</td>
@@ -177,11 +247,27 @@
 			</tr>
 			<tr>
 				<td>rz0d_static</td>
+				<td>Structure for a single R, Z position (0D, static)</td>
+			</tr>
+			<tr>
+				<td>rz0d_constant</td>
 				<td>Structure for a single R, Z position (0D, constant)</td>
 			</tr>
 			<tr>
 				<td>identifier</td>
 				<td>Standard type for identifiers. The three fields: name, index and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</td>
+			</tr>
+			<tr>
+				<td>line_of_sight_2points</td>
+				<td>Generic description of a line of sight, defined by two points</td>
+			</tr>
+			<tr>
+				<td>line_of_sight_2points_dynamic_aos3</td>
+				<td>Generic description of a line of sight, defined by two points, dynamic within a type 3 array of structure (index on time)</td>
+			</tr>
+			<tr>
+				<td>line_of_sight_3points</td>
+				<td>Generic description of a line of sight, defined by two points (one way) and an optional third point to indicate the direction of reflection if the second point is e.g. the position of a mirror reflecting the line-of-sight</td>
 			</tr>
 			<tr>
 				<td>oblique_static</td>
@@ -293,6 +379,854 @@
 							</tr>
 							<tr>
 								<td>2- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="antennas"><p class="welcome">ITER Physics Data Model Documentation for antennas</p>
+			<p>Antenna systems for heating and current drive in the electron cyclotron (EC) and ion cylcotron (IC) frequencies.</p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)</td>
+					<td>Electron Cyclotron antennas</td>
+					<td>struct_array [max_size=10]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/name</td>
+					<td>Name of the antenna {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/frequency</td>
+					<td>Frequency {static} [Hz]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/power</td>
+					<td>Power</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/power/data</td>
+					<td>Power {dynamic} [W]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ec(:)/power/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/power/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/mode</td>
+					<td>Incoming wave mode (+ or -1 for O/X mode)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/mode/data</td>
+					<td>Incoming wave mode (+ or -1 for O/X mode) {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ec(:)/mode/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/mode/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position</td>
+					<td>Launching position of the beam</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position/r</td>
+					<td>Major radius</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position/r/data</td>
+					<td>Major radius {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ec(:)/launching_position/r/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position/r/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position/z</td>
+					<td>Height</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position/z/data</td>
+					<td>Height {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ec(:)/launching_position/z/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position/z/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position/phi</td>
+					<td>Toroidal angle</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position/phi/data</td>
+					<td>Toroidal angle {dynamic} [rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ec(:)/launching_position/phi/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_position/phi/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_angle_pol</td>
+					<td>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/launching_angle_pol/data</td>
+					<td>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R; {dynamic} [rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ec(:)/launching_angle_pol/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_angle_pol/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_angle_tor</td>
+					<td>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/launching_angle_tor/data</td>
+					<td>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi {dynamic} [rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ec(:)/launching_angle_tor/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/launching_angle_tor/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/beam </td>
+					<td>Beams characteristics</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/beam /spot</td>
+					<td>Spot ellipse characteristics</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/beam /spot/size</td>
+					<td>Size of the spot ellipse</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/beam /spot/size/data</td>
+					<td>Size of the spot ellipse {dynamic} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- ec(:)/beam /spot/size/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/beam /spot/size/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/beam /spot/angle</td>
+					<td>Rotation angle for the spot ellipse</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/beam /spot/angle/data</td>
+					<td>Rotation angle for the spot ellipse {dynamic} [rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ec(:)/beam /spot/angle/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/beam /spot/angle/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/beam /phase</td>
+					<td>Phase ellipse characteristics</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/beam /phase/curvature</td>
+					<td>Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/beam /phase/curvature/data</td>
+					<td>Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams {dynamic} [m^-1]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...2</td>
+							</tr>
+							<tr>
+								<td>2- ec(:)/beam /phase/curvature/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/beam /phase/curvature/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/beam /phase/angle</td>
+					<td>Rotation angle for the phase ellipse</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ec(:)/beam /phase/angle/data</td>
+					<td>Rotation angle for the phase ellipse {dynamic} [rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ec(:)/beam /phase/angle/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ec(:)/beam /phase/angle/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>reference_point</td>
+					<td>Reference point used to define the poloidal angle, e.g. the geometrical centre of the vacuum vessel. Used to define the poloidal mode numbers under ic/surface_current</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>reference_point/r</td>
+					<td>Major radius {constant} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>reference_point/z</td>
+					<td>Height {constant} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)</td>
+					<td>Ion Cyclotron antennas</td>
+					<td>struct_array [max_size=5]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/name</td>
+					<td>Name of the antenna {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/frequency</td>
+					<td>Frequency</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/frequency/data</td>
+					<td>Frequency {dynamic} [Hz]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ic(:)/frequency/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/frequency/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/power</td>
+					<td>Power</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/power/data</td>
+					<td>Power {dynamic} [W]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ic(:)/power/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/power/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)</td>
+					<td>Properties of IC antenna straps</td>
+					<td>struct_array [max_size=10]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/position</td>
+					<td>R, Z, Phi position of the strap centre</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/position/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/position/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/position/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/width_tor</td>
+					<td>Width of strap in the toroidal direction</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/width_tor/data</td>
+					<td>Width of strap in the toroidal direction {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/distance_to_conductor</td>
+					<td>Distance to conducting wall or other conductor behind the antenna strap</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/distance_to_conductor/data</td>
+					<td>Distance to conducting wall or other conductor behind the antenna strap {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry</td>
+					<td>Cross-sectional shape of the strap</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/geometry_type</td>
+					<td>Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique')  {static}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/outline</td>
+					<td>Irregular outline of the element</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/outline/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/outline/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/rectangle</td>
+					<td>Rectangular description of the element</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/rectangle/r</td>
+					<td>Geometric centre R {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/rectangle/z</td>
+					<td>Geometric centre Z {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/rectangle/width</td>
+					<td>Horizontal full width {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/rectangle/height</td>
+					<td>Vertical full height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/oblique</td>
+					<td>Trapezoidal description of the element</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/oblique/r</td>
+					<td>Geometric centre R {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/oblique/z</td>
+					<td>Geometric centre Z {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/oblique/length</td>
+					<td>Length {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/oblique/thickness</td>
+					<td>Thickness {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/oblique/alpha</td>
+					<td>Inclination of first angle TBD {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/geometry/oblique/beta</td>
+					<td>Inclination of second angle TBD {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/current</td>
+					<td>Root mean square current flowing along the strap</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/current/data</td>
+					<td>Root mean square current flowing along the strap {dynamic} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ic(:)/strap(:)/current/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/current/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/phase</td>
+					<td>Phase of the strap current</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/phase/data</td>
+					<td>Phase of the strap current {dynamic} [rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ic(:)/strap(:)/phase/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/strap(:)/phase/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/surface_current(:)</td>
+					<td>Description of the IC surface current on the antenna straps and on passive components, for every time slice {dynamic}</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ic(:)/surface_current(:)/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/surface_current(:)/m_pol</td>
+					<td>Poloidal mode numbers, used to describe the spectrum of the antenna current. The poloidal angle is defined from the reference point; the angle at a point (R,Z) is given by atan((Z-Zref)/(R-Rref)), where Rref=reference_point/r and Zref=reference_point/z {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/surface_current(:)/n_tor</td>
+					<td>Toroidal mode numbers, used to describe the spectrum of the antenna current {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>ic(:)/surface_current(:)/spectrum</td>
+					<td>Spectrum of the total surface current on the antenna strap and passive components expressed in poloidal and toroidal modes {dynamic} [A]</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- ic(:)/surface_current(:)/m_pol</td>
+							</tr>
+							<tr>
+								<td>2- ic(:)/surface_current(:)/n_pol</td>
 							</tr>
 						</table>
 					</td>
@@ -682,6 +1616,347 @@
 					<td>Flag for specific coordinate spacing (for optimization purposes). Integer flag: 0=undefined; 1=uniform; ... {static}</td>
 					<td>INT_0D</td>
 					<td />
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="charge_exchange"><p class="welcome">ITER Physics Data Model Documentation for charge_exchange</p>
+			<p>Charge exchange spectroscopy diagnostic</p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)</td>
+					<td>Set of channels (lines-of-sight)</td>
+					<td>struct_array [max_size=20]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/name</td>
+					<td>Name of the channel {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/identifier</td>
+					<td>ID of the channel {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/a</td>
+					<td>Mass of atom of the emmitting impurity. Varies according to channels since they are spanning different lines of sight {constant} [Atomic Mass Unit]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/channel_names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/z_ion</td>
+					<td>Ion charge of the emmitting impurity. Varies according to channels since they are spanning different lines of sight {constant} [Elementary Charge Unit]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/channel_names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/z_n</td>
+					<td>Nuclear charge of the emmitting impurity. Varies according to channels since they are spanning different lines of sight {constant} [Elementary Charge Unit]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/channel_names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/label</td>
+					<td>String identifying the emmitting impurity (e.g. H+, D+, T+, He+2, C+6, ...) {constant}</td>
+					<td>STR_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/channel_names</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/position</td>
+					<td>Position of the measurements</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/position/r</td>
+					<td>Major radius</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/position/r/data</td>
+					<td>Major radius {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/position/r/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/position/r/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/position/z</td>
+					<td>Height</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/position/z/data</td>
+					<td>Height {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/position/z/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/position/z/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/position/phi</td>
+					<td>Toroidal angle</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/position/phi/data</td>
+					<td>Toroidal angle {dynamic} [rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/position/phi/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/position/phi/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/t_z</td>
+					<td>Ion temperature (of the emmitting impurity)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/t_z/data</td>
+					<td>Ion temperature (of the emmitting impurity) {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/t_z/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/t_z/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/v_tor_z</td>
+					<td>Toroidal velocity (of the emmitting impurity)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/v_tor_z/data</td>
+					<td>Toroidal velocity (of the emmitting impurity) {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/v_tor_z/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/v_tor_z/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/v_pol_z</td>
+					<td>Poloidal velocity (of the emmitting impurity)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/v_pol_z/data</td>
+					<td>Poloidal velocity (of the emmitting impurity) {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/v_pol_z/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/v_pol_z/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>code</td>
@@ -1392,6 +2667,383 @@
 						<table>
 							<tr>
 								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="core_instant_changes"><p class="welcome">ITER Physics Data Model Documentation for core_instant_changes</p>
+			<p>Instant changes of the radial core plasma profiles due to pellet, MHD, ... </p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vacuum_toroidal_field</td>
+					<td>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vacuum_toroidal_field/r0</td>
+					<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {constant} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vacuum_toroidal_field/b0</td>
+					<td>Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS. {dynamic} [T]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)</td>
+					<td>Set of instant_change terms</td>
+					<td>struct_array [max_size=10]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/name</td>
+					<td>Name of the instant_change term {constant} [-]</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)</td>
+					<td>instant_change profiles for various time slices {dynamic}</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/grid</td>
+					<td>Radial grid</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+					<td>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/grid/rho_tor</td>
+					<td>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0 {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/grid/psi</td>
+					<td>Poloidal magnetic flux {dynamic} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/grid/volume</td>
+					<td>Volume enclosed inside the magnetic surface {dynamic} [m^3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/grid/area</td>
+					<td>Cross-sectional area of the flux surface {dynamic} [m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/n_e</td>
+					<td>instant_change term for electron density {dynamic} [m^-3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/t_e</td>
+					<td>instant_change term for electron temperature {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/t_i</td>
+					<td>instant_change term for the average ion temperature {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/momentum_tor</td>
+					<td>instant_change term for total toroidal momentum {dynamic} [kg.m^2.s^-1]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)</td>
+					<td>instant_change terms related to the different ions species</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/a</td>
+					<td>Mass of atom {constant} [Atomic Mass Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/z_ion</td>
+					<td>Ion charge (of the dominant ionisation state; lumped ions are allowed) {constant} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/z_n</td>
+					<td>Nuclear charge {constant} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/label</td>
+					<td>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...) {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/n_i</td>
+					<td>instant_change term for ion density {dynamic} [m^-3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/t_i</td>
+					<td>instant_change term for the ion temperature {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/multiple_charge_states_flag</td>
+					<td>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge states are considered and are described in the charge_state structure {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/charge_state(:)</td>
+					<td>instant_change terms related to the different charge states of the ion species</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/charge_state(:)/z_min</td>
+					<td>Minimum Z of the charge state bundle {constant} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/charge_state(:)/z_max</td>
+					<td>Maximum Z of the charge state bundle {constant} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/charge_state(:)/label</td>
+					<td>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...) {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/charge_state(:)/n_z</td>
+					<td>instant_change term for the charge state density  {dynamic} [m^-3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/ion(:)/charge_state(:)/t_z</td>
+					<td>instant_change terms for the charge state temperature {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- instant_change(:)/profiles(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>instant_change(:)/profiles(:)/time</td>
+					<td>Time {dynamic} [s]</td>
+					<td>flt_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
@@ -5031,6 +6683,227 @@
 					</td>
 				</tr>
 			</table>
+		</a><a name="interferometer"><p class="welcome">ITER Physics Data Model Documentation for interferometer</p>
+			<p>Interferometer diagnostic</p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)</td>
+					<td>Set of channels (lines-of-sight)</td>
+					<td>struct_array [max_size=15]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/name</td>
+					<td>Name of the channel {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/identifier</td>
+					<td>ID of the channel {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight</td>
+					<td>Description of the line of sight of the channel, defined by two points</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/first_point</td>
+					<td>Position of the first point</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/first_point/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/first_point/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/first_point/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/second_point</td>
+					<td>Position of the second point</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/second_point/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/second_point/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/second_point/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/third_point</td>
+					<td>Position of the third point</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/third_point/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/third_point/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/third_point/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/beam_width</td>
+					<td>Width of the probing gaussian beam (1/e) {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/n_e_line</td>
+					<td>Line integrated density</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/n_e_line/data</td>
+					<td>Line integrated density {dynamic} [m^-2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/n_e_line/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/n_e_line/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
 		</a><a name="magnetics"><p class="welcome">ITER Physics Data Model Documentation for magnetics</p>
 			<p>Magnetic diagnostics for equilibrium identification and plasma shape control.</p>
 			<p>Lifecycle status: alpha since version 3.0.0</p>
@@ -5384,6 +7257,1551 @@
 					</td>
 				</tr>
 			</table>
+		</a><a name="mhd_linear"><p class="welcome">ITER Physics Data Model Documentation for mhd_linear</p>
+			<p>Magnetohydronamic linear stability</p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vacuum_toroidal_field</td>
+					<td>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vacuum_toroidal_field/r0</td>
+					<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {constant} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vacuum_toroidal_field/b0</td>
+					<td>Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS. {dynamic} [T]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)</td>
+					<td>Core plasma radial profiles for various time slices {dynamic}</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)</td>
+					<td>Vector of toroidal modes</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/n_tor</td>
+					<td>Toroidal mode number of the MHD mode {dynamic}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/growthrate</td>
+					<td>Linear growthrate of the mode {dynamic} [Hz]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/frequency</td>
+					<td>Frequency of the mode {dynamic} [Hz]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma</td>
+					<td>MHD modes in the confined plasma</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/grid</td>
+					<td>Radial grid</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+					<td>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor</td>
+					<td>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0 {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/grid/psi</td>
+					<td>Poloidal magnetic flux {dynamic} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/grid/volume</td>
+					<td>Volume enclosed inside the magnetic surface {dynamic} [m^3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/grid/area</td>
+					<td>Cross-sectional area of the flux surface {dynamic} [m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+					<td>Array of poloidal mode numbers for the various radial positions {dynamic}</td>
+					<td>INT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/displacement_perpendicular</td>
+					<td>Perpendicular displacement of the modes (in Fourier space) {dynamic} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/displacement_parallel</td>
+					<td>Parallel displacement of the modes (in Fourier space) {dynamic} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/tau_alfven</td>
+					<td>Alven time=R/vA=R0 sqrt(mi ni(rho))/B0 {dynamic} [s]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/tau_resistive</td>
+					<td>Resistive time = mu_0 rho*rho/1.22/eta_neo {dynamic} [s]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system</td>
+					<td>Flux surface coordinate system on a square grid of flux and poloidal angle</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid_type</td>
+					<td>Type of coordinate system</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid_type/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid_type/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid_type/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid</td>
+					<td>Definition of the 2D grid</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+					<td>First dimension values {dynamic} [mixed]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+					<td>Second dimension values {dynamic} [mixed]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/r</td>
+					<td>Values of the major radius on the grid {dynamic} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/z</td>
+					<td>Values of the Height on the grid {dynamic} [m]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/jacobian</td>
+					<td>Jacobian of the coordinate system {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_11</td>
+					<td>metric coefficients g_11; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_12</td>
+					<td>metric coefficients g_12; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_13</td>
+					<td>metric coefficients g_13; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_22</td>
+					<td>metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_23</td>
+					<td>metric coefficients g_23; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_33</td>
+					<td>metric coefficients g_33; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/a_perturbed</td>
+					<td>Pertubed vector potential (in Fourier space) [T.m]</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/a_perturbed/coordinate1</td>
+					<td>Fourier components of first coordinate {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/a_perturbed/coordinate2</td>
+					<td>Fourier components of second coordinate {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/a_perturbed/coordinate3</td>
+					<td>Fourier components of third coordinate {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/b_perturbed</td>
+					<td>Pertubed magnetic field (in Fourier space) [T]</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/b_perturbed/coordinate1</td>
+					<td>Fourier components of first coordinate {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/b_perturbed/coordinate2</td>
+					<td>Fourier components of second coordinate {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/b_perturbed/coordinate3</td>
+					<td>Fourier components of third coordinate {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/v_perturbed</td>
+					<td>Pertubed velocity (in Fourier space) [m/s]</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/v_perturbed/coordinate1</td>
+					<td>Fourier components of first coordinate {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/v_perturbed/coordinate2</td>
+					<td>Fourier components of second coordinate {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/v_perturbed/coordinate3</td>
+					<td>Fourier components of third coordinate {dynamic} [mixed]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/pressure_perturbed</td>
+					<td>Perturbed pressure (in Fourier space) {dynamic} [P]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/mass_density_perturbed</td>
+					<td>Perturbed mass density (in Fourier space) {dynamic} [kg.m^-3]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/toroidal_mode(:)/plasma/temperature_perturbed</td>
+					<td>Perturbed temperature (in Fourier space) {dynamic} [eV]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm</td>
+							</tr>
+							<tr>
+								<td>2- time_slice(:)/toroidal_mode(:)/plasma/m_pol</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/time</td>
+					<td>Time {dynamic} [s]</td>
+					<td>flt_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="nbi"><p class="welcome">ITER Physics Data Model Documentation for nbi</p>
+			<p>Neutral Beam Injection systems and description of the fast neutrals that arrive into the torus</p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)</td>
+					<td>The NBI system is described as a set of units of which the power can be controlled individually.</td>
+					<td>struct_array [max_size=32]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/name</td>
+					<td>Name of the NBI unit {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/id</td>
+					<td>ID of the NBI unit {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/species</td>
+					<td>Injected species {constant} [Atomic Mass Unit]</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/species/a</td>
+					<td>Mass of atom {constant} [Atomic Mass Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/species/z_n</td>
+					<td>Nuclear charge {constant} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/species/label</td>
+					<td>String identifying the species (e.g. H, D, T, ...) {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/power</td>
+					<td>Power</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/power/data</td>
+					<td>Power {dynamic} [W]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- unit(:)/power/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/power/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/energy</td>
+					<td>Full energy of the injected species (acceleration of a single atom)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/energy/data</td>
+					<td>Full energy of the injected species (acceleration of a single atom) {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- unit(:)/energy/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/energy/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/beam_current_fraction</td>
+					<td>Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beam_current_fraction/data</td>
+					<td>Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third) {dynamic} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...3</td>
+							</tr>
+							<tr>
+								<td>2- unit(:)/beam_current_fraction/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/beam_current_fraction/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/beam_power_fraction</td>
+					<td>Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beam_power_fraction/data</td>
+					<td>Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third) {dynamic} [-]</td>
+					<td>FLT_2D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...3</td>
+							</tr>
+							<tr>
+								<td>2- unit(:)/beam_power_fraction/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/beam_power_fraction/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)</td>
+					<td>Group of beamlets with common vertical and horizontal focal point. If there are no common focal points, then select small groups of beamlets such that a focal point description of the beamlets group provides a fair description</td>
+					<td>struct_array [max_size=10]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/position</td>
+					<td>R, Z, Phi position of the coil centre</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/position/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/position/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/position/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/tangency_radius</td>
+					<td>Tangency radius (major radius where the central line of a NBI unit is tangent to a circle around the torus) {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/angle</td>
+					<td>Angle of inclination between a beamlet at the centre of the injection unit surface and the horiontal plane {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/direction</td>
+					<td>Direction of the beam seen from above the torus: -1 = clockwise; 1 = counter clockwise {static}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/width_horizontal</td>
+					<td>Horizontal width of the beam group at the injection unit surface (or grounded grid) {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/width_vertical</td>
+					<td>Vertical width of the beam group at the injection unit surface (or grounded grid) {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/focus</td>
+					<td>Describes how the beamlet group is focused</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/focus/focal_length_horizontal</td>
+					<td>Horizontal focal length along the beam line, i.e. the point along the centre of the beamlet-group where the beamlet-group has its minimum horizontal width {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/focus/focal_length_vertical</td>
+					<td>Vertical focal length along the beam line, i.e. the point along the centre of the beamlet-group where the beamlet-group has its minimum vertical width {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/focus/width_min_horizontal</td>
+					<td>The horizontal width of the beamlets group at the at the horizontal focal point {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/focus/width_min_vertical</td>
+					<td>The vertical width of the beamlets group at the at the vertical focal point {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/divergence_component(:)</td>
+					<td>Detailed information on beamlet divergence. Divergence is described as a superposition of Gaussian components with amplitide "particles_fraction" and vertical/horizontal divergence. Note that for positive ion NBI the divergence is well described by a single Gaussian</td>
+					<td>struct_array [max_size=3]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/divergence_component(:)/particles_fraction</td>
+					<td>Fraction of injected particles in the component {static} [-]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/divergence_component(:)/vertical</td>
+					<td>The vertical beamlet divergence of the component. Here the divergence is defined for Gaussian beams as the angel where the beam density is reduced by a factor 1/e compared to the maximum density. For non-Gaussian beams the divergence is sqrt(2)*mean((x-mean(x))**2), where x is the angle and the mean should be performed over the beam density, P(x): mean(y)=int(y*P(x)*dx). {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/divergence_component(:)/horizontal</td>
+					<td>The horiztonal beamlet divergence of the component. Here the divergence is defined for Gaussian beams as the angel where the beam density is reduced by a factor 1/e compared to the maximum density. For non-Gaussian beams the divergence is sqrt(2)*mean((x-mean(x))**2), where x is the angle and the mean should be performed over the beam density, P(x): mean(y)=int(y*P(x)*dx). {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/beamlet(:)</td>
+					<td>Detailed information on beamlets</td>
+					<td>struct_array [max_size=10]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/beamlet(:)/position</td>
+					<td>Position of beamlets</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/beamlet(:)/position/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/beamlet(:)/position/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/beamlet(:)/position/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/beamlet(:)/tangency_radius</td>
+					<td>Tangency radius (major radius where the central line of a beamlet is tangent to a circle around the torus), for every beamlet {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/beamlet(:)/angle</td>
+					<td>Angle of inclination between a line at the centre of a beamlet and the horiontal plane {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>unit(:)/beamlets_group(:)/beamlet(:)/power_fraction</td>
+					<td>Fraction of power of a unit injected by a beamlet {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="pellets"><p class="welcome">ITER Physics Data Model Documentation for pellets</p>
+			<p>Description of pellets launched into the plasma</p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)</td>
+					<td>Description of the pellets launched at various time slices. The time of this structure corresponds to the full ablation of the pellet inside the plasma. {dynamic}</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)</td>
+					<td>Set of pellets ablated in the plasma at a given time</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/shape</td>
+					<td>Initial shape of a pellet at launch</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/shape/type</td>
+					<td>Identifier structure for the shape type: 1-spherical; 2-cylindrical; 3-rectangular {constant}</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/shape/type/name</td>
+					<td>Short string identifier {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/shape/type/index</td>
+					<td>Integer identifier (enumeration index within a list) {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/shape/type/description</td>
+					<td>Verbose description {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/shape/size</td>
+					<td>Size of the pellet in the various dimensions, depending on the shape type. Spherical pellets: size(1) is the radius of the pellet. Cylindrical pellets: size(1) is the radius and size(2) is the height of the cylinder. Rectangular pellets: size(1) is the height, size(2) is the width and size(3) is the length {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/species(:)</td>
+					<td>Set of species included in the pellet composition</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/species(:)/a</td>
+					<td>Mass of atom {dynamic} [Atomic Mass Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/species(:)/z_n</td>
+					<td>Nuclear charge {dynamic} [Elementary Charge Unit]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/species(:)/label</td>
+					<td>String identifying the species (e.g. H, D, T, ...) {dynamic}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/species(:)/density</td>
+					<td>Material density of the species in the pellet {dynamic} [-]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/species(:)/fraction</td>
+					<td>Fraction of the species atoms in the pellet {dynamic} [-]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/species(:)/sublimation_energy</td>
+					<td>Sublimation energy per atom {dynamic} [eV]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/velocity_initial</td>
+					<td>Initial velocity of the pellet as it enters the vaccum chamber {dynamic} [m.s^-1]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_geometry</td>
+					<td>Geometry of the pellet path in the vaccuum chamber</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_geometry/first_point</td>
+					<td>Position of the first point</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_geometry/first_point/r</td>
+					<td>Major radius {dynamic} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_geometry/first_point/z</td>
+					<td>Height {dynamic} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_geometry/first_point/phi</td>
+					<td>Toroidal angle {dynamic} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_geometry/second_point</td>
+					<td>Position of the second point</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_geometry/second_point/r</td>
+					<td>Major radius {dynamic} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_geometry/second_point/z</td>
+					<td>Height {dynamic} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_geometry/second_point/phi</td>
+					<td>Toroidal angle {dynamic} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles</td>
+					<td>1-D profiles of plasma and pellet along the pellet path </td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/distance</td>
+					<td>Distance along the pellet path, with the origin taken at path_geometry/first_point. Used as the main coordinate for the path_profiles structure  {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/rho_tor_norm</td>
+					<td>Normalised toroidal coordinate along the pellet path  {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/distance</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/psi</td>
+					<td>Poloidal flux along the pellet path  {dynamic} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/distance</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/velocity</td>
+					<td>Pellet velocity along the pellet path  {dynamic} [m.s^-1]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/distance</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/n_e</td>
+					<td>Electron density along the pellet path  {dynamic} [m^-3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/distance</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/t_e</td>
+					<td>Electron temperature along the pellet path  {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/distance</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/ablation_rate</td>
+					<td>Ablation rate (electrons) along the pellet path  {dynamic} [s^-1]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/distance</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/ablated_particles</td>
+					<td>Number of ablated particles (electrons) along the pellet path  {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/distance</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/rho_tor_norm_drift</td>
+					<td>Difference to due ExB drifts between the ablation and the final deposition locations, in terms of the normalised toroidal flux coordinate {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/distance</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/position</td>
+					<td>Position along the pellet path</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/position/r</td>
+					<td>Major radius {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/position/z</td>
+					<td>Height {dynamic} [m]</td>
+					<td>FLT_0D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/position/r</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/pellet(:)/path_profiles/position/phi</td>
+					<td>Toroidal angle {dynamic} [rad]</td>
+					<td>FLT_0D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time_slice(:)/pellet(:)/path_profiles/position/r</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time_slice(:)/time</td>
+					<td>Time {dynamic} [s]</td>
+					<td>flt_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
 		</a><a name="pf_active"><p class="welcome">ITER Physics Data Model Documentation for pf_active</p>
 			<p>Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</p>
 			<p>Lifecycle status: alpha since version 3.0.0</p>
@@ -5498,7 +8916,7 @@
 				</tr>
 				<tr>
 					<td>coil(:)/element(:)/geometry/geometry_type</td>
-					<td>Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ')  {static}</td>
+					<td>Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique')  {static}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
@@ -5564,7 +8982,7 @@
 				</tr>
 				<tr>
 					<td>coil(:)/element(:)/geometry/oblique</td>
-					<td>Rectangular description of the element</td>
+					<td>Trapezoidal description of the element</td>
 					<td>structure</td>
 					<td />
 				</tr>
@@ -6130,7 +9548,7 @@
 				</tr>
 				<tr>
 					<td>loop(:)/geometry/geometry_type</td>
-					<td>Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ')  {static}</td>
+					<td>Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique')  {static}</td>
 					<td>INT_0D</td>
 					<td />
 				</tr>
@@ -6196,7 +9614,7 @@
 				</tr>
 				<tr>
 					<td>loop(:)/geometry/oblique</td>
-					<td>Rectangular description of the element</td>
+					<td>Trapezoidal description of the element</td>
 					<td>structure</td>
 					<td />
 				</tr>
@@ -6239,6 +9657,796 @@
 				<tr>
 					<td>loop(:)/current</td>
 					<td>Passive loop current {dynamic} [A]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="polarimeter"><p class="welcome">ITER Physics Data Model Documentation for polarimeter</p>
+			<p>Polarimeter diagnostic</p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)</td>
+					<td>Set of channels (lines-of-sight)</td>
+					<td>struct_array [max_size=15]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/name</td>
+					<td>Name of the channel {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/identifier</td>
+					<td>ID of the channel {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight</td>
+					<td>Description of the line of sight of the channel, defined by two points</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/first_point</td>
+					<td>Position of the first point</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/first_point/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/first_point/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/first_point/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/second_point</td>
+					<td>Position of the second point</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/second_point/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/second_point/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/second_point/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/third_point</td>
+					<td>Position of the third point</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/third_point/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/third_point/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/third_point/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/line_of_sight/beam_width</td>
+					<td>Width of the probing gaussian beam (1/e) {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/polarisation_angle</td>
+					<td>Polarisation angle</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/polarisation_angle/data</td>
+					<td>Polarisation angle {dynamic} [rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/polarisation_angle/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/polarisation_angle/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="sawteeth"><p class="welcome">ITER Physics Data Model Documentation for sawteeth</p>
+			<p>Description of sawtooth events</p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vacuum_toroidal_field</td>
+					<td>Characteristics of the vacuum toroidal field (used in rho_tor definition)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vacuum_toroidal_field/r0</td>
+					<td>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane) {constant} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>vacuum_toroidal_field/b0</td>
+					<td>Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS. {dynamic} [T]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)</td>
+					<td>Core profiles after sawtooth crash for various time slices {dynamic}</td>
+					<td>struct_array [max_size=unbounded]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/grid</td>
+					<td>Radial grid</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/grid/rho_tor_norm</td>
+					<td>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation)  {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/grid/rho_tor</td>
+					<td>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0 {dynamic} [m]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/grid/psi</td>
+					<td>Poloidal magnetic flux {dynamic} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/grid/volume</td>
+					<td>Volume enclosed inside the magnetic surface {dynamic} [m^3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/grid/area</td>
+					<td>Cross-sectional area of the flux surface {dynamic} [m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/t_e</td>
+					<td>Electron temperature {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/t_i_average</td>
+					<td>Ion temperature (averaged on charge states and ion species) {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/n_e</td>
+					<td>Electron density (thermal+non-thermal) {dynamic} [m^-3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/n_e_fast</td>
+					<td>Density of fast (non-thermal) electrons {dynamic} [m^-3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/n_i_total_over_n_e</td>
+					<td>Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal) {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/momentum_tor</td>
+					<td>Total plasma toroidal momentum, summed over ion species and electrons  {dynamic} [kg.m/s]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/zeff</td>
+					<td>Effective charge {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/p_e</td>
+					<td>Electron pressure {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/p_e_fast_perpendicular</td>
+					<td>Fast (non-thermal) electron perpendicular pressure {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/p_e_fast_parallel</td>
+					<td>Fast (non-thermal) electron parallel pressure {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/p_i_total</td>
+					<td>Total ion pressure (sum over the ion species) {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/p_i_total_fast_perpendicular</td>
+					<td>Fast (non-thermal) total ion (sum over the ion species) perpendicular pressure {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/p_i_total_fast_parallel</td>
+					<td>Fast (non-thermal) total ion (sum over the ion species) parallel pressure {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/pressure_thermal</td>
+					<td>Thermal pressure (electrons+ions) {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/pressure_perpendicular</td>
+					<td>Total perpendicular pressure (electrons+ions, thermal+non-thermal) {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/pressure_parallel</td>
+					<td>Total parallel pressure (electrons+ions, thermal+non-thermal) {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/j_total</td>
+					<td>Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/j_tor</td>
+					<td>Total toroidal current density = average(J_Tor/R) / average(1/R) {dynamic} [A/m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/j_ohmic</td>
+					<td>Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/j_non_inductive</td>
+					<td>Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/j_bootstrap</td>
+					<td>Bootstrap current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [A/m^2]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/conductivity_parallel</td>
+					<td>Parallel conductivity {dynamic} [ohm^-1.m^-1]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/e_field_parallel</td>
+					<td>Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0 {dynamic} [V.m^-1]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/q</td>
+					<td>Safety factor {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/magnetic_shear</td>
+					<td>Magnetic shear, defined as rho_tor/q . dq/drho_tor {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/phi</td>
+					<td>Toroidal flux {dynamic} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/psi_star</td>
+					<td>Psi* = psi - phi {dynamic} [Wb]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/time</td>
+					<td>Time {dynamic} [s]</td>
+					<td>flt_type</td>
+					<td />
+				</tr>
+				<tr>
+					<td>diagnostics</td>
+					<td>Detailed information about the sawtooh characteristics</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>diagnostics/magnetic_shear_q1</td>
+					<td>Magnetic shear at surface q = 1, defined as rho_tor/q . dq/drho_tor {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>diagnostics/rho_tor_norm_q1</td>
+					<td>Normalised toroidal flux coordinate at surface q = 1 {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>diagnostics/rho_tor_norm_inversion</td>
+					<td>Normalised toroidal flux coordinate at inversion radius {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>diagnostics/rho_tor_norm_mixing</td>
+					<td>Normalised toroidal flux coordinate at mixing radius {dynamic} [-]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -8085,6 +12293,197 @@
 					<td>Verbose description {constant}</td>
 					<td>STR_0D</td>
 					<td />
+				</tr>
+				<tr>
+					<td>code</td>
+					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/name</td>
+					<td>Name of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/version</td>
+					<td>Version of the code {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/parameters</td>
+					<td>List of the code specific parameters in XML format {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>code/output_flag</td>
+					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</a><a name="thomson_scattering"><p class="welcome">ITER Physics Data Model Documentation for thomson_scattering</p>
+			<p>Thomson scattering diagnostic</p>
+			<p>Lifecycle status: alpha since version 3.0.4</p>
+			<table border="1">
+				<thead style="color:#ff0000">
+					<td>Full path name</td>
+					<td>Description</td>
+					<td>Data Type</td>
+					<td>Coordinates</td>
+				</thead>
+				<tr>
+					<td>ids_properties</td>
+					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/comment</td>
+					<td>Any comment describing the content of this IDS {constant}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/homogeneous_time</td>
+					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>ids_properties/cocos</td>
+					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
+					<td>INT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)</td>
+					<td>Set of channels (lines-of-sight)</td>
+					<td>struct_array [max_size=100]</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/name</td>
+					<td>Name of the channel {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/identifier</td>
+					<td>ID of the channel {static}</td>
+					<td>STR_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/position</td>
+					<td>Position of the measurements (intersection between laser beam and line of sight)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/position/r</td>
+					<td>Major radius {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/position/z</td>
+					<td>Height {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/position/phi</td>
+					<td>Toroidal angle {static} [rad]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/t_e</td>
+					<td>Electron temperature</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/t_e/data</td>
+					<td>Electron temperature {dynamic} [eV]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/t_e/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/t_e/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/n_e</td>
+					<td>Electron density</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/n_e/data</td>
+					<td>Electron density {dynamic} [m^-3]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/n_e/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/n_e/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>code</td>

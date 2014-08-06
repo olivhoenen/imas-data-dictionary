@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
+	<!-- This IDS should be made simpler if we would find a way to avoid a systematic data/time construct (due to temporary limitation in the XSD processing) -->
+	<xs:complexType name="antennas_beam_spot">
+		<xs:annotation>
+			<xs:documentation>Spot ellipse characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="size">
+				<xs:annotation>
+					<xs:documentation>Size of the spot ellipse</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...2</coordinate1>
+						<coordinate2>time</coordinate2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="angle">
+				<xs:annotation>
+					<xs:documentation>Rotation angle for the spot ellipse</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="antennas_beam_phase">
+		<xs:annotation>
+			<xs:documentation>Phase ellipse characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="curvature">
+				<xs:annotation>
+					<xs:documentation>Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...2</coordinate1>
+						<coordinate2>time</coordinate2>
+						<units>m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="angle">
+				<xs:annotation>
+					<xs:documentation>Rotation angle for the phase ellipse</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="antennas_beam">
+		<xs:annotation>
+			<xs:documentation>Beam characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="spot" type="antennas_beam_spot">
+				<xs:annotation>
+					<xs:documentation>Spot ellipse characteristics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phase" type="antennas_beam_phase">
+				<xs:annotation>
+					<xs:documentation>Phase ellipse characteristics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="antennas_ec">
+		<xs:annotation>
+			<xs:documentation>Electron Cyclotron Antenna</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="frequency">
+				<xs:annotation>
+					<xs:documentation>Frequency</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Incoming wave mode (+ or -1 for O/X mode)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="launching_position" type="rzphi1d_dynamic_aos1">
+				<xs:annotation>
+					<xs:documentation>Launching position of the beam</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="launching_angle_pol">
+				<xs:annotation>
+					<xs:documentation>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="launching_angle_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="beam " type="antennas_beam">
+				<xs:annotation>
+					<xs:documentation>Beams characteristics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="antennas_ic_strap">
+		<xs:annotation>
+			<xs:documentation>Properties of IC antenna strap</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="position" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>R, Z, Phi position of the strap centre</xs:documentation>
+					<xs:appinfo/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="width_tor">
+				<xs:annotation>
+					<xs:documentation>Width of strap in the toroidal direction</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_0D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="distance_to_conductor">
+				<xs:annotation>
+					<xs:documentation>Distance to conducting wall or other conductor behind the antenna strap</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="FLT_0D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometry" type="outline_2d_geometry_static">
+				<xs:annotation>
+					<xs:documentation>Cross-sectional shape of the strap</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="current">
+				<xs:annotation>
+					<xs:documentation>Root mean square current flowing along the strap</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase of the strap current</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="antennas_ic_surface_current">
+		<xs:annotation>
+			<xs:documentation>Description of the IC surface current on the antenna straps and on passive components.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="m_pol">
+				<xs:annotation>
+					<xs:documentation>Poloidal mode numbers, used to describe the spectrum of the antenna current. The poloidal angle is defined from the reference point; the angle at a point (R,Z) is given by atan((Z-Zref)/(R-Rref)), where Rref=reference_point/r and Zref=reference_point/z</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal mode numbers, used to describe the spectrum of the antenna current</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spectrum">
+				<xs:annotation>
+					<xs:documentation>Spectrum of the total surface current on the antenna strap and passive components expressed in poloidal and toroidal modes</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../m_pol</coordinate1>
+						<coordinate2>../n_pol</coordinate2>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="antennas_ic">
+		<xs:annotation>
+			<xs:documentation>Ion Cyclotron Antenna</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="frequency">
+				<xs:annotation>
+					<xs:documentation>Frequency</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="strap" type="antennas_ic_strap" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Properties of IC antenna straps</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="surface_current" type="antennas_ic_surface_current" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Description of the IC surface current on the antenna straps and on passive components, for every time slice</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="antennas">
+		<xs:annotation>
+			<xs:documentation>Antenna systems for heating and current drive in the electron cyclotron (EC) and ion cylcotron (IC) frequencies.</xs:documentation>
+			<xs:appinfo>
+				<lifecycle_status>alpha</lifecycle_status>
+				<lifecycle_version>3.0.4</lifecycle_version>
+			</xs:appinfo>
+			<xs:appinfo/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="ec" type="antennas_ec" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Electron Cyclotron antennas</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="reference_point" type="rz0d_constant">
+					<xs:annotation>
+						<xs:documentation>Reference point used to define the poloidal angle, e.g. the geometrical centre of the vacuum vessel. Used to define the poloidal mode numbers under ic/surface_current</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ic" type="antennas_ic" maxOccurs="5">
+					<xs:annotation>
+						<xs:documentation>Ion Cyclotron antennas</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="code"/>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

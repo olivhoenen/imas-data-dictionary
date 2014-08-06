@@ -18,6 +18,138 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
+	<IDS name="antennas" maxoccur="2" documentation="Antenna systems for heating and current drive in the electron cyclotron (EC) and ion cylcotron (IC) frequencies." lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="ec" path="ec" documentation="Electron Cyclotron antennas" data_type="struct_array" maxoccur="10" path_doc="ec(:)" coordinate1="1...N">
+			<field name="name" path="ec/name" path_doc="ec(:)/name" documentation="Name of the antenna" data_type="STR_0D" type="static"/>
+			<field name="frequency" path="ec/frequency" path_doc="ec(:)/frequency" documentation="Frequency" data_type="FLT_0D" type="static" units="Hz"/>
+			<field name="power" path="ec/power" path_doc="ec(:)/power" documentation="Power" data_type="structure">
+				<field name="data" path="ec/power/data" path_doc="ec(:)/power/data" documentation="Power" data_type="FLT_1D" type="dynamic" coordinate1="ec(:)/power/time" units="W"/>
+				<field name="time" path="ec/power/time" path_doc="ec(:)/power/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="mode" path="ec/mode" path_doc="ec(:)/mode" documentation="Incoming wave mode (+ or -1 for O/X mode)" data_type="structure">
+				<field name="data" path="ec/mode/data" path_doc="ec(:)/mode/data" documentation="Incoming wave mode (+ or -1 for O/X mode)" data_type="INT_1D" type="dynamic" coordinate1="ec(:)/mode/time"/>
+				<field name="time" path="ec/mode/time" path_doc="ec(:)/mode/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="launching_position" path="ec/launching_position" documentation="Launching position of the beam" data_type="structure" path_doc="ec(:)/launching_position">
+				<field name="r" path="ec/launching_position/r" path_doc="ec(:)/launching_position/r" documentation="Major radius" data_type="structure">
+					<field name="data" path="ec/launching_position/r/data" path_doc="ec(:)/launching_position/r/data" documentation="Major radius" data_type="FLT_1D" type="dynamic" units="m" coordinate1="ec(:)/launching_position/r/time"/>
+					<field name="time" path="ec/launching_position/r/time" path_doc="ec(:)/launching_position/r/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+				</field>
+				<field name="z" path="ec/launching_position/z" path_doc="ec(:)/launching_position/z" documentation="Height" data_type="structure">
+					<field name="data" path="ec/launching_position/z/data" path_doc="ec(:)/launching_position/z/data" documentation="Height" data_type="FLT_1D" type="dynamic" units="m" coordinate1="ec(:)/launching_position/z/time"/>
+					<field name="time" path="ec/launching_position/z/time" path_doc="ec(:)/launching_position/z/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+				</field>
+				<field name="phi" path="ec/launching_position/phi" path_doc="ec(:)/launching_position/phi" documentation="Toroidal angle" data_type="structure">
+					<field name="data" path="ec/launching_position/phi/data" path_doc="ec(:)/launching_position/phi/data" documentation="Toroidal angle" data_type="FLT_1D" type="dynamic" units="rad" coordinate1="ec(:)/launching_position/phi/time"/>
+					<field name="time" path="ec/launching_position/phi/time" path_doc="ec(:)/launching_position/phi/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+				</field>
+			</field>
+			<field name="launching_angle_pol" path="ec/launching_angle_pol" path_doc="ec(:)/launching_angle_pol" documentation="Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;" data_type="structure">
+				<field name="data" path="ec/launching_angle_pol/data" path_doc="ec(:)/launching_angle_pol/data" documentation="Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;" data_type="FLT_1D" type="dynamic" coordinate1="ec(:)/launching_angle_pol/time" units="rad"/>
+				<field name="time" path="ec/launching_angle_pol/time" path_doc="ec(:)/launching_angle_pol/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="launching_angle_tor" path="ec/launching_angle_tor" path_doc="ec(:)/launching_angle_tor" documentation="Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi" data_type="structure">
+				<field name="data" path="ec/launching_angle_tor/data" path_doc="ec(:)/launching_angle_tor/data" documentation="Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi" data_type="FLT_1D" type="dynamic" coordinate1="ec(:)/launching_angle_tor/time" units="rad"/>
+				<field name="time" path="ec/launching_angle_tor/time" path_doc="ec(:)/launching_angle_tor/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="beam " path="ec/beam " documentation="Beams characteristics" data_type="structure" path_doc="ec(:)/beam ">
+				<field name="spot" path="ec/beam /spot" documentation="Spot ellipse characteristics" data_type="structure" path_doc="ec(:)/beam /spot">
+					<field name="size" path="ec/beam /spot/size" path_doc="ec(:)/beam /spot/size" documentation="Size of the spot ellipse" data_type="structure">
+						<field name="data" path="ec/beam /spot/size/data" path_doc="ec(:)/beam /spot/size/data" documentation="Size of the spot ellipse" data_type="FLT_2D" type="dynamic" coordinate1="1...2" coordinate2="ec(:)/beam /spot/size/time" units="m"/>
+						<field name="time" path="ec/beam /spot/size/time" path_doc="ec(:)/beam /spot/size/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+					</field>
+					<field name="angle" path="ec/beam /spot/angle" path_doc="ec(:)/beam /spot/angle" documentation="Rotation angle for the spot ellipse" data_type="structure">
+						<field name="data" path="ec/beam /spot/angle/data" path_doc="ec(:)/beam /spot/angle/data" documentation="Rotation angle for the spot ellipse" data_type="FLT_1D" type="dynamic" coordinate1="ec(:)/beam /spot/angle/time" units="rad"/>
+						<field name="time" path="ec/beam /spot/angle/time" path_doc="ec(:)/beam /spot/angle/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+					</field>
+				</field>
+				<field name="phase" path="ec/beam /phase" documentation="Phase ellipse characteristics" data_type="structure" path_doc="ec(:)/beam /phase">
+					<field name="curvature" path="ec/beam /phase/curvature" path_doc="ec(:)/beam /phase/curvature" documentation="Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams" data_type="structure">
+						<field name="data" path="ec/beam /phase/curvature/data" path_doc="ec(:)/beam /phase/curvature/data" documentation="Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams" data_type="FLT_2D" type="dynamic" coordinate1="1...2" coordinate2="ec(:)/beam /phase/curvature/time" units="m^-1"/>
+						<field name="time" path="ec/beam /phase/curvature/time" path_doc="ec(:)/beam /phase/curvature/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+					</field>
+					<field name="angle" path="ec/beam /phase/angle" path_doc="ec(:)/beam /phase/angle" documentation="Rotation angle for the phase ellipse" data_type="structure">
+						<field name="data" path="ec/beam /phase/angle/data" path_doc="ec(:)/beam /phase/angle/data" documentation="Rotation angle for the phase ellipse" data_type="FLT_1D" type="dynamic" coordinate1="ec(:)/beam /phase/angle/time" units="rad"/>
+						<field name="time" path="ec/beam /phase/angle/time" path_doc="ec(:)/beam /phase/angle/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+					</field>
+				</field>
+			</field>
+		</field>
+		<field name="reference_point" path="reference_point" documentation="Reference point used to define the poloidal angle, e.g. the geometrical centre of the vacuum vessel. Used to define the poloidal mode numbers under ic/surface_current" data_type="structure" path_doc="reference_point">
+			<field name="r" path="reference_point/r" path_doc="reference_point/r" documentation="Major radius" data_type="FLT_0D" type="constant" units="m"/>
+			<field name="z" path="reference_point/z" path_doc="reference_point/z" documentation="Height" data_type="FLT_0D" type="constant" units="m"/>
+		</field>
+		<field name="ic" path="ic" documentation="Ion Cyclotron antennas" data_type="struct_array" maxoccur="5" path_doc="ic(:)" coordinate1="1...N">
+			<field name="name" path="ic/name" path_doc="ic(:)/name" documentation="Name of the antenna" data_type="STR_0D" type="static"/>
+			<field name="frequency" path="ic/frequency" path_doc="ic(:)/frequency" documentation="Frequency" data_type="structure">
+				<field name="data" path="ic/frequency/data" path_doc="ic(:)/frequency/data" documentation="Frequency" data_type="FLT_1D" type="dynamic" coordinate1="ic(:)/frequency/time" units="Hz"/>
+				<field name="time" path="ic/frequency/time" path_doc="ic(:)/frequency/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="power" path="ic/power" path_doc="ic(:)/power" documentation="Power" data_type="structure">
+				<field name="data" path="ic/power/data" path_doc="ic(:)/power/data" documentation="Power" data_type="FLT_1D" type="dynamic" coordinate1="ic(:)/power/time" units="W"/>
+				<field name="time" path="ic/power/time" path_doc="ic(:)/power/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="strap" path="ic/strap" documentation="Properties of IC antenna straps" data_type="struct_array" maxoccur="10" path_doc="ic(:)/strap(:)" coordinate1="1...N">
+				<field name="position" path="ic/strap/position" documentation="R, Z, Phi position of the strap centre" data_type="structure" path_doc="ic(:)/strap(:)/position">
+					<field name="r" path="ic/strap/position/r" path_doc="ic(:)/strap(:)/position/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="ic/strap/position/z" path_doc="ic(:)/strap(:)/position/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+					<field name="phi" path="ic/strap/position/phi" path_doc="ic(:)/strap(:)/position/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+				<field name="width_tor" path="ic/strap/width_tor" path_doc="ic(:)/strap(:)/width_tor" documentation="Width of strap in the toroidal direction" data_type="structure">
+					<field name="data" path="ic/strap/width_tor/data" path_doc="ic(:)/strap(:)/width_tor/data" documentation="Width of strap in the toroidal direction" data_type="FLT_0D" type="static" units="m"/>
+				</field>
+				<field name="distance_to_conductor" path="ic/strap/distance_to_conductor" path_doc="ic(:)/strap(:)/distance_to_conductor" documentation="Distance to conducting wall or other conductor behind the antenna strap" data_type="structure">
+					<field name="data" path="ic/strap/distance_to_conductor/data" path_doc="ic(:)/strap(:)/distance_to_conductor/data" documentation="Distance to conducting wall or other conductor behind the antenna strap" data_type="FLT_0D" type="static" units="m"/>
+				</field>
+				<field name="geometry" path="ic/strap/geometry" documentation="Cross-sectional shape of the strap" data_type="structure" path_doc="ic(:)/strap(:)/geometry">
+					<field name="geometry_type" path="ic/strap/geometry/geometry_type" path_doc="ic(:)/strap(:)/geometry/geometry_type" documentation="Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique') " data_type="INT_0D" type="static"/>
+					<field name="outline" path="ic/strap/geometry/outline" documentation="Irregular outline of the element" data_type="structure" path_doc="ic(:)/strap(:)/geometry/outline">
+						<field name="r" path="ic/strap/geometry/outline/r" path_doc="ic(:)/strap(:)/geometry/outline/r" documentation="Major radius" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
+						<field name="z" path="ic/strap/geometry/outline/z" path_doc="ic(:)/strap(:)/geometry/outline/z" documentation="Height" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
+					</field>
+					<field name="rectangle" path="ic/strap/geometry/rectangle" documentation="Rectangular description of the element" data_type="structure" path_doc="ic(:)/strap(:)/geometry/rectangle">
+						<field name="r" path="ic/strap/geometry/rectangle/r" path_doc="ic(:)/strap(:)/geometry/rectangle/r" documentation="Geometric centre R" data_type="FLT_0D" type="static" units="m"/>
+						<field name="z" path="ic/strap/geometry/rectangle/z" path_doc="ic(:)/strap(:)/geometry/rectangle/z" documentation="Geometric centre Z" data_type="FLT_0D" type="static" units="m"/>
+						<field name="width" path="ic/strap/geometry/rectangle/width" path_doc="ic(:)/strap(:)/geometry/rectangle/width" documentation="Horizontal full width" data_type="FLT_0D" type="static" units="m"/>
+						<field name="height" path="ic/strap/geometry/rectangle/height" path_doc="ic(:)/strap(:)/geometry/rectangle/height" documentation="Vertical full height" data_type="FLT_0D" type="static" units="m"/>
+					</field>
+					<field name="oblique" path="ic/strap/geometry/oblique" documentation="Trapezoidal description of the element" data_type="structure" path_doc="ic(:)/strap(:)/geometry/oblique">
+						<field name="r" path="ic/strap/geometry/oblique/r" path_doc="ic(:)/strap(:)/geometry/oblique/r" documentation="Geometric centre R" data_type="FLT_0D" type="static" units="m"/>
+						<field name="z" path="ic/strap/geometry/oblique/z" path_doc="ic(:)/strap(:)/geometry/oblique/z" documentation="Geometric centre Z" data_type="FLT_0D" type="static" units="m"/>
+						<field name="length" path="ic/strap/geometry/oblique/length" path_doc="ic(:)/strap(:)/geometry/oblique/length" documentation="Length" data_type="FLT_0D" type="static" units="m"/>
+						<field name="thickness" path="ic/strap/geometry/oblique/thickness" path_doc="ic(:)/strap(:)/geometry/oblique/thickness" documentation="Thickness" data_type="FLT_0D" type="static" units="m"/>
+						<field name="alpha" path="ic/strap/geometry/oblique/alpha" path_doc="ic(:)/strap(:)/geometry/oblique/alpha" documentation="Inclination of first angle TBD" data_type="FLT_0D" type="static" units="m"/>
+						<field name="beta" path="ic/strap/geometry/oblique/beta" path_doc="ic(:)/strap(:)/geometry/oblique/beta" documentation="Inclination of second angle TBD" data_type="FLT_0D" type="static" units="m"/>
+					</field>
+				</field>
+				<field name="current" path="ic/strap/current" path_doc="ic(:)/strap(:)/current" documentation="Root mean square current flowing along the strap" data_type="structure">
+					<field name="data" path="ic/strap/current/data" path_doc="ic(:)/strap(:)/current/data" documentation="Root mean square current flowing along the strap" data_type="FLT_1D" type="dynamic" coordinate1="ic(:)/strap(:)/current/time" units="A"/>
+					<field name="time" path="ic/strap/current/time" path_doc="ic(:)/strap(:)/current/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+				</field>
+				<field name="phase" path="ic/strap/phase" path_doc="ic(:)/strap(:)/phase" documentation="Phase of the strap current" data_type="structure">
+					<field name="data" path="ic/strap/phase/data" path_doc="ic(:)/strap(:)/phase/data" documentation="Phase of the strap current" data_type="FLT_1D" type="dynamic" coordinate1="ic(:)/strap(:)/phase/time" units="rad"/>
+					<field name="time" path="ic/strap/phase/time" path_doc="ic(:)/strap(:)/phase/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+				</field>
+			</field>
+			<field name="surface_current" path="ic/surface_current" documentation="Description of the IC surface current on the antenna straps and on passive components, for every time slice" data_type="struct_array" maxoccur="unbounded" path_doc="ic(:)/surface_current(:)" coordinate1="ic(:)/surface_current(:)/time" type="dynamic">
+				<field name="m_pol" path="ic/surface_current/m_pol" path_doc="ic(:)/surface_current(:)/m_pol" documentation="Poloidal mode numbers, used to describe the spectrum of the antenna current. The poloidal angle is defined from the reference point; the angle at a point (R,Z) is given by atan((Z-Zref)/(R-Rref)), where Rref=reference_point/r and Zref=reference_point/z" data_type="INT_1D" type="dynamic" coordinate1="1...N"/>
+				<field name="n_tor" path="ic/surface_current/n_tor" path_doc="ic(:)/surface_current(:)/n_tor" documentation="Toroidal mode numbers, used to describe the spectrum of the antenna current" data_type="INT_1D" type="dynamic" coordinate1="1...N"/>
+				<field name="spectrum" path="ic/surface_current/spectrum" path_doc="ic(:)/surface_current(:)/spectrum" documentation="Spectrum of the total surface current on the antenna strap and passive components expressed in poloidal and toroidal modes" data_type="INT_1D" type="dynamic" coordinate1="ic(:)/surface_current(:)/m_pol" coordinate2="ic(:)/surface_current(:)/n_pol" units="A"/>
+			</field>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
 	<IDS name="atomic_data" maxoccur="2" documentation="Atomic, molecular, nuclear and surface physics data. Each occurrence contains the atomic data for a given element (nuclear charge), describing various physical processes. For each process, atomic data tables are organized by charge states. The coordinate system used by the atomic data tables is described under the coordinate_system node." lifecycle_status="alpha" lifecycle_version="3.0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
@@ -56,6 +188,54 @@
 				<field name="units" path="coordinate_system/coordinate/units" path_doc="coordinate_system(:)/coordinate(:)/units" documentation="Units of coordinate (e.g. eV)" data_type="STR_0D" type="static"/>
 				<field name="transformation" path="coordinate_system/coordinate/transformation" path_doc="coordinate_system(:)/coordinate(:)/transformation" documentation="Coordinate transformation applied to coordinate values stored in coord. Integer flag: 0=none; 1=log10; 2=ln" data_type="INT_0D" type="static"/>
 				<field name="spacing" path="coordinate_system/coordinate/spacing" path_doc="coordinate_system(:)/coordinate(:)/spacing" documentation="Flag for specific coordinate spacing (for optimization purposes). Integer flag: 0=undefined; 1=uniform; ..." data_type="INT_0D" type="static"/>
+			</field>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="charge_exchange" maxoccur="2" documentation="Charge exchange spectroscopy diagnostic" lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="channel" path="channel" documentation="Set of channels (lines-of-sight)" data_type="struct_array" maxoccur="20" path_doc="channel(:)" coordinate1="1...N">
+			<field name="name" path="channel/name" path_doc="channel(:)/name" documentation="Name of the channel" data_type="STR_0D" type="static"/>
+			<field name="identifier" path="channel/identifier" path_doc="channel(:)/identifier" documentation="ID of the channel" data_type="STR_0D" type="static"/>
+			<field name="a" path="channel/a" path_doc="channel(:)/a" documentation="Mass of atom of the emmitting impurity. Varies according to channels since they are spanning different lines of sight" data_type="FLT_1D" units="Atomic Mass Unit" type="constant" coordinate1="channel(:)/channel_names"/>
+			<field name="z_ion" path="channel/z_ion" path_doc="channel(:)/z_ion" documentation="Ion charge of the emmitting impurity. Varies according to channels since they are spanning different lines of sight" data_type="FLT_1D" type="constant" units="Elementary Charge Unit" coordinate1="channel(:)/channel_names"/>
+			<field name="z_n" path="channel/z_n" path_doc="channel(:)/z_n" documentation="Nuclear charge of the emmitting impurity. Varies according to channels since they are spanning different lines of sight" data_type="FLT_1D" units="Elementary Charge Unit" type="constant" coordinate1="channel(:)/channel_names"/>
+			<field name="label" path="channel/label" path_doc="channel(:)/label" documentation="String identifying the emmitting impurity (e.g. H+, D+, T+, He+2, C+6, ...)" data_type="STR_1D" type="constant" coordinate1="channel(:)/channel_names"/>
+			<field name="position" path="channel/position" documentation="Position of the measurements" data_type="structure" path_doc="channel(:)/position">
+				<field name="r" path="channel/position/r" path_doc="channel(:)/position/r" documentation="Major radius" data_type="structure">
+					<field name="data" path="channel/position/r/data" path_doc="channel(:)/position/r/data" documentation="Major radius" data_type="FLT_1D" type="dynamic" units="m" coordinate1="channel(:)/position/r/time"/>
+					<field name="time" path="channel/position/r/time" path_doc="channel(:)/position/r/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+				</field>
+				<field name="z" path="channel/position/z" path_doc="channel(:)/position/z" documentation="Height" data_type="structure">
+					<field name="data" path="channel/position/z/data" path_doc="channel(:)/position/z/data" documentation="Height" data_type="FLT_1D" type="dynamic" units="m" coordinate1="channel(:)/position/z/time"/>
+					<field name="time" path="channel/position/z/time" path_doc="channel(:)/position/z/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+				</field>
+				<field name="phi" path="channel/position/phi" path_doc="channel(:)/position/phi" documentation="Toroidal angle" data_type="structure">
+					<field name="data" path="channel/position/phi/data" path_doc="channel(:)/position/phi/data" documentation="Toroidal angle" data_type="FLT_1D" type="dynamic" units="rad" coordinate1="channel(:)/position/phi/time"/>
+					<field name="time" path="channel/position/phi/time" path_doc="channel(:)/position/phi/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+				</field>
+			</field>
+			<field name="t_z" path="channel/t_z" path_doc="channel(:)/t_z" documentation="Ion temperature (of the emmitting impurity)" data_type="structure">
+				<field name="data" path="channel/t_z/data" path_doc="channel(:)/t_z/data" documentation="Ion temperature (of the emmitting impurity)" data_type="FLT_1D" coordinate1="channel(:)/t_z/time" units="eV" type="dynamic"/>
+				<field name="time" path="channel/t_z/time" path_doc="channel(:)/t_z/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="v_tor_z" path="channel/v_tor_z" path_doc="channel(:)/v_tor_z" documentation="Toroidal velocity (of the emmitting impurity)" data_type="structure">
+				<field name="data" path="channel/v_tor_z/data" path_doc="channel(:)/v_tor_z/data" documentation="Toroidal velocity (of the emmitting impurity)" data_type="FLT_1D" coordinate1="channel(:)/v_tor_z/time" units="eV" type="dynamic"/>
+				<field name="time" path="channel/v_tor_z/time" path_doc="channel(:)/v_tor_z/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="v_pol_z" path="channel/v_pol_z" path_doc="channel(:)/v_pol_z" documentation="Poloidal velocity (of the emmitting impurity)" data_type="structure">
+				<field name="data" path="channel/v_pol_z/data" path_doc="channel(:)/v_pol_z/data" documentation="Poloidal velocity (of the emmitting impurity)" data_type="FLT_1D" coordinate1="channel(:)/v_pol_z/time" units="eV" type="dynamic"/>
+				<field name="time" path="channel/v_pol_z/time" path_doc="channel(:)/v_pol_z/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
@@ -151,6 +331,57 @@
 			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
 			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
 		</field>
+	</IDS>
+	<IDS name="core_instant_changes" maxoccur="3" documentation="Instant changes of the radial core plasma profiles due to pellet, MHD, ... " lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)" data_type="structure" path_doc="vacuum_toroidal_field">
+			<field name="r0" path="vacuum_toroidal_field/r0" path_doc="vacuum_toroidal_field/r0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="constant" units="m"/>
+			<field name="b0" path="vacuum_toroidal_field/b0" path_doc="vacuum_toroidal_field/b0" documentation="Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS." data_type="FLT_1D" type="dynamic" units="T" coordinate1="time"/>
+		</field>
+		<field name="instant_change" path="instant_change" documentation="Set of instant_change terms" data_type="struct_array" maxoccur="10" path_doc="instant_change(:)" coordinate1="1...N">
+			<field name="name" path="instant_change/name" path_doc="instant_change(:)/name" documentation="Name of the instant_change term" data_type="STR_0D" units="-" type="constant"/>
+			<field name="profiles" path="instant_change/profiles" documentation="instant_change profiles for various time slices" data_type="struct_array" maxoccur="unbounded" path_doc="instant_change(:)/profiles(:)" coordinate1="instant_change(:)/profiles(:)/time" type="dynamic">
+				<field name="grid" path="instant_change/profiles/grid" documentation="Radial grid" data_type="structure" path_doc="instant_change(:)/profiles(:)/grid">
+					<field name="rho_tor_norm" path="instant_change/profiles/grid/rho_tor_norm" path_doc="instant_change(:)/profiles(:)/grid/rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="-"/>
+					<field name="rho_tor" path="instant_change/profiles/grid/rho_tor" path_doc="instant_change(:)/profiles(:)/grid/rho_tor" documentation="Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0" data_type="FLT_1D" type="dynamic" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="m"/>
+					<field name="psi" path="instant_change/profiles/grid/psi" path_doc="instant_change(:)/profiles(:)/grid/psi" documentation="Poloidal magnetic flux" data_type="FLT_1D" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="Wb" type="dynamic"/>
+					<field name="volume" path="instant_change/profiles/grid/volume" path_doc="instant_change(:)/profiles(:)/grid/volume" documentation="Volume enclosed inside the magnetic surface" data_type="FLT_1D" type="dynamic" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="m^3"/>
+					<field name="area" path="instant_change/profiles/grid/area" path_doc="instant_change(:)/profiles(:)/grid/area" documentation="Cross-sectional area of the flux surface" data_type="FLT_1D" type="dynamic" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="m^2"/>
+				</field>
+				<field name="n_e" path="instant_change/profiles/n_e" path_doc="instant_change(:)/profiles(:)/n_e" documentation="instant_change term for electron density" data_type="FLT_1D" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="m^-3" type="dynamic"/>
+				<field name="t_e" path="instant_change/profiles/t_e" path_doc="instant_change(:)/profiles(:)/t_e" documentation="instant_change term for electron temperature" data_type="FLT_1D" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="eV" type="dynamic"/>
+				<field name="t_i" path="instant_change/profiles/t_i" path_doc="instant_change(:)/profiles(:)/t_i" documentation="instant_change term for the average ion temperature" data_type="FLT_1D" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="eV" type="dynamic"/>
+				<field name="momentum_tor" path="instant_change/profiles/momentum_tor" path_doc="instant_change(:)/profiles(:)/momentum_tor" documentation="instant_change term for total toroidal momentum" data_type="FLT_1D" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="kg.m^2.s^-1" type="dynamic"/>
+				<field name="ion" path="instant_change/profiles/ion" documentation="instant_change terms related to the different ions species" data_type="struct_array" maxoccur="unbounded" path_doc="instant_change(:)/profiles(:)/ion(:)" coordinate1="1...N">
+					<field name="a" path="instant_change/profiles/ion/a" path_doc="instant_change(:)/profiles(:)/ion(:)/a" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="constant"/>
+					<field name="z_ion" path="instant_change/profiles/ion/z_ion" path_doc="instant_change(:)/profiles(:)/ion(:)/z_ion" documentation="Ion charge (of the dominant ionisation state; lumped ions are allowed)" data_type="FLT_0D" type="constant" units="Elementary Charge Unit"/>
+					<field name="z_n" path="instant_change/profiles/ion/z_n" path_doc="instant_change(:)/profiles(:)/ion(:)/z_n" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+					<field name="label" path="instant_change/profiles/ion/label" path_doc="instant_change(:)/profiles(:)/ion(:)/label" documentation="String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)" data_type="STR_0D" type="constant"/>
+					<field name="n_i" path="instant_change/profiles/ion/n_i" path_doc="instant_change(:)/profiles(:)/ion(:)/n_i" documentation="instant_change term for ion density" data_type="FLT_1D" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="m^-3" type="dynamic"/>
+					<field name="t_i" path="instant_change/profiles/ion/t_i" path_doc="instant_change(:)/profiles(:)/ion(:)/t_i" documentation="instant_change term for the ion temperature" data_type="FLT_1D" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="eV" type="dynamic"/>
+					<field name="multiple_charge_states_flag" path="instant_change/profiles/ion/multiple_charge_states_flag" path_doc="instant_change(:)/profiles(:)/ion(:)/multiple_charge_states_flag" documentation="Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge states are considered and are described in the charge_state structure" data_type="INT_0D" type="constant"/>
+					<field name="charge_state" path="instant_change/profiles/ion/charge_state" documentation="instant_change terms related to the different charge states of the ion species" data_type="struct_array" maxoccur="unbounded" path_doc="instant_change(:)/profiles(:)/ion(:)/charge_state(:)" coordinate1="1...N">
+						<field name="z_min" path="instant_change/profiles/ion/charge_state/z_min" path_doc="instant_change(:)/profiles(:)/ion(:)/charge_state(:)/z_min" documentation="Minimum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+						<field name="z_max" path="instant_change/profiles/ion/charge_state/z_max" path_doc="instant_change(:)/profiles(:)/ion(:)/charge_state(:)/z_max" documentation="Maximum Z of the charge state bundle" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+						<field name="label" path="instant_change/profiles/ion/charge_state/label" path_doc="instant_change(:)/profiles(:)/ion(:)/charge_state(:)/label" documentation="String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)" data_type="STR_0D" type="constant"/>
+						<field name="n_z" path="instant_change/profiles/ion/charge_state/n_z" path_doc="instant_change(:)/profiles(:)/ion(:)/charge_state(:)/n_z" documentation="instant_change term for the charge state density " data_type="FLT_1D" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="m^-3" type="dynamic"/>
+						<field name="t_z" path="instant_change/profiles/ion/charge_state/t_z" path_doc="instant_change(:)/profiles(:)/ion(:)/charge_state(:)/t_z" documentation="instant_change terms for the charge state temperature" data_type="FLT_1D" coordinate1="instant_change(:)/profiles(:)/grid/rho_tor_norm" units="eV" type="dynamic"/>
+					</field>
+				</field>
+				<field name="time" path="instant_change/profiles/time" path_doc="instant_change(:)/profiles(:)/time" documentation="Time" data_type="flt_type" units="s" type="dynamic"/>
+			</field>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
 	<IDS name="core_profiles" maxoccur="6" documentation="Core plasma radial profiles" lifecycle_status="alpha" lifecycle_version="3.0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
@@ -395,7 +626,7 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="em_coupling" maxoccur="6" documentation="Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source" lifecycle_status="alpha" lifecycle_version="3.0.0">
+	<IDS name="em_coupling" maxoccur="3" documentation="Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source" lifecycle_status="alpha" lifecycle_version="3.0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
@@ -426,7 +657,7 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="equilibrium" maxoccur="6" documentation="Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code." lifecycle_status="beta" lifecycle_version="3.0.1">
+	<IDS name="equilibrium" maxoccur="3" documentation="Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code." lifecycle_status="beta" lifecycle_version="3.0.1">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
@@ -582,7 +813,47 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="magnetics" maxoccur="6" documentation="Magnetic diagnostics for equilibrium identification and plasma shape control." lifecycle_status="alpha" lifecycle_version="3.0.0">
+	<IDS name="interferometer" maxoccur="1" documentation="Interferometer diagnostic" lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="channel" path="channel" documentation="Set of channels (lines-of-sight)" data_type="struct_array" maxoccur="15" path_doc="channel(:)" coordinate1="1...N">
+			<field name="name" path="channel/name" path_doc="channel(:)/name" documentation="Name of the channel" data_type="STR_0D" type="static"/>
+			<field name="identifier" path="channel/identifier" path_doc="channel(:)/identifier" documentation="ID of the channel" data_type="STR_0D" type="static"/>
+			<field name="line_of_sight" path="channel/line_of_sight" documentation="Description of the line of sight of the channel, defined by two points" data_type="structure" path_doc="channel(:)/line_of_sight">
+				<field name="first_point" path="channel/line_of_sight/first_point" documentation="Position of the first point" data_type="structure" path_doc="channel(:)/line_of_sight/first_point">
+					<field name="r" path="channel/line_of_sight/first_point/r" path_doc="channel(:)/line_of_sight/first_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="channel/line_of_sight/first_point/z" path_doc="channel(:)/line_of_sight/first_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+					<field name="phi" path="channel/line_of_sight/first_point/phi" path_doc="channel(:)/line_of_sight/first_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+				<field name="second_point" path="channel/line_of_sight/second_point" documentation="Position of the second point" data_type="structure" path_doc="channel(:)/line_of_sight/second_point">
+					<field name="r" path="channel/line_of_sight/second_point/r" path_doc="channel(:)/line_of_sight/second_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="channel/line_of_sight/second_point/z" path_doc="channel(:)/line_of_sight/second_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+					<field name="phi" path="channel/line_of_sight/second_point/phi" path_doc="channel(:)/line_of_sight/second_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+				<field name="third_point" path="channel/line_of_sight/third_point" documentation="Position of the third point" data_type="structure" path_doc="channel(:)/line_of_sight/third_point">
+					<field name="r" path="channel/line_of_sight/third_point/r" path_doc="channel(:)/line_of_sight/third_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="channel/line_of_sight/third_point/z" path_doc="channel(:)/line_of_sight/third_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+					<field name="phi" path="channel/line_of_sight/third_point/phi" path_doc="channel(:)/line_of_sight/third_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+				<field name="beam_width" path="channel/line_of_sight/beam_width" path_doc="channel(:)/line_of_sight/beam_width" documentation="Width of the probing gaussian beam (1/e)" data_type="FLT_0D" type="static" units="m"/>
+			</field>
+			<field name="n_e_line" path="channel/n_e_line" path_doc="channel(:)/n_e_line" documentation="Line integrated density" data_type="structure">
+				<field name="data" path="channel/n_e_line/data" path_doc="channel(:)/n_e_line/data" documentation="Line integrated density" data_type="FLT_1D" coordinate1="channel(:)/n_e_line/time" units="m^-2" type="dynamic"/>
+				<field name="time" path="channel/n_e_line/time" path_doc="channel(:)/n_e_line/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="magnetics" maxoccur="3" documentation="Magnetic diagnostics for equilibrium identification and plasma shape control." lifecycle_status="alpha" lifecycle_version="3.0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
@@ -638,7 +909,221 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="pf_active" maxoccur="6" documentation="Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems" lifecycle_status="alpha" lifecycle_version="3.0.0">
+	<IDS name="mhd_linear" maxoccur="3" documentation="Magnetohydronamic linear stability" lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)" data_type="structure" path_doc="vacuum_toroidal_field">
+			<field name="r0" path="vacuum_toroidal_field/r0" path_doc="vacuum_toroidal_field/r0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="constant" units="m"/>
+			<field name="b0" path="vacuum_toroidal_field/b0" path_doc="vacuum_toroidal_field/b0" documentation="Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS." data_type="FLT_1D" type="dynamic" units="T" coordinate1="time"/>
+		</field>
+		<field name="time_slice" path="time_slice" documentation="Core plasma radial profiles for various time slices" data_type="struct_array" maxoccur="unbounded" path_doc="time_slice(:)" coordinate1="time_slice(:)/time" type="dynamic">
+			<field name="toroidal_mode" path="time_slice/toroidal_mode" documentation="Vector of toroidal modes" data_type="struct_array" maxoccur="unbounded" path_doc="time_slice(:)/toroidal_mode(:)" coordinate1="1...N">
+				<field name="n_tor" path="time_slice/toroidal_mode/n_tor" path_doc="time_slice(:)/toroidal_mode(:)/n_tor" documentation="Toroidal mode number of the MHD mode" data_type="INT_0D" type="dynamic"/>
+				<field name="growthrate" path="time_slice/toroidal_mode/growthrate" path_doc="time_slice(:)/toroidal_mode(:)/growthrate" documentation="Linear growthrate of the mode" data_type="FLT_0D" type="dynamic" units="Hz"/>
+				<field name="frequency" path="time_slice/toroidal_mode/frequency" path_doc="time_slice(:)/toroidal_mode(:)/frequency" documentation="Frequency of the mode" data_type="FLT_0D" type="dynamic" units="Hz"/>
+				<field name="plasma" path="time_slice/toroidal_mode/plasma" documentation="MHD modes in the confined plasma" data_type="structure" path_doc="time_slice(:)/toroidal_mode(:)/plasma">
+					<field name="grid" path="time_slice/toroidal_mode/plasma/grid" documentation="Radial grid" data_type="structure" path_doc="time_slice(:)/toroidal_mode(:)/plasma/grid">
+						<field name="rho_tor_norm" path="time_slice/toroidal_mode/plasma/grid/rho_tor_norm" path_doc="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="-"/>
+						<field name="rho_tor" path="time_slice/toroidal_mode/plasma/grid/rho_tor" path_doc="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor" documentation="Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0" data_type="FLT_1D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" units="m"/>
+						<field name="psi" path="time_slice/toroidal_mode/plasma/grid/psi" path_doc="time_slice(:)/toroidal_mode(:)/plasma/grid/psi" documentation="Poloidal magnetic flux" data_type="FLT_1D" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" units="Wb" type="dynamic"/>
+						<field name="volume" path="time_slice/toroidal_mode/plasma/grid/volume" path_doc="time_slice(:)/toroidal_mode(:)/plasma/grid/volume" documentation="Volume enclosed inside the magnetic surface" data_type="FLT_1D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" units="m^3"/>
+						<field name="area" path="time_slice/toroidal_mode/plasma/grid/area" path_doc="time_slice(:)/toroidal_mode(:)/plasma/grid/area" documentation="Cross-sectional area of the flux surface" data_type="FLT_1D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" units="m^2"/>
+					</field>
+					<field name="m_pol" path="time_slice/toroidal_mode/plasma/m_pol" path_doc="time_slice(:)/toroidal_mode(:)/plasma/m_pol" documentation="Array of poloidal mode numbers for the various radial positions" data_type="INT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="1...N"/>
+					<field name="displacement_perpendicular" path="time_slice/toroidal_mode/plasma/displacement_perpendicular" path_doc="time_slice(:)/toroidal_mode(:)/plasma/displacement_perpendicular" documentation="Perpendicular displacement of the modes (in Fourier space)" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol" units="m"/>
+					<field name="displacement_parallel" path="time_slice/toroidal_mode/plasma/displacement_parallel" path_doc="time_slice(:)/toroidal_mode(:)/plasma/displacement_parallel" documentation="Parallel displacement of the modes (in Fourier space)" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol" units="m"/>
+					<field name="tau_alfven" path="time_slice/toroidal_mode/plasma/tau_alfven" path_doc="time_slice(:)/toroidal_mode(:)/plasma/tau_alfven" documentation="Alven time=R/vA=R0 sqrt(mi ni(rho))/B0" data_type="FLT_1D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" units="s"/>
+					<field name="tau_resistive" path="time_slice/toroidal_mode/plasma/tau_resistive" path_doc="time_slice(:)/toroidal_mode(:)/plasma/tau_resistive" documentation="Resistive time = mu_0 rho*rho/1.22/eta_neo" data_type="FLT_1D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" units="s"/>
+					<field name="coordinate_system" path="time_slice/toroidal_mode/plasma/coordinate_system" documentation="Flux surface coordinate system on a square grid of flux and poloidal angle" data_type="structure" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system">
+						<field name="grid_type" path="time_slice/toroidal_mode/plasma/coordinate_system/grid_type" documentation="Type of coordinate system" data_type="structure" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid_type">
+							<field name="name" path="time_slice/toroidal_mode/plasma/coordinate_system/grid_type/name" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid_type/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+							<field name="index" path="time_slice/toroidal_mode/plasma/coordinate_system/grid_type/index" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid_type/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+							<field name="description" path="time_slice/toroidal_mode/plasma/coordinate_system/grid_type/description" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid_type/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+						</field>
+						<field name="grid" path="time_slice/toroidal_mode/plasma/coordinate_system/grid" documentation="Definition of the 2D grid" data_type="structure" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid">
+							<field name="dim1" path="time_slice/toroidal_mode/plasma/coordinate_system/grid/dim1" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" documentation="First dimension values" data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="mixed"/>
+							<field name="dim2" path="time_slice/toroidal_mode/plasma/coordinate_system/grid/dim2" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" documentation="Second dimension values" data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="mixed"/>
+						</field>
+						<field name="r" path="time_slice/toroidal_mode/plasma/coordinate_system/r" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/r" documentation="Values of the major radius on the grid" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" units="m"/>
+						<field name="z" path="time_slice/toroidal_mode/plasma/coordinate_system/z" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/z" documentation="Values of the Height on the grid" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" units="m"/>
+						<field name="jacobian" path="time_slice/toroidal_mode/plasma/coordinate_system/jacobian" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/jacobian" documentation="Jacobian of the coordinate system" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" units="mixed"/>
+						<field name="g_11" path="time_slice/toroidal_mode/plasma/coordinate_system/g_11" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_11" documentation="metric coefficients g_11; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" units="mixed"/>
+						<field name="g_12" path="time_slice/toroidal_mode/plasma/coordinate_system/g_12" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_12" documentation="metric coefficients g_12; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" units="mixed"/>
+						<field name="g_13" path="time_slice/toroidal_mode/plasma/coordinate_system/g_13" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_13" documentation="metric coefficients g_13; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" units="mixed"/>
+						<field name="g_22" path="time_slice/toroidal_mode/plasma/coordinate_system/g_22" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_22" documentation="metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" units="mixed"/>
+						<field name="g_23" path="time_slice/toroidal_mode/plasma/coordinate_system/g_23" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_23" documentation="metric coefficients g_23; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" units="mixed"/>
+						<field name="g_33" path="time_slice/toroidal_mode/plasma/coordinate_system/g_33" path_doc="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/g_33" documentation="metric coefficients g_33; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim1" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/coordinate_system/grid/dim2" units="mixed"/>
+					</field>
+					<field name="a_perturbed" path="time_slice/toroidal_mode/plasma/a_perturbed" documentation="Pertubed vector potential (in Fourier space)" data_type="structure" path_doc="time_slice(:)/toroidal_mode(:)/plasma/a_perturbed" units="T.m">
+						<field name="coordinate1" path="time_slice/toroidal_mode/plasma/a_perturbed/coordinate1" path_doc="time_slice(:)/toroidal_mode(:)/plasma/a_perturbed/coordinate1" documentation="Fourier components of first coordinate" data_type="FLT_2D" units="mixed" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol"/>
+						<field name="coordinate2" path="time_slice/toroidal_mode/plasma/a_perturbed/coordinate2" path_doc="time_slice(:)/toroidal_mode(:)/plasma/a_perturbed/coordinate2" documentation="Fourier components of second coordinate" data_type="FLT_2D" units="mixed" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol"/>
+						<field name="coordinate3" path="time_slice/toroidal_mode/plasma/a_perturbed/coordinate3" path_doc="time_slice(:)/toroidal_mode(:)/plasma/a_perturbed/coordinate3" documentation="Fourier components of third coordinate" data_type="FLT_2D" units="mixed" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol"/>
+					</field>
+					<field name="b_perturbed" path="time_slice/toroidal_mode/plasma/b_perturbed" documentation="Pertubed magnetic field (in Fourier space)" data_type="structure" path_doc="time_slice(:)/toroidal_mode(:)/plasma/b_perturbed" units="T">
+						<field name="coordinate1" path="time_slice/toroidal_mode/plasma/b_perturbed/coordinate1" path_doc="time_slice(:)/toroidal_mode(:)/plasma/b_perturbed/coordinate1" documentation="Fourier components of first coordinate" data_type="FLT_2D" units="mixed" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol"/>
+						<field name="coordinate2" path="time_slice/toroidal_mode/plasma/b_perturbed/coordinate2" path_doc="time_slice(:)/toroidal_mode(:)/plasma/b_perturbed/coordinate2" documentation="Fourier components of second coordinate" data_type="FLT_2D" units="mixed" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol"/>
+						<field name="coordinate3" path="time_slice/toroidal_mode/plasma/b_perturbed/coordinate3" path_doc="time_slice(:)/toroidal_mode(:)/plasma/b_perturbed/coordinate3" documentation="Fourier components of third coordinate" data_type="FLT_2D" units="mixed" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol"/>
+					</field>
+					<field name="v_perturbed" path="time_slice/toroidal_mode/plasma/v_perturbed" documentation="Pertubed velocity (in Fourier space)" data_type="structure" path_doc="time_slice(:)/toroidal_mode(:)/plasma/v_perturbed" units="m/s">
+						<field name="coordinate1" path="time_slice/toroidal_mode/plasma/v_perturbed/coordinate1" path_doc="time_slice(:)/toroidal_mode(:)/plasma/v_perturbed/coordinate1" documentation="Fourier components of first coordinate" data_type="FLT_2D" units="mixed" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol"/>
+						<field name="coordinate2" path="time_slice/toroidal_mode/plasma/v_perturbed/coordinate2" path_doc="time_slice(:)/toroidal_mode(:)/plasma/v_perturbed/coordinate2" documentation="Fourier components of second coordinate" data_type="FLT_2D" units="mixed" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol"/>
+						<field name="coordinate3" path="time_slice/toroidal_mode/plasma/v_perturbed/coordinate3" path_doc="time_slice(:)/toroidal_mode(:)/plasma/v_perturbed/coordinate3" documentation="Fourier components of third coordinate" data_type="FLT_2D" units="mixed" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol"/>
+					</field>
+					<field name="pressure_perturbed" path="time_slice/toroidal_mode/plasma/pressure_perturbed" path_doc="time_slice(:)/toroidal_mode(:)/plasma/pressure_perturbed" documentation="Perturbed pressure (in Fourier space)" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol" units="P"/>
+					<field name="mass_density_perturbed" path="time_slice/toroidal_mode/plasma/mass_density_perturbed" path_doc="time_slice(:)/toroidal_mode(:)/plasma/mass_density_perturbed" documentation="Perturbed mass density (in Fourier space)" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol" units="kg.m^-3"/>
+					<field name="temperature_perturbed" path="time_slice/toroidal_mode/plasma/temperature_perturbed" path_doc="time_slice(:)/toroidal_mode(:)/plasma/temperature_perturbed" documentation="Perturbed temperature (in Fourier space)" data_type="FLT_2D" type="dynamic" coordinate1="time_slice(:)/toroidal_mode(:)/plasma/grid/rho_tor_norm" coordinate2="time_slice(:)/toroidal_mode(:)/plasma/m_pol" units="eV"/>
+				</field>
+			</field>
+			<field name="time" path="time_slice/time" path_doc="time_slice(:)/time" documentation="Time" data_type="flt_type" units="s" type="dynamic"/>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="nbi" maxoccur="3" documentation="Neutral Beam Injection systems and description of the fast neutrals that arrive into the torus" lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="unit" path="unit" documentation="The NBI system is described as a set of units of which the power can be controlled individually." data_type="struct_array" maxoccur="32" path_doc="unit(:)" coordinate1="1...N">
+			<field name="name" path="unit/name" path_doc="unit(:)/name" documentation="Name of the NBI unit" data_type="STR_0D" type="static"/>
+			<field name="id" path="unit/id" path_doc="unit(:)/id" documentation="ID of the NBI unit" data_type="STR_0D" type="static"/>
+			<field name="species" path="unit/species" documentation="Injected species" data_type="structure" path_doc="unit(:)/species" units="Atomic Mass Unit" type="constant">
+				<field name="a" path="unit/species/a" path_doc="unit(:)/species/a" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="constant"/>
+				<field name="z_n" path="unit/species/z_n" path_doc="unit(:)/species/z_n" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="constant"/>
+				<field name="label" path="unit/species/label" path_doc="unit(:)/species/label" documentation="String identifying the species (e.g. H, D, T, ...)" data_type="STR_0D" type="constant"/>
+			</field>
+			<field name="power" path="unit/power" path_doc="unit(:)/power" documentation="Power" data_type="structure">
+				<field name="data" path="unit/power/data" path_doc="unit(:)/power/data" documentation="Power" data_type="FLT_1D" type="dynamic" coordinate1="unit(:)/power/time" units="W"/>
+				<field name="time" path="unit/power/time" path_doc="unit(:)/power/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="energy" path="unit/energy" path_doc="unit(:)/energy" documentation="Full energy of the injected species (acceleration of a single atom)" data_type="structure">
+				<field name="data" path="unit/energy/data" path_doc="unit(:)/energy/data" documentation="Full energy of the injected species (acceleration of a single atom)" data_type="FLT_1D" type="dynamic" coordinate1="unit(:)/energy/time" units="eV"/>
+				<field name="time" path="unit/energy/time" path_doc="unit(:)/energy/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="beam_current_fraction" path="unit/beam_current_fraction" path_doc="unit(:)/beam_current_fraction" documentation="Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)" data_type="structure">
+				<field name="data" path="unit/beam_current_fraction/data" path_doc="unit(:)/beam_current_fraction/data" documentation="Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)" data_type="FLT_2D" type="dynamic" coordinate1="1...3" coordinate2="unit(:)/beam_current_fraction/time" units="-"/>
+				<field name="time" path="unit/beam_current_fraction/time" path_doc="unit(:)/beam_current_fraction/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="beam_power_fraction" path="unit/beam_power_fraction" path_doc="unit(:)/beam_power_fraction" documentation="Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)" data_type="structure">
+				<field name="data" path="unit/beam_power_fraction/data" path_doc="unit(:)/beam_power_fraction/data" documentation="Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)" data_type="FLT_2D" type="dynamic" coordinate1="1...3" coordinate2="unit(:)/beam_power_fraction/time" units="-"/>
+				<field name="time" path="unit/beam_power_fraction/time" path_doc="unit(:)/beam_power_fraction/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="beamlets_group" path="unit/beamlets_group" documentation="Group of beamlets with common vertical and horizontal focal point. If there are no common focal points, then select small groups of beamlets such that a focal point description of the beamlets group provides a fair description" data_type="struct_array" maxoccur="10" path_doc="unit(:)/beamlets_group(:)" coordinate1="1...N">
+				<field name="position" path="unit/beamlets_group/position" documentation="R, Z, Phi position of the coil centre" data_type="structure" path_doc="unit(:)/beamlets_group(:)/position">
+					<field name="r" path="unit/beamlets_group/position/r" path_doc="unit(:)/beamlets_group(:)/position/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="unit/beamlets_group/position/z" path_doc="unit(:)/beamlets_group(:)/position/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+					<field name="phi" path="unit/beamlets_group/position/phi" path_doc="unit(:)/beamlets_group(:)/position/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+				<field name="tangency_radius" path="unit/beamlets_group/tangency_radius" path_doc="unit(:)/beamlets_group(:)/tangency_radius" documentation="Tangency radius (major radius where the central line of a NBI unit is tangent to a circle around the torus)" data_type="FLT_0D" type="static" units="m"/>
+				<field name="angle" path="unit/beamlets_group/angle" path_doc="unit(:)/beamlets_group(:)/angle" documentation="Angle of inclination between a beamlet at the centre of the injection unit surface and the horiontal plane" data_type="FLT_0D" type="static" units="rad"/>
+				<field name="direction" path="unit/beamlets_group/direction" path_doc="unit(:)/beamlets_group(:)/direction" documentation="Direction of the beam seen from above the torus: -1 = clockwise; 1 = counter clockwise" data_type="INT_0D" type="static"/>
+				<field name="width_horizontal" path="unit/beamlets_group/width_horizontal" path_doc="unit(:)/beamlets_group(:)/width_horizontal" documentation="Horizontal width of the beam group at the injection unit surface (or grounded grid)" data_type="FLT_0D" type="static" units="m"/>
+				<field name="width_vertical" path="unit/beamlets_group/width_vertical" path_doc="unit(:)/beamlets_group(:)/width_vertical" documentation="Vertical width of the beam group at the injection unit surface (or grounded grid)" data_type="FLT_0D" type="static" units="m"/>
+				<field name="focus" path="unit/beamlets_group/focus" documentation="Describes how the beamlet group is focused" data_type="structure" path_doc="unit(:)/beamlets_group(:)/focus">
+					<field name="focal_length_horizontal" path="unit/beamlets_group/focus/focal_length_horizontal" path_doc="unit(:)/beamlets_group(:)/focus/focal_length_horizontal" documentation="Horizontal focal length along the beam line, i.e. the point along the centre of the beamlet-group where the beamlet-group has its minimum horizontal width" data_type="FLT_0D" type="static" units="m"/>
+					<field name="focal_length_vertical" path="unit/beamlets_group/focus/focal_length_vertical" path_doc="unit(:)/beamlets_group(:)/focus/focal_length_vertical" documentation="Vertical focal length along the beam line, i.e. the point along the centre of the beamlet-group where the beamlet-group has its minimum vertical width" data_type="FLT_0D" type="static" units="m"/>
+					<field name="width_min_horizontal" path="unit/beamlets_group/focus/width_min_horizontal" path_doc="unit(:)/beamlets_group(:)/focus/width_min_horizontal" documentation="The horizontal width of the beamlets group at the at the horizontal focal point" data_type="FLT_0D" type="static" units="m"/>
+					<field name="width_min_vertical" path="unit/beamlets_group/focus/width_min_vertical" path_doc="unit(:)/beamlets_group(:)/focus/width_min_vertical" documentation="The vertical width of the beamlets group at the at the vertical focal point" data_type="FLT_0D" type="static" units="m"/>
+				</field>
+				<field name="divergence_component" path="unit/beamlets_group/divergence_component" documentation="Detailed information on beamlet divergence. Divergence is described as a superposition of Gaussian components with amplitide &quot;particles_fraction&quot; and vertical/horizontal divergence. Note that for positive ion NBI the divergence is well described by a single Gaussian" data_type="struct_array" maxoccur="3" path_doc="unit(:)/beamlets_group(:)/divergence_component(:)" coordinate1="1...N">
+					<field name="particles_fraction" path="unit/beamlets_group/divergence_component/particles_fraction" path_doc="unit(:)/beamlets_group(:)/divergence_component(:)/particles_fraction" documentation="Fraction of injected particles in the component" data_type="FLT_0D" type="static" units="-"/>
+					<field name="vertical" path="unit/beamlets_group/divergence_component/vertical" path_doc="unit(:)/beamlets_group(:)/divergence_component(:)/vertical" documentation="The vertical beamlet divergence of the component. Here the divergence is defined for Gaussian beams as the angel where the beam density is reduced by a factor 1/e compared to the maximum density. For non-Gaussian beams the divergence is sqrt(2)*mean((x-mean(x))**2), where x is the angle and the mean should be performed over the beam density, P(x): mean(y)=int(y*P(x)*dx)." data_type="FLT_0D" type="static" units="rad"/>
+					<field name="horizontal" path="unit/beamlets_group/divergence_component/horizontal" path_doc="unit(:)/beamlets_group(:)/divergence_component(:)/horizontal" documentation="The horiztonal beamlet divergence of the component. Here the divergence is defined for Gaussian beams as the angel where the beam density is reduced by a factor 1/e compared to the maximum density. For non-Gaussian beams the divergence is sqrt(2)*mean((x-mean(x))**2), where x is the angle and the mean should be performed over the beam density, P(x): mean(y)=int(y*P(x)*dx)." data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+				<field name="beamlet" path="unit/beamlets_group/beamlet" documentation="Detailed information on beamlets" data_type="struct_array" maxoccur="10" path_doc="unit(:)/beamlets_group(:)/beamlet(:)" coordinate1="1...N">
+					<field name="position" path="unit/beamlets_group/beamlet/position" documentation="Position of beamlets" data_type="structure" path_doc="unit(:)/beamlets_group(:)/beamlet(:)/position">
+						<field name="r" path="unit/beamlets_group/beamlet/position/r" path_doc="unit(:)/beamlets_group(:)/beamlet(:)/position/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+						<field name="z" path="unit/beamlets_group/beamlet/position/z" path_doc="unit(:)/beamlets_group(:)/beamlet(:)/position/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+						<field name="phi" path="unit/beamlets_group/beamlet/position/phi" path_doc="unit(:)/beamlets_group(:)/beamlet(:)/position/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+					</field>
+					<field name="tangency_radius" path="unit/beamlets_group/beamlet/tangency_radius" path_doc="unit(:)/beamlets_group(:)/beamlet(:)/tangency_radius" documentation="Tangency radius (major radius where the central line of a beamlet is tangent to a circle around the torus), for every beamlet" data_type="FLT_0D" type="static" units="m"/>
+					<field name="angle" path="unit/beamlets_group/beamlet/angle" path_doc="unit(:)/beamlets_group(:)/beamlet(:)/angle" documentation="Angle of inclination between a line at the centre of a beamlet and the horiontal plane" data_type="FLT_0D" type="static" units="rad"/>
+					<field name="power_fraction" path="unit/beamlets_group/beamlet/power_fraction" path_doc="unit(:)/beamlets_group(:)/beamlet(:)/power_fraction" documentation="Fraction of power of a unit injected by a beamlet" data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+			</field>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="pellets" maxoccur="2" documentation="Description of pellets launched into the plasma" lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="time_slice" path="time_slice" documentation="Description of the pellets launched at various time slices. The time of this structure corresponds to the full ablation of the pellet inside the plasma." data_type="struct_array" maxoccur="unbounded" path_doc="time_slice(:)" coordinate1="time_slice(:)/time" type="dynamic">
+			<field name="pellet" path="time_slice/pellet" documentation="Set of pellets ablated in the plasma at a given time" data_type="struct_array" maxoccur="unbounded" path_doc="time_slice(:)/pellet(:)" coordinate1="1...N">
+				<field name="shape" path="time_slice/pellet/shape" documentation="Initial shape of a pellet at launch" data_type="structure" path_doc="time_slice(:)/pellet(:)/shape">
+					<field name="type" path="time_slice/pellet/shape/type" documentation="Identifier structure for the shape type: 1-spherical; 2-cylindrical; 3-rectangular" data_type="structure" path_doc="time_slice(:)/pellet(:)/shape/type" type="constant">
+						<field name="name" path="time_slice/pellet/shape/type/name" path_doc="time_slice(:)/pellet(:)/shape/type/name" documentation="Short string identifier" data_type="STR_0D" type="constant"/>
+						<field name="index" path="time_slice/pellet/shape/type/index" path_doc="time_slice(:)/pellet(:)/shape/type/index" documentation="Integer identifier (enumeration index within a list)" data_type="INT_0D" type="constant"/>
+						<field name="description" path="time_slice/pellet/shape/type/description" path_doc="time_slice(:)/pellet(:)/shape/type/description" documentation="Verbose description" data_type="STR_0D" type="constant"/>
+					</field>
+					<field name="size" path="time_slice/pellet/shape/size" path_doc="time_slice(:)/pellet(:)/shape/size" documentation="Size of the pellet in the various dimensions, depending on the shape type. Spherical pellets: size(1) is the radius of the pellet. Cylindrical pellets: size(1) is the radius and size(2) is the height of the cylinder. Rectangular pellets: size(1) is the height, size(2) is the width and size(3) is the length" data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="m"/>
+				</field>
+				<field name="species" path="time_slice/pellet/species" documentation="Set of species included in the pellet composition" data_type="struct_array" maxoccur="unbounded" path_doc="time_slice(:)/pellet(:)/species(:)" coordinate1="1...N">
+					<field name="a" path="time_slice/pellet/species/a" path_doc="time_slice(:)/pellet(:)/species(:)/a" documentation="Mass of atom" data_type="FLT_0D" units="Atomic Mass Unit" type="dynamic"/>
+					<field name="z_n" path="time_slice/pellet/species/z_n" path_doc="time_slice(:)/pellet(:)/species(:)/z_n" documentation="Nuclear charge" data_type="FLT_0D" units="Elementary Charge Unit" type="dynamic"/>
+					<field name="label" path="time_slice/pellet/species/label" path_doc="time_slice(:)/pellet(:)/species(:)/label" documentation="String identifying the species (e.g. H, D, T, ...)" data_type="STR_0D" type="dynamic"/>
+					<field name="density" path="time_slice/pellet/species/density" path_doc="time_slice(:)/pellet(:)/species(:)/density" documentation="Material density of the species in the pellet" data_type="FLT_0D" type="dynamic" units="-"/>
+					<field name="fraction" path="time_slice/pellet/species/fraction" path_doc="time_slice(:)/pellet(:)/species(:)/fraction" documentation="Fraction of the species atoms in the pellet" data_type="FLT_0D" type="dynamic" units="-"/>
+					<field name="sublimation_energy" path="time_slice/pellet/species/sublimation_energy" path_doc="time_slice(:)/pellet(:)/species(:)/sublimation_energy" documentation="Sublimation energy per atom" data_type="FLT_0D" type="dynamic" units="eV"/>
+				</field>
+				<field name="velocity_initial" path="time_slice/pellet/velocity_initial" path_doc="time_slice(:)/pellet(:)/velocity_initial" documentation="Initial velocity of the pellet as it enters the vaccum chamber" data_type="FLT_0D" units="m.s^-1" type="dynamic"/>
+				<field name="path_geometry" path="time_slice/pellet/path_geometry" documentation="Geometry of the pellet path in the vaccuum chamber" data_type="structure" path_doc="time_slice(:)/pellet(:)/path_geometry">
+					<field name="first_point" path="time_slice/pellet/path_geometry/first_point" documentation="Position of the first point" data_type="structure" path_doc="time_slice(:)/pellet(:)/path_geometry/first_point">
+						<field name="r" path="time_slice/pellet/path_geometry/first_point/r" path_doc="time_slice(:)/pellet(:)/path_geometry/first_point/r" documentation="Major radius" data_type="FLT_0D" type="dynamic" units="m"/>
+						<field name="z" path="time_slice/pellet/path_geometry/first_point/z" path_doc="time_slice(:)/pellet(:)/path_geometry/first_point/z" documentation="Height" data_type="FLT_0D" type="dynamic" units="m"/>
+						<field name="phi" path="time_slice/pellet/path_geometry/first_point/phi" path_doc="time_slice(:)/pellet(:)/path_geometry/first_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="dynamic" units="rad"/>
+					</field>
+					<field name="second_point" path="time_slice/pellet/path_geometry/second_point" documentation="Position of the second point" data_type="structure" path_doc="time_slice(:)/pellet(:)/path_geometry/second_point">
+						<field name="r" path="time_slice/pellet/path_geometry/second_point/r" path_doc="time_slice(:)/pellet(:)/path_geometry/second_point/r" documentation="Major radius" data_type="FLT_0D" type="dynamic" units="m"/>
+						<field name="z" path="time_slice/pellet/path_geometry/second_point/z" path_doc="time_slice(:)/pellet(:)/path_geometry/second_point/z" documentation="Height" data_type="FLT_0D" type="dynamic" units="m"/>
+						<field name="phi" path="time_slice/pellet/path_geometry/second_point/phi" path_doc="time_slice(:)/pellet(:)/path_geometry/second_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="dynamic" units="rad"/>
+					</field>
+				</field>
+				<field name="path_profiles" path="time_slice/pellet/path_profiles" documentation="1-D profiles of plasma and pellet along the pellet path " data_type="structure" path_doc="time_slice(:)/pellet(:)/path_profiles">
+					<field name="distance" path="time_slice/pellet/path_profiles/distance" path_doc="time_slice(:)/pellet(:)/path_profiles/distance" documentation="Distance along the pellet path, with the origin taken at path_geometry/first_point. Used as the main coordinate for the path_profiles structure " data_type="FLT_1D" units="m" type="dynamic" coordinate1="1...N"/>
+					<field name="rho_tor_norm" path="time_slice/pellet/path_profiles/rho_tor_norm" path_doc="time_slice(:)/pellet(:)/path_profiles/rho_tor_norm" documentation="Normalised toroidal coordinate along the pellet path " data_type="FLT_1D" units="-" type="dynamic" coordinate1="time_slice(:)/pellet(:)/path_profiles/distance"/>
+					<field name="psi" path="time_slice/pellet/path_profiles/psi" path_doc="time_slice(:)/pellet(:)/path_profiles/psi" documentation="Poloidal flux along the pellet path " data_type="FLT_1D" units="Wb" type="dynamic" coordinate1="time_slice(:)/pellet(:)/path_profiles/distance"/>
+					<field name="velocity" path="time_slice/pellet/path_profiles/velocity" path_doc="time_slice(:)/pellet(:)/path_profiles/velocity" documentation="Pellet velocity along the pellet path " data_type="FLT_1D" units="m.s^-1" type="dynamic" coordinate1="time_slice(:)/pellet(:)/path_profiles/distance"/>
+					<field name="n_e" path="time_slice/pellet/path_profiles/n_e" path_doc="time_slice(:)/pellet(:)/path_profiles/n_e" documentation="Electron density along the pellet path " data_type="FLT_1D" units="m^-3" type="dynamic" coordinate1="time_slice(:)/pellet(:)/path_profiles/distance"/>
+					<field name="t_e" path="time_slice/pellet/path_profiles/t_e" path_doc="time_slice(:)/pellet(:)/path_profiles/t_e" documentation="Electron temperature along the pellet path " data_type="FLT_1D" units="eV" type="dynamic" coordinate1="time_slice(:)/pellet(:)/path_profiles/distance"/>
+					<field name="ablation_rate" path="time_slice/pellet/path_profiles/ablation_rate" path_doc="time_slice(:)/pellet(:)/path_profiles/ablation_rate" documentation="Ablation rate (electrons) along the pellet path " data_type="FLT_1D" units="s^-1" type="dynamic" coordinate1="time_slice(:)/pellet(:)/path_profiles/distance"/>
+					<field name="ablated_particles" path="time_slice/pellet/path_profiles/ablated_particles" path_doc="time_slice(:)/pellet(:)/path_profiles/ablated_particles" documentation="Number of ablated particles (electrons) along the pellet path " data_type="FLT_1D" units="-" type="dynamic" coordinate1="time_slice(:)/pellet(:)/path_profiles/distance"/>
+					<field name="rho_tor_norm_drift" path="time_slice/pellet/path_profiles/rho_tor_norm_drift" path_doc="time_slice(:)/pellet(:)/path_profiles/rho_tor_norm_drift" documentation="Difference to due ExB drifts between the ablation and the final deposition locations, in terms of the normalised toroidal flux coordinate" data_type="FLT_1D" units="-" type="dynamic" coordinate1="time_slice(:)/pellet(:)/path_profiles/distance"/>
+					<field name="position" path="time_slice/pellet/path_profiles/position" documentation="Position along the pellet path" data_type="structure" path_doc="time_slice(:)/pellet(:)/path_profiles/position">
+						<field name="r" path="time_slice/pellet/path_profiles/position/r" path_doc="time_slice(:)/pellet(:)/path_profiles/position/r" documentation="Major radius" data_type="FLT_1D" type="dynamic" units="m" coordinate1="1...N"/>
+						<field name="z" path="time_slice/pellet/path_profiles/position/z" path_doc="time_slice(:)/pellet(:)/path_profiles/position/z" documentation="Height" data_type="FLT_0D" type="dynamic" units="m" coordinate1="time_slice(:)/pellet(:)/path_profiles/position/r"/>
+						<field name="phi" path="time_slice/pellet/path_profiles/position/phi" path_doc="time_slice(:)/pellet(:)/path_profiles/position/phi" documentation="Toroidal angle" data_type="FLT_0D" type="dynamic" units="rad" coordinate1="time_slice(:)/pellet(:)/path_profiles/position/r"/>
+					</field>
+				</field>
+			</field>
+			<field name="time" path="time_slice/time" path_doc="time_slice(:)/time" documentation="Time" data_type="flt_type" units="s" type="dynamic"/>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="pf_active" maxoccur="3" documentation="Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems" lifecycle_status="alpha" lifecycle_version="3.0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
@@ -655,7 +1140,7 @@
 				<field name="turns_with_sign" path="coil/element/turns_with_sign" path_doc="coil(:)/element(:)/turns_with_sign" documentation="Number of effective turns in the element for calculating magnetic fields of the coil; includes the sign of the number of turns" data_type="INT_0D" type="static"/>
 				<field name="area" path="coil/element/area" path_doc="coil(:)/element(:)/area" documentation="Cross-sectional areas of the element" data_type="FLT_0D" type="static" units="m^2"/>
 				<field name="geometry" path="coil/element/geometry" documentation="Cross-sectional shape of the element" data_type="structure" path_doc="coil(:)/element(:)/geometry">
-					<field name="geometry_type" path="coil/element/geometry/geometry_type" path_doc="coil(:)/element(:)/geometry/geometry_type" documentation="Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ') " data_type="INT_0D" type="static"/>
+					<field name="geometry_type" path="coil/element/geometry/geometry_type" path_doc="coil(:)/element(:)/geometry/geometry_type" documentation="Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique') " data_type="INT_0D" type="static"/>
 					<field name="outline" path="coil/element/geometry/outline" documentation="Irregular outline of the element" data_type="structure" path_doc="coil(:)/element(:)/geometry/outline">
 						<field name="r" path="coil/element/geometry/outline/r" path_doc="coil(:)/element(:)/geometry/outline/r" documentation="Major radius" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
 						<field name="z" path="coil/element/geometry/outline/z" path_doc="coil(:)/element(:)/geometry/outline/z" documentation="Height" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
@@ -666,7 +1151,7 @@
 						<field name="width" path="coil/element/geometry/rectangle/width" path_doc="coil(:)/element(:)/geometry/rectangle/width" documentation="Horizontal full width" data_type="FLT_0D" type="static" units="m"/>
 						<field name="height" path="coil/element/geometry/rectangle/height" path_doc="coil(:)/element(:)/geometry/rectangle/height" documentation="Vertical full height" data_type="FLT_0D" type="static" units="m"/>
 					</field>
-					<field name="oblique" path="coil/element/geometry/oblique" documentation="Rectangular description of the element" data_type="structure" path_doc="coil(:)/element(:)/geometry/oblique">
+					<field name="oblique" path="coil/element/geometry/oblique" documentation="Trapezoidal description of the element" data_type="structure" path_doc="coil(:)/element(:)/geometry/oblique">
 						<field name="r" path="coil/element/geometry/oblique/r" path_doc="coil(:)/element(:)/geometry/oblique/r" documentation="Geometric centre R" data_type="FLT_0D" type="static" units="m"/>
 						<field name="z" path="coil/element/geometry/oblique/z" path_doc="coil(:)/element(:)/geometry/oblique/z" documentation="Geometric centre Z" data_type="FLT_0D" type="static" units="m"/>
 						<field name="length" path="coil/element/geometry/oblique/length" path_doc="coil(:)/element(:)/geometry/oblique/length" documentation="Length" data_type="FLT_0D" type="static" units="m"/>
@@ -741,7 +1226,7 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="pf_passive" maxoccur="6" documentation="Description of the axisymmetric passive conductors, currents flowing in them" lifecycle_status="alpha" lifecycle_version="3.0.0">
+	<IDS name="pf_passive" maxoccur="3" documentation="Description of the axisymmetric passive conductors, currents flowing in them" lifecycle_status="alpha" lifecycle_version="3.0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
@@ -752,7 +1237,7 @@
 			<field name="area" path="loop/area" path_doc="loop(:)/area" documentation="Surface area of the passive loop" data_type="FLT_0D" type="static" units="m^2"/>
 			<field name="resistance" path="loop/resistance" path_doc="loop(:)/resistance" documentation="Passive loop resistance" data_type="FLT_0D" type="static" units="Ohm"/>
 			<field name="geometry" path="loop/geometry" documentation="Shape of the passive loop" data_type="structure" path_doc="loop(:)/geometry">
-				<field name="geometry_type" path="loop/geometry/geometry_type" path_doc="loop(:)/geometry/geometry_type" documentation="Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ') " data_type="INT_0D" type="static"/>
+				<field name="geometry_type" path="loop/geometry/geometry_type" path_doc="loop(:)/geometry/geometry_type" documentation="Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique') " data_type="INT_0D" type="static"/>
 				<field name="outline" path="loop/geometry/outline" documentation="Irregular outline of the element" data_type="structure" path_doc="loop(:)/geometry/outline">
 					<field name="r" path="loop/geometry/outline/r" path_doc="loop(:)/geometry/outline/r" documentation="Major radius" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
 					<field name="z" path="loop/geometry/outline/z" path_doc="loop(:)/geometry/outline/z" documentation="Height" data_type="FLT_1D" type="static" units="m" coordinate1="1...N"/>
@@ -763,7 +1248,7 @@
 					<field name="width" path="loop/geometry/rectangle/width" path_doc="loop(:)/geometry/rectangle/width" documentation="Horizontal full width" data_type="FLT_0D" type="static" units="m"/>
 					<field name="height" path="loop/geometry/rectangle/height" path_doc="loop(:)/geometry/rectangle/height" documentation="Vertical full height" data_type="FLT_0D" type="static" units="m"/>
 				</field>
-				<field name="oblique" path="loop/geometry/oblique" documentation="Rectangular description of the element" data_type="structure" path_doc="loop(:)/geometry/oblique">
+				<field name="oblique" path="loop/geometry/oblique" documentation="Trapezoidal description of the element" data_type="structure" path_doc="loop(:)/geometry/oblique">
 					<field name="r" path="loop/geometry/oblique/r" path_doc="loop(:)/geometry/oblique/r" documentation="Geometric centre R" data_type="FLT_0D" type="static" units="m"/>
 					<field name="z" path="loop/geometry/oblique/z" path_doc="loop(:)/geometry/oblique/z" documentation="Geometric centre Z" data_type="FLT_0D" type="static" units="m"/>
 					<field name="length" path="loop/geometry/oblique/length" path_doc="loop(:)/geometry/oblique/length" documentation="Length" data_type="FLT_0D" type="static" units="m"/>
@@ -773,6 +1258,107 @@
 				</field>
 			</field>
 			<field name="current" path="loop/current" path_doc="loop(:)/current" documentation="Passive loop current" data_type="FLT_1D" type="dynamic" coordinate1="time" units="A"/>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="polarimeter" maxoccur="1" documentation="Polarimeter diagnostic" lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="channel" path="channel" documentation="Set of channels (lines-of-sight)" data_type="struct_array" maxoccur="15" path_doc="channel(:)" coordinate1="1...N">
+			<field name="name" path="channel/name" path_doc="channel(:)/name" documentation="Name of the channel" data_type="STR_0D" type="static"/>
+			<field name="identifier" path="channel/identifier" path_doc="channel(:)/identifier" documentation="ID of the channel" data_type="STR_0D" type="static"/>
+			<field name="line_of_sight" path="channel/line_of_sight" documentation="Description of the line of sight of the channel, defined by two points" data_type="structure" path_doc="channel(:)/line_of_sight">
+				<field name="first_point" path="channel/line_of_sight/first_point" documentation="Position of the first point" data_type="structure" path_doc="channel(:)/line_of_sight/first_point">
+					<field name="r" path="channel/line_of_sight/first_point/r" path_doc="channel(:)/line_of_sight/first_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="channel/line_of_sight/first_point/z" path_doc="channel(:)/line_of_sight/first_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+					<field name="phi" path="channel/line_of_sight/first_point/phi" path_doc="channel(:)/line_of_sight/first_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+				<field name="second_point" path="channel/line_of_sight/second_point" documentation="Position of the second point" data_type="structure" path_doc="channel(:)/line_of_sight/second_point">
+					<field name="r" path="channel/line_of_sight/second_point/r" path_doc="channel(:)/line_of_sight/second_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="channel/line_of_sight/second_point/z" path_doc="channel(:)/line_of_sight/second_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+					<field name="phi" path="channel/line_of_sight/second_point/phi" path_doc="channel(:)/line_of_sight/second_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+				<field name="third_point" path="channel/line_of_sight/third_point" documentation="Position of the third point" data_type="structure" path_doc="channel(:)/line_of_sight/third_point">
+					<field name="r" path="channel/line_of_sight/third_point/r" path_doc="channel(:)/line_of_sight/third_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+					<field name="z" path="channel/line_of_sight/third_point/z" path_doc="channel(:)/line_of_sight/third_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+					<field name="phi" path="channel/line_of_sight/third_point/phi" path_doc="channel(:)/line_of_sight/third_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+				</field>
+				<field name="beam_width" path="channel/line_of_sight/beam_width" path_doc="channel(:)/line_of_sight/beam_width" documentation="Width of the probing gaussian beam (1/e)" data_type="FLT_0D" type="static" units="m"/>
+			</field>
+			<field name="polarisation_angle" path="channel/polarisation_angle" path_doc="channel(:)/polarisation_angle" documentation="Polarisation angle" data_type="structure">
+				<field name="data" path="channel/polarisation_angle/data" path_doc="channel(:)/polarisation_angle/data" documentation="Polarisation angle" data_type="FLT_1D" coordinate1="channel(:)/polarisation_angle/time" units="rad" type="dynamic"/>
+				<field name="time" path="channel/polarisation_angle/time" path_doc="channel(:)/polarisation_angle/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="sawteeth" maxoccur="2" documentation="Description of sawtooth events" lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="vacuum_toroidal_field" path="vacuum_toroidal_field" documentation="Characteristics of the vacuum toroidal field (used in rho_tor definition)" data_type="structure" path_doc="vacuum_toroidal_field">
+			<field name="r0" path="vacuum_toroidal_field/r0" path_doc="vacuum_toroidal_field/r0" documentation="Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)" data_type="FLT_0D" type="constant" units="m"/>
+			<field name="b0" path="vacuum_toroidal_field/b0" path_doc="vacuum_toroidal_field/b0" documentation="Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS." data_type="FLT_1D" type="dynamic" units="T" coordinate1="time"/>
+		</field>
+		<field name="profiles_1d" path="profiles_1d" documentation="Core profiles after sawtooth crash for various time slices" data_type="struct_array" maxoccur="unbounded" path_doc="profiles_1d(:)" coordinate1="profiles_1d(:)/time" type="dynamic">
+			<field name="grid" path="profiles_1d/grid" documentation="Radial grid" data_type="structure" path_doc="profiles_1d(:)/grid">
+				<field name="rho_tor_norm" path="profiles_1d/grid/rho_tor_norm" path_doc="profiles_1d(:)/grid/rho_tor_norm" documentation="Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) " data_type="FLT_1D" type="dynamic" coordinate1="1...N" units="-"/>
+				<field name="rho_tor" path="profiles_1d/grid/rho_tor" path_doc="profiles_1d(:)/grid/rho_tor" documentation="Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0" data_type="FLT_1D" type="dynamic" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="m"/>
+				<field name="psi" path="profiles_1d/grid/psi" path_doc="profiles_1d(:)/grid/psi" documentation="Poloidal magnetic flux" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Wb" type="dynamic"/>
+				<field name="volume" path="profiles_1d/grid/volume" path_doc="profiles_1d(:)/grid/volume" documentation="Volume enclosed inside the magnetic surface" data_type="FLT_1D" type="dynamic" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="m^3"/>
+				<field name="area" path="profiles_1d/grid/area" path_doc="profiles_1d(:)/grid/area" documentation="Cross-sectional area of the flux surface" data_type="FLT_1D" type="dynamic" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="m^2"/>
+			</field>
+			<field name="t_e" path="profiles_1d/t_e" path_doc="profiles_1d(:)/t_e" documentation="Electron temperature" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="eV" type="dynamic"/>
+			<field name="t_i_average" path="profiles_1d/t_i_average" path_doc="profiles_1d(:)/t_i_average" documentation="Ion temperature (averaged on charge states and ion species)" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="eV" type="dynamic"/>
+			<field name="n_e" path="profiles_1d/n_e" path_doc="profiles_1d(:)/n_e" documentation="Electron density (thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="m^-3" type="dynamic"/>
+			<field name="n_e_fast" path="profiles_1d/n_e_fast" path_doc="profiles_1d(:)/n_e_fast" documentation="Density of fast (non-thermal) electrons" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="m^-3" type="dynamic"/>
+			<field name="n_i_total_over_n_e" path="profiles_1d/n_i_total_over_n_e" path_doc="profiles_1d(:)/n_i_total_over_n_e" documentation="Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="-" type="dynamic"/>
+			<field name="momentum_tor" path="profiles_1d/momentum_tor" path_doc="profiles_1d(:)/momentum_tor" documentation="Total plasma toroidal momentum, summed over ion species and electrons " data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" type="dynamic" units="kg.m/s"/>
+			<field name="zeff" path="profiles_1d/zeff" path_doc="profiles_1d(:)/zeff" documentation="Effective charge" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" type="dynamic" units="-"/>
+			<field name="p_e" path="profiles_1d/p_e" path_doc="profiles_1d(:)/p_e" documentation="Electron pressure" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="p_e_fast_perpendicular" path="profiles_1d/p_e_fast_perpendicular" path_doc="profiles_1d(:)/p_e_fast_perpendicular" documentation="Fast (non-thermal) electron perpendicular pressure" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="p_e_fast_parallel" path="profiles_1d/p_e_fast_parallel" path_doc="profiles_1d(:)/p_e_fast_parallel" documentation="Fast (non-thermal) electron parallel pressure" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="p_i_total" path="profiles_1d/p_i_total" path_doc="profiles_1d(:)/p_i_total" documentation="Total ion pressure (sum over the ion species)" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="p_i_total_fast_perpendicular" path="profiles_1d/p_i_total_fast_perpendicular" path_doc="profiles_1d(:)/p_i_total_fast_perpendicular" documentation="Fast (non-thermal) total ion (sum over the ion species) perpendicular pressure" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="p_i_total_fast_parallel" path="profiles_1d/p_i_total_fast_parallel" path_doc="profiles_1d(:)/p_i_total_fast_parallel" documentation="Fast (non-thermal) total ion (sum over the ion species) parallel pressure" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="pressure_thermal" path="profiles_1d/pressure_thermal" path_doc="profiles_1d(:)/pressure_thermal" documentation="Thermal pressure (electrons+ions)" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="pressure_perpendicular" path="profiles_1d/pressure_perpendicular" path_doc="profiles_1d(:)/pressure_perpendicular" documentation="Total perpendicular pressure (electrons+ions, thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="pressure_parallel" path="profiles_1d/pressure_parallel" path_doc="profiles_1d(:)/pressure_parallel" documentation="Total parallel pressure (electrons+ions, thermal+non-thermal)" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Pa" type="dynamic"/>
+			<field name="j_total" path="profiles_1d/j_total" path_doc="profiles_1d(:)/j_total" documentation="Total parallel current density = average(jtot.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="j_tor" path="profiles_1d/j_tor" path_doc="profiles_1d(:)/j_tor" documentation="Total toroidal current density = average(J_Tor/R) / average(1/R)" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="j_ohmic" path="profiles_1d/j_ohmic" path_doc="profiles_1d(:)/j_ohmic" documentation="Ohmic parallel current density = average(J_Ohmic.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="j_non_inductive" path="profiles_1d/j_non_inductive" path_doc="profiles_1d(:)/j_non_inductive" documentation="Non-inductive (includes bootstrap) parallel current density = average(jni.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="j_bootstrap" path="profiles_1d/j_bootstrap" path_doc="profiles_1d(:)/j_bootstrap" documentation="Bootstrap current density = average(J_Bootstrap.B) / B0, where B0 = Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="A/m^2" type="dynamic"/>
+			<field name="conductivity_parallel" path="profiles_1d/conductivity_parallel" path_doc="profiles_1d(:)/conductivity_parallel" documentation="Parallel conductivity" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="ohm^-1.m^-1" type="dynamic"/>
+			<field name="e_field_parallel" path="profiles_1d/e_field_parallel" path_doc="profiles_1d(:)/e_field_parallel" documentation="Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="V.m^-1" type="dynamic"/>
+			<field name="q" path="profiles_1d/q" path_doc="profiles_1d(:)/q" documentation="Safety factor" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" type="dynamic" units="-"/>
+			<field name="magnetic_shear" path="profiles_1d/magnetic_shear" path_doc="profiles_1d(:)/magnetic_shear" documentation="Magnetic shear, defined as rho_tor/q . dq/drho_tor" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="-" type="dynamic"/>
+			<field name="phi" path="profiles_1d/phi" path_doc="profiles_1d(:)/phi" documentation="Toroidal flux" data_type="FLT_1D" type="dynamic" coordinate1="profiles_1d(:)/grid/rho_tor_norm" units="Wb"/>
+			<field name="psi_star" path="profiles_1d/psi_star" path_doc="profiles_1d(:)/psi_star" documentation="Psi* = psi - phi" data_type="FLT_1D" coordinate1="profiles_1d(:)/grid/rho_tor_norm" type="dynamic" units="Wb"/>
+			<field name="time" path="profiles_1d/time" path_doc="profiles_1d(:)/time" documentation="Time" data_type="flt_type" units="s" type="dynamic"/>
+		</field>
+		<field name="diagnostics" path="diagnostics" documentation="Detailed information about the sawtooh characteristics" data_type="structure" path_doc="diagnostics">
+			<field name="magnetic_shear_q1" path="diagnostics/magnetic_shear_q1" path_doc="diagnostics/magnetic_shear_q1" documentation="Magnetic shear at surface q = 1, defined as rho_tor/q . dq/drho_tor" data_type="FLT_1D" coordinate1="time" units="-" type="dynamic"/>
+			<field name="rho_tor_norm_q1" path="diagnostics/rho_tor_norm_q1" path_doc="diagnostics/rho_tor_norm_q1" documentation="Normalised toroidal flux coordinate at surface q = 1" data_type="FLT_1D" coordinate1="time" units="-" type="dynamic"/>
+			<field name="rho_tor_norm_inversion" path="diagnostics/rho_tor_norm_inversion" path_doc="diagnostics/rho_tor_norm_inversion" documentation="Normalised toroidal flux coordinate at inversion radius" data_type="FLT_1D" coordinate1="time" units="-" type="dynamic"/>
+			<field name="rho_tor_norm_mixing" path="diagnostics/rho_tor_norm_mixing" path_doc="diagnostics/rho_tor_norm_mixing" documentation="Normalised toroidal flux coordinate at mixing radius" data_type="FLT_1D" coordinate1="time" units="-" type="dynamic"/>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
@@ -803,7 +1389,7 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="sdn" maxoccur="6" documentation="Description of the Synchronous Data Network parameters and the signals on it" lifecycle_status="alpha" lifecycle_version="3.0.0">
+	<IDS name="sdn" maxoccur="3" documentation="Description of the Synchronous Data Network parameters and the signals on it" lifecycle_status="alpha" lifecycle_version="3.0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
@@ -1071,7 +1657,38 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="tf" maxoccur="6" documentation="Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS." lifecycle_status="alpha" lifecycle_version="3.0.0">
+	<IDS name="thomson_scattering" maxoccur="3" documentation="Thomson scattering diagnostic" lifecycle_status="alpha" lifecycle_version="3.0.4">
+		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
+			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
+			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
+			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
+		</field>
+		<field name="channel" path="channel" documentation="Set of channels (lines-of-sight)" data_type="struct_array" maxoccur="100" path_doc="channel(:)" coordinate1="1...N">
+			<field name="name" path="channel/name" path_doc="channel(:)/name" documentation="Name of the channel" data_type="STR_0D" type="static"/>
+			<field name="identifier" path="channel/identifier" path_doc="channel(:)/identifier" documentation="ID of the channel" data_type="STR_0D" type="static"/>
+			<field name="position" path="channel/position" documentation="Position of the measurements (intersection between laser beam and line of sight)" data_type="structure" path_doc="channel(:)/position">
+				<field name="r" path="channel/position/r" path_doc="channel(:)/position/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
+				<field name="z" path="channel/position/z" path_doc="channel(:)/position/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
+				<field name="phi" path="channel/position/phi" path_doc="channel(:)/position/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
+			</field>
+			<field name="t_e" path="channel/t_e" path_doc="channel(:)/t_e" documentation="Electron temperature" data_type="structure">
+				<field name="data" path="channel/t_e/data" path_doc="channel(:)/t_e/data" documentation="Electron temperature" data_type="FLT_1D" coordinate1="channel(:)/t_e/time" units="eV" type="dynamic"/>
+				<field name="time" path="channel/t_e/time" path_doc="channel(:)/t_e/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="n_e" path="channel/n_e" path_doc="channel(:)/n_e" documentation="Electron density" data_type="structure">
+				<field name="data" path="channel/n_e/data" path_doc="channel(:)/n_e/data" documentation="Electron density" data_type="FLT_1D" coordinate1="channel(:)/n_e/time" units="m^-3" type="dynamic"/>
+				<field name="time" path="channel/n_e/time" path_doc="channel(:)/n_e/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+		</field>
+		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
+			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
+			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
+			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
+			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
+		</field>
+		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+	</IDS>
+	<IDS name="tf" maxoccur="3" documentation="Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS." lifecycle_status="alpha" lifecycle_version="3.0.0">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>

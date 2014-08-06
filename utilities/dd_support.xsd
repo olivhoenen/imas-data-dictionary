@@ -122,6 +122,48 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="plasma_composition_species">
+		<xs:annotation>
+			<xs:documentation>Description of simple species (elements) without declaration of their ionisation state</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="a">
+				<xs:annotation>
+					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:appinfo>
+						<units>Atomic Mass Unit</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_n">
+				<xs:annotation>
+					<xs:documentation>Nuclear charge</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H, D, T, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="plasma_composition_neutrals_components">
 		<xs:annotation>
 			<xs:documentation>Components to the atom or molecule</xs:documentation>
@@ -395,29 +437,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="dynamic_type">
-		<xs:annotation>
-			<xs:documentation>Structure for 1D dynamic (prototype to be evaluated)</xs:documentation>
-			<xs:appinfo>parent-dependent</xs:appinfo>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element ref="time"/>
-			<xs:element name="value">
-				<xs:annotation>
-					<xs:documentation>Value of the dynamic. Value/Data is ugly. Moreover the metadata are not at the right place. </xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<unit>Defined by its parent</unit>
-						<coordinate1>../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:group ref="FLT_1D"/>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="b_tor_vacuum_1">
 		<xs:annotation>
 			<xs:documentation>Characteristics of the vacuum toroidal field. time assumed to be one level above</xs:documentation>
@@ -554,6 +573,182 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="equilibrium_profiles_2d_grid">
+		<xs:annotation>
+			<xs:documentation>Definition of the 2D grid</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="dim1">
+				<xs:annotation>
+					<xs:documentation>First dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dim2">
+				<xs:annotation>
+					<xs:documentation>Second dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="equilibrium_coordinate_system">
+		<xs:annotation>
+			<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Type of coordinate system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid" type="equilibrium_profiles_2d_grid">
+				<xs:annotation>
+					<xs:documentation>Definition of the 2D grid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Values of the major radius on the grid</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Values of the Height on the grid</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="jacobian">
+				<xs:annotation>
+					<xs:documentation>Jacobian of the coordinate system</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_11">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_11; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_12">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_12; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_13">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_13; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_22">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_22; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_23">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_23; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g_33">
+				<xs:annotation>
+					<xs:documentation>metric coefficients g_33; g_ij=g^ij are contravariant metric tensor for the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rzphi0d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi positions (0D, static)</xs:documentation>
@@ -588,6 +783,49 @@
 					<xs:documentation>Toroidal angle</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rzphi0d_dynamic_aos3">
+		<xs:annotation>
+			<xs:documentation>Structure for R, Z, Phi positions (0D, dynamic within a type 3 array of structure (index on time))</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -639,6 +877,107 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rzphi1d_dynamic_aos1">
+		<xs:annotation>
+			<xs:documentation>Structure for list of R, Z, Phi positions (1D, dynamic within a type 1 array of structure (indexed on objects, data/time structure)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rzphi1d_dynamic_aos3">
+		<xs:annotation>
+			<xs:documentation>Structure for R, Z, Phi positions (1D, dynamic within a type 3 array of structure (index on time))</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>../r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -808,6 +1147,37 @@
 	</xs:complexType>
 	<xs:complexType name="rz0d_static">
 		<xs:annotation>
+			<xs:documentation>Structure for a single R, Z position (0D, static)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rz0d_constant">
+		<xs:annotation>
 			<xs:documentation>Structure for a single R, Z position (0D, constant)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
@@ -873,6 +1243,74 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="line_of_sight_2points">
+		<xs:annotation>
+			<xs:documentation>Generic description of a line of sight, defined by two points</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="first_point" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the first point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="second_point" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the second point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="line_of_sight_2points_dynamic_aos3">
+		<xs:annotation>
+			<xs:documentation>Generic description of a line of sight, defined by two points, dynamic within a type 3 array of structure (index on time)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="first_point" type="rzphi0d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Position of the first point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="second_point" type="rzphi0d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Position of the second point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="line_of_sight_3points">
+		<xs:annotation>
+			<xs:documentation>Generic description of a line of sight, defined by two points (one way) and an optional third point to indicate the direction of reflection if the second point is e.g. the position of a mirror reflecting the line-of-sight</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="first_point" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the first point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="second_point" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the second point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="third_point" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the third point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam_width">
+				<xs:annotation>
+					<xs:documentation>Width of the probing gaussian beam (1/e)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -1018,7 +1456,7 @@
 		<xs:sequence>
 			<xs:element name="geometry_type">
 				<xs:annotation>
-					<xs:documentation>Type used to describe the element shape (0 for 'Coordinates_RZ' or 1 for 'RZDRDZ') </xs:documentation>
+					<xs:documentation>Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique') </xs:documentation>
 					<xs:appinfo>
 						<Type>static</Type>
 					</xs:appinfo>
@@ -1039,7 +1477,7 @@
 			</xs:element>
 			<xs:element name="oblique" type="oblique_static">
 				<xs:annotation>
-					<xs:documentation>Rectangular description of the element</xs:documentation>
+					<xs:documentation>Trapezoidal description of the element</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
