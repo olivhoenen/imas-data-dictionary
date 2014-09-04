@@ -813,7 +813,7 @@
 		</field>
 		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 	</IDS>
-	<IDS name="interferometer" maxoccur="1" documentation="Interferometer diagnostic" lifecycle_status="alpha" lifecycle_version="3.0.4">
+	<IDS name="interfero_polarimeter" maxoccur="1" documentation="Interfero-polarimeter diagnostic" lifecycle_status="alpha" lifecycle_version="3.0.4">
 		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
 			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
 			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
@@ -822,7 +822,7 @@
 		<field name="channel" path="channel" documentation="Set of channels (lines-of-sight)" data_type="struct_array" maxoccur="15" path_doc="channel(:)" coordinate1="1...N">
 			<field name="name" path="channel/name" path_doc="channel(:)/name" documentation="Name of the channel" data_type="STR_0D" type="static"/>
 			<field name="identifier" path="channel/identifier" path_doc="channel(:)/identifier" documentation="ID of the channel" data_type="STR_0D" type="static"/>
-			<field name="line_of_sight" path="channel/line_of_sight" documentation="Description of the line of sight of the channel, defined by two points" data_type="structure" path_doc="channel(:)/line_of_sight">
+			<field name="line_of_sight" path="channel/line_of_sight" documentation="Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path" data_type="structure" path_doc="channel(:)/line_of_sight">
 				<field name="first_point" path="channel/line_of_sight/first_point" documentation="Position of the first point" data_type="structure" path_doc="channel(:)/line_of_sight/first_point">
 					<field name="r" path="channel/line_of_sight/first_point/r" path_doc="channel(:)/line_of_sight/first_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
 					<field name="z" path="channel/line_of_sight/first_point/z" path_doc="channel(:)/line_of_sight/first_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
@@ -840,10 +840,25 @@
 				</field>
 				<field name="beam_width" path="channel/line_of_sight/beam_width" path_doc="channel(:)/line_of_sight/beam_width" documentation="Width of the probing gaussian beam (1/e)" data_type="FLT_0D" type="static" units="m"/>
 			</field>
+			<field name="wavelength_polarimetry" path="channel/wavelength_polarimetry" path_doc="channel(:)/wavelength_polarimetry" documentation="Wavelength used for polarimetry" data_type="FLT_0D" type="static" units="m"/>
+			<field name="polarisation_angle_initial" path="channel/polarisation_angle_initial" path_doc="channel(:)/polarisation_angle_initial" documentation="Initial polarisation angle before entering the plasma" data_type="FLT_0D" type="static" units="m"/>
 			<field name="n_e_line" path="channel/n_e_line" path_doc="channel(:)/n_e_line" documentation="Line integrated density" data_type="structure">
 				<field name="data" path="channel/n_e_line/data" path_doc="channel(:)/n_e_line/data" documentation="Line integrated density" data_type="FLT_1D" coordinate1="channel(:)/n_e_line/time" units="m^-2" type="dynamic"/>
 				<field name="time" path="channel/n_e_line/time" path_doc="channel(:)/n_e_line/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
 			</field>
+			<field name="polarisation_angle" path="channel/polarisation_angle" path_doc="channel(:)/polarisation_angle" documentation="Polarisation angle" data_type="structure">
+				<field name="data" path="channel/polarisation_angle/data" path_doc="channel(:)/polarisation_angle/data" documentation="Polarisation angle" data_type="FLT_1D" coordinate1="channel(:)/polarisation_angle/time" units="rad" type="dynamic"/>
+				<field name="time" path="channel/polarisation_angle/time" path_doc="channel(:)/polarisation_angle/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="ellipticity" path="channel/ellipticity" path_doc="channel(:)/ellipticity" documentation="Ellipticity" data_type="structure">
+				<field name="data" path="channel/ellipticity/data" path_doc="channel(:)/ellipticity/data" documentation="Ellipticity" data_type="FLT_1D" coordinate1="channel(:)/ellipticity/time" units="-" type="dynamic"/>
+				<field name="time" path="channel/ellipticity/time" path_doc="channel(:)/ellipticity/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="validity_timed" path="channel/validity_timed" path_doc="channel(:)/validity_timed" documentation="Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)" data_type="structure">
+				<field name="data" path="channel/validity_timed/data" path_doc="channel(:)/validity_timed/data" documentation="Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)" data_type="INT_1D" coordinate1="channel(:)/validity_timed/time" type="dynamic"/>
+				<field name="time" path="channel/validity_timed/time" path_doc="channel(:)/validity_timed/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
+			</field>
+			<field name="validity" path="channel/validity" path_doc="channel(:)/validity" documentation="Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid)" data_type="INT_0D" type="static"/>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
@@ -1258,46 +1273,6 @@
 				</field>
 			</field>
 			<field name="current" path="loop/current" path_doc="loop(:)/current" documentation="Passive loop current" data_type="FLT_1D" type="dynamic" coordinate1="time" units="A"/>
-		</field>
-		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
-			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>
-			<field name="version" path="code/version" path_doc="code/version" documentation="Version of the code" data_type="STR_0D" type="constant"/>
-			<field name="parameters" path="code/parameters" path_doc="code/parameters" documentation="List of the code specific parameters in XML format" data_type="STR_0D" type="constant"/>
-			<field name="output_flag" path="code/output_flag" path_doc="code/output_flag" documentation="Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used." data_type="INT_1D" coordinate1="time" type="dynamic"/>
-		</field>
-		<field name="time" path="time" path_doc="time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
-	</IDS>
-	<IDS name="polarimeter" maxoccur="1" documentation="Polarimeter diagnostic" lifecycle_status="alpha" lifecycle_version="3.0.4">
-		<field name="ids_properties" path="ids_properties" path_doc="ids_properties" documentation="Interface Data Structure properties. This element identifies the node above as an IDS" data_type="structure">
-			<field name="comment" path="ids_properties/comment" path_doc="ids_properties/comment" documentation="Any comment describing the content of this IDS" data_type="STR_0D" type="constant"/>
-			<field name="homogeneous_time" path="ids_properties/homogeneous_time" path_doc="ids_properties/homogeneous_time" documentation="1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree." data_type="INT_0D" type="constant"/>
-			<field name="cocos" path="ids_properties/cocos" path_doc="ids_properties/cocos" documentation="Coordinate conventions of this IDS, expected to be 11 for ITER data" data_type="INT_0D" type="constant"/>
-		</field>
-		<field name="channel" path="channel" documentation="Set of channels (lines-of-sight)" data_type="struct_array" maxoccur="15" path_doc="channel(:)" coordinate1="1...N">
-			<field name="name" path="channel/name" path_doc="channel(:)/name" documentation="Name of the channel" data_type="STR_0D" type="static"/>
-			<field name="identifier" path="channel/identifier" path_doc="channel(:)/identifier" documentation="ID of the channel" data_type="STR_0D" type="static"/>
-			<field name="line_of_sight" path="channel/line_of_sight" documentation="Description of the line of sight of the channel, defined by two points" data_type="structure" path_doc="channel(:)/line_of_sight">
-				<field name="first_point" path="channel/line_of_sight/first_point" documentation="Position of the first point" data_type="structure" path_doc="channel(:)/line_of_sight/first_point">
-					<field name="r" path="channel/line_of_sight/first_point/r" path_doc="channel(:)/line_of_sight/first_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
-					<field name="z" path="channel/line_of_sight/first_point/z" path_doc="channel(:)/line_of_sight/first_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
-					<field name="phi" path="channel/line_of_sight/first_point/phi" path_doc="channel(:)/line_of_sight/first_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
-				</field>
-				<field name="second_point" path="channel/line_of_sight/second_point" documentation="Position of the second point" data_type="structure" path_doc="channel(:)/line_of_sight/second_point">
-					<field name="r" path="channel/line_of_sight/second_point/r" path_doc="channel(:)/line_of_sight/second_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
-					<field name="z" path="channel/line_of_sight/second_point/z" path_doc="channel(:)/line_of_sight/second_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
-					<field name="phi" path="channel/line_of_sight/second_point/phi" path_doc="channel(:)/line_of_sight/second_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
-				</field>
-				<field name="third_point" path="channel/line_of_sight/third_point" documentation="Position of the third point" data_type="structure" path_doc="channel(:)/line_of_sight/third_point">
-					<field name="r" path="channel/line_of_sight/third_point/r" path_doc="channel(:)/line_of_sight/third_point/r" documentation="Major radius" data_type="FLT_0D" type="static" units="m"/>
-					<field name="z" path="channel/line_of_sight/third_point/z" path_doc="channel(:)/line_of_sight/third_point/z" documentation="Height" data_type="FLT_0D" type="static" units="m"/>
-					<field name="phi" path="channel/line_of_sight/third_point/phi" path_doc="channel(:)/line_of_sight/third_point/phi" documentation="Toroidal angle" data_type="FLT_0D" type="static" units="rad"/>
-				</field>
-				<field name="beam_width" path="channel/line_of_sight/beam_width" path_doc="channel(:)/line_of_sight/beam_width" documentation="Width of the probing gaussian beam (1/e)" data_type="FLT_0D" type="static" units="m"/>
-			</field>
-			<field name="polarisation_angle" path="channel/polarisation_angle" path_doc="channel(:)/polarisation_angle" documentation="Polarisation angle" data_type="structure">
-				<field name="data" path="channel/polarisation_angle/data" path_doc="channel(:)/polarisation_angle/data" documentation="Polarisation angle" data_type="FLT_1D" coordinate1="channel(:)/polarisation_angle/time" units="rad" type="dynamic"/>
-				<field name="time" path="channel/polarisation_angle/time" path_doc="channel(:)/polarisation_angle/time" documentation="Generic time [s]" data_type="flt_1d_type" coordinate1="1...N" type="dynamic"/>
-			</field>
 		</field>
 		<field name="code" path="code" path_doc="code" documentation="Generic decription of the code specific parameters for the code that has produced this IDS" data_type="structure">
 			<field name="name" path="code/name" path_doc="code/name" documentation="Name of the code" data_type="STR_0D" type="constant"/>

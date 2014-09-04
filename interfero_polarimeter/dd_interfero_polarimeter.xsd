@@ -10,7 +10,7 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="interferometer_channel">
+	<xs:complexType name="interfero_polarimeter_channel">
 		<xs:annotation>
 			<xs:documentation>Charge exchange channel</xs:documentation>
 		</xs:annotation>
@@ -39,8 +39,32 @@
 			</xs:element>
 			<xs:element name="line_of_sight" type="line_of_sight_3points">
 				<xs:annotation>
-					<xs:documentation>Description of the line of sight of the channel, defined by two points</xs:documentation>
+					<xs:documentation>Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="wavelength_polarimetry">
+				<xs:annotation>
+					<xs:documentation>Wavelength used for polarimetry</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="polarisation_angle_initial">
+				<xs:annotation>
+					<xs:documentation>Initial polarisation angle before entering the plasma</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="n_e_line">
 				<xs:annotation>
@@ -58,11 +82,69 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="polarisation_angle">
+				<xs:annotation>
+					<xs:documentation>Polarisation angle</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ellipticity">
+				<xs:annotation>
+					<xs:documentation>Ellipticity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity_timed">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="interferometer">
+	<xs:element name="interfero_polarimeter">
 		<xs:annotation>
-			<xs:documentation>Interferometer diagnostic</xs:documentation>
+			<xs:documentation>Interfero-polarimeter diagnostic</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
@@ -71,7 +153,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="channel" type="interferometer_channel" maxOccurs="15">
+				<xs:element name="channel" type="interfero_polarimeter_channel" maxOccurs="15">
 					<xs:annotation>
 						<xs:documentation>Set of channels (lines-of-sight)</xs:documentation>
 						<xs:appinfo>

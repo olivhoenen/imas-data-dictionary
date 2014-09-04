@@ -73,8 +73,8 @@
 				<td>3</td>
 			</tr>
 			<tr>
-				<td><a href="#interferometer">interferometer</a></td>
-				<td>Interferometer diagnostic</td>
+				<td><a href="#interfero_polarimeter">interfero_polarimeter</a></td>
+				<td>Interfero-polarimeter diagnostic</td>
 				<td>1</td>
 			</tr>
 			<tr>
@@ -106,11 +106,6 @@
 				<td><a href="#pf_passive">pf_passive</a></td>
 				<td>Description of the axisymmetric passive conductors, currents flowing in them</td>
 				<td>3</td>
-			</tr>
-			<tr>
-				<td><a href="#polarimeter">polarimeter</a></td>
-				<td>Polarimeter diagnostic</td>
-				<td>1</td>
 			</tr>
 			<tr>
 				<td><a href="#sawteeth">sawteeth</a></td>
@@ -6683,8 +6678,8 @@
 					</td>
 				</tr>
 			</table>
-		</a><a name="interferometer"><p class="welcome">ITER Physics Data Model Documentation for interferometer</p>
-			<p>Interferometer diagnostic</p>
+		</a><a name="interfero_polarimeter"><p class="welcome">ITER Physics Data Model Documentation for interfero_polarimeter</p>
+			<p>Interfero-polarimeter diagnostic</p>
 			<p>Lifecycle status: alpha since version 3.0.4</p>
 			<table border="1">
 				<thead style="color:#ff0000">
@@ -6743,7 +6738,7 @@
 				</tr>
 				<tr>
 					<td>channel(:)/line_of_sight</td>
-					<td>Description of the line of sight of the channel, defined by two points</td>
+					<td>Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path</td>
 					<td>structure</td>
 					<td />
 				</tr>
@@ -6826,6 +6821,18 @@
 					<td />
 				</tr>
 				<tr>
+					<td>channel(:)/wavelength_polarimetry</td>
+					<td>Wavelength used for polarimetry {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/polarisation_angle_initial</td>
+					<td>Initial polarisation angle before entering the plasma {static} [m]</td>
+					<td>FLT_0D</td>
+					<td />
+				</tr>
+				<tr>
 					<td>channel(:)/n_e_line</td>
 					<td>Line integrated density</td>
 					<td>structure</td>
@@ -6854,6 +6861,102 @@
 							</tr>
 						</table>
 					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/polarisation_angle</td>
+					<td>Polarisation angle</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/polarisation_angle/data</td>
+					<td>Polarisation angle {dynamic} [rad]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/polarisation_angle/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/polarisation_angle/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/ellipticity</td>
+					<td>Ellipticity</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/ellipticity/data</td>
+					<td>Ellipticity {dynamic} [-]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/ellipticity/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/ellipticity/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/validity_timed</td>
+					<td>Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>channel(:)/validity_timed/data</td>
+					<td>Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid) {dynamic}</td>
+					<td>INT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- channel(:)/validity_timed/time</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/validity_timed/time</td>
+					<td>Generic time [s] {dynamic}</td>
+					<td>flt_1d_type</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- 1...N</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>channel(:)/validity</td>
+					<td>Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid) {static}</td>
+					<td>INT_0D</td>
+					<td />
 				</tr>
 				<tr>
 					<td>code</td>
@@ -9662,227 +9765,6 @@
 						<table>
 							<tr>
 								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>code</td>
-					<td>Generic decription of the code specific parameters for the code that has produced this IDS</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>code/name</td>
-					<td>Name of the code {constant}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>code/version</td>
-					<td>Version of the code {constant}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>code/parameters</td>
-					<td>List of the code specific parameters in XML format {constant}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>code/output_flag</td>
-					<td>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used. {dynamic}</td>
-					<td>INT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>time</td>
-					<td>Generic time [s] {dynamic}</td>
-					<td>flt_1d_type</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</a><a name="polarimeter"><p class="welcome">ITER Physics Data Model Documentation for polarimeter</p>
-			<p>Polarimeter diagnostic</p>
-			<p>Lifecycle status: alpha since version 3.0.4</p>
-			<table border="1">
-				<thead style="color:#ff0000">
-					<td>Full path name</td>
-					<td>Description</td>
-					<td>Data Type</td>
-					<td>Coordinates</td>
-				</thead>
-				<tr>
-					<td>ids_properties</td>
-					<td>Interface Data Structure properties. This element identifies the node above as an IDS</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/comment</td>
-					<td>Any comment describing the content of this IDS {constant}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/homogeneous_time</td>
-					<td>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree. {constant}</td>
-					<td>INT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>ids_properties/cocos</td>
-					<td>Coordinate conventions of this IDS, expected to be 11 for ITER data {constant}</td>
-					<td>INT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)</td>
-					<td>Set of channels (lines-of-sight)</td>
-					<td>struct_array [max_size=15]</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>channel(:)/name</td>
-					<td>Name of the channel {static}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/identifier</td>
-					<td>ID of the channel {static}</td>
-					<td>STR_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight</td>
-					<td>Description of the line of sight of the channel, defined by two points</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/first_point</td>
-					<td>Position of the first point</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/first_point/r</td>
-					<td>Major radius {static} [m]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/first_point/z</td>
-					<td>Height {static} [m]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/first_point/phi</td>
-					<td>Toroidal angle {static} [rad]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/second_point</td>
-					<td>Position of the second point</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/second_point/r</td>
-					<td>Major radius {static} [m]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/second_point/z</td>
-					<td>Height {static} [m]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/second_point/phi</td>
-					<td>Toroidal angle {static} [rad]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/third_point</td>
-					<td>Position of the third point</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/third_point/r</td>
-					<td>Major radius {static} [m]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/third_point/z</td>
-					<td>Height {static} [m]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/third_point/phi</td>
-					<td>Toroidal angle {static} [rad]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/line_of_sight/beam_width</td>
-					<td>Width of the probing gaussian beam (1/e) {static} [m]</td>
-					<td>FLT_0D</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/polarisation_angle</td>
-					<td>Polarisation angle</td>
-					<td>structure</td>
-					<td />
-				</tr>
-				<tr>
-					<td>channel(:)/polarisation_angle/data</td>
-					<td>Polarisation angle {dynamic} [rad]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- channel(:)/polarisation_angle/time</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>channel(:)/polarisation_angle/time</td>
-					<td>Generic time [s] {dynamic}</td>
-					<td>flt_1d_type</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- 1...N</td>
 							</tr>
 						</table>
 					</td>
