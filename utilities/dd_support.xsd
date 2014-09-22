@@ -1301,18 +1301,6 @@
 					<xs:documentation>Position of the third point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beam_width">
-				<xs:annotation>
-					<xs:documentation>Width of the probing gaussian beam (1/e)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="oblique_static">
@@ -1479,6 +1467,68 @@
 				<xs:annotation>
 					<xs:documentation>Trapezoidal description of the element</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="data_entry">
+		<xs:annotation>
+			<xs:documentation>Definition of a data entry</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="user">
+				<xs:annotation>
+					<xs:documentation>Username</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="machine">
+				<xs:annotation>
+					<xs:documentation>Name of the experimental device to which this data is related</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pulse_type">
+				<xs:annotation>
+					<xs:documentation>Type of the data entry, e.g. "pulse", "simulation", ...</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pulse">
+				<xs:annotation>
+					<xs:documentation>Pulse number</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="run">
+				<xs:annotation>
+					<xs:documentation>Run number</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

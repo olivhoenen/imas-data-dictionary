@@ -10,6 +10,41 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="interfero_polarimeter_channel_wavelength_interferometry">
+		<xs:annotation>
+			<xs:documentation>Value of the wavelength and density estimators associated to an interferometry wavelength</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Wavelength value</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_e_line">
+				<xs:annotation>
+					<xs:documentation>Line integrated density estimated from this wavelength</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>m^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="interfero_polarimeter_channel">
 		<xs:annotation>
 			<xs:documentation>Charge exchange channel</xs:documentation>
@@ -54,9 +89,29 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="polarisation_angle_initial">
+			<xs:element name="wavelength_interferometry" type="interfero_polarimeter_channel_wavelength_interferometry" maxOccurs="2">
 				<xs:annotation>
-					<xs:documentation>Initial polarisation angle before entering the plasma</xs:documentation>
+					<xs:documentation>Set of wavelengths used for interferometry</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="polarisation_initial">
+				<xs:annotation>
+					<xs:documentation>Initial polarisation vector before entering the plasma</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ellipticity_initial">
+				<xs:annotation>
+					<xs:documentation>Initial ellipticity before entering the plasma</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -68,7 +123,7 @@
 			</xs:element>
 			<xs:element name="n_e_line">
 				<xs:annotation>
-					<xs:documentation>Line integrated density</xs:documentation>
+					<xs:documentation>Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<units>m^-2</units>
@@ -82,9 +137,9 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="polarisation_angle">
+			<xs:element name="faraday_angle">
 				<xs:annotation>
-					<xs:documentation>Polarisation angle</xs:documentation>
+					<xs:documentation>Faraday angle (variation of the Faraday angle induced by crossing the plasma) </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<units>rad</units>

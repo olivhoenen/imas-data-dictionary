@@ -10,7 +10,7 @@
   -* and for providing reinstant_changes to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:complexType name="core_instant_changes_instant_change_instant_change_profiles_ions_charge_states">
+	<xs:complexType name="core_instant_changes_change_profiles_ions_charge_states">
 		<xs:annotation>
 			<xs:documentation>instant_change terms related to the a given charge state of the ion species</xs:documentation>
 		</xs:annotation>
@@ -52,7 +52,7 @@
 			</xs:element>
 			<xs:element name="n_z">
 				<xs:annotation>
-					<xs:documentation>instant_change term for the charge state density </xs:documentation>
+					<xs:documentation>change of charge state density </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>m^-3</units>
@@ -65,7 +65,7 @@
 			</xs:element>
 			<xs:element name="t_z">
 				<xs:annotation>
-					<xs:documentation>instant_change terms for the charge state temperature</xs:documentation>
+					<xs:documentation>change of charge state temperature</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
@@ -78,7 +78,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="core_instant_changes_instant_change_instant_change_profiles_ions">
+	<xs:complexType name="core_instant_changes_change_profiles_ions">
 		<xs:annotation>
 			<xs:documentation>instant_change terms related to a given ion species</xs:documentation>
 		</xs:annotation>
@@ -132,7 +132,7 @@
 			</xs:element>
 			<xs:element name="n_i">
 				<xs:annotation>
-					<xs:documentation>instant_change term for ion density</xs:documentation>
+					<xs:documentation>change of ion density</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>m^-3</units>
@@ -145,7 +145,7 @@
 			</xs:element>
 			<xs:element name="t_i">
 				<xs:annotation>
-					<xs:documentation>instant_change term for the ion temperature</xs:documentation>
+					<xs:documentation>change of ion temperature</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
@@ -167,9 +167,9 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="charge_state" type="core_instant_changes_instant_change_instant_change_profiles_ions_charge_states" maxOccurs="unbounded">
+			<xs:element name="charge_state" type="core_instant_changes_change_profiles_ions_charge_states" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>instant_change terms related to the different charge states of the ion species</xs:documentation>
+					<xs:documentation>changes related to the different charge states of the ion species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -177,7 +177,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="core_instant_changes_instant_change_instant_change_profiles">
+	<xs:complexType name="core_instant_changes_change_profiles">
 		<xs:annotation>
 			<xs:documentation>instant_change terms for a given time slice</xs:documentation>
 		</xs:annotation>
@@ -189,7 +189,7 @@
 			</xs:element>
 			<xs:element name="n_e">
 				<xs:annotation>
-					<xs:documentation>instant_change term for electron density</xs:documentation>
+					<xs:documentation>change of electron density</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>m^-3</units>
@@ -202,7 +202,7 @@
 			</xs:element>
 			<xs:element name="t_e">
 				<xs:annotation>
-					<xs:documentation>instant_change term for electron temperature</xs:documentation>
+					<xs:documentation>change of electron temperature</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
@@ -215,7 +215,7 @@
 			</xs:element>
 			<xs:element name="t_i">
 				<xs:annotation>
-					<xs:documentation>instant_change term for the average ion temperature</xs:documentation>
+					<xs:documentation>change of average ion temperature</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
@@ -228,7 +228,7 @@
 			</xs:element>
 			<xs:element name="momentum_tor">
 				<xs:annotation>
-					<xs:documentation>instant_change term for total toroidal momentum</xs:documentation>
+					<xs:documentation>change of total toroidal momentum</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>kg.m^2.s^-1</units>
@@ -239,9 +239,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="ion" type="core_instant_changes_instant_change_instant_change_profiles_ions" maxOccurs="unbounded">
+			<xs:element name="ion" type="core_instant_changes_change_profiles_ions" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>instant_change terms related to the different ions species</xs:documentation>
+					<xs:documentation>changes related to the different ions species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -258,14 +258,14 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="core_instant_changes_instant_change">
+	<xs:complexType name="core_instant_changes_change">
 		<xs:annotation>
 			<xs:documentation>instant_change terms for a given instant_change</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the instant_change term</xs:documentation>
+					<xs:documentation>Name of the instant change term</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
 						<type>constant</type>
@@ -275,7 +275,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="profiles" type="core_instant_changes_instant_change_instant_change_profiles" maxOccurs="unbounded">
+			<xs:element name="profiles_1d" type="core_instant_changes_change_profiles" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>instant_change profiles for various time slices</xs:documentation>
 					<xs:appinfo>
@@ -302,9 +302,9 @@
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="instant_change" type="core_instant_changes_instant_change" maxOccurs="10">
+				<xs:element name="change" type="core_instant_changes_change" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>Set of instant_change terms</xs:documentation>
+						<xs:documentation>Set of instant change terms</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
