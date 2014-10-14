@@ -20,7 +20,7 @@
 					<xs:documentation>Value of the contribution</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>-</units>
+						<units>m^-1</units>
 						<coordinate1>../../time_detailed</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -244,6 +244,19 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="rho_tor">
+				<xs:annotation>
+					<xs:documentation>Flux coordinate on which the mode is centred</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time_detailed</coordinate1>
+						<units>m</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ntm_time_slice_mode_evolution_deltaw">
@@ -256,7 +269,7 @@
 					<xs:documentation>Value of the contribution</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>-</units>
+						<units>m^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -306,11 +319,104 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="ntm_time_slice_mode_evolution">
+	<xs:complexType name="ntm_time_slice_mode_onset">
 		<xs:annotation>
-			<xs:documentation>NTM evolution on the timebase of the time_slice array of structure</xs:documentation>
+			<xs:documentation>Onset characteristics of an NTM</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="width">
+				<xs:annotation>
+					<xs:documentation>Seed island full width at onset time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time_onset">
+				<xs:annotation>
+					<xs:documentation>Onset time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time_offset">
+				<xs:annotation>
+					<xs:documentation>Offset time (when a mode disappears). If the mode reappears later in the simulation, use another index of the mode array of structure</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase of the mode at onset</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="m_pol">
+				<xs:annotation>
+					<xs:documentation>Poloidal mode number</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cause">
+				<xs:annotation>
+					<xs:documentation>Cause of the mode onset</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ntm_time_slice_mode">
+		<xs:annotation>
+			<xs:documentation>Description of an NTM</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="onset" type="ntm_time_slice_mode_onset">
+				<xs:annotation>
+					<xs:documentation>NTM onset characteristics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="width">
 				<xs:annotation>
 					<xs:documentation>Full width of the mode</xs:documentation>
@@ -457,110 +563,17 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ntm_time_slice_mode_onset">
-		<xs:annotation>
-			<xs:documentation>Onset characteristics of an NTM</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="width">
+			<xs:element name="rho_tor">
 				<xs:annotation>
-					<xs:documentation>Seed island full width</xs:documentation>
+					<xs:documentation>Flux coordinate on which the mode is centred</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>m</units>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="time_onset">
-				<xs:annotation>
-					<xs:documentation>Onset time</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>s</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="time_offset">
-				<xs:annotation>
-					<xs:documentation>Offset time (when a mode disappears). If the mode reappears later in the simulation, use another index of the mode array of structure</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>s</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="phase">
-				<xs:annotation>
-					<xs:documentation>Phase of the mode at onset</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="n_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal mode number</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="m_pol">
-				<xs:annotation>
-					<xs:documentation>Poloidal mode number</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="cause">
-				<xs:annotation>
-					<xs:documentation>Cause of the mode onset</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ntm_time_slice_mode">
-		<xs:annotation>
-			<xs:documentation>Description of an NTM</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="onset" type="ntm_time_slice_mode_onset">
-				<xs:annotation>
-					<xs:documentation>NTM onset characteristics</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="evolution" type="ntm_time_slice_mode_evolution">
-				<xs:annotation>
-					<xs:documentation>NTM evolution corresponding to the timebase of the time_slice array of structure</xs:documentation>
-				</xs:annotation>
 			</xs:element>
 			<xs:element name="detailed_evolution" type="ntm_time_slice_mode_detailed_evolution">
 				<xs:annotation>
@@ -604,6 +617,11 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
+					<xs:annotation>
+						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="time_slice" type="ntm_time_slice" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Description of neoclassical tearing modes for various time slices</xs:documentation>

@@ -573,6 +573,99 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic_space_object">
+		<xs:annotation>
+			<xs:documentation>Generic grid, list of objects of a given dimension within a space (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="boundaries">
+				<xs:annotation>
+					<xs:documentation>Lists of (n-1)-dimensional space objects defining the boundary of an n-dimensional space object. Matrix(number of objects of this dimension, maximum number of boundaries per object). First dimension: object index, second dimension: boundary object index</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="neighbours">
+				<xs:annotation>
+					<xs:documentation>Connectivity information. Array (number of objects, maximum number of boundaries per object, maximum number of neighbours per boundary). Stores the indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on every boundary. First dimension: object index, second dimension: boundary index, third dimension: neighbour index on the boundary.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../boundaries</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<coordinate2_same_as>../boundaries</coordinate2_same_as>
+						<coordinate3>1...N</coordinate3>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic_space">
+		<xs:annotation>
+			<xs:documentation>Generic grid space (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="geotype">
+				<xs:annotation>
+					<xs:documentation>NOT UNDERSTOOD, VECINT type. Type of space geometry (id flags). Flags defining how the geometry (objects.geo) fields associated with; space objects are to be interpreted. Array (number of geometries defined for  this space),; first dimension: geometry index. A flag value of GRID_UNDEFINED=0 indicates the standard interpretation for; the given coordinates.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geotypeid">
+				<xs:annotation>
+					<xs:documentation>NOT UNDERSTOOD. VECSTRING TYPE. Type of space geometries (id string). See geotype.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="coordinates_type">
+				<xs:annotation>
+					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therfore defines the dimension of the space. The meaning of these predefined integer constants can be found in the documentation of the grid service library</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="objects_per_dimension" type="generic_grid_dynamic_space_object" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic">
+		<xs:annotation>
+			<xs:documentation>Generic grid (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Grid identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="space" type="generic_grid_dynamic_space" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of grid spaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_profiles_2d_grid">
 		<xs:annotation>
 			<xs:documentation>Definition of the 2D grid</xs:documentation>
@@ -1209,7 +1302,7 @@
 	</xs:complexType>
 	<xs:complexType name="identifier">
 		<xs:annotation>
-			<xs:documentation>Standard type for identifiers. The three fields: name, index and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</xs:documentation>
+			<xs:documentation>Standard type for identifiers (constant). The three fields: name, index and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
@@ -1239,6 +1332,46 @@
 					<xs:documentation>Verbose description</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="identifier_dynamic_aos3">
+		<xs:annotation>
+			<xs:documentation>Standard type for identifiers (dynamic within type 3 array of structure (index on time)). The three fields: name, index and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Short string identifier</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Integer identifier (enumeration index within a list)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Verbose description</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

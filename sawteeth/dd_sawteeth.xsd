@@ -358,9 +358,22 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="psi_star">
+			<xs:element name="psi_star_pre_crash">
 				<xs:annotation>
-					<xs:documentation>Psi* = psi - phi</xs:documentation>
+					<xs:documentation>Psi* = psi - phi, just before the sawtooth crash</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi_star_post_crash">
+				<xs:annotation>
+					<xs:documentation>Psi* = psi - phi, after the sawtooth crash</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<type>dynamic</type>
@@ -384,7 +397,7 @@
 	</xs:complexType>
 	<xs:complexType name="sawteeth_diagnostics">
 		<xs:annotation>
-			<xs:documentation>Detailed information about the sawtooh characteristics</xs:documentation>
+			<xs:documentation>Detailed information about the sawtooth characteristics</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="magnetic_shear_q1">
@@ -443,7 +456,7 @@
 	</xs:complexType>
 	<xs:element name="sawteeth">
 		<xs:annotation>
-			<xs:documentation>Description of sawtooth events</xs:documentation>
+			<xs:documentation>Description of sawtooth events. This IDS must be used in homogeneous_time = 1 mode</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
@@ -468,7 +481,7 @@
 				</xs:element>
 				<xs:element name="diagnostics" type="sawteeth_diagnostics">
 					<xs:annotation>
-						<xs:documentation>Detailed information about the sawtooh characteristics</xs:documentation>
+						<xs:documentation>Detailed information about the sawtooth characteristics</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
