@@ -536,7 +536,7 @@
 			</xs:element>
 			<xs:element name="b0">
 				<xs:annotation>
-					<xs:documentation>Vacuum toroidal field at R0 [T]; When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
+					<xs:documentation>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>T</units>
@@ -568,7 +568,7 @@
 			</xs:element>
 			<xs:element name="b0">
 				<xs:annotation>
-					<xs:documentation>Vacuum toroidal field at b0. When using cocos = 11 (expected for ITER data), positive sign means anti-clockwise when viewed from above. The product r0*b0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
+					<xs:documentation>Vacuum toroidal field at b0. Positive sign means anti-clockwise when viewed from above. The product r0*b0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>T</units>
@@ -2536,17 +2536,6 @@
 				<xs:element name="homogeneous_time">
 					<xs:annotation>
 						<xs:documentation>1 if the time of this IDS is homogeneous. In this case, the time values for this IDS are stored in ../time just below the root of this IDS. Otherwise, the time values are stored in the various time fields at lower levels in the tree.</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="INT_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="cocos">
-					<xs:annotation>
-						<xs:documentation>Coordinate conventions of this IDS, expected to be 11 for ITER data</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
 						</xs:appinfo>
