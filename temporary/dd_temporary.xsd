@@ -209,34 +209,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="temporary_dynamic_quantities_str_1d">
-		<xs:annotation>
-			<xs:documentation>Temporary dynamic STR_1D</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="value">
-				<xs:annotation>
-					<xs:documentation>Value</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>mixed</units>
-						<coordinate1>time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:group ref="STR_1D"/>
-						<xs:element ref="time"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="identifier" type="identifier">
-				<xs:annotation>
-					<xs:documentation>Description of the quantity using the standard identifier structure</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="temporary_constant_quantities_float_2d">
 		<xs:annotation>
 			<xs:documentation>Temporary constant Float_2D</xs:documentation>
@@ -708,14 +680,6 @@
 				<xs:element name="dynamic_float1d" type="temporary_dynamic_quantities_float_1d" maxOccurs="10">
 					<xs:annotation>
 						<xs:documentation>Dynamic 1D float</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="dynamic_string1d" type="temporary_dynamic_quantities_str_1d" maxOccurs="10">
-					<xs:annotation>
-						<xs:documentation>Dynamic 1D string</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
