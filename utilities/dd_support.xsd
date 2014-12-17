@@ -573,39 +573,217 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_dynamic_space_object">
+	<xs:complexType name="generic_grid_scalar">
 		<xs:annotation>
-			<xs:documentation>Generic grid, list of objects of a given dimension within a space (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Scalar values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="boundaries">
+			<xs:element name="grid_index">
 				<xs:annotation>
-					<xs:documentation>Lists of (n-1)-dimensional space objects defining the boundary of an n-dimensional space object. Matrix(number of objects of this dimension, maximum number of boundaries per object). First dimension: object index, second dimension: boundary object index</xs:documentation>
+					<xs:documentation>Index of the grid this scalar quantity is associated with</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<coordinate2>1...N</coordinate2>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_2D"/>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="subgrid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the subgrid (as stored in generic_grid/subgrid) the data is stored on</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>One scalar value is stored per element in the subgrid.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_vector">
+		<xs:annotation>
+			<xs:documentation>Vector values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid this scalar quantity is associated with</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="subgrid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the subgrid (as stored in generic_grid/subgrid) the data is stored on</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>List of vector components, one list per element in the subgrid. First dimenstion: element index. Second dimension: vector component index.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_matrix">
+		<xs:annotation>
+			<xs:documentation>Matrix values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid this scalar quantity is associated with</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="subgrid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the subgrid (as stored in generic_grid/subgrid) the data is stored on</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>List of matrix components, one list per element in the subgrid. First dimenstion: element index. Second dimension: first matrix index. Third dimension: second matrix index.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic_space_dimension_object_boundary">
+		<xs:annotation>
+			<xs:documentation>Generic grid, description of an object boundary and its neighbours (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Index of this (n-1)-dimensional boundary object</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="neighbours">
 				<xs:annotation>
-					<xs:documentation>Connectivity information. Array (number of objects, maximum number of boundaries per object, maximum number of neighbours per boundary). Stores the indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on every boundary. First dimension: object index, second dimension: boundary index, third dimension: neighbour index on the boundary.</xs:documentation>
+					<xs:documentation>List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on a boundary</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
-						<coordinate1_same_as>../boundaries</coordinate1_same_as>
-						<coordinate2>1...N</coordinate2>
-						<coordinate2_same_as>../boundaries</coordinate2_same_as>
-						<coordinate3>1...N</coordinate3>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_3D"/>
+					<xs:group ref="INT_1D"/>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic_space_dimension_object">
+		<xs:annotation>
+			<xs:documentation>Generic grid, list of objects of a given dimension within a space (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="boundary" type="generic_grid_dynamic_space_dimension_object_boundary" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometry">
+				<xs:annotation>
+					<xs:documentation>Geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. </xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="measure">
+				<xs:annotation>
+					<xs:documentation>Measure of the space object, i.e. physical size (length for 1d, area for 2d, volume for 3d objects,...)</xs:documentation>
+					<xs:appinfo>
+						<units>m^dimension</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic_space_dimension">
+		<xs:annotation>
+			<xs:documentation>Generic grid, list of dimensions within a space (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="object" type="generic_grid_dynamic_space_dimension_object" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of objects for a given dimension</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -614,14 +792,9 @@
 			<xs:documentation>Generic grid space (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="geotype">
+			<xs:element name="geometry_type" type="identifier">
 				<xs:annotation>
-					<xs:documentation>NOT UNDERSTOOD, VECINT type. Type of space geometry (id flags). Flags defining how the geometry (objects.geo) fields associated with; space objects are to be interpreted. Array (number of geometries defined for  this space),; first dimension: geometry index. A flag value of GRID_UNDEFINED=0 indicates the standard interpretation for; the given coordinates.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="geotypeid">
-				<xs:annotation>
-					<xs:documentation>NOT UNDERSTOOD. VECSTRING TYPE. Type of space geometries (id string). See geotype.</xs:documentation>
+					<xs:documentation>Type of space geometry (0: standard, 1:Fourier)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="coordinates_type">
@@ -636,9 +809,95 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="objects_per_dimension" type="generic_grid_dynamic_space_object" maxOccurs="unbounded">
+			<xs:element name="objects_per_dimension" type="generic_grid_dynamic_space_dimension" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic_subgrid_element_object">
+		<xs:annotation>
+			<xs:documentation>Generic grid, object part of an element part of a subgrid (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="space">
+				<xs:annotation>
+					<xs:documentation>Index of the space from which that object is taken</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dimension">
+				<xs:annotation>
+					<xs:documentation>Dimension of the object</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Object index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic_subgrid_element">
+		<xs:annotation>
+			<xs:documentation>Generic grid, element part of a subgrid (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="object" type="generic_grid_dynamic_subgrid_element_object" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of objects defining the element</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic_subgrid">
+		<xs:annotation>
+			<xs:documentation>Generic grid subgrid (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Subgrid identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dimension">
+				<xs:annotation>
+					<xs:documentation>Space dimension of the subgrid elements. This must be equal to the sum of the dimensions of the individual objects forming the element.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="element" type="generic_grid_dynamic_subgrid_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of elements defining the subgrid. An element is defined by a combination of objects from potentially all spaces</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -662,6 +921,19 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subgrid" type="generic_grid_dynamic_subgrid" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of subgrids</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BASES">
+				<xs:annotation>
+					<xs:documentation>Add if necessary. We first need to asses, for a given canonical base, how to represent a vector. The ITM complexgrid_vector is strange, why isnt'it simply a generic_grid_vector ? Ensuite il y a la question de définir plusieurs bases, et comment on passe de l'une à l'autre. La metrique doit être définie pour chaque base aussi. Le fait de définir les composants d'une base (grille complète) sur une sous-grille est aussi troublant.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
