@@ -198,12 +198,44 @@
 				<td>1D radial grid for core* IDSs</td>
 			</tr>
 			<tr>
-				<td>generic_grid_dynamic_space_object</td>
+				<td>generic_grid_scalar</td>
+				<td>Scalar values on a generic grid (dynamic within a type 3 AoS)</td>
+			</tr>
+			<tr>
+				<td>generic_grid_vector</td>
+				<td>Vector values on a generic grid (dynamic within a type 3 AoS)</td>
+			</tr>
+			<tr>
+				<td>generic_grid_matrix</td>
+				<td>Matrix values on a generic grid (dynamic within a type 3 AoS)</td>
+			</tr>
+			<tr>
+				<td>generic_grid_dynamic_space_dimension_object_boundary</td>
+				<td>Generic grid, description of an object boundary and its neighbours (dynamic within a type 3 AoS)</td>
+			</tr>
+			<tr>
+				<td>generic_grid_dynamic_space_dimension_object</td>
 				<td>Generic grid, list of objects of a given dimension within a space (dynamic within a type 3 AoS)</td>
+			</tr>
+			<tr>
+				<td>generic_grid_dynamic_space_dimension</td>
+				<td>Generic grid, list of dimensions within a space (dynamic within a type 3 AoS)</td>
 			</tr>
 			<tr>
 				<td>generic_grid_dynamic_space</td>
 				<td>Generic grid space (dynamic within a type 3 AoS)</td>
+			</tr>
+			<tr>
+				<td>generic_grid_dynamic_subgrid_element_object</td>
+				<td>Generic grid, object part of an element part of a subgrid (dynamic within a type 3 AoS)</td>
+			</tr>
+			<tr>
+				<td>generic_grid_dynamic_subgrid_element</td>
+				<td>Generic grid, element part of a subgrid (dynamic within a type 3 AoS)</td>
+			</tr>
+			<tr>
+				<td>generic_grid_dynamic_subgrid</td>
+				<td>Generic grid subgrid (dynamic within a type 3 AoS)</td>
 			</tr>
 			<tr>
 				<td>generic_grid_dynamic</td>
@@ -1889,25 +1921,25 @@
 					</td>
 				</tr>
 				<tr>
-					<td>channel(:)/t_z</td>
+					<td>channel(:)/temperature</td>
 					<td>Ion temperature (of the emmitting impurity)</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>channel(:)/t_z/data</td>
+					<td>channel(:)/temperature/data</td>
 					<td>Ion temperature (of the emmitting impurity) {dynamic} [eV]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- channel(:)/t_z/time</td>
+								<td>1- channel(:)/temperature/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>channel(:)/t_z/time</td>
+					<td>channel(:)/temperature/time</td>
 					<td>Generic time [s] {dynamic}</td>
 					<td>flt_1d_type</td>
 					<td>
@@ -1919,25 +1951,25 @@
 					</td>
 				</tr>
 				<tr>
-					<td>channel(:)/v_tor_z</td>
+					<td>channel(:)/velocity_tor</td>
 					<td>Toroidal velocity (of the emmitting impurity)</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>channel(:)/v_tor_z/data</td>
+					<td>channel(:)/velocity_tor/data</td>
 					<td>Toroidal velocity (of the emmitting impurity) {dynamic} [eV]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- channel(:)/v_tor_z/time</td>
+								<td>1- channel(:)/velocity_tor/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>channel(:)/v_tor_z/time</td>
+					<td>channel(:)/velocity_tor/time</td>
 					<td>Generic time [s] {dynamic}</td>
 					<td>flt_1d_type</td>
 					<td>
@@ -1949,25 +1981,25 @@
 					</td>
 				</tr>
 				<tr>
-					<td>channel(:)/v_pol_z</td>
+					<td>channel(:)/velocity_pol</td>
 					<td>Poloidal velocity (of the emmitting impurity)</td>
 					<td>structure</td>
 					<td />
 				</tr>
 				<tr>
-					<td>channel(:)/v_pol_z/data</td>
+					<td>channel(:)/velocity_pol/data</td>
 					<td>Poloidal velocity (of the emmitting impurity) {dynamic} [eV]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
 							<tr>
-								<td>1- channel(:)/v_pol_z/time</td>
+								<td>1- channel(:)/velocity_pol/time</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td>channel(:)/v_pol_z/time</td>
+					<td>channel(:)/velocity_pol/time</td>
 					<td>Generic time [s] {dynamic}</td>
 					<td>flt_1d_type</td>
 					<td>
@@ -3182,8 +3214,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/t_e</td>
-					<td>Electron temperature {dynamic} [eV]</td>
+					<td>profiles_1d(:)/electrons</td>
+					<td>Quantities related to the electrons</td>
+					<td>structure</td>
+					<td />
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/electrons/temperature</td>
+					<td>Temperature {dynamic} [eV]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3194,8 +3232,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/t_i_average</td>
-					<td>Ion temperature (averaged on charge states and ion species) {dynamic} [eV]</td>
+					<td>profiles_1d(:)/electrons/density</td>
+					<td>Density (thermal+non-thermal) {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3206,8 +3244,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/n_e</td>
-					<td>Electron density (thermal+non-thermal) {dynamic} [m^-3]</td>
+					<td>profiles_1d(:)/electrons/density_fast</td>
+					<td>Density of fast (non-thermal) particles {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3218,8 +3256,56 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/n_e_fast</td>
-					<td>Density of fast (non-thermal) electrons {dynamic} [m^-3]</td>
+					<td>profiles_1d(:)/electrons/pressure</td>
+					<td>Pressure {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/electrons/pressure_fast_perpendicular</td>
+					<td>Fast (non-thermal) perpendicular pressure {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/electrons/pressure_fast_parallel</td>
+					<td>Fast (non-thermal) parallel pressure {dynamic} [Pa]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/electrons/velocity_tor</td>
+					<td>Toroidal velocity {dynamic} [m.s^-1]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/electrons/velocity_pol</td>
+					<td>Poloidal velocity {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3266,8 +3352,8 @@
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/n_i</td>
-					<td>Ion density (thermal+non-thermal) {dynamic} [m^-3]</td>
+					<td>profiles_1d(:)/ion(:)/temperature</td>
+					<td>Temperature {dynamic} [eV]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3278,8 +3364,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/n_i_fast</td>
-					<td>Density of fast (non-thermal) ions, for the ion species considered {dynamic} [m^-3]</td>
+					<td>profiles_1d(:)/ion(:)/density</td>
+					<td>Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered) {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3290,8 +3376,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/t_i</td>
-					<td>Ion temperature of that ion species {dynamic} [eV]</td>
+					<td>profiles_1d(:)/ion(:)/density_fast</td>
+					<td>Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered) {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3302,8 +3388,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/p_i</td>
-					<td>Ion pressure for that ion species {dynamic} [Pa]</td>
+					<td>profiles_1d(:)/ion(:)/pressure</td>
+					<td>Pressure (average over charge states when multiple charge states are considered) {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3314,8 +3400,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/p_i_fast_perpendicular</td>
-					<td>Fast ion perpendicular pressure for that ion species {dynamic} [Pa]</td>
+					<td>profiles_1d(:)/ion(:)/pressure_fast_perpendicular</td>
+					<td>Fast (non-thermal) perpendicular pressure  (average over charge states when multiple charge states are considered) {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3326,8 +3412,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/p_i_fast_parallel</td>
-					<td>Fast ion parallel pressure for that ion species {dynamic} [Pa]</td>
+					<td>profiles_1d(:)/ion(:)/pressure_fast_parallel</td>
+					<td>Fast (non-thermal) parallel pressure  (average over charge states when multiple charge states are considered) {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3338,8 +3424,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/v_tor_i</td>
-					<td>Toroidal velocity of that ion species {dynamic} [m.s^-1]</td>
+					<td>profiles_1d(:)/ion(:)/velocity_tor</td>
+					<td>Toroidal velocity (average over charge states when multiple charge states are considered) {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3350,8 +3436,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/v_pol_i</td>
-					<td>Poloidal velocity of that ion species {dynamic} [m.s^-1]</td>
+					<td>profiles_1d(:)/ion(:)/velocity_pol</td>
+					<td>Poloidal velocity (average over charge states when multiple charge states are considered) {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3398,8 +3484,8 @@
 					<td />
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/charge_state(:)/n_z</td>
-					<td>Density of the charge state considered (thermal+non-thermal) {dynamic} [m^-3]</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/temperature</td>
+					<td>Temperature {dynamic} [eV]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3410,8 +3496,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/charge_state(:)/n_z_fast</td>
-					<td>Density of fast (non-thermal) ions, for the charge state considered {dynamic} [m^-3]</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/density</td>
+					<td>Density (thermal+non-thermal) {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3422,8 +3508,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/charge_state(:)/t_z</td>
-					<td>Temperature of the charge state considered {dynamic} [m^-3]</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/density_fast</td>
+					<td>Density of fast (non-thermal) particles {dynamic} [m^-3]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3434,8 +3520,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/charge_state(:)/p_z</td>
-					<td>Pressure of the charge state considered {dynamic} [Pa]</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/pressure</td>
+					<td>Pressure {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3446,8 +3532,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/charge_state(:)/p_z_fast_perpendicular</td>
-					<td>Fast perpendicular pressure of the charge state considered {dynamic} [Pa]</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/pressure_fast_perpendicular</td>
+					<td>Fast (non-thermal) perpendicular pressure {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3458,8 +3544,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/charge_state(:)/p_z_fast_parallel</td>
-					<td>Fast parallel pressure of the charge state considered {dynamic} [Pa]</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/pressure_fast_parallel</td>
+					<td>Fast (non-thermal) parallel pressure {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3470,8 +3556,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/charge_state(:)/v_tor_z</td>
-					<td>Toroidal velocity of the charge state considered {dynamic} [m.s^-1]</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/velocity_tor</td>
+					<td>Toroidal velocity {dynamic} [m.s^-1]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3482,8 +3568,20 @@
 					</td>
 				</tr>
 				<tr>
-					<td>profiles_1d(:)/ion(:)/charge_state(:)/v_pol_z</td>
-					<td>Poloidal velocity of the charge state considered {dynamic} [m.s^-1]</td>
+					<td>profiles_1d(:)/ion(:)/charge_state(:)/velocity_pol</td>
+					<td>Poloidal velocity {dynamic} [m.s^-1]</td>
+					<td>FLT_1D</td>
+					<td>
+						<table>
+							<tr>
+								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>profiles_1d(:)/t_i_average</td>
+					<td>Ion temperature (averaged on charge states and ion species) {dynamic} [eV]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -3520,78 +3618,6 @@
 				<tr>
 					<td>profiles_1d(:)/zeff</td>
 					<td>Effective charge {dynamic} [-]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d(:)/p_e</td>
-					<td>Electron pressure {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d(:)/p_e_fast_perpendicular</td>
-					<td>Fast (non-thermal) electron perpendicular pressure {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d(:)/p_e_fast_parallel</td>
-					<td>Fast (non-thermal) electron parallel pressure {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d(:)/p_i_total</td>
-					<td>Total ion pressure (sum over the ion species) {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d(:)/p_i_total_fast_perpendicular</td>
-					<td>Fast (non-thermal) total ion (sum over the ion species) perpendicular pressure {dynamic} [Pa]</td>
-					<td>FLT_1D</td>
-					<td>
-						<table>
-							<tr>
-								<td>1- profiles_1d(:)/grid/rho_tor_norm</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>profiles_1d(:)/p_i_total_fast_parallel</td>
-					<td>Fast (non-thermal) total ion (sum over the ion species) parallel pressure {dynamic} [Pa]</td>
 					<td>FLT_1D</td>
 					<td>
 						<table>
@@ -5728,7 +5754,7 @@
 				</tr>
 				<tr>
 					<td>time_slice(:)/boundary/geometric_axis</td>
-					<td>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 of the boundary)</td>
+					<td>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 and (Zmin+Zmax) / 2 of the boundary)</td>
 					<td>structure</td>
 					<td />
 				</tr>
@@ -5745,7 +5771,7 @@
 					<td />
 				</tr>
 				<tr>
-					<td>time_slice(:)/boundary/a_minor</td>
+					<td>time_slice(:)/boundary/minor_radius</td>
 					<td>Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary) {dynamic} [m]</td>
 					<td>FLT_0D</td>
 					<td />

@@ -50,9 +50,22 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_z">
+			<xs:element name="temperature">
 				<xs:annotation>
-					<xs:documentation>Density of the charge state considered (thermal+non-thermal)</xs:documentation>
+					<xs:documentation>Temperature</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="density">
+				<xs:annotation>
+					<xs:documentation>Density (thermal+non-thermal)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>m^-3</units>
@@ -63,9 +76,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_z_fast">
+			<xs:element name="density_fast">
 				<xs:annotation>
-					<xs:documentation>Density of fast (non-thermal) ions, for the charge state considered</xs:documentation>
+					<xs:documentation>Density of fast (non-thermal) particles</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>m^-3</units>
@@ -76,22 +89,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="t_z">
+			<xs:element name="pressure">
 				<xs:annotation>
-					<xs:documentation>Temperature of the charge state considered</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="p_z">
-				<xs:annotation>
-					<xs:documentation>Pressure of the charge state considered</xs:documentation>
+					<xs:documentation>Pressure</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -102,9 +102,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="p_z_fast_perpendicular">
+			<xs:element name="pressure_fast_perpendicular">
 				<xs:annotation>
-					<xs:documentation>Fast perpendicular pressure of the charge state considered</xs:documentation>
+					<xs:documentation>Fast (non-thermal) perpendicular pressure</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -115,9 +115,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="p_z_fast_parallel">
+			<xs:element name="pressure_fast_parallel">
 				<xs:annotation>
-					<xs:documentation>Fast parallel pressure of the charge state considered</xs:documentation>
+					<xs:documentation>Fast (non-thermal) parallel pressure</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -128,9 +128,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="v_tor_z">
+			<xs:element name="velocity_tor">
 				<xs:annotation>
-					<xs:documentation>Toroidal velocity of the charge state considered</xs:documentation>
+					<xs:documentation>Toroidal velocity</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>m.s^-1</units>
@@ -141,9 +141,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="v_pol_z">
+			<xs:element name="velocity_pol">
 				<xs:annotation>
-					<xs:documentation>Poloidal velocity of the charge state considered</xs:documentation>
+					<xs:documentation>Poloidal velocity</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>m.s^-1</units>
@@ -208,35 +208,9 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_i">
+			<xs:element name="temperature">
 				<xs:annotation>
-					<xs:documentation>Ion density (thermal+non-thermal)</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="n_i_fast">
-				<xs:annotation>
-					<xs:documentation>Density of fast (non-thermal) ions, for the ion species considered</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="t_i">
-				<xs:annotation>
-					<xs:documentation>Ion temperature of that ion species</xs:documentation>
+					<xs:documentation>Temperature</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
@@ -247,9 +221,35 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="p_i">
+			<xs:element name="density">
 				<xs:annotation>
-					<xs:documentation>Ion pressure for that ion species</xs:documentation>
+					<xs:documentation>Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="density_fast">
+				<xs:annotation>
+					<xs:documentation>Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure">
+				<xs:annotation>
+					<xs:documentation>Pressure (average over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -260,9 +260,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="p_i_fast_perpendicular">
+			<xs:element name="pressure_fast_perpendicular">
 				<xs:annotation>
-					<xs:documentation>Fast ion perpendicular pressure for that ion species</xs:documentation>
+					<xs:documentation>Fast (non-thermal) perpendicular pressure  (average over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -273,9 +273,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="p_i_fast_parallel">
+			<xs:element name="pressure_fast_parallel">
 				<xs:annotation>
-					<xs:documentation>Fast ion parallel pressure for that ion species</xs:documentation>
+					<xs:documentation>Fast (non-thermal) parallel pressure  (average over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -286,9 +286,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="v_tor_i">
+			<xs:element name="velocity_tor">
 				<xs:annotation>
-					<xs:documentation>Toroidal velocity of that ion species</xs:documentation>
+					<xs:documentation>Toroidal velocity (average over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>m.s^-1</units>
@@ -299,9 +299,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="v_pol_i">
+			<xs:element name="velocity_pol">
 				<xs:annotation>
-					<xs:documentation>Poloidal velocity of that ion species</xs:documentation>
+					<xs:documentation>Poloidal velocity (average over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>m.s^-1</units>
@@ -457,18 +457,16 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="core_profiles_profiles_1d">
+	<xs:complexType name="core_profiles_profiles_1d_electrons">
+		<xs:annotation>
+			<xs:documentation>Quantities related to electrons</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="grid" type="core_radial_grid">
+			<xs:element name="temperature">
 				<xs:annotation>
-					<xs:documentation>Radial grid</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="t_e">
-				<xs:annotation>
-					<xs:documentation>Electron temperature</xs:documentation>
+					<xs:documentation>Temperature</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -476,6 +474,119 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="density">
+				<xs:annotation>
+					<xs:documentation>Density (thermal+non-thermal)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="density_fast">
+				<xs:annotation>
+					<xs:documentation>Density of fast (non-thermal) particles</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure">
+				<xs:annotation>
+					<xs:documentation>Pressure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_fast_perpendicular">
+				<xs:annotation>
+					<xs:documentation>Fast (non-thermal) perpendicular pressure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_fast_parallel">
+				<xs:annotation>
+					<xs:documentation>Fast (non-thermal) parallel pressure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="velocity_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal velocity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="velocity_pol">
+				<xs:annotation>
+					<xs:documentation>Poloidal velocity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_profiles_profiles_1d">
+		<xs:sequence>
+			<xs:element name="grid" type="core_radial_grid">
+				<xs:annotation>
+					<xs:documentation>Radial grid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="electrons" type="core_profiles_profiles_1d_electrons">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the electrons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion" type="core_profile_ions" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N_Ions</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="t_i_average">
 				<xs:annotation>
@@ -489,40 +600,6 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="n_e">
-				<xs:annotation>
-					<xs:documentation>Electron density (thermal+non-thermal)</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="n_e_fast">
-				<xs:annotation>
-					<xs:documentation>Density of fast (non-thermal) electrons</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="ion" type="core_profile_ions" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Quantities related to the different ion species</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N_Ions</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
 			</xs:element>
 			<xs:element name="n_i_total_over_n_e">
 				<xs:annotation>
@@ -557,84 +634,6 @@
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<type>dynamic</type>
 						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="p_e">
-				<xs:annotation>
-					<xs:documentation>Electron pressure</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>Pa</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="p_e_fast_perpendicular">
-				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) electron perpendicular pressure</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>Pa</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="p_e_fast_parallel">
-				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) electron parallel pressure</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>Pa</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="p_i_total">
-				<xs:annotation>
-					<xs:documentation>Total ion pressure (sum over the ion species)</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>Pa</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="p_i_total_fast_perpendicular">
-				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) total ion (sum over the ion species) perpendicular pressure</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>Pa</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="p_i_total_fast_parallel">
-				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) total ion (sum over the ion species) parallel pressure</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>Pa</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
