@@ -933,7 +933,12 @@
 			</xs:element>
 			<xs:element name="BASES">
 				<xs:annotation>
-					<xs:documentation>Add if necessary. We first need to asses, for a given canonical base, how to represent a vector. The ITM complexgrid_vector is strange, why isnt'it simply a generic_grid_vector ? Ensuite il y a la question de définir plusieurs bases, et comment on passe de l'une à l'autre. La metrique doit être définie pour chaque base aussi. Le fait de définir les composants d'une base (grille complète) sur une sous-grille est aussi troublant.</xs:documentation>
+					<xs:documentation>TO DO (array of structure (NBASES). CHAQUE Base doit être une matrice NxN where N is the total dimension of the grid. This matrix is given for every element of a subgrid. Donc il faut un indice the subgrid quelque part. VOIR SI ON REMET SOUS SUBGRID OU PAS. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="METRIC">
+				<xs:annotation>
+					<xs:documentation>TO DO. Matrice NxN comme les bases, Array(subgird). VOIR SI ON REMET SOUS SUBGRID OU PAS. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
