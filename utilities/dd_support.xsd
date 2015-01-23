@@ -874,6 +874,143 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_dynamic_subgrid_metric">
+		<xs:annotation>
+			<xs:documentation>Generic grid, metric description for a given subgrid and base (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="g11">
+				<xs:annotation>
+					<xs:documentation>Metric coefficient g11</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g12">
+				<xs:annotation>
+					<xs:documentation>Metric coefficient g12</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g13">
+				<xs:annotation>
+					<xs:documentation>Metric coefficient g13</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g21">
+				<xs:annotation>
+					<xs:documentation>Metric coefficient g21</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g22">
+				<xs:annotation>
+					<xs:documentation>Metric coefficient g22</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g23">
+				<xs:annotation>
+					<xs:documentation>Metric coefficient g23</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g31">
+				<xs:annotation>
+					<xs:documentation>Metric coefficient g31</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g32">
+				<xs:annotation>
+					<xs:documentation>Metric coefficient g32</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="g33">
+				<xs:annotation>
+					<xs:documentation>Metric coefficient g33</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="jacobian">
+				<xs:annotation>
+					<xs:documentation>Metric Jacobian</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_dynamic_subgrid">
 		<xs:annotation>
 			<xs:documentation>Generic grid subgrid (dynamic within a type 3 AoS)</xs:documentation>
@@ -903,6 +1040,19 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="base" type="generic_grid_dynamic_subgrid_metric" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of bases for the subgrid. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="metric" type="generic_grid_dynamic_subgrid_metric">
+				<xs:annotation>
+					<xs:documentation>Metric of the canonical frame onto Cartesian coordinates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="generic_grid_dynamic">
@@ -929,16 +1079,6 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="BASES">
-				<xs:annotation>
-					<xs:documentation>TO DO (array of structure (NBASES). CHAQUE Base doit être une matrice NxN where N is the total dimension of the grid. This matrix is given for every element of a subgrid. Donc il faut un indice the subgrid quelque part. VOIR SI ON REMET SOUS SUBGRID OU PAS. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="METRIC">
-				<xs:annotation>
-					<xs:documentation>TO DO. Matrice NxN comme les bases, Array(subgird). VOIR SI ON REMET SOUS SUBGRID OU PAS. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
