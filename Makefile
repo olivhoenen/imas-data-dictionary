@@ -1,7 +1,7 @@
-SAXONICA_DIR= $(IMAS_HOME)/saxonica
 # FIXME: Dependency on Saxon can possibly be replaced by xslt?
 # Get Saxon here: http://sourceforge.net/projects/saxon/files/Saxon-HE/9.6/
 
+# SAXONICA_DIR= $(IMAS_HOME)/saxonica
 # SAXONICA_DIR is to be set in environment 
 
 all: IDSDef.xml validation_report.html html_documentation/html_documentation.html
