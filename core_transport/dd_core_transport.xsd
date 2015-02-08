@@ -366,14 +366,14 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_z_transport" type="core_transport_model_3_density">
+			<xs:element name="particles" type="core_transport_model_3_density">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients of for the density of the charge state considered (thermal+non-thermal)</xs:documentation>
+					<xs:documentation>Transport quantities related to density equation of the charge state considered (thermal+non-thermal)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_z_transport" type="core_transport_model_3_energy">
+			<xs:element name="energy" type="core_transport_model_3_energy">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients of for the energy of the charge state considered </xs:documentation>
+					<xs:documentation>Transport quantities related to the energy equation of the charge state considered </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -430,14 +430,14 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_i_transport" type="core_transport_model_2_density">
+			<xs:element name="particles" type="core_transport_model_2_density">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients for ion density equation</xs:documentation>
+					<xs:documentation>Transport related to the ion density equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_transport" type="core_transport_model_2_energy">
+			<xs:element name="energy" type="core_transport_model_2_energy">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients for ion energy equation</xs:documentation>
+					<xs:documentation>Transport coefficients related to the ion energy equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="multiple_charge_states_flag">
@@ -457,6 +457,23 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_electrons">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients related to electrons</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="particles" type="core_transport_model_2_density">
+				<xs:annotation>
+					<xs:documentation>Transport quantities for the electron density equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy" type="core_transport_model_2_energy">
+				<xs:annotation>
+					<xs:documentation>Transport quantities for the electron energy equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -494,22 +511,17 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_e_transport" type="core_transport_model_1_density">
+			<xs:element name="electrons" type="core_transport_model_electrons">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients for electron density equation</xs:documentation>
+					<xs:documentation>Transport quantities related to the electrons</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e_transport" type="core_transport_model_1_energy">
+			<xs:element name="total_ion_energy" type="core_transport_model_1_energy">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients for electron energy equation</xs:documentation>
+					<xs:documentation>Transport coefficients for the total ion energy equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_average_transport" type="core_transport_model_1_energy">
-				<xs:annotation>
-					<xs:documentation>Transport coefficients for averaged (over ion species) ion energy equation</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_tor_transport" type="core_transport_model_1_momentum">
+			<xs:element name="momentum_tor" type="core_transport_model_1_momentum">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients for total toroidal momentum equation</xs:documentation>
 				</xs:annotation>

@@ -10,173 +10,6 @@
   -* and for providing reinstant_changes to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:complexType name="core_instant_changes_change_profiles_ions_charge_states">
-		<xs:annotation>
-			<xs:documentation>instant_change terms related to the a given charge state of the ion species</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="z_min">
-				<xs:annotation>
-					<xs:documentation>Minimum Z of the charge state bundle</xs:documentation>
-					<xs:appinfo>
-						<units>Elementary Charge Unit</units>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z_max">
-				<xs:annotation>
-					<xs:documentation>Maximum Z of the charge state bundle</xs:documentation>
-					<xs:appinfo>
-						<units>Elementary Charge Unit</units>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="label">
-				<xs:annotation>
-					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="n_z">
-				<xs:annotation>
-					<xs:documentation>change of charge state density </xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="t_z">
-				<xs:annotation>
-					<xs:documentation>change of charge state temperature</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>eV</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="core_instant_changes_change_profiles_ions">
-		<xs:annotation>
-			<xs:documentation>instant_change terms related to a given ion species</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="a">
-				<xs:annotation>
-					<xs:documentation>Mass of atom</xs:documentation>
-					<xs:appinfo>
-						<units>Atomic Mass Unit</units>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z_ion">
-				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>Elementary Charge Unit</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z_n">
-				<xs:annotation>
-					<xs:documentation>Nuclear charge</xs:documentation>
-					<xs:appinfo>
-						<units>Elementary Charge Unit</units>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="label">
-				<xs:annotation>
-					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="n_i">
-				<xs:annotation>
-					<xs:documentation>change of ion density</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="t_i">
-				<xs:annotation>
-					<xs:documentation>change of ion temperature</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>eV</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="multiple_charge_states_flag">
-				<xs:annotation>
-					<xs:documentation>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge states are considered and are described in the charge_state structure</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="charge_state" type="core_instant_changes_change_profiles_ions_charge_states" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>changes related to the different charge states of the ion species</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="core_instant_changes_change_profiles">
 		<xs:annotation>
 			<xs:documentation>instant_change terms for a given time slice</xs:documentation>
@@ -187,33 +20,12 @@
 					<xs:documentation>Radial grid</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e">
+			<xs:element name="electrons" type="core_profiles_profiles_1d_electrons">
 				<xs:annotation>
-					<xs:documentation>change of electron density</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
+					<xs:documentation>Change of electrons-related quantities</xs:documentation>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="t_e">
-				<xs:annotation>
-					<xs:documentation>change of electron temperature</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>eV</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="t_i">
+			<xs:element name="t_i_average">
 				<xs:annotation>
 					<xs:documentation>change of average ion temperature</xs:documentation>
 					<xs:appinfo>
@@ -239,7 +51,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="ion" type="core_instant_changes_change_profiles_ions" maxOccurs="unbounded">
+			<xs:element name="ion" type="core_profile_ions" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>changes related to the different ions species</xs:documentation>
 					<xs:appinfo>
