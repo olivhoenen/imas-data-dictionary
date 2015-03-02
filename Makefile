@@ -20,6 +20,7 @@ html_documentation/html_documentation.html: IDSDef.xml IDSDef_2_HTMLDocumentatio
 
 # check if saxon9he.jar is in the CLASSPATH
 ifeq (,$(SAXONICAJAR))
+$(info CLASSPATH is: $(CLASSPATH))
 $(error Invalid /path/to/saxon9he.jar in CLASSPATH)
 endif
 
