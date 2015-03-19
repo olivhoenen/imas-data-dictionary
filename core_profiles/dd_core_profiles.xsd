@@ -150,7 +150,7 @@
 				<xs:annotation>
 					<xs:documentation>Quantities related to the different ion species</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N_Ions</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -200,6 +200,19 @@
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<type>dynamic</type>
 						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_ion_total">
+				<xs:annotation>
+					<xs:documentation>Total (sum over ion species) thermal ion pressure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>Pa</units>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

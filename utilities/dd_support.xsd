@@ -244,9 +244,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="plasma_composition_neutrals_components">
+	<xs:complexType name="plasma_composition_neutral_element">
 		<xs:annotation>
-			<xs:documentation>Components to the atom or molecule</xs:documentation>
+			<xs:documentation>Element entering in the composition of the neutral atom or molecule</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="a">
@@ -287,29 +287,26 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="plasma_composition_neutrals">
+	<xs:complexType name="plasma_composition_neutral">
 		<xs:annotation>
-			<xs:documentation>Array of neutral atoms or molecules</xs:documentation>
+			<xs:documentation>Definition of a neutral atom or molecule</xs:documentation>
 			<xs:appinfo>
 				<coordinate1>1...N</coordinate1>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="components" type="plasma_composition_neutrals_components" maxOccurs="10">
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>Array of components to the atom or molecule</xs:documentation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energies">
+			<xs:element name="type" type="identifier" maxOccurs="4">
 				<xs:annotation>
-					<xs:documentation>Types energies considered for this neutral species : 0=cold, 1=thermal, 2= fast, 3=NBI</xs:documentation>
+					<xs:documentation>List of neutral types, in terms of energy, considered for that neutral species. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
+						<coodinate1>1...N</coodinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
@@ -338,7 +335,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="neutrals" type="plasma_composition_neutrals" maxOccurs="5">
+				<xs:element name="neutrals" type="plasma_composition_neutral" maxOccurs="5">
 					<xs:annotation>
 						<xs:documentation>Array of neutrals</xs:documentation>
 						<xs:appinfo>
@@ -682,6 +679,42 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="z_average">
+				<xs:annotation>
+					<xs:documentation>Average Z of the charge state bundle (equal to z_min if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_square_average">
+				<xs:annotation>
+					<xs:documentation>Average Z square of the charge state bundle (equal to z_min if no bundle), = sum (Z^2*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ionisation_potential">
+				<xs:annotation>
+					<xs:documentation>Cumulative and average ionisation potential to reach a given bundle. Defined as sum (x_z* (sum of Epot from z'=0 to z-1)), where Epot is the ionisation potential of ion Xz’+, and x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
 					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
@@ -853,7 +886,7 @@
 			</xs:element>
 			<xs:element name="temperature">
 				<xs:annotation>
-					<xs:documentation>Temperature</xs:documentation>
+					<xs:documentation>Temperature (average over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
@@ -892,7 +925,7 @@
 			</xs:element>
 			<xs:element name="pressure">
 				<xs:annotation>
-					<xs:documentation>Pressure (average over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:documentation>Pressure (sum over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -905,7 +938,7 @@
 			</xs:element>
 			<xs:element name="pressure_fast_perpendicular">
 				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) perpendicular pressure  (average over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:documentation>Fast (non-thermal) perpendicular pressure  (sum over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -918,7 +951,7 @@
 			</xs:element>
 			<xs:element name="pressure_fast_parallel">
 				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) parallel pressure  (average over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:documentation>Fast (non-thermal) parallel pressure  (sum over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>

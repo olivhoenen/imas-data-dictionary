@@ -17,6 +17,7 @@
 	<xs:include schemaLocation="core_sources/dd_core_sources.xsd"/>
 	<xs:include schemaLocation="core_transport/dd_core_transport.xsd"/>
 	<xs:include schemaLocation="dataset_description/dd_dataset_description.xsd"/>
+	<xs:include schemaLocation="edge_profiles/dd_edge_profiles.xsd"/>
 	<xs:include schemaLocation="em_coupling/dd_em_coupling.xsd"/>
 	<xs:include schemaLocation="equilibrium/dd_equilibrium.xsd"/>
 	<xs:include schemaLocation="interfero_polarimeter/dd_interfero_polarimeter.xsd"/>
@@ -31,8 +32,10 @@
 	<xs:include schemaLocation="schedule/dd_schedule.xsd"/>
 	<xs:include schemaLocation="sdn/dd_sdn.xsd"/>
 	<xs:include schemaLocation="temporary/dd_temporary.xsd"/>
-	<xs:include schemaLocation="thomson_scattering/dd_thomson_scattering.xsd"/>
 	<xs:include schemaLocation="tf/dd_tf.xsd"/>
+	<xs:include schemaLocation="thomson_scattering/dd_thomson_scattering.xsd"/>
+	<xs:include schemaLocation="transport_solver_numerics/dd_transport_solver_numerics.xsd"/>
+	<xs:include schemaLocation="wall/dd_wall.xsd"/>
 	<xs:element name="physics_data_dictionary">
 		<xs:annotation>
 			<xs:documentation>Root of the Physics Data Dictionary</xs:documentation>
@@ -47,8 +50,9 @@
 				<xs:element ref="core_instant_changes" maxOccurs="3"/>
 				<xs:element ref="core_profiles" maxOccurs="6"/>
 				<xs:element ref="core_sources" maxOccurs="6"/>
-				<xs:element ref="core_transport" maxOccurs="6"/>
+				<xs:element ref="core_transport" maxOccurs="10"/>
 				<xs:element ref="dataset_description"/>
+				<xs:element ref="edge_profiles" maxOccurs="3"/>
 				<xs:element ref="em_coupling" maxOccurs="3"/>
 				<xs:element ref="equilibrium" maxOccurs="3"/>
 				<xs:element ref="interfero_polarimeter"/>
@@ -65,6 +69,8 @@
 				<xs:element ref="temporary" maxOccurs="6"/>
 				<xs:element ref="thomson_scattering" maxOccurs="3"/>
 				<xs:element ref="tf" maxOccurs="3"/>
+				<xs:element ref="transport_solver_numerics"/>
+				<xs:element ref="wall"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
