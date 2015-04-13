@@ -840,17 +840,13 @@
 			<xs:documentation>Quantities related to a given ion species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="a">
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
 					<xs:appinfo>
-						<units>Atomic Mass Unit</units>
-						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
@@ -858,18 +854,6 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z_n">
-				<xs:annotation>
-					<xs:documentation>Nuclear charge</xs:documentation>
-					<xs:appinfo>
-						<units>Elementary Charge Unit</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
