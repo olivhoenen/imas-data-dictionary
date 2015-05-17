@@ -665,6 +665,60 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="error_description">
+		<xs:annotation>
+			<xs:documentation>Error description, an array of this structure is passed as argument of the access layer calls (get and put) for handling errorbars. Does not appear as such in the data structure. This is inserted in dd_support.xsd for automatic declaration in the Fortran and C++ type definitions.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="symmetric" type="int_type">
+					<xs:annotation>
+						<xs:documentation>Flag indicating whether the error is “+/-“ symmetric (1) or not (0)</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="type" type="identifier">
+					<xs:annotation>
+						<xs:documentation>Type of error bar description which is used (assumed to be identical for the lower and upper error): constant_absolute|constant_relative|explicit_values|expression</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="expression_upper_0d" type="str_type">
+					<xs:annotation>
+						<xs:documentation>Upper error expression (absolute value taken), for 1D dynamic quantities</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="expression_upper_1d" type="str_1d_type">
+					<xs:annotation>
+						<xs:documentation>Upper error expression (absolute value taken), for 2D dynamic quantities. If its dimension is equal to 1, the same error expression is applied to all indices of the original physical quantity </xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="expression_lower_0d" type="str_type">
+					<xs:annotation>
+						<xs:documentation>Lower error expression (absolute value taken), for 1D dynamic quantities</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="expression_lower_1d" type="str_1d_type">
+					<xs:annotation>
+						<xs:documentation>Lower error expression (absolute value taken), for 2D dynamic quantities. If its dimension is equal to 1, the same error expression is applied to all indices of the original physical quantity </xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	<xs:complexType name="schedule_waveform">
 		<xs:annotation>
 			<xs:documentation>Description of a named waveform, normally for scheduling</xs:documentation>
