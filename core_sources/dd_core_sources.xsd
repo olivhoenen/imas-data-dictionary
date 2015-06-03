@@ -285,9 +285,22 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="j_parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel current density source, average(J.B) / B0, where B0 = core_sources/vacuum_toroidal_field/b0 </xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>A.m^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="conductivity_parallel">
 				<xs:annotation>
-					<xs:documentation>Parallel conductivity induced by this source</xs:documentation>
+					<xs:documentation>Parallel conductivity due this source</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>ohm^-1.m^-1</units>
