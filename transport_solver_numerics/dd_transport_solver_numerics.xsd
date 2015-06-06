@@ -594,6 +594,71 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="dpsi_dt_crho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Derivative of the poloidal flux profile with respect to time, at constant normalised toroidal flux coordinate</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="drho_tor_dt">
+				<xs:annotation>
+					<xs:documentation>Derivative of the toroidal flux coordinate profile with respect to time</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>m.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d_dvolume_drho_tor_dt">
+				<xs:annotation>
+					<xs:documentation>Derivative with respect to time of the derivative of the volume with respect to the toroidal flux coordinate</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>m^2.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dpsi_drho_tor">
+				<xs:annotation>
+					<xs:documentation>First derivative of the poloidal flux profile with respect to the toroidal flux coordinate</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>Wb.m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d2psi_drho_tor2">
+				<xs:annotation>
+					<xs:documentation>Second derivative of the poloidal flux profile with respect to the toroidal flux coordinate</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>Wb.m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="time" type="flt_type">
 				<xs:annotation>
 					<xs:documentation>Time</xs:documentation>
@@ -900,6 +965,16 @@
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>W.m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_tor" type="numerics_bc_1d_bc">
+				<xs:annotation>
+					<xs:documentation>Boundary condition for the total plasma toroidal momentum equation (summed over ion species and electrons) (momentum if ID = 1) </xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>kg.m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>

@@ -134,36 +134,20 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="a">
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
 					<xs:appinfo>
-						<units>Atomic Mass Unit</units>
-						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
 					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
+						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z_n">
-				<xs:annotation>
-					<xs:documentation>Nuclear charge</xs:documentation>
-					<xs:appinfo>
-						<units>Elementary Charge Unit</units>
-						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -174,16 +158,16 @@
 				<xs:annotation>
 					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="multiple_charge_state_flag">
+			<xs:element name="multiple_states_flag">
 				<xs:annotation>
-					<xs:documentation>Multiple charge state calculation flag : 0-Only one charge state is considered; 1-Multiple charge state are considered and are described in the Charge_States structure</xs:documentation>
+					<xs:documentation>Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
@@ -192,11 +176,11 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="charge_states" type="plasma_composition_charge_states" maxOccurs="10">
+			<xs:element name="state" type="core_profiles_ions_charge_states2" maxOccurs="10">
 				<xs:annotation>
-					<xs:documentation>Array of charge states considered for this ion (non-empty if Multiple_Charge_State_Flag = 1)</xs:documentation>
+					<xs:documentation>Quantities related to the different states of the species (ionisation, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
+						<coordinate1>1...N_charge_states</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -327,17 +311,9 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="ions" type="plasma_composition_ions" maxOccurs="5">
+				<xs:element name="ion" type="plasma_composition_ions" maxOccurs="5">
 					<xs:annotation>
 						<xs:documentation>Array of plasma ions</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="neutrals" type="plasma_composition_neutral" maxOccurs="5">
-					<xs:annotation>
-						<xs:documentation>Array of neutrals</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
@@ -727,110 +703,6 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="temperature">
-				<xs:annotation>
-					<xs:documentation>Temperature</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>eV</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="density">
-				<xs:annotation>
-					<xs:documentation>Density (thermal+non-thermal)</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="density_fast">
-				<xs:annotation>
-					<xs:documentation>Density of fast (non-thermal) particles</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pressure">
-				<xs:annotation>
-					<xs:documentation>Pressure</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>Pa</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pressure_fast_perpendicular">
-				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) perpendicular pressure</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>Pa</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pressure_fast_parallel">
-				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) parallel pressure</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>Pa</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal velocity</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity_pol">
-				<xs:annotation>
-					<xs:documentation>Poloidal velocity</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

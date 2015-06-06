@@ -10,66 +10,139 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:complexType name="wall_global_quantitites_ion">
+		<xs:annotation>
+			<xs:documentation>Simple 0D description of plasma-wall interaction, related to a given ion species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H, D, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pumping_speed">
+				<xs:annotation>
+					<xs:documentation>Pumping speed of that species</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s^-1</units>
+						<coordinate1>../../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gas_puff">
+				<xs:annotation>
+					<xs:documentation>Gas puff for that species</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s^-1</units>
+						<coordinate1>../../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="wall_inventory">
+				<xs:annotation>
+					<xs:documentation>Wall inventory, i.e. cumulated exchange of neutral species between plasma and wall from t = 0, positive if a species has gone to the wall, for that species</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>../../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recycling_particles_coefficient">
+				<xs:annotation>
+					<xs:documentation>Particle recycling coefficient corresponding to the conversion into various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../../../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recycling_energy_coefficient">
+				<xs:annotation>
+					<xs:documentation>Energy recycling coefficient corresponding to the conversion into various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../../../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sputtering_physical_coefficient">
+				<xs:annotation>
+					<xs:documentation>Effective coefficient of physical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../../../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sputtering_chemical_coefficient">
+				<xs:annotation>
+					<xs:documentation>Effective coefficient of chemical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../../../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="wall_global_quantitites">
 		<xs:annotation>
 			<xs:documentation>Simple 0D description of plasma-wall interaction</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="pumping_speed">
+			<xs:element name="ion" type="wall_global_quantitites_ion" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>Pumping speed for the various neutral species</xs:documentation>
+					<xs:documentation>Quantities related to the various plasma ion/neutral species (in this structure charge states are not distinguished)</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<units>s^-1</units>
-						<coordinate1>../../neutral</coordinate1>
-						<coordinate2>../../time</coordinate2>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="gas_puff">
-				<xs:annotation>
-					<xs:documentation>Gas puff for the various neutral species</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>s^-1</units>
-						<coordinate1>../../neutral</coordinate1>
-						<coordinate2>../../time</coordinate2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="wall_inventory">
-				<xs:annotation>
-					<xs:documentation>Wall inventory, i.e. cumulated exchange of neutral species between plasma and wall from t = 0, positive if a species has gone to the wall, for the various neutral species</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<coordinate1>../../neutral</coordinate1>
-						<coordinate2>../../time</coordinate2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="recycling_coefficient">
-				<xs:annotation>
-					<xs:documentation>Recycling coefficient for the various neutral species</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>s^-1</units>
-						<coordinate1>../../neutral</coordinate1>
-						<coordinate2>../../time</coordinate2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="temperature">
 				<xs:annotation>
@@ -123,14 +196,6 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="neutral" type="plasma_composition_neutral" maxOccurs="20">
-					<xs:annotation>
-						<xs:documentation>List of considered neutral species. Should this be static (as now) or dynamic ?</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
 				<xs:element name="global_quantities" type="wall_global_quantitites">
 					<xs:annotation>
 						<xs:documentation>Simple 0D description of plasma-wall interaction</xs:documentation>
