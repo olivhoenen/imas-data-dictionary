@@ -71,7 +71,8 @@
     <tr>
 <td><xsl:value-of select="@path_doc"/>
 
-<xsl:if test="@maxOccurs>1 or @maxOccurs='unbounded'">{1:<xsl:value-of select="@maxOccurs"/>}</xsl:if></td>
+<xsl:if test="@maxOccurs>1 or @maxOccurs='unbounded'">{1:<xsl:value-of select="@maxOccurs"/>}</xsl:if>
+<xsl:if test="@lifecycle_status"><p>Lifecycle status: <font color="red"><xsl:value-of select="@lifecycle_status"/></font> since version <xsl:value-of select="@lifecycle_version"/></p></xsl:if></td>
 
            <td><xsl:value-of select="@documentation"/>
            <xsl:if test="@type"> {<xsl:value-of select="@type"/>}</xsl:if>
