@@ -64,8 +64,8 @@ These are the steps to follow.
 - Include changes to next commit:
   - `git add mynewfile.txt changedfile.txt`
   - (for this issue: README.md)
-- Make the commit, provide a one-line message with `-m`, inlude issue key (e.g. `IMAS-123`)
-  - `git commit -m "IMAS-123: introduce functionality xyz"` (for this issue: "add README.md with developement guideline steps")
+- Make the commit, provide a one-line message with `-m` inluding the issue key (e.g. `IMAS-123`)
+  - `git commit -m "IMAS-123: introduce functionality xyz"` (for this issue: "Add README.md with developement guideline steps")
 - Repeat this step if needed.
 
 ### 7. Pull the changes from upstream
@@ -78,7 +78,7 @@ These are the steps to follow.
 
 ### 8. Push your changes to upstream
 - Note: Clean up your history before pushing
-- Once you are happy, proceed to push the the branch back upstream (after this, you cannot go back and change history)    
+- Once you are happy, proceed to push the the branch back upstream (note, after this you cannot go back and change history)
 - Be sure you are on the chosen feature branch:
   - `git checkout feature/IMAS-123-add-functionality-xyz`
 - To see what will be done with a push, run:
@@ -91,16 +91,16 @@ These are the steps to follow.
 - Until the feature branch is ready to be tested and pulled into release branch.
 
 ### 10. Create a Pull request
-- Once the feature branch is a satisfactory solution to the issue, we want to ask for inclusion to the release branch
+- Once the feature branch is a satisfactory solution to the issue, ask for inclusion to the release branch
 - Update the local release branch:
   - `git fetch origin release/#`
 - Rebase the feature branch onto the release branch:
   - `git rebase release/# feature/IMAS-123-add-functionality-xyz`
 - Fix any conflicts that arise, commit and 
-  - `rebase --continue`
+  - `git rebase --continue`
 - Push the branch:
   - `git push origin`
-- Login on git.iter.org, find the DD repository and the feature branch
+- Login to git.iter.org, find the DD repository and the feature branch
 - Click Create Pull request:
   - Source: the feature/IMAS-123-add-functionality-xyz branch 
   - Destination: the release/# branch
