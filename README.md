@@ -105,5 +105,3 @@ These are the steps to follow.
   - Source: the feature/IMAS-123-add-functionality-xyz branch 
   - Destination: the release/# branch
   - Reviewers: add your collaborators that need to approve
-
-
