@@ -120,6 +120,36 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="momentum_tor" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for toroidal momentum equation, on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_pol" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for poloidal momentum equation, on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for diamagnetic momentum equation, on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="edge_sources_source_profiles_ggd_ions">
@@ -160,7 +190,7 @@
 			</xs:element>
 			<xs:element name="particles" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for ion density equation, on various subgrids</xs:documentation>
+					<xs:documentation>Source term for ion density equation, on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>s^-1.m^-3</units>
@@ -170,10 +200,40 @@
 			</xs:element>
 			<xs:element name="energy" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for the ion energy transport equation, on various subgrids</xs:documentation>
+					<xs:documentation>Source term for the ion energy transport equation, on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>W.m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_tor" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for toroidal momentum equation (sum over states when multiple states are considered), on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_pol" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for poloidal momentum equation (sum over states when multiple states are considered), on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for diamagnetic momentum equation (sum over states when multiple states are considered), on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -206,7 +266,7 @@
 		<xs:sequence>
 			<xs:element name="particles" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for electron density equation, given on various subgrids</xs:documentation>
+					<xs:documentation>Source term for electron density equation, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>m^-3.s^-1</units>
@@ -216,7 +276,7 @@
 			</xs:element>
 			<xs:element name="energy" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for the electron energy equation, given on various subgrids</xs:documentation>
+					<xs:documentation>Source term for the electron energy equation, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>W.m^-3</units>
@@ -243,7 +303,7 @@
 			</xs:element>
 			<xs:element name="total_ion_energy" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for the total ion energy equation, on various subgrids</xs:documentation>
+					<xs:documentation>Source term for the total (summed over ion  species) energy equation, on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>W.m^-3</units>
@@ -253,7 +313,27 @@
 			</xs:element>
 			<xs:element name="momentum_tor" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for total toroidal momentum equation, on various subgrids</xs:documentation>
+					<xs:documentation>Source term for total toroidal momentum equation, on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_pol" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for total poloidal momentum equation, on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for total diamagnetic momentum equation, on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>kg.m^-1.s^-2</units>
@@ -263,20 +343,10 @@
 			</xs:element>
 			<xs:element name="j_parallel" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Parallel current density source, average(J.B) / B0, where B0 = edge_sources/vacuum_toroidal_field/b0, ARE YOU USING THIS NORMALISATION ON B0 ? IF YES WE MUST ADD B0 on various subgrids </xs:documentation>
+					<xs:documentation>Parallel current density source</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>A.m^-2</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="conductivity_parallel" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Parallel conductivity due to this source, on various subgrids</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>ohm^-1.m^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -310,7 +380,7 @@
 					<xs:documentation>Source term identifier</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="profiles_ggd" type="edge_sources_source_profiles_ggd" maxOccurs="unbounded">
+			<xs:element name="ggd" type="edge_sources_source_profiles_ggd" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Source terms represented using the general grid description, for various time slices</xs:documentation>
 					<xs:appinfo>
@@ -323,7 +393,7 @@
 	</xs:complexType>
 	<xs:element name="edge_sources">
 		<xs:annotation>
-			<xs:documentation>edge plasma source terms</xs:documentation>
+			<xs:documentation>Edge plasma sources. Energy terms correspond to the full kinetic energy equation (i.e. the energy flux takes into account the energy transported by the particle flux)</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.2.1</lifecycle_version>

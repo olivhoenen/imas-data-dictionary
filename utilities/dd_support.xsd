@@ -507,6 +507,37 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="b_tor_vacuum_aos3">
+		<xs:annotation>
+			<xs:documentation>Characteristics of the vacuum toroidal field, dynamic within a type 3 AoS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r0">
+				<xs:annotation>
+					<xs:documentation>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b0">
+				<xs:annotation>
+					<xs:documentation>Vacuum toroidal field at b0. Positive sign means anti-clockwise when viewed from above. The product r0*b0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="core_radial_grid">
 		<xs:annotation>
 			<xs:documentation>1D radial grid for core* IDSs</xs:documentation>
@@ -862,7 +893,7 @@
 				<xs:annotation>
 					<xs:documentation>Quantities related to the different states of the species (ionisation, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N_charge_states</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -986,7 +1017,7 @@
 		<xs:sequence>
 			<xs:element name="grid_index">
 				<xs:annotation>
-					<xs:documentation>Index of the grid this scalar quantity is associated with</xs:documentation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -995,9 +1026,9 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="subgrid_index">
+			<xs:element name="grid_subset_index">
 				<xs:annotation>
-					<xs:documentation>Index of the subgrid (as stored in generic_grid/subgrid) the data is stored on</xs:documentation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1008,7 +1039,7 @@
 			</xs:element>
 			<xs:element name="values">
 				<xs:annotation>
-					<xs:documentation>One scalar value is stored per element in the subgrid.</xs:documentation>
+					<xs:documentation>One scalar value is provided per element in the grid subset.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
@@ -1028,7 +1059,7 @@
 		<xs:sequence>
 			<xs:element name="grid_index">
 				<xs:annotation>
-					<xs:documentation>Index of the grid this scalar quantity is associated with</xs:documentation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1037,9 +1068,9 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="subgrid_index">
+			<xs:element name="grid_subset_index">
 				<xs:annotation>
-					<xs:documentation>Index of the subgrid (as stored in generic_grid/subgrid) the data is stored on</xs:documentation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1050,7 +1081,7 @@
 			</xs:element>
 			<xs:element name="values">
 				<xs:annotation>
-					<xs:documentation>List of vector components, one list per element in the subgrid. First dimenstion: element index. Second dimension: vector component index.</xs:documentation>
+					<xs:documentation>List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
@@ -1071,7 +1102,7 @@
 		<xs:sequence>
 			<xs:element name="grid_index">
 				<xs:annotation>
-					<xs:documentation>Index of the grid this scalar quantity is associated with</xs:documentation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1080,9 +1111,9 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="subgrid_index">
+			<xs:element name="grid_subset_index">
 				<xs:annotation>
-					<xs:documentation>Index of the subgrid (as stored in generic_grid/subgrid) the data is stored on</xs:documentation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1093,7 +1124,7 @@
 			</xs:element>
 			<xs:element name="values">
 				<xs:annotation>
-					<xs:documentation>List of matrix components, one list per element in the subgrid. First dimenstion: element index. Second dimension: first matrix index. Third dimension: second matrix index.</xs:documentation>
+					<xs:documentation>List of matrix components, one list per element in the grid subset. First dimenstion: element index. Second dimension: first matrix index. Third dimension: second matrix index.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
@@ -1225,9 +1256,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_dynamic_subgrid_element_object">
+	<xs:complexType name="generic_grid_dynamic_grid_subset_element_object">
 		<xs:annotation>
-			<xs:documentation>Generic grid, object part of an element part of a subgrid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Generic grid, object part of an element part of a grid_subset (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="space">
@@ -1265,12 +1296,12 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_dynamic_subgrid_element">
+	<xs:complexType name="generic_grid_dynamic_grid_subset_element">
 		<xs:annotation>
-			<xs:documentation>Generic grid, element part of a subgrid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Generic grid, element part of a grid_subset (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="object" type="generic_grid_dynamic_subgrid_element_object" maxOccurs="unbounded">
+			<xs:element name="object" type="generic_grid_dynamic_grid_subset_element_object" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of objects defining the element</xs:documentation>
 					<xs:appinfo>
@@ -1280,9 +1311,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_dynamic_subgrid_metric">
+	<xs:complexType name="generic_grid_dynamic_grid_subset_metric">
 		<xs:annotation>
-			<xs:documentation>Generic grid, metric description for a given subgrid and base (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Generic grid, metric description for a given grid_subset and base (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="jacobian">
@@ -1534,19 +1565,19 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_dynamic_subgrid">
+	<xs:complexType name="generic_grid_dynamic_grid_subset">
 		<xs:annotation>
-			<xs:documentation>Generic grid subgrid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Generic grid grid_subset (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="identifier" type="identifier_dynamic_aos3">
 				<xs:annotation>
-					<xs:documentation>Subgrid identifier</xs:documentation>
+					<xs:documentation>Grid subset identifier</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="dimension">
 				<xs:annotation>
-					<xs:documentation>Space dimension of the subgrid elements. This must be equal to the sum of the dimensions of the individual objects forming the element.</xs:documentation>
+					<xs:documentation>Space dimension of the grid subset elements. This must be equal to the sum of the dimensions of the individual objects forming the element.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1555,23 +1586,23 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="element" type="generic_grid_dynamic_subgrid_element" maxOccurs="unbounded">
+			<xs:element name="element" type="generic_grid_dynamic_grid_subset_element" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of elements defining the subgrid. An element is defined by a combination of objects from potentially all spaces</xs:documentation>
+					<xs:documentation>Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="base" type="generic_grid_dynamic_subgrid_metric" maxOccurs="unbounded">
+			<xs:element name="base" type="generic_grid_dynamic_grid_subset_metric" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of bases for the subgrid. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.</xs:documentation>
+					<xs:documentation>Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="metric" type="generic_grid_dynamic_subgrid_metric">
+			<xs:element name="metric" type="generic_grid_dynamic_grid_subset_metric">
 				<xs:annotation>
 					<xs:documentation>Metric of the canonical frame onto Cartesian coordinates</xs:documentation>
 				</xs:annotation>
@@ -1596,9 +1627,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="subgrid" type="generic_grid_dynamic_subgrid" maxOccurs="unbounded">
+			<xs:element name="grid_subset" type="generic_grid_dynamic_grid_subset" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of subgrids</xs:documentation>
+					<xs:documentation>Grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
