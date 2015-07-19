@@ -631,6 +631,19 @@
 					<xs:documentation>Derivatives of total ion quantities with respect to time</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="dpsi_dt">
+				<xs:annotation>
+					<xs:documentation>Derivative of the poloidal flux profile with respect to time</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="dpsi_dt_cphi">
 				<xs:annotation>
 					<xs:documentation>Derivative of the poloidal flux profile with respect to time, at constant toroidal flux</xs:documentation>

@@ -258,6 +258,50 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="distribution_sources_source_identifier">
+		<xs:annotation>
+			<xs:documentation>Identifier of this source term</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Process type. index=1 for NBI; index=2 for nuclear reaction (reaction unspecified); index=3 for nuclear reaction: T(d,n)4He [D+T->He4+n]; index=4 for nuclear reaction: He3(d,p)4He [He3+D->He4+p]; index=5 for nuclear reaction: D(d,p)T [D+D->T+p]; index=6 for nuclear reaction: D(d,n)3He [D+D->He3+n]; index=7 for runaway processes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reactant_energy" type="identifier">
+				<xs:annotation>
+					<xs:documentation>For nuclear reaction source, energy of the reactants. index = 0 for a sum over all energies; index = 1 for thermal-thermal; index = 2 for beam-beam; index = 3 for beam-thermal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nbi_energy" type="identifier">
+				<xs:annotation>
+					<xs:documentation>For NBI source, energy of the accelerated species considered. index = 0 for a sum over all energies; index = 1 for full energiy; index = 2 for half energy; index = 3 for third energy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nbi_unit">
+				<xs:annotation>
+					<xs:documentation>Index of the NBI unit considered. Refers to the "unit" array of the NBI IDS. 0 means sum over all NBI units.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="nbi_beamlets_group">
+				<xs:annotation>
+					<xs:documentation>Index of the NBI beamlets group considered. Refers to the "unit/beamlets_group" array of the NBI IDS. 0 means sum over all beamlets groups.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="distribution_sources_source_species">
 		<xs:annotation>
 			<xs:documentation>Species produced by this source term</xs:documentation>
@@ -280,9 +324,9 @@
 			<xs:documentation>Source terms for a given actuator</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="identifier" type="identifier" maxOccurs="32">
+			<xs:element name="process" type="distribution_sources_source_identifier" maxOccurs="32">
 				<xs:annotation>
-					<xs:documentation>Source term identifier. List of identifiers for the source, in term the type and name of the injectors and reactions that provide the source, along with an index separating sources with the same name and type. Possible content for type: NBI or reaction names. The field name should either be taken from nbi/nbi_unit(*)/name, or describe the populations involved in the reaction, e.g. fast-thermal; the field index should separate different sources generated from a single injector or reaction.</xs:documentation>
+					<xs:documentation>Set of processes (NBI units, fusion reactions, ...) that provide the source.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -347,7 +391,7 @@
 			<xs:documentation>Sources of particles for input to kinetic equations, e.g. Fokker-Planck calculation. The sources could originate from e.g. NBI or fusion reactions.</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
-				<lifecycle_version>3.3.0</lifecycle_version>
+				<lifecycle_version>3.2.1</lifecycle_version>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>

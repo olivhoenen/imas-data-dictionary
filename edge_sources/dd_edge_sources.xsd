@@ -10,9 +10,96 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:complexType name="edge_sources_source_profiles_ggd_ions_charge_states">
+	<xs:complexType name="edge_sources_source_ggd_neutral_state">
 		<xs:annotation>
-			<xs:documentation>Source terms related to the a given charge state of the ion species</xs:documentation>
+			<xs:documentation>Source terms related to the a given state of the neutral species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying state</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_level">
+				<xs:annotation>
+					<xs:documentation>Vibrational level (can be bundled)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_mode">
+				<xs:annotation>
+					<xs:documentation>Vibrational mode of this state, e.g. "A_g". Need to define, or adopt a standard nomenclature.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electron_configuration">
+				<xs:annotation>
+					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="neutral_type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="particles" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for the charge state density transport equation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>s^-1.m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source terms for the charge state energy transport equation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum" type="generic_grid_vector_components" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for momentum equations, on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="edge_sources_source_ggd_ion_state">
+		<xs:annotation>
+			<xs:documentation>Source terms related to the a given state of the ion species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="z_min">
@@ -73,22 +160,6 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="is_neutral">
-				<xs:annotation>
-					<xs:documentation>Flag specifying if this state corresponds to a neutral (1) or not (0)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="neutral_type" type="identifier">
-				<xs:annotation>
-					<xs:documentation>Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="electron_configuration">
 				<xs:annotation>
 					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
@@ -120,29 +191,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="momentum_tor" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="momentum" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for toroidal momentum equation, on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>kg.m^-1.s^-2</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_pol" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Source term for poloidal momentum equation, on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>kg.m^-1.s^-2</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Source term for diamagnetic momentum equation, on various grid subsets</xs:documentation>
+					<xs:documentation>Source term for momentum equations, on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>kg.m^-1.s^-2</units>
@@ -152,7 +203,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="edge_sources_source_profiles_ggd_ions">
+	<xs:complexType name="edge_sources_source_ggd_ion">
 		<xs:annotation>
 			<xs:documentation>Source terms related to a given ion species</xs:documentation>
 		</xs:annotation>
@@ -188,6 +239,17 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="neutral_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding neutral species in the ../../neutral array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="particles" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Source term for ion density equation, on various grid subsets</xs:documentation>
@@ -208,29 +270,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="momentum_tor" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="momentum" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for toroidal momentum equation (sum over states when multiple states are considered), on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>kg.m^-1.s^-2</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_pol" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Source term for poloidal momentum equation (sum over states when multiple states are considered), on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>kg.m^-1.s^-2</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Source term for diamagnetic momentum equation (sum over states when multiple states are considered), on various grid subsets</xs:documentation>
+					<xs:documentation>Source term for momentum equations (sum over states when multiple states are considered), on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>kg.m^-1.s^-2</units>
@@ -249,7 +291,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="state" type="edge_sources_source_profiles_ggd_ions_charge_states" maxOccurs="unbounded">
+			<xs:element name="state" type="edge_sources_source_ggd_ion_state" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Source terms related to the different charge states of the species (ionisation, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
@@ -259,7 +301,93 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="edge_sources_source_profiles_ggd_electrons">
+	<xs:complexType name="edge_sources_source_ggd_neutral">
+		<xs:annotation>
+			<xs:documentation>Source terms related to a given neutral species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying neutral (e.g. H, D, T, He, C, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ion_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding ion species in the ../../ion array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="particles" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for ion density equation, on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>s^-1.m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for the ion energy transport equation, on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum" type="generic_grid_vector_components" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term for momentum equations (sum over states when multiple states are considered), on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="multiple_states_flag">
+				<xs:annotation>
+					<xs:documentation>Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="state" type="edge_sources_source_ggd_neutral_state" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source terms related to the different charge states of the species (energy, excitation, ...)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="edge_sources_source_ggd_electrons">
 		<xs:annotation>
 			<xs:documentation>Source terms related to electrons</xs:documentation>
 		</xs:annotation>
@@ -286,7 +414,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="edge_sources_source_profiles_ggd">
+	<xs:complexType name="edge_sources_source_ggd">
 		<xs:annotation>
 			<xs:documentation>Source terms for a given time slice</xs:documentation>
 		</xs:annotation>
@@ -296,9 +424,25 @@
 					<xs:documentation>Grid description</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="electrons" type="edge_sources_source_profiles_ggd_electrons">
+			<xs:element name="electrons" type="edge_sources_source_ggd_electrons">
 				<xs:annotation>
 					<xs:documentation>Sources for electrons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion" type="edge_sources_source_ggd_ion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source terms related to the different ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="neutral" type="edge_sources_source_ggd_neutral" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source terms related to the different neutral species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="total_ion_energy" type="generic_grid_scalar" maxOccurs="unbounded">
@@ -311,9 +455,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="momentum_tor" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="momentum" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for total toroidal momentum equation, on various grid subsets</xs:documentation>
+					<xs:documentation>Source term for total momentum equations, on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>kg.m^-1.s^-2</units>
@@ -321,41 +465,13 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="momentum_pol" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="current" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source term for total poloidal momentum equation, on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>kg.m^-1.s^-2</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Source term for total diamagnetic momentum equation, on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>kg.m^-1.s^-2</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="j_parallel" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Parallel current density source</xs:documentation>
+					<xs:documentation>Current density source</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>A.m^-2</units>
 						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="ion" type="edge_sources_source_profiles_ggd_ions" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Source terms related to the different ions and neutral species</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -380,7 +496,7 @@
 					<xs:documentation>Source term identifier</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="ggd" type="edge_sources_source_profiles_ggd" maxOccurs="unbounded">
+			<xs:element name="ggd" type="edge_sources_source_ggd" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Source terms represented using the general grid description, for various time slices</xs:documentation>
 					<xs:appinfo>

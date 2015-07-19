@@ -4,53 +4,157 @@
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="edge_profiles_time_slice_vector_components">
+	<xs:complexType name="edge_profiles_time_slice_neutral_state">
 		<xs:annotation>
-			<xs:documentation>Vector components in various directions on a generic grid</xs:documentation>
+			<xs:documentation>Quantities related to a given state of the neutral species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="radial" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>Radial component, given on various grid subsets</xs:documentation>
+					<xs:documentation>String identifying state</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electron_configuration">
+				<xs:annotation>
+					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_level">
+				<xs:annotation>
+					<xs:documentation>Vibrational level (can be bundled)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_mode">
+				<xs:annotation>
+					<xs:documentation>Vibrational mode of this state, e.g. "A_g". Need to define, or adopt a standard nomenclature.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="neutral_type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Neutral type, in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="temperature" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Temperature, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="density" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Density (thermal+non-thermal), given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>m^-3</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="density_fast" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Diamagnetic component, given on various grid subsets</xs:documentation>
+					<xs:documentation>Density of fast (non-thermal) particles, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>m^-3</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="parallel" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="pressure" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Parallel component, given on various grid subsets</xs:documentation>
+					<xs:documentation>Pressure, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
-						<units>m^-3</units>
+						<units>Pa</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="poloidal" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="pressure_fast_perpendicular" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Poloidal component, given on various grid subsets</xs:documentation>
+					<xs:documentation>Fast (non-thermal) perpendicular pressure, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
-						<units>m^-3</units>
+						<units>Pa</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="toroidal" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="pressure_fast_parallel" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Toroidal component, given on various grid subsets</xs:documentation>
+					<xs:documentation>Fast (non-thermal) parallel pressure, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
-						<units>m^-3</units>
+						<units>Pa</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity" type="generic_grid_vector_components" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Velocity, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_diamagnetic" type="generic_grid_vector_components" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Velocity due to the diamagnetic drift, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_exb" type="generic_grid_vector_components" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Velocity due to the ExB drift, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy_density_kinetic" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Kinetic energy density, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>J.m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="distribution_function" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Distribution function, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -58,7 +162,7 @@
 	</xs:complexType>
 	<xs:complexType name="edge_profiles_time_slice_ion_charge_state">
 		<xs:annotation>
-			<xs:documentation>Quantities related to the a given charge state of the ion species</xs:documentation>
+			<xs:documentation>Quantities related to a given charge state of the ion species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="z_min">
@@ -160,36 +264,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="is_neutral">
-				<xs:annotation>
-					<xs:documentation>Flag specifying if this state corresponds to a neutral (1) or not (0)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="neutral_type" type="identifier">
-				<xs:annotation>
-					<xs:documentation>Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="temperature" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Temperature, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>eV</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity" type="edge_profiles_time_slice_vector_components">
-				<xs:annotation>
-					<xs:documentation>Velocity</xs:documentation>
-					<xs:appinfo>
-						<units>m.s^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -238,54 +318,27 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity_tor" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="velocity" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Toroidal velocity, given on various grid subsets</xs:documentation>
+					<xs:documentation>Velocity, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_diamagnetic" type="generic_grid_vector_components" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Velocity due to the diamagnetic drift, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>m.s^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity_pol" type="generic_grid_scalar" maxOccurs="unbounded">
+			<xs:element name="velocity_exb" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Poloidal velocity, given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Velocity in the diamagnetic direction, given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_diamagnetic_drift_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Velocity due to the diamagnetic drift in the diamagnetic direction, given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_exb_drift_radial" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Velocity due to the ExB drift in the radial direction, given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_exb_drift_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Velocity due to the ExB drift in the diamagnetic direction, given on various grid subsets</xs:documentation>
+					<xs:documentation>Velocity due to the ExB drift, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>m.s^-1</units>
@@ -307,6 +360,134 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="edge_profiles_time_slice_neutral">
+		<xs:annotation>
+			<xs:documentation>Quantities related to a given neutral species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H, D, T, He, C, D2, DT, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ion_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding ion species in the ../../ion array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="temperature" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Temperature (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="density" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Density (thermal+non-thermal) (sum over states when multiple states are considered), given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="density_fast" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Density of fast (non-thermal) particles (sum over states when multiple states are considered), given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pressure" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Pressure (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>Pa</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pressure_fast_perpendicular" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Fast (non-thermal) perpendicular pressure (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>Pa</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pressure_fast_parallel" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Fast (non-thermal) parallel pressure (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>Pa</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity" type="generic_grid_vector_components" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Velocity (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy_density_kinetic" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Kinetic energy density (sum over states when multiple states are considered), given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>J.m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="multiple_states_flag">
+				<xs:annotation>
+					<xs:documentation>Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="state" type="edge_profiles_time_slice_neutral_state" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different states of the species (energy, excitation, ...)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N_charge_states</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -348,9 +529,20 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="neutral_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding neutral species in the ../../neutral array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="temperature" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Temperature (average over charge states when multiple charge states are considered), given on various grid subsets</xs:documentation>
+					<xs:documentation>Temperature (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>eV</units>
@@ -359,7 +551,7 @@
 			</xs:element>
 			<xs:element name="density" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered), given on various grid subsets</xs:documentation>
+					<xs:documentation>Density (thermal+non-thermal) (sum over states when multiple states are considered), given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>m^-3</units>
@@ -368,7 +560,7 @@
 			</xs:element>
 			<xs:element name="density_fast" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered), given on various grid subsets</xs:documentation>
+					<xs:documentation>Density of fast (non-thermal) particles (sum over states when multiple states are considered), given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>m^-3</units>
@@ -377,7 +569,7 @@
 			</xs:element>
 			<xs:element name="pressure" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Pressure (average over charge states when multiple charge states are considered), given on various grid subsets</xs:documentation>
+					<xs:documentation>Pressure (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>Pa</units>
@@ -386,7 +578,7 @@
 			</xs:element>
 			<xs:element name="pressure_fast_perpendicular" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) perpendicular pressure (average over charge states when multiple charge states are considered), given on various grid subsets</xs:documentation>
+					<xs:documentation>Fast (non-thermal) perpendicular pressure (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>Pa</units>
@@ -395,45 +587,19 @@
 			</xs:element>
 			<xs:element name="pressure_fast_parallel" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Fast (non-thermal) parallel pressure (average over charge states when multiple charge states are considered), given on various grid subsets</xs:documentation>
+					<xs:documentation>Fast (non-thermal) parallel pressure (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>Pa</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="velocity" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Velocity</xs:documentation>
+					<xs:documentation>Velocity (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_tor" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Toroidal velocity (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
-					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_pol" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Poloidal velocity (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Velocity in the diamagnetic direction (average over states when multiple states are considered), given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -526,38 +692,12 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="velocity" type="generic_grid_vector_components">
 				<xs:annotation>
-					<xs:documentation>Velocity</xs:documentation>
+					<xs:documentation>Velocity, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_tor" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Toroidal velocity, given on various grid subsets</xs:documentation>
-					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_pol" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Poloidal velocity, given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity_diamagnetic" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Velocity in the diamagnetic direction, given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>m.s^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -589,7 +729,15 @@
 			</xs:element>
 			<xs:element name="ion" type="edge_profiles_time_slice_ion" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Quantities related to the different ion and neutral species</xs:documentation>
+					<xs:documentation>Quantities related to the different ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="neutral" type="edge_profiles_time_slice_neutral" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different neutral species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -655,77 +803,85 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_anomalous" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="j_anomalous" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Anomalous current density</xs:documentation>
+					<xs:documentation>Anomalous current density, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_inertial" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="j_inertial" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Inertial current density</xs:documentation>
+					<xs:documentation>Inertial current density, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_ion_neutral_friction" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="j_ion_neutral_friction" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Current density due to ion neutral friction</xs:documentation>
+					<xs:documentation>Current density due to ion neutral friction, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_parallel_viscosity" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="j_parallel_viscosity" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Current density due to the parallel viscosity</xs:documentation>
+					<xs:documentation>Current density due to the parallel viscosity, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_perpendicular_viscosity" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="j_perpendicular_viscosity" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Current density due to the perpendicular viscosity</xs:documentation>
+					<xs:documentation>Current density due to the perpendicular viscosity, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+												<coordinate1>1...N</coordinate1>
+
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_heat_viscosity" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="j_heat_viscosity" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Current density due to the heat viscosity</xs:documentation>
+					<xs:documentation>Current density due to the heat viscosity, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_pfirsch_schlueter" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="j_pfirsch_schlueter" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Current density due to Pfirsch-Schlüter effects</xs:documentation>
+					<xs:documentation>Current density due to Pfirsch-Schlüter effects, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_diamagnetic" type="edge_profiles_time_slice_vector_components">
+			<xs:element name="j_diamagnetic" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Current density due to the diamgnetic drift</xs:documentation>
+					<xs:documentation>Current density due to the diamgnetic drift, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="e_field" type="edge_profiles_time_slice_vector_components" maxOccurs="unbounded">
+			<xs:element name="e_field" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Parallel electric field</xs:documentation>
+					<xs:documentation>Electric field, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>V.m^-1</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

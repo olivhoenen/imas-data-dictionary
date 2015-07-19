@@ -10,7 +10,7 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:complexType name="wall_global_quantitites_ion">
+	<xs:complexType name="wall_global_quantitites_neutral">
 		<xs:annotation>
 			<xs:documentation>Simple 0D description of plasma-wall interaction, related to a given ion species</xs:documentation>
 		</xs:annotation>
@@ -136,9 +136,9 @@
 			<xs:documentation>Simple 0D description of plasma-wall interaction</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="ion" type="wall_global_quantitites_ion" maxOccurs="5">
+			<xs:element name="neutral" type="wall_global_quantitites_neutral" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>Quantities related to the various plasma ion/neutral species (in this structure charge states are not distinguished)</xs:documentation>
+					<xs:documentation>Quantities related to the various neutral species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
