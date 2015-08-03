@@ -782,7 +782,60 @@
 		<xs:sequence>
 			<xs:element name="identifier" type="identifier">
 				<xs:annotation>
-					<xs:documentation>Identifier of the boundary condition type. ID = 1: poloidal flux; 2: ip; 3: loop voltage; 4: undefined; 5: generic boundary condition y expressed as a1y'+a2y=a3. 6: equation not solved; </xs:documentation>
+					<xs:documentation>Identifier of the boundary condition type. List of options TBD.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index (for ID = 1 to 3, only the first position in the vector is used. For ID = 5, all three positions are used, meaning respectively a1, a2, a3)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="numerics_bc_ggd_bc">
+		<xs:annotation>
+			<xs:documentation>Boundary conditions for a given transport equation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the boundary condition type. List of options TBD.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
@@ -902,21 +955,21 @@
 			<xs:documentation>Boundary conditions for the electron related transport equations</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="particles" type="numerics_bc_1d_bc">
+			<xs:element name="particles" type="numerics_bc_ggd_bc" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Boundary condition for the electron density equation (density if ID = 1) </xs:documentation>
+					<xs:documentation>Boundary condition for the electron density equation (density if ID = 1), on various grid subsets</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate1>1...N</coordinate1>
 						<units>m^-3.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy" type="numerics_bc_1d_bc">
+			<xs:element name="energy" type="numerics_bc_ggd_bc" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Boundary condition for the electron energy equation (temperature if ID = 1) </xs:documentation>
+					<xs:documentation>Boundary condition for the electron energy equation (temperature if ID = 1), on various grid subsets </xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate1>1...N</coordinate1>
 						<units>W.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1126,21 +1179,21 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="particles" type="numerics_bc_1d_bc">
+			<xs:element name="particles" type="numerics_bc_ggd_bc" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Boundary condition for the charge state density equation (density if ID = 1) </xs:documentation>
+					<xs:documentation>Boundary condition for the charge state density equation (density if ID = 1), on various grid subsets</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate1>1...N</coordinate1>
 						<units>m^-3.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy" type="numerics_bc_1d_bc">
+			<xs:element name="energy" type="numerics_bc_ggd_bc" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Boundary condition for the charge state energy equation (temperature if ID = 1) </xs:documentation>
+					<xs:documentation>Boundary condition for the charge state energy equation (temperature if ID = 1), on various grid subsets </xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate1>1...N</coordinate1>
 						<units>W.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1293,21 +1346,21 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="particles" type="numerics_bc_1d_bc">
+			<xs:element name="particles" type="numerics_bc_ggd_bc" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Boundary condition for the ion density equation (density if ID = 1) </xs:documentation>
+					<xs:documentation>Boundary condition for the ion density equation (density if ID = 1), on various grid subsets</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate1>1...N</coordinate1>
 						<units>m^-3.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy" type="numerics_bc_1d_bc">
+			<xs:element name="energy" type="numerics_bc_ggd_bc" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Boundary condition for the ion energy equation (temperature if ID = 1) </xs:documentation>
+					<xs:documentation>Boundary condition for the ion energy equation (temperature if ID = 1), on various grid subsets</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate1>1...N</coordinate1>
 						<units>W.m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1417,26 +1470,6 @@
 					<xs:documentation>Quantities related to the different ion species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="energy_ion_total" type="numerics_bc_1d_bc">
-				<xs:annotation>
-					<xs:documentation>Boundary condition for the ion total (sum over ion species) energy equation (temperature if ID = 1) </xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>W.m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_tor" type="numerics_bc_1d_bc">
-				<xs:annotation>
-					<xs:documentation>Boundary condition for the total plasma toroidal momentum equation (summed over ion species and electrons) (momentum if ID = 1) </xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>kg.m.s^-1</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
