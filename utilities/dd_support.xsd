@@ -41,6 +41,46 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="identifier_static">
+		<xs:annotation>
+			<xs:documentation>Standard type for identifiers (static). The three fields: name, index and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Short string identifier</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Integer identifier (enumeration index within a list)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Verbose description</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="identifier_dynamic_aos3">
 		<xs:annotation>
 			<xs:documentation>Standard type for identifiers (dynamic within type 3 array of structure (index on time)). The three fields: name, index and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</xs:documentation>
@@ -1963,7 +2003,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
-						<coordinate1>1...n_points</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1976,7 +2016,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
-						<coordinate1>../R</coordinate1>
+						<coordinate1>../r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1989,7 +2029,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>rad</units>
-						<coordinate1>../R</coordinate1>
+						<coordinate1>../r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

@@ -10,7 +10,52 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="tf_coil_geometry">
+		<xs:annotation>
+			<xs:documentation>Geometry of a coil</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Coil type: index = 1: circular; index = 2: D-shape</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="centre" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of coil centre (in case of circular coil)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="radius">
+				<xs:annotation>
+					<xs:documentation>Coil radius (in case of circular coil)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="rzphi1d_static">
+				<xs:annotation>
+					<xs:documentation>Coil outline (in case of D-shape coil)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="tf_coil">
+		<xs:annotation>
+			<xs:documentation>Description of a given coil</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="turns">
 				<xs:annotation>
@@ -22,6 +67,11 @@
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometry" type="tf_coil_geometry">
+				<xs:annotation>
+					<xs:documentation>Coil geometry</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="current">
 				<xs:annotation>
@@ -70,7 +120,7 @@
 				<xs:element ref="ids_properties"/>
 				<xs:element name="coil" type="tf_coil" maxOccurs="20">
 					<xs:annotation>
-						<xs:documentation>Number of coils around the tokamak</xs:documentation>
+						<xs:documentation>Set of coils around the tokamak</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<coordinate1>1...N</coordinate1>
