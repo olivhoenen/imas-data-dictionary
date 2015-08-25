@@ -24,7 +24,7 @@
 				<xs:annotation>
 					<xs:documentation>Source density of particles in phase space, for various grid subsets</xs:documentation>
 					<xs:appinfo>
-					<coordinate1>1...N</coordinate1>
+						<coordinate1>1...N</coordinate1>
 						<units>(m.s^-1)^-3.m^-3.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -40,59 +40,6 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="time" type="flt_type">
-				<xs:annotation>
-					<xs:documentation>Time</xs:documentation>
-					<xs:appinfo>
-						<units>s</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="distribution_sources_source_markers">
-		<xs:annotation>
-			<xs:documentation>Test particles for a given time slice</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="coordinate_identifier" type="identifier_dynamic_aos3" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Set of coordinate identifiers, coordinates on which the markers are represented</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>W.m^-3</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="weights">
-				<xs:annotation>
-					<xs:documentation>Weight of the markers, i.e. number of real particles represented by each marker. The dimension of the vector correspond to the number of markers</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>-</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="positions">
-				<xs:annotation>
-					<xs:documentation>Position of the markers in the set of coordinates. The first dimension corresponds to the number of markers, the second dimension to the set of coordinates</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../weights</coordinate1>
-						<coordinate2>../coordinate_identifier</coordinate2>
-						<units>mixed</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="time" type="flt_type">
@@ -166,37 +113,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="distribution_sources_source_global_quantities_magnetic_axis">
-		<xs:annotation>
-			<xs:documentation>R, Z at magnetic axis, dynamic within a type 3 array of structure (index on time)</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="r">
-				<xs:annotation>
-					<xs:documentation>Major radius of the magnetic axis</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height of the magnetic axis</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="distribution_sources_source_global_quantities">
 		<xs:annotation>
 			<xs:documentation>Global quantities of distribution_source for a given time slice</xs:documentation>
@@ -238,16 +154,6 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="magnetic_axis" type="distribution_sources_source_global_quantities_magnetic_axis">
-				<xs:annotation>
-					<xs:documentation>Magnetic axis position (used to define a poloidal angle)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_aos3">
-				<xs:annotation>
-					<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="time" type="flt_type">
 				<xs:annotation>
 					<xs:documentation>Time</xs:documentation>
@@ -259,73 +165,12 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="distribution_sources_source_identifier">
-		<xs:annotation>
-			<xs:documentation>Identifier of this source term</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="type" type="identifier">
-				<xs:annotation>
-					<xs:documentation>Process type. index=1 for NBI; index=2 for nuclear reaction (reaction unspecified); index=3 for nuclear reaction: T(d,n)4He [D+T->He4+n]; index=4 for nuclear reaction: He3(d,p)4He [He3+D->He4+p]; index=5 for nuclear reaction: D(d,p)T [D+D->T+p]; index=6 for nuclear reaction: D(d,n)3He [D+D->He3+n]; index=7 for runaway processes</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="reactant_energy" type="identifier">
-				<xs:annotation>
-					<xs:documentation>For nuclear reaction source, energy of the reactants. index = 0 for a sum over all energies; index = 1 for thermal-thermal; index = 2 for beam-beam; index = 3 for beam-thermal</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="nbi_energy" type="identifier">
-				<xs:annotation>
-					<xs:documentation>For NBI source, energy of the accelerated species considered. index = 0 for a sum over all energies; index = 1 for full energiy; index = 2 for half energy; index = 3 for third energy</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="nbi_unit">
-				<xs:annotation>
-					<xs:documentation>Index of the NBI unit considered. Refers to the "unit" array of the NBI IDS. 0 means sum over all NBI units.</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="nbi_beamlets_group">
-				<xs:annotation>
-					<xs:documentation>Index of the NBI beamlets group considered. Refers to the "unit/beamlets_group" array of the NBI IDS. 0 means sum over all beamlets groups.</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="distribution_sources_source_species">
-		<xs:annotation>
-			<xs:documentation>Species produced by this source term</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="type" type="identifier">
-				<xs:annotation>
-					<xs:documentation>Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion and ion/state structures); index=4 for neutron; index=5 for photon</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="ion" type="plasma_composition_ions">
-				<xs:annotation>
-					<xs:documentation>Description of the ion species, used if type/index = 2 or 3</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="distribution_sources_source">
 		<xs:annotation>
 			<xs:documentation>Source terms for a given actuator</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="process" type="distribution_sources_source_identifier" maxOccurs="32">
+			<xs:element name="process" type="distribution_process_identifier" maxOccurs="32">
 				<xs:annotation>
 					<xs:documentation>Set of processes (NBI units, fusion reactions, ...) that provide the source.</xs:documentation>
 					<xs:appinfo>
@@ -344,7 +189,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="species" type="distribution_sources_source_species">
+			<xs:element name="species" type="distribution_species">
 				<xs:annotation>
 					<xs:documentation>Species injected or consumed by this source/sink</xs:documentation>
 				</xs:annotation>
@@ -376,7 +221,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="markers" type="distribution_sources_source_markers" maxOccurs="unbounded">
+			<xs:element name="markers" type="distribution_markers" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Source given as a group of markers (test particles) born per second, for various time slices</xs:documentation>
 					<xs:appinfo>
@@ -404,6 +249,16 @@
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
+					<xs:annotation>
+						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="magnetic_axis" type="rz1d_dynamic_1">
+					<xs:annotation>
+						<xs:documentation>Magnetic axis position (used to define a poloidal angle for the 2D profiles)</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>

@@ -1044,6 +1044,120 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="distribution_markers">
+		<xs:annotation>
+			<xs:documentation>Test particles for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="coordinate_identifier" type="identifier_dynamic_aos3" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of coordinate identifiers, coordinates on which the markers are represented</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="weights">
+				<xs:annotation>
+					<xs:documentation>Weight of the markers, i.e. number of real particles represented by each marker. The dimension of the vector correspond to the number of markers</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="positions">
+				<xs:annotation>
+					<xs:documentation>Position of the markers in the set of coordinates. The first dimension corresponds to the number of markers, the second dimension to the set of coordinates</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../weights</coordinate1>
+						<coordinate2>../coordinate_identifier</coordinate2>
+						<units>mixed</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="distribution_species">
+		<xs:annotation>
+			<xs:documentation>Description of a species in a distribution function related IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion and ion/state structures); index=4 for neutron; index=5 for photon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion" type="plasma_composition_ions">
+				<xs:annotation>
+					<xs:documentation>Description of the ion species, used if type/index = 2 or 3</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="distribution_process_identifier">
+		<xs:annotation>
+			<xs:documentation>Identifier an NBI or fusion reaction process intervening affecting a distribution function</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Process type. index=1 for NBI; index=2 for nuclear reaction (reaction unspecified); index=3 for nuclear reaction: T(d,n)4He [D+T->He4+n]; index=4 for nuclear reaction: He3(d,p)4He [He3+D->He4+p]; index=5 for nuclear reaction: D(d,p)T [D+D->T+p]; index=6 for nuclear reaction: D(d,n)3He [D+D->He3+n]; index=7 for runaway processes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reactant_energy" type="identifier">
+				<xs:annotation>
+					<xs:documentation>For nuclear reaction source, energy of the reactants. index = 0 for a sum over all energies; index = 1 for thermal-thermal; index = 2 for beam-beam; index = 3 for beam-thermal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nbi_energy" type="identifier">
+				<xs:annotation>
+					<xs:documentation>For NBI source, energy of the accelerated species considered. index = 0 for a sum over all energies; index = 1 for full energiy; index = 2 for half energy; index = 3 for third energy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nbi_unit">
+				<xs:annotation>
+					<xs:documentation>Index of the NBI unit considered. Refers to the "unit" array of the NBI IDS. 0 means sum over all NBI units.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="nbi_beamlets_group">
+				<xs:annotation>
+					<xs:documentation>Index of the NBI beamlets group considered. Refers to the "unit/beamlets_group" array of the NBI IDS. 0 means sum over all beamlets groups.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_scalar">
 		<xs:annotation>
 			<xs:documentation>Scalar values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
@@ -2355,7 +2469,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rz1d_dynamic">
+	<xs:complexType name="rz1d_dynamic_2">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z positions (1D, dynamic), time assumed to be 2 levels above</xs:documentation>
 		</xs:annotation>
@@ -2380,6 +2494,39 @@
 						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>../../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rz1d_dynamic_1">
+		<xs:annotation>
+			<xs:documentation>Structure for list of R, Z positions (1D, dynamic), time assumed to be 1 level above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
