@@ -81,9 +81,88 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="plasma_composition_ion_state_constant">
+		<xs:annotation>
+			<xs:documentation>Definition of an ion state (when describing the plasma composition) (constant)</xs:documentation>
+			<xs:appinfo>
+				<coordinate1>1...N</coordinate1>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="z_min">
+				<xs:annotation>
+					<xs:documentation>Minimum Z of the charge state bundle (z_min = z_max = 0 for a neutral)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_max">
+				<xs:annotation>
+					<xs:documentation>Maximum Z of the charge state bundle (equal to z_min if no bundle)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electron_configuration">
+				<xs:annotation>
+					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_level">
+				<xs:annotation>
+					<xs:documentation>Vibrational level (can be bundled)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_mode">
+				<xs:annotation>
+					<xs:documentation>Vibrational mode of this state, e.g. "A_g". Need to define, or adopt a standard nomenclature.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="plasma_composition_ion_state">
 		<xs:annotation>
-			<xs:documentation>Definition of an ion state (when describing the plasma composition)</xs:documentation>
+			<xs:documentation>Definition of an ion state (when describing the plasma composition) (within a type 3 AoS)</xs:documentation>
 			<xs:appinfo>
 				<coordinate1>1...N</coordinate1>
 			</xs:appinfo>
@@ -160,9 +239,69 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="plasma_composition_ions_constant">
+		<xs:annotation>
+			<xs:documentation>Array of plasma ions (constant)</xs:documentation>
+			<xs:appinfo>
+				<coordinate1>1...N</coordinate1>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element_constant" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_ion">
+				<xs:annotation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>Elementary Charge Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="multiple_states_flag">
+				<xs:annotation>
+					<xs:documentation>Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="state" type="plasma_composition_ion_state_constant" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different states of the species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="plasma_composition_ions">
 		<xs:annotation>
-			<xs:documentation>Array of plasma ions.</xs:documentation>
+			<xs:documentation>Array of plasma ions (within a type 3 AoS)</xs:documentation>
 			<xs:appinfo>
 				<coordinate1>1...N</coordinate1>
 			</xs:appinfo>
@@ -262,9 +401,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="plasma_composition_neutral_element">
+	<xs:complexType name="plasma_composition_neutral_element_constant">
 		<xs:annotation>
-			<xs:documentation>Element entering in the composition of the neutral atom or molecule</xs:documentation>
+			<xs:documentation>Element entering in the composition of the neutral atom or molecule (constant)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="a">
@@ -297,6 +436,49 @@
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="plasma_composition_neutral_element">
+		<xs:annotation>
+			<xs:documentation>Element entering in the composition of the neutral atom or molecule (within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="a">
+				<xs:annotation>
+					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:appinfo>
+						<units>Atomic Mass Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_n">
+				<xs:annotation>
+					<xs:documentation>Nuclear charge</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="multiplicity">
+				<xs:annotation>
+					<xs:documentation>Multiplicity of the atom</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1107,7 +1289,7 @@
 					<xs:documentation>Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion and ion/state structures); index=4 for neutron; index=5 for photon</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="ion" type="plasma_composition_ions">
+			<xs:element name="ion" type="plasma_composition_ions_constant">
 				<xs:annotation>
 					<xs:documentation>Description of the ion species, used if type/index = 2 or 3</xs:documentation>
 				</xs:annotation>
