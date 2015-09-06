@@ -81,9 +81,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="plasma_composition_charge_states">
+	<xs:complexType name="plasma_composition_ion_state_constant">
 		<xs:annotation>
-			<xs:documentation>Array of charge states considered</xs:documentation>
+			<xs:documentation>Definition of an ion state (when describing the plasma composition) (constant)</xs:documentation>
 			<xs:appinfo>
 				<coordinate1>1...N</coordinate1>
 			</xs:appinfo>
@@ -91,7 +91,7 @@
 		<xs:sequence>
 			<xs:element name="z_min">
 				<xs:annotation>
-					<xs:documentation>Minimum Z of the charge state bundle</xs:documentation>
+					<xs:documentation>Minimum Z of the charge state bundle (z_min = z_max = 0 for a neutral)</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>constant</type>
@@ -103,7 +103,7 @@
 			</xs:element>
 			<xs:element name="z_max">
 				<xs:annotation>
-					<xs:documentation>Maximum Z of the charge state bundle</xs:documentation>
+					<xs:documentation>Maximum Z of the charge state bundle (equal to z_min if no bundle)</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>constant</type>
@@ -115,7 +115,41 @@
 			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:documentation>String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electron_configuration">
+				<xs:annotation>
+					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_level">
+				<xs:annotation>
+					<xs:documentation>Vibrational level (can be bundled)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_mode">
+				<xs:annotation>
+					<xs:documentation>Vibrational mode of this state, e.g. "A_g". Need to define, or adopt a standard nomenclature.</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
@@ -126,9 +160,148 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="plasma_composition_ion_state">
+		<xs:annotation>
+			<xs:documentation>Definition of an ion state (when describing the plasma composition) (within a type 3 AoS)</xs:documentation>
+			<xs:appinfo>
+				<coordinate1>1...N</coordinate1>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="z_min">
+				<xs:annotation>
+					<xs:documentation>Minimum Z of the charge state bundle (z_min = z_max = 0 for a neutral)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_max">
+				<xs:annotation>
+					<xs:documentation>Maximum Z of the charge state bundle (equal to z_min if no bundle)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electron_configuration">
+				<xs:annotation>
+					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_level">
+				<xs:annotation>
+					<xs:documentation>Vibrational level (can be bundled)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_mode">
+				<xs:annotation>
+					<xs:documentation>Vibrational mode of this state, e.g. "A_g". Need to define, or adopt a standard nomenclature.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="plasma_composition_ions_constant">
+		<xs:annotation>
+			<xs:documentation>Array of plasma ions (constant)</xs:documentation>
+			<xs:appinfo>
+				<coordinate1>1...N</coordinate1>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element_constant" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_ion">
+				<xs:annotation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>Elementary Charge Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="multiple_states_flag">
+				<xs:annotation>
+					<xs:documentation>Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="state" type="plasma_composition_ion_state_constant" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different states of the species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="plasma_composition_ions">
 		<xs:annotation>
-			<xs:documentation>Array of plasma ions.</xs:documentation>
+			<xs:documentation>Array of plasma ions (within a type 3 AoS)</xs:documentation>
 			<xs:appinfo>
 				<coordinate1>1...N</coordinate1>
 			</xs:appinfo>
@@ -176,11 +349,11 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="state" type="core_profiles_ions_charge_states2" maxOccurs="10">
+			<xs:element name="state" type="plasma_composition_ion_state" maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation>Quantities related to the different states of the species (ionisation, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N_charge_states</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -228,9 +401,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="plasma_composition_neutral_element">
+	<xs:complexType name="plasma_composition_neutral_element_constant">
 		<xs:annotation>
-			<xs:documentation>Element entering in the composition of the neutral atom or molecule</xs:documentation>
+			<xs:documentation>Element entering in the composition of the neutral atom or molecule (constant)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="a">
@@ -263,6 +436,49 @@
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="plasma_composition_neutral_element">
+		<xs:annotation>
+			<xs:documentation>Element entering in the composition of the neutral atom or molecule (within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="a">
+				<xs:annotation>
+					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:appinfo>
+						<units>Atomic Mass Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_n">
+				<xs:annotation>
+					<xs:documentation>Nuclear charge</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="multiplicity">
+				<xs:annotation>
+					<xs:documentation>Multiplicity of the atom</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -503,6 +719,37 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="b_tor_vacuum_aos3">
+		<xs:annotation>
+			<xs:documentation>Characteristics of the vacuum toroidal field, dynamic within a type 3 AoS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r0">
+				<xs:annotation>
+					<xs:documentation>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b0">
+				<xs:annotation>
+					<xs:documentation>Vacuum toroidal field at b0. Positive sign means anti-clockwise when viewed from above. The product r0*b0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -862,7 +1109,7 @@
 				<xs:annotation>
 					<xs:documentation>Quantities related to the different states of the species (ionisation, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N_charge_states</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -979,6 +1226,120 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="distribution_markers">
+		<xs:annotation>
+			<xs:documentation>Test particles for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="coordinate_identifier" type="identifier_dynamic_aos3" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of coordinate identifiers, coordinates on which the markers are represented</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="weights">
+				<xs:annotation>
+					<xs:documentation>Weight of the markers, i.e. number of real particles represented by each marker. The dimension of the vector correspond to the number of markers</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="positions">
+				<xs:annotation>
+					<xs:documentation>Position of the markers in the set of coordinates. The first dimension corresponds to the number of markers, the second dimension to the set of coordinates</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../weights</coordinate1>
+						<coordinate2>../coordinate_identifier</coordinate2>
+						<units>mixed</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="distribution_species">
+		<xs:annotation>
+			<xs:documentation>Description of a species in a distribution function related IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Species type. index=1 for electron; index=2 for ion species in a single/average state (refer to ion structure); index=3 for ion species in a particular state (refer to ion and ion/state structures); index=4 for neutron; index=5 for photon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion" type="plasma_composition_ions_constant">
+				<xs:annotation>
+					<xs:documentation>Description of the ion species, used if type/index = 2 or 3</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="distribution_process_identifier">
+		<xs:annotation>
+			<xs:documentation>Identifier an NBI or fusion reaction process intervening affecting a distribution function</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Process type. index=1 for NBI; index=2 for nuclear reaction (reaction unspecified); index=3 for nuclear reaction: T(d,n)4He [D+T->He4+n]; index=4 for nuclear reaction: He3(d,p)4He [He3+D->He4+p]; index=5 for nuclear reaction: D(d,p)T [D+D->T+p]; index=6 for nuclear reaction: D(d,n)3He [D+D->He3+n]; index=7 for runaway processes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reactant_energy" type="identifier">
+				<xs:annotation>
+					<xs:documentation>For nuclear reaction source, energy of the reactants. index = 0 for a sum over all energies; index = 1 for thermal-thermal; index = 2 for beam-beam; index = 3 for beam-thermal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nbi_energy" type="identifier">
+				<xs:annotation>
+					<xs:documentation>For NBI source, energy of the accelerated species considered. index = 0 for a sum over all energies; index = 1 for full energiy; index = 2 for half energy; index = 3 for third energy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nbi_unit">
+				<xs:annotation>
+					<xs:documentation>Index of the NBI unit considered. Refers to the "unit" array of the NBI IDS. 0 means sum over all NBI units.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="nbi_beamlets_group">
+				<xs:annotation>
+					<xs:documentation>Index of the NBI beamlets group considered. Refers to the "unit/beamlets_group" array of the NBI IDS. 0 means sum over all beamlets groups.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_scalar">
 		<xs:annotation>
 			<xs:documentation>Scalar values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
@@ -986,7 +1347,7 @@
 		<xs:sequence>
 			<xs:element name="grid_index">
 				<xs:annotation>
-					<xs:documentation>Index of the grid this scalar quantity is associated with</xs:documentation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -995,9 +1356,9 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="subgrid_index">
+			<xs:element name="grid_subset_index">
 				<xs:annotation>
-					<xs:documentation>Index of the subgrid (as stored in generic_grid/subgrid) the data is stored on</xs:documentation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1008,11 +1369,11 @@
 			</xs:element>
 			<xs:element name="values">
 				<xs:annotation>
-					<xs:documentation>One scalar value is stored per element in the subgrid.</xs:documentation>
+					<xs:documentation>One scalar value is provided per element in the grid subset.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
-						<units>mixed</units>
+						<units>as_parent</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1028,7 +1389,7 @@
 		<xs:sequence>
 			<xs:element name="grid_index">
 				<xs:annotation>
-					<xs:documentation>Index of the grid this scalar quantity is associated with</xs:documentation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1037,9 +1398,9 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="subgrid_index">
+			<xs:element name="grid_subset_index">
 				<xs:annotation>
-					<xs:documentation>Index of the subgrid (as stored in generic_grid/subgrid) the data is stored on</xs:documentation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1050,16 +1411,110 @@
 			</xs:element>
 			<xs:element name="values">
 				<xs:annotation>
-					<xs:documentation>List of vector components, one list per element in the subgrid. First dimenstion: element index. Second dimension: vector component index.</xs:documentation>
+					<xs:documentation>List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
 						<coordinate2>1...N</coordinate2>
-						<units>mixed</units>
+						<units>as_parent</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_vector_components">
+		<xs:annotation>
+			<xs:documentation>Vector components in predefined directions on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="radial">
+				<xs:annotation>
+					<xs:documentation>Radial component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="diamagnetic">
+				<xs:annotation>
+					<xs:documentation>Diamagnetic component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../radial</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../radial</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="poloidal">
+				<xs:annotation>
+					<xs:documentation>Poloidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../radial</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal">
+				<xs:annotation>
+					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../radial</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -1071,7 +1526,7 @@
 		<xs:sequence>
 			<xs:element name="grid_index">
 				<xs:annotation>
-					<xs:documentation>Index of the grid this scalar quantity is associated with</xs:documentation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1080,9 +1535,9 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="subgrid_index">
+			<xs:element name="grid_subset_index">
 				<xs:annotation>
-					<xs:documentation>Index of the subgrid (as stored in generic_grid/subgrid) the data is stored on</xs:documentation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1093,13 +1548,13 @@
 			</xs:element>
 			<xs:element name="values">
 				<xs:annotation>
-					<xs:documentation>List of matrix components, one list per element in the subgrid. First dimenstion: element index. Second dimension: first matrix index. Third dimension: second matrix index.</xs:documentation>
+					<xs:documentation>List of matrix components, one list per element in the grid subset. First dimenstion: element index. Second dimension: first matrix index. Third dimension: second matrix index.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
 						<coordinate2>1...N</coordinate2>
 						<coordinate3>1...N</coordinate3>
-						<units>mixed</units>
+						<units>as_parent</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1225,9 +1680,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_dynamic_subgrid_element_object">
+	<xs:complexType name="generic_grid_dynamic_grid_subset_element_object">
 		<xs:annotation>
-			<xs:documentation>Generic grid, object part of an element part of a subgrid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Generic grid, object part of an element part of a grid_subset (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="space">
@@ -1265,12 +1720,12 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_dynamic_subgrid_element">
+	<xs:complexType name="generic_grid_dynamic_grid_subset_element">
 		<xs:annotation>
-			<xs:documentation>Generic grid, element part of a subgrid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Generic grid, element part of a grid_subset (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="object" type="generic_grid_dynamic_subgrid_element_object" maxOccurs="unbounded">
+			<xs:element name="object" type="generic_grid_dynamic_grid_subset_element_object" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of objects defining the element</xs:documentation>
 					<xs:appinfo>
@@ -1280,9 +1735,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_dynamic_subgrid_metric">
+	<xs:complexType name="generic_grid_dynamic_grid_subset_metric">
 		<xs:annotation>
-			<xs:documentation>Generic grid, metric description for a given subgrid and base (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Generic grid, metric description for a given grid_subset and base (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="jacobian">
@@ -1534,19 +1989,19 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_dynamic_subgrid">
+	<xs:complexType name="generic_grid_dynamic_grid_subset">
 		<xs:annotation>
-			<xs:documentation>Generic grid subgrid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Generic grid grid_subset (dynamic within a type 3 AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="identifier" type="identifier_dynamic_aos3">
 				<xs:annotation>
-					<xs:documentation>Subgrid identifier</xs:documentation>
+					<xs:documentation>Grid subset identifier</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="dimension">
 				<xs:annotation>
-					<xs:documentation>Space dimension of the subgrid elements. This must be equal to the sum of the dimensions of the individual objects forming the element.</xs:documentation>
+					<xs:documentation>Space dimension of the grid subset elements. This must be equal to the sum of the dimensions of the individual objects forming the element.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1555,23 +2010,23 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="element" type="generic_grid_dynamic_subgrid_element" maxOccurs="unbounded">
+			<xs:element name="element" type="generic_grid_dynamic_grid_subset_element" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of elements defining the subgrid. An element is defined by a combination of objects from potentially all spaces</xs:documentation>
+					<xs:documentation>Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="base" type="generic_grid_dynamic_subgrid_metric" maxOccurs="unbounded">
+			<xs:element name="base" type="generic_grid_dynamic_grid_subset_metric" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of bases for the subgrid. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.</xs:documentation>
+					<xs:documentation>Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="metric" type="generic_grid_dynamic_subgrid_metric">
+			<xs:element name="metric" type="generic_grid_dynamic_grid_subset_metric">
 				<xs:annotation>
 					<xs:documentation>Metric of the canonical frame onto Cartesian coordinates</xs:documentation>
 				</xs:annotation>
@@ -1596,9 +2051,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="subgrid" type="generic_grid_dynamic_subgrid" maxOccurs="unbounded">
+			<xs:element name="grid_subset" type="generic_grid_dynamic_grid_subset" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of subgrids</xs:documentation>
+					<xs:documentation>Grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -2196,7 +2651,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rz1d_dynamic">
+	<xs:complexType name="rz1d_dynamic_2">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z positions (1D, dynamic), time assumed to be 2 levels above</xs:documentation>
 		</xs:annotation>
@@ -2221,6 +2676,39 @@
 						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>../../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rz1d_dynamic_1">
+		<xs:annotation>
+			<xs:documentation>Structure for list of R, Z positions (1D, dynamic), time assumed to be 1 level above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
