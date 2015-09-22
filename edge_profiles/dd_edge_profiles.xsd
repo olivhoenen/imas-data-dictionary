@@ -844,8 +844,7 @@
 					<xs:documentation>Current density due to the perpendicular viscosity, given on various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
-												<coordinate1>1...N</coordinate1>
-
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -907,6 +906,15 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="profiles_1d" type="core_profiles_profiles_1d" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>SOL radial profiles for various time slices, taken on outboard equatorial mid-plane</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="ggd" type="edge_profiles_time_slice" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Edge plasma quantities represented using the general grid description, for various time slices</xs:documentation>
