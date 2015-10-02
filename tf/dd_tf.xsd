@@ -40,35 +40,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="tf_coil_fiber_thickness">
-		<xs:annotation>
-			<xs:documentation>Thickness of the elements of the fiber contour</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="half_width_horizontal">
-				<xs:annotation>
-					<xs:documentation>Horizontal half width</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="half_width_vertical">
-				<xs:annotation>
-					<xs:documentation>Vertical half width</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="tf_coil_fiber">
 		<xs:annotation>
 			<xs:documentation>Description of a neutral fiber</xs:documentation>
@@ -83,11 +54,12 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="elements_thickness" type="tf_coil_fiber_thickness">
+			<xs:element name="section_point" type="delta_rzphi0d_static" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>Thickness of the elements, perpendicular to the TF coil contour, in the horizontal and vertical directions</xs:documentation>
+					<xs:documentation>The section perpendicular to the TF coil contour is described by contour points, given by their relative position with respect to the start point of the first element. This section is assumed constant for all elements.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+												<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -100,6 +72,18 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="resistance">
+				<xs:annotation>
+					<xs:documentation>Fiber resistance</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>Ohm</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="current">
@@ -152,13 +136,25 @@
 			</xs:element>
 			<xs:element name="turns">
 				<xs:annotation>
-					<xs:documentation>Number of total turns in a toroidal field coil</xs:documentation>
+					<xs:documentation>Number of total turns in a toroidal field coil. May be a fraction when describing the coil connections.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_0D"/>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="resistance">
+				<xs:annotation>
+					<xs:documentation>Coil resistance</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>Ohm</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="current">
@@ -206,7 +202,29 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="coil" type="tf_coil" maxOccurs="20">
+				<xs:element name="is_periodic">
+					<xs:annotation>
+						<xs:documentation>Flag indicating whether coils are described one by one in the coil() structure (flag=0) or whether the coil structure represents only coils having different characteristics (flag = 1, n_coils must be filled in that case). In the latter case, the coil() sequence is repeated periodically around the torus.</xs:documentation>
+						<xs:appinfo>
+							<type>static</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="INT_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="coils_n">
+					<xs:annotation>
+						<xs:documentation>Number of coils around the torus, in case is_periodic = 1</xs:documentation>
+						<xs:appinfo>
+							<type>static</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="INT_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="coil" type="tf_coil" maxOccurs="24">
 					<xs:annotation>
 						<xs:documentation>Set of coils around the tokamak</xs:documentation>
 						<xs:appinfo>

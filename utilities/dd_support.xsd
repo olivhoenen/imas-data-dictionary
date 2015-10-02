@@ -1019,6 +1019,49 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="delta_rzphi0d_static">
+		<xs:annotation>
+			<xs:documentation>Structure for R, Z, Phi relative positions (0D, static)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="delta_r">
+				<xs:annotation>
+					<xs:documentation>Major radius (relative to a reference point)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="delta_z">
+				<xs:annotation>
+					<xs:documentation>Height (relative to a reference point)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="delta_phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle (relative to a reference point)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_scalar">
 		<xs:annotation>
 			<xs:documentation>Scalar values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
