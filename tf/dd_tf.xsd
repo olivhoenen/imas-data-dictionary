@@ -10,9 +10,9 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="tf_coil_fibre_element">
+	<xs:complexType name="tf_coil_conductor_element">
 		<xs:annotation>
-			<xs:documentation>Element descibring the fibre contour</xs:documentation>
+			<xs:documentation>Element descibring the conductor contour</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="type" type="identifier_static">
@@ -40,14 +40,14 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="tf_coil_fibre">
+	<xs:complexType name="tf_coil_conductor">
 		<xs:annotation>
-			<xs:documentation>Description of a neutral fibre</xs:documentation>
+			<xs:documentation>Description of a conductor</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="element" type="tf_coil_fibre_element" maxOccurs="20">
+			<xs:element name="element" type="tf_coil_conductor_element" maxOccurs="20">
 				<xs:annotation>
-					<xs:documentation>Set of geometrical elements (line segments and/or arcs of a circle) describing the TF coil contour</xs:documentation>
+					<xs:documentation>Set of geometrical elements (line segments and/or arcs of a circle) describing the contour of the TF conductor centre</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -56,7 +56,7 @@
 			</xs:element>
 			<xs:element name="section_point" type="delta_rzphi0d_static" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>The section perpendicular to the TF coil contour is described by contour points, given by their relative position with respect to the start point of the first element. This section is assumed constant for all elements.</xs:documentation>
+					<xs:documentation>The section perpendicular to the TF conductor contour is described by contour points, given by their relative position with respect to the start point of the first element. This section is assumed constant for all elements.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -65,7 +65,7 @@
 			</xs:element>
 			<xs:element name="resistance">
 				<xs:annotation>
-					<xs:documentation>fibre resistance</xs:documentation>
+					<xs:documentation>conductor resistance</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>Ohm</units>
@@ -77,7 +77,7 @@
 			</xs:element>
 			<xs:element name="current">
 				<xs:annotation>
-					<xs:documentation>Current in the fibre</xs:documentation>
+					<xs:documentation>Current in the conductor</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>time</coordinate1>
@@ -93,7 +93,7 @@
 			</xs:element>
 			<xs:element name="voltage">
 				<xs:annotation>
-					<xs:documentation>Voltage on the fibre terminals</xs:documentation>
+					<xs:documentation>Voltage on the conductor terminals</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>time</coordinate1>
@@ -114,9 +114,9 @@
 			<xs:documentation>Description of a given coil</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="neutral_fibre" type="tf_coil_fibre" maxOccurs="20">
+			<xs:element name="conductor" type="tf_coil_conductor" maxOccurs="20">
 				<xs:annotation>
-					<xs:documentation>Set of neutral fibres inside the coil. The structure can be used with size 1 for a simplified description of all fibres as a single conductor</xs:documentation>
+					<xs:documentation>Set of conductors inside the coil. The structure can be used with size 1 for a simplified description as a single conductor</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
