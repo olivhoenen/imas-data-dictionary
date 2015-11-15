@@ -277,6 +277,237 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="wall_2d_vessel_element">
+		<xs:annotation>
+			<xs:documentation>2D vessel block element description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the block element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="rz1d_static">
+				<xs:annotation>
+					<xs:documentation>Outline of the block element. Do NOT repeat the first point for closed contours</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resistivity">
+				<xs:annotation>
+					<xs:documentation>Resistivity of the block element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>ohm.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal current induced in this block element</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>A</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="resistance">
+				<xs:annotation>
+					<xs:documentation>Resistivity of the block element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>Ohm</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_2d_vessel_annular">
+		<xs:annotation>
+			<xs:documentation>2D vessel annular description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="outline_inner" type="rz1d_static">
+				<xs:annotation>
+					<xs:documentation>Inner vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="outline_outer" type="rz1d_static">
+				<xs:annotation>
+					<xs:documentation>Outer vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resistivity">
+				<xs:annotation>
+					<xs:documentation>Resistivity of the vessel unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>ohm.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_2d_vessel_unit">
+		<xs:annotation>
+			<xs:documentation>2D vessel unit description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the vessel unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="annular" type="wall_2d_vessel_annular">
+				<xs:annotation>
+					<xs:documentation>Annular representation of a vessel layer by two contours, inner and outer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="element" type="wall_2d_vessel_element" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Set of block elements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_2d_vessel">
+		<xs:annotation>
+			<xs:documentation>2D vessel description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of the vessel description. index = 0 for the official single/multiple annular vessel and 1 for the official block element representation for each vessel unit. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on flag=2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unit" type="wall_2d_vessel_unit" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Set of vessel units</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_2d_limiter_unit">
+		<xs:annotation>
+			<xs:documentation>2D limiter unit description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the limiter unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="closed">
+				<xs:annotation>
+					<xs:documentation>Flag identifying whether the contour is closed (1) or open (0)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="rz1d_static">
+				<xs:annotation>
+					<xs:documentation>Irregular outline of the limiting surface. Do NOT repeat the first point for closed contours</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resistivity">
+				<xs:annotation>
+					<xs:documentation>Resistivity of the limiter unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>ohm.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_2d_limiter">
+		<xs:annotation>
+			<xs:documentation>2D limiter description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of the limiter description. index = 0 for the official single contour limiter and 1 for the official disjoint PFC structure like first wall. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on flag=2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unit" type="wall_2d_limiter_unit" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Set of limiter units</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_2d">
+		<xs:annotation>
+			<xs:documentation>2D wall description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of the description. index = 0 for equilibrium codes (single closed limiter and vessel); 1 for gas-tight walls (disjoint PFCs with inner vessel as last limiter_unit; no vessel structure); 2 for free boundary codes (disjoint PFCs and vessel) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="limiter" type="wall_2d_limiter">
+				<xs:annotation>
+					<xs:documentation>Description of the immobile limiting surface(s) or plasma facing components for defining the Last Closed Flux Surface.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vessel" type="wall_2d_vessel">
+				<xs:annotation>
+					<xs:documentation>Mechanical structure of the vacuum vessel. The vessel is described as a set of nested layers with given physics properties; Two representations are admitted for each vessel unit : annular (two contours) or block elements.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="wall">
 		<xs:annotation>
 			<xs:documentation>Description of the torus wall and its interaction with the plasma</xs:documentation>
@@ -291,6 +522,14 @@
 				<xs:element name="global_quantities" type="wall_global_quantitites">
 					<xs:annotation>
 						<xs:documentation>Simple 0D description of plasma-wall interaction</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="description_2d" type="wall_2d" maxOccurs="3">
+					<xs:annotation>
+						<xs:documentation>Set of 2D wall descriptions, for each type of possible physics or engineering configurations necessary (gas tight vs wall with ports and holes, coarse vs fine representation, single contour limiter, disjoint gapped plasma facing components, ...).</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
