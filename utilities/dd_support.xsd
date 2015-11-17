@@ -281,13 +281,10 @@
 	</xs:complexType>
 	<xs:complexType name="plasma_composition_ions_constant">
 		<xs:annotation>
-			<xs:documentation>Array of plasma ions (constant)</xs:documentation>
-			<xs:appinfo>
-				<coordinate1>1...N</coordinate1>
-			</xs:appinfo>
+			<xs:documentation>Description of plasma ions (constant)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="element" type="plasma_composition_neutral_element_constant" maxOccurs="unbounded">
+			<xs:element name="element" type="plasma_composition_neutral_element_constant" maxOccurs="5">
 				<xs:annotation>
 					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
 					<xs:appinfo>
@@ -1720,7 +1717,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="generic_grid_vector_components">
 		<xs:annotation>
 			<xs:documentation>Vector components in predefined directions on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
