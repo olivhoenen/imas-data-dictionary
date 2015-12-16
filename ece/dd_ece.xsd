@@ -49,11 +49,6 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="line_of_sight" type="line_of_sight_2points">
-				<xs:annotation>
-					<xs:documentation>Description of the line of sight of the channel, defined by two points</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="harmonic">
 				<xs:annotation>
 					<xs:documentation>Harmonic detected by the channel</xs:documentation>
@@ -103,9 +98,14 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="line_of_sight" type="line_of_sight_2points">
+					<xs:annotation>
+						<xs:documentation>Description of the line of sight of the diagnostic (valid for all channels), defined by two points</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="channel" type="ece_channel" maxOccurs="100">
 					<xs:annotation>
-						<xs:documentation>Set of channels (lines-of-sight)</xs:documentation>
+						<xs:documentation>Set of channels (frequency)</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
