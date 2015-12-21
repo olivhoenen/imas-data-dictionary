@@ -10,14 +10,14 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="ece_channel">
+	<xs:complexType name="iron_core_segment">
 		<xs:annotation>
-			<xs:documentation>Charge exchange channel</xs:documentation>
+			<xs:documentation>Segment of the iron core</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the channel</xs:documentation>
+					<xs:documentation>Name of the segment</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -28,7 +28,7 @@
 			</xs:element>
 			<xs:element name="identifier">
 				<xs:annotation>
-					<xs:documentation>ID of the channel</xs:documentation>
+					<xs:documentation>ID of the segment</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -37,44 +37,59 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="frequency">
+			<xs:element name="b_field">
 				<xs:annotation>
-					<xs:documentation>Frequency of the channel</xs:documentation>
+					<xs:documentation>Array of magnetic field values, for each of which the relative permeability is given</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>Hz</units>
+						<units>T</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="harmonic">
+			<xs:element name="permeability_relative">
 				<xs:annotation>
-					<xs:documentation>Harmonic detected by the channel</xs:documentation>
+					<xs:documentation>Relative permeability of the iron segment</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>-</units>
+						<coordinate1>../b_field</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometry" type="outline_2d_geometry_static">
+				<xs:annotation>
+					<xs:documentation>Cross-sectional shape of the segment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="magnetisation_r">
+				<xs:annotation>
+					<xs:documentation>Magnetisation M of the iron segment along the major radius axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
+						<units>T</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element ref="time"/>
-						<xs:group ref="INT_1D"/>
+						<xs:group ref="FLT_1D"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="position" type="rzphi1d_dynamic_aos1">
+			<xs:element name="magnetisation_z">
 				<xs:annotation>
-					<xs:documentation>Position of the measurements</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="t_e">
-				<xs:annotation>
-					<xs:documentation>Electron temperature</xs:documentation>
+					<xs:documentation>Magnetisation M of the iron segment along the vertical axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
-						<units>eV</units>
+						<units>T</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -87,25 +102,20 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="ece">
+	<xs:element name="iron_core">
 		<xs:annotation>
-			<xs:documentation>Electron cyclotron emission diagnostic</xs:documentation>
+			<xs:documentation>Iron core description</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
-				<lifecycle_version>3.2.1</lifecycle_version>
+				<lifecycle_version>3.2.3</lifecycle_version>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="line_of_sight" type="line_of_sight_2points">
+				<xs:element name="segment" type="iron_core_segment" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>Description of the line of sight of the diagnostic (valid for all channels), defined by two points</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="channel" type="ece_channel" maxOccurs="100">
-					<xs:annotation>
-						<xs:documentation>Set of channels (frequency)</xs:documentation>
+						<xs:documentation>The iron core is describred as a set of segments</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
