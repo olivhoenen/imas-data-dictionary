@@ -1418,6 +1418,17 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="neutral_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding neutral species in the ../../neutral array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="temperature">
 				<xs:annotation>
 					<xs:documentation>Temperature (average over charge states when multiple charge states are considered)</xs:documentation>
@@ -2304,7 +2315,7 @@
 					<xs:documentation>Description of the ion or neutral species, used if type/index = 2 or 3</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-						<xs:element name="neutral" type="plasma_composition_neutral_constant">
+			<xs:element name="neutral" type="plasma_composition_neutral_constant">
 				<xs:annotation>
 					<xs:documentation>Description of the neutral species, used if type/index = 4 or 5</xs:documentation>
 				</xs:annotation>
