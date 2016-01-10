@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
 <?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./$GET[stylesheet]" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+<xsl:stylesheet xmlns:yaslt="http://www.mod-xslt2.com/ns/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" extension-element-prefixes="yaslt" xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:local="http://www.example.com/functions/local" exclude-result-prefixes="local xs">
+<xsl:output method="html" encoding="UTF-8" indent="yes"/>
   <xsl:template match="/*">
+<xsl:result-document href="html_documentation/html_documentation.html">
     <html>
       <head>
        <title>Data Dictionary HTML documentation</title>
@@ -21,7 +22,7 @@
         <thead style="color:#ff0000"><td>IDS name</td><td>Description</td><td>Max. occurrence number</td></thead>
 <xsl:for-each select="IDS">
 <tr>
-	<td><a href="#{@name}"><xsl:value-of select="@name"/></a></td>
+	<td><a href="{@name}.html"><xsl:value-of select="@name"/></a></td>
 	<td><xsl:value-of select="@documentation"/></td>
 	<td><xsl:value-of select="@maxoccur"/></td>
 </tr>
@@ -47,23 +48,38 @@
 </tr>
 </xsl:for-each>
 </table>
+</body>
+</html>
+</xsl:result-document>
 
 <!--Third: write the detailed documentation of each IDS-->
 <xsl:for-each select="IDS">
-<a name="{@name}">
+<xsl:result-document href="html_documentation/{@name}.html">
+<html>
+      <head>
+       <title>Data Dictionary HTML documentation</title>
+        <style type="text/css">
+			p {color:black;font-size:12pt;font-weight:normal;}
+			p.name {color:red;font-size:18pt;font-weight:bold;}
+			p.welcome {color:#3333aa; font-size:20pt; font-weight:bold; text-align:center;}
+			span.head {color:#3333aa; font-size:12pt; font-weight:bold; }
+       </style>
+      </head>
+      <body>
         <p class="welcome">ITER Physics Data Model Documentation for <xsl:value-of select="@name"/></p>
         <p><xsl:value-of select="@documentation"/></p> <!-- Write the IDS description -->
         <p>Lifecycle status: <xsl:value-of select="@lifecycle_status"/> since version <xsl:value-of select="@lifecycle_version"/></p> <!-- Write the IDS Lifecycle information -->
-        <!--<b></b>
-        <br />-->
+        <p><a href="html_documentation.html">Back to top IDS list</a></p>
         <table border="1">
         <thead style="color:#ff0000"><td>Full path name</td><td>Description</td><td>Data Type</td><td>Coordinates</td></thead>
         <xsl:apply-templates select="field"/>
         </table>
-        </a>
+        <p><a href="html_documentation.html">Back to top IDS list</a></p>
+</body>
+</html>
+</xsl:result-document>
         </xsl:for-each>
-     </body>
-    </html>
+
   </xsl:template>
   
 
