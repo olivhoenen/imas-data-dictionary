@@ -328,7 +328,7 @@
 	</xs:complexType>
 	<xs:complexType name="core_transport_model_ions_charge_states">
 		<xs:annotation>
-			<xs:documentation>Transport coefficients related to the a given charge state of the ion species</xs:documentation>
+			<xs:documentation>Transport coefficients related to the a given state of the ion species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="z_min">
@@ -393,6 +393,8 @@
 				<xs:annotation>
 					<xs:documentation>Flag specifying if this state corresponds to a neutral (1) or not (0)</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.3.0</lifecycle_version>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -403,7 +405,73 @@
 			<xs:element name="neutral_type" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
+					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.3.0</lifecycle_version>
+					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="electron_configuration">
+				<xs:annotation>
+					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="particles" type="core_transport_model_3_density">
+				<xs:annotation>
+					<xs:documentation>Transport quantities related to density equation of the charge state considered (thermal+non-thermal)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy" type="core_transport_model_3_energy">
+				<xs:annotation>
+					<xs:documentation>Transport quantities related to the energy equation of the charge state considered </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_neutral_state">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients related to the a given state of the neutral species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying state</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_level">
+				<xs:annotation>
+					<xs:documentation>Vibrational level (can be bundled)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_mode">
+				<xs:annotation>
+					<xs:documentation>Vibrational mode of this state, e.g. "A_g". Need to define, or adopt a standard nomenclature.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="electron_configuration">
 				<xs:annotation>
@@ -464,6 +532,17 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="neutral_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding neutral species in the ../../neutral array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="particles" type="core_transport_model_2_density">
 				<xs:annotation>
 					<xs:documentation>Transport related to the ion density equation</xs:documentation>
@@ -486,6 +565,72 @@
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="state" type="core_transport_model_ions_charge_states" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients related to the different states of the species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_neutral">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients related to a given neutral species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ion_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding ion species in the ../../ion array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="particles" type="core_transport_model_2_density">
+				<xs:annotation>
+					<xs:documentation>Transport related to the neutral density equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy" type="core_transport_model_2_energy">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients related to the neutral energy equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="multiple_states_flag">
+				<xs:annotation>
+					<xs:documentation>Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="state" type="core_transport_model_neutral_state" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients related to the different states of the species</xs:documentation>
 					<xs:appinfo>
@@ -562,7 +707,15 @@
 			</xs:element>
 			<xs:element name="ion" type="core_transport_model_ions" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients related to the various ion and neutral species</xs:documentation>
+					<xs:documentation>Transport coefficients related to the various ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="neutral" type="core_transport_model_neutral" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients related to the various neutral species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
