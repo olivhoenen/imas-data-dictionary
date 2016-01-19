@@ -21,7 +21,7 @@
 <!-- Tests are done for each IDS -->
 <xsl:for-each select="IDS">
 <a name="{@name}">
-        <!-- First a general test here on all conditions to generate the "IDS is VALID" statement. This test consists in having success on all tests, i.e. all individual tests expressions are assembled here with AND NOT() statements.  -->
+        <!-- First a general test here on all conditions to generate the "IDS is VALID" statement. This test consists in having success on all tests, i.e. all individual tests expressions are assembled here with AND NOT() statements. We therefore have to copy here with "and not()" all individual tests listed in the second xsl:when statement  -->
 <xsl:choose>
 <xsl:when test="not(.//field[not(@type) and not(@data_type='structure') and not(@data_type='struct_array')]) 
 and not(.//field[not(@coordinate1) and (@data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_1D' or @data_type='INT_2D' or @data_type='INT_3D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' or @data_type='STR_1D' or @data_type='struct_array' )])
@@ -31,10 +31,11 @@ and not (.//field[not(@coordinate4) and (@data_type='FLT_4D' or @data_type='FLT_
 and not (.//field[not(@coordinate5) and (@data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
 and not (.//field[not(@coordinate6) and (@data_type='FLT_6D' or @data_type='CPX_6D' )])
 and not (.//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_0D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D')])
+and not (.//field[@maxoccur='unbounded' and @type='dynamic' and ancestor::field[@maxoccur='unbounded' and @type='dynamic']])
 ">
 <p class="welcome">IDS <xsl:value-of select="@name"/> is valid</p>
 </xsl:when>
-<xsl:otherwise>
+<xsl:otherwise> 
 <!-- Create error table and populate it with results of the various tests, which are applied sequentially, each test corresponding to a particular type of error  -->
         <p class="welcome">IDS <xsl:value-of select="@name"/> has errors</p>
        <table border="1">
@@ -71,7 +72,10 @@ and not (.//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or
         <xsl:apply-templates select=".//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_0D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D')]">
         <xsl:with-param name="error_description" select="'This field must have a units attribute'"/>
        </xsl:apply-templates>
-
+       <!-- Test the presence of nested AoS 3 (illegal) -->
+        <xsl:apply-templates select=".//field[@maxoccur='unbounded' and @type='dynamic' and ancestor::field[@maxoccur='unbounded' and @type='dynamic']]">
+        <xsl:with-param name="error_description" select="'Illegal construct: this field is an AoS type 3 nested under another AoS type 3'"/>
+       </xsl:apply-templates>
 
        </table>
 </xsl:otherwise>
