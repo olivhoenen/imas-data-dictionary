@@ -2632,6 +2632,18 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="nodes">
+				<xs:annotation>
+					<xs:documentation>List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="measure">
 				<xs:annotation>
 					<xs:documentation>Measure of the space object, i.e. physical size (length for 1d, area for 2d, volume for 3d objects,...)</xs:documentation>
