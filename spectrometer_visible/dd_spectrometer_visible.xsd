@@ -10,7 +10,7 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="spectrometer_visible_channel_filter">
+	<xs:complexType name="spectro_vis_channel_filter">
 		<xs:annotation>
 			<xs:documentation>Filter spectrometer</xs:documentation>
 		</xs:annotation>
@@ -145,7 +145,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="spectrometer_visible_channel_grating">
+	<xs:complexType name="spectro_vis_channel_grating">
 		<xs:annotation>
 			<xs:documentation>Grating spectrometer</xs:documentation>
 		</xs:annotation>
@@ -279,7 +279,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="spectrometer_visible_channel">
+	<xs:complexType name="spectro_vis_channel">
 		<xs:annotation>
 			<xs:documentation>Charge exchange channel</xs:documentation>
 		</xs:annotation>
@@ -320,12 +320,12 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="grating" type="spectrometer_visible_channel_grating">
+			<xs:element name="grating" type="spectro_vis_channel_grating">
 				<xs:annotation>
 					<xs:documentation>Quantities measured by the channel if connected to a grating spectrometer</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="filter" type="spectrometer_visible_channel_filter">
+			<xs:element name="filter" type="spectro_vis_channel_filter">
 				<xs:annotation>
 					<xs:documentation>Quantities measured by the channel if connected to a filter spectrometer</xs:documentation>
 				</xs:annotation>
@@ -369,7 +369,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="channel" type="spectrometer_visible_channel" maxOccurs="240">
+				<xs:element name="channel" type="spectro_vis_channel" maxOccurs="240">
 					<xs:annotation>
 						<xs:documentation>Set of channels (lines-of-sight)</xs:documentation>
 						<xs:appinfo>
