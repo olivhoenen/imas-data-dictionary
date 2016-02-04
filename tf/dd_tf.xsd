@@ -10,32 +10,48 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="tf_coil_conductor_element">
+	<xs:complexType name="tf_coil_conductor_elements">
 		<xs:annotation>
-			<xs:documentation>Element descibring the conductor contour</xs:documentation>
+			<xs:documentation>Elements descibring the conductor contour</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="type" type="identifier_static">
+			<xs:element name="names">
 				<xs:annotation>
-					<xs:documentation>Element type: index = 1: line segment, its ends are given by ; index = 2: arc of a circle. </xs:documentation>
+					<xs:documentation>Name or description of every element</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="start_point" type="rzphi0d_static">
+			<xs:element name="types">
 				<xs:annotation>
-					<xs:documentation>Position of the start point of the element</xs:documentation>
+					<xs:documentation>Type of every element: 1: line segment, its ends are given by the start and end points; index = 2: arc of a circle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>../names</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="start_points" type="rzphi1d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the start point of every element</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="end_point" type="rzphi0d_static">
+			<xs:element name="end_points" type="rzphi1d_static">
 				<xs:annotation>
-					<xs:documentation>Position of the end point of the element</xs:documentation>
+					<xs:documentation>Position of the end point of every element</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="centre" type="rzphi0d_static">
+			<xs:element name="centres" type="rzphi1d_static">
 				<xs:annotation>
-					<xs:documentation>Position of the centre of the arc of a circle (used only if type/index = 2)</xs:documentation>
+					<xs:documentation>Position of the centre of the arc of a circle of every element (meaningful only if type/index = 2, fill with default/empty value otherwise)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -45,22 +61,14 @@
 			<xs:documentation>Description of a conductor</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="element" type="tf_coil_conductor_element" maxOccurs="20">
+			<xs:element name="elements" type="tf_coil_conductor_elements">
 				<xs:annotation>
 					<xs:documentation>Set of geometrical elements (line segments and/or arcs of a circle) describing the contour of the TF conductor centre</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="section_point" type="delta_rzphi0d_static" maxOccurs="5">
+			<xs:element name="cross_section" type="delta_rzphi1d_static">
 				<xs:annotation>
-					<xs:documentation>The section perpendicular to the TF conductor contour is described by contour points, given by their relative position with respect to the start point of the first element. This section is assumed constant for all elements.</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
+					<xs:documentation>The cross-section perpendicular to the TF conductor contour is described by a series of contour points, given by their relative position with respect to the start point of the first element. This cross-section is assumed constant for all elements.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="resistance">
@@ -116,7 +124,7 @@
 		<xs:sequence>
 			<xs:element name="conductor" type="tf_coil_conductor" maxOccurs="20">
 				<xs:annotation>
-					<xs:documentation>Set of conductors inside the coil. The structure can be used with size 1 for a simplified description as a single conductor</xs:documentation>
+					<xs:documentation>Set of conductors inside the coil. The structure can be used with size 1 for a simplified description as a single conductor. A conductor is composed of several elements, serially connected, i.e. transporting the same current.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -183,7 +191,7 @@
 	</xs:complexType>
 	<xs:element name="tf">
 		<xs:annotation>
-			<xs:documentation>Toroidal field coils (all assumed to be identical). If individual description of coil is needed, use the same description as in pf IDS.</xs:documentation>
+			<xs:documentation>Toroidal field coils</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
