@@ -2433,6 +2433,20 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../values</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="generic_grid_vector">
@@ -2474,6 +2488,21 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension). Second dimension: vector component index. Third dimension: coefficient index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../values</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -2518,6 +2547,20 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="radial_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../radial</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="diamagnetic">
 				<xs:annotation>
 					<xs:documentation>Diamagnetic component, one scalar value is provided per element in the grid subset.</xs:documentation>
@@ -2529,6 +2572,20 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="diamagnetic_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../radial</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="parallel">
@@ -2544,6 +2601,21 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+						<xs:element name="parallel_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../radial</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+
 			<xs:element name="poloidal">
 				<xs:annotation>
 					<xs:documentation>Poloidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
@@ -2557,6 +2629,20 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="poloidal_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../radial</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="toroidal">
 				<xs:annotation>
 					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
@@ -2568,6 +2654,20 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../radial</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -2612,6 +2712,22 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension). Second dimension: first matrix index. Third dimension: second matrix index. Fourth dimension: coefficient index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../values</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>1...N</coordinate4>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_4D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -2818,238 +2934,36 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="g11_covariant">
+			<xs:element name="tensor_covariant">
 				<xs:annotation>
-					<xs:documentation>Metric coefficient g11 from the covariant metric tensor</xs:documentation>
+					<xs:documentation>Covariant metric tensor, given on each element of the subgrid (first dimension)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../../element</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
 						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="g12_covariant">
+			<xs:element name="tensor_contravariant">
 				<xs:annotation>
-					<xs:documentation>Metric coefficient g12 from the covariant metric tensor</xs:documentation>
+					<xs:documentation>Contravariant metric tensor, given on each element of the subgrid (first dimension)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../../element</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate2_same_as>../tensor_covariant</coordinate2_same_as>
+						<coordinate3>1...N</coordinate3>
+						<coordinate3_same_as>../tensor_covariant</coordinate3_same_as>
 						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g13_covariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g13 from the covariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g21_covariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g21 from the covariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g22_covariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g22 from the covariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g23_covariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g23 from the covariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g31_covariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g31 from the covariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g32_covariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g32 from the covariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g33_covariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g33 from the covariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g11_contravariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g11 from the contravariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g12_contravariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g12 from the contravariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g13_contravariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g13 from the contravariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g21_contravariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g21 from the contravariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g22_contravariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g22 from the contravariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g23_contravariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g23 from the contravariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g31_contravariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g31 from the contravariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g32_contravariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g32 from the contravariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g33_contravariant">
-				<xs:annotation>
-					<xs:documentation>Metric coefficient g33 from the contravariant metric tensor</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../element</coordinate1>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -3216,10 +3130,44 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="tensor_covariant">
+				<xs:annotation>
+					<xs:documentation>Covariant metric tensor on every point of the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<coordinate3>1...3</coordinate3>
+						<coordinate4>1...3</coordinate4>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_4D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tensor_contravariant">
+				<xs:annotation>
+					<xs:documentation>Contravariant metric tensor on every point of the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../grid/dim1</coordinate1>
+						<coordinate2>../grid/dim2</coordinate2>
+						<coordinate3>1...3</coordinate3>
+						<coordinate4>1...3</coordinate4>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_4D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="g11_covariant">
 				<xs:annotation>
 					<xs:documentation>metric coefficients g11,  covariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3234,6 +3182,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g12,  covariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3248,6 +3198,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g13,  covariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3262,6 +3214,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g22,  covariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3276,6 +3230,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g23,  covariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3290,6 +3246,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g33,  covariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3304,6 +3262,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g11,  contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3318,6 +3278,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g12,  contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3332,6 +3294,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g13,  contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3346,6 +3310,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g22,  contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3360,6 +3326,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g23,  contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
@@ -3374,6 +3342,8 @@
 				<xs:annotation>
 					<xs:documentation>metric coefficients g33,  contravariant metric tensor for the grid described by grid_type</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.4.0</lifecycle_version>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
