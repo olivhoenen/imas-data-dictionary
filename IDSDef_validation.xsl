@@ -32,6 +32,7 @@ and not (.//field[not(@coordinate5) and (@data_type='FLT_5D' or @data_type='FLT_
 and not (.//field[not(@coordinate6) and (@data_type='FLT_6D' or @data_type='CPX_6D' )])
 and not (.//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_0D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D')])
 and not (.//field[@maxoccur='unbounded' and @type='dynamic' and ancestor::field[@maxoccur='unbounded' and @type='dynamic']])
+and not (.//field[@maxoccur='unbounded' and not(@type='dynamic') and not(ancestor::field[@maxoccur='unbounded' and @type='dynamic'])])
 ">
 <p class="welcome">IDS <xsl:value-of select="@name"/> is valid</p>
 </xsl:when>
@@ -75,6 +76,10 @@ and not (.//field[@maxoccur='unbounded' and @type='dynamic' and ancestor::field[
        <!-- Test the presence of nested AoS 3 (illegal) -->
         <xsl:apply-templates select=".//field[@maxoccur='unbounded' and @type='dynamic' and ancestor::field[@maxoccur='unbounded' and @type='dynamic']]">
         <xsl:with-param name="error_description" select="'Illegal construct: this field is an AoS type 3 nested under another AoS type 3'"/>
+       </xsl:apply-templates>
+        <!-- Test the presence of AoS 2 that is not nested below an AoS 3 (not implemented yet in the AL) -->
+        <xsl:apply-templates select=".//field[@maxoccur='unbounded' and not(@type='dynamic') and not(ancestor::field[@maxoccur='unbounded' and @type='dynamic'])]">
+        <xsl:with-param name="error_description" select="'Illegal construct: this field is an AoS type 2 and should be nested under an AoS type 3 (AoS 2 without nesting benow an AoS 3 are not implemented in the AL yet). If this construct is needed, set the field as an AoS type 1 by setting a finite maxOccurs attribute'"/>
        </xsl:apply-templates>
 
        </table>
