@@ -189,6 +189,81 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="tf_ggd">
+		<xs:annotation>
+			<xs:documentation>Toroidal field map represented on ggd</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid" type="generic_grid_dynamic">
+				<xs:annotation>
+					<xs:documentation>Grid description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="b_r" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>R component of the vacuum magnetic field, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="b_z" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Z component of the vacuum magnetic field, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="b_tor" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toroidal component of the vacuum magnetic field, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="a_r" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>R component of the vacuum vector potential, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>T.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="a_z" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Z component of the vacuum vector potential, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>T.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="a_tor" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Toroidal component of the vacuum vector potential, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>T.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="tf">
 		<xs:annotation>
 			<xs:documentation>Toroidal field coils</xs:documentation>
@@ -228,6 +303,15 @@
 						<xs:appinfo>
 							<type>static</type>
 							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="field_map" type="tf_ggd" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Map of the vacuum field at various time slices, represented using the generic grid description</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
