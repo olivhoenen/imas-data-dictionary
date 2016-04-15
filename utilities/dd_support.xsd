@@ -1179,7 +1179,7 @@
 		<xs:sequence>
 			<xs:element name="rho_tor_norm">
 				<xs:annotation>
-					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) </xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
@@ -1192,7 +1192,7 @@
 			</xs:element>
 			<xs:element name="rho_tor">
 				<xs:annotation>
-					<xs:documentation>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0</xs:documentation>
+					<xs:documentation>Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../rho_tor_norm</coordinate1>
@@ -2655,7 +2655,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-						<xs:element name="parallel_coefficients">
+			<xs:element name="parallel_coefficients">
 				<xs:annotation>
 					<xs:documentation>Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
 					<xs:appinfo>
@@ -2669,7 +2669,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-
 			<xs:element name="poloidal">
 				<xs:annotation>
 					<xs:documentation>Poloidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
