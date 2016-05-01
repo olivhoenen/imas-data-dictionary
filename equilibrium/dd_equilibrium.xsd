@@ -201,7 +201,7 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-						<xs:element name="b_field_tor">
+			<xs:element name="b_field_tor">
 				<xs:annotation>
 					<xs:documentation>Total toroidal magnetic field at the magnetic axis</xs:documentation>
 					<xs:appinfo>
@@ -213,7 +213,6 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="equilibrium_global_quantities_qmin">
@@ -900,7 +899,7 @@
 						<coordinate1>../psi</coordinate1>
 						<units>T</units>
 						<lifecycle_status>obsolescent</lifecycle_status>
-<lifecycle_version>3.5.0</lifecycle_version>
+						<lifecycle_version>3.5.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -928,7 +927,7 @@
 						<coordinate1>../psi</coordinate1>
 						<units>T</units>
 						<lifecycle_status>obsolescent</lifecycle_status>
-<lifecycle_version>3.5.0</lifecycle_version>
+						<lifecycle_version>3.5.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -956,7 +955,7 @@
 						<coordinate1>../psi</coordinate1>
 						<units>T</units>
 						<lifecycle_status>obsolescent</lifecycle_status>
-<lifecycle_version>3.5.0</lifecycle_version>
+						<lifecycle_version>3.5.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1100,15 +1099,14 @@
 						<coordinate2>../grid/dim2</coordinate2>
 						<units>T</units>
 						<lifecycle_status>obsolescent</lifecycle_status>
-<lifecycle_version>3.5.0</lifecycle_version>
-
+						<lifecycle_version>3.5.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-					<xs:element name="b_field_r">
+			<xs:element name="b_field_r">
 				<xs:annotation>
 					<xs:documentation>R component of the poloidal magnetic field</xs:documentation>
 					<xs:appinfo>
@@ -1122,7 +1120,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-
 			<xs:element name="b_z">
 				<xs:annotation>
 					<xs:documentation>Z component of the poloidal magnetic field</xs:documentation>
@@ -1132,15 +1129,14 @@
 						<coordinate2>../grid/dim2</coordinate2>
 						<units>T</units>
 						<lifecycle_status>obsolescent</lifecycle_status>
-<lifecycle_version>3.5.0</lifecycle_version>
-
+						<lifecycle_version>3.5.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-						<xs:element name="b_field_z">
+			<xs:element name="b_field_z">
 				<xs:annotation>
 					<xs:documentation>Z component of the poloidal magnetic field</xs:documentation>
 					<xs:appinfo>
@@ -1154,7 +1150,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-
 			<xs:element name="b_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal component of the magnetic field</xs:documentation>
@@ -1164,15 +1159,14 @@
 						<coordinate2>../grid/dim2</coordinate2>
 						<units>T</units>
 						<lifecycle_status>obsolescent</lifecycle_status>
-<lifecycle_version>3.5.0</lifecycle_version>
-
+						<lifecycle_version>3.5.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-						<xs:element name="b_field_tor">
+			<xs:element name="b_field_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal component of the magnetic field</xs:documentation>
 					<xs:appinfo>
@@ -1186,7 +1180,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="equilibrium_ggd">
@@ -1318,16 +1311,17 @@
 				<xs:annotation>
 					<xs:documentation>Equilibrium 2D profiles in the poloidal plane. Multiple 2D representations of the equilibrium can be stored here.</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...n_representations</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="ggd" type="equilibrium_ggd">
+			<xs:element name="ggd" type="equilibrium_ggd" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Equilibrium representation using the generic grid description</xs:documentation>
+					<xs:documentation>Equilibrium representation using the generic grid description. Multiple GGD representations of the equilibrium can be stored here.</xs:documentation>
 					<xs:appinfo>
 						<lifecycle_status>alpha</lifecycle_status>
 						<lifecycle_version>3.2.1</lifecycle_version>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
