@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with KWrite by Andrei Kovalev USER (ITER ORGANIZATION) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
+	<xs:complexType name="neutronics_unit_sources">
+		<xs:annotation>
+			<xs:documentation>Unit ring sources distribution</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="source_position">
+				<xs:annotation>
+					<xs:documentation>Position of ring unit sources inside ITER vacuum vessel</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1..NS</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Unit ring sources distribution</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="r">
+							<xs:annotation>
+								<xs:documentation>Major Radius</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+									<units>m</units>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="FLT_0D"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="z">
+							<xs:annotation>
+								<xs:documentation>Height</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+									<units>m</units>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="FLT_0D"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Value of radiation flux spectrum in diagnostic's detector for certain radiation and plasma types</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="reaction">
+							<xs:annotation>
+								<xs:documentation>Name of plasma reaction ('DD' or 'DT')</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="STR_0D"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="radiation_type">
+							<xs:annotation>
+								<xs:documentation>Radiation type in the detector ('neutrons' or 'gamma-rays')</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="STR_0D"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="energy">
+							<xs:annotation>
+								<xs:documentation>Energy boundaries for Detector Radiator Flux</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+									<coordinate1>1...NE</coordinate1>
+									<units>eV</units>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="FLT_1D"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="detector_radiation_flux">
+							<xs:annotation>
+								<xs:documentation>Radiation flux from Unit Ring Source in recent ditector's convertor</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+									<coordinate1>../../../1..ND</coordinate1>
+									<coordinate2>../../../unit_sources(:)/data/energy(:)</coordinate2>
+									<units>m^-2</units>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="FLT_2D"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutronics_detectors">
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of Detector number {1..ND}</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="material">
+				<xs:annotation>
+					<xs:documentation>Name of convertor material</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="position">
+				<xs:annotation>
+					<xs:documentation>Detector Position Data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="r">
+							<xs:annotation>
+								<xs:documentation>Major Radius coordinate of detector number {1..ND}</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+									<units>m</units>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="FLT_0D"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="z">
+							<xs:annotation>
+								<xs:documentation>Height coordinate of detector number {1..ND}</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+									<units>m</units>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="FLT_0D"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="phi">
+							<xs:annotation>
+								<xs:documentation>Toroidal angle coordinate of detector number {1..ND}</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+									<units>rad</units>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="FLT_0D"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="mesuring_mode">
+				<xs:annotation>
+					<xs:documentation>Measuring Mode Properties and Data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1..NM</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name">
+							<xs:annotation>
+								<xs:documentation>Name of Measuring Mode number {1..NM}</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="STR_0D"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="statistic">
+							<xs:annotation>
+								<xs:documentation>Statistical parameters of Measuring Module number {1..NM}</xs:documentation>
+								<xs:appinfo>
+									<type>static</type>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="reaction">
+										<xs:annotation>
+											<xs:documentation>Name of plasma reaction ('DD' or 'DT')</xs:documentation>
+											<xs:appinfo>
+												<type>static</type>
+											</xs:appinfo>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:group ref="STR_0D"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="count_lim_up">
+										<xs:annotation>
+											<xs:documentation>Upper limit of recent Measuring Mode and plasma reaction</xs:documentation>
+											<xs:appinfo>
+												<type>static</type>
+												<units>cps</units>
+											</xs:appinfo>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:group ref="FLT_0D"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="count_lim_dwn">
+										<xs:annotation>
+											<xs:documentation>Lower limit of recent Measuring Mode and plasma reaction</xs:documentation>
+											<xs:appinfo>
+												<type>static</type>
+												<units>cps</units>
+											</xs:appinfo>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:group ref="FLT_0D"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="error">
+										<xs:annotation>
+											<xs:documentation>Diagnostic's relative uncertainty for recent plasma reaction</xs:documentation>
+											<xs:appinfo>
+												<type>static</type>
+												<units>-</units>
+											</xs:appinfo>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:group ref="FLT_0D"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="counting">
+							<xs:annotation>
+								<xs:documentation>Counting in Measuring Mode number {1..NM} in Dynamic</xs:documentation>
+								<xs:appinfo>
+									<type>dynamic</type>
+									<coordinate1>../../../time</coordinate1>
+									<units>cps</units>
+								</xs:appinfo>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:group ref="FLT_1D"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fission_rate">
+				<xs:annotation>
+					<xs:documentation>Radiation Fission Rate in ditector's convertor material</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+						<units>m^-3*sec^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutronics_output_data">
+		<xs:sequence>
+			<xs:element name="total_neutron_flux">
+				<xs:annotation>
+					<xs:documentation>Total Neutron Flux in Dynamic</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+						<units>sec^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fusion_power">
+				<xs:annotation>
+					<xs:documentation>Fusion Power</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>		
+	<xs:element name="neutronics">
+		<xs:annotation>
+			<xs:documentation>Scetch of IDS for Neutron Diagnostics like DNFM, NFM or MFC for ITER plant simulator</xs:documentation>
+			<xs:appinfo>
+				<lifecycle_status>alpha</lifecycle_status>
+				<lifecycle_version>x.x.x</lifecycle_version>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="unit_sources" type="neutronics_unit_sources" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Unit ring sources description</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...NS</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="detectors" type="neutronics_detectors" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Description of Detectors properties and Data in Neutron Diagnostic Module</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...ND</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="output_data" type="neutronics_output_data" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Output Data from Neutron Diagnostic's Module</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="code"/>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
