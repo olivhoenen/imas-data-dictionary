@@ -2,50 +2,49 @@
 <!-- edited with KWrite by Andrei Kovalev USER (ITER ORGANIZATION) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
+	<xs:complexType name="neutronics_unit_sources_source_position">
+		<xs:annotation>
+			<xs:documentation>Unit ring sources distribution</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major Radius</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="neutronics_unit_sources">
 		<xs:annotation>
 			<xs:documentation>Unit ring sources distribution</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="source_position">
+			<xs:element name="source_position" type="neutronics_unit_sources_source_position"  maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation>Position of ring unit sources inside ITER vacuum vessel</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
 						<coordinate1>1..NS</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:annotation>
-						<xs:documentation>Unit ring sources distribution</xs:documentation>
-					</xs:annotation>
-					<xs:sequence>
-						<xs:element name="r">
-							<xs:annotation>
-								<xs:documentation>Major Radius</xs:documentation>
-								<xs:appinfo>
-									<type>static</type>
-									<units>m</units>
-								</xs:appinfo>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_0D"/>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="z">
-							<xs:annotation>
-								<xs:documentation>Height</xs:documentation>
-								<xs:appinfo>
-									<type>static</type>
-									<units>m</units>
-								</xs:appinfo>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:group ref="FLT_0D"/>
-							</xs:complexType>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="data">
 				<xs:annotation>
