@@ -4212,6 +4212,40 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_identifier">
+		<xs:annotation>
+			<xs:documentation>Wave identifier</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Wave/antenna type. index=1 for name=EC; index=2 for name=LH; index=3 for name=IC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="antenna_name">
+				<xs:annotation>
+					<xs:documentation>Name of the antenna that launches this wave. Corresponds to the name specified in antennas/ec(i)/name, or antennas/ic(i)/name or antennas/lh(i)/name (depends of antenna/wave type) in the ANTENNAS IDS.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="index_in_antenna">
+				<xs:annotation>
+					<xs:documentation>Index of the wave (starts at 1), separating different waves generated from a single antenna.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="data_entry">
 		<xs:annotation>
 			<xs:documentation>Definition of a data entry</xs:documentation>
