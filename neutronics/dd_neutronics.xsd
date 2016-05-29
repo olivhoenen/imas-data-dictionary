@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <!-- edited with KWrite by Andrei Kovalev USER (ITER ORGANIZATION) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
@@ -81,7 +82,10 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -125,7 +129,7 @@
 			</xs:element>
 			<xs:element name="detector_radiation_flux">
 				<xs:annotation>
-					<xs:documentation>Radiation flux from Unit Ring Source in recent ditector's convertor</xs:documentation>
+					<xs:documentation>Radiation flux from Unit Ring Source in recent detector's convertor</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>../../../1..N</coordinate1>
@@ -143,7 +147,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of Detector number {1..N}</xs:documentation>
+					<xs:documentation>Name of Detector</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -231,9 +235,6 @@
 				<xs:annotation>
 					<xs:documentation>Position of ring unit sources inside ITER vacuum vessel</xs:documentation>
 				</xs:annotation>
-				<xs:appinfo>
-					<coordinate1>1..N</coordinate1>
-				</xs:appinfo>
 			</xs:element>
 			<xs:element name="data" type="neutronics_unit_sources_data">
 				<xs:annotation>
@@ -244,7 +245,7 @@
 	</xs:complexType>
 	<xs:element name="neutronics">
 		<xs:annotation>
-			<xs:documentation>Scetch of IDS for Neutron Diagnostics like DNFM, NFM or MFC for ITER plant simulator</xs:documentation>
+			<xs:documentation>Scetch of IDS for Neutron Diagnostics like DNFM, NFM or MFC</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>x.x.x</lifecycle_version>
