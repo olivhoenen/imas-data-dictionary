@@ -3,7 +3,7 @@
 <!-- edited with KWrite by Andrei Kovalev (ITER ORGANIZATION) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
-	<xs:complexType name="neutron_diagnostic_module_characteristics_plasma_reaction">
+	<xs:complexType name="neutron_diagnostic_module_characteristics_reaction">
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:annotation>
@@ -92,7 +92,7 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="plasma_reaction" type="neutron_diagnostic_module_characteristics_plasma_reaction" maxOccurs="2">
+			<xs:element name="reaction" type="neutron_diagnostic_module_characteristics_reaction" maxOccurs="2">
 				<xs:annotation>
 					<xs:documentation>Plasma reaction (1 -'DT'; 2 - 'DD')</xs:documentation>
 					<xs:appinfo>
@@ -225,7 +225,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_unit_source_radiation_type_plasma_reaction">
+	<xs:complexType name="neutron_diagnostic_unit_source_radiation_reaction">
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:annotation>
@@ -307,7 +307,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_unit_source_radiation_type">
+	<xs:complexType name="neutron_diagnostic_unit_source_radiation">
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:annotation>
@@ -331,7 +331,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="plasma_reaction" type="neutron_diagnostic_unit_source_radiation_type_plasma_reaction"  maxOccurs="2">
+			<xs:element name="reaction" type="neutron_diagnostic_unit_source_radiation_reaction"  maxOccurs="2">
 				<xs:annotation>
 					<xs:documentation>Plasma reaction (1 - 'DT'; 2 - 'DD')</xs:documentation>
 					<xs:appinfo>
@@ -351,7 +351,7 @@
 					<xs:documentation>Position of ring unit sources inside ITER vacuum vessel</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="radiation_type" type="neutron_diagnostic_unit_source_radiation_type" maxOccurs="2">
+			<xs:element name="radiation" type="neutron_diagnostic_unit_source_radiation" maxOccurs="2">
 				<xs:annotation>
 					<xs:documentation>Radiation type on detector's convertor (1 - 'neutrons'; 2 - 'gamma-rays')</xs:documentation>
 					<xs:appinfo>
