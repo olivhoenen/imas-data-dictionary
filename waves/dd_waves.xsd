@@ -10,6 +10,539 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:complexType name="waves_CPX_1D">
+		<xs:annotation>
+			<xs:documentation>Structure for 1D complex number</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="real">
+				<xs:annotation>
+					<xs:documentation>Real part</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="imaginary">
+				<xs:annotation>
+					<xs:documentation>Imaginary part</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_rzphipsitheta1d_dynamic_aos3">
+		<xs:annotation>
+			<xs:documentation>Structure for R, Z, Phi, Psi, Theta positions (1D, dynamic within a type 3 array of structure)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal flux</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Wb</units>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="theta">
+				<xs:annotation>
+					<xs:documentation>Poloidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_beam_tracing_ion_state">
+		<xs:annotation>
+			<xs:documentation>State related quantities for beam tracing</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="z_min">
+				<xs:annotation>
+					<xs:documentation>Minimum Z of the charge state bundle (z_min = z_max = 0 for a neutral)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_max">
+				<xs:annotation>
+					<xs:documentation>Maximum Z of the charge state bundle (equal to z_min if no bundle)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electron_configuration">
+				<xs:annotation>
+					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_level">
+				<xs:annotation>
+					<xs:documentation>Vibrational level (can be bundled)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_mode">
+				<xs:annotation>
+					<xs:documentation>Vibrational mode of this state, e.g. "A_g". Need to define, or adopt a standard nomenclature.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power absorbed along the beam by the species</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_beam_tracing_ion">
+		<xs:annotation>
+			<xs:documentation>Ion related quantities for beam tracing</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_ion">
+				<xs:annotation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Elementary Charge Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power absorbed along the beam by the species</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="multiple_states_flag">
+				<xs:annotation>
+					<xs:documentation>Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="state" type="waves_coherent_wave_beam_tracing_ion_state" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N_charge_states</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_beam_tracing_electrons">
+		<xs:annotation>
+			<xs:documentation>Electrons related quantities for beam tracing</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power absorbed along the beam by the species</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_beam_tracing_power_flow">
+		<xs:annotation>
+			<xs:documentation>Power flow for beam tracing</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="perpendicular">
+				<xs:annotation>
+					<xs:documentation>Normalized power flow in the direction perpendicular to the magnetic field</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parallel">
+				<xs:annotation>
+					<xs:documentation>Normalized power flow in the direction parallel to the magnetic field</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_beam_tracing_beam_e_field">
+		<xs:annotation>
+			<xs:documentation>Components of the electric field for beam tracing</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="plus" type="waves_CPX_1D">
+				<xs:annotation>
+					<xs:documentation>Left hand polarised electric field component</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minus" type="waves_CPX_1D">
+				<xs:annotation>
+					<xs:documentation>Right hand polarised electric field component</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parallel" type="waves_CPX_1D">
+				<xs:annotation>
+					<xs:documentation>Parallel to magnetic field polarised electric field component</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_beam_tracing_beam_k">
+		<xs:annotation>
+			<xs:documentation>Beam wave vector</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="k_r">
+				<xs:annotation>
+					<xs:documentation>Wave vector component in the major radius direction</xs:documentation>
+					<xs:appinfo>
+						<units>m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="k_z">
+				<xs:annotation>
+					<xs:documentation>Wave vector component in the vertical direction</xs:documentation>
+					<xs:appinfo>
+						<units>m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="k_tor">
+				<xs:annotation>
+					<xs:documentation>Wave vector component in the toroidal direction</xs:documentation>
+					<xs:appinfo>
+						<units>m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel refractive index</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_perpendicular">
+				<xs:annotation>
+					<xs:documentation>Perpendicular refractive index</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal wave number, contains a single value if varying_ntor = 1 to avoid useless repetition constant values</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>dynamic</type>
+						<coordinate1>../../length OR 1</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="varying_n_tor">
+				<xs:annotation>
+					<xs:documentation>Flag telling whether n_tor is constant along the ray path (0) or varying (1)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_beam_tracing_beam">
+		<xs:annotation>
+			<xs:documentation>Beam description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power_initial">
+				<xs:annotation>
+					<xs:documentation>Initial power in the ray/beam</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="length">
+				<xs:annotation>
+					<xs:documentation>Ray/beam curvilinear length</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="position" type="waves_rzphipsitheta1d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Position of the ray/beam along its path</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="wave_vector" type="waves_coherent_wave_beam_tracing_beam_k">
+				<xs:annotation>
+					<xs:documentation>Wave vector of the ray/beam along its path</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="e_field" type="waves_coherent_wave_beam_tracing_beam_e_field">
+				<xs:annotation>
+					<xs:documentation>Electric field polarization of the ray/beam along its path</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_flow_norm" type="waves_coherent_wave_beam_tracing_power_flow">
+				<xs:annotation>
+					<xs:documentation>Normalised power flow</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="electrons" type="waves_coherent_wave_beam_tracing_electrons">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the electrons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion" type="waves_coherent_wave_beam_tracing_ion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_beam_tracing">
+		<xs:annotation>
+			<xs:documentation>Beam tracing calculations for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="beam" type="waves_coherent_wave_beam_tracing_beam" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of rays/beams describing the wave propagation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="waves_coherent_wave_global_quantities_ion_state">
 		<xs:annotation>
 			<xs:documentation>Global quantities related to a given ion species state</xs:documentation>
@@ -322,106 +855,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="waves_coherent_wave_profiles_1d">
-		<xs:annotation>
-			<xs:documentation>Radial profiles (RF waves) for a given time slice</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="grid" type="core_radial_grid">
-				<xs:annotation>
-					<xs:documentation>Radial grid</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="n_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal mode numbers</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="power_density">
-				<xs:annotation>
-					<xs:documentation>Flux surface averaged total absorbed wave power density (electrons + ion + fast populations)</xs:documentation>
-					<xs:appinfo>
-						<units>W.m^-3</units>
-						<type>dynamic</type>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="power_density_n_tor">
-				<xs:annotation>
-					<xs:documentation>Flux surface averaged absorbed wave power density per toroidal mode number</xs:documentation>
-					<xs:appinfo>
-						<units>W.m^-3</units>
-						<type>dynamic</type>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../n_tor</coordinate2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="current_tor_inside">
-				<xs:annotation>
-					<xs:documentation>Wave driven toroidal current from a stand alone calculation (not consistent with other sources), inside a flux surface</xs:documentation>
-					<xs:appinfo>
-						<units>A</units>
-						<type>dynamic</type>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="current_tor_inside_n_tor">
-				<xs:annotation>
-					<xs:documentation>Wave driven toroidal current from a stand alone calculation (not consistent with other sources), inside a flux surface, per toroidal mode number</xs:documentation>
-					<xs:appinfo>
-						<units>A</units>
-						<type>dynamic</type>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../n_tor</coordinate2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="electrons" type="waves_coherent_wave_global_quantities_electrons">
-				<xs:annotation>
-					<xs:documentation>Quantities related to the electrons</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="ion" type="waves_coherent_wave_global_quantities_ion" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Quantities related to the different ion species</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="time" type="flt_type">
-				<xs:annotation>
-					<xs:documentation>Time</xs:documentation>
-					<xs:appinfo>
-						<units>s</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="waves_coherent_wave_global_quantities">
 		<xs:annotation>
 			<xs:documentation>Global quantities (RF waves) for a given time slice</xs:documentation>
@@ -525,6 +958,1403 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_1d_ion_state">
+		<xs:annotation>
+			<xs:documentation>Radial profiles (RF waves) related to a given ion species state</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="z_min">
+				<xs:annotation>
+					<xs:documentation>Minimum Z of the charge state bundle (z_min = z_max = 0 for a neutral)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_max">
+				<xs:annotation>
+					<xs:documentation>Maximum Z of the charge state bundle (equal to z_min if no bundle)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electron_configuration">
+				<xs:annotation>
+					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_level">
+				<xs:annotation>
+					<xs:documentation>Vibrational level (can be bundled)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_mode">
+				<xs:annotation>
+					<xs:documentation>Vibrational mode of this state, e.g. "A_g". Need to define, or adopt a standard nomenclature.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the thermal species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_tor">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the fast species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_tor">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_thermal">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_thermal_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_fast">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_fast_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_1d_ion">
+		<xs:annotation>
+			<xs:documentation>Radial profiles (RF waves) related to a given ion species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_ion">
+				<xs:annotation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Elementary Charge Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the thermal species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_tor">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the fast species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_tor">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_thermal">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_thermal_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_fast">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_fast_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="multiple_states_flag">
+				<xs:annotation>
+					<xs:documentation>Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="state" type="waves_coherent_wave_profiles_1d_ion_state" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N_charge_states</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_1d_electrons">
+		<xs:annotation>
+			<xs:documentation>Radial profiles (RF waves) related to electrons</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power_density_thermal">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the thermal species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_tor">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the fast species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_tor">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_thermal">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_thermal_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_fast">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_fast_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_1d_e_field">
+		<xs:annotation>
+			<xs:documentation>Components of the surface averaged electric field</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="plus">
+				<xs:annotation>
+					<xs:documentation>Left hand polarised electric field component, for every flux surface and every toroidal number</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="minus">
+				<xs:annotation>
+					<xs:documentation>Right hand polarised electric field component, for every flux surface and every toroidal number</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel electric field component, for every flux surface and every toroidal number</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_1d">
+		<xs:annotation>
+			<xs:documentation>Radial profiles (RF waves) for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid" type="core_radial_grid">
+				<xs:annotation>
+					<xs:documentation>Radial grid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal mode numbers</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged total absorbed wave power density (electrons + ion + fast populations)</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_n_tor">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside">
+				<xs:annotation>
+					<xs:documentation>Total absorbed wave power (electrons + ion + fast populations) inside a flux surface (cumulative volume integral of the absorbed power density)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_n_tor">
+				<xs:annotation>
+					<xs:documentation>Total absorbed wave power (electrons + ion + fast populations) inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_tor_inside">
+				<xs:annotation>
+					<xs:documentation>Wave driven toroidal current from a stand alone calculation (not consistent with other sources), inside a flux surface</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_tor_inside_n_tor">
+				<xs:annotation>
+					<xs:documentation>Wave driven toroidal current from a stand alone calculation (not consistent with other sources), inside a flux surface, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_parallel_density">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged wave driven parallel current density = average(j.B) / B0, where B0 = vacuum_toroidal_field/b0.</xs:documentation>
+					<xs:appinfo>
+						<units>A.m^-2</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_parallel_density_n_tor">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged wave driven parallel current density, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>A.m^-2</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="e_field" type="waves_coherent_wave_profiles_1d_e_field">
+				<xs:annotation>
+					<xs:documentation>Components of the electric field, averaged over the flux surface, where the averaged is weighted with the power deposition density, such that e_field = ave(e_field.power_density) / ave(power_density)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="k_perpendicular">
+				<xs:annotation>
+					<xs:documentation>Perpendicular wave vector,  averaged over the flux surface, where the averaged is weighted with the power deposition density, such that k_perpendicular = ave(k_perpendicular.power_density) / ave(power_density), for every flux surface and every toroidal number</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../n_tor</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electrons" type="waves_coherent_wave_profiles_1d_electrons">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the electrons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion" type="waves_coherent_wave_profiles_1d_ion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_full_wave_e_field">
+		<xs:annotation>
+			<xs:documentation>Components of the full wave electric field</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="plus" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Left hand circularly polarised component of the perpendicular (to the static magnetic field) electric field, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minus" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Right hand circularly polarised component of the perpendicular (to the static magnetic field) electric field, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parallel" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Parallel (to the static magnetic field) component of electric field, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="normal" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Magnitude of wave electric field normal to a flux surface, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bi_normal" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Magnitude of perpendicular (to the static magnetic field) wave electric field tangent to a flux surface, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_full_wave_b_field">
+		<xs:annotation>
+			<xs:documentation>Components of the full wave magnetic field</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="parallel" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Parallel (to the static magnetic field) component of the wave magnetic field, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="normal" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Magnitude of wave magnetic field normal to a flux surface, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bi_normal" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Magnitude of perpendicular (to the static magnetic field) wave magnetic field tangent to a flux surface, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_full_wave">
+		<xs:annotation>
+			<xs:documentation>Full wave solution for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid" type="generic_grid_dynamic">
+				<xs:annotation>
+					<xs:documentation>Grid description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="e_field" type="waves_coherent_wave_full_wave_e_field">
+				<xs:annotation>
+					<xs:documentation>Components of the wave electric field</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="b_field" type="waves_coherent_wave_full_wave_b_field">
+				<xs:annotation>
+					<xs:documentation>Components of the wave magnetic field</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="k_perpendicular" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Perpendicular wave vector, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_2d_grid">
+		<xs:annotation>
+			<xs:documentation>2D grid for waves</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Grid type: index=0: Rectangular grid in the (R,Z) coordinates; index=1: Rectangular grid in the (radial, theta_geometric) coordinates; index=2: Rectangular grid in the (radial, theta_straight) coordinates. index=3: unstructured grid.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../rho_tor_norm</coordinate1>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2_same_as>../r</coordinate2_same_as>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="theta_straight">
+				<xs:annotation>
+					<xs:documentation>Straight field line poloidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2_same_as>../r</coordinate2_same_as>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="theta_geometric">
+				<xs:annotation>
+					<xs:documentation>Geometrical poloidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2_same_as>../r</coordinate2_same_as>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2_same_as>../r</coordinate2_same_as>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal flux coordinate. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2_same_as>../r</coordinate2_same_as>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal magnetic flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2_same_as>../r</coordinate2_same_as>
+						<units>Wb</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="volume">
+				<xs:annotation>
+					<xs:documentation>Volume enclosed inside the magnetic surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2_same_as>../r</coordinate2_same_as>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="area">
+				<xs:annotation>
+					<xs:documentation>Cross-sectional area of the flux surface</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2_same_as>../r</coordinate2_same_as>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_2d_ion_state">
+		<xs:annotation>
+			<xs:documentation>Global quantities related to a given ion species state</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="z_min">
+				<xs:annotation>
+					<xs:documentation>Minimum Z of the charge state bundle (z_min = z_max = 0 for a neutral)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_max">
+				<xs:annotation>
+					<xs:documentation>Maximum Z of the charge state bundle (equal to z_min if no bundle)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electron_configuration">
+				<xs:annotation>
+					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_level">
+				<xs:annotation>
+					<xs:documentation>Vibrational level (can be bundled)</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vibrational_mode">
+				<xs:annotation>
+					<xs:documentation>Vibrational mode of this state, e.g. "A_g". Need to define, or adopt a standard nomenclature.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the thermal species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
+						<coordinate3>../../../n_tor</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the fast species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
+						<coordinate3>../../../n_tor</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_2d_ion">
+		<xs:annotation>
+			<xs:documentation>Global quantities related to a given ion species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_ion">
+				<xs:annotation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Elementary Charge Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the thermal species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+						<coordinate3>../../n_tor</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the fast species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+						<coordinate3>../../n_tor</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="multiple_states_flag">
+				<xs:annotation>
+					<xs:documentation>Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="state" type="waves_coherent_wave_profiles_2d_ion_state" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N_charge_states</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_2d_electrons">
+		<xs:annotation>
+			<xs:documentation>Global quantities related to electrons</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power_density_thermal">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the thermal species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+						<coordinate3>../../n_tor</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the fast species</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+						<coordinate3>../../n_tor</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_profiles_2d">
+		<xs:annotation>
+			<xs:documentation>2D profiles (RF waves) for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid" type="waves_coherent_wave_profiles_2d_grid">
+				<xs:annotation>
+					<xs:documentation>2D grid in a poloidal cross-section</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal mode numbers</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density">
+				<xs:annotation>
+					<xs:documentation>Total absorbed wave power density (electrons + ion + fast populations)</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../grid/r</coordinate2_same_as>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_n_tor">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../grid/r</coordinate2_same_as>
+						<coordinate3>../n_tor</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electrons" type="waves_coherent_wave_profiles_2d_electrons">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the electrons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion" type="waves_coherent_wave_profiles_2d_ion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the different ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="waves_coherent_wave">
 		<xs:annotation>
 			<xs:documentation>Source terms for a given actuator</xs:documentation>
@@ -552,6 +2382,33 @@
 			<xs:element name="profiles_1d" type="waves_coherent_wave_profiles_1d" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Source radial profiles (flux surface averaged quantities) for various time slices</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="profiles_2d" type="waves_coherent_wave_profiles_2d" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>2D profiles in poloidal cross-section, for various time slices</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam_tracing" type="waves_coherent_wave_beam_tracing" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Beam tracing calculations, for various time slices</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="full_wave" type="waves_coherent_wave_full_wave" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Solution by a full wave code, given on a generic grid description, for various time slices</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
