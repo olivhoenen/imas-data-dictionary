@@ -2790,7 +2790,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="process" type="distribution_process_identifier" maxOccurs="32">
+			<xs:element name="process" type="distribution_process_identifier" maxOccurs="33">
 				<xs:annotation>
 					<xs:documentation>List all processes (NBI units, fusion reactions, ...) affecting the distribution, identified as in distribution_sources/source(i)/process in the DISTRIBUTION_SOURCES IDS</xs:documentation>
 					<xs:appinfo>
@@ -2888,7 +2888,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="distribution" type="distributions_d" maxOccurs="10">
+				<xs:element name="distribution" type="distributions_d" maxOccurs="33">
 					<xs:annotation>
 						<xs:documentation>Set of distribution functions. Every distribution function has to be associated with only one particle species, specified in distri_vec/species/, but there could be multiple distribution function for each species. In this case, the fast particle populations should be superposed</xs:documentation>
 						<xs:appinfo>
