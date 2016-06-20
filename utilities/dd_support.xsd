@@ -3124,6 +3124,20 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="volume_element">
+				<xs:annotation>
+					<xs:documentation>Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../dim1</coordinate1>
+						<coordinate2>../dim2</coordinate2>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="equilibrium_coordinate_system">
