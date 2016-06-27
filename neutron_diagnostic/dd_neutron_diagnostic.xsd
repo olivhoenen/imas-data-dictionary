@@ -375,7 +375,7 @@
 			</xs:element>
 			<xs:element name="reaction_rate">
 				<xs:annotation>
-					<xs:documentation>Reaction Rate on converter's material from Unit Ring Source in recent detector's converter for "spline" reconstruction(1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
+					<xs:documentation>Reaction Rate on converter's material from Unit Ring Source in recent detector's converter (1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -389,14 +389,16 @@
 			</xs:element>
 			<xs:element name="sensitivity">
 				<xs:annotation>
-					<xs:documentation>Sensitivity of ditector's converter material</xs:documentation>
+					<xs:documentation>Sensitivity of converter's material in recent detector's converter (1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../../../unit_source(:)/energy(:)</coordinate2>
 						<units>cps.m^2.s</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
