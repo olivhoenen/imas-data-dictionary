@@ -3,17 +3,28 @@
 <!-- edited with KWrite by Andrei Kovalev (ITER ORGANIZATION) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
-	<xs:complexType name="neutron_diagnostic_module_characteristics_reaction">
+	<xs:complexType name="neutron_diagnostic_characteristics_reaction_mode">
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:annotation>
-					<xs:documentation>Index of plasma reaction type</xs:documentation>
+					<xs:documentation>Index of Measuring Mode</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of Measuring Mode</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="count_lim_up">
@@ -40,6 +51,21 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_characteristics_reaction">
+		<xs:sequence>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Index of plasma reaction type</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="error">
 				<xs:annotation>
 					<xs:documentation>Diagnostic's relative uncertainty for recent plasma reaction</xs:documentation>
@@ -64,16 +90,24 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="mode" type="neutron_diagnostic_characteristics_reaction_mode" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Characteristics of counting linear limits in recent Measuring modes for recent Plasma reaction type</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>index</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_module_characteristics">
+	<xs:complexType name="neutron_diagnostic_characteristics">
 		<xs:sequence>
 			<xs:element name="dead_time">
 				<xs:annotation>
 					<xs:documentation>Dead time of detectors</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>sec</units>
+						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -85,14 +119,14 @@
 					<xs:documentation>Lower counting limit of recent Measuring Mode and plasma reaction</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>sec</units>
+						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="reaction" type="neutron_diagnostic_module_characteristics_reaction" maxOccurs="2">
+			<xs:element name="reaction" type="neutron_diagnostic_characteristics_reaction" maxOccurs="2">
 				<xs:annotation>
 					<xs:documentation>Plasma reaction (1 -'DT'; 2 - 'DD')</xs:documentation>
 					<xs:appinfo>
@@ -102,7 +136,70 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_detectors_measuring_mode">
+	<xs:complexType name="neutron_diagnostic_detectors_radiation">
+		<xs:sequence>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Index of radiation type</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="converter_name">
+				<xs:annotation>
+					<xs:documentation>Name of detector's converter for resent particle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="converter_volume">
+				<xs:annotation>
+					<xs:documentation>Volume of detector's converter for resent particle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="converter_nuclear_density">
+				<xs:annotation>
+					<xs:documentation>Nuclear density of detector's converter for resent particle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="converter_temperature">
+				<xs:annotation>
+					<xs:documentation>Temperature of detector's converter</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../time</coordinate1>
+						<units>K</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_detectors_mode">
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:annotation>
@@ -168,23 +265,20 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="material">
+			<xs:element name="radiation" type="neutron_diagnostic_detectors_radiation" maxOccurs="2">
 				<xs:annotation>
-					<xs:documentation>Name of convertor material</xs:documentation>
+					<xs:documentation>Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<coordinate1>index</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="position" type="rzphi0d_static">
 				<xs:annotation>
 					<xs:documentation>Detector Position Data</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="measuring_mode" type="neutron_diagnostic_detectors_measuring_mode" maxOccurs="50">
+			<xs:element name="mode" type="neutron_diagnostic_detectors_mode" maxOccurs="50">
 				<xs:annotation>
 					<xs:documentation>Measuring Mode Properties and Data</xs:documentation>
 					<xs:appinfo>
@@ -203,7 +297,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../../time</coordinate1>
-						<units>sec^-1</units>
+						<units>s^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -253,7 +347,7 @@
 			</xs:element>
 			<xs:element name="flux">
 				<xs:annotation>
-					<xs:documentation>Radiation flux from Unit Ring Source in recent detector's convertor (1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
+					<xs:documentation>Radiation flux from Unit Ring Source in recent detector's converter (1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -265,14 +359,14 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="d2flux_dRdZ">
+			<xs:element name="d2flux_drdz">
 				<xs:annotation>
-					<xs:documentation>Second deriviation of Radiation flux from Unit Ring Source in recent detector's convertor for "spline" reconstruction(1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
+					<xs:documentation>Second deriviation of Radiation flux from Unit Ring Source in recent detector's converter for "spline" reconstruction(1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
 						<coordinate2>../../../unit_source(:)/energy(:)</coordinate2>
-						<units>m^-2</units>
+						<units>m^-4</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -281,12 +375,12 @@
 			</xs:element>
 			<xs:element name="reaction_rate">
 				<xs:annotation>
-					<xs:documentation>Reaction Rate on convertor's material from Unit Ring Source in recent detector's convertor for "spline" reconstruction(1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
+					<xs:documentation>Reaction Rate on converter's material from Unit Ring Source in recent detector's converter for "spline" reconstruction(1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
 						<coordinate2>../../../unit_source(:)/energy(:)</coordinate2>
-						<units>m^-2</units>
+						<units>m^-3</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -295,10 +389,10 @@
 			</xs:element>
 			<xs:element name="sensitivity">
 				<xs:annotation>
-					<xs:documentation>Sensitivity of ditector's convertor material</xs:documentation>
+					<xs:documentation>Sensitivity of ditector's converter material</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>cps*m^2*sec</units>
+						<units>cps.m^2.s</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -318,17 +412,6 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="convertor_name">
-				<xs:annotation>
-					<xs:documentation>Name of Convertor for resent particle</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="reaction" type="neutron_diagnostic_unit_source_radiation_reaction"  maxOccurs="2">
@@ -353,7 +436,7 @@
 			</xs:element>
 			<xs:element name="radiation" type="neutron_diagnostic_unit_source_radiation" maxOccurs="2">
 				<xs:annotation>
-					<xs:documentation>Radiation type on detector's convertor (1 - 'neutrons'; 2 - 'gamma-rays')</xs:documentation>
+					<xs:documentation>Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>index</coordinate1>
 					</xs:appinfo>
@@ -372,7 +455,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="module_characteristics" type="neutron_diagnostic_module_characteristics">
+				<xs:element name="characteristics" type="neutron_diagnostic_characteristics">
 					<xs:annotation>
 						<xs:documentation>Description of Diagnostic's module detection characteristics for differen plasma modes based on Design Description</xs:documentation>
 					</xs:annotation>
