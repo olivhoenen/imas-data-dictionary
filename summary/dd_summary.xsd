@@ -10,9 +10,9 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
-	<xs:complexType name="summary_dynamic_flt_1d_3">
+	<xs:complexType name="summary_dynamic_flt_1d_3_parent_2">
 		<xs:annotation>
-			<xs:documentation>Summary dynamic FLT_1D + source information, time three levels above this node</xs:documentation>
+			<xs:documentation>Summary dynamic FLT_1D + source information, time three levels above this node and units as parent level 2</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="value">
@@ -20,7 +20,40 @@
 					<xs:documentation>Value</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>as_parent</units>
+						<units>as_parent_level_2</units>
+						<coordinate1>../../../../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="STR_0D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_dynamic_flt_1d_2_parent_2">
+		<xs:annotation>
+			<xs:documentation>Summary dynamic FLT_1D + source information, time two levels above this node and units as parent level 2</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent_level_2</units>
 						<coordinate1>../../../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -109,6 +142,38 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_dynamic_int_1d_2">
+		<xs:annotation>
+			<xs:documentation>Summary dynamic INT_1D + source information, time two levels above this node</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="STR_0D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_dynamic_int_1d_1">
 		<xs:annotation>
 			<xs:documentation>Summary dynamic INT_1D + source information, time one level above this node</xs:documentation>
@@ -138,6 +203,150 @@
 						<xs:group ref="STR_0D"/>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_species_level_3">
+		<xs:annotation>
+			<xs:documentation>List of ion species used in summary, three levels below the top</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="hydrogen" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Hydrogen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deuterium" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Deuterium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="titrium" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Tritium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="helium" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Helium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="berylium" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Berylium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lithium" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Lithium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="carbon" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Carbon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nitrogen" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Nitrogen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="neon" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Neon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="argon" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Argon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="xenon" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Xenon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oxygen" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Oxygen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tungsten" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Tungsten</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_species_level_2">
+		<xs:annotation>
+			<xs:documentation>List of ion species used in summary, two levels below the top</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="hydrogen" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Hydrogen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deuterium" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Deuterium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="titrium" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Tritium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="helium" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Helium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="berylium" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Berylium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lithium" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Lithium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="carbon" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Carbon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nitrogen" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Nitrogen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="neon" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Neon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="argon" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Argon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="xenon" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Xenon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oxygen" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Oxygen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tungsten" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Tungsten</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -221,9 +430,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="n_i" type="summary_species_level_3">
+				<xs:annotation>
+					<xs:documentation>Ion density per species</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
-					<xs:documentation>Total ion density (sum overs species)</xs:documentation>
+					<xs:documentation>Total ion density (sum over species)</xs:documentation>
 					<xs:appinfo>
 						<units>m^-3</units>
 					</xs:appinfo>
@@ -245,6 +462,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="velocity_tor" type="summary_species_level_3">
+				<xs:annotation>
+					<xs:documentation>Ion toroidal rotation velocity, per species</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="q" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
 					<xs:documentation>Safety factor</xs:documentation>
@@ -256,6 +481,100 @@
 			<xs:element name="magnetic_shear" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
 					<xs:documentation>Magnetic shear, defined as rho_tor/q . dq/drho_tor</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_local">
+		<xs:annotation>
+			<xs:documentation>Set of locations</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="centre" type="summary_local_quantities">
+				<xs:annotation>
+					<xs:documentation>Parameters at magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="edge" type="summary_local_quantities">
+				<xs:annotation>
+					<xs:documentation>Parameters at last closed flux surface</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pedestal" type="summary_local_quantities">
+				<xs:annotation>
+					<xs:documentation>Parameters at pedestal top</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="itb" type="summary_local_quantities">
+				<xs:annotation>
+					<xs:documentation>Parameters at internal transport barrier</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_average_quantities">
+		<xs:annotation>
+			<xs:documentation>Set of average quantities</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="t_e" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Electron temperature</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Ion temperature (average over ion species)</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_e" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Electron density</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_i" type="summary_species_level_2">
+				<xs:annotation>
+					<xs:documentation>Ion density per species</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Total ion density (sum over species)</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zeff" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Effective charge</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
 					</xs:appinfo>
@@ -380,6 +699,94 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_h_cd_ec">
+		<xs:annotation>
+			<xs:documentation>ECRH/CD related parameters</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="frequency" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>ECRH frequency</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="position" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Position of the maximum of the ECRH power deposition, in rho_tor_norm</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="polarisation" type="summary_dynamic_int_1d_2">
+				<xs:annotation>
+					<xs:documentation>Polarisation of the ECRH waves (0 = O mode, 1 = X mode)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="harmonic" type="summary_dynamic_int_1d_2">
+				<xs:annotation>
+					<xs:documentation>Harmonic number of the absorbed ECRH waves</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="angle_tor" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle of ECRH at resonance</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="angle_pol" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Poloidal angle of ECRH at resonance</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Electron cyclotron heating power</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="current" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Parallel current driven by EC waves</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy_fast" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Fast particle energy content driven by EC waves</xs:documentation>
+					<xs:appinfo>
+						<units>J</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_h_cd">
+		<xs:annotation>
+			<xs:documentation>Heating and current drive related parameters</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ec" type="summary_h_cd_ec">
+				<xs:annotation>
+					<xs:documentation>ECRH/ECCD related parameters</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="summary">
 		<xs:annotation>
 			<xs:documentation>Summary of physics quantities from a simulation or an experiment</xs:documentation>
@@ -394,6 +801,26 @@
 				<xs:element name="global_quantities" type="summary_global_quantities">
 					<xs:annotation>
 						<xs:documentation>Various global quantities derived from the profiles</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="local" type="summary_local">
+					<xs:annotation>
+						<xs:documentation>Plasma parameter values at different locations</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="line_average" type="summary_average_quantities">
+					<xs:annotation>
+						<xs:documentation>Line average plasma parameters</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="volume_average" type="summary_average_quantities">
+					<xs:annotation>
+						<xs:documentation>Volume average plasma parameters</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="heating_current_drive" type="summary_h_cd">
+					<xs:annotation>
+						<xs:documentation>Heating and current drive parameters</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
