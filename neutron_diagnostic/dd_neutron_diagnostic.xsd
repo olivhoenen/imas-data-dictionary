@@ -27,7 +27,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="count_lim_up">
+			<xs:element name="count_limit_upper">
 				<xs:annotation>
 					<xs:documentation>Upper counting limit of recent Measuring Mode and plasma reaction</xs:documentation>
 					<xs:appinfo>
@@ -39,7 +39,7 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="count_lim_dwn">
+			<xs:element name="count_limit_lower">
 				<xs:annotation>
 					<xs:documentation>Lower counting limit of recent Measuring Mode and plasma reaction</xs:documentation>
 					<xs:appinfo>
@@ -203,7 +203,7 @@
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:annotation>
-					<xs:documentation>Index of Measuring Mode</xs:documentation>
+					<xs:documentation>Index of Measuring Mode.  TO BE REMOVED: the mode index is provided by the index of the mode array above.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -245,7 +245,7 @@
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:annotation>
-					<xs:documentation>Number of Detector</xs:documentation>
+					<xs:documentation>Number of Detector. TO BE REMOVED: the detector index is provided by the index of the detector array above.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -323,7 +323,7 @@
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:annotation>
-					<xs:documentation>Index of plasma reaction type</xs:documentation>
+					<xs:documentation>Index of plasma reaction type. To be removed, since it is given by the index of the reaction array above.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -407,7 +407,7 @@
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:annotation>
-					<xs:documentation>Index of radiation type</xs:documentation>
+					<xs:documentation>Index of radiation type. TO BE REMOVED, since it is given by the index of the radiation array above.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -416,7 +416,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="reaction" type="neutron_diagnostic_unit_source_radiation_reaction"  maxOccurs="2">
+			<xs:element name="reaction" type="neutron_diagnostic_unit_source_radiation_reaction" maxOccurs="2">
 				<xs:annotation>
 					<xs:documentation>Plasma reaction (1 - 'DT'; 2 - 'DD')</xs:documentation>
 					<xs:appinfo>
