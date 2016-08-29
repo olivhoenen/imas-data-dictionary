@@ -36,9 +36,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:group ref="STR_0D"/>
-					</xs:sequence>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -69,9 +67,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:group ref="STR_0D"/>
-					</xs:sequence>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -102,9 +98,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:group ref="STR_0D"/>
-					</xs:sequence>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -135,9 +129,37 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:group ref="STR_0D"/>
-					</xs:sequence>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_constant_flt_0d">
+		<xs:annotation>
+			<xs:documentation>Summary constant FLT_0D + source information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -167,9 +189,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:group ref="STR_0D"/>
-					</xs:sequence>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -199,9 +219,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:group ref="STR_0D"/>
-					</xs:sequence>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -226,9 +244,14 @@
 					<xs:documentation>Tritium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="helium" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="helium_3" type="summary_dynamic_flt_1d_3_parent_2">
 				<xs:annotation>
-					<xs:documentation>Helium</xs:documentation>
+					<xs:documentation>Helium isotope with 3 nucleons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="helium_4" type="summary_dynamic_flt_1d_3_parent_2">
+				<xs:annotation>
+					<xs:documentation>Helium isotope with 4 nucleons</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="berylium" type="summary_dynamic_flt_1d_3_parent_2">
@@ -298,9 +321,14 @@
 					<xs:documentation>Tritium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="helium" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="helium_3" type="summary_dynamic_flt_1d_2_parent_2">
 				<xs:annotation>
-					<xs:documentation>Helium</xs:documentation>
+					<xs:documentation>Helium isotope with 3 nucleons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="helium_4" type="summary_dynamic_flt_1d_2_parent_2">
+				<xs:annotation>
+					<xs:documentation>Helium isotope with 4 nucleons</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="berylium" type="summary_dynamic_flt_1d_2_parent_2">
@@ -493,7 +521,7 @@
 			<xs:documentation>Set of locations</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="centre" type="summary_local_quantities">
+			<xs:element name="magnetic_axis" type="summary_local_quantities">
 				<xs:annotation>
 					<xs:documentation>Parameters at magnetic axis</xs:documentation>
 					<xs:appinfo>
@@ -672,30 +700,115 @@
 					<xs:documentation>H-mode flag: 0 when the plasma is in L-mode and 1 when in H-mode </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="r0">
+			<xs:element name="r0" type="summary_constant_flt_0d">
 				<xs:annotation>
 					<xs:documentation>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="b0">
+			<xs:element name="b0" type="summary_dynamic_flt_1d_1">
 				<xs:annotation>
 					<xs:documentation>Vacuum toroidal field at R0 [T]; Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>T</units>
-						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
+			</xs:element>
+			<xs:element name="h_98" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Energy confinement time enhancement factor over the IPB98(y,2) scaling</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_neutron_reaction">
+		<xs:annotation>
+			<xs:documentation>Neutron fluxes per reaction</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="total" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Total neutron flux coming from this reaction</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="thermal" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Neutron flux coming from thermal plasma</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam_thermal" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Neutron flux coming from NBI beam - plasma reactions</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam_beam" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Neutron flux coming from NBI beam self reactions</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_neutron">
+		<xs:annotation>
+			<xs:documentation>Description of neutron fluxes</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="total" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Total neutron flux from all reactions</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="thermal" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Neutron flux from all plasma thermal reactions</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dd" type="summary_neutron_reaction">
+				<xs:annotation>
+					<xs:documentation>Neutron fluxes from DD reactions</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dt" type="summary_neutron_reaction">
+				<xs:annotation>
+					<xs:documentation>Neutron fluxes from DT reactions</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tt" type="summary_neutron_reaction">
+				<xs:annotation>
+					<xs:documentation>Neutron fluxes from TT reactions</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -821,6 +934,11 @@
 				<xs:element name="heating_current_drive" type="summary_h_cd">
 					<xs:annotation>
 						<xs:documentation>Heating and current drive parameters</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="neutron_fluxes" type="summary_neutron">
+					<xs:annotation>
+						<xs:documentation>Neutron fluxes from various reactions</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
