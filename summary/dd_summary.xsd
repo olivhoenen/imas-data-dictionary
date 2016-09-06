@@ -72,6 +72,38 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_dynamic_flt_2d_fraction_2">
+		<xs:annotation>
+			<xs:documentation>Summary dynamic FL2_1D + source information, time two levels above this node, first dimension 1...3 (beam fractions)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>1...3</coordinate1>
+						<coordinate2>../../../../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_dynamic_flt_1d_2">
 		<xs:annotation>
 			<xs:documentation>Summary dynamic FLT_1D + source information, time two levels above this node</xs:documentation>
@@ -149,6 +181,35 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_constant_str_0d">
+		<xs:annotation>
+			<xs:documentation>Summary constant STR_0D + source information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="source">
@@ -374,6 +435,34 @@
 			<xs:element name="tungsten" type="summary_dynamic_flt_1d_2_parent_2">
 				<xs:annotation>
 					<xs:documentation>Tungsten</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_plasma_composition_species">
+		<xs:annotation>
+			<xs:documentation>Description of simple species (elements) without declaration of their ionisation state</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="a" type="summary_constant_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:appinfo>
+						<units>Atomic Mass Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_n" type="summary_constant_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Nuclear charge</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label" type="summary_constant_str_0d">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H, D, T, ...)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -812,6 +901,62 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_h_cd_nbi">
+		<xs:annotation>
+			<xs:documentation>NBI unit</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="species" type="summary_plasma_composition_species">
+				<xs:annotation>
+					<xs:documentation>Injected species</xs:documentation>
+					<xs:appinfo>
+						<units>Atomic Mass Unit</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>NBI power coupled to the plasma by this unit</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="current" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Parallel current driven by this NBI unit</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Full energy of the injected species (acceleration of a single atom)</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam_current_fraction" type="summary_dynamic_flt_2d_fraction_2">
+				<xs:annotation>
+					<xs:documentation>Fractions of beam current distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam_power_fraction" type="summary_dynamic_flt_2d_fraction_2">
+				<xs:annotation>
+					<xs:documentation>Fractions of beam power distributed among the different energies, the first index corresponds to the fast neutrals energy (1:full, 2: half, 3: one third)</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_h_cd_ec">
 		<xs:annotation>
 			<xs:documentation>ECRH/CD related parameters</xs:documentation>
@@ -861,7 +1006,7 @@
 			</xs:element>
 			<xs:element name="power" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
-					<xs:documentation>Electron cyclotron heating power</xs:documentation>
+					<xs:documentation>Electron cyclotron heating power coupled to the plasma</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -890,11 +1035,21 @@
 			<xs:documentation>Heating and current drive related parameters</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="ec" type="summary_h_cd_ec">
+			<xs:element name="ec" type="summary_h_cd_ec" maxOccurs="6">
 				<xs:annotation>
-					<xs:documentation>ECRH/ECCD related parameters</xs:documentation>
+					<xs:documentation>Set of ECRH/ECCD launchers</xs:documentation>
 					<xs:appinfo>
 						<catalogue_name>suffix</catalogue_name>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nbi" type="summary_h_cd_nbi" maxOccurs="32">
+				<xs:annotation>
+					<xs:documentation>Set of NBI units</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

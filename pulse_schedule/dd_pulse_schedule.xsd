@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
+	<xs:complexType name="pulse_schedule_reference">
+		<xs:annotation>
+			<xs:documentation>General structure for pulse schedule reference. NB: we propose to use the automatically generated reference/data_error_upper and reference/data_error_lower nodes to describe the upper of lower bound of the envelope of the waveform, since they almost have the same meaning and are already set on the same time base as reference/data.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reference_name">
+				<xs:annotation>
+					<xs:documentation>Reference name (e.g. in the native pulse schedule system of the device)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reference">
+				<xs:annotation>
+					<xs:documentation>Reference waveform</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>mixed</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reference_type">
+				<xs:annotation>
+					<xs:documentation>Reference type:  0:relative; 1: absolute; refers to the reference/data node</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="envelope_type">
+				<xs:annotation>
+					<xs:documentation>Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes </xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_rz">
+		<xs:annotation>
+			<xs:documentation>R,Z position</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_ic_antenna">
+		<xs:annotation>
+			<xs:documentation>IC antenna</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Power</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phase" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Phase</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="frequency" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Frequency</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_ec_antenna">
+		<xs:annotation>
+			<xs:documentation>EC antenna</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Power</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phase" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Phase</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="frequency" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Frequency</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_lh_antenna">
+		<xs:annotation>
+			<xs:documentation>LH antenna</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Power</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phase" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Phasing between neighbour waveguides (in the toroidal direction)</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="frequency" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Frequency</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_nbi_unit">
+		<xs:annotation>
+			<xs:documentation>NBI unit</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Power</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_nbi">
+		<xs:annotation>
+			<xs:documentation>Neutral beam heating and current drive system</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="unit" type="pulse_schedule_nbi_unit" maxOccurs="36">
+				<xs:annotation>
+					<xs:documentation>Set of NBI units</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_ic">
+		<xs:annotation>
+			<xs:documentation>Ion cyclotron heating and current drive system</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="antenna" type="pulse_schedule_ic_antenna" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Set of ICRH antennas</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_lh">
+		<xs:annotation>
+			<xs:documentation>Lower hybrid heating and current drive system</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="antenna" type="pulse_schedule_lh_antenna" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Set of LH antennas</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_ec">
+		<xs:annotation>
+			<xs:documentation>Electron cyclotron heating and current drive system</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="antenna" type="pulse_schedule_ec_antenna" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Set of ECRH antennas</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_density_control_valve">
+		<xs:annotation>
+			<xs:documentation>Gas injection valve</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="flow_rate" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Flow rate of the valve</xs:documentation>
+					<xs:appinfo>
+						<units>Pa.m^3.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_density_control">
+		<xs:annotation>
+			<xs:documentation>Gas injection system</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="valve" type="pulse_schedule_density_control_valve" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Set of injection valves. Time-dependent</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_e_line" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Line integrated electron density</xs:documentation>
+					<xs:appinfo>
+						<units>m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zeff" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Line average effective charge</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+						<xs:element name="n_t_over_n_d" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Average ratio of tritium over deuterium density</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_h_over_n_d" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Average ratio of hydrogen over deuterium density</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_flux_control">
+		<xs:annotation>
+			<xs:documentation>Flux control references</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="i_plasma" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Plasma current</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loop_voltage" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Loop voltage</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_position">
+		<xs:annotation>
+			<xs:documentation>Flux control references</xs:documentation>
+			<xs:appinfo>machine description</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="magnetic_axis" type="pulse_schedule_rz">
+				<xs:annotation>
+					<xs:documentation>Magnetic axis position</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_tf">
+		<xs:annotation>
+			<xs:documentation>Toroidal field references</xs:documentation>
+			<xs:appinfo>machine description</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="b_field_tor_vacuum_r" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above</xs:documentation>
+					<xs:appinfo>
+						<units>T.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="pulse_schedule">
+		<xs:annotation>
+			<xs:documentation>Description of Pulse Schedule, described by subsystems waveform references and an enveloppe aounrd them. The controllers, pulse schedule and SDN are defined separately</xs:documentation>
+			<xs:appinfo>
+				<lifecycle_status>alpha</lifecycle_status>
+				<lifecycle_version>3.6.0</lifecycle_version>
+			</xs:appinfo>
+			<xs:appinfo/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="ic" type="pulse_schedule_ic">
+					<xs:annotation>
+						<xs:documentation>Ion cyclotron heating and current drive system</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ec" type="pulse_schedule_ec">
+					<xs:annotation>
+						<xs:documentation>Electron cyclotron heating and current drive system</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="lh" type="pulse_schedule_lh">
+					<xs:annotation>
+						<xs:documentation>Lower Hybrid heating and current drive system</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="nbi" type="pulse_schedule_lh">
+					<xs:annotation>
+						<xs:documentation>Neutral beam heating and current drive system</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="density_control" type="pulse_schedule_density_control">
+					<xs:annotation>
+						<xs:documentation>Gas injection system and density control references</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="flux_control" type="pulse_schedule_flux_control">
+					<xs:annotation>
+						<xs:documentation>Magnetic flux control references</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="position_control" type="pulse_schedule_position">
+					<xs:annotation>
+						<xs:documentation>Plasma position and shape control references</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="tf" type="pulse_schedule_tf">
+					<xs:annotation>
+						<xs:documentation>Toroidal field references</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="code"/>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

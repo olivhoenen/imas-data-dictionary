@@ -827,40 +827,6 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:complexType name="schedule_waveform">
-		<xs:annotation>
-			<xs:documentation>Description of a named waveform, normally for scheduling</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>Reference name</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="value">
-				<xs:annotation>
-					<xs:documentation>Values of the reference for the timebase</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
-						<units>mixed</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="b_tor_vacuum_1">
 		<xs:annotation>
 			<xs:documentation>Characteristics of the vacuum toroidal field. time assumed to be one level above</xs:documentation>
@@ -3802,8 +3768,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			
-						<xs:element name="theta">
+			<xs:element name="theta">
 				<xs:annotation>
 					<xs:documentation>Poloidal angle</xs:documentation>
 					<xs:appinfo>
@@ -3816,7 +3781,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="rz1d_constant">
