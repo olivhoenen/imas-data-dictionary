@@ -688,13 +688,24 @@
 	</xs:element>
 	<xs:element name="code">
 		<xs:annotation>
-			<xs:documentation>Generic decription of the code specific parameters for the code that has produced this IDS</xs:documentation>
+			<xs:documentation>Generic decription of the code-specific parameters for the code that has produced this IDS</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="name">
 					<xs:annotation>
-						<xs:documentation>Name of the code</xs:documentation>
+						<xs:documentation>Name of software generating IDS</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="commit">
+					<xs:annotation>
+						<xs:documentation>Unique commit reference of software</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
 						</xs:appinfo>
@@ -705,7 +716,18 @@
 				</xs:element>
 				<xs:element name="version">
 					<xs:annotation>
-						<xs:documentation>Version of the code</xs:documentation>
+						<xs:documentation>Unique version (tag) of software</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="repository">
+					<xs:annotation>
+						<xs:documentation>URL of software repository</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
 						</xs:appinfo>
