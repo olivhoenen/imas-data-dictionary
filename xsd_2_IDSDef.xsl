@@ -102,6 +102,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:apply-templates select="xs:complexType" mode="IMPLEMENT">
 								<xsl:with-param name="currPath" select="''"/>
 								<xsl:with-param name="currPath_doc" select="''"/>
+								<xsl:with-param name="aosLevel" select="1"/>
 							</xsl:apply-templates>
 							<xsl:choose>
 								<xsl:when test="@name and @type">
@@ -109,6 +110,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:with-param name="thisType" select="@type"/>
 										<xsl:with-param name="currPath" select="''"/>
 										<xsl:with-param name="currPath_doc" select="''"/>
+										<xsl:with-param name="aosLevel" select="1"/>
 									</xsl:call-template>
 								</xsl:when>
 							</xsl:choose>
@@ -130,15 +132,18 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="actRef"/>
 		<xsl:param name="currPath"/>
 		<xsl:param name="currPath_doc"/>
+		<xsl:param name="aosLevel"/>
 		<xsl:apply-templates select="document(@schemaLocation)/*/xs:element[@name=$actRef]" mode="IMPLEMENT">
 			<xsl:with-param name="currPath" select="$currPath"/>
 			<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+			<xsl:with-param name="aosLevel" select="$aosLevel"/>
 		</xsl:apply-templates>
 	</xsl:template>
 	<!-- Handle ComplexType definition in IMPLEMENT mode -->
 	<xsl:template match="xs:complexType" mode="IMPLEMENT">
 		<xsl:param name="currPath"/>
 		<xsl:param name="currPath_doc"/>
+		<xsl:param name="aosLevel"/>
 		<xsl:param name="parentmachine"/>
 		<xsl:param name="parenttime"/>
 		<xsl:param name="parentunit"/>
@@ -147,12 +152,14 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:apply-templates select="xs:annotation/xs:appinfo[contains(string(.),'representation')]">
 			<xsl:with-param name="currPath" select="$currPath"/>
 			<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+			<xsl:with-param name="aosLevel" select="$aosLevel"/>
 			<xsl:with-param name="relPath" select="'yes'"/>
 		</xsl:apply-templates>
 		<!-- Start implementing all child elements of the complexType -->
 		<xsl:apply-templates select="*/xs:element" mode="IMPLEMENT">
 			<xsl:with-param name="currPath" select="$currPath"/>
 			<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+			<xsl:with-param name="aosLevel" select="$aosLevel"/>
 			<xsl:with-param name="parentmachine" select="$parentmachine"/>
 			<xsl:with-param name="parenttime" select="$parenttime"/>
 			<xsl:with-param name="parentunit" select="$parentunit"/>
@@ -163,6 +170,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 	<xsl:template match="xs:element" mode="IMPLEMENT">
 		<xsl:param name="currPath"/>
 		<xsl:param name="currPath_doc"/>
+		<xsl:param name="aosLevel"/>
 		<xsl:param name="parentmachine"/>
 		<xsl:param name="parenttime"/>
 		<xsl:param name="parentunit"/>
@@ -174,6 +182,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					<xsl:with-param name="thisRef" select="@ref"/>
 					<xsl:with-param name="currPath" select="$currPath"/>
 					<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+					<xsl:with-param name="aosLevel" select="$aosLevel"/>
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:when test="@name">
@@ -223,67 +232,63 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 						</field>
 						<!-- Then we test if the type is real or complex, if so add *_error nodes to the structure for the errorbars -->
 						<xsl:if test="contains(xs:complexType/xs:group/@ref,'FLT') or contains(xs:complexType/xs:group/@ref,'CPX')">
-
-												<field> <!-- _error_upper field -->
-							<xsl:attribute name="name"><xsl:value-of select="concat(@name,'_error_upper')"/></xsl:attribute>
-							<xsl:choose>
-								<xsl:when test="$currPath=''">
-									<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_upper')"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_upper')"/></xsl:attribute>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'_error_upper')"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_upper')"/></xsl:attribute>
-								</xsl:otherwise>
-							</xsl:choose>
-							<xsl:attribute name="documentation"><xsl:value-of select="concat('Upper error for &quot;',@name,'&quot;')"/></xsl:attribute>
-							<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
-							<xsl:for-each select="xs:annotation/xs:appinfo/*">
-								<!-- Generic method for declaring all appinfo as attributes-->
-								<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-							</xsl:for-each>						
-						</field>	
-
-
-
-						<field> <!-- _error_lower field -->
-							<xsl:attribute name="name"><xsl:value-of select="concat(@name,'_error_lower')"/></xsl:attribute>
-							<xsl:choose>
-								<xsl:when test="$currPath=''">
-									<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_lower')"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_lower')"/></xsl:attribute>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'_error_lower')"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_lower')"/></xsl:attribute>
-								</xsl:otherwise>
-							</xsl:choose>
-							<xsl:attribute name="documentation"><xsl:value-of select="concat('Lower error for &quot;',@name,'&quot;')"/></xsl:attribute>
-							<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
-							<xsl:for-each select="xs:annotation/xs:appinfo/*">
-								<!-- Generic method for declaring all appinfo as attributes-->
-								<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-							</xsl:for-each>						
-						</field>						
-					
-												<field> <!-- _error_index field -->
-							<xsl:attribute name="name"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
-							<xsl:choose>
-								<xsl:when test="$currPath=''">
-									<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'_error_index')"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_index')"/></xsl:attribute>
-								</xsl:otherwise>
-							</xsl:choose>
-							<xsl:attribute name="documentation"><xsl:value-of select="concat('Index in the error_description list for &quot;',@name,'&quot;')"/></xsl:attribute>
-							<xsl:attribute name="data_type">int_type</xsl:attribute>
-														<xsl:attribute name="type">constant</xsl:attribute>
-					
-						</field>						
-					
+							<field>
+								<!-- _error_upper field -->
+								<xsl:attribute name="name"><xsl:value-of select="concat(@name,'_error_upper')"/></xsl:attribute>
+								<xsl:choose>
+									<xsl:when test="$currPath=''">
+										<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_upper')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_upper')"/></xsl:attribute>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'_error_upper')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_upper')"/></xsl:attribute>
+									</xsl:otherwise>
+								</xsl:choose>
+								<xsl:attribute name="documentation"><xsl:value-of select="concat('Upper error for &quot;',@name,'&quot;')"/></xsl:attribute>
+								<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
+								<xsl:for-each select="xs:annotation/xs:appinfo/*">
+									<!-- Generic method for declaring all appinfo as attributes-->
+									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+								</xsl:for-each>
+							</field>
+							<field>
+								<!-- _error_lower field -->
+								<xsl:attribute name="name"><xsl:value-of select="concat(@name,'_error_lower')"/></xsl:attribute>
+								<xsl:choose>
+									<xsl:when test="$currPath=''">
+										<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_lower')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_lower')"/></xsl:attribute>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'_error_lower')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_lower')"/></xsl:attribute>
+									</xsl:otherwise>
+								</xsl:choose>
+								<xsl:attribute name="documentation"><xsl:value-of select="concat('Lower error for &quot;',@name,'&quot;')"/></xsl:attribute>
+								<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
+								<xsl:for-each select="xs:annotation/xs:appinfo/*">
+									<!-- Generic method for declaring all appinfo as attributes-->
+									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+								</xsl:for-each>
+							</field>
+							<field>
+								<!-- _error_index field -->
+								<xsl:attribute name="name"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
+								<xsl:choose>
+									<xsl:when test="$currPath=''">
+										<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'_error_index')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_index')"/></xsl:attribute>
+									</xsl:otherwise>
+								</xsl:choose>
+								<xsl:attribute name="documentation"><xsl:value-of select="concat('Index in the error_description list for &quot;',@name,'&quot;')"/></xsl:attribute>
+								<xsl:attribute name="data_type">int_type</xsl:attribute>
+								<xsl:attribute name="type">constant</xsl:attribute>
+							</field>
 						</xsl:if>
 					</xsl:when>
 					<xsl:otherwise>
@@ -309,17 +314,16 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:attribute name="maxoccur"><xsl:value-of select="@maxOccurs"/></xsl:attribute>
 											<xsl:choose>
 												<xsl:when test="$currPath_doc=''">
-													<xsl:attribute name="path_doc"><xsl:value-of select="@name"/>(:)</xsl:attribute>
+													<xsl:attribute name="path_doc"><xsl:value-of select="@name"/><xsl:call-template name="aosIndex"><xsl:with-param name="aosLevel" select="$aosLevel"/></xsl:call-template></xsl:attribute>
 												</xsl:when>
 												<xsl:otherwise>
-													<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name)"/>(:)</xsl:attribute>
+													<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name)"/><xsl:call-template name="aosIndex"><xsl:with-param name="aosLevel" select="$aosLevel"/></xsl:call-template></xsl:attribute>
 												</xsl:otherwise>
 											</xsl:choose>
-									<xsl:for-each select="xs:annotation/xs:appinfo/*">
-										<!-- Generic method for declaring all appinfo as attributes-->
-										<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'(:)')"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'(:)')"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-									</xsl:for-each>
-
+											<xsl:for-each select="xs:annotation/xs:appinfo/*">
+												<!-- Generic method for declaring all appinfo as attributes. There is a long, special treatement for coordinates because the path is indicated, otherwise treatment is just copying the attribute (see the value-of select . at the very end ...) -->
+												<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="../type='dynamic'"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'(itime)')"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'(itime)')"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'($aosLevel)')"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'($aosLevel)')"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+											</xsl:for-each>
 										</xsl:when>
 										<!-- It is a regular structure -->
 										<xsl:otherwise>
@@ -332,14 +336,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 													<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name)"/></xsl:attribute>
 												</xsl:otherwise>
 											</xsl:choose>
-									<xsl:for-each select="xs:annotation/xs:appinfo/*">
-										<!-- Generic method for declaring all appinfo as attributes-->
-										<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-									</xsl:for-each>
-
-
-
-
+											<xsl:for-each select="xs:annotation/xs:appinfo/*">
+												<!-- Generic method for declaring all appinfo as attributes. There is a long, special treatement for coordinates because the path is indicated, otherwise treatment is just copying the attribute (see the value-of select . at the very end ...) -->
+												<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+											</xsl:for-each>
 										</xsl:otherwise>
 									</xsl:choose>
 									<!-- Handle type definition via template doImplementType. Need to pass an appropriate path definition -->
@@ -347,17 +347,31 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:when test="$currPath=''">
 											<xsl:choose>
 												<xsl:when test="@maxOccurs='unbounded' or @maxOccurs &gt; 1">
-													<xsl:call-template name="doImplementType">
-														<xsl:with-param name="thisType" select="@type"/>
-														<xsl:with-param name="currPath" select="@name"/>
-														<xsl:with-param name="currPath_doc" select="concat(@name,'(:)')"/>
-													</xsl:call-template>
+													<xsl:choose>
+														<xsl:when test="xs:annotation/xs:appinfo/type='dynamic'">
+															<xsl:call-template name="doImplementType">
+																<xsl:with-param name="thisType" select="@type"/>
+																<xsl:with-param name="currPath" select="@name"/>
+																<xsl:with-param name="currPath_doc" select="concat(@name,'(itime)')"/>
+																<xsl:with-param name="aosLevel" select="$aosLevel"/>
+															</xsl:call-template>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:call-template name="doImplementType">
+																<xsl:with-param name="thisType" select="@type"/>
+																<xsl:with-param name="currPath" select="@name"/>
+																<xsl:with-param name="currPath_doc" select="concat(@name,'(i',$aosLevel,')')"/>
+																<xsl:with-param name="aosLevel" select="$aosLevel+1"/>
+															</xsl:call-template>
+														</xsl:otherwise>
+													</xsl:choose>
 												</xsl:when>
 												<xsl:otherwise>
 													<xsl:call-template name="doImplementType">
 														<xsl:with-param name="thisType" select="@type"/>
 														<xsl:with-param name="currPath" select="@name"/>
 														<xsl:with-param name="currPath_doc" select="@name"/>
+														<xsl:with-param name="aosLevel" select="$aosLevel"/>
 													</xsl:call-template>
 												</xsl:otherwise>
 											</xsl:choose>
@@ -365,17 +379,31 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:otherwise>
 											<xsl:choose>
 												<xsl:when test="@maxOccurs='unbounded' or @maxOccurs &gt; 1">
-													<xsl:call-template name="doImplementType">
-														<xsl:with-param name="thisType" select="@type"/>
-														<xsl:with-param name="currPath" select="concat($currPath,'/',@name)"/>
-														<xsl:with-param name="currPath_doc" select="concat($currPath_doc,'/',@name,'(:)')"/>
-													</xsl:call-template>
+													<xsl:choose>
+														<xsl:when test="xs:annotation/xs:appinfo/type='dynamic'">
+															<xsl:call-template name="doImplementType">
+																<xsl:with-param name="thisType" select="@type"/>
+																<xsl:with-param name="currPath" select="concat($currPath,'/',@name)"/>
+																<xsl:with-param name="currPath_doc" select="concat($currPath_doc,'/',@name,'(itime)')"/>
+																<xsl:with-param name="aosLevel" select="$aosLevel"/>
+															</xsl:call-template>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:call-template name="doImplementType">
+																<xsl:with-param name="thisType" select="@type"/>
+																<xsl:with-param name="currPath" select="concat($currPath,'/',@name)"/>
+																<xsl:with-param name="currPath_doc" select="concat($currPath_doc,'/',@name,'(i',$aosLevel,')')"/>
+																<xsl:with-param name="aosLevel" select="$aosLevel+1"/>
+															</xsl:call-template>
+														</xsl:otherwise>
+													</xsl:choose>
 												</xsl:when>
 												<xsl:otherwise>
 													<xsl:call-template name="doImplementType">
 														<xsl:with-param name="thisType" select="@type"/>
 														<xsl:with-param name="currPath" select="concat($currPath,'/',@name)"/>
 														<xsl:with-param name="currPath_doc" select="concat($currPath_doc,'/',@name)"/>
+														<xsl:with-param name="aosLevel" select="$aosLevel"/>
 													</xsl:call-template>
 												</xsl:otherwise>
 											</xsl:choose>
@@ -432,79 +460,68 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
 													</xsl:for-each>
 												</field>
-						<!-- Then we test if the type is real or complex, if so add *_error nodes to the structure for the errorbars -->
-						<xsl:if test="contains(xs:complexType/xs:sequence/xs:group/@ref,'FLT') or contains(xs:complexType/xs:sequence/xs:group/@ref,'CPX')">
-
-												<field> <!-- _error_upper field -->
-							<xsl:attribute name="name"><xsl:value-of select="'data_error_upper'"/></xsl:attribute>						
-<xsl:choose>
-														<xsl:when test="$currPath=''">
-															<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data_error_upper')"/></xsl:attribute>
-															<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_upper')"/></xsl:attribute>
-														</xsl:when>
-														<xsl:otherwise>
-															<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data_error_upper')"/></xsl:attribute>
-															<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_upper')"/></xsl:attribute>
-														</xsl:otherwise>
-													</xsl:choose>							
-							<xsl:attribute name="documentation">Upper error for &quot;data&quot;</xsl:attribute>
-							<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:attribute>
-													<xsl:for-each select="xs:annotation/xs:appinfo/*">
-														<!-- Generic method for declaring all appinfo as attributes-->
-														<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-														<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
-													</xsl:for-each>
-						</field>	
-
-
-												<field> <!-- _error_lower field -->
-							<xsl:attribute name="name"><xsl:value-of select="'data_error_lower'"/></xsl:attribute>						
-<xsl:choose>
-														<xsl:when test="$currPath=''">
-															<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data_error_lower')"/></xsl:attribute>
-															<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_lower')"/></xsl:attribute>
-														</xsl:when>
-														<xsl:otherwise>
-															<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data_error_lower')"/></xsl:attribute>
-															<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_lower')"/></xsl:attribute>
-														</xsl:otherwise>
-													</xsl:choose>							
-							<xsl:attribute name="documentation">Lower error for &quot;data&quot;</xsl:attribute>
-							<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:attribute>
-													<xsl:for-each select="xs:annotation/xs:appinfo/*">
-														<!-- Generic method for declaring all appinfo as attributes-->
-														<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-														<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
-													</xsl:for-each>
-						</field>	
-
-																	
-												<field> <!-- _error_index field -->
-							<xsl:attribute name="name">data_error_index</xsl:attribute>						
-<xsl:choose>
-														<xsl:when test="$currPath=''">
-															<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data_error_index')"/></xsl:attribute>
-															<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_index')"/></xsl:attribute>
-														</xsl:when>
-														<xsl:otherwise>
-															<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data_error_index')"/></xsl:attribute>
-															<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_index')"/></xsl:attribute>
-														</xsl:otherwise>
-													</xsl:choose>							
-							<xsl:attribute name="documentation">Index in the error_description list for &quot;data&quot;</xsl:attribute>
-							<xsl:attribute name="data_type">int_type</xsl:attribute>
-							<xsl:attribute name="type">constant</xsl:attribute>
-						</field>	
-</xsl:if>
-												
-												
-												
-												
-												
-												
-												
-												
-												
+												<!-- Then we test if the type is real or complex, if so add *_error nodes to the structure for the errorbars -->
+												<xsl:if test="contains(xs:complexType/xs:sequence/xs:group/@ref,'FLT') or contains(xs:complexType/xs:sequence/xs:group/@ref,'CPX')">
+													<field>
+														<!-- _error_upper field -->
+														<xsl:attribute name="name"><xsl:value-of select="'data_error_upper'"/></xsl:attribute>
+														<xsl:choose>
+															<xsl:when test="$currPath=''">
+																<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data_error_upper')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_upper')"/></xsl:attribute>
+															</xsl:when>
+															<xsl:otherwise>
+																<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data_error_upper')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_upper')"/></xsl:attribute>
+															</xsl:otherwise>
+														</xsl:choose>
+														<xsl:attribute name="documentation">Upper error for &quot;data&quot;</xsl:attribute>
+														<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:attribute>
+														<xsl:for-each select="xs:annotation/xs:appinfo/*">
+															<!-- Generic method for declaring all appinfo as attributes-->
+															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+															<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
+														</xsl:for-each>
+													</field>
+													<field>
+														<!-- _error_lower field -->
+														<xsl:attribute name="name"><xsl:value-of select="'data_error_lower'"/></xsl:attribute>
+														<xsl:choose>
+															<xsl:when test="$currPath=''">
+																<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data_error_lower')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_lower')"/></xsl:attribute>
+															</xsl:when>
+															<xsl:otherwise>
+																<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data_error_lower')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_lower')"/></xsl:attribute>
+															</xsl:otherwise>
+														</xsl:choose>
+														<xsl:attribute name="documentation">Lower error for &quot;data&quot;</xsl:attribute>
+														<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:attribute>
+														<xsl:for-each select="xs:annotation/xs:appinfo/*">
+															<!-- Generic method for declaring all appinfo as attributes-->
+															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+															<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
+														</xsl:for-each>
+													</field>
+													<field>
+														<!-- _error_index field -->
+														<xsl:attribute name="name">data_error_index</xsl:attribute>
+														<xsl:choose>
+															<xsl:when test="$currPath=''">
+																<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data_error_index')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_index')"/></xsl:attribute>
+															</xsl:when>
+															<xsl:otherwise>
+																<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data_error_index')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_index')"/></xsl:attribute>
+															</xsl:otherwise>
+														</xsl:choose>
+														<xsl:attribute name="documentation">Index in the error_description list for &quot;data&quot;</xsl:attribute>
+														<xsl:attribute name="data_type">int_type</xsl:attribute>
+														<xsl:attribute name="type">constant</xsl:attribute>
+													</field>
+												</xsl:if>
 											</xsl:if>
 										</xsl:otherwise>
 									</xsl:choose>
@@ -513,12 +530,14 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:apply-templates select="*/*/xs:element" mode="IMPLEMENT">
 												<xsl:with-param name="currPath" select="@name"/>
 												<xsl:with-param name="currPath_doc" select="@name"/>
+												<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											</xsl:apply-templates>
 										</xsl:when>
 										<xsl:otherwise>
 											<xsl:apply-templates select="*/*/xs:element" mode="IMPLEMENT">
 												<xsl:with-param name="currPath" select="concat($currPath, '/',@name)"/>
 												<xsl:with-param name="currPath_doc" select="concat($currPath_doc, '/',@name)"/>
+												<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											</xsl:apply-templates>
 										</xsl:otherwise>
 									</xsl:choose>
@@ -553,6 +572,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="thisRef"/>
 		<xsl:param name="currPath"/>
 		<xsl:param name="currPath_doc"/>
+		<xsl:param name="aosLevel"/>
 		<xsl:choose>
 			<xsl:when test="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisRef]">
 				when the reference to be included is a complexType defined in utilities : NEVER HAPPENS
@@ -560,6 +580,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 				<xsl:apply-templates select="document('utilities.xsd')/*/xs:complexType[@name=$thisRef]" mode="IMPLEMENT">
 					<xsl:with-param name="currPath" select="$currPath"/>
 					<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+					<xsl:with-param name="aosLevel" select="$aosLevel"/>
 					<xsl:with-param name="parentmachine" select="yes"/>
 				</xsl:apply-templates>
 			</xsl:when>
@@ -568,6 +589,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 				<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]" mode="IMPLEMENT">
 					<xsl:with-param name="currPath" select="$currPath"/>
 					<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+					<xsl:with-param name="aosLevel" select="$aosLevel"/>
 				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
@@ -576,6 +598,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					<xsl:with-param name="actRef" select="$thisRef"/>
 					<xsl:with-param name="currPath" select="$currPath"/>
 					<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+					<xsl:with-param name="aosLevel" select="$aosLevel"/>
 				</xsl:apply-templates>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -584,6 +607,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="thisType"/>
 		<xsl:param name="currPath"/>
 		<xsl:param name="currPath_doc"/>
+		<xsl:param name="aosLevel"/>
 		<xsl:param name="parentmachine"/>
 		<xsl:param name="parenttime"/>
 		<xsl:choose>
@@ -603,6 +627,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+											<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											<xsl:with-param name="parentmachine" select="'yes'"/>
 											<xsl:with-param name="parenttime" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
@@ -613,6 +638,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+											<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											<xsl:with-param name="parentmachine" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
@@ -626,6 +652,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+											<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											<xsl:with-param name="parenttime" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
@@ -635,6 +662,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+											<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
 									</xsl:otherwise>
@@ -651,6 +679,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 									<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 									<xsl:with-param name="currPath" select="$currPath"/>
 									<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+									<xsl:with-param name="aosLevel" select="$aosLevel"/>
 									<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 									<xsl:with-param name="experimental" select="$thisType"/>
 								</xsl:apply-templates>
@@ -660,6 +689,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 									<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 									<xsl:with-param name="currPath" select="$currPath"/>
 									<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+									<xsl:with-param name="aosLevel" select="$aosLevel"/>
 									<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 								</xsl:apply-templates>
 							</xsl:otherwise>
@@ -679,6 +709,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+											<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											<xsl:with-param name="parentmachine" select="'yes'"/>
 											<xsl:with-param name="parenttime" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
@@ -688,6 +719,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:apply-templates select="/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+											<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											<xsl:with-param name="parentmachine" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
@@ -701,6 +733,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+											<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											<xsl:with-param name="parenttime" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
@@ -709,6 +742,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:apply-templates select="/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+											<xsl:with-param name="aosLevel" select="$aosLevel"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
 									</xsl:otherwise>
@@ -721,11 +755,20 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 						<xsl:apply-templates select="/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 							<xsl:with-param name="currPath" select="$currPath"/>
 							<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+							<xsl:with-param name="aosLevel" select="$aosLevel"/>
 							<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 						</xsl:apply-templates>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	<!-- Template to write the aosIndex to the path_doc attribute-->
+	<xsl:template name="aosIndex">
+		<xsl:param name="aosLevel"/>
+		<xsl:choose>
+			<xsl:when test="xs:annotation/xs:appinfo/type='dynamic'">(itime)</xsl:when>
+			<xsl:otherwise>(i<xsl:value-of select="$aosLevel"/>)</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 	<!-- Below is the template dedicated to building absolute Path from the relative path, for the coordinate attributes-->
@@ -736,8 +779,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:choose>
 			<xsl:when test="contains($coordinatePath,'...')">
 				<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
-				<xsl:value-of select="replace($coordinatePath,'../','')"/>				
-				</xsl:when>
+				<xsl:value-of select="replace($coordinatePath,'../','')"/>
+			</xsl:when>
 			<xsl:when test="contains($coordinatePath,'IDS')">
 				<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
 				<xsl:value-of select="$coordinatePath"/>

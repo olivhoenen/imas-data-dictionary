@@ -68,6 +68,7 @@
       <body>
         <p class="welcome">ITER Physics Data Model Documentation for <xsl:value-of select="@name"/></p>
         <p><xsl:value-of select="@documentation"/></p> <!-- Write the IDS description -->
+        <p>Notation of array of structure indices: itime indicates a time index; i1, i2, i3, ... indicate other indices with their depth in the IDS. This notation clarifies the path of a given node, but should not be used to compare indices of different nodes (they may have different meanings).</p>
         <p>Lifecycle status: <xsl:value-of select="@lifecycle_status"/> since version <xsl:value-of select="@lifecycle_version"/></p> <!-- Write the IDS Lifecycle information -->
         <p><a href="html_documentation.html">Back to top IDS list</a></p>
         <table border="1">
