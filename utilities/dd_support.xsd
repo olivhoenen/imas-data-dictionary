@@ -447,6 +447,46 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="gas_mixture_constant">
+		<xs:annotation>
+			<xs:documentation>Description of a neutral species within a gas mixture (constant)</xs:documentation>
+			<xs:appinfo>
+				<coordinate1>1...N</coordinate1>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element_constant" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying neutral (e.g. H, D, T, He, C, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fraction">
+				<xs:annotation>
+					<xs:documentation>Relative fraction of this species (in molecules) in the gas mixture</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="plasma_composition_ions">
 		<xs:annotation>
 			<xs:documentation>Array of plasma ions (within a type 3 AoS)</xs:documentation>

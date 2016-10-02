@@ -71,6 +71,8 @@
 				<xs:annotation>
 					<xs:documentation>Internal inductance. The li_3 definition is used, i.e. li_3 = 2/R0/mu0^2/Ip^2 * int(Bp^2 dV).</xs:documentation>
 					<xs:appinfo>
+											<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.7.0</lifecycle_version>
 						<coordinate1>../../time</coordinate1>
 						<type>dynamic</type>
 						<units>-</units>
@@ -80,6 +82,20 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+						<xs:element name="li_3">
+				<xs:annotation>
+					<xs:documentation>Internal inductance. The li_3 definition is used, i.e. li_3 = 2/R0/mu0^2/Ip^2 * int(Bp^2 dV).</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../time</coordinate1>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+
 			<xs:element name="beta_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal beta, defined as the volume-averaged total perpendicular pressure divided by (B0^2/(2*mu0)), i.e. beta_toroidal = 2 mu0 int(p dV) / V / B0^2</xs:documentation>
@@ -124,7 +140,7 @@
 					<xs:documentation>Plasma energy content = 3/2 * integral over the plasma volume of the total perpendicular pressure </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
-						<units>A</units>
+						<units>J</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>

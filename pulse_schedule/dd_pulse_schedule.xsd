@@ -141,6 +141,30 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="deposition_rho_tor_norm" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate at which the main deposition should occur</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="angle_pol" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Poloidal injection angle of the waves with respect to the horizontal direction. Positive means wave launched upwards, negative means wave launched downwards</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="angle_tor" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Toroidal injection angle of the waves, with respect to the normal to the vacuum magnetic field. 0 means perpendicular injection. Positive sign means the waves is injected anti-clockwise when viewed from above.</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="pulse_schedule_lh_antenna">
@@ -164,6 +188,22 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="phase" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Phasing between neighbour waveguides (in the toroidal direction)</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_parallel" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Main parallel refractive index of the injected wave power spectrum</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="frequency" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Frequency</xs:documentation>
@@ -179,11 +219,27 @@
 			<xs:documentation>NBI unit</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="species" type="gas_mixture_constant" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Species injected by the NBI unit (may be more than one in case the unit injects a gas mixture)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Power</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Full energy of the injected species (acceleration of a single atom)</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -319,6 +375,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="species" type="gas_mixture_constant" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Species injected by the valve (may be more than one in case the valve injects a gas mixture)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="pulse_schedule_density_control">
@@ -350,7 +414,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-						<xs:element name="n_t_over_n_d" type="pulse_schedule_reference">
+			<xs:element name="n_t_over_n_d" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Average ratio of tritium over deuterium density</xs:documentation>
 					<xs:appinfo>
@@ -401,6 +465,22 @@
 					<xs:documentation>Loop voltage</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="li_3" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Internal inductance</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beta_normal" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA]</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -507,7 +587,7 @@
 						<xs:documentation>Lower Hybrid heating and current drive system</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="nbi" type="pulse_schedule_lh">
+				<xs:element name="nbi" type="pulse_schedule_nbi">
 					<xs:annotation>
 						<xs:documentation>Neutral beam heating and current drive system</xs:documentation>
 					</xs:annotation>
