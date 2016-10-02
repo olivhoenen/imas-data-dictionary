@@ -149,17 +149,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="angle_pol" type="pulse_schedule_reference">
+			<xs:element name="launching_angle_pol" type="pulse_schedule_reference">
 				<xs:annotation>
-					<xs:documentation>Poloidal injection angle of the waves with respect to the horizontal direction. Positive means wave launched upwards, negative means wave launched downwards</xs:documentation>
+					<xs:documentation>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R. Positive means wave launched downwards, negative means wave launched upwards</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="angle_tor" type="pulse_schedule_reference">
+			<xs:element name="launching_angle_tor" type="pulse_schedule_reference">
 				<xs:annotation>
-					<xs:documentation>Toroidal injection angle of the waves, with respect to the normal to the vacuum magnetic field. 0 means perpendicular injection. Positive sign means the waves is injected anti-clockwise when viewed from above.</xs:documentation>
+					<xs:documentation>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi. Positive sign means the waves is injected anti-clockwise when viewed from above.</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
 					</xs:appinfo>
@@ -253,6 +253,9 @@
 			<xs:element name="unit" type="pulse_schedule_nbi_unit" maxOccurs="36">
 				<xs:annotation>
 					<xs:documentation>Set of NBI units</xs:documentation>
+					<xs:appinfo>
+<coordinate1>1...N</coordinate1>					
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="mode">
