@@ -1453,7 +1453,7 @@
 			</xs:element>
 			<xs:element name="pressure">
 				<xs:annotation>
-					<xs:documentation>Pressure</xs:documentation>
+					<xs:documentation>Pressure (thermal+non-thermal)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -1580,7 +1580,7 @@
 			</xs:element>
 			<xs:element name="pressure">
 				<xs:annotation>
-					<xs:documentation>Pressure (sum over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:documentation>Pressure (thermal+non-thermal) (sum over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -1780,7 +1780,7 @@
 			</xs:element>
 			<xs:element name="pressure">
 				<xs:annotation>
-					<xs:documentation>Pressure</xs:documentation>
+					<xs:documentation>Pressure (thermal+non-thermal)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -1895,7 +1895,7 @@
 			</xs:element>
 			<xs:element name="pressure">
 				<xs:annotation>
-					<xs:documentation>Pressure (sum over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:documentation>Pressure (thermal+non-thermal) (sum over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -2007,7 +2007,7 @@
 			</xs:element>
 			<xs:element name="pressure">
 				<xs:annotation>
-					<xs:documentation>Pressure</xs:documentation>
+					<xs:documentation>Pressure (thermal+non-thermal)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>Pa</units>
@@ -2143,11 +2143,11 @@
 			</xs:element>
 			<xs:element name="momentum_tor">
 				<xs:annotation>
-					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons </xs:documentation>
+					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<type>dynamic</type>
-						<units>kg.m.s^-1</units>
+						<units>kg.m^-1.s^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
