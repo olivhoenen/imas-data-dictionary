@@ -467,6 +467,78 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_local_position_r_z">
+		<xs:annotation>
+			<xs:documentation>Radial position at which physics quantities are evaluated, including an R,Z position</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) </xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../../time</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under global_quantities/b0</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../../time</coordinate1>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal magnetic flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../time</coordinate1>
+						<units>Wb</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../time</coordinate1>
+						<units>m</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../time</coordinate1>
+						<units>m</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_local_position">
 		<xs:annotation>
 			<xs:documentation>Radial position at which physics quantities are evaluated</xs:documentation>
@@ -510,6 +582,98 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_local_quantities_r_z">
+		<xs:annotation>
+			<xs:documentation>Set of local quantities, including an R,Z position</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="position" type="summary_local_position_r_z">
+				<xs:annotation>
+					<xs:documentation>Radial position at which physics quantities are evaluated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Electron temperature</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Ion temperature (average over ion species)</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_e" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Electron density</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_i" type="summary_species_level_3">
+				<xs:annotation>
+					<xs:documentation>Ion density per species</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Total ion density (sum over species)</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zeff" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Effective charge</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_tor" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons</xs:documentation>
+					<xs:appinfo>
+						<units>kg.m.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_tor" type="summary_species_level_3">
+				<xs:annotation>
+					<xs:documentation>Ion toroidal rotation velocity, per species</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="q" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Safety factor</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="magnetic_shear" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Magnetic shear, defined as rho_tor/q . dq/drho_tor</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -610,7 +774,7 @@
 			<xs:documentation>Set of locations</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="magnetic_axis" type="summary_local_quantities">
+			<xs:element name="magnetic_axis" type="summary_local_quantities_r_z">
 				<xs:annotation>
 					<xs:documentation>Parameters at magnetic axis</xs:documentation>
 					<xs:appinfo>
