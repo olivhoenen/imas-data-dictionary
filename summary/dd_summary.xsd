@@ -197,6 +197,66 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_static_flt_0d">
+		<xs:annotation>
+			<xs:documentation>Summary static FLT_0D + source information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_static_int_0d">
+		<xs:annotation>
+			<xs:documentation>Summary static INT_0D + source information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_constant_flt_0d">
 		<xs:annotation>
 			<xs:documentation>Summary constant FLT_0D + source information</xs:documentation>
@@ -253,6 +313,40 @@
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_rzphi0d_static">
+		<xs:annotation>
+			<xs:documentation>Structure for R, Z, Phi positions (0D, static) + source information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r" type="summary_static_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z" type="summary_static_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phi" type="summary_static_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -1468,6 +1562,32 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="position" type="summary_rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>R, Z, Phi position of the NBI unit centre</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tangency_radius" type="summary_static_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Tangency radius (major radius where the central line of a NBI unit is tangent to a circle around the torus)</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="angle" type="summary_static_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Angle of inclination between a beamlet at the centre of the injection unit surface and the horiontal plane</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="direction" type="summary_static_int_0d">
+				<xs:annotation>
+					<xs:documentation>Direction of the beam seen from above the torus: -1 = clockwise; 1 = counter clockwise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="energy" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
 					<xs:documentation>Full energy of the injected species (acceleration of a single atom)</xs:documentation>
@@ -1567,6 +1687,61 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_h_cd_lh">
+		<xs:annotation>
+			<xs:documentation>LHCD related parameters</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="frequency" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>LH wave frequency</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="position" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Position of the maximum of the LH power deposition, in rho_tor_norm</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_parallel" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Main parallel refractive index of LH waves at launch</xs:documentation>
+										<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>LH heating power coupled to the plasma</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="current" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Parallel current driven by LH waves</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy_fast" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Fast particle energy content driven by LH waves</xs:documentation>
+					<xs:appinfo>
+						<units>J</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_h_cd_ic">
 		<xs:annotation>
 			<xs:documentation>ICRH related parameters</xs:documentation>
@@ -1583,6 +1758,27 @@
 			<xs:element name="position" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
 					<xs:documentation>Position of the maximum of the ICRH power deposition, in rho_tor_norm</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_tor" type="summary_dynamic_int_1d_2">
+				<xs:annotation>
+					<xs:documentation>Main toroidal mode number of IC waves</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="k_perpendicular" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Main perpendicular wave number of IC waves</xs:documentation>
+					<xs:appinfo>
+						<units>m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="e_field_plus_minus_ratio" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Average E+/E- power ratio of IC waves</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
 					</xs:appinfo>
@@ -1653,6 +1849,15 @@
 			<xs:element name="ic" type="summary_h_cd_ic" maxOccurs="6">
 				<xs:annotation>
 					<xs:documentation>Set of ICRH launchers</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lh" type="summary_h_cd_lh" maxOccurs="6">
+				<xs:annotation>
+					<xs:documentation>Set of LHCD launchers</xs:documentation>
 					<xs:appinfo>
 						<catalogue_name>suffix</catalogue_name>
 						<coordinate1>1...N</coordinate1>
