@@ -83,6 +83,10 @@
 
   </xsl:template>
   
+  <xsl:template match="int">
+  <!-- Construction of a table for the identifier documentation (doc_identifier)-->
+  <tr><td><xsl:value-of select="@name"/></td><td><xsl:value-of select="."/></td><td><xsl:value-of select="@description"/></td></tr>
+  </xsl:template>
 
   <xsl:template match="field">
     <tr>
@@ -96,7 +100,14 @@
            <xsl:if test="@Type"> {<xsl:value-of select="@Type"/>}</xsl:if>
           <xsl:if test="@units"> [<xsl:value-of select="@units"/>]</xsl:if>
                     <xsl:if test="@Units"> [<xsl:value-of select="@Units"/>]</xsl:if>
-
+           <xsl:if test="@doc_identifier">. Available options (refer to the children of this identifier structure) :
+                <table border="1">
+                      <thead><td>Name</td><td>Index</td><td>Description</td></thead>
+                      <xsl:apply-templates select="document(@doc_identifier)/*/int"/>
+                      <tr>
+        </tr>
+        </table>
+           </xsl:if>
            </td>
            <td><xsl:value-of select="@data_type"/><xsl:if test="@maxoccur"> [max_size=<xsl:value-of select="@maxoccur"/>]</xsl:if></td>  
   

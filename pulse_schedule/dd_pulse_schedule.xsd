@@ -81,6 +81,80 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="pulse_schedule_gap">
+		<xs:annotation>
+			<xs:documentation>Gap for describing the plasma boundary</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius of the reference point</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height of the reference point</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="angle">
+				<xs:annotation>
+					<xs:documentation>Angle between the direction in which the gap is measured (in the poloidal cross-section) and the horizontal axis. </xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="value" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Value of the gap, i.e. distance between the reference point and the separatrix along the gap direction</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_outline">
+		<xs:annotation>
+			<xs:documentation>RZ outline</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="pulse_schedule_ic_antenna">
 		<xs:annotation>
 			<xs:documentation>IC antenna</xs:documentation>
@@ -505,6 +579,104 @@
 			<xs:element name="magnetic_axis" type="pulse_schedule_rz">
 				<xs:annotation>
 					<xs:documentation>Magnetic axis position</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometric_axis" type="pulse_schedule_rz">
+				<xs:annotation>
+					<xs:documentation>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 and (Zmin+Zmax) / 2 of the boundary)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minor_radius" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="elongation" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Elongation of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="elongation_upper" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Elongation (upper half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="elongation_lower" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Elongation (lower half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="triangularity" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="triangularity_upper" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Upper triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="triangularity_lower" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Lower triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_point" type="pulse_schedule_rz" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation>Array of X-points, for each of them the RZ position is given</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="strike_point" type="pulse_schedule_rz" maxOccurs="4">
+				<xs:annotation>
+					<xs:documentation>Array of strike points, for each of them the RZ position is given</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="active_limiter_point" type="pulse_schedule_rz">
+				<xs:annotation>
+					<xs:documentation>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="boundary_outline" type="pulse_schedule_outline" maxOccurs="51">
+				<xs:annotation>
+					<xs:documentation>Set of (R,Z) points defining the outline of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="gap" type="pulse_schedule_gap" maxOccurs="51">
+				<xs:annotation>
+					<xs:documentation>Set of gaps, defined by a reference point and a direction.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="mode">
