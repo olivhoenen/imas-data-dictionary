@@ -2,47 +2,42 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="..\utilities\dd_support.xsd"/>
-	<xs:complexType name="sdn_topic_list">
+	<xs:complexType name="sdn_topic">
 		<xs:annotation>
-			<xs:documentation>List of the groups of signals used at different reading and writing points</xs:documentation>
+			<xs:documentation>List of the topics</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="names">
+			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Names of the group of SDN signals</xs:documentation>
+					<xs:documentation>Topic name</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...N</coordinate1>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="STR_1D"/>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="indices">
+			<xs:element name="signal" type="sdn_allocatable_signals" maxOccurs="100">
 				<xs:annotation>
-					<xs:documentation>Indices into the current SDN allocated list; it must be updated when the allocated list is changed</xs:documentation>
+					<xs:documentation>List of signals which can be allocated to the SDN</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="sdn_allocatable_signals">
 		<xs:annotation>
-			<xs:documentation>Dictionary of the signal names and definitions which can be allocated to the SDN</xs:documentation>
+			<xs:documentation>List of signals which can be allocated to the SDN</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the allocatable signal</xs:documentation>
+					<xs:documentation>Signal name</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -51,24 +46,13 @@
 			</xs:element>
 			<xs:element name="definition">
 				<xs:annotation>
-					<xs:documentation>Definition of the allocatable signal</xs:documentation>
+					<xs:documentation>Signal definition</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="ip_normalise">
-				<xs:annotation>
-					<xs:documentation>0 or 1 if this signal is multiplied by Ip to generate a control variable; this usage is specific to magnetic control, but could be extended to other control loops</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="allocated_position">
@@ -88,11 +72,29 @@
 					<xs:appinfo>
 						<units>mixed</units>
 						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
+						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="quality">
+				<xs:annotation>
+					<xs:documentation>Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&amp;action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -108,17 +110,9 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="signal" type="sdn_allocatable_signals" maxOccurs="150">
+				<xs:element name="topic" type="sdn_topic" maxOccurs="20">
 					<xs:annotation>
-						<xs:documentation>Dictionary of the signal names and definitions which can be allocated to the SDN</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="topic_list" type="sdn_topic_list" maxOccurs="30">
-					<xs:annotation>
-						<xs:documentation>List of the groups of signals used at different reading and writing points; this is an implementation detail which might change</xs:documentation>
+						<xs:documentation>List of topics. SDN signals are grouped by topic</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
