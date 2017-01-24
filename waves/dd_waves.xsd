@@ -12,7 +12,7 @@
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
 	<xs:complexType name="waves_CPX_1D">
 		<xs:annotation>
-			<xs:documentation>Structure for 1D complex number</xs:documentation>
+			<xs:documentation>Structure for 1D complex number, real and imaginary parts</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="real">
@@ -39,6 +39,78 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_CPX_amp_phase_1D">
+		<xs:annotation>
+			<xs:documentation>Structure for 1D complex number, amplitude and phase</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="amplitude">
+				<xs:annotation>
+					<xs:documentation>Amplitude</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_CPX_amp_phase_2D">
+		<xs:annotation>
+			<xs:documentation>Structure for 2D complex number, amplitude and phase</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="amplitude">
+				<xs:annotation>
+					<xs:documentation>Amplitude</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
+											</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
+						</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -1421,52 +1493,34 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="waves_coherent_wave_profiles_1d_e_field">
+	<xs:complexType name="waves_profiles_1d_e_field_n_tor">
 		<xs:annotation>
 			<xs:documentation>Components of the surface averaged electric field</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="plus">
+			<xs:element name="plus" type="waves_CPX_amp_phase_1D">
 				<xs:annotation>
-					<xs:documentation>Left hand polarised electric field component, for every flux surface and every toroidal number</xs:documentation>
+					<xs:documentation>Left hand polarised electric field component for every flux surface</xs:documentation>
 					<xs:appinfo>
 						<units>V.m^-1</units>
-						<type>dynamic</type>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../n_tor</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="minus">
+			<xs:element name="minus" type="waves_CPX_amp_phase_1D">
 				<xs:annotation>
-					<xs:documentation>Right hand polarised electric field component, for every flux surface and every toroidal number</xs:documentation>
+					<xs:documentation>Right hand polarised electric field component for every flux surface</xs:documentation>
 					<xs:appinfo>
 						<units>V.m^-1</units>
-						<type>dynamic</type>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../n_tor</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="parallel">
+			<xs:element name="parallel" type="waves_CPX_amp_phase_1D">
 				<xs:annotation>
-					<xs:documentation>Parallel electric field component, for every flux surface and every toroidal number</xs:documentation>
+					<xs:documentation>Parallel electric field component for every flux surface</xs:documentation>
 					<xs:appinfo>
 						<units>V.m^-1</units>
-						<type>dynamic</type>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../n_tor</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -1600,9 +1654,12 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="e_field" type="waves_coherent_wave_profiles_1d_e_field">
+			<xs:element name="e_field_n_tor" type="waves_profiles_1d_e_field_n_tor" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Components of the electric field, averaged over the flux surface, where the averaged is weighted with the power deposition density, such that e_field = ave(e_field.power_density) / ave(power_density)</xs:documentation>
+					<xs:documentation>Components of the electric field per toroidal mode number, averaged over the flux surface, where the averaged is weighted with the power deposition density, such that e_field = ave(e_field.power_density) / ave(power_density)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../n_tor</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="k_perpendicular">
@@ -2266,6 +2323,37 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="waves_profiles_2d_e_field_n_tor">
+		<xs:annotation>
+			<xs:documentation>Components of the surface averaged electric field</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="plus" type="waves_CPX_amp_phase_2D">
+				<xs:annotation>
+					<xs:documentation>Left hand polarised electric field component</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minus" type="waves_CPX_amp_phase_2D">
+				<xs:annotation>
+					<xs:documentation>Right hand polarised electric field component</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parallel" type="waves_CPX_amp_phase_2D">
+				<xs:annotation>
+					<xs:documentation>Parallel electric field component</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="waves_coherent_wave_profiles_2d">
 		<xs:annotation>
 			<xs:documentation>2D profiles (RF waves) for a given time slice</xs:documentation>
@@ -2320,6 +2408,14 @@
 				<xs:complexType>
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="e_field_n_tor" type="waves_profiles_2d_e_field_n_tor" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Components of the electric field per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../n_tor</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="electrons" type="waves_coherent_wave_profiles_2d_electrons">
 				<xs:annotation>
