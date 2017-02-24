@@ -27,6 +27,22 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase measured for this wavelength</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="n_e_line">
 				<xs:annotation>
 					<xs:documentation>Line integrated density estimated from this wavelength</xs:documentation>
