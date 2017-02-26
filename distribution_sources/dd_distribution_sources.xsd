@@ -112,6 +112,49 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="distribution_sources_source_global_shinethrough">
+		<xs:annotation>
+			<xs:documentation>Global quantities related to shinethrough, for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power losses due to shinethrough</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="particles">
+				<xs:annotation>
+					<xs:documentation>Particle losses due to shinethrough</xs:documentation>
+					<xs:appinfo>
+						<units>s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="torque_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal torque losses due to shinethrough</xs:documentation>
+					<xs:appinfo>
+						<units>N.m</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="distribution_sources_source_global_quantities">
 		<xs:annotation>
 			<xs:documentation>Global quantities of distribution_source for a given time slice</xs:documentation>
@@ -152,6 +195,11 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="shinethrough" type="distribution_sources_source_global_shinethrough">
+				<xs:annotation>
+					<xs:documentation>Shinethrough losses</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="time" type="flt_type">
 				<xs:annotation>
