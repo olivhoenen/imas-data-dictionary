@@ -42,7 +42,7 @@
 					<xs:documentation>Detector description</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="aperture" type="detector_aperture" maxOccurs="2">
+			<xs:element name="aperture" type="detector_aperture" maxOccurs="5">
 				<xs:annotation>
 					<xs:documentation>Description of a set of collimating apertures</xs:documentation>
 					<xs:appinfo>
@@ -52,15 +52,15 @@
 			</xs:element>
 			<xs:element name="line_of_sight" type="line_of_sight_3points">
 				<xs:annotation>
-					<xs:documentation>Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path</xs:documentation>
+					<xs:documentation>Description of the reference line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="measure">
+			<xs:element name="power">
 				<xs:annotation>
-					<xs:documentation>Light intensity ?</xs:documentation>
+					<xs:documentation>Power received on the detector</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
-						<units>m^-2</units>
+						<units>W</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
