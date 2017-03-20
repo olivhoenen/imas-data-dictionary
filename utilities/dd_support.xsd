@@ -1507,7 +1507,7 @@
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed), volume averaged over plasma radius</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
@@ -1537,6 +1537,19 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_ion_1d">
+				<xs:annotation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="temperature">
@@ -4041,6 +4054,82 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="x1x21d_static">
+		<xs:annotation>
+			<xs:documentation>Structure for list of X1, X2 positions (1D, static)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x1">
+				<xs:annotation>
+					<xs:documentation>Positions along x1 axis</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x2">
+				<xs:annotation>
+					<xs:documentation>Positions along x2 axis</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../x1</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="xyz0d_static">
+		<xs:annotation>
+			<xs:documentation>Structure for list of X, Y, Z components (0D, static)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x">
+				<xs:annotation>
+					<xs:documentation>Component along X axis</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="y">
+				<xs:annotation>
+					<xs:documentation>Component along Y axis</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Component along Z axis</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rz0d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for a single R, Z position (0D, static)</xs:documentation>
@@ -4100,6 +4189,38 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="detector_aperture">
+		<xs:annotation>
+			<xs:documentation>Generic description of a plane detector or collimating aperture</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="origin" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area. The X1 axis is horizontal and oriented is the positive phi direction (counter-clockwise when seen from above). The X3 axis is normal to the detector/aperture plane and oriented towards the plasma. The X2 axis is orthonormal so that uX2 = uX3 x uX1.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x1_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x2_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x3_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="outline" type="x1x21d_static">
+				<xs:annotation>
+					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
