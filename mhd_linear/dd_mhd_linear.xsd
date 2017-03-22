@@ -10,52 +10,104 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:complexType name="complex_2d_dynamic_aos_mhd_linear_vector">
+		<xs:annotation>
+			<xs:documentation>Structure (temporary) for real and imaginary part, while waiting for the implementation of complex numbers, dynamic within a type 3 array of structure (index on time))</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="real" type="complex_2d_dynamic_aos_mhd_linear_vector">
+				<xs:annotation>
+					<xs:documentation>Real part</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../poloidal_grid</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="imaginary">
+				<xs:annotation>
+					<xs:documentation>Imaginary part</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../poloidal_grid</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="complex_2d_dynamic_aos_mhd_scalar">
+		<xs:annotation>
+			<xs:documentation>Structure (temporary) for real and imaginary part, while waiting for the implementation of complex numbers, dynamic within a type 3 array of structure (index on time))</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="real">
+				<xs:annotation>
+					<xs:documentation>Real part</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../poloidal_grid</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="imaginary">
+				<xs:annotation>
+					<xs:documentation>Imaginary part</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../poloidal_grid</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="mhd_linear_vector">
 		<xs:annotation>
 			<xs:documentation>Vector structure for the MHD IDS</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="coordinate1">
+			<xs:element name="coordinate1" type="complex_2d_dynamic_aos_mhd_linear_vector">
 				<xs:annotation>
 					<xs:documentation>First coordinate (radial)</xs:documentation>
 					<xs:appinfo>
 						<units>as parent</units>
 						<type>dynamic</type>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../poloidal_grid</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="coordinate2">
+			<xs:element name="coordinate2" type="complex_2d_dynamic_aos_mhd_linear_vector">
 				<xs:annotation>
 					<xs:documentation>Second coordinate (poloidal)</xs:documentation>
 					<xs:appinfo>
 						<units>as parent</units>
 						<type>dynamic</type>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../poloidal_grid</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="coordinate3">
+			<xs:element name="coordinate3" type="complex_2d_dynamic_aos_mhd_linear_vector">
 				<xs:annotation>
 					<xs:documentation>Third coordinate (toroidal)</xs:documentation>
 					<xs:appinfo>
 						<units>as parent</units>
 						<type>dynamic</type>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../poloidal_grid</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -125,33 +177,23 @@
 					<xs:group ref="INT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="displacement_perpendicular">
+			<xs:element name="displacement_perpendicular" type="complex_2d_dynamic_aos_mhd_scalar">
 				<xs:annotation>
 					<xs:documentation>Perpendicular displacement of the modes</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../poloidal_grid</coordinate2>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="displacement_parallel">
+			<xs:element name="displacement_parallel" type="complex_2d_dynamic_aos_mhd_scalar">
 				<xs:annotation>
 					<xs:documentation>Parallel displacement of the modes</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../poloidal_grid</coordinate2>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="tau_alfven">
 				<xs:annotation>
@@ -203,47 +245,32 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pressure_perturbed">
+			<xs:element name="pressure_perturbed" type="complex_2d_dynamic_aos_mhd_scalar">
 				<xs:annotation>
 					<xs:documentation>Perturbed pressure for given toroidal mode number</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../poloidal_grid</coordinate2>
 						<units>P</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="mass_density_perturbed">
+			<xs:element name="mass_density_perturbed" type="complex_2d_dynamic_aos_mhd_scalar">
 				<xs:annotation>
 					<xs:documentation>Perturbed mass density for given toroidal mode number</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../poloidal_grid</coordinate2>
 						<units>kg.m^-3</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_perturbed">
+			<xs:element name="temperature_perturbed" type="complex_2d_dynamic_aos_mhd_scalar">
 				<xs:annotation>
 					<xs:documentation>Perturbed temperature for given toroidal mode number</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../poloidal_grid</coordinate2>
 						<units>eV</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
