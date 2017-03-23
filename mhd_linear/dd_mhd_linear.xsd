@@ -15,7 +15,7 @@
 			<xs:documentation>Structure (temporary) for real and imaginary part, while waiting for the implementation of complex numbers, dynamic within a type 3 array of structure (index on time))</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="real" type="complex_2d_dynamic_aos_mhd_linear_vector">
+			<xs:element name="real">
 				<xs:annotation>
 					<xs:documentation>Real part</xs:documentation>
 					<xs:appinfo>
@@ -25,6 +25,9 @@
 						<coordinate2>../../../poloidal_grid</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
+								<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="imaginary">
 				<xs:annotation>
