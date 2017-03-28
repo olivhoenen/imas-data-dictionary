@@ -733,6 +733,46 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="numerics_restart">
+		<xs:annotation>
+			<xs:documentation>Description of a restart file</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="names">
+				<xs:annotation>
+					<xs:documentation>Names of the restart files</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="descriptions">
+				<xs:annotation>
+					<xs:documentation>Descriptions of the restart files</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../names</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="numerics_bc_1d_current">
 		<xs:annotation>
 			<xs:documentation>Boundary conditions for the current diffusion equation</xs:documentation>
@@ -1849,6 +1889,15 @@
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="restart_files" type="numerics_restart" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Set of code-specific restart files for a given time slice. These files are managed by a physical application to ensure its restart during long simulations</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
