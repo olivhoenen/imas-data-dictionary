@@ -1541,10 +1541,22 @@
 			</xs:element>
 			<xs:element name="z_ion_1d">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:documentation>Average charge of the ion species (sum of states charge weighted by state density and divided by ion density)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>eV</units>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element><xs:element name="z_ion_square_1d">
+				<xs:annotation>
+					<xs:documentation>Average sqare charge of the ion species (sum of states square charge weighted by state density and divided by ion density)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>-</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
