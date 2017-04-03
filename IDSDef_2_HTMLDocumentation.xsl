@@ -20,6 +20,7 @@
 <!-- First make a list of IDS with the Links-->
 <table border="1">
         <thead style="color:#ff0000"><td>IDS name</td><td>Description</td><td>Max. occurrence number</td></thead>
+        
 <xsl:for-each select="IDS">
 <tr>
 	<td><a href="{@name}.html"><xsl:value-of select="@name"/></a></td>
@@ -71,6 +72,20 @@
         <p>Notation of array of structure indices: itime indicates a time index; i1, i2, i3, ... indicate other indices with their depth in the IDS. This notation clarifies the path of a given node, but should not be used to compare indices of different nodes (they may have different meanings).</p>
         <p>Lifecycle status: <xsl:value-of select="@lifecycle_status"/> since version <xsl:value-of select="@lifecycle_version"/></p> <!-- Write the IDS Lifecycle information -->
         <p><a href="html_documentation.html">Back to top IDS list</a></p>
+		<button onclick="ToggleErrorDisplay()">Show/Hide errorbar nodes</button>
+		<p/>
+<script>		
+function ToggleErrorDisplay() {
+    var x = document.getElementsByClassName("errorbar");
+    var i;
+    for (i = 0; i &lt; x.length; i++)
+   if (x[i].style.display == 'none') {
+        x[i].style.display = 'table-row';
+    } else {
+        x[i].style.display = 'none';
+    } 
+}
+</script>
         <table border="1">
         <thead style="color:#ff0000"><td>Full path name</td><td>Description</td><td>Data Type</td><td>Coordinates</td></thead>
         <xsl:apply-templates select="field"/>
@@ -89,7 +104,11 @@
   </xsl:template>
 
   <xsl:template match="field">
-    <tr>
+<tr>
+<xsl:if test="ends-with(@name,'error_upper') or ends-with(@name,'error_lower') or ends-with(@name,'error_index')">
+<xsl:attribute name='class'>errorbar</xsl:attribute>
+<xsl:attribute name='style'>display:none;</xsl:attribute>  <!-- Hide errorbars in the documentation by default-->
+</xsl:if> 
 <td><xsl:value-of select="@path_doc"/>
 
 <xsl:if test="@maxOccurs>1 or @maxOccurs='unbounded'">{1:<xsl:value-of select="@maxOccurs"/>}</xsl:if>
