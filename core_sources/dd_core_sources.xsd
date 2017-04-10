@@ -411,12 +411,38 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="particles_inside">
+				<xs:annotation>
+					<xs:documentation>Electron source inside the flux surface. Cumulative volume integral of the source term for the electron density equation.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="energy">
 				<xs:annotation>
 					<xs:documentation>Source term for the electron energy equation</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>W.m^-3</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside">
+				<xs:annotation>
+					<xs:documentation>Power coupled to electrons inside the flux surface. Cumulative volume integral of the source term for the electron energy equation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>W</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -454,6 +480,19 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="total_ion_power_inside">
+				<xs:annotation>
+					<xs:documentation>Total power coupled to ion species (summed over ion  species) inside the flux surface. Cumulative volume integral of the source term for the total ion energy equation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="momentum_tor">
 				<xs:annotation>
 					<xs:documentation>Source term for total toroidal momentum equation</xs:documentation>
@@ -467,12 +506,38 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="torque_tor_inside">
+				<xs:annotation>
+					<xs:documentation>Toroidal torque inside the flux surface. Cumulative volume integral of the source term for the total toroidal momentum equation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>kg.m^2.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="j_parallel">
 				<xs:annotation>
 					<xs:documentation>Parallel current density source, average(J.B) / B0, where B0 = core_sources/vacuum_toroidal_field/b0 </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>A.m^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_parallel_inside">
+				<xs:annotation>
+					<xs:documentation>Parallel current driven inside the flux surface. Cumulative surface integral of j_parallel</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>A</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -520,6 +585,106 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="core_sources_source_global_electrons">
+		<xs:annotation>
+			<xs:documentation>Source terms related to electrons</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="particles">
+				<xs:annotation>
+					<xs:documentation>Electron particle source</xs:documentation>
+					<xs:appinfo>
+						<units>s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power coupled to electrons</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_sources_source_global">
+		<xs:annotation>
+			<xs:documentation>Source global quantities for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Total power coupled to the plasma</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="total_ion_power">
+				<xs:annotation>
+					<xs:documentation>Total power coupled to ion species (summed over ion  species)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="electrons" type="core_sources_source_global_electrons">
+				<xs:annotation>
+					<xs:documentation>Sources for electrons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="torque_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal torque</xs:documentation>
+					<xs:appinfo>
+						<units>kg.m^2.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel current driven</xs:documentation>
+					<xs:appinfo>
+						<units>A.m</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="core_sources_source">
 		<xs:annotation>
 			<xs:documentation>Source terms for a given actuator</xs:documentation>
@@ -528,6 +693,15 @@
 			<xs:element name="identifier" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Source term identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="global_quantities" type="core_sources_source_global" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Total source quantities integrated over the plasma volume or surface</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="profiles_1d" type="core_sources_source_profiles_1d" maxOccurs="unbounded">
