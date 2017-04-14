@@ -9,7 +9,7 @@
   -* Thanks to http://www.masobit.net/ for paying me while working on mod-xslt
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
 	<!--The time slices in this IDS are defined as the time at which the pellet is fully ablated and provides a core_instant_change. This time is slightly different from the pellet injection time (from the pulse schedule) and the pellet injector is not described (needs likely a separate IDS) -->
 	<xs:complexType name="pellets_time_slice_pellet_shape">
 		<xs:annotation>
@@ -259,7 +259,9 @@
 			<xs:element name="species" type="pellets_time_slice_pellet_species" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of species included in the pellet composition</xs:documentation>
-					<xs:appinfo><coordinate1>1...N</coordinate1></xs:appinfo>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="velocity_initial">
