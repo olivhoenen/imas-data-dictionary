@@ -10,6 +10,8 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:include schemaLocation="../waves/dd_waves.xsd"/>
+	<!-- Waves included because of the use of some generic types - temporary issue due to IFORT compiler refusing to compile utilities_copy_struct.f90 -->
 	<xs:complexType name="distributions_d_ggd_expansion">
 		<xs:annotation>
 			<xs:documentation>Expansion of the distribution function for a given time slice, using a GGD representation</xs:documentation>
