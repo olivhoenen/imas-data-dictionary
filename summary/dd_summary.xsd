@@ -257,6 +257,36 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_constant_int_0d">
+		<xs:annotation>
+			<xs:documentation>Summary constant INT_0D + source information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_constant_flt_0d">
 		<xs:annotation>
 			<xs:documentation>Summary constant FLT_0D + source information</xs:documentation>
@@ -1866,6 +1896,50 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_disruption">
+		<xs:annotation>
+			<xs:documentation>Disruption related parameters</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="time" type="summary_constant_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Time of the disruption</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time_radiated_power_max" type="summary_constant_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Time of maximum radiated power, relative to the time of the disruption</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time_half_ip" type="summary_constant_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Time at which the plasma current has fallen to half of the initial current at the start of the disruption, relative to the time of the disruption</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vertical_displacement" type="summary_constant_int_0d">
+				<xs:annotation>
+					<xs:documentation>Direction of the plasma vertical displacement just before the disruption 1 (upwards) / 0 (no displacement)/ -1 (downwards)</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mitigation_valve" type="summary_constant_int_0d">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether any disruption mitigation valve has been used (1) or none (0)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="summary">
 		<xs:annotation>
 			<xs:documentation>Summary of physics quantities from a simulation or an experiment</xs:documentation>
@@ -1895,6 +1969,11 @@
 				<xs:element name="volume_average" type="summary_average_quantities">
 					<xs:annotation>
 						<xs:documentation>Volume average plasma parameters</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="disruption" type="summary_disruption">
+					<xs:annotation>
+						<xs:documentation>Disruption characteristics, if the pulse is terminated by a disruption</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="heating_current_drive" type="summary_h_cd">
