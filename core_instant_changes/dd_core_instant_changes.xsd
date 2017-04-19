@@ -88,9 +88,9 @@
 					<xs:documentation>Instant change term identifier</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="profiles_1d" type="core_instant_changes_change_profiles" maxOccurs="unbounded">
+			<xs:element name="profiles_1d" type="core_profiles_profiles_1d" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>instant_change profiles for various time slices</xs:documentation>
+					<xs:documentation>Changes in 1D core profiles for various time slices. This structure mirrors core_profiles/profiles_1d and describes instant changes to each of these physical quantities (i.e. a signed difference quantity after change - quantity before change)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
@@ -103,8 +103,8 @@
 		<xs:annotation>
 			<xs:documentation>Instant changes of the radial core plasma profiles due to pellet, MHD, ... </xs:documentation>
 			<xs:appinfo>
-				<lifecycle_status>alpha</lifecycle_status>
-				<lifecycle_version>3.0.4</lifecycle_version>
+				<lifecycle_status>active</lifecycle_status>
+				<lifecycle_version>3.9.0</lifecycle_version>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -117,7 +117,7 @@
 				</xs:element>
 				<xs:element name="change" type="core_instant_changes_change" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>Set of instant change terms</xs:documentation>
+						<xs:documentation>Set of instant change terms (each being due to a different phenomenon)</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
