@@ -1382,28 +1382,6 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="is_neutral">
-				<xs:annotation>
-					<xs:documentation>Flag specifying if this state corresponds to a neutral (1) or not (0)</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="neutral_type" type="identifier">
-				<xs:annotation>
-					<xs:documentation>Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="velocity" type="core_profiles_vector_components_3">
 				<xs:annotation>
 					<xs:documentation>Velocity</xs:documentation>
@@ -1551,7 +1529,8 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
-			</xs:element><xs:element name="z_ion_square_1d">
+			</xs:element>
+			<xs:element name="z_ion_square_1d">
 				<xs:annotation>
 					<xs:documentation>Average sqare charge of the ion species (sum of states square charge weighted by state density and divided by ion density)</xs:documentation>
 					<xs:appinfo>
