@@ -697,8 +697,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
-			<xsl:otherwise>
-				<!-- the definition of the Type is directly in the local schema -->
+			<xsl:when test="/*/xs:complexType[@name=$thisType]">
+		    	<!-- the definition of the Type is directly in the local schema -->
 				<xsl:choose>
 					<xsl:when test="contains(string(/*/xs:complexType[@name=$thisType]/xs:annotation/xs:appinfo), 'parent-dependent')">
 						<xsl:choose>
@@ -760,6 +760,25 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 						</xsl:apply-templates>
 					</xsl:otherwise>
 				</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise>
+				<xsl:for-each select="/*/xs:include[not(contains(@schemaLocation,'utilities'))]">   <!-- Complex Type not yet found, need to scan other included schemas -->
+				<!-- FOUND INCLUDE <xsl:value-of select="@schemaLocation"/> -->
+				<xsl:choose>
+				<xsl:when test="document(@schemaLocation)/*/xs:complexType[@name=$thisType]">
+				<!-- FOUND ELEMENT <xsl:value-of select="$thisType"/> -->
+												<xsl:apply-templates select="document(@schemaLocation)/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+									<!--This fills the complexType from its definition in the included schema (if it is there and not in the local schema, neither in utilities)-->
+									<xsl:with-param name="currPath" select="$currPath"/>
+									<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+									<xsl:with-param name="aosLevel" select="$aosLevel"/>
+								</xsl:apply-templates>
+				</xsl:when>
+				<xsl:otherwise>
+<xsl:message select="concat('ERROR during IDSDef generation: the complexType' , $thisType, ' cannot be found')" terminate="yes"/>			
+				</xsl:otherwise>
+				</xsl:choose>
+				</xsl:for-each>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>

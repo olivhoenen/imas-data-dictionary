@@ -9,7 +9,9 @@
   -* Thanks to http://www.masobit.net/ for paying me while working on mod-xslt
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:include schemaLocation="../distributions/dd_distributions.xsd"/>
+	<!--Distributions included because of the use of some generic types - temporary issue due to IFORT compiler refusing to compile utilities_copy_struct.f90 -->
 	<xs:complexType name="waves_CPX_1D">
 		<xs:annotation>
 			<xs:documentation>Structure for 1D complex number, real and imaginary parts</xs:documentation>
@@ -91,7 +93,7 @@
 						<coordinate2>1...N</coordinate2>
 						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
 						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
-											</xs:appinfo>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
@@ -107,7 +109,7 @@
 						<coordinate2>1...N</coordinate2>
 						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
 						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
-						</xs:appinfo>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
@@ -546,7 +548,7 @@
 				<xs:annotation>
 					<xs:documentation>Ray/beam curvilinear length</xs:documentation>
 					<xs:appinfo>
-						<units>W</units>
+						<units>m</units>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>

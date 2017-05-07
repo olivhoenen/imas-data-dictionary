@@ -10,6 +10,8 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:include schemaLocation="../ic_antennas/dd_ic_antennas.xsd"/>
+	<!--IC antennas included because of the use of some generic types - temporary issue due to IFORT compiler refusing to compile utilities_copy_struct.f90 -->
 	<xs:complexType name="iron_core_segment">
 		<xs:annotation>
 			<xs:documentation>Segment of the iron core</xs:documentation>
