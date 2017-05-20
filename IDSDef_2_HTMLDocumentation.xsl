@@ -115,7 +115,7 @@ function ToggleErrorDisplay() {
 <xsl:if test="@lifecycle_status"><p>Lifecycle status: <font color="red"><xsl:value-of select="@lifecycle_status"/></font> since version <xsl:value-of select="@lifecycle_version"/></p></xsl:if></td>
 
            <td><xsl:value-of select="@documentation"/>
-           <xsl:if test="@url">Click here for <a href="{@url}">further documentation</a>.</xsl:if>
+           <xsl:if test="@url"> Click here for <a href="{@url}">further documentation</a>.</xsl:if>
            <xsl:if test="@type"> {<xsl:value-of select="@type"/>}</xsl:if>
            <xsl:if test="@Type"> {<xsl:value-of select="@Type"/>}</xsl:if>
           <xsl:if test="@units"> [<xsl:value-of select="@units"/>]</xsl:if>
