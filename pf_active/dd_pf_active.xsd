@@ -4,7 +4,6 @@
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
 	<xs:include schemaLocation="../ic_antennas/dd_ic_antennas.xsd"/>
 	<!--IC antennas included because of the use of some generic types - temporary issue due to IFORT compiler refusing to compile utilities_copy_struct.f90 -->
-
 	<xs:complexType name="pf_supplies">
 		<xs:annotation>
 			<xs:documentation>PF power supplies</xs:documentation>
@@ -250,12 +249,11 @@
 			</xs:element>
 			<xs:element name="connections">
 				<xs:annotation>
-					<xs:documentation>Description of the supplies and coils connections (nodes) across the circuit. The matrix describing for each node (first dimension) which components are connected to it (1 if connected, 0 otherwise). There are 2 sides to each component, thus 2*ncomponents as the size of the second dimension, listing first all supplies, then all coils (in the same order as listed in SUPPLIES and COILS). An example can be found in the data structure documentation PFconnections.pdf (TBD)</xs:documentation>
+					<xs:documentation>Description of the supplies and coils connections (nodes) across the circuit. Nodes of the circuit are listed as the first dimension of the matrix. Supplies (listed first) and coils (listed second) SIDES are listed as the second dimension. Thus the second dimension has a size equal to 2*(N_supplies+N_coils). The (i,j) matrix elements are 1 if the j-th supply or coil side is connected to the i-th node, or 0 otherwise.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>1...2*N</coordinate2>
-						<units>-</units>
+						<coordinate2>1...N</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
