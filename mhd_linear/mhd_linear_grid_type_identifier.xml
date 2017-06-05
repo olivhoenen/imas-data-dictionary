@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<constants name="equilibrium_profiles_2d">
+	<header>List of equilibrium grid types</header>
+	<dd_instance xpath="equilibrium%time_slice(:)%profiles_2d(:)%grid_type"/>
+	<int name="rectangular" description="Cylindrical R,Z ala eqdsk. In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.">1</int>
+<int name="inverse" description="Rhopolar_polar 2D polar coordinates (rho, theta) with magnetic axis as center of grid; theta and values following the COCOS convention, theta=atan2(z-zaxis,r-raxis)≡polar angle">2</int>
+<int name="inverse psi_straight field line" description="Flux surface type with psi as radial label, theta straight-field line (mod(index,10)=1), could be non-equidistant; magnetic axis as center of grid; following the COCOS convention">11</int>
+<int name="inverse psi_equal" description="Arc flux surface type with psi as radial label, theta to have equal arc (mod(index,10)=2)">12</int>
+<int name="inverse psi_polar"	description="Flux surface type with psi as radial label, theta as polar angle, could be non-equidistant">13</int>
+<int name="inverse psi_m"	description="Flux surface type with psi as radial label and poloidal mode number as dim2, could be non-equidistant">14</int>
+<int name="inverse rhopolnorm_straight field line" description="Flux surface type with radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and theta straight-field line">21</int>
+<int name="inverse rhopolnorm_equal arc" description="Flux surface type with radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)], theta to have equal arc">22</int>
+<int name="inverse rhopolnorm_polar" description="Same as 13 but radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)], theta as polar angle, could be non-equidistant">23</int>
+<int name="inverse rhopolnorm_m" description="Same as 13 but radial label is sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] and poloidal mode number as dim2, could be non-equidistant">23</int>
+<int name="inverse rhotornorm_straight field line" description="Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux and theta straight-field line">31</int>
+<int name="inverse rhotornorm_equal arc" description="Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux, theta to have equal arc">32</int>
+<int name="inverse rhotornorm_polar" description="Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux, theta as polar angle, could be non-equidistant">33</int>
+<int name="inverse rhotornorm_m" description="Flux surface type with radial label is sqrt[Phi/Phi_edge], Phi being toroidal flux, poloidal mode number as dim2, could be non-equidistant">34</int>
+<int name="inverse rhopol_straight field line" description="Flux surface type with radial label is sqrt[psi-psi_axis] and theta straight-field line">41</int>
+<int name="inverse rhopol_equal arc" description="Flux surface type with radial label is sqrt[psi-psi_axis], theta to have equal arc">42</int>
+<int name="inverse rhopol_polar" description="Same as 13 but radial label is sqrt[psi-psi_axis], theta as polar angle, could be non-equidistant">43</int>
+<int name="inverse rhopol_m" description="Same as 13 but radial label is sqrt[psi-psi_axis], poloidal mode number as dim2, could be non-equidistant">44</int>
+<int name="inverse rhotor_straight field line" description="Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux and theta straight-field line">51</int>
+<int name="inverse rhotor_equal arc" description="Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux, theta to have equal arc">52</int>
+<int name="inverse rhotor_polar" description="Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux, theta as polar angle, could be non-equidistant">53</int>
+<int name="inverse rhotor_m" description="Flux surface type with radial label is sqrt[Phi/pi/B0], Phi being toroidal flux, poloidal mode number as dim2, could be non-equidistant">54</int>
+<int name="irregular rz_na" description="Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1); needs to know if R,Z, psi,theta for dim1, dim2?Used with connect and only for rz">91</int>
+</constants>

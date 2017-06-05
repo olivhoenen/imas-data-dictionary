@@ -21,8 +21,8 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-						<coordinate1>../../../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../../poloidal_grid</coordinate2>
+						<coordinate1>../../../grid/dim1</coordinate1>
+						<coordinate2>../../../grid/dim2</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -35,8 +35,8 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-						<coordinate1>../../../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../../poloidal_grid</coordinate2>
+                        <coordinate1>../../../grid/dim1</coordinate1>
+						<coordinate2>../../../grid/dim2</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -56,8 +56,8 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-						<coordinate1>../../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../poloidal_grid</coordinate2>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>../../grid/dim2</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -70,8 +70,8 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-						<coordinate1>../../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../../poloidal_grid</coordinate2>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>../../grid/dim2</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -119,24 +119,18 @@
 			<xs:documentation>MHD modes in the vaccuum</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="poloidal_grid_type" type="identifier">
+			<xs:element name="grid_type" type="identifier">
 				<xs:annotation>
-					<xs:documentation>Selection of one of a set of grid types. 1: poloidal mode number; 2: poloidal angle</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="poloidal_grid">
-				<xs:annotation>
-					<xs:documentation>Array of poloidal grid values for the various radial positions</xs:documentation>
+					<xs:documentation>Selection of one of a set of grid types</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>1...N</coordinate2>
-						<units>mixed</units>
+						<doc_identifier>mhd_linear/mhd_linear_grid_type_identifier.xml</doc_identifier>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid" type="equilibrium_profiles_2d_grid">
+				<xs:annotation>
+					<xs:documentation>Definition of the 2D grid</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="a_field_perturbed" type="mhd_linear_vector">
 				<xs:annotation>
@@ -161,24 +155,18 @@
 			<xs:documentation>MHD modes in the confined plasma</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="poloidal_grid_type" type="identifier">
+			<xs:element name="grid_type" type="identifier">
 				<xs:annotation>
-					<xs:documentation>Selection of one of a set of grid types. 1: poloidal mode number; 2: poloidal angle</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="poloidal_grid">
-				<xs:annotation>
-					<xs:documentation>Array of poloidal grid values for the various radial positions</xs:documentation>
+					<xs:documentation>Selection of one of a set of grid types</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
-						<coordinate2>1...N</coordinate2>
-						<units>mixed</units>
+						<doc_identifier>mhd_linear/mhd_linear_grid_type_identifier.xml</doc_identifier>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid" type="equilibrium_profiles_2d_grid">
+				<xs:annotation>
+					<xs:documentation>Definition of the 2D grid</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="displacement_perpendicular" type="complex_2d_dynamic_aos_mhd_scalar">
 				<xs:annotation>
@@ -203,7 +191,7 @@
 					<xs:documentation>Alven time=R/vA=R0 sqrt(mi ni(rho))/B0</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate1>../grid/dim1</coordinate1>
 						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -216,7 +204,7 @@
 					<xs:documentation>Resistive time = mu_0 rho*rho/1.22/eta_neo</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate1>../grid/dim1</coordinate1>
 						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -253,7 +241,7 @@
 					<xs:documentation>Perturbed pressure for given toroidal mode number</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>P</units>
+						<units>Pa</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -334,11 +322,6 @@
 			<xs:documentation>Time slice description of linear MHD stability</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="grid_plasma" type="core_radial_grid">
-				<xs:annotation>
-					<xs:documentation>Radial grid within plasma (for quantities below toroidal_mode/plasma)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="toroidal_mode" type="mhd_linear_time_slice_toroidal_modes" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Vector of toroidal modes</xs:documentation>
