@@ -41,17 +41,21 @@
 				<xs:annotation>
 					<xs:documentation>Frequency of the channel</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<coordinate1>time</coordinate1>					
+						<type>dynamic</type>
 						<units>Hz</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+				<xs:sequence>
+  				    <xs:element ref="time"/>
+					<xs:group ref="FLT_1D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="harmonic">
 				<xs:annotation>
-					<xs:documentation>Harmonic detected by the channel</xs:documentation>
+					<xs:documentation>Harmonic detected by the channel. 1 corresponds to the "O1" mode, while 2 corresponds to the "X2" mode. </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
@@ -75,6 +79,22 @@
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="t_e_voltage">
+				<xs:annotation>
+					<xs:documentation>Raw voltage measured on each channel, from which the calibrated temperature data is then derived</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>V</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
