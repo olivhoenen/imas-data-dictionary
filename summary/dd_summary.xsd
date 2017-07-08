@@ -1942,7 +1942,7 @@
 	</xs:complexType>
 	<xs:element name="summary">
 		<xs:annotation>
-			<xs:documentation>Summary of physics quantities from a simulation or an experiment. Dynamic quantities are either taken at given time slices (indicated in the "time" vector) or time-averaged over an interval (in such case the "time_width" of the interval is indicated and the "time" vector represents the middle of each time interval).</xs:documentation>
+			<xs:documentation>Summary of physics quantities from a simulation or an experiment. Dynamic quantities are either taken at given time slices (indicated in the "time" vector) or time-averaged over an interval (in such case the "time_width" of the interval is indicated and the "time" vector represents the end of each time interval).</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
@@ -1998,7 +1998,7 @@
 				</xs:element>
 				<xs:element name="time_width">
 					<xs:annotation>
-						<xs:documentation>In case the time-dependent quantities of this IDS are averaged over a time interval, this node is the width of this time interval (empty otherwise). By convention, the time interval starts at time-0.5*time_width and ends at time+0.5*time_width.</xs:documentation>
+						<xs:documentation>In case the time-dependent quantities of this IDS are averaged over a time interval, this node is the width of this time interval (empty otherwise). By convention, the time interval starts at time-time_width and ends at time.</xs:documentation>
 						<xs:appinfo>
 							<type>dynamic</type>
 							<units>s</units>
