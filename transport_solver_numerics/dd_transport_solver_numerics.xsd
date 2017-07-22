@@ -2912,6 +2912,216 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="numerics_solver_1d_equation_primary">
+		<xs:annotation>
+			<xs:documentation>Profile and derivatives a the primary quantity for a 1D transport equation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the primary quantity of the transport equation. The description node contains the path to the quantity in the physics IDS (example:
+core_profiles/profiles_1d/ion(1)/density)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="profile">
+				<xs:annotation>
+					<xs:documentation>Profile of the primary quantity</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d_dr">
+				<xs:annotation>
+					<xs:documentation>Radial derivative with respect to the primary coordinate</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d2_dr2">
+				<xs:annotation>
+					<xs:documentation>Second order radial derivative with respect to the primary coordinate</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d_dt">
+				<xs:annotation>
+					<xs:documentation>Time derivative</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d_dt_cphi">
+				<xs:annotation>
+					<xs:documentation>Derivative with respect to time, at constant toroidal flux (for current diffusion equation)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d_dt_cr">
+				<xs:annotation>
+					<xs:documentation>Derivative with respect to time, at constant primary coordinate coordinate (for current diffusion equation)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="numerics_solver_1d_equation_bc">
+		<xs:annotation>
+			<xs:documentation>Boundary conditions for a 1D transport equation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the boundary condition type. Has different meanings dependent on the transport equation (PROVIDE FULL DOCUMENTATION)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value of the boundary condition. For indentifier/index = 1 to 3, only the first position in the vector is used. For identifier/index = 5, all three positions are used, meaning respectively a1, a2, a3. </xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<type>dynamic</type>
+						<coordinate1>1...3</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="position">
+				<xs:annotation>
+					<xs:documentation>Position, in terms of the primary coordinate, at which the boundary condition is imposed. Outside this position, the value of the data are considered to be prescribed.</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="numerics_solver_1d_equation">
+		<xs:annotation>
+			<xs:documentation>Numeric of a given 1D transport equation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="primary_quantity" type="numerics_solver_1d_equation_primary">
+				<xs:annotation>
+					<xs:documentation>Profile and derivatives of the primary quantity of the transport equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="boundary_condition" type="numerics_solver_1d_equation_bc">
+				<xs:annotation>
+					<xs:documentation>Boundary condition of the transport equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="convergence" type="numerics_convergence_equations_single">
+				<xs:annotation>
+					<xs:documentation>Convergence details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="numerics_solver_1d">
+		<xs:annotation>
+			<xs:documentation>Numerics related to 1D radial solver for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid" type="core_radial_grid">
+				<xs:annotation>
+					<xs:documentation>Radial grid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equation" type="numerics_solver_1d_equation" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of transport equations</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="drho_tor_dt">
+				<xs:annotation>
+					<xs:documentation>Partial derivative of the toroidal flux coordinate profile with respect to time</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>m.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="d_dvolume_drho_tor_dt">
+				<xs:annotation>
+					<xs:documentation>Partial derivative with respect to time of the derivative of the volume with respect to the toroidal flux coordinate</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>m^2.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="transport_solver_numerics">
 		<xs:annotation>
 			<xs:documentation>Numerical quantities used by transport solvers and convergence details</xs:documentation>
@@ -2923,6 +3133,22 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="time_step">
+					<xs:annotation>
+						<xs:documentation>Internal time step used by the transport solver (assuming all transport equations are solved with the same time step)</xs:documentation>
+						<xs:appinfo>
+							<units>s</units>
+							<type>dynamic</type>
+							<coordinate1>time</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="time"/>
+							<xs:group ref="FLT_1D"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="solver" type="identifier">
 					<xs:annotation>
 						<xs:documentation>Solver identifier</xs:documentation>
@@ -2933,9 +3159,18 @@
 						<xs:documentation>Primary coordinate system with which the transport equations are solved. For a 1D transport solver: index = 1 means rho_tor_norm; 2 = rho_tor.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="solver_1d" type="numerics_solver_1d" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Numerics related to 1D radial solver, for various time slices.</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="profiles_1d" type="numerics_profiles_1d" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Numerics related to 1D radial profiles, for various time slices</xs:documentation>
+						<xs:documentation>Numerics related to 1D radial profiles, for various time slices. To be removed when the solver_1d structure is finalized.</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>
@@ -2944,7 +3179,7 @@
 				</xs:element>
 				<xs:element name="derivatives_1d" type="numerics_profiles_1d_derivatives" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Radial profiles derivatives for various time slices. To be removed when the profiles_1d structure is finalized.</xs:documentation>
+						<xs:documentation>Radial profiles derivatives for various time slices. To be removed when the solver_1d structure is finalized.</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>
@@ -2953,7 +3188,7 @@
 				</xs:element>
 				<xs:element name="boundary_conditions_1d" type="numerics_bc_1d" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Boundary conditions of the radial transport equations for various time slices. To be removed when the profiles_1d structure is finalized.</xs:documentation>
+						<xs:documentation>Boundary conditions of the radial transport equations for various time slices. To be removed when the solver_1d structure is finalized.</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>
@@ -2971,7 +3206,7 @@
 				</xs:element>
 				<xs:element name="convergence" type="numerics_convergence">
 					<xs:annotation>
-						<xs:documentation>Convergence details</xs:documentation>
+						<xs:documentation>Convergence details To be removed when the solver_1d structure is finalized.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
