@@ -82,6 +82,49 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="arcs_of_circle_static">
+		<xs:annotation>
+			<xs:documentation>Arcs of circle description of a 2D contour</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radii of the start point of each arc of circle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height of the start point of each arc of circle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="curvature_radii">
+				<xs:annotation>
+					<xs:documentation>Curvature radius of each arc of circle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rectangle_static">
 		<xs:annotation>
 			<xs:documentation>Rectangular description of a 2D object</xs:documentation>
@@ -144,7 +187,7 @@
 		<xs:sequence>
 			<xs:element name="geometry_type">
 				<xs:annotation>
-					<xs:documentation>Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique') </xs:documentation>
+					<xs:documentation>Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique', 4:'arcs of circle') </xs:documentation>
 					<xs:appinfo>
 						<Type>static</Type>
 					</xs:appinfo>
@@ -166,6 +209,11 @@
 			<xs:element name="oblique" type="oblique_static">
 				<xs:annotation>
 					<xs:documentation>Trapezoidal description of the element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="arcs_of_circle" type="arcs_of_circle_static">
+				<xs:annotation>
+					<xs:documentation>Description of the element contour by a set of arcs of circle. For each of these, the position of the start point is given together with the curvature radius. The end point is given by the start point of the next arc of circle.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
