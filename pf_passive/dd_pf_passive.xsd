@@ -2,9 +2,9 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-    <xs:include schemaLocation="../ic_antennas/dd_ic_antennas.xsd"/>
+	<xs:include schemaLocation="../ic_antennas/dd_ic_antennas.xsd"/>
+	<xs:include schemaLocation="../pf_active/dd_pf_active.xsd"/>
 	<!--IC antennas included because of the use of some generic types - temporary issue due to IFORT compiler refusing to compile utilities_copy_struct.f90 -->
-
 	<xs:complexType name="pf_passive_loops">
 		<xs:annotation>
 			<xs:documentation>Passive axisymmetric conductor description in the form of non-connected loops; any connected loops are expressed as active coil circuits with no power supply attached.</xs:documentation>
@@ -19,18 +19,6 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="area">
-				<xs:annotation>
-					<xs:documentation>Surface area of the passive loop</xs:documentation>
-					<xs:appinfo>
-						<Type>static</Type>
-						<Units>m^2</Units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="resistance">
@@ -57,9 +45,12 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="geometry" type="outline_2d_geometry_static">
+			<xs:element name="element" type="pf_coils_elements" maxOccurs="20">
 				<xs:annotation>
-					<xs:documentation>Shape of the passive loop</xs:documentation>
+					<xs:documentation>Each loop is comprised of a number of cross-section elements described  individually</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="current">
