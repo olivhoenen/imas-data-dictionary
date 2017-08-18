@@ -10,6 +10,120 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="spectro_vis_channel_light_collection">
+		<xs:annotation>
+			<xs:documentation>Emission weights for various points</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>Values of the light collection efficiencies</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>-</units>
+						<coordinate1>../positions/r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="positions" type="rzphi1d_static">
+				<xs:annotation>
+					<xs:documentation>List of positions for which the light collection efficiencies are provided</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="detector_image_circular">
+		<xs:annotation>
+			<xs:documentation>Description of circular or elliptic observation cones</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="radius">
+				<xs:annotation>
+					<xs:documentation>Radius of the circle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ellipticity">
+				<xs:annotation>
+					<xs:documentation>Ellipticity</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="detector_image">
+		<xs:annotation>
+			<xs:documentation>Description of the observation volume of the detector or detector pixel at the focal plane of the optical system. This is basically the image of the detector pixel on the focal plane</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="geometry_type">
+				<xs:annotation>
+					<xs:documentation>Type of geometry used to describe the detector image (1:'outline', 2:'circular')</xs:documentation>
+					<xs:appinfo>
+						<Type>static</Type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="rzphi1d_static">
+				<xs:annotation>
+					<xs:documentation>Coordinates of the points shaping the polygon of the detector image</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="circular" type="detector_image_circular">
+				<xs:annotation>
+					<xs:documentation>Description of circular or elliptic detector image</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="spectro_vis_channel_resolution">
+		<xs:annotation>
+			<xs:documentation>In case of active spectroscopy, spatial resolution of the measurement</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="centre" type="rzphi0d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Position of the centre of the spatially resolved zone</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="width" type="rzphi0d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Full width of the spatially resolved zone in the R, Z and phi directions</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectro_vis_channel_filter">
 		<xs:annotation>
 			<xs:documentation>Filter spectrometer</xs:documentation>
@@ -57,6 +171,24 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="photon_count">
+				<xs:annotation>
+					<xs:documentation>Detected photon count</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>s^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../raw_lines</coordinate1>
+						<coordinate2>time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="line_intensities">
@@ -303,9 +435,41 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="detector" type="detector_aperture">
+				<xs:annotation>
+					<xs:documentation>Detector description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aperture" type="detector_aperture" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Description of a set of collimating apertures</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="line_of_sight" type="line_of_sight_2points">
 				<xs:annotation>
 					<xs:documentation>Description of the line of sight of the channel, given by 2 points</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="detector_image" type="detector_image">
+				<xs:annotation>
+					<xs:documentation>Image of the detector or pixel on the focal plane of the optical system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="light_collection_efficiencies" type="spectro_vis_channel_light_collection">
+				<xs:annotation>
+					<xs:documentation>Light collection efficiencies (fraction of the local emission detected by the optical system) for a list of points defining regions of interest. To be used for non-pinhole optics.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="active_spatial_resolution" type="spectro_vis_channel_resolution" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>In case of active spectroscopy, describes the spatial resolution of the measurement, calculated as a convolution of the atomic smearing, magnetic and beam geometry smearing and detector projection, for a set of time slices</xs:documentation>
+							<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="spot_diameter">
@@ -369,9 +533,20 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="detector_layout">
+					<xs:annotation>
+						<xs:documentation>Layout of the detector grid employed. Ex: '4x16', '4x32', '1x18'</xs:documentation>
+						<xs:appinfo>
+							<type>static</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="channel" type="spectro_vis_channel" maxOccurs="240">
 					<xs:annotation>
-						<xs:documentation>Set of channels (lines-of-sight)</xs:documentation>
+						<xs:documentation>Set of channels (detector or pixel of a camera)</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
