@@ -111,6 +111,23 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="power_density">
+				<xs:annotation>
+					<xs:documentation>Power received on the detector per unit surface, in multiple energy bands if available from the detector</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../energy_band</coordinate1>
+						<coordinate2>time</coordinate2>
+						<units>W.m^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_2D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="validity_timed">
 				<xs:annotation>
 					<xs:documentation>Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)</xs:documentation>
