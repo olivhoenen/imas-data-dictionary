@@ -10,7 +10,7 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="gas_puffing_gvb_valve">
+	<xs:complexType name="gas_injection_pipe_valve">
 		<xs:annotation>
 			<xs:documentation>Gas injection valve</xs:documentation>
 		</xs:annotation>
@@ -103,7 +103,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="gas_puffing_gvb">
+	<xs:complexType name="gas_injection_pipe">
 		<xs:annotation>
 			<xs:documentation>Gas injection pipe</xs:documentation>
 		</xs:annotation>
@@ -171,7 +171,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="valve" type="gas_puffing_gvb_valve" maxOccurs="3">
+			<xs:element name="valve" type="gas_injection_pipe_valve" maxOccurs="3">
 				<xs:annotation>
 					<xs:documentation>Set of valves connecting a gas bottle the the pipe</xs:documentation>
 					<xs:appinfo>
@@ -181,7 +181,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="gas_puffing">
+	<xs:element name="gas_injection">
 		<xs:annotation>
 			<xs:documentation>Gas injection by a system of pipes and valves</xs:documentation>
 			<xs:appinfo>
@@ -192,7 +192,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="pipe" type="gas_puffing_gvb" maxOccurs="20">
+				<xs:element name="pipe" type="gas_injection_pipe" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>Set of gas injection pipes</xs:documentation>
 						<xs:appinfo>
