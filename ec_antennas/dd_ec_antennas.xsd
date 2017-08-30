@@ -107,7 +107,18 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the antenna</xs:documentation>
+					<xs:documentation>Name of the antenna (unique within the set of all antennas of the experiment)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the antenna (unique within the set of all antennas of the experiment)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>

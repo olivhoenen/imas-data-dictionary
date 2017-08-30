@@ -86,6 +86,28 @@
 			<xs:documentation>Gap for describing the plasma boundary</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the gap</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the gap</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="r">
 				<xs:annotation>
 					<xs:documentation>Major radius of the reference point</xs:documentation>
@@ -160,6 +182,28 @@
 			<xs:documentation>IC antenna</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Power</xs:documentation>
@@ -191,6 +235,28 @@
 			<xs:documentation>EC antenna</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Power</xs:documentation>
@@ -246,6 +312,28 @@
 			<xs:documentation>LH antenna</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Power</xs:documentation>
@@ -285,6 +373,28 @@
 			<xs:documentation>NBI unit</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the NBI unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the NBI unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="species" type="gas_mixture_constant" maxOccurs="3">
 				<xs:annotation>
 					<xs:documentation>Species injected by the NBI unit (may be more than one in case the unit injects a gas mixture)</xs:documentation>
@@ -436,6 +546,28 @@
 			<xs:documentation>Gas injection valve</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the valve</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the valve</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="flow_rate" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Flow rate of the valve</xs:documentation>
@@ -729,7 +861,7 @@
 	</xs:complexType>
 	<xs:element name="pulse_schedule">
 		<xs:annotation>
-			<xs:documentation>Description of Pulse Schedule, described by subsystems waveform references and an enveloppe aounrd them. The controllers, pulse schedule and SDN are defined separately</xs:documentation>
+			<xs:documentation>Description of Pulse Schedule, described by subsystems waveform references and an enveloppe around them. The controllers, pulse schedule and SDN are defined in separate IDSs. All names and identifiers of subsystems appearing in the pulse_schedule must be identical to those used in the IDSs describing the related subsystems.</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
