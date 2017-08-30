@@ -8,7 +8,6 @@
 	<!--   Here we must declare all included schemas, not only those directly below TOP but also all those used at any sublevel (makes it easier for the recursive XSL transformation generating the type definitions) -->
 	<xs:include schemaLocation="utilities/dd_support.xsd"/>
 	<xs:include schemaLocation="neutron_diagnostic/dd_neutron_diagnostic.xsd"/>
-	<xs:include schemaLocation="actuator/dd_actuator.xsd"/>
 	<xs:include schemaLocation="amns_data/dd_amns_data.xsd"/>
 	<xs:include schemaLocation="bolometer/dd_bolometer.xsd"/>
 	<xs:include schemaLocation="charge_exchange/dd_charge_exchange.xsd"/>
@@ -55,7 +54,6 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="actuator" maxOccurs="6"/>
 				<xs:element ref="amns_data" maxOccurs="2"/>
 				<xs:element ref="bolometer" maxOccurs="2"/>
 				<xs:element ref="charge_exchange" maxOccurs="2"/>
