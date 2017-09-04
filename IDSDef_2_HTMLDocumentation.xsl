@@ -17,6 +17,8 @@
       </head>
       <body>
               <p class="welcome">ITER Physics Data Model Documentation : Top level (list of all IDSs)</p>
+       		  <p><a href="dd_versions.html">Data Dictionary version history</a></p>
+
 <!-- First make a list of IDS with the Links-->
 <table border="1">
         <thead style="color:#ff0000"><td>IDS name</td><td>Description</td><td>Max. occurrence number</td></thead>
