@@ -407,7 +407,7 @@
 		<xs:sequence>
 			<xs:element name="type" type="identifier_static">
 				<xs:annotation>
-					<xs:documentation>Type of the vessel description. index = 0 for the official single/multiple annular vessel and 1 for the official block element representation for each vessel unit. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on flag=2</xs:documentation>
+					<xs:documentation>Type of the vessel description. index = 0 for the official single/multiple annular vessel and 1 for the official block element representation for each vessel unit. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on index=2</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="unit" type="wall_2d_vessel_unit" maxOccurs="5">
@@ -473,12 +473,82 @@
 		<xs:sequence>
 			<xs:element name="type" type="identifier_static">
 				<xs:annotation>
-					<xs:documentation>Type of the limiter description. index = 0 for the official single contour limiter and 1 for the official disjoint PFC structure like first wall. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on flag=2</xs:documentation>
+					<xs:documentation>Type of the limiter description. index = 0 for the official single contour limiter and 1 for the official disjoint PFC structure like first wall. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on index =2</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="unit" type="wall_2d_limiter_unit" maxOccurs="33">
 				<xs:annotation>
 					<xs:documentation>Set of limiter units</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_2d_mobile_unit">
+		<xs:annotation>
+			<xs:documentation>2D mobile parts description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the mobile unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="closed">
+				<xs:annotation>
+					<xs:documentation>Flag identifying whether the contour is closed (1) or open (0)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="rz1d_dynamic_aos_time" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Irregular outline of the mobile unit, for a set of time slices. Do NOT repeat the first point for closed contours</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resistivity">
+				<xs:annotation>
+					<xs:documentation>Resistivity of the mobile unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>ohm.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_2d_mobile">
+		<xs:annotation>
+			<xs:documentation>2D mobile parts description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of the description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unit" type="wall_2d_mobile_unit" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Set of mobile units</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -499,6 +569,11 @@
 			<xs:element name="limiter" type="wall_2d_limiter">
 				<xs:annotation>
 					<xs:documentation>Description of the immobile limiting surface(s) or plasma facing components for defining the Last Closed Flux Surface.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobile" type="wall_2d_mobile">
+				<xs:annotation>
+					<xs:documentation>Description of mobile Plasma Facing Components which can potentially move closer to the plasma than the static limiting surface defined under  limiter</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="vessel" type="wall_2d_vessel">
