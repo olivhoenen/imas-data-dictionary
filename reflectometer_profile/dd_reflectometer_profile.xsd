@@ -101,28 +101,13 @@
 			</xs:element>
 			<xs:element name="mode">
 				<xs:annotation>
-					<xs:documentation>Detection mode "X" or "O". Or is it more useful to define instead the harmonic ? (it's what we chose for ECE, see below)</xs:documentation>
+					<xs:documentation>Detection mode "X" or "O"</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="harmonic">
-				<xs:annotation>
-					<xs:documentation>Harmonic detected by the channel. 1 corresponds to the "O1" mode, while 2 corresponds to the "X2" mode. </xs:documentation>
-					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="INT_1D"/>
-					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="line_of_sight_emission" type="line_of_sight_2points">
@@ -153,6 +138,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>Hz</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -161,7 +147,7 @@
 			</xs:element>
 			<xs:element name="phase">
 				<xs:annotation>
-					<xs:documentation>Measured phase for each frequency and time slice (corresponding to the begin time of a sweep). PLEASE PROVIDE EXACT DEFINITION</xs:documentation>
+					<xs:documentation>Measured phase of the probing wave for each frequency and time slice (corresponding to the begin time of a sweep), relative to the phase at launch</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../frequencies</coordinate1>
 						<coordinate2>time</coordinate2>
@@ -185,10 +171,10 @@
 				<xs:annotation>
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
-					    <coordinate1>1...N</coordinate1>
-					    <coordinate1_same_as>../position/r/data</coordinate1_same_as>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../position/r/data</coordinate1_same_as>
 						<coordinate2>time</coordinate2>
-					    <coordinate2_same_as>../position/r/data</coordinate2_same_as>
+						<coordinate2_same_as>../position/r/data</coordinate2_same_as>
 						<units>m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
