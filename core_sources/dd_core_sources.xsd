@@ -175,6 +175,78 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="core_sources_source_profiles_1d_components_2">
+		<xs:annotation>
+			<xs:documentation>Source terms for vector components in predefined directions, assuming core_radial_grid 2 levels above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="radial">
+				<xs:annotation>
+					<xs:documentation>Radial component</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="diamagnetic">
+				<xs:annotation>
+					<xs:documentation>Diamagnetic component</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parallel">
+				<xs:annotation>
+					<xs:documentation>Parallel component</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="poloidal">
+				<xs:annotation>
+					<xs:documentation>Poloidal component</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal">
+				<xs:annotation>
+					<xs:documentation>Toroidal component</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="core_sources_source_profiles_1d_ions_charge_states">
 		<xs:annotation>
 			<xs:documentation>Source terms related to the a given state of the ion species</xs:documentation>
@@ -371,6 +443,11 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="momentum" type="core_sources_source_profiles_1d_components_2">
+				<xs:annotation>
+					<xs:documentation>Source term for the uin momentum transport equations along various components (directions)</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="multiple_states_flag">
 				<xs:annotation>
