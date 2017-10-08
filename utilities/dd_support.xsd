@@ -1739,7 +1739,7 @@
 		<xs:sequence>
 			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:documentation>String identifying state</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1916,7 +1916,7 @@
 			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:documentation>String identifying the species (e.g. H, D, T, He, C, D2, DT, CD4, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -2216,6 +2216,19 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="collisionality_norm">
+				<xs:annotation>
+					<xs:documentation>Collisionality normalised to the bounce frequency</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="core_profiles_profiles_1d">
@@ -2268,6 +2281,19 @@
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_i_thermal_total">
+				<xs:annotation>
+					<xs:documentation>Total ion thermal density (sum over species and charge states)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -2366,6 +2392,19 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="current_parallel_inside">
+				<xs:annotation>
+					<xs:documentation>Parallel current driven inside the flux surface. Cumulative surface integral of j_total</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>A</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="j_tor">
 				<xs:annotation>
 					<xs:documentation>Total toroidal current density = average(J_Tor/R) / average(1/R)</xs:documentation>
@@ -2448,7 +2487,7 @@
 			</xs:element>
 			<xs:element name="e_field" type="core_profiles_vector_components_1">
 				<xs:annotation>
-					<xs:documentation>Electric field, averaged on the magnetic surface. E.g for the parellel component, average(E.B) / B0, using core_profiles/vacuum_toroidal_field/b0</xs:documentation>
+					<xs:documentation>Electric field, averaged on the magnetic surface. E.g for the parallel component, average(E.B) / B0, using core_profiles/vacuum_toroidal_field/b0</xs:documentation>
 					<xs:appinfo>
 						<units>V.m^-1</units>
 					</xs:appinfo>
