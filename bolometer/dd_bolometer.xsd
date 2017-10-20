@@ -118,6 +118,44 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="radiated_power_total">
+					<xs:annotation>
+						<xs:documentation>Total radiated power reconstructed from bolometry data</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>../time</coordinate1>
+							<type>dynamic</type>
+							<units>W</units>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_1D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="radiated_power_inside_lcfs">
+					<xs:annotation>
+						<xs:documentation>Radiated power from the plasma inside the Last Closed Flux Surface, reconstructed from bolometry data</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>../time</coordinate1>
+							<type>dynamic</type>
+							<units>W</units>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_1D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="radiated_power_validity">
+					<xs:annotation>
+						<xs:documentation>Validity flag related to the radiated power reconstructions</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>../time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="INT_1D"/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element ref="code"/>
 				<xs:element ref="time"/>
 			</xs:sequence>
