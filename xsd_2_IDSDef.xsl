@@ -98,6 +98,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<!-- Replicate LIFECYCLE information as an attribute-->
 							<xsl:attribute name="lifecycle_status"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_status"/></xsl:attribute>
 							<xsl:attribute name="lifecycle_version"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_version"/></xsl:attribute>
+							<xsl:attribute name="lifecycle_last_change"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_last_change"/></xsl:attribute>
 							<!-- Scan its components in IMPLEMENT mode -->
 							<xsl:apply-templates select="xs:complexType" mode="IMPLEMENT">
 								<xsl:with-param name="currPath" select="''"/>
