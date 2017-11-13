@@ -229,6 +229,12 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:for-each select="xs:annotation/xs:appinfo/*">
 								<!-- Generic method for declaring all appinfo as attributes-->
 								<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+								<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
+										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
+										<xsl:value-of select="."/>
+										</xsl:attribute>
+										</xsl:if>
 							</xsl:for-each>
 						</field>
 						<!-- Then we test if the type is real or complex, if so add *_error nodes to the structure for the errorbars -->
@@ -251,6 +257,12 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:for-each select="xs:annotation/xs:appinfo/*">
 									<!-- Generic method for declaring all appinfo as attributes-->
 									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+									<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
+										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
+										<xsl:value-of select="."/>
+										</xsl:attribute>
+										</xsl:if>
 								</xsl:for-each>
 							</field>
 							<field>
@@ -271,6 +283,12 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:for-each select="xs:annotation/xs:appinfo/*">
 									<!-- Generic method for declaring all appinfo as attributes-->
 									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+								<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
+										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
+										<xsl:value-of select="."/>
+										</xsl:attribute>
+										</xsl:if>
 								</xsl:for-each>
 							</field>
 							<field>
@@ -459,6 +477,12 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<!-- Generic method for declaring all appinfo as attributes-->
 														<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 														<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
+														<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
+										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
+										<xsl:value-of select="concat('../',.)"/>
+										</xsl:attribute>
+										</xsl:if>
 													</xsl:for-each>
 												</field>
 												<!-- Then we test if the type is real or complex, if so add *_error nodes to the structure for the errorbars -->
@@ -482,6 +506,12 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 															<!-- Generic method for declaring all appinfo as attributes-->
 															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 															<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
+															<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
+										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
+										<xsl:value-of select="concat('../',.)"/>
+										</xsl:attribute>
+										</xsl:if>
 														</xsl:for-each>
 													</field>
 													<field>
@@ -503,6 +533,12 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 															<!-- Generic method for declaring all appinfo as attributes-->
 															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 															<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
+															<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
+										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
+										<xsl:value-of select="concat('../',.)"/>
+										</xsl:attribute>
+										</xsl:if>
 														</xsl:for-each>
 													</field>
 													<field>
