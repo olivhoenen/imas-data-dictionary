@@ -229,11 +229,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:for-each select="xs:annotation/xs:appinfo/*">
 								<!-- Generic method for declaring all appinfo as attributes-->
 								<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-								<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+								<!-- Write a second attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate -->
 										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
-										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
-										<xsl:value-of select="."/>
-										</xsl:attribute>
+										<xsl:attribute name="{concat(lower-case(name(.)),'_AosParent_relative')}">
+										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
 										</xsl:if>
 							</xsl:for-each>
 						</field>
@@ -257,11 +256,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:for-each select="xs:annotation/xs:appinfo/*">
 									<!-- Generic method for declaring all appinfo as attributes-->
 									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-									<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+									<!-- Write a second attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate -->
 										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
-										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
-										<xsl:value-of select="."/>
-										</xsl:attribute>
+										<xsl:attribute name="{concat(lower-case(name(.)),'_AosParent_relative')}">
+										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
 										</xsl:if>
 								</xsl:for-each>
 							</field>
@@ -283,11 +281,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:for-each select="xs:annotation/xs:appinfo/*">
 									<!-- Generic method for declaring all appinfo as attributes-->
 									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-								<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+								<!-- Write a second attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate -->
 										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
-										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
-										<xsl:value-of select="."/>
-										</xsl:attribute>
+										<xsl:attribute name="{concat(lower-case(name(.)),'_AosParent_relative')}">
+										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
 										</xsl:if>
 								</xsl:for-each>
 							</field>
@@ -477,11 +474,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<!-- Generic method for declaring all appinfo as attributes-->
 														<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 														<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
-														<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+										<!-- Write a second attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate -->
 										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
-										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
-										<xsl:value-of select="concat('../',.)"/>
-										</xsl:attribute>
+										<xsl:attribute name="{concat(lower-case(name(.)),'_AosParent_relative')}">
+										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
 										</xsl:if>
 													</xsl:for-each>
 												</field>
@@ -506,11 +502,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 															<!-- Generic method for declaring all appinfo as attributes-->
 															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 															<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
-															<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+															<!-- Write a second attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate -->
 										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
-										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
-										<xsl:value-of select="concat('../',.)"/>
-										</xsl:attribute>
+										<xsl:attribute name="{concat(lower-case(name(.)),'_AosParent_relative')}">
+										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
 										</xsl:if>
 														</xsl:for-each>
 													</field>
@@ -533,11 +528,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 															<!-- Generic method for declaring all appinfo as attributes-->
 															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 															<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
-															<!-- Write a second attribute (relative coordinate path, natively present in the schema) in case the appinfo is a coordinate -->
+															<!-- Write a second attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate -->
 										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
-										<xsl:attribute name="{concat(lower-case(name(.)),'_relative')}">
-										<xsl:value-of select="concat('../',.)"/>
-										</xsl:attribute>
+																				<xsl:attribute name="{concat(lower-case(name(.)),'_AosParent_relative')}">
+										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
 										</xsl:if>
 														</xsl:for-each>
 													</field>
@@ -844,6 +838,35 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="concat($currPath,'/',$coordinatePath)"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	<!-- Template dedicated to building relative Path from the nearest AoS parent, for the coordinate attributes. It first calculates the absolute path of the coordinate, exactly as done in the BuildAbsolutePath template, then extracts the substring after the last AoS parent (detected thanks to aosLevel param) -->
+	<!-- CAVEAT1: likely to return empty string when no AoS parent: create when statement !-->
+		<!-- CAVEAT2: MUST HANDLE DETECTION OF (itime) as well -->
+	<xsl:template name="BuildRelativeAosParentPath">
+		<xsl:param name="coordinate"/>
+		<xsl:param name="currPath"/>
+		<xsl:param name="coordinatePath"/>
+		<xsl:param name="aosLevel"/>
+		<xsl:choose>
+			<xsl:when test="contains($coordinatePath,'...')">
+				<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
+				<xsl:value-of select="replace($coordinatePath,'../','')"/>
+			</xsl:when>
+			<xsl:when test="contains($coordinatePath,'IDS')">
+				<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
+				<xsl:value-of select="$coordinatePath"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:choose>
+					<xsl:when test="contains($coordinatePath,'../')">
+						<xsl:value-of select="substring-after(local:getAbsolutePath(concat($currPath,'/',$coordinatePath)),concat('(i',$aosLevel,')/'))"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="substring-after(concat($currPath,'/',$coordinatePath),concat('(i',$aosLevel,')/'))"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:otherwise>
