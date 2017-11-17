@@ -843,9 +843,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	<!-- Template dedicated to building relative Path from the nearest AoS parent, for the coordinate attributes. It first calculates the absolute path of the coordinate, exactly as done in the BuildAbsolutePath template, then extracts the substring after the last AoS parent (detected thanks to aosLevel param) -->
-	<!-- CAVEAT1: likely to return empty string when no AoS parent: create when statement !-->
-		<!-- CAVEAT2: MUST HANDLE DETECTION OF (itime) as well -->
+	<!-- Template dedicated to building relative Path from the nearest static AoS parent, to calculate the time coordinate relative path for the new low level. It first calculates the absolute path of the coordinate, exactly as done in the BuildAbsolutePath template, then extracts the substring after the last AoS parent (detected thanks to aosLevel param) -->
+		<!-- NB does handle the detection of (itime) in case of a dynamic AoS parent, but this attribute will anyway not be used in this case because there is no need to specify a time coordinate ! -->
 	<xsl:template name="BuildRelativeAosParentPath">
 		<xsl:param name="coordinate"/>
 		<xsl:param name="currPath"/>
@@ -860,13 +859,25 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 				<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
 				<xsl:value-of select="$coordinatePath"/>
 			</xsl:when>
-			<xsl:otherwise>
+			<xsl:when test="contains($currPath,'(i1)')">
+			    <!-- There is at least one static AoS ancestor, process the path to make it relative to the nearest one -->
 				<xsl:choose>
 					<xsl:when test="contains($coordinatePath,'../')">
 						<xsl:value-of select="substring-after(local:getAbsolutePath(concat($currPath,'/',$coordinatePath)),concat('(i',$aosLevel,')/'))"/>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="substring-after(concat($currPath,'/',$coordinatePath),concat('(i',$aosLevel,')/'))"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+			<!-- Case with no static AoS ancestor, simply calculate the absolute path as in the BuilAbsolutePath template -->
+                <xsl:choose>
+					<xsl:when test="contains($coordinatePath,'../')">
+						<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',$coordinatePath))"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="concat($currPath,'/',$coordinatePath)"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:otherwise>
