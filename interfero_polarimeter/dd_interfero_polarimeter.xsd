@@ -43,12 +43,12 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_e_line">
+			<xs:element name="phase_corrected">
 				<xs:annotation>
-					<xs:documentation>Line integrated density estimated from this wavelength</xs:documentation>
+					<xs:documentation>Phase measured for this wavelength, corrected from fringe jumps</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
-						<units>m^-2</units>
+						<units>rad</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -57,6 +57,33 @@
 						<xs:element ref="time"/>
 						<xs:group ref="FLT_1D"/>
 					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fring_jump_correction">
+				<xs:annotation>
+					<xs:documentation>Flag indicated whether a fringe jump has been corrected (1) or not (0) for each time slice</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase_to_n_e_line">
+				<xs:annotation>
+					<xs:documentation>Conversion factor to be used to convert phase into line density for this wavelength</xs:documentation>
+					<xs:appinfo>
+						<units>m^-2.rad^-1</units>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -139,10 +166,26 @@
 			</xs:element>
 			<xs:element name="n_e_line">
 				<xs:annotation>
-					<xs:documentation>Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths</xs:documentation>
+					<xs:documentation>Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<units>m^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_e_line_average">
+				<xs:annotation>
+					<xs:documentation>Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>m^-3</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -187,7 +230,7 @@
 			</xs:element>
 			<xs:element name="validity_timed">
 				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)</xs:documentation>
+					<xs:documentation>Indicator of the validity of the channel as a function of time. 0: valid, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
@@ -202,7 +245,7 @@
 			</xs:element>
 			<xs:element name="validity">
 				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid)</xs:documentation>
+					<xs:documentation>Indicator of the validity of the channel for the whole acquisition period. 0: valid, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -215,11 +258,11 @@
 	</xs:complexType>
 	<xs:element name="interfero_polarimeter">
 		<xs:annotation>
-			<xs:documentation>Interfero-polarimeter diagnostic</xs:documentation>
+			<xs:documentation>Interfero-polarimeter diagnostic. Can also be used to describe a pure interferometer or a pure polarimeter diagnostic</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.7.4</lifecycle_last_change>
+				<lifecycle_last_change>3.13.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
