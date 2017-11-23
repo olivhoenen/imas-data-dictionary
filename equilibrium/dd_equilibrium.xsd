@@ -417,12 +417,26 @@
 					<xs:documentation>Minimum q value and position</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="energy_mhd">
+				<xs:annotation>
+					<xs:documentation>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>J</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="w_mhd">
 				<xs:annotation>
 					<xs:documentation>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>J</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.14.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1389,7 +1403,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.8.0</lifecycle_last_change>
+				<lifecycle_last_change>3.14.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
