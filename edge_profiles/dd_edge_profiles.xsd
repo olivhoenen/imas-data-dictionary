@@ -714,11 +714,6 @@
 			<xs:documentation>edge plasma description for a given time slice</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="grid" type="generic_grid_dynamic">
-				<xs:annotation>
-					<xs:documentation>Grid description</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="electrons" type="edge_profiles_time_slice_electrons">
 				<xs:annotation>
 					<xs:documentation>Quantities related to the electrons</xs:documentation>
@@ -895,6 +890,39 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="edge_profiles_global_quantities">
+		<xs:annotation>
+			<xs:documentation>Various 0D quantities calculated from the fields solved in the transport equations, may be stored at faster frequency than the full GGD data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="energy_thermal">
+				<xs:annotation>
+					<xs:documentation>Plasma energy content = 3/2 * integral over the plasma volume of the thermal pressure (summed over all species)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../time</coordinate1>
+						<units>J</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_separatrix">
+				<xs:annotation>
+					<xs:documentation>Power flowing accross the separatrix</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../time</coordinate1>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="edge_profiles">
 		<xs:annotation>
 			<xs:documentation>Edge plasma profiles (includes the scrape-off layer and possibly part of the confined plasma)</xs:documentation>
@@ -907,9 +935,23 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="global_quantities" type="edge_profiles_global_quantities">
+					<xs:annotation>
+						<xs:documentation>Various 0D quantities calculated from the fields solved in the transport equations, may be stored at faster frequency than the full GGD data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="profiles_1d" type="core_profiles_profiles_1d" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>SOL radial profiles for various time slices, taken on outboard equatorial mid-plane</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebase</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>

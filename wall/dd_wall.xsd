@@ -68,6 +68,32 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="power_inner_target">
+				<xs:annotation>
+					<xs:documentation>Electron power on the inner target</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../time</coordinate1>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_outer_target">
+				<xs:annotation>
+					<xs:documentation>Electron power on the inner target</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../time</coordinate1>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="wall_global_quantitites_neutral">
@@ -269,6 +295,45 @@
 						<type>dynamic</type>
 						<units>W</units>
 						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inner_target_ion_total">
+				<xs:annotation>
+					<xs:documentation>Total ion (summed over ion species) power on the inner target</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../time</coordinate1>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_inner_target_max">
+				<xs:annotation>
+					<xs:documentation>Maximum power density on the inner target</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../time</coordinate1>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_outer_target_max">
+				<xs:annotation>
+					<xs:documentation>Maximum power density on the outer target</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../time</coordinate1>
+						<units>W</units>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
