@@ -367,6 +367,52 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="edge_transport_model_ggd_fast_neutral">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients related to a given neutral species</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying neutral (e.g. H, D, T, He, C, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ion_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding ion species in the ../../ion array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="particle_flux_integrated" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Total number of particles of this species crossing a surface per unit time, for various surfaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="edge_transport_model_ion">
 		<xs:annotation>
 			<xs:documentation>Transport coefficients related to a given ion species</xs:documentation>
@@ -450,6 +496,64 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="edge_transport_model_ggd_fast_ion">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients related to a given ion species (high frequency data)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_ion">
+				<xs:annotation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>Elementary Charge Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="neutral_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding neutral species in the ../../neutral array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="particle_flux_integrated" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Total number of particles of this species crossing a surface per unit time, for various surfaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="edge_transport_model_electrons">
 		<xs:annotation>
 			<xs:documentation>Transport coefficients related to electrons</xs:documentation>
@@ -467,16 +571,82 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="edge_transport_model_ggd_fast_electrons">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients related to electrons (high frequency data)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="particle_flux_integrated" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Total number of particles of this species crossing a surface per unit time, for various surfaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Power carried by this species crossing a surface, for various surfaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="edge_transport_model_ggd_fast">
+		<xs:annotation>
+			<xs:documentation>Transport coefficient given on the ggd at a given time slice (high frequency data)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="electrons" type="edge_transport_model_electrons">
+				<xs:annotation>
+					<xs:documentation>Transport quantities related to the electrons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion" type="edge_transport_model_ggd_fast_ion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients related to the various ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="neutral" type="edge_transport_model_neutral" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients related to the various ion and neutral species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_ion_total" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Power carried by all ions (sum over ions species) crossing a surface, for various surfaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="edge_transport_model_ggd">
 		<xs:annotation>
 			<xs:documentation>Transport coefficient given on the ggd at a given time slice</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="grid" type="generic_grid_dynamic">
-				<xs:annotation>
-					<xs:documentation>Grid description</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="conductivity" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Conductivity, on various grid subsets</xs:documentation>
@@ -550,9 +720,27 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebase</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="ggd" type="edge_transport_model_ggd" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients represented using the general grid description, for various time slices</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ggd_fast" type="edge_transport_model_ggd_fast" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Quantities provided at a higher frequency than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>

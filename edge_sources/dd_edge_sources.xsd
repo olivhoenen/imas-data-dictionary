@@ -405,11 +405,6 @@
 			<xs:documentation>Source terms for a given time slice</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="grid" type="generic_grid_dynamic">
-				<xs:annotation>
-					<xs:documentation>Grid description</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="electrons" type="edge_sources_source_ggd_electrons">
 				<xs:annotation>
 					<xs:documentation>Sources for electrons</xs:documentation>
@@ -477,6 +472,15 @@
 			<xs:element name="identifier" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Source term identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebase</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ggd" type="edge_sources_source_ggd" maxOccurs="unbounded">

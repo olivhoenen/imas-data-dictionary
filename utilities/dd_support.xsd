@@ -2648,6 +2648,48 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_scalar_single_position">
+		<xs:annotation>
+			<xs:documentation>Scalar values at a single position on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Scalar value of the quantity on the grid subset of size 1 (single position)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_scalar">
 		<xs:annotation>
 			<xs:documentation>Scalar values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
