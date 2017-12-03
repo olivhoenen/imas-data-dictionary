@@ -2552,6 +2552,34 @@ core_profiles/profiles_1d/ion(1)/density)</xs:documentation>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="time_step_average">
+					<xs:annotation>
+						<xs:documentation>Average internal time step used by the transport solver between the previous and the current time stored for this quantity (assuming all transport equations are solved with the same time step)</xs:documentation>
+						<xs:appinfo>
+							<units>s</units>
+							<type>dynamic</type>
+							<coordinate1>time</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="time"/>
+							<xs:group ref="FLT_1D"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="time_step_min">
+					<xs:annotation>
+						<xs:documentation>Minimum internal time step to be used by the transport solver</xs:documentation>
+						<xs:appinfo>
+							<units>s</units>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="solver" type="identifier">
 					<xs:annotation>
 						<xs:documentation>Solver identifier</xs:documentation>

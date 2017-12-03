@@ -601,22 +601,22 @@
 			<xs:documentation>Transport coefficient given on the ggd at a given time slice (high frequency data)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="electrons" type="edge_transport_model_electrons">
+			<xs:element name="electrons" type="edge_transport_model_ggd_fast_electrons">
 				<xs:annotation>
-					<xs:documentation>Transport quantities related to the electrons</xs:documentation>
+					<xs:documentation>Transport quantities and flux integrals related to the electrons</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ion" type="edge_transport_model_ggd_fast_ion" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients related to the various ion species</xs:documentation>
+					<xs:documentation>Transport coefficients and flux integrals related to the various ion species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="neutral" type="edge_transport_model_neutral" maxOccurs="unbounded">
+			<xs:element name="neutral" type="edge_transport_model_ggd_fast_neutral" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients related to the various ion and neutral species</xs:documentation>
+					<xs:documentation>Transport coefficients and flux integrals related to the various ion and neutral species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -625,6 +625,24 @@
 			<xs:element name="power_ion_total" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Power carried by all ions (sum over ions species) crossing a surface, for various surfaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy_flux_max" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Maximum power density over a surface, for various surfaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>W.m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Power (sum over all species) crossing a surface, for various surfaces</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>W</units>
@@ -755,7 +773,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.2.1</lifecycle_version>
-				<lifecycle_last_change>3.3.1</lifecycle_last_change>
+				<lifecycle_last_change>3.14.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
