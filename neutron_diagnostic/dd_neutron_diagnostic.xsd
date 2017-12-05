@@ -201,17 +201,6 @@
 	</xs:complexType>
 	<xs:complexType name="neutron_diagnostic_detectors_mode">
 		<xs:sequence>
-			<xs:element name="index">
-				<xs:annotation>
-					<xs:documentation>Index of Measuring Mode.  TO BE REMOVED: the mode index is provided by the index of the mode array above.</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="name">
 				<xs:annotation>
 					<xs:documentation>Name of Measuring Mode</xs:documentation>
@@ -243,17 +232,6 @@
 	</xs:complexType>
 	<xs:complexType name="neutron_diagnostic_detectors">
 		<xs:sequence>
-			<xs:element name="index">
-				<xs:annotation>
-					<xs:documentation>Number of Detector. TO BE REMOVED: the detector index is provided by the index of the detector array above.</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="name">
 				<xs:annotation>
 					<xs:documentation>Name of Detector</xs:documentation>
@@ -275,7 +253,20 @@
 			</xs:element>
 			<xs:element name="position" type="rzphi0d_static">
 				<xs:annotation>
-					<xs:documentation>Detector Position Data</xs:documentation>
+					<xs:documentation>Detector Position Data SHOULD BE REMOVED</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="detector" type="detector_aperture">
+				<xs:annotation>
+					<xs:documentation>Detector description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aperture" type="detector_aperture" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation>Description of a set of collimating apertures</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="mode" type="neutron_diagnostic_detectors_mode" maxOccurs="50">
@@ -286,6 +277,17 @@
 						<coordinate1>index</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="analyzer_channels_n">
+				<xs:annotation>
+					<xs:documentation>Number of analyzer channels for spectrum calculation</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -465,7 +467,7 @@
 				</xs:element>
 				<xs:element name="detectors" type="neutron_diagnostic_detectors" maxOccurs="50">
 					<xs:annotation>
-						<xs:documentation>Description of Detectors properties and Data in Neutron Diagnostic Module</xs:documentation>
+						<xs:documentation>Description of Detectors properties and Data in Neutron Diagnostic Module. RENAME INTO CHANNEL</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
