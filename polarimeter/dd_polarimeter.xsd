@@ -10,7 +10,7 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="interfero_polarimeter_channel_wavelength_interf">
+	<xs:complexType name="polarimeter_channel_wavelength_interf">
 		<xs:annotation>
 			<xs:documentation>Value of the wavelength and density estimators associated to an interferometry wavelength</xs:documentation>
 		</xs:annotation>
@@ -27,9 +27,9 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phase">
+			<xs:element name="phase_corrected">
 				<xs:annotation>
-					<xs:documentation>Phase measured for this wavelength</xs:documentation>
+					<xs:documentation>Phase measured for this wavelength, corrected from fringe jumps</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<units>rad</units>
@@ -43,25 +43,46 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_e_line">
+			<xs:element name="fring_jump_correction">
 				<xs:annotation>
-					<xs:documentation>Line integrated density estimated from this wavelength</xs:documentation>
+					<xs:documentation>Signed number of 2pi phase corrections applied to remove a fringe jump, for each time slice on which a correction has been made </xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<units>m^-2</units>
-						<type>dynamic</type>
+						<coordinate1>../fring_jump_correction_times</coordinate1>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fring_jump_correction_times">
+				<xs:annotation>
+					<xs:documentation>List of time slices of the pulse on which a fringe jump correction has been made </xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>constant</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase_to_n_e_line">
+				<xs:annotation>
+					<xs:documentation>Conversion factor to be used to convert phase into line density for this wavelength</xs:documentation>
+					<xs:appinfo>
+						<units>m^-2.rad^-1</units>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="interfero_polarimeter_channel">
+	<xs:complexType name="polarimeter_channel">
 		<xs:annotation>
 			<xs:documentation>Charge exchange channel</xs:documentation>
 		</xs:annotation>
@@ -93,7 +114,7 @@
 					<xs:documentation>Description of the line of sight of the channel, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="wavelength_polarimetry">
+			<xs:element name="wavelength">
 				<xs:annotation>
 					<xs:documentation>Wavelength used for polarimetry</xs:documentation>
 					<xs:appinfo>
@@ -104,14 +125,6 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="wavelength_interferometry" type="interfero_polarimeter_channel_wavelength_interf" maxOccurs="2">
-				<xs:annotation>
-					<xs:documentation>Set of wavelengths used for interferometry</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
 			</xs:element>
 			<xs:element name="polarisation_initial">
 				<xs:annotation>
@@ -137,22 +150,6 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_e_line">
-				<xs:annotation>
-					<xs:documentation>Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<units>m^-2</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="faraday_angle">
 				<xs:annotation>
 					<xs:documentation>Faraday angle (variation of the Faraday angle induced by crossing the plasma) </xs:documentation>
@@ -167,6 +164,17 @@
 						<xs:element ref="time"/>
 						<xs:group ref="FLT_1D"/>
 					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="faraday_angle_validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the faraday_angle data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ellipticity">
@@ -185,26 +193,11 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="validity_timed">
+			<xs:element name="ellipticity_validity">
 				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)</xs:documentation>
+					<xs:documentation>Indicator of the validity of the ellipticity data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="INT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="validity">
-				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
+						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -213,19 +206,19 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="interfero_polarimeter">
+	<xs:element name="polarimeter">
 		<xs:annotation>
-			<xs:documentation>Interfero-polarimeter diagnostic</xs:documentation>
+			<xs:documentation>Polarimeter diagnostic</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
-				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.7.4</lifecycle_last_change>
+				<lifecycle_version>3.15.0</lifecycle_version>
+				<lifecycle_last_change>3.15.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="channel" type="interfero_polarimeter_channel" maxOccurs="15">
+				<xs:element name="channel" type="polarimeter_channel" maxOccurs="15">
 					<xs:annotation>
 						<xs:documentation>Set of channels (lines-of-sight)</xs:documentation>
 						<xs:appinfo>
