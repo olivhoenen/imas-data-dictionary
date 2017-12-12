@@ -10,6 +10,91 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:complexType name="edge_sources_source_ggd_fast_ion">
+		<xs:annotation>
+			<xs:documentation>Integrated source terms related to a given ion species (high frequency data)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_ion">
+				<xs:annotation>
+					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>Elementary Charge Unit</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="neutral_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding neutral species in the ../../neutral array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Total power source or sink related to this ion species, integrated over the computational volume</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="edge_sources_source_ggd_fast">
+		<xs:annotation>
+			<xs:documentation>Integrated source terms given on the ggd at a given time slice (high frequency data)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ion" type="edge_sources_source_ggd_fast_ion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Source term integrals related to the various ion species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="edge_sources_source_ggd_neutral_state">
 		<xs:annotation>
 			<xs:documentation>Source terms related to the a given state of the neutral species</xs:documentation>
@@ -474,18 +559,18 @@
 					<xs:documentation>Source term identifier</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
+			<xs:element name="ggd" type="edge_sources_source_ggd" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebase</xs:documentation>
+					<xs:documentation>Source terms represented using the general grid description, for various time slices</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="ggd" type="edge_sources_source_ggd" maxOccurs="unbounded">
+			<xs:element name="ggd_fast" type="edge_sources_source_ggd_fast" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Source terms represented using the general grid description, for various time slices</xs:documentation>
+					<xs:documentation>Quantities provided at a higher frequency than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
@@ -506,6 +591,15 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebases</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="source" type="edge_sources_source" maxOccurs="15">
 					<xs:annotation>
 						<xs:documentation>Set of source terms</xs:documentation>

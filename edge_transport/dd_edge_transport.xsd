@@ -738,15 +738,6 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebase</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="ggd" type="edge_transport_model_ggd" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients represented using the general grid description, for various time slices</xs:documentation>
@@ -779,6 +770,15 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebases</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="model" type="edge_transport_model" maxOccurs="10">
 					<xs:annotation>
 						<xs:documentation>Transport is described by a combination of various transport models</xs:documentation>
