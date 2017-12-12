@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
-<constants name="equilibrium_profiles_2d" identifier="yes" create_mapping_function="yes">
-<header>List of equilibrium grid types</header>
-<dd_instance xpath="equilibrium/time_slice/profiles_2d/grid_type"/>
+<constants name="poloidal_plane_coordinates_identifier" identifier="yes" create_mapping_function="yes">
+<header>List of coordinate systems for describing the poloidal plane</header>
+<ddInstance xpath="/equilibrium/time_slice/profiles_2d/grid_type"/>
+<ddInstance xpath="/mhd_linear/time_slice/toroidal_mode/vacuum/grid_type"/>
+<ddInstance xpath="/mhd_linear/time_slice/toroidal_mode/plasma/grid_type"/>
+
 <int name="rectangular" description="Cylindrical R,Z ala eqdsk. In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2." unique="yes">1</int>
 <int name="inverse" description="Rhopolar_polar 2D polar coordinates (rho, theta) with magnetic axis as center of grid; theta and values following the COCOS convention, theta=atan2(z-zaxis,r-raxis)≡polar angle" unique="yes">2</int>
 <int name="inverse_psi_straight_field_line" description="Flux surface type with psi as radial label, theta straight-field line (mod(index,10)=1), could be non-equidistant; magnetic axis as center of grid; following the COCOS convention" unique="yes">11</int>
