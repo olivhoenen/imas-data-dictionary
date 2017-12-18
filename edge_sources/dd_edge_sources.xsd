@@ -12,7 +12,7 @@
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
 	<xs:complexType name="edge_sources_source_ggd_fast_ion">
 		<xs:annotation>
-			<xs:documentation>Integrated source terms related to a given ion species (high frequency data)</xs:documentation>
+			<xs:documentation>Integrated source terms related to a given ion species (fast sampled data)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
@@ -73,7 +73,7 @@
 	</xs:complexType>
 	<xs:complexType name="edge_sources_source_ggd_fast">
 		<xs:annotation>
-			<xs:documentation>Integrated source terms given on the ggd at a given time slice (high frequency data)</xs:documentation>
+			<xs:documentation>Integrated source terms given on the ggd at a given time slice (fast sampled data)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ion" type="edge_sources_source_ggd_fast_ion" maxOccurs="unbounded">
@@ -570,7 +570,7 @@
 			</xs:element>
 			<xs:element name="ggd_fast" type="edge_sources_source_ggd_fast" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Quantities provided at a higher frequency than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
+					<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>

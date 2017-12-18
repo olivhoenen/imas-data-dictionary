@@ -632,7 +632,7 @@
 	</xs:complexType>
 	<xs:complexType name="edge_profiles_ggd_fast_ion">
 		<xs:annotation>
-			<xs:documentation>High frequency quantities related to a given ion species</xs:documentation>
+			<xs:documentation>Fast sampled quantities related to a given ion species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
@@ -789,7 +789,7 @@
 	</xs:complexType>
 	<xs:complexType name="edge_profiles_ggd_fast_electrons">
 		<xs:annotation>
-			<xs:documentation>High frequency quantities related to electrons</xs:documentation>
+			<xs:documentation>Fast sampled quantities related to electrons</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="temperature" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
@@ -995,7 +995,7 @@
 	</xs:complexType>
 	<xs:complexType name="edge_profiles_ggd_fast">
 		<xs:annotation>
-			<xs:documentation>Quantities provided at a higher frequency than the full ggd quantities, on a reduced set of positions. Positions are described by a set of grid_subsets of size 1</xs:documentation>
+			<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities, on a reduced set of positions. Positions are described by a set of grid_subsets of size 1</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="electrons" type="edge_profiles_ggd_fast_electrons">
@@ -1108,7 +1108,7 @@
 				</xs:element>
 				<xs:element name="ggd_fast" type="edge_profiles_ggd_fast" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Quantities provided at a higher frequency than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
+						<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
 						<xs:appinfo>
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>

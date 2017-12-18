@@ -369,7 +369,7 @@
 	</xs:complexType>
 	<xs:complexType name="edge_transport_model_ggd_fast_neutral">
 		<xs:annotation>
-			<xs:documentation>Transport coefficients related to a given neutral species</xs:documentation>
+			<xs:documentation>Transport coefficients related to a given neutral species (fast sampled data)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
@@ -498,7 +498,7 @@
 	</xs:complexType>
 	<xs:complexType name="edge_transport_model_ggd_fast_ion">
 		<xs:annotation>
-			<xs:documentation>Transport coefficients related to a given ion species (high frequency data)</xs:documentation>
+			<xs:documentation>Transport coefficients related to a given ion species (fast sampled data)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="unbounded">
@@ -573,7 +573,7 @@
 	</xs:complexType>
 	<xs:complexType name="edge_transport_model_ggd_fast_electrons">
 		<xs:annotation>
-			<xs:documentation>Transport coefficients related to electrons (high frequency data)</xs:documentation>
+			<xs:documentation>Transport coefficients related to electrons (fast sampled data)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="particle_flux_integrated" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
@@ -598,7 +598,7 @@
 	</xs:complexType>
 	<xs:complexType name="edge_transport_model_ggd_fast">
 		<xs:annotation>
-			<xs:documentation>Transport coefficient given on the ggd at a given time slice (high frequency data)</xs:documentation>
+			<xs:documentation>Transport coefficient given on the ggd at a given time slice (fast sampled data)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="electrons" type="edge_transport_model_ggd_fast_electrons">
@@ -749,7 +749,7 @@
 			</xs:element>
 			<xs:element name="ggd_fast" type="edge_transport_model_ggd_fast" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Quantities provided at a higher frequency than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
+					<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
