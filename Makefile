@@ -4,13 +4,17 @@
 # Note: be sure to set CLASSPATH='/path/to/saxon9he.jar;...' in your environment
 SAXONICAJAR=$(wildcard $(filter %saxon9he.jar,$(subst :, ,$(CLASSPATH))))
 
-all: IDSDef.xml validation_report.html html_documentation/html_documentation.html
+TARGETS=IDSDef.xml IDSNames.txt validation_report.html html_documentation/html_documentation.html
+all: $(TARGETS)
 
 clean:
-	rm -f IDSDef.xml validation_report.html html_documentation/html_documentation.html
+	rm -f $(TARGETS)
 
 IDSDef.xml: dd_physics_data_dictionary.xsd ./*/*.xsd xsd_2_IDSDef.xsl $(SAXONICAJAR)
 	java net.sf.saxon.Transform -t -s:dd_physics_data_dictionary.xsd -xsl:xsd_2_IDSDef.xsl -o:IDSDef.xml
+
+IDSNames.txt: %.txt:%.xsl IDSDef.xml
+	xsltproc $^ > $@
 
 validation_report.html: IDSDef.xml IDSDef_validation.xsl
 	xsltproc IDSDef_validation.xsl IDSDef.xml > validation_report.html
