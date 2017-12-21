@@ -801,6 +801,17 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 				<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
 				<xsl:value-of select="$coordinatePath"/>
 			</xsl:when>
+			<xsl:when test="contains($coordinatePath,' OR ')">
+				<!-- Case of multiple possible coordinate nodes (maximum 2 OR statements considered) -->
+				<xsl:choose>
+                   <xsl:when test="contains(substring-after($coordinatePath,' OR '),' OR ')">
+                        <xsl:value-of select="concat(local:getAbsolutePath(concat($currPath,'/',substring-before($coordinatePath,' OR '))),' OR ',local:getAbsolutePath(concat($currPath,'/',substring-before(substring-after($coordinatePath,' OR '),' OR '))),' OR ', local:getAbsolutePath(concat($currPath,'/',substring-after(substring-after($coordinatePath,' OR '),' OR '))))"/>
+                   </xsl:when>
+                   <xsl:otherwise>
+  				        <xsl:value-of select="concat(local:getAbsolutePath(concat($currPath,'/',substring-before($coordinatePath,' OR '))),' OR ',local:getAbsolutePath(concat($currPath,'/',substring-after($coordinatePath,' OR '))))"/>             
+                   </xsl:otherwise>				
+				</xsl:choose>
+			</xsl:when>
 			<xsl:otherwise>
 				<xsl:choose>
 					<xsl:when test="contains($coordinatePath,'../')">
