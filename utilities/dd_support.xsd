@@ -2564,6 +2564,37 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="detector_energy_band">
+		<xs:annotation>
+			<xs:documentation>Detector energy band</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lower_bound">
+				<xs:annotation>
+					<xs:documentation>Lower bound of the energy band</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="upper_bound">
+				<xs:annotation>
+					<xs:documentation>Upper bound of the energy band</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="distribution_markers">
 		<xs:annotation>
 			<xs:documentation>Test particles for a given time slice</xs:documentation>

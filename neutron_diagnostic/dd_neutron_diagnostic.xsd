@@ -3,6 +3,290 @@
 <!-- edited with KWrite by Andrei Kovalev (ITER ORGANIZATION) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="neutron_diagnostic_temperature_sensor">
+		<xs:annotation>
+			<xs:documentation>Temperature sensor</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power_switch">
+				<xs:annotation>
+					<xs:documentation>Power switch (1=on, 0=off)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="temperature">
+				<xs:annotation>
+					<xs:documentation>Temperature measured by the sensor</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>K</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_b_field_sensor">
+		<xs:annotation>
+			<xs:documentation>Magnetic field sensor</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power_switch">
+				<xs:annotation>
+					<xs:documentation>Power switch (1=on, 0=off)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b_field">
+				<xs:annotation>
+					<xs:documentation>Magnetic field measured by the sensor</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_test_generator">
+		<xs:annotation>
+			<xs:documentation>Test generator</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power_switch">
+				<xs:annotation>
+					<xs:documentation>Power switch (1=on, 0=off)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="shape" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Signal shape. Index : 1 – rectangular, 2 – gaussian</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rise_time">
+				<xs:annotation>
+					<xs:documentation>Peak rise time</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fall_time">
+				<xs:annotation>
+					<xs:documentation>Peak fall time</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="frequency">
+				<xs:annotation>
+					<xs:documentation>Generated signal frequency</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="amplitude">
+				<xs:annotation>
+					<xs:documentation>Generated signal amplitude</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_supply">
+		<xs:annotation>
+			<xs:documentation>Power supply</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power_switch">
+				<xs:annotation>
+					<xs:documentation>Power switch (1=on, 0=off)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="voltage_set">
+				<xs:annotation>
+					<xs:documentation>Voltage set</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="voltage_out">
+				<xs:annotation>
+					<xs:documentation>Voltage at the supply output</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_adc">
+		<xs:annotation>
+			<xs:documentation>ADC</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power_switch">
+				<xs:annotation>
+					<xs:documentation>Power switch (1=on, 0=off)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="discriminator_level_lower">
+				<xs:annotation>
+					<xs:documentation>Lower level discriminator of ADC</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="discriminator_level_upper">
+				<xs:annotation>
+					<xs:documentation>Upper level discriminator of ADC</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sampling_rate">
+				<xs:annotation>
+					<xs:documentation>Number of samples recorded per second</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="bias">
+				<xs:annotation>
+					<xs:documentation>ADC signal bias</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="input_range">
+				<xs:annotation>
+					<xs:documentation>ADC input range</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="impedance">
+				<xs:annotation>
+					<xs:documentation>ADC impedance</xs:documentation>
+					<xs:appinfo>
+						<units>ohm</units>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="neutron_diagnostic_characteristics_reaction_mode">
 		<xs:sequence>
 			<xs:element name="index">
@@ -201,17 +485,6 @@
 	</xs:complexType>
 	<xs:complexType name="neutron_diagnostic_detectors_mode">
 		<xs:sequence>
-			<xs:element name="index">
-				<xs:annotation>
-					<xs:documentation>Index of Measuring Mode.  TO BE REMOVED: the mode index is provided by the index of the mode array above.</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="name">
 				<xs:annotation>
 					<xs:documentation>Name of Measuring Mode</xs:documentation>
@@ -243,17 +516,6 @@
 	</xs:complexType>
 	<xs:complexType name="neutron_diagnostic_detectors">
 		<xs:sequence>
-			<xs:element name="index">
-				<xs:annotation>
-					<xs:documentation>Number of Detector. TO BE REMOVED: the detector index is provided by the index of the detector array above.</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="name">
 				<xs:annotation>
 					<xs:documentation>Name of Detector</xs:documentation>
@@ -275,7 +537,20 @@
 			</xs:element>
 			<xs:element name="position" type="rzphi0d_static">
 				<xs:annotation>
-					<xs:documentation>Detector Position Data</xs:documentation>
+					<xs:documentation>Detector Position Data SHOULD BE REMOVED, REDUNDANT WITH THE NEW DETECTOR DESCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="detector" type="detector_aperture">
+				<xs:annotation>
+					<xs:documentation>Detector description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aperture" type="detector_aperture" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation>Description of a set of collimating apertures</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="mode" type="neutron_diagnostic_detectors_mode" maxOccurs="50">
@@ -285,6 +560,140 @@
 						<type>static</type>
 						<coordinate1>index</coordinate1>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy_band" type="detector_energy_band" maxOccurs="8">
+				<xs:annotation>
+					<xs:documentation>Set of energy bands in which neutrons are counted by the detector</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="start_time">
+				<xs:annotation>
+					<xs:documentation>Time stamp of the moment diagnostic starts recording data</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="end_time">
+				<xs:annotation>
+					<xs:documentation>Time stamp of the moment diagnostic ends recording data</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spectrum_sampling_time">
+				<xs:annotation>
+					<xs:documentation>Sampling time used to obtain one spectrum time slice</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="amplitude_raw">
+				<xs:annotation>
+					<xs:documentation>Raw amplitude of the measured signal</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>V</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="amplitude_peak">
+				<xs:annotation>
+					<xs:documentation>Processed peak amplitude of the measured signal</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>V</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spectrum_total">
+				<xs:annotation>
+					<xs:documentation>Detected count per energy channel, integrated over the whole acquisition duration</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../energy_band</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spectrum">
+				<xs:annotation>
+					<xs:documentation>Detected count per energy channel as a function of time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../energy_band</coordinate1>
+						<coordinate2>time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_2D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="adc" type="neutron_diagnostic_adc">
+				<xs:annotation>
+					<xs:documentation>Description of analogic-digital converter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="supply_high_voltage" type="neutron_diagnostic_supply">
+				<xs:annotation>
+					<xs:documentation>Description of high voltage power supply</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="supply_low_voltage" type="neutron_diagnostic_supply">
+				<xs:annotation>
+					<xs:documentation>Description of low voltage power supply</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="test_generator" type="neutron_diagnostic_test_generator">
+				<xs:annotation>
+					<xs:documentation>Test generator characteristics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="b_field_sensor" type="neutron_diagnostic_test_generator">
+				<xs:annotation>
+					<xs:documentation>Magnetic field sensor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="temperature_sensor" type="neutron_diagnostic_test_generator">
+				<xs:annotation>
+					<xs:documentation>Temperature sensor</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
