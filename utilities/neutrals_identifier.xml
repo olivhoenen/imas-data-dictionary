@@ -1,20 +1,16 @@
 <?xml version="1.0"?>
-<constants name="neutrals" identifier="yes" create_mapping_function="yes">
+<constants name="neutrals_identifier" identifier="yes" create_mapping_function="yes">
 <header>
   Translation table for identifying different types of neutral.
   The neutrals are characterised by their energy and source of the neutrals.
-
-  \version "$Id: coreneutral_types.xml 647 2014-03-14 19:42:22Z tjohnson $"
-  URL: https://gforge.efda-itm.eu/svn/itmshared/trunk/src/itm_constants
 </header>
 
-<ddInstance xpath="IDS:core_profiles/profiles_1d/neutral/state/neutral_type" />
-<ddInstance xpath="IDS:core_sources/source/profiles_1d/neutral/state/neutral_type" />
-<ddInstance xpath="IDS:core_transport/model/profiles_1d/neutral/state/neutral_type" />
-<ddInstance xpath="IDS:edge_profiles/profiles_1d/neutral/state/neutral_type" />
-<ddInstance xpath="IDS:edge_profiles/ggd/neutral/state/neutral_type" />
-<ddInstance xpath="IDS:edge_sources/source/ggd/neutral/state/neutral_type" />
-<ddInstance xpath="IDS:edge_transport/model/ggd/neutral/state/neutral_type" />
+<ddInstance xpath="/core_sources/source/profiles_1d/neutral/state/neutral_type"/>
+<ddInstance xpath="/distributions/distribution/species/neutral/state/neutral_type"/>
+<ddInstance xpath="/core_instant_changes/change/profiles_1d/neutral/state/neutral_type"/>
+<ddInstance xpath="/core_profiles/profiles_1d/neutral/state/neutral_type"/>
+<ddInstance xpath="/edge_profiles/profiles_1d/neutral/state/neutral_type"/>
+<ddInstance xpath="complexType:core_instant_changes_change_profiles/neutral/state/neutral_type"/>
 
 <int name="cold"      description="Cold neutrals"     unique="yes">1</int>
 <int name="thermal"   description="Thermal neutrals"  unique="yes">2</int>

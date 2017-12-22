@@ -15,11 +15,15 @@ Translation table for coordinate_identifier_definitions.
 
 <int name="psi"                    description="Poloidal magnetic flux"                                                                          units="Tm^2" unique="yes">10</int>
 <int name="rho_tor"                description="The square root of the toroidal flux, sqrt((Phi-Phi_axis)/pi/B0), where Phi is the toroidal flux and B0 is the vaccum magnetic field" units="m" unique="yes">11</int>
+<int name="rho_tor_norm"           description="The square root of the normalised toroidal flux, sqrt((Phi-Phi_axis)/(Phi_lcf-Phi_axis)), where Phi is the toroidal flux" units="m" unique="yes">12</int>
+<int name="rho_pol"                description="The square root of the poloidal flux, sqrt(psi-psi_axis), where psi is the poloidal flux"        units="T^{1/2}m" unique="yes">13</int>
+<int name="rho_pol_norm"           description="The square root of the normalised poloidal flux, sqrt((psi-psi_axis)/(psi_lcf-psi_axis)), where psi is the poloidal flux" units="m" unique="yes">14</int>
 
 <int name="theta"                  description="Geometrical poloidal angle around the magnetic axis"                                             units="rad"  unique="yes">20</int>
 <int name="theta_straight"         description="Straight field line poloidal angle"                                                              units="rad"  unique="yes">21</int>
+<int name="theta_equal_arc"        description="Equal-arc poloidal angle; a differential of the angle is proportional to the length of the corresponding arc in the poloidal plane." units="rad"  unique="yes">22</int>
 
-<int name="velocity"               description="Total velocity, i.e. modulus of the velocity vector"                                             units="m/s"  unique="yes">100</int>
+<int name="velocity"               description="Total velocity; modulus of the velocity vector"                                                  units="m/s"  unique="yes">100</int>
 <int name="velocity_x"             description="Velocity component in the x-direction"                                                           units="m/s"  unique="yes">101</int>
 <int name="velocity_y"             description="Velocity component in the z-direction"                                                           units="m/s"  unique="yes">102</int>
 <int name="velocity_z"             description="Velocity component in the z-direction"                                                           units="m/s"  unique="yes">103</int>
@@ -40,6 +44,6 @@ Translation table for coordinate_identifier_definitions.
 <int name="lambda"                 description="Ratio, magnetic moment over hamiltonian energy"                                                  units="1/T"  unique="yes">400</int>
 <int name="pitch_angle"            description="Angle between the magnetic field and the velocity vector"                                        units=""     unique="yes">402</int>
 <int name="pitch"                  description="Ratio, parallel velocity over total velocity"                                                    units=""     unique="yes">403</int>
-<int name="pitch_at_min_b"         description="Pitch, i.e. ratio between the parallel over the perpendicular velocity, at the minimum value of the magnetic field strength along the guiding centre orbit" units="" unique="yes">404</int>
+<int name="pitch_at_min_b"         description="Pitch, ratio between the parallel over the perpendicular velocity, at the minimum value of the magnetic field strength along the guiding centre orbit" units="" unique="yes">404</int>
 
 </constants>
