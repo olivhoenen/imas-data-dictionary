@@ -29,9 +29,9 @@ Source:
   <float name="IMAS_KBOLT">1.3806488e-23</float>
 
 <!--
-the following is derived from:
+the following has been derived from:
 
-svn cat http://gforge.efda-imas.eu/svn/amnsproto/data/constants/mass_isotopes2.txt | tr '()#' '   ' | awk '/Atomic Symbol/{S=$4}/Mass Number/{M=$4}/Relative Atomic Mass/&&NF>=5{printf "  <float name=\"IMAS_MASS_%s_%s\" alias=\"true\" description=\"isotope mass\" units=\"kg\">%s * IMAS_AMU</float>\n", S, M, $5}'
+svn cat http://gforge.efda-itm.eu/svn/amnsproto/data/constants/mass_isotopes2.txt | tr '()#' '   ' | awk '/Atomic Symbol/{S=$4}/Mass Number/{M=$4}/Relative Atomic Mass/&&NF>=5{printf "  <float name=\"IMAS_MASS_%s_%s\" alias=\"true\" description=\"isotope mass\" units=\"kg\">%s * IMAS_AMU</float>\n", S, M, $5}'
 
 with the names for D and T changed to H
 -->
