@@ -62,9 +62,31 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 	  "/>
 	</xsl:function>
 	<!-- A first scan is performed on the top-level elements to find out the IDS components and to declare them each time a IDS is found, its elements are scanned via apply'templates in IMPLEMENT mode -->
-	<!-- Scan for top-level elements -->
 	<xsl:template match="/*">
 		<IDSs>
+		<utilities>
+        <!-- Declare complex types from Utilities -->
+        <xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:complexType">
+        <field>
+        <xsl:attribute name="name" select="@name"/>
+        <xsl:attribute name="data_type" select="'structure'"/>
+        <xsl:attribute name="structure_reference" select="'self'"/>
+        <xsl:attribute name="documentation" select="xs:annotation/xs:documentation"/>
+        <xsl:call-template name="doImplementType">
+                   <xsl:with-param name="thisType" select="@name"/>
+					<xsl:with-param name="currPath" select="''"/>
+					<xsl:with-param name="currPath_doc" select="''"/>
+					<xsl:with-param name="aosLevel" select="1"/>
+          </xsl:call-template>
+          </field>
+        </xsl:for-each>
+        <!-- Declare Elements from Utilities -->
+        <xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element" mode="IMPLEMENT">
+<xsl:with-param name="structure_reference" select="'self'"/>
+<xsl:with-param name="aosLevel" select="1"/>
+        </xsl:apply-templates> 
+		</utilities>
+	<!-- Scan for top-level elements (IDSs) -->
 			<xsl:apply-templates select="*/*/*/xs:element" mode="DECLARE">
 				<xsl:with-param name="currPath" select="''"/>
 				<xsl:with-param name="currPath_doc" select="''"/>
