@@ -176,6 +176,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="parenttime"/>
 		<xsl:param name="parentunit"/>
 		<xsl:param name="experimental"/>
+		<xsl:param name="structure_reference"/>
 		<xsl:choose>
 			<!-- If it is an external reference -->
 			<xsl:when test="@ref">
@@ -314,6 +315,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<!-- It is an external reference -->
 								<field>
 									<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
+                                    <xsl:attribute name="structure_reference"><xsl:value-of select="@type"/></xsl:attribute>
 									<xsl:choose>
 										<xsl:when test="$currPath=''">
 											<xsl:attribute name="path"><xsl:value-of select="@name"/></xsl:attribute>
@@ -431,6 +433,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<!-- It is a complexType -->
 								<field>
 									<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
+									<xsl:attribute name="structure_reference"><xsl:value-of select="$structure_reference"/></xsl:attribute>
 									<xsl:choose>
 										<xsl:when test="$currPath=''">
 											<xsl:attribute name="path"><xsl:value-of select="@name"/></xsl:attribute>
@@ -621,6 +624,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					<xsl:with-param name="currPath" select="$currPath"/>
 					<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 					<xsl:with-param name="aosLevel" select="$aosLevel"/>
+					<xsl:with-param name="structure_reference" select="$thisRef"/>
 				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
@@ -630,6 +634,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					<xsl:with-param name="currPath" select="$currPath"/>
 					<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 					<xsl:with-param name="aosLevel" select="$aosLevel"/>
+					<xsl:with-param name="structure_reference" select="$thisRef"/>
 				</xsl:apply-templates>
 			</xsl:otherwise>
 		</xsl:choose>
