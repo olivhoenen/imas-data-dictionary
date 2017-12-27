@@ -575,6 +575,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
+<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -598,6 +599,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>s</units>
+<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -609,6 +611,7 @@
 					<xs:documentation>Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -621,6 +624,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
+<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -633,10 +637,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
+<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="reconstructed">
@@ -645,10 +650,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
+						<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="chi_squared">
@@ -657,10 +663,11 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
+						<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -675,6 +682,49 @@
 					<xs:documentation>Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above</xs:documentation>
 					<xs:appinfo>
 						<units>T.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bpol_probe" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of poloidal field probes</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>IDS:magnetics/bpol_probe</coordinate1>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="diamagnetic_flux" type="equilibrium_constraints_0D">
+				<xs:annotation>
+					<xs:documentation>Diamagnetic flux</xs:documentation>
+					<xs:appinfo>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="faraday_angle" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of faraday angles</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>IDS:polarimeter/channel</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="flux_loop" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of flux loops</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>IDS:magnetics/flux_loop</coordinate1>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ip" type="equilibrium_constraints_0D">
+				<xs:annotation>
+					<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
