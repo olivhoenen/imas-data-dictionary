@@ -463,6 +463,202 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="equilibrium_constraints_pure_position">
+		<xs:annotation>
+			<xs:documentation>R,Z position constraint</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="position_measured" type="rz0d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>Measured or estimated position</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Path to the source data for this measurement in the IMAS data dictionary</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time_measurement">
+				<xs:annotation>
+					<xs:documentation>Exact time slice used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="exact">
+				<xs:annotation>
+					<xs:documentation>Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="weight">
+				<xs:annotation>
+					<xs:documentation>Weight given to the measurement</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="standard_deviation">
+				<xs:annotation>
+					<xs:documentation>Standard deviation of the measurement</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="position_reconstructed" type="rz0d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>Position estimated from the reconstructed equilibrium</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chi_squared">
+				<xs:annotation>
+					<xs:documentation>Chi-squared difference of (reconstructed-measured)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="equilibrium_constraints_0D_position">
+		<xs:annotation>
+			<xs:documentation>Scalar constraint with R,Z,phi position</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="measured">
+				<xs:annotation>
+					<xs:documentation>Measured value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="position" type="rzphi0d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Position at which this measurement is given</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Path to the source data for this measurement in the IMAS data dictionary</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time_measurement">
+				<xs:annotation>
+					<xs:documentation>Exact time slice used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="exact">
+				<xs:annotation>
+					<xs:documentation>Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="weight">
+				<xs:annotation>
+					<xs:documentation>Weight given to the measurement</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="standard_deviation">
+				<xs:annotation>
+					<xs:documentation>Standard deviation of the measurement</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reconstructed">
+				<xs:annotation>
+					<xs:documentation>Value calculated from the reconstructed equilibrium</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="chi_squared">
+				<xs:annotation>
+					<xs:documentation>Chi-squared difference of (reconstructed-measured)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_constraints_0D">
 		<xs:annotation>
 			<xs:documentation>Scalar constraint</xs:documentation>
@@ -575,7 +771,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-<coordinate1>1...N</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -599,7 +795,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>s</units>
-<coordinate1>../measured</coordinate1>
+						<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -611,7 +807,7 @@
 					<xs:documentation>Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-<coordinate1>../measured</coordinate1>
+						<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -624,7 +820,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
-<coordinate1>../measured</coordinate1>
+						<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -637,7 +833,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-<coordinate1>../measured</coordinate1>
+						<coordinate1>../measured</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -669,6 +865,29 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="equilibrium_constraints_magnetisation">
+		<xs:annotation>
+			<xs:documentation>Magnetisation constraints along R and Z axis</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="magnetisation_r" type="equilibrium_constraints_0D">
+				<xs:annotation>
+					<xs:documentation>Magnetisation M of the iron core segment along the major radius axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;</xs:documentation>
+					<xs:appinfo>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="magnetisation_z" type="equilibrium_constraints_0D">
+				<xs:annotation>
+					<xs:documentation>Magnetisation M of the iron core segment along the vertical axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;</xs:documentation>
+					<xs:appinfo>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -725,6 +944,68 @@
 					<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="iron_core_segment" type="equilibrium_constraints_magnetisation" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Magnetisation M of a set of iron core segments</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>IDS:iron_core/segment</coordinate1>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_e" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of local density measurements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_e_line" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of line integrated density measurements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>IDS:interferometer/channel</coordinate1>
+						<units>m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pf_current" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Current in a set of poloidal field coils</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>IDS:pf_active/coil</coordinate1>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pressure" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of total pressure estimates</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>Pa</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="q" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of safety factor estimates at various positions</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>Pa</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_point" type="equilibrium_constraints_pure_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Array of X-points, for each of them the RZ position is given</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
