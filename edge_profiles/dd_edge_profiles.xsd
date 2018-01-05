@@ -690,7 +690,7 @@
 			</xs:element>
 			<xs:element name="temperature" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Temperature (average over states when multiple states are considered), given at various positions</xs:documentation>
+					<xs:documentation>Temperature (average over states when multiple states are considered), given at various positions (grid subset of size 1)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>eV</units>
@@ -699,7 +699,7 @@
 			</xs:element>
 			<xs:element name="density" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Density (thermal+non-thermal) (sum over states when multiple states are considered), given at various positions</xs:documentation>
+					<xs:documentation>Density (thermal+non-thermal) (sum over states when multiple states are considered), given at various positions (grid subset of size 1)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>m^-3</units>
@@ -794,7 +794,7 @@
 		<xs:sequence>
 			<xs:element name="temperature" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Temperature, given at various positions</xs:documentation>
+					<xs:documentation>Temperature, given at various positions (grid subset of size 1)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>eV</units>
@@ -803,7 +803,7 @@
 			</xs:element>
 			<xs:element name="density" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Density (thermal+non-thermal), given at various positions</xs:documentation>
+					<xs:documentation>Density (thermal+non-thermal), given at various positions (grid subset of size 1)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>m^-3</units>
@@ -1011,17 +1011,15 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_thermal">
+			<xs:element name="energy_thermal" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Plasma energy content = 3/2 * integral over the computational volume of the thermal pressure (summed over all species)</xs:documentation>
+					<xs:documentation>Plasma energy content = 3/2 * integral over the volume of the grid subset of the thermal pressure (summed over all species), for various grid subsets</xs:documentation>
 					<xs:appinfo>
 						<units>J</units>
+						<coordinate1>1...N</coordinate1>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="time" type="flt_type">
 				<xs:annotation>
@@ -1088,7 +1086,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
+				<xs:element name="grid_ggd" type="generic_grid_aos3_root" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebase</xs:documentation>
 						<xs:appinfo>
@@ -1108,7 +1106,7 @@
 				</xs:element>
 				<xs:element name="ggd_fast" type="edge_profiles_ggd_fast" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
+						<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities. These are either integrated quantities or local quantities provided on a reduced set of positions. Positions and integration domains are described by a set of grid_subsets (of size 1 for a position). </xs:documentation>
 						<xs:appinfo>
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>

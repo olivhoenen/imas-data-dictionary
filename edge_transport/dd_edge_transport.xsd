@@ -404,7 +404,7 @@
 			</xs:element>
 			<xs:element name="particle_flux_integrated" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Total number of particles of this species crossing a surface per unit time, for various surfaces</xs:documentation>
+					<xs:documentation>Total number of particles of this species crossing a surface per unit time, for various surfaces (grid subsets)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>s^-1</units>
@@ -545,7 +545,7 @@
 			</xs:element>
 			<xs:element name="particle_flux_integrated" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Total number of particles of this species crossing a surface per unit time, for various surfaces</xs:documentation>
+					<xs:documentation>Total number of particles of this species crossing a surface per unit time, for various surfaces (grid subsets)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>s^-1</units>
@@ -578,7 +578,7 @@
 		<xs:sequence>
 			<xs:element name="particle_flux_integrated" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Total number of particles of this species crossing a surface per unit time, for various surfaces</xs:documentation>
+					<xs:documentation>Total number of particles of this species crossing a surface per unit time, for various surfaces (grid subsets)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>s^-1</units>
@@ -587,7 +587,7 @@
 			</xs:element>
 			<xs:element name="power" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Power carried by this species crossing a surface, for various surfaces</xs:documentation>
+					<xs:documentation>Power carried by this species crossing a surface, for various surfaces (grid subsets)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>W</units>
@@ -624,7 +624,7 @@
 			</xs:element>
 			<xs:element name="power_ion_total" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Power carried by all ions (sum over ions species) crossing a surface, for various surfaces</xs:documentation>
+					<xs:documentation>Power carried by all ions (sum over ions species) crossing a surface, for various surfaces (grid subsets)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>W</units>
@@ -633,7 +633,7 @@
 			</xs:element>
 			<xs:element name="energy_flux_max" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Maximum power density over a surface, for various surfaces</xs:documentation>
+					<xs:documentation>Maximum power density over a surface, for various surfaces (grid subsets)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>W.m^-2</units>
@@ -642,7 +642,7 @@
 			</xs:element>
 			<xs:element name="power" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Power (sum over all species) crossing a surface, for various surfaces</xs:documentation>
+					<xs:documentation>Power (sum over all species) crossing a surface, for various surfaces (grid subsets)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>W</units>
@@ -749,7 +749,7 @@
 			</xs:element>
 			<xs:element name="ggd_fast" type="edge_transport_model_ggd_fast" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
+					<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities. These are either integrated quantities or local quantities provided on a reduced set of positions. Positions and integration domains are described by a set of grid_subsets (of size 1 for a position).  </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
@@ -770,7 +770,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
+				<xs:element name="grid_ggd" type="generic_grid_aos3_root" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebases</xs:documentation>
 						<xs:appinfo>
