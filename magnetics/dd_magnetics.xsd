@@ -46,21 +46,13 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="flux">
+			<xs:element name="flux" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Measured flux</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>Wb</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="flux_validity">
 				<xs:annotation>
@@ -167,21 +159,13 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="field">
+			<xs:element name="field" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Measured magnetic field</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<type>dynamic</type>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="field_validity">
 				<xs:annotation>
