@@ -2749,15 +2749,14 @@
 			</xs:element>
 			<xs:element name="value">
 				<xs:annotation>
-					<xs:documentation>Scalar value of the quantity on the grid subset of size 1 (single position)</xs:documentation>
+					<xs:documentation>Scalar value of the quantity on the grid subset (corresponding to a single local position or to an integrated value over the subset)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
 						<units>as_parent</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -3403,6 +3402,43 @@
 					<xs:documentation>Grid subsets</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_aos3_root">
+		<xs:annotation>
+			<xs:documentation>Generic grid (being itself the root of a type 3 AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Grid identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="space" type="generic_grid_dynamic_space" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of grid spaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid_subset" type="generic_grid_dynamic_grid_subset" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

@@ -57,17 +57,15 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="power">
+			<xs:element name="power" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Total power source or sink related to this ion species, integrated over the computational volume</xs:documentation>
+					<xs:documentation>Total power source or sink related to this ion species, integrated over the volume of the grid subset, for various grid subsets.</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
+						<coordinate1>1...N</coordinate1>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -570,7 +568,7 @@
 			</xs:element>
 			<xs:element name="ggd_fast" type="edge_sources_source_ggd_fast" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities. These are either global quantities or local quantities provided on a reduced set of positions. Positions are described by a set of grid_subsets of size 1. </xs:documentation>
+					<xs:documentation>Quantities provided at a faster sampling rate than the full ggd quantities. These are either integrated quantities or local quantities provided on a reduced set of positions. Positions and integration domains are described by a set of grid_subsets (of size 1 for a position). </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
@@ -591,7 +589,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="grid_ggd" type="generic_grid_dynamic" maxOccurs="unbounded">
+				<xs:element name="grid_ggd" type="generic_grid_aos3_root" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the ggd timebases</xs:documentation>
 						<xs:appinfo>
