@@ -212,7 +212,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:when test="@name">
 				<xsl:choose>
 					<!-- if the node is a leaf defined as a simple type -->
-					<xsl:when test="@type='int_type' or @type='flt_type'  or @type='str_type' or @type='flt_1d_type'">
+					<xsl:when test="@type='int_type' or @type='flt_type'  or @type='str_type' or @type='flt_1d_type' or @type='str_1d_type' or @type='int_1d_type'">
 						<field>
 							<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
 							<xsl:choose>
