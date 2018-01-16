@@ -80,8 +80,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
           </xsl:call-template>
           </field>
         </xsl:for-each>
-        <!-- Declare Elements from Utilities -->
-        <xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element" mode="IMPLEMENT">
+        <!-- Declare Elements from Utilities (only those being the root of a structure, simple elements are not needed in IDSDef.xml)-->
+        <xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[./xs:complexType]" mode="IMPLEMENT">
 <xsl:with-param name="structure_reference" select="'self'"/>
 <xsl:with-param name="aosLevel" select="1"/>
         </xsl:apply-templates> 
