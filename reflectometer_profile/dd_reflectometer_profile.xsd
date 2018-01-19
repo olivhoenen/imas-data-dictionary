@@ -15,28 +15,20 @@
 			<xs:documentation>Structure for list of R, Z, Phi positions (2D, dynamic within a type 1 array of structure (indexed on objects, data/time structure)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="r">
+			<xs:element name="r" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>1...N</coordinate1>
 						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="z" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>1...N</coordinate1>
 						<coordinate1_same_as>../../r/data</coordinate1_same_as>
@@ -44,18 +36,11 @@
 						<coordinate2_same_as>../../r/data</coordinate2_same_as>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="phi" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>rad</units>
 						<coordinate1>1...N</coordinate1>
 						<coordinate1_same_as>../../r/data</coordinate1_same_as>
@@ -63,12 +48,6 @@
 						<coordinate2_same_as>../../r/data</coordinate2_same_as>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -145,29 +124,22 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phase">
+			<xs:element name="phase" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Measured phase of the probing wave for each frequency and time slice (corresponding to the begin time of a sweep), relative to the phase at launch</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../frequencies</coordinate1>
 						<coordinate2>time</coordinate2>
 						<units>rad</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="position" type="rzphi2d_dynamic_aos1">
 				<xs:annotation>
 					<xs:documentation>Position of the density measurements</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e">
+			<xs:element name="n_e" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
@@ -176,15 +148,8 @@
 						<coordinate2>time</coordinate2>
 						<coordinate2_same_as>../position/r/data</coordinate2_same_as>
 						<units>m^-3</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

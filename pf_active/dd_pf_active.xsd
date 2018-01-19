@@ -175,37 +175,21 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="voltage">
+			<xs:element name="voltage" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Voltage at the supply output</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="current">
+			<xs:element name="current" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -261,37 +245,21 @@
 					<xs:group ref="INT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="voltage">
+			<xs:element name="voltage" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Voltage on the circuit</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="current">
+			<xs:element name="current" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Current in the circuit</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
-						<units>V</units>
+						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -452,37 +420,21 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current">
+			<xs:element name="current" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Current in the coil</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="voltage">
+			<xs:element name="voltage" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Voltage on the coil terminals</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -539,21 +491,13 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="force">
+			<xs:element name="force" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Force </xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>N</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

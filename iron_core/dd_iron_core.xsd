@@ -70,37 +70,21 @@
 					<xs:documentation>Cross-sectional shape of the segment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="magnetisation_r">
+			<xs:element name="magnetisation_r" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Magnetisation M of the iron segment along the major radius axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>T</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="magnetisation_z">
+			<xs:element name="magnetisation_z" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Magnetisation M of the iron segment along the vertical axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>T</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

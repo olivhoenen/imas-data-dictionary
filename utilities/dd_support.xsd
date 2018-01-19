@@ -161,6 +161,291 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="signal_flt_1d">
+		<xs:annotation>
+			<xs:documentation>Signal (FLT_1D) with its time base</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="signal_flt_2d">
+		<xs:annotation>
+			<xs:documentation>Signal (FLT_2D) with its time base</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+<xs:complexType name="signal_flt_3d">
+		<xs:annotation>
+			<xs:documentation>Signal (FLT_3D) with its time base</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>as_parent</coordinate1>
+						<coordinate2>as_parent</coordinate2>
+						<coordinate3>../time</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="signal_flt_4d">
+		<xs:annotation>
+			<xs:documentation>Signal (FLT_4D) with its time base</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>as_parent</coordinate1>
+						<coordinate2>as_parent</coordinate2>
+						<coordinate3>as_parent</coordinate3>
+						<coordinate4>../time</coordinate4>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_4D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="signal_flt_5d">
+		<xs:annotation>
+			<xs:documentation>Signal (FLT_5D) with its time base</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>as_parent</coordinate1>
+						<coordinate2>as_parent</coordinate2>
+						<coordinate3>as_parent</coordinate3>
+						<coordinate4>as_parent</coordinate4>
+						<coordinate5>../time</coordinate5>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_5D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+		<xs:complexType name="signal_flt_6d">
+		<xs:annotation>
+			<xs:documentation>Signal (FLT_6D) with its time base</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>as_parent</coordinate1>
+						<coordinate2>as_parent</coordinate2>
+						<coordinate3>as_parent</coordinate3>
+						<coordinate4>as_parent</coordinate4>
+						<coordinate5>as_parent</coordinate5>
+						<coordinate6>../time</coordinate6>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_6D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+		<xs:complexType name="signal_int_1d">
+		<xs:annotation>
+			<xs:documentation>Signal (INT_1D) with its time base</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+		<xs:complexType name="signal_int_2d">
+		<xs:annotation>
+			<xs:documentation>Signal (INT_2D) with its time base</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>as_parent</coordinate1>
+						<coordinate2>../time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+			<xs:complexType name="signal_int_3d">
+		<xs:annotation>
+			<xs:documentation>Signal (INT_3D) with its time base</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>as_parent</coordinate1>
+						<coordinate2>as_parent</coordinate2>
+						<coordinate3>../time</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="plasma_composition_ion_state_constant">
 		<xs:annotation>
 			<xs:documentation>Definition of an ion state (when describing the plasma composition) (constant)</xs:documentation>
@@ -4411,53 +4696,29 @@
 			<xs:documentation>Structure for list of R, Z, Phi positions (1D, dynamic within a type 1 array of structures (indexed on objects, data/time structure)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="r">
+			<xs:element name="r" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="z" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="phi" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>rad</units>
-						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -4983,36 +5244,6 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="signal_flt_1d">
-		<xs:annotation>
-			<xs:documentation>Signal (FLT_1D) with its time base</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="data">
-				<xs:annotation>
-					<xs:documentation>Data</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="time" type="flt_1d_type">
-				<xs:annotation>
-					<xs:documentation>Time</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>s</units>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

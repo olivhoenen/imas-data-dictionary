@@ -42,37 +42,21 @@
 					<xs:documentation>Position of the measurements (intersection between laser beam and line of sight)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e">
+			<xs:element name="t_e" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>eV</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_e">
+			<xs:element name="n_e" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>m^-3</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

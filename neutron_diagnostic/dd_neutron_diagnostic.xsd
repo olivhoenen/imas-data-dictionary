@@ -19,21 +19,13 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature">
+			<xs:element name="temperature" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Temperature measured by the sensor</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>K</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -53,21 +45,13 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_field">
+			<xs:element name="b_field" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Magnetic field measured by the sensor</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>T</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -116,37 +100,21 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="frequency">
+			<xs:element name="frequency" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Generated signal frequency</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>Hz</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="amplitude">
+			<xs:element name="amplitude" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Generated signal amplitude</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -166,37 +134,21 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="voltage_set">
+			<xs:element name="voltage_set" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Voltage set</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="voltage_out">
+			<xs:element name="voltage_out" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Voltage at the supply output</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -496,21 +448,13 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="counting">
+			<xs:element name="counting" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Counting in Measuring Mode in Dynamic</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../../time</coordinate1>
 						<units>cps</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -606,37 +550,21 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="amplitude_raw">
+			<xs:element name="amplitude_raw" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Raw amplitude of the measured signal</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="amplitude_peak">
+			<xs:element name="amplitude_peak" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Processed peak amplitude of the measured signal</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="spectrum_total">
 				<xs:annotation>
@@ -650,21 +578,14 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="spectrum">
+			<xs:element name="spectrum" type="signal_int_2d">
 				<xs:annotation>
 					<xs:documentation>Detected count per energy channel as a function of time</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<coordinate1>../energy_band</coordinate1>
 						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="INT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="adc" type="neutron_diagnostic_adc">
 				<xs:annotation>

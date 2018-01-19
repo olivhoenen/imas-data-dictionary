@@ -88,37 +88,21 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="current">
+			<xs:element name="current" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Current in the conductor</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="voltage">
+			<xs:element name="voltage" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Voltage on the conductor terminals</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -182,37 +166,21 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="current">
+			<xs:element name="current" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Current in the coil</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="voltage">
+			<xs:element name="voltage" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Voltage on the coil terminals</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -355,21 +323,13 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="b_field_tor_vacuum_r">
+				<xs:element name="b_field_tor_vacuum_r" type="signal_flt_1d">
 					<xs:annotation>
 						<xs:documentation>Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above</xs:documentation>
 						<xs:appinfo>
-							<type>dynamic</type>
-							<coordinate1>time</coordinate1>
 							<units>T.m</units>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="time"/>
-							<xs:group ref="FLT_1D"/>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
 				<xs:element ref="time"/>
 			</xs:sequence>

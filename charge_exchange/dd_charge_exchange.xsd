@@ -39,41 +39,27 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="radiance">
+			<xs:element name="radiance" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Calibrated, background subtracted radiance (integrated over the spectrum for this line)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<units>m^-2.s^-1.sr^-1</units>
 						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="intensity">
+			<xs:element name="intensity" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Non-calibrated intensity (integrated over the spectrum for this line), i.e. number of photoelectrons detected by unit time, taking into account electronic gain compensation and channels relative calibration</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<units>(photonelectrons).s^-1</units>
 						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="width">
+			<xs:element name="width" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Full width at Half Maximum (FWHM) of the emission line</xs:documentation>
 					<xs:appinfo>
@@ -83,14 +69,8 @@
 						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="shift">
+			<xs:element name="shift" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Shift of the emission line wavelength with respected to the unshifted cental wavelength (e.g. Doppler shift)</xs:documentation>
 					<xs:appinfo>
@@ -100,12 +80,6 @@
 						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -177,7 +151,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="intensity_spectrum">
+			<xs:element name="intensity_spectrum" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Intensity spectrum (not calibrated), i.e. number of photoelectrons detected by unit time by a wavelength pixel of the channel, taking into account electronic gain compensation and channels relative calibration</xs:documentation>
 					<xs:appinfo>
@@ -188,30 +162,17 @@
 						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="radiance_spectral">
+			<xs:element name="radiance_spectral" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Calibrated spectral radiance (radiance per unit wavelength)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>(photons) m^-2.s^-1.sr^-1.m^-1</units>
 						<type>dynamic</type>
 						<coordinate1>../wavelengths</coordinate1>
 						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="processed_line" type="charge_exchange_channel_processed_line" maxOccurs="5">
 				<xs:annotation>
@@ -256,7 +217,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="radiance_continuum">
+			<xs:element name="radiance_continuum" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Calibrated continuum intensity  in the middle of the spectrum per unit wavelength</xs:documentation>
 					<xs:appinfo>
@@ -265,12 +226,6 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -338,7 +293,7 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="radiance">
+			<xs:element name="radiance" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Calibrated radiance of the fast ion charge exchange spectrum assuming the shape is pre-defined (e.g. by the Fokker-Planck slowing-down function). Note: radiance is integrated over the sightline crossing the neutral beam</xs:documentation>
 					<xs:appinfo>
@@ -347,12 +302,6 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="radiance_spectral_method" type="identifier">
 				<xs:annotation>
@@ -413,70 +362,46 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="t_i">
+			<xs:element name="t_i" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Ion temperature at the channel measurement point</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>eV</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="t_i_method" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Description of the method used to derive the ion temperature</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity_tor">
+			<xs:element name="velocity_tor" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Toroidal velocity of the ion (oriented counter-clockwise when seen from above) at the channel measurement point</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>m.s^-1</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="velocity_tor_method" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Description of the method used to reconstruct the ion toroidal velocity</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity_pol">
+			<xs:element name="velocity_pol" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Poloidal velocity of the ion (oriented clockwise when seen from front on the right side of the tokamak axi-symmetry axis) at the channel measurement point</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>m.s^-1</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="velocity_pol_method" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Description of the method used to reconstruct the ion poloidal velocity</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i_over_n_e">
+			<xs:element name="n_i_over_n_e" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Ion concentration (ratio of the ion density over the electron density) at the channel measurement point</xs:documentation>
 					<xs:appinfo>
@@ -485,12 +410,6 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="n_i_over_n_e_method" type="identifier">
 				<xs:annotation>
@@ -563,7 +482,7 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="doppler_shift">
+			<xs:element name="doppler_shift" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Doppler shift due to the diagnostic neutral beam particle velocity</xs:documentation>
 					<xs:appinfo>
@@ -572,14 +491,8 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="lorentz_shift">
+			<xs:element name="lorentz_shift" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Lorentz shift due to the Lorentz electric field (vxB) in the frame of the diagnostic neutral beam particles moving with a velocity v across the magnetic field B</xs:documentation>
 					<xs:appinfo>
@@ -588,30 +501,17 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="radiances">
+			<xs:element name="radiances" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Calibrated intensities of the 9 splitted lines (Stark effect due to Lorentz electric field). Note: radiances are integrated over the sightline crossing the neutral beam</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>(photons) m^-2.s^-1.sr^-1</units>
 						<type>dynamic</type>
 						<coordinate1>1...9</coordinate1>
 						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -647,7 +547,7 @@
 					<xs:documentation>Position of the measurements</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_average">
+			<xs:element name="t_i_average" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Ion temperature (averaged on charge states and ion species) at the channel measurement point</xs:documentation>
 					<xs:appinfo>
@@ -656,19 +556,13 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="t_i_average_method" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Description of the method used to reconstruct the average ion temperature</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="zeff">
+			<xs:element name="zeff" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Local ionic effective charge at the channel measurement point</xs:documentation>
 					<xs:appinfo>
@@ -677,19 +571,13 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="zeff_method" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Description of the method used to reconstruct the local effective charge</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="zeff_line_average">
+			<xs:element name="zeff_line_average" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Ionic effective charge, line average along the channel line-of-sight</xs:documentation>
 					<xs:appinfo>
@@ -698,19 +586,13 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="zeff_line_average_method" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Description of the method used to reconstruct the line average effective charge</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="momentum_tor">
+			<xs:element name="momentum_tor" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi), at the channel measurement point</xs:documentation>
 					<xs:appinfo>
@@ -719,12 +601,6 @@
 						<units>kg.m^-1.s^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_method" type="identifier">
 				<xs:annotation>

@@ -196,37 +196,21 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="ip">
+			<xs:element name="ip" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above.</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<type>dynamic</type>
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="diamagnetic_flux">
+			<xs:element name="diamagnetic_flux" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Diamagnetic flux</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<type>dynamic</type>
 						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

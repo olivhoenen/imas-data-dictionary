@@ -21,93 +21,57 @@
 					<xs:group ref="STR_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="a">
+			<xs:element name="a" type="signal_flt_3d">
 				<xs:annotation>
 					<xs:documentation>A matrix</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<coordinate1>../state_names</coordinate1>
 						<coordinate2>../state_names</coordinate2>
 						<coordinate3>time</coordinate3>
 						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_3D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="b">
+			<xs:element name="b" type="signal_flt_3d">
 				<xs:annotation>
 					<xs:documentation>B matrix</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<coordinate1>../state_names</coordinate1>
 						<coordinate2>../../input_names</coordinate2>
 						<coordinate3>time</coordinate3>
 						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_3D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="c">
+			<xs:element name="c" type="signal_flt_3d">
 				<xs:annotation>
 					<xs:documentation>C matrix</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../state_names</coordinate1>
 						<coordinate2>../../output_names</coordinate2>
 						<coordinate3>time</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_3D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="d">
+			<xs:element name="d" type="signal_flt_3d">
 				<xs:annotation>
 					<xs:documentation>D matrix, normally proper and D=0</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../state_names</coordinate1>
 						<coordinate2>../../output_names</coordinate2>
 						<coordinate3>time</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_3D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="deltat">
+			<xs:element name="deltat" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Discrete time sampling interval ; if less than 1e-10, the controller is considered to be expressed in continuous time</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>s</units>
-						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -116,75 +80,46 @@
 			<xs:documentation>type for a MIMO PID controller</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="p">
+			<xs:element name="p" type="signal_flt_3d">
 				<xs:annotation>
 					<xs:documentation>Proportional term</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../../output_names</coordinate1>
 						<coordinate2>../../input_names</coordinate2>
 						<coordinate3>time</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_3D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="i">
+			<xs:element name="i" type="signal_flt_3d">
 				<xs:annotation>
 					<xs:documentation>Integral term</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../../output_names</coordinate1>
 						<coordinate2>../../input_names</coordinate2>
 						<coordinate3>time</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_3D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="d">
+			<xs:element name="d" type="signal_flt_3d">
 				<xs:annotation>
 					<xs:documentation>Derivative term</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../../output_names</coordinate1>
 						<coordinate2>../../input_names</coordinate2>
 						<coordinate3>time</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_3D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="tau">
+			<xs:element name="tau" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Filter time-constant for the D-term</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -260,39 +195,25 @@
 					<xs:documentation>Filtered PID controller</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="inputs">
+			<xs:element name="inputs" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Input signals; the timebase is common to inputs and outputs for any particular controller</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../input_names</coordinate1>
 						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="outputs">
+			<xs:element name="outputs" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Output signals; the timebase is common to inputs and outputs for any particular controller</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../output_names</coordinate1>
 						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -369,39 +290,25 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="inputs">
+			<xs:element name="inputs" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Input signals; the timebase is common  to inputs and outputs for any particular controller</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
 						<units>mixed</units>
 						<coordinate1>../input_names</coordinate1>
 						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="outputs">
+			<xs:element name="outputs" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Output signals; the timebase is common  to inputs and outputs for any particular controller</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<units>mixed</units>
 						<coordinate1>../output_names</coordinate1>
 						<coordinate2>time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

@@ -27,21 +27,13 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phase_corrected">
+			<xs:element name="phase_corrected" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Phase measured for this wavelength, corrected from fringe jumps</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>rad</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="fring_jump_correction">
 				<xs:annotation>
@@ -150,21 +142,13 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="faraday_angle">
+			<xs:element name="faraday_angle" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Faraday angle (variation of the Faraday angle induced by crossing the plasma) </xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>rad</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="faraday_angle_validity">
 				<xs:annotation>
@@ -177,21 +161,13 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="ellipticity">
+			<xs:element name="ellipticity" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Ellipticity</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>-</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="ellipticity_validity">
 				<xs:annotation>

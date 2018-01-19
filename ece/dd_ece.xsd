@@ -37,73 +37,39 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="frequency">
+			<xs:element name="frequency" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Frequency of the channel</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<type>dynamic</type>
 						<units>Hz</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="harmonic">
+			<xs:element name="harmonic" type="signal_int_1d">
 				<xs:annotation>
 					<xs:documentation>Harmonic detected by the channel. 1 corresponds to the "O1" mode, while 2 corresponds to the "X2" mode. </xs:documentation>
-					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<type>dynamic</type>
-					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="INT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="position" type="rzphirhopsitheta1d_dynamic_aos1">
 				<xs:annotation>
 					<xs:documentation>Position of the measurements</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e">
+			<xs:element name="t_e" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>eV</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="t_e_voltage">
+			<xs:element name="t_e_voltage" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Raw voltage measured on each channel, from which the calibrated temperature data is then derived</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>V</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="optical_depth">
 				<xs:annotation>

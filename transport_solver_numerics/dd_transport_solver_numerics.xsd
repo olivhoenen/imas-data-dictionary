@@ -2151,21 +2151,13 @@
 			<xs:documentation>Convergence details</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="time_step">
+			<xs:element name="time_step" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Internal time step used by the transport solver (assuming all transport equations are solved with the same time step)</xs:documentation>
 					<xs:appinfo>
 						<units>s</units>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="equations" type="numerics_convergence_equation" maxOccurs="unbounded">
 				<xs:annotation>
@@ -2532,53 +2524,29 @@ core_profiles/profiles_1d/ion(1)/density)</xs:documentation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="time_step">
+				<xs:element name="time_step" type="signal_flt_1d">
 					<xs:annotation>
 						<xs:documentation>Internal time step used by the transport solver (assuming all transport equations are solved with the same time step)</xs:documentation>
 						<xs:appinfo>
 							<units>s</units>
-							<type>dynamic</type>
-							<coordinate1>time</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="time"/>
-							<xs:group ref="FLT_1D"/>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
-				<xs:element name="time_step_average">
+				<xs:element name="time_step_average" type="signal_flt_1d">
 					<xs:annotation>
 						<xs:documentation>Average internal time step used by the transport solver between the previous and the current time stored for this quantity (assuming all transport equations are solved with the same time step)</xs:documentation>
 						<xs:appinfo>
 							<units>s</units>
-							<type>dynamic</type>
-							<coordinate1>time</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="time"/>
-							<xs:group ref="FLT_1D"/>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
-				<xs:element name="time_step_min">
+				<xs:element name="time_step_min" type="signal_flt_1d">
 					<xs:annotation>
 						<xs:documentation>Minimum internal time step used by the transport solver between the previous and the current time stored for this quantity (assuming all transport equations are solved with the same time step)</xs:documentation>
 						<xs:appinfo>
 							<units>s</units>
-							<type>dynamic</type>
-							<coordinate1>time</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="time"/>
-							<xs:group ref="FLT_1D"/>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
 				<xs:element name="solver" type="identifier">
 					<xs:annotation>

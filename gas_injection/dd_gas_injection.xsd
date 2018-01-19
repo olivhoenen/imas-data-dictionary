@@ -69,37 +69,21 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="flow_rate">
+			<xs:element name="flow_rate" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Flow rate at the exit of the valve</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>Pa.m^3.s^-1</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="electron_rate">
+			<xs:element name="electron_rate" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Number of electrons injected per second</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>s^-1</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -160,21 +144,13 @@
 					<xs:documentation>Second point indicating (combined with the exit_position) the direction of the gas injection towards the plasma</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="flow_rate">
+			<xs:element name="flow_rate" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Flow rate at the exit of the pipe</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>Pa.m^3.s^-1</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="valve" type="gas_injection_pipe_valve" maxOccurs="3">
 				<xs:annotation>

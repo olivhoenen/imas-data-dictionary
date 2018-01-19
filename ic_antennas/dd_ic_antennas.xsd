@@ -297,37 +297,21 @@
 					<xs:documentation>Cross-sectional shape of the strap</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current">
+			<xs:element name="current" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Root mean square current flowing along the strap</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="phase">
+			<xs:element name="phase" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Phase of the strap current</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -581,37 +565,21 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="frequency">
+			<xs:element name="frequency" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Frequency (average over modules)</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>Hz</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="power_launched">
+			<xs:element name="power_launched" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Power launched from this antenna into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>W</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="power_forward">
 				<xs:annotation>

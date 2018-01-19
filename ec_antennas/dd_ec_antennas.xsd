@@ -8,38 +8,23 @@
 			<xs:documentation>Spot ellipse characteristics</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="size">
+			<xs:element name="size" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Size of the spot ellipse</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<coordinate1>1...2</coordinate1>
 						<coordinate2>time</coordinate2>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="angle">
+			<xs:element name="angle" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Rotation angle for the spot ellipse</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -48,38 +33,23 @@
 			<xs:documentation>Phase ellipse characteristics</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="curvature">
+			<xs:element name="curvature" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
 						<coordinate1>1...2</coordinate1>
 						<coordinate2>time</coordinate2>
 						<units>m^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_2D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="angle">
+			<xs:element name="angle" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Rotation angle for the phase ellipse</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -139,73 +109,39 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="power_launched">
+			<xs:element name="power_launched" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Power launched from this antenna into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>W</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="mode">
+			<xs:element name="mode" type="signal_int_1d">
 				<xs:annotation>
 					<xs:documentation>Incoming wave mode (+ or -1 for O/X mode)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
-					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="INT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="launching_position" type="rzphi1d_dynamic_aos1">
 				<xs:annotation>
 					<xs:documentation>Launching position of the beam</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="launching_angle_pol">
+			<xs:element name="launching_angle_pol" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="launching_angle_tor">
+			<xs:element name="launching_angle_tor" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="beam" type="ec_antennas_beam">
 				<xs:annotation>

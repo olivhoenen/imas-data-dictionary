@@ -27,21 +27,13 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phase_corrected">
+			<xs:element name="phase_corrected" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Phase measured for this wavelength, corrected from fringe jumps</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>rad</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="fringe_jump_correction">
 				<xs:annotation>
@@ -122,37 +114,21 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="path_length_variation">
+			<xs:element name="path_length_variation" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Optical path length variation due to the plasma</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>m</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_e_line">
+			<xs:element name="n_e_line" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>m^-2</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="n_e_line_validity">
 				<xs:annotation>
@@ -165,21 +141,13 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_e_line_average">
+			<xs:element name="n_e_line_average" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>m^-3</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="n_e_line_average_validity">
 				<xs:annotation>
@@ -214,21 +182,13 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="n_e_volume_average">
+				<xs:element name="n_e_volume_average" type="signal_flt_1d">
 					<xs:annotation>
 						<xs:documentation>Volume average plasma density estimated from the line densities measured by the various channels</xs:documentation>
 						<xs:appinfo>
-							<coordinate1>time</coordinate1>
 							<units>m^-3</units>
-							<type>dynamic</type>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="time"/>
-							<xs:group ref="FLT_1D"/>
-						</xs:sequence>
-					</xs:complexType>
 				</xs:element>
 				<xs:element name="n_e_volume_average_validity">
 					<xs:annotation>
