@@ -222,7 +222,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-<xs:complexType name="signal_flt_3d">
+	<xs:complexType name="signal_flt_3d">
 		<xs:annotation>
 			<xs:documentation>Signal (FLT_3D) with its time base</xs:documentation>
 		</xs:annotation>
@@ -321,7 +321,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-		<xs:complexType name="signal_flt_6d">
+	<xs:complexType name="signal_flt_6d">
 		<xs:annotation>
 			<xs:documentation>Signal (FLT_6D) with its time base</xs:documentation>
 		</xs:annotation>
@@ -356,7 +356,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-		<xs:complexType name="signal_int_1d">
+	<xs:complexType name="signal_int_1d">
 		<xs:annotation>
 			<xs:documentation>Signal (INT_1D) with its time base</xs:documentation>
 		</xs:annotation>
@@ -385,7 +385,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-		<xs:complexType name="signal_int_2d">
+	<xs:complexType name="signal_int_2d">
 		<xs:annotation>
 			<xs:documentation>Signal (INT_2D) with its time base</xs:documentation>
 		</xs:annotation>
@@ -415,7 +415,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-			<xs:complexType name="signal_int_3d">
+	<xs:complexType name="signal_int_3d">
 		<xs:annotation>
 			<xs:documentation>Signal (INT_3D) with its time base</xs:documentation>
 		</xs:annotation>
@@ -5533,6 +5533,319 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>					
+	<xs:complexType name="oblique_static">
+		<xs:annotation>
+			<xs:documentation>Oblique description of a 2D object</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Geometric centre R</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Geometric centre Z</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="length">
+				<xs:annotation>
+					<xs:documentation>Length</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="thickness">
+				<xs:annotation>
+					<xs:documentation>Thickness</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="alpha">
+				<xs:annotation>
+					<xs:documentation>Inclination of first angle TBD</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="beta">
+				<xs:annotation>
+					<xs:documentation>Inclination of second angle TBD</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="arcs_of_circle_static">
+		<xs:annotation>
+			<xs:documentation>Arcs of circle description of a 2D contour</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radii of the start point of each arc of circle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height of the start point of each arc of circle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="curvature_radii">
+				<xs:annotation>
+					<xs:documentation>Curvature radius of each arc of circle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rectangle_static">
+		<xs:annotation>
+			<xs:documentation>Rectangular description of a 2D object</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Geometric centre R</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Geometric centre Z</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="width">
+				<xs:annotation>
+					<xs:documentation>Horizontal full width</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="height">
+				<xs:annotation>
+					<xs:documentation>Vertical full height</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="outline_2d_geometry_static">
+		<xs:annotation>
+			<xs:documentation>Description of 2D geometry</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="geometry_type">
+				<xs:annotation>
+					<xs:documentation>Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique', 4:'arcs of circle') </xs:documentation>
+					<xs:appinfo>
+						<Type>static</Type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="rz1d_static">
+				<xs:annotation>
+					<xs:documentation>Irregular outline of the element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rectangle" type="rectangle_static">
+				<xs:annotation>
+					<xs:documentation>Rectangular description of the element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oblique" type="oblique_static">
+				<xs:annotation>
+					<xs:documentation>Trapezoidal description of the element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="arcs_of_circle" type="arcs_of_circle_static">
+				<xs:annotation>
+					<xs:documentation>Description of the element contour by a set of arcs of circle. For each of these, the position of the start point is given together with the curvature radius. The end point is given by the start point of the next arc of circle.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pf_coils_elements">
+		<xs:annotation>
+			<xs:documentation>Each PF coil is comprised of a number of cross-section elements described  individually</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+            <xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of this element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of this element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="turns_with_sign">
+				<xs:annotation>
+					<xs:documentation>Number of effective turns in the element for calculating magnetic fields of the coil/loop; includes the sign of the number of turns (positive means current is counter-clockwise when seen from above)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="area">
+				<xs:annotation>
+					<xs:documentation>Cross-sectional areas of the element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometry" type="outline_2d_geometry_static">
+				<xs:annotation>
+					<xs:documentation>Cross-sectional shape of the element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_coherent_wave_identifier">
+		<xs:annotation>
+			<xs:documentation>Wave identifier</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Wave/antenna type. index=1 for name=EC; index=2 for name=IC; index=3 for name=LH</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/wave_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="antenna_name">
+				<xs:annotation>
+					<xs:documentation>Name of the antenna that launches this wave. Corresponds to the name specified in antennas/ec(i)/name, or antennas/ic(i)/name or antennas/lh(i)/name (depends of antenna/wave type) in the ANTENNAS IDS.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="index_in_antenna">
+				<xs:annotation>
+					<xs:documentation>Index of the wave (starts at 1), separating different waves generated from a single antenna.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

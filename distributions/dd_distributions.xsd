@@ -10,43 +10,7 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="waves_coherent_wave_identifier">
-		<xs:annotation>
-			<xs:documentation>Wave identifier</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="type" type="identifier">
-				<xs:annotation>
-					<xs:documentation>Wave/antenna type. index=1 for name=EC; index=2 for name=IC; index=3 for name=LH</xs:documentation>
-					<xs:appinfo>
-						<doc_identifier>utilities/wave_identifier.xml</doc_identifier>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="antenna_name">
-				<xs:annotation>
-					<xs:documentation>Name of the antenna that launches this wave. Corresponds to the name specified in antennas/ec(i)/name, or antennas/ic(i)/name or antennas/lh(i)/name (depends of antenna/wave type) in the ANTENNAS IDS.</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="index_in_antenna">
-				<xs:annotation>
-					<xs:documentation>Index of the wave (starts at 1), separating different waves generated from a single antenna.</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
+
 	<xs:complexType name="distributions_d_ggd_expansion">
 		<xs:annotation>
 			<xs:documentation>Expansion of the distribution function for a given time slice, using a GGD representation</xs:documentation>
