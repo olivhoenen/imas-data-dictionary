@@ -326,8 +326,14 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								</xsl:choose>
 								<xsl:attribute name="documentation"><xsl:value-of select="concat('Index in the error_description list for &quot;',@name,'&quot;')"/></xsl:attribute>
 								<xsl:attribute name="data_type">int_type</xsl:attribute>
-								<xsl:attribute name="type">constant</xsl:attribute>
-							</field>
+<xsl:choose>
+														<xsl:when test="contains($currPath_doc,'(itime)')">
+															<xsl:attribute name="type">dynamic</xsl:attribute> <!-- the node must be dynamic if it has any dynamic (type 3) AoS ancestor, although this is likely overkill to specify a time-dependent error expression -->
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:attribute name="type">constant</xsl:attribute>														
+														</xsl:otherwise>
+														</xsl:choose>							</field>
 						</xsl:if>
 					</xsl:when>
 					<xsl:otherwise>
@@ -575,7 +581,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														</xsl:choose>
 														<xsl:attribute name="documentation">Index in the error_description list for &quot;data&quot;</xsl:attribute>
 														<xsl:attribute name="data_type">int_type</xsl:attribute>
-														<xsl:attribute name="type">constant</xsl:attribute>
+														<xsl:attribute name="type">constant</xsl:attribute>														
 													</field>
 												</xsl:if>
 											</xsl:if>
