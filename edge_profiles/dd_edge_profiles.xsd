@@ -677,16 +677,14 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="content">
+			<xs:element name="content" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Total number of particles for this ion species in the computational volume</xs:documentation>
+					<xs:documentation>Particle content = total number of particles for this ion species in the volume of the grid subset, for various grid subsets</xs:documentation>
 					<xs:appinfo>
-						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="temperature" type="generic_grid_scalar_single_position" maxOccurs="unbounded">
 				<xs:annotation>
@@ -1017,7 +1015,6 @@
 					<xs:appinfo>
 						<units>J</units>
 						<coordinate1>1...N</coordinate1>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1032,46 +1029,13 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="edge_profiles_global_quantities">
-		<xs:annotation>
-			<xs:documentation>Various 0D quantities calculated from the fields solved in the transport equations, may be stored at faster frequency than the full GGD data. NOT USED</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="energy_thermal">
-				<xs:annotation>
-					<xs:documentation>Plasma energy content = 3/2 * integral over the computational volume of the thermal pressure (summed over all species)</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
-						<units>J</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="power_separatrix">
-				<xs:annotation>
-					<xs:documentation>Power flowing accross the separatrix</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
-						<units>W</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:element name="edge_profiles">
 		<xs:annotation>
 			<xs:documentation>Edge plasma profiles (includes the scrape-off layer and possibly part of the confined plasma)</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.15.1</lifecycle_last_change>
+				<lifecycle_last_change>3.15.2</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
