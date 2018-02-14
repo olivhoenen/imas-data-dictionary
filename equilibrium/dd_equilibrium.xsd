@@ -4,6 +4,24 @@
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../Utilities/DD_Support.xsd"/>
+	<xs:complexType name="equilibrium_convergence">
+		<xs:annotation>
+			<xs:documentation>Convergence details for the equilibrium calculation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="iterations_n">
+				<xs:annotation>
+					<xs:documentation>Number of iterations carried out in the convergence loop</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_boundary">
 		<xs:annotation>
 			<xs:documentation>Geometry of the plasma boundary</xs:documentation>
@@ -1386,6 +1404,11 @@
 					<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="convergence" type="equilibrium_convergence">
+				<xs:annotation>
+					<xs:documentation>Convergence details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="time" type="flt_type">
 				<xs:annotation>
 					<xs:documentation>Time</xs:documentation>
@@ -1403,7 +1426,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.14.0</lifecycle_last_change>
+				<lifecycle_last_change>3.16.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
