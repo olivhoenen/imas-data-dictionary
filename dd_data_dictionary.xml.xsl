@@ -77,6 +77,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					<xsl:with-param name="currPath" select="''"/>
 					<xsl:with-param name="currPath_doc" select="''"/>
 					<xsl:with-param name="aosLevel" select="1"/>
+					<xsl:with-param name="aos3Parent" select="xs:annotation/xs:appinfo/aos3Parent"/>
           </xsl:call-template>
           </field>
         </xsl:for-each>
@@ -84,6 +85,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
         <xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[./xs:complexType]" mode="IMPLEMENT">
 <xsl:with-param name="structure_reference" select="'self'"/>
 <xsl:with-param name="aosLevel" select="1"/>
+<xsl:with-param name="aos3Parent" select="xs:annotation/xs:appinfo/aos3Parent"/>
         </xsl:apply-templates> 
 		</utilities>
 	<!-- Scan for top-level elements (IDSs) -->
@@ -167,6 +169,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath"/>
 		<xsl:param name="currPath_doc"/>
 		<xsl:param name="aosLevel"/>
+        <xsl:param name="aos3Parent"/>
 		<xsl:param name="parentmachine"/>
 		<xsl:param name="parenttime"/>
 		<xsl:param name="parentunit"/>
@@ -183,6 +186,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:with-param name="currPath" select="$currPath"/>
 			<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 			<xsl:with-param name="aosLevel" select="$aosLevel"/>
+<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 			<xsl:with-param name="parentmachine" select="$parentmachine"/>
 			<xsl:with-param name="parenttime" select="$parenttime"/>
 			<xsl:with-param name="parentunit" select="$parentunit"/>
@@ -194,6 +198,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath"/>
 		<xsl:param name="currPath_doc"/>
 		<xsl:param name="aosLevel"/>
+		<xsl:param name="aos3Parent"/>
 		<xsl:param name="parentmachine"/>
 		<xsl:param name="parenttime"/>
 		<xsl:param name="parentunit"/>
@@ -327,7 +332,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:attribute name="documentation"><xsl:value-of select="concat('Index in the error_description list for &quot;',@name,'&quot;')"/></xsl:attribute>
 								<xsl:attribute name="data_type">int_type</xsl:attribute>
 <xsl:choose>
-														<xsl:when test="contains($currPath_doc,'(itime)')">
+														<xsl:when test="contains($currPath_doc,'(itime)') or contains($aos3Parent,'yes')">
 															<xsl:attribute name="type">dynamic</xsl:attribute> <!-- the node must be dynamic if it has any dynamic (type 3) AoS ancestor, although this is likely overkill to specify a time-dependent error expression -->
 														</xsl:when>
 														<xsl:otherwise>
@@ -400,6 +405,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 																<xsl:with-param name="currPath" select="@name"/>
 																<xsl:with-param name="currPath_doc" select="concat(@name,'(itime)')"/>
 																<xsl:with-param name="aosLevel" select="$aosLevel"/>
+																<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 															</xsl:call-template>
 														</xsl:when>
 														<xsl:otherwise>
@@ -408,6 +414,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 																<xsl:with-param name="currPath" select="@name"/>
 																<xsl:with-param name="currPath_doc" select="concat(@name,'(i',$aosLevel,')')"/>
 																<xsl:with-param name="aosLevel" select="$aosLevel+1"/>
+																<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 															</xsl:call-template>
 														</xsl:otherwise>
 													</xsl:choose>
@@ -418,6 +425,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<xsl:with-param name="currPath" select="@name"/>
 														<xsl:with-param name="currPath_doc" select="@name"/>
 														<xsl:with-param name="aosLevel" select="$aosLevel"/>
+														<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 													</xsl:call-template>
 												</xsl:otherwise>
 											</xsl:choose>
@@ -432,6 +440,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 																<xsl:with-param name="currPath" select="concat($currPath,'/',@name)"/>
 																<xsl:with-param name="currPath_doc" select="concat($currPath_doc,'/',@name,'(itime)')"/>
 																<xsl:with-param name="aosLevel" select="$aosLevel"/>
+																<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 															</xsl:call-template>
 														</xsl:when>
 														<xsl:otherwise>
@@ -440,6 +449,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 																<xsl:with-param name="currPath" select="concat($currPath,'/',@name)"/>
 																<xsl:with-param name="currPath_doc" select="concat($currPath_doc,'/',@name,'(i',$aosLevel,')')"/>
 																<xsl:with-param name="aosLevel" select="$aosLevel+1"/>
+																<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 															</xsl:call-template>
 														</xsl:otherwise>
 													</xsl:choose>
@@ -450,6 +460,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<xsl:with-param name="currPath" select="concat($currPath,'/',@name)"/>
 														<xsl:with-param name="currPath_doc" select="concat($currPath_doc,'/',@name)"/>
 														<xsl:with-param name="aosLevel" select="$aosLevel"/>
+														<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 													</xsl:call-template>
 												</xsl:otherwise>
 											</xsl:choose>
@@ -593,6 +604,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 												<xsl:with-param name="currPath" select="@name"/>
 												<xsl:with-param name="currPath_doc" select="@name"/>
 												<xsl:with-param name="aosLevel" select="$aosLevel"/>
+												<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 											</xsl:apply-templates>
 										</xsl:when>
 										<xsl:otherwise>
@@ -600,6 +612,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 												<xsl:with-param name="currPath" select="concat($currPath, '/',@name)"/>
 												<xsl:with-param name="currPath_doc" select="concat($currPath_doc, '/',@name)"/>
 												<xsl:with-param name="aosLevel" select="$aosLevel"/>
+												<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 											</xsl:apply-templates>
 										</xsl:otherwise>
 									</xsl:choose>
@@ -672,6 +685,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath"/>
 		<xsl:param name="currPath_doc"/>
 		<xsl:param name="aosLevel"/>
+		<xsl:param name="aos3Parent"/>
 		<xsl:param name="parentmachine"/>
 		<xsl:param name="parenttime"/>
 		<xsl:choose>
@@ -754,6 +768,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 									<xsl:with-param name="currPath" select="$currPath"/>
 									<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 									<xsl:with-param name="aosLevel" select="$aosLevel"/>
+									<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
 									<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 								</xsl:apply-templates>
 							</xsl:otherwise>
@@ -774,6 +789,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 											<xsl:with-param name="aosLevel" select="$aosLevel"/>
+											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
 											<xsl:with-param name="parentmachine" select="'yes'"/>
 											<xsl:with-param name="parenttime" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
@@ -784,6 +800,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 											<xsl:with-param name="aosLevel" select="$aosLevel"/>
+											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
 											<xsl:with-param name="parentmachine" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
@@ -798,6 +815,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 											<xsl:with-param name="aosLevel" select="$aosLevel"/>
+   									        <xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
 											<xsl:with-param name="parenttime" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
@@ -807,6 +825,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 											<xsl:with-param name="aosLevel" select="$aosLevel"/>
+											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
 									</xsl:otherwise>
@@ -820,6 +839,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:with-param name="currPath" select="$currPath"/>
 							<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 							<xsl:with-param name="aosLevel" select="$aosLevel"/>
+							<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
 							<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 						</xsl:apply-templates>
 					</xsl:otherwise>
@@ -836,6 +856,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:with-param name="currPath" select="$currPath"/>
 								<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 								<xsl:with-param name="aosLevel" select="$aosLevel"/>
+								<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
 							</xsl:apply-templates>
 						</xsl:if>
 				</xsl:for-each>
