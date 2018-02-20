@@ -177,6 +177,85 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="pulse_schedule_event">
+		<xs:annotation>
+			<xs:documentation>Event</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Type of this event</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Unique identifier of this event provided by the scheduling / event handler</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time_stamp">
+				<xs:annotation>
+					<xs:documentation>Time stamp of this event</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="duration">
+				<xs:annotation>
+					<xs:documentation>Duration of this event</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="acquisition_strategy" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Acquisition strategy related to this event: index = 1 : on-trigger; index = 2 : pre-trigger; index = 3 : post-trigger</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="acquisition_state" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Acquisition state of the related system : index = 1 : armed; index = 2 : on; index = 3 : off; index = 4 : closed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="provider">
+				<xs:annotation>
+					<xs:documentation>System having generated this event</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="listeners">
+				<xs:annotation>
+					<xs:documentation>Systems listening to this event</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="pulse_schedule_ic_antenna">
 		<xs:annotation>
 			<xs:documentation>IC antenna</xs:documentation>
@@ -865,7 +944,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
-				<lifecycle_last_change>3.10.2</lifecycle_last_change>
+				<lifecycle_last_change>3.16.1</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
@@ -895,6 +974,14 @@
 				<xs:element name="density_control" type="pulse_schedule_density_control">
 					<xs:annotation>
 						<xs:documentation>Gas injection system and density control references</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="event" type="pulse_schedule_event" maxOccurs="50">
+					<xs:annotation>
+						<xs:documentation>List of events, either predefined triggers  or events recorded during the pulse</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="flux_control" type="pulse_schedule_flux_control">
