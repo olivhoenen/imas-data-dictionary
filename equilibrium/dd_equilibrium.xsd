@@ -930,6 +930,15 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="mse_polarisation_angle" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of MSE polarisation angles</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>IDS:mse/channel</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="flux_loop" type="equilibrium_constraints_0D" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of flux loops</xs:documentation>
@@ -1921,6 +1930,10 @@
 			</xs:element>
 			<xs:element name="constraints" type="equilibrium_constraints">
 				<xs:annotation>
+					<xs:appinfo>
+						<lifecycle_status>alpha</lifecycle_status>
+						<lifecycle_version>3.16.1</lifecycle_version>
+					</xs:appinfo>
 					<xs:documentation>In case of equilibrium reconstruction under constraints, measurements used to constrain the equilibrium, reconstructed values and accuracy of the fit</xs:documentation>
 				</xs:annotation>
 			</xs:element>
