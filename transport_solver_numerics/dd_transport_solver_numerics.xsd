@@ -2293,6 +2293,39 @@
 core_profiles/profiles_1d/ion(1)/density)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="ion_index">
+				<xs:annotation>
+					<xs:documentation>If the primary quantity is related to a ion species, index of the corresponding species in the core_profiles/profiles_1d/ion array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="neutral_index">
+				<xs:annotation>
+					<xs:documentation>If the primary quantity is related to a neutral species, index of the corresponding species in the core_profiles/profiles_1d/neutral array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="state_index">
+				<xs:annotation>
+					<xs:documentation>If the primary quantity is related to a particular state (of an ion or a neutral species), index of the corresponding state in the core_profiles/profiles_1d/ion (or neutral)/state array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="profile">
 				<xs:annotation>
 					<xs:documentation>Profile of the primary quantity</xs:documentation>
@@ -2521,7 +2554,7 @@ core_profiles/profiles_1d/ion(1)/density)</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.15.1</lifecycle_last_change>
+				<lifecycle_last_change>3.16.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
