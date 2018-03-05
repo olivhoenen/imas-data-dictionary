@@ -10,7 +10,7 @@ TARGETS=IDSDef.xml IDSNames.txt IDSDef_validation.txt html_documentation/html_do
 all: $(TARGETS)
 
 clean:
-	git clean -f -X || rm -f $(TARGETS)
+	$(if $(wildcard .git/config),git clean -f -X,$(RM) -f $(TARGETS))
 
 test: IDSDef_validation.txt
 	grep -i Error $< >&2 && exit 1 || grep valid $<
