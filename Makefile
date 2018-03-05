@@ -4,7 +4,7 @@
 # Note: be sure to set CLASSPATH='/path/to/saxon9he.jar;...' in your environment
 SAXONICAJAR=$(wildcard $(filter %saxon9he.jar,$(subst :, ,$(CLASSPATH))))
 
-TARGETS=IDSDef.xml IDSNames.txt IDSDef_validation.html IDSDef_validation.txt html_documentation/html_documentation.html test
+TARGETS=IDSDef.xml IDSNames.txt IDSDef_validation.txt html_documentation/html_documentation.html test
 
 .PHONY: all clean test
 all: $(TARGETS)
@@ -15,10 +15,10 @@ clean:
 test: IDSDef_validation.txt
 	grep -i Error $< >&2 && exit 1 || grep valid $<
 
-IDSDef.xml: %:%.xsd %.xsl $(SAXONICAJAR)
+IDSDef.xml: %: %.xsd %.xsl $(SAXONICAJAR)
 	java net.sf.saxon.Transform -t -warnings:fatal -s:$< -xsl:$(word 2,$^) -o:$@ || { rm -f $@ ; exit 1 ; }
 
-IDSNames.txt IDSDef_validation.html IDSDef_validation.txt: %:%.xsl IDSDef.xml
+IDSNames.txt IDSDef_validation.txt: %: %.xsl IDSDef.xml
 	xsltproc $^ > $@ || { rm -f $@ ; exit 1 ;}
 
 html_documentation/html_documentation.html: IDSDef.xml IDSDef_2_HTMLDocumentation.xsl $(SAXONICAJAR)
