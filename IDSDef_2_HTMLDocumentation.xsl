@@ -132,30 +132,22 @@
   
 <td>
 <xsl:if test="@coordinate1"> <!--If there is at least one axis-->
-<table>
-<tr><td>1- <xsl:value-of select="@coordinate1"/>
-</td></tr>
+1- <xsl:value-of select="@coordinate1"/><br/>
 <xsl:if test="@coordinate2">
-<tr><td>2- <xsl:value-of select="@coordinate2"/>
-</td></tr>
+2- <xsl:value-of select="@coordinate2"/><br/>
 <xsl:if test="@coordinate3">
-<tr><td>3- <xsl:value-of select="@coordinate3"/>
-</td></tr>
+3- <xsl:value-of select="@coordinate3"/><br/>
 <xsl:if test="@coordinate4">
-<tr><td>4- <xsl:value-of select="@coordinate4"/>
-</td></tr>
+4- <xsl:value-of select="@coordinate4"/><br/>
 <xsl:if test="@coordinate5">
-<tr><td>5- <xsl:value-of select="@coordinate5"/>
-</td></tr>
+5- <xsl:value-of select="@coordinate5"/><br/>
 <xsl:if test="@coordinate6">
-<tr><td>6- <xsl:value-of select="@coordinate6"/>
-</td></tr>
+6- <xsl:value-of select="@coordinate6"/><br/>
 </xsl:if>
 </xsl:if>
 </xsl:if>
 </xsl:if>
 </xsl:if>
-</table>
 </xsl:if>
 </td>
   </tr>
