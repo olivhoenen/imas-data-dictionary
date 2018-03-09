@@ -68,6 +68,8 @@
 			p.welcome {color:#3333aa; font-size:20pt; font-weight:bold; text-align:center;}
 			span.head {color:#3333aa; font-size:12pt; font-weight:bold; }
        </style>
+       	<link href="css/jquery.treetable.css" rel="stylesheet" type="text/css"/>
+		<link href="css/maketree.css" rel="stylesheet"/>
       </head>
       <body>
         <p class="welcome">ITER Physics Data Model Documentation for <xsl:value-of select="@name"/></p>
@@ -76,25 +78,18 @@
         <p>Lifecycle status: <xsl:value-of select="@lifecycle_status"/> since version <xsl:value-of select="@lifecycle_version"/></p> <!-- Write the IDS Lifecycle information -->
         <p>Last change occured on version: <xsl:value-of select="@lifecycle_last_change"/></p> <!-- Write the IDS Lifecycle information -->
         <p><a href="html_documentation.html">Back to top IDS list</a></p>
-		<button onclick="ToggleErrorDisplay()">Show/Hide errorbar nodes</button>
-		<p/>
-<script>		
-function ToggleErrorDisplay() {
-    var x = document.getElementsByClassName("errorbar");
-    var i;
-    for (i = 0; i &lt; x.length; i++)
-   if (x[i].style.display == 'none') {
-        x[i].style.display = 'table-row';
-    } else {
-        x[i].style.display = 'none';
-    } 
-}
-</script>
+		<button onclick="ToggleErrorDisplay('body>table')">Show/Hide errorbar nodes</button>
+        <br/>   
+        <br/>          
         <table border="1">
         <thead style="color:#ff0000"><td>Full path name</td><td>Description</td><td>Data Type</td><td>Coordinates</td></thead>
         <xsl:apply-templates select="field"/>
         </table>
         <p><a href="html_documentation.html">Back to top IDS list</a></p>
+        <script src="js/jquery-1.12.4.min.js"></script>                
+        <script src="js/jquery.treetable.js"></script>        
+		<script src="js/treeView.jquery.js"></script>   
+        <script>  makeTree('body>table');  </script>
 </body>
 </html>
 </xsl:result-document>
@@ -116,7 +111,7 @@ function ToggleErrorDisplay() {
 <td><xsl:value-of select="@path_doc"/>
 
 <xsl:if test="@maxOccurs>1 or @maxOccurs='unbounded'">{1:<xsl:value-of select="@maxOccurs"/>}</xsl:if>
-<xsl:if test="@lifecycle_status"><p>Lifecycle status: <font color="red"><xsl:value-of select="@lifecycle_status"/></font> since version <xsl:value-of select="@lifecycle_version"/></p></xsl:if></td>
+<xsl:if test="@lifecycle_status"><br/>Lifecycle status: <font color="red"><xsl:value-of select="@lifecycle_status"/></font> since version <xsl:value-of select="@lifecycle_version"/></xsl:if></td>
 
            <td><xsl:value-of select="@documentation"/>
            <xsl:if test="@url"> Click here for <a href="{@url}">further documentation</a>.</xsl:if>
