@@ -1179,6 +1179,45 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_pedestal_fit_stability">
+		<xs:annotation>
+			<xs:documentation>MHD stability analysis of the pedestal (for a given fit of the profiles)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="alpha_critical" type="summary_dynamic_flt_1d_3">
+				<xs:annotation>
+					<xs:documentation>Critical normalized pressure gradient determined with self-consistent runs with an MHD stability code</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="alpha_experimental" type="summary_dynamic_flt_1d_3">
+				<xs:annotation>
+					<xs:documentation>Experimental normalized pressure gradient reconstructed by an MHD stability code (with assumptions on the ion pressure)</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="alpha_ratio" type="summary_dynamic_flt_1d_3">
+				<xs:annotation>
+					<xs:documentation>Ratio of alpha_critical over alpha_experimental</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e_pedestal_top_critical" type="summary_dynamic_flt_1d_3">
+				<xs:annotation>
+					<xs:documentation>Critical electron temperature at pedestal top determined with self-consistent runs with an MHD stability code</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_pedestal_fit_linear_te">
 		<xs:annotation>
 			<xs:documentation>Quantities related to linear fit of pedestal profiles for a given physical quantity (temperature)</xs:documentation>
@@ -1752,6 +1791,11 @@
 					<xs:appinfo>
 						<units>-</units>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="stability" type="summary_pedestal_fit_stability">
+				<xs:annotation>
+					<xs:documentation>MHD stability analysis of the pedestal (for this fit of the profiles)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="parameters">
