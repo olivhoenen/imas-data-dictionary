@@ -1264,6 +1264,10 @@
 			<xs:element name="grid" type="generic_grid_dynamic">
 				<xs:annotation>
 					<xs:documentation>Grid description</xs:documentation>
+					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.17.0</lifecycle_version>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="r" type="generic_grid_scalar" maxOccurs="unbounded">
@@ -1426,7 +1430,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.16.0</lifecycle_last_change>
+				<lifecycle_last_change>3.17.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -1435,6 +1439,15 @@
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="grid_ggd" type="generic_grid_aos3_root" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Grid (using the Generic Grid Description), for various time slices. The timebase of this array of structure must be a subset of the time_slice timebase</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="time_slice" type="equilibrium_time_slice" maxOccurs="unbounded">
