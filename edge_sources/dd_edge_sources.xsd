@@ -553,7 +553,12 @@
 		<xs:sequence>
 			<xs:element name="identifier" type="identifier">
 				<xs:annotation>
-					<xs:documentation>Source term identifier</xs:documentation>
+					<xs:documentation>Source term identifier (process causing this source term)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="species" type="distribution_species">
+				<xs:annotation>
+					<xs:documentation>Species species causing this source term (if relevant, e.g. a particular ion or neutral state in case of line radiation)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ggd" type="edge_sources_source_ggd" maxOccurs="unbounded">
@@ -582,7 +587,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.2.1</lifecycle_version>
-				<lifecycle_last_change>3.16.0</lifecycle_last_change>
+				<lifecycle_last_change>3.17.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -597,7 +602,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="source" type="edge_sources_source" maxOccurs="15">
+				<xs:element name="source" type="edge_sources_source" maxOccurs="80">
 					<xs:annotation>
 						<xs:documentation>Set of source terms</xs:documentation>
 						<xs:appinfo>
