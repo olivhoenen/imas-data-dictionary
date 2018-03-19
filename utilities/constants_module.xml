@@ -2,36 +2,38 @@
 <header>Module implementing the IMAS physics constants
 
 Source:
- based on SOLPS b2mod_constants.F
    09/12/2007 xpb : source CODATA 2006 (http://www.nist.gov/)
    08/19/2011 xpb : source CODATA 2010 (http://www.nist.gov/)
- pulled from ets r100
+   03/19/2018 dpc : source CODATA 2014 (http://www.nist.gov/)
 
 \author David Coster
 </header>
 
   <include name="Fortran">iso_c_binding</include>
 
+
+  <float name="CODATA_version" description="Version number for CODATA source (http://www.nist.gov/)">2014</float>
+
   <float name="PI" used_internally="true">3.141592653589793238462643383280</float>
   <float name="C" description="speed of light" units="m/s" used_internally="true">2.99792458e8</float>
-  <float name="ME" description="electron mass" units="kg">9.10938291e-31</float>
-  <float name="MP" description="proton mass" units="kg">1.672621777e-27</float>
-  <float name="MN" description="neutron mass" units="kg">1.674927351e-27</float>
-  <float name="MD" description="deuteron mass" units="kg">3.34358348e-27</float>
-  <float name="MT" description="triton mass" units="kg">5.00735630e-27</float>
-  <float name="MA" description="alpha mass" units="kg">6.64465675e-27</float>
-  <float name="AMU" description="atomic mass unit" units="kg" used_internally="true">1.660538921e-27</float>
-  <float name="EV" description="electron volt (eV)" used_internally="true" >1.602176565e-19</float>
+  <float name="ME" description="electron mass" units="kg">9.10938356e-31</float>
+  <float name="MP" description="proton mass" units="kg">1.672621898e-27</float>
+  <float name="MN" description="neutron mass" units="kg">1.674927471e-27</float>
+  <float name="MD" description="deuteron mass" units="kg">3.343583719e-27</float>
+  <float name="MT" description="triton mass" units="kg">5.007356665e-27</float>
+  <float name="MA" description="alpha mass" units="kg">6.644657230e-27</float>
+  <float name="AMU" description="atomic mass unit" units="kg" used_internally="true">1.660539040e-27</float>
+  <float name="EV" description="electron volt (eV)" used_internally="true" >1.6021766208e-19</float>
   <float name="QE" description="elementary charge" units="coulomb" alias="true">EV</float>
   <float name="MU0" alias="true" description="vacuum permeability" used_internally="true">4.0e-7 * PI</float>
   <float name="EPS0" alias="true">1.0 / (MU0 * C * C)</float>
-  <float name="AVOGR">6.02214129e23</float>
-  <float name="KBOLT">1.3806488e-23</float>
+  <float name="AVOGR">6.022140857e23</float>
+  <float name="KBOLT">1.38064852e-23</float>
 
 <!--
 the following has been derived from:
 
-svn cat http://gforge.efda-itm.eu/svn/amnsproto/data/constants/mass_isotopes2.txt | tr '()#' '   ' | awk '/Atomic Symbol/{S=$4}/Mass Number/{M=$4}/Relative Atomic Mass/&&NF>=5{printf "  <float name=\"IMAS_MASS_%s_%s\" alias=\"true\" description=\"isotope mass\" units=\"kg\">%s * IMAS_AMU</float>\n", S, M, $5}'
+svn cat http://gforge.efda-itm.eu/svn/amnsproto/data/constants/mass_isotopes2.txt | tr '()#' '   ' | awk '/Atomic Symbol/{S=$4}/Mass Number/{M=$4}/Relative Atomic Mass/&&NF>=5{printf "  <float name=\"MASS_%s_%s\" alias=\"true\" description=\"isotope mass\" units=\"kg\">%s * AMU</float>\n", S, M, $5}'
 
 with the names for D and T changed to H
 -->
