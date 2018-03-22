@@ -17,6 +17,7 @@
       </head>
       <body>
               <p class="welcome">ITER Physics Data Model Documentation : Top level (list of all IDSs)</p>
+              <p>The ITER Physics Data Model follows the COCOS = 11 coordinate convention. The COCOS conventions are defined in [O. Sauter and S.Yu. Medvedev, Computer Physics Communications 184 (2013) 293]</p>
        		  <p><a href="dd_versions.html">Data Dictionary version history</a></p>
 
 <!-- First make a list of IDS with the Links-->
