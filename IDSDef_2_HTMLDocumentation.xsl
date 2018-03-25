@@ -88,7 +88,7 @@
         <p><a href="html_documentation.html">Back to top IDS list</a></p>
         <script src="js/jquery-1.12.4.min.js"></script>                
         <script src="js/jquery.treetable.js"></script>        
-		<script src="js/treeView.jquery.js"></script>   
+        <script src="js/treeView2.js"></script>
         <script>  makeTree('body>table');  </script>
 </body>
 </html>
@@ -108,7 +108,7 @@
 <xsl:attribute name='class'>errorbar</xsl:attribute>
 <xsl:attribute name='style'>display:none;</xsl:attribute>  <!-- Hide errorbars in the documentation by default-->
 </xsl:if> 
-<td><xsl:value-of select="@path_doc"/>
+<td><span class="pathname"><xsl:value-of select="@path_doc"/></span>
 
 <xsl:if test="@maxOccurs>1 or @maxOccurs='unbounded'">{1:<xsl:value-of select="@maxOccurs"/>}</xsl:if>
 <xsl:if test="@lifecycle_status"><br/>Lifecycle status: <font color="red"><xsl:value-of select="@lifecycle_status"/></font> since version <xsl:value-of select="@lifecycle_version"/></xsl:if></td>
