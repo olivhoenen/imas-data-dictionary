@@ -107,10 +107,10 @@
 			</xs:element>
 			<xs:element name="velocity_tor">
 				<xs:annotation>
-					<xs:documentation>Toroidal velocity (of the emmitting impurity)</xs:documentation>
+					<xs:documentation>Toroidal velocity (of the emmitting impurity) (oriented counter-clockwise when seen from above)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
-						<units>eV</units>
+						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -123,10 +123,10 @@
 			</xs:element>
 			<xs:element name="velocity_pol">
 				<xs:annotation>
-					<xs:documentation>Poloidal velocity (of the emmitting impurity)</xs:documentation>
+					<xs:documentation>Poloidal velocity (of the emmitting impurity) (oriented clockwise when seen from front)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
-						<units>eV</units>
+						<units>m.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -145,13 +145,13 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.15.1</lifecycle_last_change>
+				<lifecycle_last_change>3.17.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="channel" type="charge_exchange_channel" maxOccurs="20">
+				<xs:element name="channel" type="charge_exchange_channel" maxOccurs="100">
 					<xs:annotation>
 						<xs:documentation>Set of channels (lines-of-sight)</xs:documentation>
 						<xs:appinfo>
