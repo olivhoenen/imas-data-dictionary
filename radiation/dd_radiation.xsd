@@ -10,7 +10,7 @@
   -* and for providing reprocesss to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="radiations_process_profiles_1d_neutral_state">
+	<xs:complexType name="radiation_process_profiles_1d_neutral_state">
 		<xs:annotation>
 			<xs:documentation>Process terms related to the a given state of the neutral species</xs:documentation>
 		</xs:annotation>
@@ -96,7 +96,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="radiations_process_profiles_1d_neutral">
+	<xs:complexType name="radiation_process_profiles_1d_neutral">
 		<xs:annotation>
 			<xs:documentation>Process terms related to a given neutral species</xs:documentation>
 		</xs:annotation>
@@ -168,7 +168,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="state" type="radiations_process_profiles_1d_neutral_state" maxOccurs="unbounded">
+			<xs:element name="state" type="radiation_process_profiles_1d_neutral_state" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Process terms related to the different charge states of the species (energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
@@ -178,7 +178,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="radiations_process_profiles_1d_ions_charge_states">
+	<xs:complexType name="radiation_process_profiles_1d_ions_charge_states">
 		<xs:annotation>
 			<xs:documentation>Process terms related to the a given state of the ion species</xs:documentation>
 		</xs:annotation>
@@ -302,7 +302,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="radiations_process_profiles_1d_ions">
+	<xs:complexType name="radiation_process_profiles_1d_ions">
 		<xs:annotation>
 			<xs:documentation>Process terms related to a given ion species</xs:documentation>
 		</xs:annotation>
@@ -386,7 +386,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="state" type="radiations_process_profiles_1d_ions_charge_states" maxOccurs="unbounded">
+			<xs:element name="state" type="radiation_process_profiles_1d_ions_charge_states" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Process terms related to the different charge states of the species (ionisation, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
@@ -396,7 +396,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="radiations_process_profiles_1d_electrons">
+	<xs:complexType name="radiation_process_profiles_1d_electrons">
 		<xs:annotation>
 			<xs:documentation>Process terms related to electrons</xs:documentation>
 		</xs:annotation>
@@ -429,7 +429,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="radiations_process_profiles_1d">
+	<xs:complexType name="radiation_process_profiles_1d">
 		<xs:annotation>
 			<xs:documentation>Process terms for a given time slice</xs:documentation>
 		</xs:annotation>
@@ -439,7 +439,7 @@
 					<xs:documentation>Radial grid</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="electrons" type="radiations_process_profiles_1d_electrons">
+			<xs:element name="electrons" type="radiation_process_profiles_1d_electrons">
 				<xs:annotation>
 					<xs:documentation>Processs terms related to electrons</xs:documentation>
 				</xs:annotation>
@@ -496,7 +496,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="ion" type="radiations_process_profiles_1d_ions" maxOccurs="unbounded">
+			<xs:element name="ion" type="radiation_process_profiles_1d_ions" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Process terms related to the different ions species</xs:documentation>
 					<xs:appinfo>
@@ -504,7 +504,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="neutral" type="radiations_process_profiles_1d_neutral" maxOccurs="unbounded">
+			<xs:element name="neutral" type="radiation_process_profiles_1d_neutral" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Process terms related to the different neutral species</xs:documentation>
 					<xs:appinfo>
@@ -523,7 +523,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="radiations_process_global_volume">
+	<xs:complexType name="radiation_process_global_volume">
 		<xs:annotation>
 			<xs:documentation>Global quantities (emissions) related to a given volume</xs:documentation>
 		</xs:annotation>
@@ -578,17 +578,17 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="radiations_process_global">
+	<xs:complexType name="radiation_process_global">
 		<xs:annotation>
 			<xs:documentation>Process global quantities for a given time slice</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="inside_lcfs" type="radiations_process_global_volume">
+			<xs:element name="inside_lcfs" type="radiation_process_global_volume">
 				<xs:annotation>
 					<xs:documentation>Emissions from the core plasma, inside the last closed flux surface</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="inside_vessel" type="radiations_process_global_volume">
+			<xs:element name="inside_vessel" type="radiation_process_global_volume">
 				<xs:annotation>
 					<xs:documentation>Total emissions inside the vacuum vessel</xs:documentation>
 				</xs:annotation>
@@ -604,7 +604,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="radiations_process">
+	<xs:complexType name="radiation_process">
 		<xs:annotation>
 			<xs:documentation>Process terms for a given actuator</xs:documentation>
 		</xs:annotation>
@@ -613,11 +613,11 @@
 				<xs:annotation>
 					<xs:documentation>Process identifier</xs:documentation>
 					<xs:appinfo>
-						<doc_identifier>radiations/radiations_identifier.xml</doc_identifier>
+						<doc_identifier>radiation/radiation_identifier.xml</doc_identifier>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="global_quantities" type="radiations_process_global" maxOccurs="unbounded">
+			<xs:element name="global_quantities" type="radiation_process_global" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Scalar volume integrated quantities</xs:documentation>
 					<xs:appinfo>
@@ -626,7 +626,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="profiles_1d" type="radiations_process_profiles_1d" maxOccurs="unbounded">
+			<xs:element name="profiles_1d" type="radiation_process_profiles_1d" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Emissivity radial profiles for various time slices</xs:documentation>
 					<xs:appinfo>
@@ -637,9 +637,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="radiations">
+	<xs:element name="radiation">
 		<xs:annotation>
-			<xs:documentation>Radiations emitted by the plasma and neutrals</xs:documentation>
+			<xs:documentation>Radiation emitted by the plasma and neutrals</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.17.1</lifecycle_version>
@@ -654,7 +654,7 @@
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition)</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="process" type="radiations_process" maxOccurs="20">
+				<xs:element name="process" type="radiation_process" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>Set of emission processes. The radiation characteristics are described at the level of the originating entity:
 1/ line radiation from neutrals under neutral 2/ line and recombination radiation under ion 3/ bremsstrahlung radiation under neutral and ion 4/ possibly recombination and bremsstrahlung under ion</xs:documentation>
