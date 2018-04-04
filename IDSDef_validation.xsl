@@ -34,6 +34,7 @@ and not (.//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or
 and not (.//field[@maxoccur='unbounded' and @type='dynamic' and ancestor::field[@maxoccur='unbounded' and @type='dynamic']])
 and not (.//field[@maxoccur='unbounded' and not(@type='dynamic') and not(ancestor::field[@maxoccur='unbounded' and @type='dynamic'])])
 and not (.//field[(@data_type='FLT_0D' or @data_type='INT_0D' or @data_type='CPX_0D' or @data_type='STR_0D') and @type='dynamic' and not(ancestor::field[@maxoccur='unbounded' and @type='dynamic'])])
+and not (.//field[@data_type='structure' and @type])
 ">
 <p class="welcome">IDS <xsl:value-of select="@name"/> is valid</p>
 </xsl:when>
@@ -85,6 +86,10 @@ and not (.//field[(@data_type='FLT_0D' or @data_type='INT_0D' or @data_type='CPX
         <!-- Test the presence of "dynamic" scalars that are not nested below an AoS 3 (scalars cannot be dynamic unless under an AoS3) -->
         <xsl:apply-templates select=".//field[(@data_type='FLT_0D' or @data_type='INT_0D' or @data_type='CPX_0D' or @data_type='STR_0D') and @type='dynamic' and not(ancestor::field[@maxoccur='unbounded' and @type='dynamic'])]">
         <xsl:with-param name="error_description" select="'Illegal metadata: this scalar field is marked as &quot;dynamic&quot;. Scalars cannot be dynamic unless placed under an AoS type 3'"/>
+       </xsl:apply-templates>
+       <!-- Test the presence of structures marked with a type attribute (no meaning and breaks the Java API) -->
+        <xsl:apply-templates select=".//field[@data_type='structure' and @type]">
+        <xsl:with-param name="error_description" select="'Illegal metadata: this structure field should NOT have a &quot;type&quot; attribute (constant/static/dynamic)'"/>
        </xsl:apply-templates>
        </table>
 </xsl:otherwise>
