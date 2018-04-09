@@ -1,31 +1,38 @@
-# FIXME: Dependency on Saxon can possibly be replaced by xslt?
-# Get Saxon here: http://sourceforge.net/projects/saxon/files/Saxon-HE/9.6/
+TARGETS=dd_data_dictionary.xml IDSDef.xml IDSNames.txt dd_data_dictionary_validation.txt html_documentation/html_documentation.html test
 
-# Note: be sure to set CLASSPATH='/path/to/saxon9he.jar;...' in your environment
-SAXONICAJAR=$(wildcard $(filter %saxon9he.jar,$(subst :, ,$(CLASSPATH))))
-
-TARGETS=IDSDef.xml IDSNames.txt validation_report.html html_documentation/html_documentation.html
+.PHONY: all clean test
 all: $(TARGETS)
 
 clean:
-	rm -f $(TARGETS)
+	$(if $(wildcard .git/config),git clean -f -X,$(RM) -f $(TARGETS))
 
-IDSDef.xml: dd_physics_data_dictionary.xsd ./*/*.xsd xsd_2_IDSDef.xsl $(SAXONICAJAR)
-	java net.sf.saxon.Transform -t -warnings:fatal -s:dd_physics_data_dictionary.xsd -xsl:xsd_2_IDSDef.xsl -o:IDSDef.xml || { rm -f $@ ; exit 1 ; }
+test: dd_data_dictionary_validation.txt
+	grep -i Error $< >&2 && exit 1 || grep valid $<
 
-IDSNames.txt: %.txt:%.xsl IDSDef.xml
-	xsltproc $^ > $@
+# Compatibility target
+IDSDef.xml: dd_data_dictionary.xml
+	ln -sf $< $@
 
-validation_report.html: IDSDef.xml IDSDef_validation.xsl
-	xsltproc IDSDef_validation.xsl IDSDef.xml > validation_report.html
+dd_data_dictionary.xml: %: %.xsd %.xsl
+	$(xslt2proc)
 
-html_documentation/html_documentation.html: IDSDef.xml IDSDef_2_HTMLDocumentation.xsl $(SAXONICAJAR)
-	java net.sf.saxon.Transform -t -warnings:fatal -s:IDSDef.xml -xsl:IDSDef_2_HTMLDocumentation.xsl || { rm -f $@ ; exit 1 ; }
-#	xsltproc IDSDef_2_HTMLDocumentation.xsl IDSDef.xml > html_documentation/html_documentation.html
+html_documentation/html_documentation.html: dd_data_dictionary.xml dd_data_dictionary_html_documentation.xsl
+	$(xslt2proc)
 
-# check if saxon9he.jar is in the CLASSPATH
-ifeq (,$(SAXONICAJAR))
-$(info CLASSPATH is: $(CLASSPATH))
-$(error Invalid /path/to/saxon9he.jar in CLASSPATH)
-endif
+IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
+	$(xsltproc)
+
+# Generic Dependencies
+# Note: be sure to set CLASSPATH='/path/to/saxon9he.jar;...' in your environment
+SAXONICAJAR=$(wildcard $(filter %saxon9he.jar,$(subst :, ,$(CLASSPATH))))
+# Canned recipes
+define xsltproc
+@# Expect prerequisites: <xmlfile> <xslfile>
+xsltproc=xsltproc $(word 2,$^) $< > $@ || { rm -f $@ ; exit 1 ;}
+endef
+define xslt2proc
+@# Expect prerequisites: <xmlfile> <xslfile>
+$(if $(SAXONICAJAR),,$(error Invalid /path/to/saxon9he.jar in CLASSPATH. Forgot to load module?))
+java net.sf.saxon.Transform -t -warnings:fatal -s:$< -xsl:$(word 2,$^) -o:$@ || { rm -f $@ ; exit 1 ; }
+endef
 
