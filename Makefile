@@ -28,7 +28,7 @@ SAXONICAJAR=$(wildcard $(filter %saxon9he.jar,$(subst :, ,$(CLASSPATH))))
 # Canned recipes
 define xsltproc
 @# Expect prerequisites: <xmlfile> <xslfile>
-xsltproc=xsltproc $(word 2,$^) $< > $@ || { rm -f $@ ; exit 1 ;}
+xsltproc $(word 2,$^) $< > $@ || { rm -f $@ ; exit 1 ;}
 endef
 define xslt2proc
 @# Expect prerequisites: <xmlfile> <xslfile>
