@@ -235,6 +235,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:for-each select="xs:annotation/xs:appinfo/*">
 								<!-- Generic method for declaring all appinfo as attributes-->
 								<xsl:attribute name="{name(.)}"><xsl:value-of select="."/></xsl:attribute>
+								<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
+										<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
+										<xsl:attribute name="timebasepath">
+										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="''"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="''"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
+										</xsl:if>
 							</xsl:for-each>
 						</field>
 					</xsl:when>
@@ -260,6 +265,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<!-- Write a second attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate -->
 										<xsl:if test="contains(lower-case(name(.)),'coordinate')">
 										<xsl:attribute name="{concat(lower-case(name(.)),'_AosParent_relative')}">
+										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
+										</xsl:if>
+										<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
+										<xsl:if test="contains(lower-case(name(.)),'coordinate') and ends-with(.,'time')">
+										<xsl:attribute name="timebasepath">
 										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
 										</xsl:if>
 							</xsl:for-each>
