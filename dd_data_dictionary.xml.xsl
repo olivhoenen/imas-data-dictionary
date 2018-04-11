@@ -218,11 +218,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:choose>
 								<xsl:when test="$currPath=''">
 									<xsl:attribute name="path"><xsl:value-of select="@name"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="@name"/></xsl:attribute>
+									<xsl:attribute name="path_doc"><xsl:value-of select="@name"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="@type"/></xsl:call-template></xsl:attribute>
 								</xsl:when>
 								<xsl:otherwise>
 									<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name)"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name)"/></xsl:attribute>
+									<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name)"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="@type"/></xsl:call-template></xsl:attribute>
 								</xsl:otherwise>
 							</xsl:choose>
 							<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
@@ -240,11 +240,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:choose>
 								<xsl:when test="$currPath=''">
 									<xsl:attribute name="path"><xsl:value-of select="@name"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="@name"/></xsl:attribute>
+									<xsl:attribute name="path_doc"><xsl:value-of select="@name"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 								</xsl:when>
 								<xsl:otherwise>
 									<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name)"/></xsl:attribute>
-									<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name)"/></xsl:attribute>
+									<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name)"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 								</xsl:otherwise>
 							</xsl:choose>
 							<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
@@ -267,11 +267,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:choose>
 									<xsl:when test="$currPath=''">
 										<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_upper')"/></xsl:attribute>
-										<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_upper')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_upper')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'_error_upper')"/></xsl:attribute>
-										<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_upper')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_upper')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 									</xsl:otherwise>
 								</xsl:choose>
 								<xsl:attribute name="documentation"><xsl:value-of select="concat('Upper error for &quot;',@name,'&quot;')"/></xsl:attribute>
@@ -292,11 +292,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:choose>
 									<xsl:when test="$currPath=''">
 										<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_lower')"/></xsl:attribute>
-										<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_lower')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'_error_lower')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'_error_lower')"/></xsl:attribute>
-										<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_lower')"/></xsl:attribute>
+										<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'_error_lower')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 									</xsl:otherwise>
 								</xsl:choose>
 								<xsl:attribute name="documentation"><xsl:value-of select="concat('Lower error for &quot;',@name,'&quot;')"/></xsl:attribute>
@@ -921,4 +921,16 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+	<!-- Adding parenthesis at the end of path_doc as a function of the number of dimensions -->
+	<xsl:template name="AddToPathDoc">
+		<xsl:param name="data_type"/>
+		<xsl:choose>
+			<xsl:when test="contains($data_type,'1d') or contains($data_type,'1D')">(:)</xsl:when>
+			<xsl:when test="contains($data_type,'2d') or contains($data_type,'2D')">(:,:)</xsl:when>
+			<xsl:when test="contains($data_type,'3d') or contains($data_type,'3D')">(:,:,:)</xsl:when>
+			<xsl:when test="contains($data_type,'4d') or contains($data_type,'4D')">(:,:,:,:)</xsl:when>
+			<xsl:when test="contains($data_type,'5d') or contains($data_type,'5D')">(:,:,:,:,:)</xsl:when>
+			<xsl:when test="contains($data_type,'6d') or contains($data_type,'6D')">(:,:,:,:,:,:)</xsl:when>
+		</xsl:choose>
+	</xsl:template>			
 </xsl:stylesheet>
