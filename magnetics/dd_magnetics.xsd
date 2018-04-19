@@ -62,6 +62,17 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="flux_validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the flux data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="magnetics_bpol_probe">
@@ -172,6 +183,17 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="field_validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the field data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="magnetics_method">
@@ -230,7 +252,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>2.0.0</lifecycle_last_change>
+				<lifecycle_last_change>3.17.2</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
