@@ -486,11 +486,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 													<xsl:choose>
 														<xsl:when test="$currPath=''">
 															<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data')"/></xsl:attribute>
-															<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data')"/></xsl:attribute>
+															<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 														</xsl:when>
 														<xsl:otherwise>
 															<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data')"/></xsl:attribute>
-															<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data')"/></xsl:attribute>
+															<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 														</xsl:otherwise>
 													</xsl:choose>
 													<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
@@ -514,11 +514,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<xsl:choose>
 															<xsl:when test="$currPath=''">
 																<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data_error_upper')"/></xsl:attribute>
-																<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_upper')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_upper')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 															</xsl:when>
 															<xsl:otherwise>
 																<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data_error_upper')"/></xsl:attribute>
-																<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_upper')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_upper')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 															</xsl:otherwise>
 														</xsl:choose>
 														<xsl:attribute name="documentation">Upper error for &quot;data&quot;</xsl:attribute>
@@ -540,11 +540,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<xsl:choose>
 															<xsl:when test="$currPath=''">
 																<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data_error_lower')"/></xsl:attribute>
-																<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_lower')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat(@name,'/data_error_lower')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 															</xsl:when>
 															<xsl:otherwise>
 																<xsl:attribute name="path"><xsl:value-of select="concat($currPath,'/',@name,'/data_error_lower')"/></xsl:attribute>
-																<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_lower')"/></xsl:attribute>
+																<xsl:attribute name="path_doc"><xsl:value-of select="concat($currPath_doc,'/',@name,'/data_error_lower')"/><xsl:call-template name="AddToPathDoc"><xsl:with-param name="data_type" select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:call-template></xsl:attribute>
 															</xsl:otherwise>
 														</xsl:choose>
 														<xsl:attribute name="documentation">Lower error for &quot;data&quot;</xsl:attribute>
