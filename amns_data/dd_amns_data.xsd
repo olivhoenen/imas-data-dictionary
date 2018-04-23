@@ -22,7 +22,7 @@
 			</xs:element>
 			<xs:element name="shot">
 				<xs:annotation>
-					<xs:documentation>Shot number = Mass*100+Nuclear_charge</xs:documentation>
+					<xs:documentation>Shot number = Mass*1000+Nuclear_charge</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -477,6 +477,21 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data_source" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Filename or subroutine name used to provide this data.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data_provider" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>IMAS responsible person for this data.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data_citation" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Reference to publication(s).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
