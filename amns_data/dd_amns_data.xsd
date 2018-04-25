@@ -389,6 +389,39 @@
 			<xs:documentation>Definition of a process and its data</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Filename or subroutine name used to provide this data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="provider">
+				<xs:annotation>
+					<xs:documentation>Name of the person in charge of producing this data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="citation">
+				<xs:annotation>
+					<xs:documentation>Reference to publication(s)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
 					<xs:documentation>String identifying the process (e.g. EI, RC, ...)</xs:documentation>
@@ -477,21 +510,6 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="data_source" type="xs:string">
-				<xs:annotation>
-					<xs:documentation>Filename or subroutine name used to provide this data.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="data_provider" type="xs:string">
-				<xs:annotation>
-					<xs:documentation>IMAS responsible person for this data.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="data_citation" type="xs:string">
-				<xs:annotation>
-					<xs:documentation>Reference to publication(s).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -616,7 +634,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.15.1</lifecycle_last_change>
+				<lifecycle_last_change>3.18.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
