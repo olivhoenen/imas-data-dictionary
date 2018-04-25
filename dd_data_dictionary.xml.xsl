@@ -951,7 +951,14 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 						<xsl:value-of select="substring-after(local:getAbsolutePath(concat($currPath,'/',$coordinatePath)),concat('(i',$aosLevel,')/'))"/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="substring-after(concat($currPath,'/',$coordinatePath),concat('(i',$aosLevel,')/'))"/>
+					<xsl:choose>
+						<xsl:when test="$coordinatePath"> <!--if coordinatePath is not empty-->
+						    <xsl:value-of select="substring-after(concat($currPath,'/',$coordinatePath),concat('(i',$aosLevel,')/'))"/>
+						</xsl:when>
+						<xsl:otherwise>  
+							<xsl:value-of select="substring-after($currPath,concat('(i',$aosLevel,')/'))"/>
+						</xsl:otherwise>
+						</xsl:choose>		
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
@@ -962,7 +969,14 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 						<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',$coordinatePath))"/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat($currPath,'/',$coordinatePath)"/>
+						<xsl:choose>
+						<xsl:when test="$coordinatePath"> <!--if coordinatePath is not empty-->
+						    <xsl:value-of select="concat($currPath,'/',$coordinatePath)"/>
+						</xsl:when>
+						<xsl:otherwise>  
+							 <xsl:value-of select="$currPath"/>
+						</xsl:otherwise>
+						</xsl:choose>					
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:otherwise>
