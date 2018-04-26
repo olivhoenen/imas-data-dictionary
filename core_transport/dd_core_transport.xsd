@@ -370,6 +370,19 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="flow_damping_rate">
+				<xs:annotation>
+					<xs:documentation>Damping rate for this flow component (e.g. due to collisions, calculated from a neoclassical model)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../grid_flux/rho_tor_norm</coordinate1>
+						<units>s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="core_transport_model_components_3_momentum">
@@ -398,6 +411,97 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="toroidal" type="core_transport_model_3_momentum">
+				<xs:annotation>
+					<xs:documentation>Toroidal component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_4_momentum">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients for momentum equation in a given direction. Coordinates four levels above.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="d">
+				<xs:annotation>
+					<xs:documentation>Effective diffusivity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../../grid_d/rho_tor_norm</coordinate1>
+						<units>m^2.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v">
+				<xs:annotation>
+					<xs:documentation>Effective convection</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../../grid_v/rho_tor_norm</coordinate1>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="flux">
+				<xs:annotation>
+					<xs:documentation>Flux</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../../grid_flux/rho_tor_norm</coordinate1>
+						<units>kg.m^-1.s^-2</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="flow_damping_rate">
+				<xs:annotation>
+					<xs:documentation>Damping rate for this flow component (e.g. due to collisions, calculated from a neoclassical model)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../../../grid_flux/rho_tor_norm</coordinate1>
+						<units>s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="core_transport_model_components_4_momentum">
+		<xs:annotation>
+			<xs:documentation>Transport coefficients for momentum equations on various components. Coordinates four levels above the leaves</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="radial" type="core_transport_model_4_momentum">
+				<xs:annotation>
+					<xs:documentation>Radial component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="diamagnetic" type="core_transport_model_4_momentum">
+				<xs:annotation>
+					<xs:documentation>Diamagnetic component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parallel" type="core_transport_model_4_momentum">
+				<xs:annotation>
+					<xs:documentation>Parallel component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="poloidal" type="core_transport_model_4_momentum">
+				<xs:annotation>
+					<xs:documentation>Poloidal component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toroidal" type="core_transport_model_4_momentum">
 				<xs:annotation>
 					<xs:documentation>Toroidal component</xs:documentation>
 				</xs:annotation>
@@ -508,6 +612,11 @@
 			<xs:element name="energy" type="core_transport_model_3_energy">
 				<xs:annotation>
 					<xs:documentation>Transport quantities related to the energy equation of the charge state considered </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum" type="core_transport_model_components_4_momentum">
+				<xs:annotation>
+					<xs:documentation>Transport coefficients related to the state momentum equations for various components (directions)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -788,6 +897,19 @@
 					<xs:documentation>Transport coefficients for total toroidal momentum equation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="e_field_radial">
+				<xs:annotation>
+					<xs:documentation>Radial component of the electric field (calculated e.g. by a neoclassical model)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid_flux/rho_tor_norm</coordinate1>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="ion" type="core_transport_model_ions" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Transport coefficients related to the various ion species</xs:documentation>
@@ -857,7 +979,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.15.0</lifecycle_last_change>
+				<lifecycle_last_change>3.18.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
