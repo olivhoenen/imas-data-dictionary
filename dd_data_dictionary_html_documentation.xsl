@@ -79,7 +79,7 @@
         <p>Lifecycle status: <xsl:value-of select="@lifecycle_status"/> since version <xsl:value-of select="@lifecycle_version"/></p> <!-- Write the IDS Lifecycle information -->
         <p>Last change occured on version: <xsl:value-of select="@lifecycle_last_change"/></p> <!-- Write the IDS Lifecycle information -->
         <p><a href="html_documentation.html">Back to top IDS list</a></p>
-		<button onclick="ToggleErrorDisplay('body>table')">Show/Hide errorbar nodes</button>
+		<button onclick="ToggleErrorDisplay('body>table')">Show/Hide errorbar nodes</button>  By convention, only the upper error node should be filled in case of symmetrical error bars.
         <br/>   
         <br/>          
         <table border="1">
