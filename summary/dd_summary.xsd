@@ -104,6 +104,37 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_dynamic_flt_1d_4">
+		<xs:annotation>
+			<xs:documentation>Summary dynamic FLT_1D + source information, time four levels above this node</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../../../../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_dynamic_flt_1d_3">
 		<xs:annotation>
 			<xs:documentation>Summary dynamic FLT_1D + source information, time three levels above this node</xs:documentation>
@@ -1176,12 +1207,12 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="summary_pedestal_fit_stability">
+	<xs:complexType name="summary_pedestal_fit_stability_method">
 		<xs:annotation>
-			<xs:documentation>MHD stability analysis of the pedestal (for a given fit of the profiles)</xs:documentation>
+			<xs:documentation>MHD stability analysis of the pedestal (for a given method for calculating the bootstrap current)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="alpha_critical" type="summary_dynamic_flt_1d_3">
+			<xs:element name="alpha_critical" type="summary_dynamic_flt_1d_4">
 				<xs:annotation>
 					<xs:documentation>Critical normalized pressure gradient determined with self-consistent runs with an MHD stability code</xs:documentation>
 					<xs:appinfo>
@@ -1189,6 +1220,29 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="alpha_ratio" type="summary_dynamic_flt_1d_4">
+				<xs:annotation>
+					<xs:documentation>Ratio of alpha_critical over alpha_experimental</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e_pedestal_top_critical" type="summary_dynamic_flt_1d_4">
+				<xs:annotation>
+					<xs:documentation>Critical electron temperature at pedestal top determined with self-consistent runs with an MHD stability code</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_pedestal_fit_stability">
+		<xs:annotation>
+			<xs:documentation>MHD stability analysis of the pedestal (for a given fit of the profiles)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
 			<xs:element name="alpha_experimental" type="summary_dynamic_flt_1d_3">
 				<xs:annotation>
 					<xs:documentation>Experimental normalized pressure gradient reconstructed by an MHD stability code (with assumptions on the ion pressure)</xs:documentation>
@@ -1197,20 +1251,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="alpha_ratio" type="summary_dynamic_flt_1d_3">
+			<xs:element name="bootstrap_current_sauter" type="summary_pedestal_fit_stability_method">
 				<xs:annotation>
-					<xs:documentation>Ratio of alpha_critical over alpha_experimental</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
-					</xs:appinfo>
+					<xs:documentation>MHD calculations of the critical alpha parameter using the Sauter formula for the calculation of the bootstrap current</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e_pedestal_top_critical" type="summary_dynamic_flt_1d_3">
+			<xs:element name="bootstrap_current_hager" type="summary_pedestal_fit_stability_method">
 				<xs:annotation>
-					<xs:documentation>Critical electron temperature at pedestal top determined with self-consistent runs with an MHD stability code</xs:documentation>
-					<xs:appinfo>
-						<units>eV</units>
-					</xs:appinfo>
+					<xs:documentation>MHD calculations of the critical alpha parameter using the Hager formula for the calculation of the bootstrap current</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
