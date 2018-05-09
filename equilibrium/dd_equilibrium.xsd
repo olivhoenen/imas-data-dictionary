@@ -22,9 +22,154 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="equilibrium_boundary_separatrix">
+		<xs:annotation>
+			<xs:documentation>Geometry of the plasma boundary at the separatrix</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type">
+				<xs:annotation>
+					<xs:documentation>0 (limiter) or 1 (diverted)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="rz1d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>RZ outline of the plasma boundary</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Value of the poloidal flux at the separatrix</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometric_axis" type="rz0d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 and (Zmin+Zmax) / 2 of the boundary)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minor_radius">
+				<xs:annotation>
+					<xs:documentation>Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="elongation">
+				<xs:annotation>
+					<xs:documentation>Elongation of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="elongation_upper">
+				<xs:annotation>
+					<xs:documentation>Elongation (upper half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="elongation_lower">
+				<xs:annotation>
+					<xs:documentation>Elongation (lower half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="triangularity">
+				<xs:annotation>
+					<xs:documentation>Triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="triangularity_upper">
+				<xs:annotation>
+					<xs:documentation>Upper triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="triangularity_lower">
+				<xs:annotation>
+					<xs:documentation>Lower triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Array of X-points, for each of them the RZ position is given</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="strike_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Array of strike points, for each of them the RZ position is given</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="active_limiter_point" type="rz0d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_boundary">
 		<xs:annotation>
-			<xs:documentation>Geometry of the plasma boundary</xs:documentation>
+			<xs:documentation>Geometry of the plasma boundary typically taken at psi_norm = 99.x % of the separatrix</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="type">
@@ -52,12 +197,38 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="psi_norm">
+				<xs:annotation>
+					<xs:documentation>Value of the normalised poloidal flux at which the boundary is taken (typically 99.x %), the flux being normalised to its value at the separatrix</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="b_flux_pol_norm">
 				<xs:annotation>
 					<xs:documentation>Value of the normalised poloidal flux at which the boundary is taken</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.18.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Value of the poloidal flux at which the boundary is taken</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1955,7 +2126,12 @@
 		<xs:sequence>
 			<xs:element name="boundary" type="equilibrium_boundary">
 				<xs:annotation>
-					<xs:documentation>Description of the plasma boundary</xs:documentation>
+					<xs:documentation>Description of the plasma boundary used by fixed-boundary codes and typically chosen at psi_norm = 99.x% of the separatrix</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="boundary_separatrix" type="equilibrium_boundary_separatrix">
+				<xs:annotation>
+					<xs:documentation>Description of the plasma boundary at the separatrix</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="constraints" type="equilibrium_constraints">
@@ -2040,7 +2216,7 @@
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>
 							<lifecycle_status>alpha</lifecycle_status>
-							<lifecycle_version>3.17.2</lifecycle_version>
+							<lifecycle_version>3.18.0</lifecycle_version>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
