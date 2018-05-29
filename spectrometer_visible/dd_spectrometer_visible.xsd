@@ -73,7 +73,7 @@
 		<xs:sequence>
 			<xs:element name="geometry_type">
 				<xs:annotation>
-					<xs:documentation>Type of geometry used to describe the detector image (1:'outline', 2:'circular')</xs:documentation>
+					<xs:documentation>Type of geometry used to describe the image (1:'outline', 2:'circular')</xs:documentation>
 					<xs:appinfo>
 						<Type>static</Type>
 					</xs:appinfo>
@@ -84,12 +84,12 @@
 			</xs:element>
 			<xs:element name="outline" type="rzphi1d_static">
 				<xs:annotation>
-					<xs:documentation>Coordinates of the points shaping the polygon of the detector image</xs:documentation>
+					<xs:documentation>Coordinates of the points shaping the polygon of the image</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="circular" type="detector_image_circular">
 				<xs:annotation>
-					<xs:documentation>Description of circular or elliptic detector image</xs:documentation>
+					<xs:documentation>Description of circular or elliptic image</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -278,6 +278,30 @@
 			<xs:documentation>Grating spectrometer</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="grating">
+				<xs:annotation>
+					<xs:documentation>Number of grating lines per unit length</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="slit_width">
+				<xs:annotation>
+					<xs:documentation>Width of the slit (placed in the object focal plane)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="processed_lines">
 				<xs:annotation>
 					<xs:documentation>Central wavelength of the processed lines</xs:documentation>
@@ -451,17 +475,10 @@
 					<xs:documentation>Image of the detector or pixel on the focal plane of the optical system</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="spot_diameter">
+			<xs:element name="fiber_image" type="detector_image">
 				<xs:annotation>
 					<xs:documentation>Image of the optical fiber on the focal plane of the optical system</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="light_collection_efficiencies" type="spectro_vis_channel_light_collection">
 				<xs:annotation>
@@ -477,12 +494,12 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="grating" type="spectro_vis_channel_grating">
+			<xs:element name="grating_spectrometer" type="spectro_vis_channel_grating">
 				<xs:annotation>
 					<xs:documentation>Quantities measured by the channel if connected to a grating spectrometer</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="filter" type="spectro_vis_channel_filter">
+			<xs:element name="filter_spectrometer" type="spectro_vis_channel_filter">
 				<xs:annotation>
 					<xs:documentation>Quantities measured by the channel if connected to a filter spectrometer</xs:documentation>
 				</xs:annotation>
@@ -521,7 +538,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.3.1</lifecycle_version>
-				<lifecycle_last_change>3.10.2</lifecycle_last_change>
+				<lifecycle_last_change>3.18.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
