@@ -36,7 +36,7 @@
 					<xs:documentation>Position of the measurements</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pressure">
+			<xs:element name="pressure" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Pressure</xs:documentation>
 					<xs:appinfo>
@@ -45,12 +45,6 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="calibration_coefficient">
 				<xs:annotation>
