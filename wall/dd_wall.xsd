@@ -648,6 +648,27 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="wall_ggd">
+		<xs:annotation>
+			<xs:documentation>3D wall description using the GGD</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of wall: index = 0 for gas tight and 1 for a wall with holes/open ports</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid_ggd" type="generic_grid_aos3_root" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Wall geometry described using the Generic Grid Description, for various time slices (in case of mobile wall elements). The timebase of this array of structure must be a subset of the timebase on which physical quantities are described. Grid_subsets are used to describe various  wall components in a modular way.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="wall">
 		<xs:annotation>
 			<xs:documentation>Description of the torus wall and its interaction with the plasma</xs:documentation>
@@ -668,6 +689,14 @@
 				<xs:element name="description_2d" type="wall_2d" maxOccurs="3">
 					<xs:annotation>
 						<xs:documentation>Set of 2D wall descriptions, for each type of possible physics or engineering configurations necessary (gas tight vs wall with ports and holes, coarse vs fine representation, single contour limiter, disjoint gapped plasma facing components, ...).</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="description_ggd" type="wall_ggd" maxOccurs="3">
+					<xs:annotation>
+						<xs:documentation>Set of 3D wall descriptions, described using the GGD, for each type of possible physics or engineering configurations necessary (gas tight vs wall with ports and holes, coarse vs fine representation, ...). </xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
