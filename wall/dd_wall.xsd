@@ -648,25 +648,11 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="wall_ggd">
+	<xs:complexType name="wall_description_ggd_ggd">
 		<xs:annotation>
-			<xs:documentation>3D wall description using the GGD</xs:documentation>
+			<xs:documentation>Physics quantities related to the 3D wall description using the GGD</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="type" type="identifier_static">
-				<xs:annotation>
-					<xs:documentation>Type of wall: index = 0 for gas tight and 1 for a wall with holes/open ports</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="grid_ggd" type="generic_grid_aos3_root" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Wall geometry described using the Generic Grid Description, for various time slices (in case of mobile wall elements). The timebase of this array of structure must be a subset of the timebase on which physical quantities are described. Grid_subsets are used to describe various  wall components in a modular way.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="power_density" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Power density arriving on the wall surface, for various wall components (grid subsets)</xs:documentation>
@@ -682,6 +668,45 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>K</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_description_ggd">
+		<xs:annotation>
+			<xs:documentation>3D wall description using the GGD</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of wall: index = 0 for gas tight and 1 for a wall with holes/open ports</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid_ggd" type="generic_grid_aos3_root" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Wall geometry described using the Generic Grid Description, for various time slices (in case of mobile wall elements). The timebase of this array of structure must be a subset of the timebase on which physical quantities are described (../ggd structure). Grid_subsets are used to describe various  wall components in a modular way.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ggd" type="wall_description_ggd_ggd" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Wall physics quantities represented using the general grid description, for various time slices.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -712,7 +737,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="description_ggd" type="wall_ggd" maxOccurs="3">
+				<xs:element name="description_ggd" type="wall_description_ggd" maxOccurs="3">
 					<xs:annotation>
 						<xs:documentation>Set of 3D wall descriptions, described using the GGD, for each type of possible physics or engineering configurations necessary (gas tight vs wall with ports and holes, coarse vs fine representation, ...). </xs:documentation>
 						<xs:appinfo>
