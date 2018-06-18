@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<!-- This IDS should be made simpler if we would find a way to avoid a systematic data/time construct (due to temporary limitation in the XSD processing) -->
+	<xs:complexType name="lh_antennas_antenna_module">
+		<xs:annotation>
+			<xs:documentation>Module of an LH antenna</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the module</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the module</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power coupled to the plasma</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_forward">
+				<xs:annotation>
+					<xs:documentation>Forward power arriving to the back of the module</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_reflected">
+				<xs:annotation>
+					<xs:documentation>Reflected power</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reflection_coefficient">
+				<xs:annotation>
+					<xs:documentation>Power reflection coefficient</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase of the forward power arriving at the back of this module</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="lh_antennas_antenna">
+		<xs:annotation>
+			<xs:documentation>LH antenna</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the antenna (unique within the set of all antennas of the experiment)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the antenna (unique within the set of all antennas of the experiment)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="frequency">
+				<xs:annotation>
+					<xs:documentation>Frequency</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power coupled to the plasma</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_forward">
+				<xs:annotation>
+					<xs:documentation>Forward power arriving at the back of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_reflected">
+				<xs:annotation>
+					<xs:documentation>Reflected power</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reflection_coefficient">
+				<xs:annotation>
+					<xs:documentation>Power reflection coefficient, averaged over modules</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase_average">
+				<xs:annotation>
+					<xs:documentation>Phase difference between two neighbouring modules (average over modules), at the mouth (front) of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_parallel_peak">
+				<xs:annotation>
+					<xs:documentation>Peak parallel refractive index of the launched wave spectrum (simple estimate based on the measured phase difference)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="position" type="rzphi1d_dynamic_aos1_definition">
+				<xs:annotation>
+					<xs:documentation>Position of a reference point on the antenna (allowing also tracking the possible movements of the antenna)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pressure_tank">
+				<xs:annotation>
+					<xs:documentation>Pressure in the vacuum tank of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>Pa</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="module" type="lh_antennas_antenna_module" maxOccurs="16">
+				<xs:annotation>
+					<xs:documentation>Set of antenna modules</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="lh_antennas">
+		<xs:annotation>
+			<xs:documentation>Antenna systems for heating and current drive in the Lower Hybrid (LH) frequencies. In the definitions below, the front (or mouth) of the antenna refers to the plasma facing side of the antenna, while the back refers to the waveguides connected side of the antenna (towards the RF generators).</xs:documentation>
+			<xs:appinfo>
+				<lifecycle_status>alpha</lifecycle_status>
+				<lifecycle_version>3.19.0</lifecycle_version>
+				<lifecycle_last_change>3.19.0</lifecycle_last_change>
+			</xs:appinfo>
+			<xs:appinfo/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="antenna" type="lh_antennas_antenna" maxOccurs="2">
+					<xs:annotation>
+						<xs:documentation>Set of Lower Hybrid antennas</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="power">
+					<xs:annotation>
+						<xs:documentation>Power coupled to the plasma by the whole LH system (sum over antennas)</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<coordinate1>time</coordinate1>
+							<units>W</units>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="time"/>
+							<xs:group ref="FLT_1D"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="code"/>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
