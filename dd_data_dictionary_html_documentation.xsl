@@ -110,7 +110,7 @@
       </head>
       <body>
         <p class="welcome">IMAS physics constants</p>
-        <p>Last change occured on version: <xsl:value-of select="document('utilities/constants_module.xml')/*/lifecycle_last_change"/></p> <!-- Write the IDS Lifecycle information -->
+        <p>Last change occured on version: <xsl:value-of select="document('utilities/constants_module.xml')/constants/@lifecycle_last_change"/></p> <!-- Write the IDS Lifecycle information -->
         <p><a href="html_documentation.html">Back to top IDS list</a></p>
         <table border="1">
         <thead style="color:#ff0000"><td>Name</td><td>Description</td><td>Value</td></thead>
