@@ -170,6 +170,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath_doc"/>
 		<xsl:param name="aosLevel"/>
         <xsl:param name="aos3Parent"/>
+        <xsl:param name="structure_reference"/>
 		<xsl:param name="parentmachine"/>
 		<xsl:param name="parenttime"/>
 		<xsl:param name="parentunit"/>
@@ -186,7 +187,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:with-param name="currPath" select="$currPath"/>
 			<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 			<xsl:with-param name="aosLevel" select="$aosLevel"/>
-<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
+            <xsl:with-param name="aos3Parent" select="$aos3Parent"/>
+            <xsl:with-param name="structure_reference" select="$structure_reference"/>
 			<xsl:with-param name="parentmachine" select="$parentmachine"/>
 			<xsl:with-param name="parenttime" select="$parenttime"/>
 			<xsl:with-param name="parentunit" select="$parentunit"/>
@@ -897,6 +899,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath"/>
 		<xsl:param name="coordinatePath"/>
 		<xsl:choose>
+     		<xsl:when test="starts-with($coordinatePath,'/')">
+		       <!-- Case of a coordinate path expressed relative to the IDS root or nearest AoS parent (special case for the utilities section, e.g. /time). We then just get rid of the initial slash for the absolute coordinate attribute (to avoid users having to learn this initial / convention) -->
+		       <xsl:value-of select="substring($coordinatePath,2)"/>  
+		    </xsl:when>
 			<xsl:when test="contains($coordinatePath,'...')">
 				<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
 				<xsl:value-of select="replace($coordinatePath,'../','')"/>
@@ -936,6 +942,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="coordinatePath"/>
 		<xsl:param name="aosLevel"/>
 		<xsl:choose>
+		      <xsl:when test="starts-with($coordinatePath,'/')">
+		       <!-- Case of a coordinate path expressed relative to the IDS root or nearest AoS parent (special case for the utilities section, e.g. /time). We then keep the initial slash and display it as it is, the AL will know how to interpret it -->
+		       <xsl:value-of select="$coordinatePath"/>  
+		    </xsl:when>
 			<xsl:when test="contains($coordinatePath,'...')">
 				<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
 				<xsl:value-of select="replace($coordinatePath,'../','')"/>
