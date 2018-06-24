@@ -68,7 +68,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="position" type="rzphi1d_dynamic_aos1">
+			<xs:element name="position" type="rzphirhopsitheta1d_dynamic_aos1">
 				<xs:annotation>
 					<xs:documentation>Position of the measurements</xs:documentation>
 				</xs:annotation>
@@ -105,6 +105,22 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="optical_depth">
+				<xs:annotation>
+					<xs:documentation>Optical depth of the plasma at the position of the measurement. This parameter is a proxy for the local / non-local character of the ECE emission. It must be greater than 1 to guarantee that the measurement is dominated by local ECE emission (non-local otherwise)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="ece">
@@ -113,7 +129,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.2.1</lifecycle_version>
-				<lifecycle_last_change>3.10.1</lifecycle_last_change>
+				<lifecycle_last_change>3.19.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
