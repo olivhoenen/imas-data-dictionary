@@ -4094,6 +4094,109 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="rzphirhopsitheta1d_dynamic_aos1">
+		<xs:annotation>
+			<xs:documentation>Structure for list of R, Z, Phi, rho_tor_norm, psi, theta positions (1D, dynamic within a type 1 array of structures (indexed on objects, data/time structure)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal flux</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="theta">
+				<xs:annotation>
+					<xs:documentation>Poloidal angle (oriented clockwise when viewing the poloidal cross section on the right hand side of the tokamak axis of symmetry, with the origin placed on the plasma magnetic axis)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rzphi1d_dynamic_aos1_definition">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi positions (1D, dynamic within a type 1 array of structures (indexed on objects, data/time structure), including a definition of the reference point</xs:documentation>
@@ -4265,7 +4368,7 @@
 			</xs:element>
 			<xs:element name="theta">
 				<xs:annotation>
-					<xs:documentation>Poloidal angle (oriented clockwise when viewing the poloidal cross section on the right hand side of the tokamak axis of symmetry)</xs:documentation>
+					<xs:documentation>Poloidal angle (oriented clockwise when viewing the poloidal cross section on the right hand side of the tokamak axis of symmetry, with the origin placed on the plasma magnetic axis)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>rad</units>
