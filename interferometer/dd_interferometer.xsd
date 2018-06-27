@@ -200,7 +200,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.15.0</lifecycle_version>
-				<lifecycle_last_change>3.16.0</lifecycle_last_change>
+				<lifecycle_last_change>3.19.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -233,6 +233,33 @@
 				<xs:element name="n_e_volume_average_validity">
 					<xs:annotation>
 						<xs:documentation>Indicator of the validity of the n_e_volume_average data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="INT_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="electrons_n">
+					<xs:annotation>
+						<xs:documentation>Total number of electrons in the plasma, estimated from the line densities measured by the various channels</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<units>-</units>
+							<type>dynamic</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="time"/>
+							<xs:group ref="FLT_1D"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="electrons_n_validity">
+					<xs:annotation>
+						<xs:documentation>Indicator of the validity of the electrons_n data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
 						</xs:appinfo>
