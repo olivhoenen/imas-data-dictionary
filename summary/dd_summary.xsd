@@ -10,9 +10,9 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="summary_dynamic_flt_1d_3_parent_2">
+	<xs:complexType name="summary_dynamic_flt_1d_root_parent_2">
 		<xs:annotation>
-			<xs:documentation>Summary dynamic FLT_1D + source information, time three levels above this node and units as parent level 2</xs:documentation>
+			<xs:documentation>Summary dynamic FLT_1D + source information, time at the root of the IDS and units as parent level 2</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="value">
@@ -21,38 +21,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent_level_2</units>
-						<coordinate1>../../../../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="source">
-				<xs:annotation>
-					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="summary_dynamic_flt_1d_2_parent_2">
-		<xs:annotation>
-			<xs:documentation>Summary dynamic FLT_1D + source information, time two levels above this node and units as parent level 2</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="value">
-				<xs:annotation>
-					<xs:documentation>Value</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent_level_2</units>
-						<coordinate1>../../../../time</coordinate1>
+						<coordinate1>/time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -74,7 +43,7 @@
 	</xs:complexType>
 	<xs:complexType name="summary_dynamic_flt_2d_fraction_2">
 		<xs:annotation>
-			<xs:documentation>Summary dynamic FL2_1D + source information, time two levels above this node, first dimension 1...3 (beam fractions)</xs:documentation>
+			<xs:documentation>Summary dynamic FL2_1D + source information, time at the root of the IDS, first dimension 1...3 (beam fractions)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="value">
@@ -84,7 +53,7 @@
 						<type>dynamic</type>
 						<units>as_parent</units>
 						<coordinate1>1...3</coordinate1>
-						<coordinate2>../../../../time</coordinate2>
+						<coordinate2>/time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -104,9 +73,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="summary_dynamic_flt_1d_4">
+	<xs:complexType name="summary_dynamic_flt_1d_root">
 		<xs:annotation>
-			<xs:documentation>Summary dynamic FLT_1D + source information, time four levels above this node</xs:documentation>
+			<xs:documentation>Summary dynamic FLT_1D + source information, time at the root of the IDS</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="value">
@@ -115,100 +84,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-						<coordinate1>../../../../../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="source">
-				<xs:annotation>
-					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="summary_dynamic_flt_1d_3">
-		<xs:annotation>
-			<xs:documentation>Summary dynamic FLT_1D + source information, time three levels above this node</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="value">
-				<xs:annotation>
-					<xs:documentation>Value</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../../../../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="source">
-				<xs:annotation>
-					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="summary_dynamic_flt_1d_2">
-		<xs:annotation>
-			<xs:documentation>Summary dynamic FLT_1D + source information, time two levels above this node</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="value">
-				<xs:annotation>
-					<xs:documentation>Value</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../../../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="source">
-				<xs:annotation>
-					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="summary_dynamic_flt_1d_1">
-		<xs:annotation>
-			<xs:documentation>Summary dynamic FLT_1D + source information, time one level above this node</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="value">
-				<xs:annotation>
-					<xs:documentation>Value</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../../../time</coordinate1>
+						<coordinate1>/time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -435,9 +311,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="summary_dynamic_int_1d_2">
+	<xs:complexType name="summary_dynamic_int_1d_root">
 		<xs:annotation>
-			<xs:documentation>Summary dynamic INT_1D + source information, time two levels above this node</xs:documentation>
+			<xs:documentation>Summary dynamic INT_1D + source information, time at the root of the IDS</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="value">
@@ -445,7 +321,7 @@
 					<xs:documentation>Value</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../../../time</coordinate1>
+						<coordinate1>/time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -465,184 +341,77 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="summary_dynamic_int_1d_1">
+	<xs:complexType name="summary_species">
 		<xs:annotation>
-			<xs:documentation>Summary dynamic INT_1D + source information, time one level above this node</xs:documentation>
+			<xs:documentation>List of ion species used in summary</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="value">
-				<xs:annotation>
-					<xs:documentation>Value</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="source">
-				<xs:annotation>
-					<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="summary_species_level_3">
-		<xs:annotation>
-			<xs:documentation>List of ion species used in summary, three levels below the top</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="hydrogen" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="hydrogen" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Hydrogen</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="deuterium" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="deuterium" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Deuterium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="tritium" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="tritium" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Tritium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="helium_3" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="helium_3" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Helium isotope with 3 nucleons</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="helium_4" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="helium_4" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Helium isotope with 4 nucleons</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beryllium" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="beryllium" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Beryllium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="lithium" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="lithium" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Lithium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="carbon" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="carbon" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Carbon</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="nitrogen" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="nitrogen" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Nitrogen</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="neon" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="neon" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Neon</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="argon" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="argon" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Argon</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="xenon" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="xenon" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Xenon</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="oxygen" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="oxygen" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Oxygen</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="tungsten" type="summary_dynamic_flt_1d_3_parent_2">
-				<xs:annotation>
-					<xs:documentation>Tungsten</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="summary_species_level_2">
-		<xs:annotation>
-			<xs:documentation>List of ion species used in summary, two levels below the top</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="hydrogen" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Hydrogen</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="deuterium" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Deuterium</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="tritium" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Tritium</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="helium_3" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Helium isotope with 3 nucleons</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="helium_4" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Helium isotope with 4 nucleons</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="beryllium" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Beryllium</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="lithium" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Lithium</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="carbon" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Carbon</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="nitrogen" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Nitrogen</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="neon" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Neon</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="argon" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Argon</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="xenon" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Xenon</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="oxygen" type="summary_dynamic_flt_1d_2_parent_2">
-				<xs:annotation>
-					<xs:documentation>Oxygen</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="tungsten" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="tungsten" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Tungsten</xs:documentation>
 				</xs:annotation>
@@ -654,47 +423,47 @@
 			<xs:documentation>List of ion species and other gas injection related quantities</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="total" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="total" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Total gas injection rate (sum over species)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="midplane" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="midplane" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Gas injection rate from all valves located near the equatorial midplane</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="top" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="top" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Gas injection rate from all valves located near the top of the vaccuum chamber</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="bottom" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="bottom" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Gas injection rate from all valves located near near the bottom of the vaccuum chamber</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="hydrogen" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="hydrogen" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Hydrogen</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="deuterium" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="deuterium" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Deuterium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="tritium" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="tritium" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Tritium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="helium_3" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="helium_3" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Helium isotope with 3 nucleons</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="helium_4" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="helium_4" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Helium isotope with 4 nucleons</xs:documentation>
 				</xs:annotation>
@@ -707,92 +476,92 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beryllium" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="beryllium" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Beryllium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="lithium" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="lithium" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Lithium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="carbon" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="carbon" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Carbon</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="oxygen" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="oxygen" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Oxygen</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="nitrogen" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="nitrogen" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Nitrogen</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="neon" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="neon" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Neon</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="argon" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="argon" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Argon</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="xenon" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="xenon" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Xenon</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="krypton" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="krypton" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Krypton</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="methane" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="methane" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Methane (CH4)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="methane_carbon_13" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="methane_carbon_13" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Methane (CH4 with carbon 13)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="methane_deuterated" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="methane_deuterated" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Deuterated methane (CD4)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="silane" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="silane" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Silane (SiH4)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="ethylene" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="ethylene" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Ethylene (C2H4)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="ethane" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="ethane" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Ethane (C2H6)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="propane" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="propane" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Propane (C3H8)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="ammonia" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="ammonia" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Ammonia (NH3)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="ammonia_deuterated" type="summary_dynamic_flt_1d_2_parent_2">
+			<xs:element name="ammonia_deuterated" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Deuterated ammonia (ND3)</xs:documentation>
 				</xs:annotation>
@@ -955,7 +724,7 @@
 					<xs:documentation>Radial position at which physics quantities are evaluated</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e" type="summary_dynamic_flt_1d_2">
+			<xs:element name="t_e" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
@@ -963,7 +732,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_2">
+			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ion temperature (average over ion species)</xs:documentation>
 					<xs:appinfo>
@@ -971,7 +740,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e" type="summary_dynamic_flt_1d_2">
+			<xs:element name="n_e" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
@@ -979,7 +748,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i" type="summary_species_level_3">
+			<xs:element name="n_i" type="summary_species">
 				<xs:annotation>
 					<xs:documentation>Ion density per species</xs:documentation>
 					<xs:appinfo>
@@ -987,7 +756,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_2">
+			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total ion density (sum over species)</xs:documentation>
 					<xs:appinfo>
@@ -995,7 +764,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="zeff" type="summary_dynamic_flt_1d_2">
+			<xs:element name="zeff" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Effective charge</xs:documentation>
 					<xs:appinfo>
@@ -1003,7 +772,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="momentum_tor" type="summary_dynamic_flt_1d_2">
+			<xs:element name="momentum_tor" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons</xs:documentation>
 					<xs:appinfo>
@@ -1011,7 +780,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity_tor" type="summary_species_level_3">
+			<xs:element name="velocity_tor" type="summary_species">
 				<xs:annotation>
 					<xs:documentation>Ion toroidal rotation velocity, per species</xs:documentation>
 					<xs:appinfo>
@@ -1019,7 +788,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="q" type="summary_dynamic_flt_1d_2">
+			<xs:element name="q" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Safety factor</xs:documentation>
 					<xs:appinfo>
@@ -1027,7 +796,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="magnetic_shear" type="summary_dynamic_flt_1d_2">
+			<xs:element name="magnetic_shear" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Magnetic shear, defined as rho_tor/q . dq/drho_tor</xs:documentation>
 					<xs:appinfo>
@@ -1035,7 +804,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Magnetic field</xs:documentation>
 					<xs:appinfo>
@@ -1055,7 +824,7 @@
 					<xs:documentation>Name of the limiter or divertor plate</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e" type="summary_dynamic_flt_1d_2">
+			<xs:element name="t_e" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
@@ -1063,7 +832,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_2">
+			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ion temperature (average over ion species)</xs:documentation>
 					<xs:appinfo>
@@ -1071,7 +840,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e" type="summary_dynamic_flt_1d_2">
+			<xs:element name="n_e" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
@@ -1079,7 +848,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i" type="summary_species_level_3">
+			<xs:element name="n_i" type="summary_species">
 				<xs:annotation>
 					<xs:documentation>Ion density per species</xs:documentation>
 					<xs:appinfo>
@@ -1087,7 +856,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_2">
+			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total ion density (sum over species)</xs:documentation>
 					<xs:appinfo>
@@ -1095,7 +864,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="zeff" type="summary_dynamic_flt_1d_2">
+			<xs:element name="zeff" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Effective charge</xs:documentation>
 					<xs:appinfo>
@@ -1103,7 +872,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="flux_expansion" type="summary_dynamic_flt_1d_2">
+			<xs:element name="flux_expansion" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Flux expansion</xs:documentation>
 					<xs:appinfo>
@@ -1118,7 +887,7 @@
 			<xs:documentation>Set of local quantities for stellerators</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="effective_helical_ripple" type="summary_dynamic_flt_1d_2">
+			<xs:element name="effective_helical_ripple" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Effective helical ripple for 1/nu neoclassical regime (see [Beidler, C. D., and W. N. G. Hitchon, 1994, Plasma Phys. Control. Fusion 35, 317])</xs:documentation>
 					<xs:appinfo>
@@ -1126,7 +895,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="plateau_factor" type="summary_dynamic_flt_1d_2">
+			<xs:element name="plateau_factor" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Plateau factor, as defined in equation (25) of reference [Stroth U. et al 1998 Plasma Phys. Control. Fusion 40 1551]</xs:documentation>
 					<xs:appinfo>
@@ -1134,7 +903,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="iota" type="summary_dynamic_flt_1d_2">
+			<xs:element name="iota" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Rotational transform (1/q)</xs:documentation>
 					<xs:appinfo>
@@ -1154,7 +923,7 @@
 					<xs:documentation>Radial position at which physics quantities are evaluated</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e" type="summary_dynamic_flt_1d_2">
+			<xs:element name="t_e" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
@@ -1162,7 +931,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_2">
+			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ion temperature (average over ion species)</xs:documentation>
 					<xs:appinfo>
@@ -1170,7 +939,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e" type="summary_dynamic_flt_1d_2">
+			<xs:element name="n_e" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
@@ -1178,7 +947,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i" type="summary_species_level_3">
+			<xs:element name="n_i" type="summary_species">
 				<xs:annotation>
 					<xs:documentation>Ion density per species</xs:documentation>
 					<xs:appinfo>
@@ -1186,7 +955,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_2">
+			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total ion density (sum over species)</xs:documentation>
 					<xs:appinfo>
@@ -1194,7 +963,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="zeff" type="summary_dynamic_flt_1d_2">
+			<xs:element name="zeff" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Effective charge</xs:documentation>
 					<xs:appinfo>
@@ -1202,7 +971,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="momentum_tor" type="summary_dynamic_flt_1d_2">
+			<xs:element name="momentum_tor" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons</xs:documentation>
 					<xs:appinfo>
@@ -1210,7 +979,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity_tor" type="summary_species_level_3">
+			<xs:element name="velocity_tor" type="summary_species">
 				<xs:annotation>
 					<xs:documentation>Ion toroidal rotation velocity, per species</xs:documentation>
 					<xs:appinfo>
@@ -1218,7 +987,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="q" type="summary_dynamic_flt_1d_2">
+			<xs:element name="q" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Safety factor</xs:documentation>
 					<xs:appinfo>
@@ -1226,7 +995,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="magnetic_shear" type="summary_dynamic_flt_1d_2">
+			<xs:element name="magnetic_shear" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Magnetic shear, defined as rho_tor/q . dq/drho_tor</xs:documentation>
 					<xs:appinfo>
@@ -1241,7 +1010,7 @@
 			<xs:documentation>MHD stability analysis of the pedestal (for a given method for calculating the bootstrap current)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="alpha_critical" type="summary_dynamic_flt_1d_4">
+			<xs:element name="alpha_critical" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Critical normalized pressure gradient determined with self-consistent runs with an MHD stability code. Details of the method for scanning parameters in the series of runs must be described in the 'source' node</xs:documentation>
 					<xs:appinfo>
@@ -1249,7 +1018,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="alpha_ratio" type="summary_dynamic_flt_1d_4">
+			<xs:element name="alpha_ratio" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ratio of alpha_critical over alpha_experimental</xs:documentation>
 					<xs:appinfo>
@@ -1257,7 +1026,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e_pedestal_top_critical" type="summary_dynamic_flt_1d_4">
+			<xs:element name="t_e_pedestal_top_critical" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Critical electron temperature at pedestal top determined with self-consistent runs with an MHD stability code. Details of the method for scanning parameters in the series of runs must be described in the 'source' node</xs:documentation>
 					<xs:appinfo>
@@ -1272,7 +1041,7 @@
 			<xs:documentation>MHD stability analysis of the pedestal (for a given fit of the profiles)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="alpha_experimental" type="summary_dynamic_flt_1d_3">
+			<xs:element name="alpha_experimental" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Experimental normalized pressure gradient reconstructed by an MHD stability code (with assumptions on the ion pressure). See definition in [Miller PoP 5 (1998),973,Eq. 42]</xs:documentation>
 					<xs:appinfo>
@@ -1297,12 +1066,12 @@
 			<xs:documentation>Quantities related to linear fit of pedestal profiles for a given physical quantity (temperature)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="pedestal_height" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="pedestal_height" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Pedestal height</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_width" type="summary_dynamic_flt_1d_3">
+			<xs:element name="pedestal_width" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal full width in normalised poloidal flux</xs:documentation>
 					<xs:appinfo>
@@ -1310,7 +1079,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_position" type="summary_dynamic_flt_1d_3">
+			<xs:element name="pedestal_position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal position in normalised poloidal flux</xs:documentation>
 					<xs:appinfo>
@@ -1318,17 +1087,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="offset" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="offset" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Offset of the parent quantity in the SOL</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="d_dpsi_norm" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Core slope of the parent quantity</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm_max" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="d_dpsi_norm_max" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Maximum gradient of the parent quantity (with respect to the normalised poloidal flux) in the pedestal</xs:documentation>
 				</xs:annotation>
@@ -1340,12 +1109,12 @@
 			<xs:documentation>Quantities related to a generic fit of pedestal profiles for a given physical quantity (temperature)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="pedestal_height" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="pedestal_height" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Pedestal height</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_width" type="summary_dynamic_flt_1d_3">
+			<xs:element name="pedestal_width" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal full width in normalised poloidal flux</xs:documentation>
 					<xs:appinfo>
@@ -1353,7 +1122,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_position" type="summary_dynamic_flt_1d_3">
+			<xs:element name="pedestal_position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal position in normalised poloidal flux</xs:documentation>
 					<xs:appinfo>
@@ -1361,22 +1130,22 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="offset" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="offset" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Offset of the parent quantity in the SOL</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="d_dpsi_norm" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Core slope of the parent quantity</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm_max" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="d_dpsi_norm_max" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Maximum gradient of the parent quantity (with respect to the normalised poloidal flux) in the pedestal</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm_max_position" type="summary_dynamic_flt_1d_3">
+			<xs:element name="d_dpsi_norm_max_position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Position (in terms of normalised poloidal flux) of the maximum gradient of the parent quantity in the pedestal</xs:documentation>
 					<xs:appinfo>
@@ -1391,17 +1160,17 @@
 			<xs:documentation>Quantities related to linear fit of pedestal profiles for a given physical quantity (density or pressure)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="separatrix" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="separatrix" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Value at separatrix</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_height" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="pedestal_height" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Pedestal height</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_width" type="summary_dynamic_flt_1d_3">
+			<xs:element name="pedestal_width" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal full width in normalised poloidal flux</xs:documentation>
 					<xs:appinfo>
@@ -1409,7 +1178,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_position" type="summary_dynamic_flt_1d_3">
+			<xs:element name="pedestal_position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal position in normalised poloidal flux</xs:documentation>
 					<xs:appinfo>
@@ -1417,17 +1186,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="offset" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="offset" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Offset of the parent quantity in the SOL</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="d_dpsi_norm" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Core slope of the parent quantity</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm_max" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="d_dpsi_norm_max" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Maximum gradient of the parent quantity (with respect to the normalised poloidal flux) in the pedestal</xs:documentation>
 				</xs:annotation>
@@ -1439,17 +1208,17 @@
 			<xs:documentation>Quantities related to a generic fit of pedestal profiles for a given physical quantity (density or pressure)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="separatrix" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="separatrix" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Value at separatrix</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_height" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="pedestal_height" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Pedestal height</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_width" type="summary_dynamic_flt_1d_3">
+			<xs:element name="pedestal_width" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal full width in normalised poloidal flux</xs:documentation>
 					<xs:appinfo>
@@ -1457,7 +1226,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pedestal_position" type="summary_dynamic_flt_1d_3">
+			<xs:element name="pedestal_position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal position in normalised poloidal flux</xs:documentation>
 					<xs:appinfo>
@@ -1465,22 +1234,22 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="offset" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="offset" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Offset of the parent quantity in the SOL</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="d_dpsi_norm" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Core slope of the parent quantity</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm_max" type="summary_dynamic_flt_1d_3_parent_2">
+			<xs:element name="d_dpsi_norm_max" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
 					<xs:documentation>Maximum gradient of the parent quantity (with respect to the normalised poloidal flux) in the pedestal</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="d_dpsi_norm_max_position" type="summary_dynamic_flt_1d_3">
+			<xs:element name="d_dpsi_norm_max_position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Position (in terms of normalised poloidal flux) of the maximum gradient of the parent quantity in the pedestal</xs:documentation>
 					<xs:appinfo>
@@ -1519,7 +1288,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_thermal_pedestal_electron" type="summary_dynamic_flt_1d_2">
+			<xs:element name="energy_thermal_pedestal_electron" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal stored thermal energy for electrons </xs:documentation>
 					<xs:appinfo>
@@ -1527,7 +1296,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_thermal_pedestal_ion" type="summary_dynamic_flt_1d_2">
+			<xs:element name="energy_thermal_pedestal_ion" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal stored thermal energy for ions </xs:documentation>
 					<xs:appinfo>
@@ -1535,7 +1304,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="volume_inside_pedestal" type="summary_dynamic_flt_1d_2">
+			<xs:element name="volume_inside_pedestal" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Plasma volume enclosed between the magnetic axis and the top of the pedestal </xs:documentation>
 					<xs:appinfo>
@@ -1543,7 +1312,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_pol_pedestal_top_electron_average" type="summary_dynamic_flt_1d_2">
+			<xs:element name="beta_pol_pedestal_top_electron_average" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal beta at pressure pedestal top for electrons using the flux surface average magnetic poloidal field</xs:documentation>
 					<xs:appinfo>
@@ -1551,7 +1320,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_pol_pedestal_top_electron_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="beta_pol_pedestal_top_electron_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal beta at pressure pedestal top for electrons using the low field side magnetic poloidal field</xs:documentation>
 					<xs:appinfo>
@@ -1559,7 +1328,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_pol_pedestal_top_electron_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="beta_pol_pedestal_top_electron_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal beta at pressure pedestal top for electrons using the high field side magnetic poloidal field</xs:documentation>
 					<xs:appinfo>
@@ -1567,7 +1336,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="nustar_pedestal_top_electron" type="summary_dynamic_flt_1d_2">
+			<xs:element name="nustar_pedestal_top_electron" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised collisionality at pressure pedestal top for electrons</xs:documentation>
 					<xs:appinfo>
@@ -1575,7 +1344,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="rhostar_pedestal_top_electron_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="rhostar_pedestal_top_electron_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised Larmor radius at pressure pedestal top for electrons using the low field side magnetic field (important for spherical tokamaks)</xs:documentation>
 					<xs:appinfo>
@@ -1583,7 +1352,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="rhostar_pedestal_top_electron_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="rhostar_pedestal_top_electron_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised Larmor radius at pressure pedestal top for electrons using the high field side magnetic field (important for spherical tokamaks)</xs:documentation>
 					<xs:appinfo>
@@ -1591,7 +1360,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="rhostar_pedestal_top_electron_magnetic_axis" type="summary_dynamic_flt_1d_2">
+			<xs:element name="rhostar_pedestal_top_electron_magnetic_axis" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised Larmor radius at pressure pedestal top for electrons using the magnetic field on the magnetic axis (definition used in most tokamak litterature)</xs:documentation>
 					<xs:appinfo>
@@ -1599,7 +1368,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pol_pedestal_top_average" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pol_pedestal_top_average" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal field calculated at the position of the pressure pedestal top (as determined by the fit) and averaged over the flux surface</xs:documentation>
 					<xs:appinfo>
@@ -1607,7 +1376,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pol_pedestal_top_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pol_pedestal_top_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the high field side</xs:documentation>
 					<xs:appinfo>
@@ -1615,7 +1384,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pol_pedestal_top_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pol_pedestal_top_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the low field side</xs:documentation>
 					<xs:appinfo>
@@ -1623,7 +1392,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pedestal_top_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pedestal_top_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total magnetic field calculated at the position of the pressure pedestal top (as determined by the fit) on the high field side</xs:documentation>
 					<xs:appinfo>
@@ -1631,7 +1400,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pedestal_top_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pedestal_top_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total magnetic field calculated at the position of the pressure pedestal top (as determined by the fit) on the low field side</xs:documentation>
 					<xs:appinfo>
@@ -1639,7 +1408,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_tor_pedestal_top_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_tor_pedestal_top_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Toroidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the high field side</xs:documentation>
 					<xs:appinfo>
@@ -1647,7 +1416,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_tor_pedestal_top_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_tor_pedestal_top_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Toroidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the low field side</xs:documentation>
 					<xs:appinfo>
@@ -1655,7 +1424,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="coulomb_factor_pedestal_top" type="summary_dynamic_flt_1d_2">
+			<xs:element name="coulomb_factor_pedestal_top" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Coulomb factor log(lambda) at the position of the pressure pedestal top (as determined by the fit)</xs:documentation>
 					<xs:appinfo>
@@ -1707,7 +1476,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_thermal_pedestal_electron" type="summary_dynamic_flt_1d_2">
+			<xs:element name="energy_thermal_pedestal_electron" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal stored thermal energy for electrons </xs:documentation>
 					<xs:appinfo>
@@ -1715,7 +1484,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_thermal_pedestal_ion" type="summary_dynamic_flt_1d_2">
+			<xs:element name="energy_thermal_pedestal_ion" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Pedestal stored thermal energy for ions </xs:documentation>
 					<xs:appinfo>
@@ -1723,7 +1492,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="volume_inside_pedestal" type="summary_dynamic_flt_1d_2">
+			<xs:element name="volume_inside_pedestal" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Plasma volume enclosed between the magnetic axis and the top of the pedestal </xs:documentation>
 					<xs:appinfo>
@@ -1731,7 +1500,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="alpha_electron_pedestal_max" type="summary_dynamic_flt_1d_2">
+			<xs:element name="alpha_electron_pedestal_max" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Maximum value in the pedestal of the alpha parameter for electron pressure (see [Miller PoP 5 (1998),973,Eq. 42])</xs:documentation>
 					<xs:appinfo>
@@ -1739,7 +1508,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="alpha_electron_pedestal_max_position" type="summary_dynamic_flt_1d_2">
+			<xs:element name="alpha_electron_pedestal_max_position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Position in normalised poloidal flux of the maximum value in the pedestal of the alpha parameter for electron pressure (see [Miller PoP 5 (1998),973,Eq. 42])</xs:documentation>
 					<xs:appinfo>
@@ -1747,7 +1516,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_pol_pedestal_top_electron_average" type="summary_dynamic_flt_1d_2">
+			<xs:element name="beta_pol_pedestal_top_electron_average" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal beta at pressure pedestal top for electrons using the flux surface average magnetic poloidal field</xs:documentation>
 					<xs:appinfo>
@@ -1755,7 +1524,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_pol_pedestal_top_electron_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="beta_pol_pedestal_top_electron_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal beta at pedestal top for electrons using the low field side magnetic poloidal field</xs:documentation>
 					<xs:appinfo>
@@ -1763,7 +1532,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_pol_pedestal_top_electron_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="beta_pol_pedestal_top_electron_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal beta at pressure pedestal top for electrons using the high field side magnetic poloidal field</xs:documentation>
 					<xs:appinfo>
@@ -1771,7 +1540,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="nustar_pedestal_top_electron" type="summary_dynamic_flt_1d_2">
+			<xs:element name="nustar_pedestal_top_electron" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised collisionality at pressure pedestal top for electrons</xs:documentation>
 					<xs:appinfo>
@@ -1779,7 +1548,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="rhostar_pedestal_top_electron_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="rhostar_pedestal_top_electron_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised Larmor radius at pressure pedestal top for electrons using the low field side magnetic field (important for spherical tokamaks)</xs:documentation>
 					<xs:appinfo>
@@ -1787,7 +1556,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="rhostar_pedestal_top_electron_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="rhostar_pedestal_top_electron_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised Larmor radius at pressure pedestal top for electrons using the high field side magnetic field (important for spherical tokamaks)</xs:documentation>
 					<xs:appinfo>
@@ -1795,7 +1564,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="rhostar_pedestal_top_electron_magnetic_axis" type="summary_dynamic_flt_1d_2">
+			<xs:element name="rhostar_pedestal_top_electron_magnetic_axis" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised Larmor radius at pressure pedestal top for electrons using the magnetic field on the magnetic axis (definition used in most tokamak litterature)</xs:documentation>
 					<xs:appinfo>
@@ -1803,7 +1572,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pol_pedestal_top_average" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pol_pedestal_top_average" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal field calculated at the position of the pressure pedestal top (as determined by the fit) and averaged over the flux surface</xs:documentation>
 					<xs:appinfo>
@@ -1811,7 +1580,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pol_pedestal_top_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pol_pedestal_top_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the high field side</xs:documentation>
 					<xs:appinfo>
@@ -1819,7 +1588,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pol_pedestal_top_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pol_pedestal_top_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the low field side</xs:documentation>
 					<xs:appinfo>
@@ -1827,7 +1596,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pedestal_top_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pedestal_top_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total magnetic field calculated at the position of the pressure pedestal top (as determined by the fit) on the high field side</xs:documentation>
 					<xs:appinfo>
@@ -1835,7 +1604,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_pedestal_top_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_pedestal_top_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total magnetic field calculated at the position of the pressure pedestal top (as determined by the fit) on the low field side</xs:documentation>
 					<xs:appinfo>
@@ -1843,7 +1612,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_tor_pedestal_top_hfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_tor_pedestal_top_hfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Toroidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the high field side</xs:documentation>
 					<xs:appinfo>
@@ -1851,7 +1620,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_tor_pedestal_top_lfs" type="summary_dynamic_flt_1d_2">
+			<xs:element name="b_field_tor_pedestal_top_lfs" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Toroidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the low field side</xs:documentation>
 					<xs:appinfo>
@@ -1859,7 +1628,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="coulomb_factor_pedestal_top" type="summary_dynamic_flt_1d_2">
+			<xs:element name="coulomb_factor_pedestal_top" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Coulomb factor log(lambda) at the position of the pressure pedestal top (as determined by the fit)</xs:documentation>
 					<xs:appinfo>
@@ -1976,7 +1745,7 @@
 			<xs:documentation>Scrape-Off-Layer characteristics</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="t_e_decay_length" type="summary_dynamic_flt_1d_1">
+			<xs:element name="t_e_decay_length" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron temperature radial decay length inv(grad Te/Te)</xs:documentation>
 					<xs:appinfo>
@@ -1984,7 +1753,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_average_decay_length" type="summary_dynamic_flt_1d_1">
+			<xs:element name="t_i_average_decay_length" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ion temperature (average over ion species) radial decay length inv(grad Ti/Ti)</xs:documentation>
 					<xs:appinfo>
@@ -1992,7 +1761,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e_decay_length" type="summary_dynamic_flt_1d_1">
+			<xs:element name="n_e_decay_length" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron density radial decay length inv(grad ne/ne)</xs:documentation>
 					<xs:appinfo>
@@ -2000,7 +1769,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i_total_decay_length" type="summary_dynamic_flt_1d_1">
+			<xs:element name="n_i_total_decay_length" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ion density radial decay length inv(grad ni/ni)</xs:documentation>
 					<xs:appinfo>
@@ -2008,7 +1777,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="heat_flux_e_decay_length" type="summary_dynamic_flt_1d_1">
+			<xs:element name="heat_flux_e_decay_length" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron heat flux radial decay length inv(grad qe/qe)</xs:documentation>
 					<xs:appinfo>
@@ -2016,7 +1785,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="heat_flux_i_decay_length" type="summary_dynamic_flt_1d_1">
+			<xs:element name="heat_flux_i_decay_length" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ion heat flux radial decay length inv(grad qi/qi)</xs:documentation>
 					<xs:appinfo>
@@ -2024,7 +1793,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_radiated" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_radiated" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Power radiated from the SOL</xs:documentation>
 					<xs:appinfo>
@@ -2032,7 +1801,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pressure_neutral" type="summary_dynamic_flt_1d_1">
+			<xs:element name="pressure_neutral" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Neutral pressure in the SOL</xs:documentation>
 					<xs:appinfo>
@@ -2047,7 +1816,7 @@
 			<xs:documentation>Set of average quantities</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="t_e" type="summary_dynamic_flt_1d_1">
+			<xs:element name="t_e" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
@@ -2055,7 +1824,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_1">
+			<xs:element name="t_i_average" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ion temperature (average over ion species)</xs:documentation>
 					<xs:appinfo>
@@ -2063,7 +1832,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e" type="summary_dynamic_flt_1d_1">
+			<xs:element name="n_e" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
@@ -2071,7 +1840,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dn_e_dt" type="summary_dynamic_flt_1d_1">
+			<xs:element name="dn_e_dt" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Time derivative of the electron density</xs:documentation>
 					<xs:appinfo>
@@ -2079,7 +1848,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i" type="summary_species_level_2">
+			<xs:element name="n_i" type="summary_species">
 				<xs:annotation>
 					<xs:documentation>Ion density per species</xs:documentation>
 					<xs:appinfo>
@@ -2087,7 +1856,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_1">
+			<xs:element name="n_i_total" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total ion density (sum over species)</xs:documentation>
 					<xs:appinfo>
@@ -2095,7 +1864,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="zeff" type="summary_dynamic_flt_1d_1">
+			<xs:element name="zeff" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Effective charge</xs:documentation>
 					<xs:appinfo>
@@ -2103,7 +1872,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="meff_hydrogenic" type="summary_dynamic_flt_1d_1">
+			<xs:element name="meff_hydrogenic" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Effective mass of the hydrogenic species (MH. nH+MD.nD+MT.nT)/(nH+nD+nT)  </xs:documentation>
 					<xs:appinfo>
@@ -2111,7 +1880,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="isotope_fraction_hydrogen" type="summary_dynamic_flt_1d_1">
+			<xs:element name="isotope_fraction_hydrogen" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Fraction of hydrogen density among the hydrogenic species (nH/(nH+nD+nT))</xs:documentation>
 					<xs:appinfo>
@@ -2126,7 +1895,7 @@
 			<xs:documentation>Edge Localized Modes related quantities</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="frequency" type="summary_dynamic_flt_1d_1">
+			<xs:element name="frequency" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>ELMs frequency</xs:documentation>
 					<xs:appinfo>
@@ -2134,7 +1903,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="type" type="summary_dynamic_int_1d_1">
+			<xs:element name="type" type="summary_dynamic_int_1d_root">
 				<xs:annotation>
 					<xs:documentation>ELMs type (I, II, III, ...)</xs:documentation>
 				</xs:annotation>
@@ -2161,12 +1930,12 @@
 			<xs:documentation>Geometry of the plasma boundary</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="type" type="summary_dynamic_int_1d_1">
+			<xs:element name="type" type="summary_dynamic_int_1d_root">
 				<xs:annotation>
 					<xs:documentation>0 (limiter), 1 (diverted), 11 (LSN), 12 (USN), 13 (DN)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="geometric_axis_r" type="summary_dynamic_flt_1d_1">
+			<xs:element name="geometric_axis_r" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>R position of the geometric axis (defined as (Rmax+Rmin) / 2 of the boundary)</xs:documentation>
 					<xs:appinfo>
@@ -2174,7 +1943,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="geometric_axis_z" type="summary_dynamic_flt_1d_1">
+			<xs:element name="geometric_axis_z" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Z position of the geometric axis (defined as (Zmax+Zmin) / 2 of the boundary)</xs:documentation>
 					<xs:appinfo>
@@ -2182,7 +1951,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="magnetic_axis_r" type="summary_dynamic_flt_1d_1">
+			<xs:element name="magnetic_axis_r" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>R position of the magnetic axis</xs:documentation>
 					<xs:appinfo>
@@ -2190,7 +1959,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="magnetic_axis_z" type="summary_dynamic_flt_1d_1">
+			<xs:element name="magnetic_axis_z" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Z position of the magnetic axis</xs:documentation>
 					<xs:appinfo>
@@ -2198,7 +1967,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="minor_radius" type="summary_dynamic_flt_1d_1">
+			<xs:element name="minor_radius" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)</xs:documentation>
 					<xs:appinfo>
@@ -2206,7 +1975,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="elongation" type="summary_dynamic_flt_1d_1">
+			<xs:element name="elongation" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Elongation of the plasma boundary</xs:documentation>
 					<xs:appinfo>
@@ -2214,7 +1983,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="triangularity_upper" type="summary_dynamic_flt_1d_1">
+			<xs:element name="triangularity_upper" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Upper triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
@@ -2222,7 +1991,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="triangularity_lower" type="summary_dynamic_flt_1d_1">
+			<xs:element name="triangularity_lower" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Lower triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
@@ -2230,7 +1999,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="strike_point_inner_r" type="summary_dynamic_flt_1d_1">
+			<xs:element name="strike_point_inner_r" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>R position of the inner strike point</xs:documentation>
 					<xs:appinfo>
@@ -2238,7 +2007,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="strike_point_inner_z" type="summary_dynamic_flt_1d_1">
+			<xs:element name="strike_point_inner_z" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Z position of the inner strike point</xs:documentation>
 					<xs:appinfo>
@@ -2246,7 +2015,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="strike_point_outer_r" type="summary_dynamic_flt_1d_1">
+			<xs:element name="strike_point_outer_r" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>R position of the outer strike point</xs:documentation>
 					<xs:appinfo>
@@ -2254,7 +2023,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="strike_point_outer_z" type="summary_dynamic_flt_1d_1">
+			<xs:element name="strike_point_outer_z" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Z position of the outer strike point</xs:documentation>
 					<xs:appinfo>
@@ -2267,7 +2036,7 @@
 					<xs:documentation>String describing the configuration of the strike points (constant, may need to become dynamic when available)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="gap_limiter_wall" type="summary_dynamic_flt_1d_1">
+			<xs:element name="gap_limiter_wall" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Distance between the separatrix and the nearest limiter or wall element</xs:documentation>
 					<xs:appinfo>
@@ -2312,7 +2081,7 @@
 			<xs:documentation>Various global quantities calculated from the fields solved in the transport equations and from the Derived Profiles</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="ip" type="summary_dynamic_flt_1d_1">
+			<xs:element name="ip" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total plasma current</xs:documentation>
 					<xs:appinfo>
@@ -2320,7 +2089,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current_non_inductive" type="summary_dynamic_flt_1d_1">
+			<xs:element name="current_non_inductive" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total non-inductive parallel current</xs:documentation>
 					<xs:appinfo>
@@ -2328,7 +2097,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current_bootstrap" type="summary_dynamic_flt_1d_1">
+			<xs:element name="current_bootstrap" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Bootstrap parallel current</xs:documentation>
 					<xs:appinfo>
@@ -2336,7 +2105,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current_ohm" type="summary_dynamic_flt_1d_1">
+			<xs:element name="current_ohm" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ohmic parallel current</xs:documentation>
 					<xs:appinfo>
@@ -2344,7 +2113,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current_alignment" type="summary_dynamic_flt_1d_1">
+			<xs:element name="current_alignment" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Figure of merit of the alignment of the current profile sources, defined in the following reference: http://iopscience.iop.org/article/10.1088/0029-5515/43/7/318</xs:documentation>
 					<xs:appinfo>
@@ -2352,7 +2121,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="v_loop" type="summary_dynamic_flt_1d_1">
+			<xs:element name="v_loop" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>LCFS loop voltage</xs:documentation>
 					<xs:appinfo>
@@ -2360,7 +2129,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="li" type="summary_dynamic_flt_1d_1">
+			<xs:element name="li" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Internal inductance. The li_3 definition is used, i.e. li_3 = 2/R0/mu0^2/Ip^2 * int(Bp^2 dV).</xs:documentation>
 					<xs:appinfo>
@@ -2368,7 +2137,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="li_mhd" type="summary_dynamic_flt_1d_1">
+			<xs:element name="li_mhd" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Internal inductance as determined by an equilibrium reconstruction code. Use this only when the li node above is used for another estimation method and there is a need to store a second value of li (determined by an equilibrium reconstruction code). The li_3 definition is used, i.e. li_3 = 2/R0/mu0^2/Ip^2 * int(Bp^2 dV).</xs:documentation>
 					<xs:appinfo>
@@ -2376,7 +2145,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_tor" type="summary_dynamic_flt_1d_1">
+			<xs:element name="beta_tor" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Toroidal beta, defined as the volume-averaged total perpendicular pressure divided by (B0^2/(2*mu0)), i.e. beta_toroidal = 2 mu0 int(p dV) / V / B0^2</xs:documentation>
 					<xs:appinfo>
@@ -2384,7 +2153,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_tor_norm" type="summary_dynamic_flt_1d_1">
+			<xs:element name="beta_tor_norm" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA] </xs:documentation>
 					<xs:appinfo>
@@ -2392,7 +2161,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_tor_norm_mhd" type="summary_dynamic_flt_1d_1">
+			<xs:element name="beta_tor_norm_mhd" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised toroidal beta, using the pressure determined by an equilibrium reconstruction code</xs:documentation>
 					<xs:appinfo>
@@ -2400,7 +2169,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_tor_thermal_norm" type="summary_dynamic_flt_1d_1">
+			<xs:element name="beta_tor_thermal_norm" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Normalised toroidal beta from thermal pressure only, defined as 100 * beta_tor_thermal * a[m] * B0 [T] / ip [MA] </xs:documentation>
 					<xs:appinfo>
@@ -2408,7 +2177,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_pol" type="summary_dynamic_flt_1d_1">
+			<xs:element name="beta_pol" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal beta. Defined as betap = 4 int(p dV) / [R_0 * mu_0 * Ip^2]</xs:documentation>
 					<xs:appinfo>
@@ -2416,7 +2185,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_pol_mhd" type="summary_dynamic_flt_1d_1">
+			<xs:element name="beta_pol_mhd" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal beta estimated from the pressure determined by an equilibrium reconstruction code. Defined as betap = 4 int(p dV) / [R_0 * mu_0 * Ip^2]</xs:documentation>
 					<xs:appinfo>
@@ -2424,7 +2193,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_diamagnetic" type="summary_dynamic_flt_1d_1">
+			<xs:element name="energy_diamagnetic" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Plasma diamagnetic energy content = 3/2 * integral over the plasma volume of the total perpendicular pressure </xs:documentation>
 					<xs:appinfo>
@@ -2432,7 +2201,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="denergy_diamagnetic_dt" type="summary_dynamic_flt_1d_1">
+			<xs:element name="denergy_diamagnetic_dt" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Time derivative of the diamagnetic plasma energy content</xs:documentation>
 					<xs:appinfo>
@@ -2440,7 +2209,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_total" type="summary_dynamic_flt_1d_1">
+			<xs:element name="energy_total" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Plasma energy content = 3/2 * integral over the plasma volume of the total kinetic pressure</xs:documentation>
 					<xs:appinfo>
@@ -2448,7 +2217,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_mhd" type="summary_dynamic_flt_1d_1">
+			<xs:element name="energy_mhd" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Plasma energy content = 3/2 * integral over the plasma volume of the total kinetic pressure (pressure determined by an equilibrium reconstruction code)</xs:documentation>
 					<xs:appinfo>
@@ -2456,7 +2225,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_thermal" type="summary_dynamic_flt_1d_1">
+			<xs:element name="energy_thermal" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Thermal plasma energy content = 3/2 * integral over the plasma volume of the thermal pressure</xs:documentation>
 					<xs:appinfo>
@@ -2464,7 +2233,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_ion_total_thermal" type="summary_dynamic_flt_1d_1">
+			<xs:element name="energy_ion_total_thermal" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Thermal ion plasma energy content (sum over the ion species) = 3/2 * integral over the plasma volume of the thermal ion pressure</xs:documentation>
 					<xs:appinfo>
@@ -2472,7 +2241,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_electrons_thermal" type="summary_dynamic_flt_1d_1">
+			<xs:element name="energy_electrons_thermal" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Thermal electron plasma energy content = 3/2 * integral over the plasma volume of the thermal electron pressure</xs:documentation>
 					<xs:appinfo>
@@ -2480,7 +2249,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="denergy_thermal_dt" type="summary_dynamic_flt_1d_1">
+			<xs:element name="denergy_thermal_dt" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Time derivative of the thermal plasma energy content</xs:documentation>
 					<xs:appinfo>
@@ -2488,7 +2257,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_b_field_pol" type="summary_dynamic_flt_1d_1">
+			<xs:element name="energy_b_field_pol" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal magnetic plasma energy content = 1/(2.mu0) * integral over the plasma volume of b_field_pol^2</xs:documentation>
 					<xs:appinfo>
@@ -2496,7 +2265,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_fast_perpendicular" type="summary_dynamic_flt_1d_1">
+			<xs:element name="energy_fast_perpendicular" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Fast particles perpendicular energy content = 3/2 * integral over the plasma volume of the fast perpendicular pressure</xs:documentation>
 					<xs:appinfo>
@@ -2504,7 +2273,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_fast_parallel" type="summary_dynamic_flt_1d_1">
+			<xs:element name="energy_fast_parallel" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Fast particles parallel energy content = 3/2 * integral over the plasma volume of the fast parallel pressure</xs:documentation>
 					<xs:appinfo>
@@ -2512,7 +2281,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="volume" type="summary_dynamic_flt_1d_1">
+			<xs:element name="volume" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Volume of the confined plasma</xs:documentation>
 					<xs:appinfo>
@@ -2520,7 +2289,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="h_mode" type="summary_dynamic_int_1d_1">
+			<xs:element name="h_mode" type="summary_dynamic_int_1d_root">
 				<xs:annotation>
 					<xs:documentation>H-mode flag: 0 when the plasma is in L-mode and 1 when in H-mode </xs:documentation>
 				</xs:annotation>
@@ -2533,7 +2302,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b0" type="summary_dynamic_flt_1d_1">
+			<xs:element name="b0" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Vacuum toroidal field at R0. Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
 					<xs:appinfo>
@@ -2541,7 +2310,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="h_98" type="summary_dynamic_flt_1d_1">
+			<xs:element name="h_98" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Energy confinement time enhancement factor over the IPB98(y,2) scaling</xs:documentation>
 					<xs:appinfo>
@@ -2549,7 +2318,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="tau_energy" type="summary_dynamic_flt_1d_1">
+			<xs:element name="tau_energy" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Energy confinement time</xs:documentation>
 					<xs:appinfo>
@@ -2557,7 +2326,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="tau_helium" type="summary_dynamic_flt_1d_1">
+			<xs:element name="tau_helium" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Helium confinement time</xs:documentation>
 					<xs:appinfo>
@@ -2565,7 +2334,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="tau_resistive" type="summary_dynamic_flt_1d_1">
+			<xs:element name="tau_resistive" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Current diffusion characteristic time</xs:documentation>
 					<xs:appinfo>
@@ -2573,7 +2342,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="tau_energy_98" type="summary_dynamic_flt_1d_1">
+			<xs:element name="tau_energy_98" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Energy confinement time estimated from the IPB98(y,2) scaling</xs:documentation>
 					<xs:appinfo>
@@ -2581,7 +2350,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="resistance" type="summary_dynamic_flt_1d_1">
+			<xs:element name="resistance" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Plasma electric resistance</xs:documentation>
 					<xs:appinfo>
@@ -2589,7 +2358,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="q_95" type="summary_dynamic_flt_1d_1">
+			<xs:element name="q_95" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>q at the 95% poloidal flux surface</xs:documentation>
 					<xs:appinfo>
@@ -2597,7 +2366,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_ohm" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_ohm" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ohmic power</xs:documentation>
 					<xs:appinfo>
@@ -2605,7 +2374,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_steady" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_steady" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total power coupled to the plasma minus dW/dt (correcting from transient energy content)</xs:documentation>
 					<xs:appinfo>
@@ -2613,7 +2382,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_radiated" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_radiated" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Radiated power</xs:documentation>
 					<xs:appinfo>
@@ -2621,7 +2390,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="greenwald_fraction" type="summary_dynamic_flt_1d_1">
+			<xs:element name="greenwald_fraction" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Greenwald fraction =line_average/n_e/value divided by (global_quantities/ip/value *1e6 * pi * minor_radius^2)</xs:documentation>
 					<xs:appinfo>
@@ -2636,7 +2405,7 @@
 			<xs:documentation>Neutron fluxes per reaction</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="total" type="summary_dynamic_flt_1d_3">
+			<xs:element name="total" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total neutron flux coming from this reaction</xs:documentation>
 					<xs:appinfo>
@@ -2644,7 +2413,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="thermal" type="summary_dynamic_flt_1d_3">
+			<xs:element name="thermal" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Neutron flux coming from thermal plasma</xs:documentation>
 					<xs:appinfo>
@@ -2652,7 +2421,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beam_thermal" type="summary_dynamic_flt_1d_3">
+			<xs:element name="beam_thermal" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Neutron flux coming from NBI beam - plasma reactions</xs:documentation>
 					<xs:appinfo>
@@ -2660,7 +2429,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beam_beam" type="summary_dynamic_flt_1d_3">
+			<xs:element name="beam_beam" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Neutron flux coming from NBI beam self reactions</xs:documentation>
 					<xs:appinfo>
@@ -2675,7 +2444,7 @@
 			<xs:documentation>Description of neutron fluxes</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="total" type="summary_dynamic_flt_1d_2">
+			<xs:element name="total" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total neutron flux from all reactions</xs:documentation>
 					<xs:appinfo>
@@ -2683,7 +2452,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="thermal" type="summary_dynamic_flt_1d_2">
+			<xs:element name="thermal" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Neutron flux from all plasma thermal reactions</xs:documentation>
 					<xs:appinfo>
@@ -2722,7 +2491,7 @@
 			<xs:documentation>Fusion reactions</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="power" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Power coupled to the plasma by fusion reactions</xs:documentation>
 					<xs:appinfo>
@@ -2730,7 +2499,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current" type="summary_dynamic_flt_1d_1">
+			<xs:element name="current" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Parallel current driven by this fusion reactions</xs:documentation>
 					<xs:appinfo>
@@ -2743,7 +2512,7 @@
 					<xs:documentation>Neutron fluxes from various reactions</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="neutron_power_total" type="summary_dynamic_flt_1d_1">
+			<xs:element name="neutron_power_total" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total neutron power (from all reactions)</xs:documentation>
 					<xs:appinfo>
@@ -2758,7 +2527,7 @@
 			<xs:documentation>Runaway electrons</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="particles" type="summary_dynamic_flt_1d_1">
+			<xs:element name="particles" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Number of runaway electrons</xs:documentation>
 					<xs:appinfo>
@@ -2766,7 +2535,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current" type="summary_dynamic_flt_1d_1">
+			<xs:element name="current" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Parallel current driven by the runaway electrons</xs:documentation>
 					<xs:appinfo>
@@ -2786,7 +2555,7 @@
 					<xs:documentation>Injected species</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power" type="summary_dynamic_flt_1d_2">
+			<xs:element name="power" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>NBI power coupled to the plasma by this unit (i.e. without shine-through and fast ion losses)</xs:documentation>
 					<xs:appinfo>
@@ -2794,7 +2563,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_launched" type="summary_dynamic_flt_1d_2">
+			<xs:element name="power_launched" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>NBI power launched into the vacuum vessel from this unit</xs:documentation>
 					<xs:appinfo>
@@ -2802,7 +2571,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current" type="summary_dynamic_flt_1d_2">
+			<xs:element name="current" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Parallel current driven by this NBI unit</xs:documentation>
 					<xs:appinfo>
@@ -2836,7 +2605,7 @@
 					<xs:documentation>Direction of the beam seen from above the torus: -1 = clockwise; 1 = counter clockwise</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy" type="summary_dynamic_flt_1d_2">
+			<xs:element name="energy" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Full energy of the injected species (acceleration of a single atom)</xs:documentation>
 					<xs:appinfo>
@@ -2867,7 +2636,7 @@
 			<xs:documentation>ECRH/CD related parameters</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="frequency" type="summary_dynamic_flt_1d_2">
+			<xs:element name="frequency" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>ECRH frequency</xs:documentation>
 					<xs:appinfo>
@@ -2875,7 +2644,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="position" type="summary_dynamic_flt_1d_2">
+			<xs:element name="position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Position of the maximum of the ECRH power deposition, in rho_tor_norm</xs:documentation>
 					<xs:appinfo>
@@ -2883,17 +2652,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="polarisation" type="summary_dynamic_int_1d_2">
+			<xs:element name="polarisation" type="summary_dynamic_int_1d_root">
 				<xs:annotation>
 					<xs:documentation>Polarisation of the ECRH waves (0 = O mode, 1 = X mode)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="harmonic" type="summary_dynamic_int_1d_2">
+			<xs:element name="harmonic" type="summary_dynamic_int_1d_root">
 				<xs:annotation>
 					<xs:documentation>Harmonic number of the absorbed ECRH waves</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="angle_tor" type="summary_dynamic_flt_1d_2">
+			<xs:element name="angle_tor" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle of ECRH at resonance</xs:documentation>
 					<xs:appinfo>
@@ -2901,7 +2670,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="angle_pol" type="summary_dynamic_flt_1d_2">
+			<xs:element name="angle_pol" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Poloidal angle of ECRH at resonance</xs:documentation>
 					<xs:appinfo>
@@ -2909,7 +2678,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power" type="summary_dynamic_flt_1d_2">
+			<xs:element name="power" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron cyclotron heating power coupled to the plasma from this launcher</xs:documentation>
 					<xs:appinfo>
@@ -2917,7 +2686,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_launched" type="summary_dynamic_flt_1d_2">
+			<xs:element name="power_launched" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Electron cyclotron heating power launched into the vacuum vessel from this launcher</xs:documentation>
 					<xs:appinfo>
@@ -2925,7 +2694,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current" type="summary_dynamic_flt_1d_2">
+			<xs:element name="current" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Parallel current driven by EC waves</xs:documentation>
 					<xs:appinfo>
@@ -2933,7 +2702,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_fast" type="summary_dynamic_flt_1d_2">
+			<xs:element name="energy_fast" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Fast particle energy content driven by EC waves</xs:documentation>
 					<xs:appinfo>
@@ -2948,7 +2717,7 @@
 			<xs:documentation>LHCD related parameters</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="frequency" type="summary_dynamic_flt_1d_2">
+			<xs:element name="frequency" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>LH wave frequency</xs:documentation>
 					<xs:appinfo>
@@ -2956,7 +2725,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="position" type="summary_dynamic_flt_1d_2">
+			<xs:element name="position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Position of the maximum of the LH power deposition, in rho_tor_norm</xs:documentation>
 					<xs:appinfo>
@@ -2964,7 +2733,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_parallel" type="summary_dynamic_flt_1d_2">
+			<xs:element name="n_parallel" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Main parallel refractive index of LH waves at launch</xs:documentation>
 					<xs:appinfo>
@@ -2972,7 +2741,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power" type="summary_dynamic_flt_1d_2">
+			<xs:element name="power" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>LH heating power coupled to the plasma from this launcher</xs:documentation>
 					<xs:appinfo>
@@ -2980,7 +2749,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_launched" type="summary_dynamic_flt_1d_2">
+			<xs:element name="power_launched" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>LH heating power launched into the vacuum vessel from this launcher</xs:documentation>
 					<xs:appinfo>
@@ -2988,7 +2757,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current" type="summary_dynamic_flt_1d_2">
+			<xs:element name="current" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Parallel current driven by LH waves</xs:documentation>
 					<xs:appinfo>
@@ -2996,7 +2765,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_fast" type="summary_dynamic_flt_1d_2">
+			<xs:element name="energy_fast" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Fast particle energy content driven by LH waves</xs:documentation>
 					<xs:appinfo>
@@ -3011,7 +2780,7 @@
 			<xs:documentation>ICRH related parameters</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="frequency" type="summary_dynamic_flt_1d_2">
+			<xs:element name="frequency" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>ICRH frequency</xs:documentation>
 					<xs:appinfo>
@@ -3019,7 +2788,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="position" type="summary_dynamic_flt_1d_2">
+			<xs:element name="position" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Position of the maximum of the ICRH power deposition, in rho_tor_norm</xs:documentation>
 					<xs:appinfo>
@@ -3027,12 +2796,12 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_tor" type="summary_dynamic_int_1d_2">
+			<xs:element name="n_tor" type="summary_dynamic_int_1d_root">
 				<xs:annotation>
 					<xs:documentation>Main toroidal mode number of IC waves</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="k_perpendicular" type="summary_dynamic_flt_1d_2">
+			<xs:element name="k_perpendicular" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Main perpendicular wave number of IC waves</xs:documentation>
 					<xs:appinfo>
@@ -3040,7 +2809,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="e_field_plus_minus_ratio" type="summary_dynamic_flt_1d_2">
+			<xs:element name="e_field_plus_minus_ratio" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Average E+/E- power ratio of IC waves</xs:documentation>
 					<xs:appinfo>
@@ -3048,12 +2817,12 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="harmonic" type="summary_dynamic_int_1d_2">
+			<xs:element name="harmonic" type="summary_dynamic_int_1d_root">
 				<xs:annotation>
 					<xs:documentation>Harmonic number of the absorbed ICRH waves</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="phase" type="summary_dynamic_flt_1d_2">
+			<xs:element name="phase" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Phase between straps</xs:documentation>
 					<xs:appinfo>
@@ -3061,7 +2830,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power" type="summary_dynamic_flt_1d_2">
+			<xs:element name="power" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>IC heating power coupled to the plasma from this launcher</xs:documentation>
 					<xs:appinfo>
@@ -3069,7 +2838,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_launched" type="summary_dynamic_flt_1d_2">
+			<xs:element name="power_launched" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>IC heating power launched into the vacuum vessel from this launcher</xs:documentation>
 					<xs:appinfo>
@@ -3077,7 +2846,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current" type="summary_dynamic_flt_1d_2">
+			<xs:element name="current" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Parallel current driven by IC waves</xs:documentation>
 					<xs:appinfo>
@@ -3085,7 +2854,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_fast" type="summary_dynamic_flt_1d_2">
+			<xs:element name="energy_fast" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Fast particle energy content driven by IC waves</xs:documentation>
 					<xs:appinfo>
@@ -3136,7 +2905,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_ec" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_ec" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total EC power coupled to the plasma</xs:documentation>
 					<xs:appinfo>
@@ -3144,7 +2913,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_launched_ec" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_ec" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total EC power launched from EC antennas into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
@@ -3152,7 +2921,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_nbi" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_nbi" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total NBI power coupled to the plasma</xs:documentation>
 					<xs:appinfo>
@@ -3160,7 +2929,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_launched_nbi" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_nbi" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total NBI power launched from neutral beam injectors into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
@@ -3168,7 +2937,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_launched_nbi_co_injected_ratio" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_nbi_co_injected_ratio" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Ratio of co-injected beam launched power to total NBI launched power. Is set to 1 for purely perpendicular injection</xs:documentation>
 					<xs:appinfo>
@@ -3176,7 +2945,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_ic" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_ic" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total IC power coupled to the plasma</xs:documentation>
 					<xs:appinfo>
@@ -3184,7 +2953,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_launched_ic" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_ic" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total IC power launched from IC antennas into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
@@ -3192,7 +2961,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_lh" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_lh" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total LH power coupled to the plasma</xs:documentation>
 					<xs:appinfo>
@@ -3200,7 +2969,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_launched_lh" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_lh" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Total LH power launched from LH antennas into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
@@ -3316,7 +3085,7 @@
 						<xs:documentation>Magnetic field shear indicator for stellarators: 0 for shearless stellarators (W7-A, W7-AS, W7-X); 1, otherwise. See [Stroth U. et al 1996 Nucl. Fusion 36 1063]</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="stationary_phase_flag" type="summary_dynamic_int_1d_1">
+				<xs:element name="stationary_phase_flag" type="summary_dynamic_int_1d_root">
 					<xs:annotation>
 						<xs:documentation>This flag is set to one if the pulse is in a stationary phase from the point of the of the energy content (if the time derivative of the energy dW/dt can be neglected when calculating tau_E as W/(P_abs-dW/dt).)</xs:documentation>
 					</xs:annotation>

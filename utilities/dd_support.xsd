@@ -1291,7 +1291,7 @@
 	</xs:element>
 	<xs:complexType name="b_tor_vacuum_1">
 		<xs:annotation>
-			<xs:documentation>Characteristics of the vacuum toroidal field. time assumed to be one level above</xs:documentation>
+			<xs:documentation>Characteristics of the vacuum toroidal field. Time coordinate at the root of the IDS</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r0">
@@ -1312,39 +1312,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>T</units>
-						<coordinate1>../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="b_tor_vacuum_2">
-		<xs:annotation>
-			<xs:documentation>Characteristics of the vacuum toroidal field. time assumed to be two levels above</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="r0">
-				<xs:annotation>
-					<xs:documentation>Reference major radius where the vacuum toroidal magnetic field is given (usually a fixed position such as the middle of the vessel at the equatorial midplane)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b0">
-				<xs:annotation>
-					<xs:documentation>Vacuum toroidal field at b0. Positive sign means anti-clockwise when viewing from above. The product r0*b0 must be consistent with the b_tor_vacuum_r field of the tf IDS.</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>T</units>
-						<coordinate1>../../../time</coordinate1>
+						<coordinate1>/time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -5262,42 +5230,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rz1d_dynamic_2">
-		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (1D, dynamic), time assumed to be 2 levels above</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="r">
-				<xs:annotation>
-					<xs:documentation>Major radius</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>../../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>../../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="rz1d_dynamic_1">
 		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (1D, dynamic), time assumed to be 1 level above</xs:documentation>
+			<xs:documentation>Structure for list of R, Z positions (1D, dynamic), time at the root of the IDS</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
@@ -5306,7 +5241,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>../../time</coordinate1>
+						<coordinate1>/time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -5319,7 +5254,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>../../time</coordinate1>
+						<coordinate1>/time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
