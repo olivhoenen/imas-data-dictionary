@@ -1303,6 +1303,145 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="core_profiles_1D_fit">
+		<xs:annotation>
+			<xs:documentation>Core profile fit information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="measured">
+				<xs:annotation>
+					<xs:documentation>Measured values</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent for a local measurement, as_parent.m for a line integrated measurement</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="source">
+				<xs:annotation>
+					<xs:documentation>Path to the source data for each measurement in the IMAS data dictionary, e.g. ece/channel(i)/t_e for the electron temperature on the i-th channel in the ECE IDS</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../measured</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time_measurement">
+				<xs:annotation>
+					<xs:documentation>Exact time slices used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>../measured</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time_measurement_slice_method" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Method used to slice the data : index = 0 means using exact time slice of the measurement, 1 means linear interpolation, ...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time_measurement_width">
+				<xs:annotation>
+					<xs:documentation>In case the measurements are averaged over a time interval, this node is the full width of this time interval (empty otherwise). In case the slicing/averaging method doesn't use a hard time interval cutoff, this width is the characteristic time span of the slicing/averaging method. By convention, the time interval starts at time_measurement-time_width and ends at time_measurement.</xs:documentation>
+					<!-- By convention, when this node has a positive value the time interval starts at time_measurement-time_width and ends at time_measurement. When it has a negative value -->
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>../measured</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="local">
+				<xs:annotation>
+					<xs:documentation>Integer flag : 1 means local measurement, 0 means line-integrated measurement</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../measured</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate of each measurement (local value for a local measurement, minimum value reached by the line of sight for a line measurement)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>../measured</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="weight">
+				<xs:annotation>
+					<xs:documentation>Weight given to each measured value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>../measured</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reconstructed">
+				<xs:annotation>
+					<xs:documentation>Value reconstructed from the fit</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent for a local measurement, as_parent.m for a line integrated measurement</units>
+						<coordinate1>../measured</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="chi_squared">
+				<xs:annotation>
+					<xs:documentation>Squared error normalized by the weighted standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>../measured</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parameters">
+				<xs:annotation>
+					<xs:documentation>List of the fit specific parameters in XML format</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="core_profiles_ions_charge_states2">
 		<xs:annotation>
 			<xs:documentation>Quantities related to the a given state of the ion species</xs:documentation>
@@ -1446,6 +1585,14 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="density_fit" type="core_profiles_1D_fit">
+				<xs:annotation>
+					<xs:documentation>Information on the fit used to obtain the density profile</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="density_thermal">
 				<xs:annotation>
@@ -1647,6 +1794,14 @@
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="density_fit" type="core_profiles_1D_fit">
+				<xs:annotation>
+					<xs:documentation>Information on the fit used to obtain the density profile</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="density_thermal">
 				<xs:annotation>
@@ -2154,6 +2309,14 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="temperature_fit" type="core_profiles_1D_fit">
+				<xs:annotation>
+					<xs:documentation>Information on the fit used to obtain the temperature profile</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="density">
 				<xs:annotation>
 					<xs:documentation>Density (thermal+non-thermal)</xs:documentation>
@@ -2177,6 +2340,14 @@
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="density_fit" type="core_profiles_1D_fit">
+				<xs:annotation>
+					<xs:documentation>Information on the fit used to obtain the density profile</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="density_thermal">
 				<xs:annotation>
@@ -2353,6 +2524,14 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="t_i_average_fit" type="core_profiles_1D_fit">
+				<xs:annotation>
+					<xs:documentation>Information on the fit used to obtain the t_i_average profile</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="n_i_total_over_n_e">
 				<xs:annotation>
 					<xs:documentation>Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)</xs:documentation>
@@ -2404,6 +2583,14 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="zeff_fit" type="core_profiles_1D_fit">
+				<xs:annotation>
+					<xs:documentation>Information on the fit used to obtain the zeff profile</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="pressure_ion_total">
 				<xs:annotation>
