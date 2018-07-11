@@ -1115,6 +1115,37 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_local_quantities_stellerator">
+		<xs:annotation>
+			<xs:documentation>Set of local quantities for stellerators</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="effective_helical_ripple" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Effective helical ripple for 1/nu neoclassical regime (see [Beidler, C. D., and W. N. G. Hitchon, 1994, Plasma Phys. Control. Fusion 35, 317])</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plateau_factor" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Plateau factor, as defined in equation (25) of reference [Stroth U. et al 1998 Plasma Phys. Control. Fusion 40 1551]</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="iota" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Rotational transform (1/q)</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_local_quantities">
 		<xs:annotation>
 			<xs:documentation>Set of local quantities</xs:documentation>
@@ -1935,6 +1966,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="r_eff_norm_2_3" type="summary_local_quantities_stellerator">
+				<xs:annotation>
+					<xs:documentation>Parameters at r_eff_norm = 2/3, where r_eff_norm is the stellarator effective minor radius normalised to its value at the last closed flux surface</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="summary_sol">
@@ -2034,6 +2070,14 @@
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
 						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dn_e_dt" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Time derivative of the electron density</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3.s-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2225,6 +2269,14 @@
 					<xs:documentation>String describing the configuration of the strike points (constant, may need to become dynamic when available)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="gap_limiter_wall" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Distance between the separatrix and the nearest limiter or wall element</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="summary_rmp">
@@ -2376,9 +2428,17 @@
 			</xs:element>
 			<xs:element name="energy_diamagnetic" type="summary_dynamic_flt_1d_1">
 				<xs:annotation>
-					<xs:documentation>Plasma energy content = 3/2 * integral over the plasma volume of the total perpendicular pressure </xs:documentation>
+					<xs:documentation>Plasma diamagnetic energy content = 3/2 * integral over the plasma volume of the total perpendicular pressure </xs:documentation>
 					<xs:appinfo>
 						<units>J</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="denergy_diamagnetic_dt" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Time derivative of the diamagnetic plasma energy content</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2403,6 +2463,14 @@
 					<xs:documentation>Thermal plasma energy content = 3/2 * integral over the plasma volume of the thermal pressure</xs:documentation>
 					<xs:appinfo>
 						<units>J</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="denergy_thermal_dt" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Time derivative of the thermal plasma energy content</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -3054,6 +3122,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="co_injected_nbi_delivered_power_ratio" type="summary_dynamic_flt_1d_1">
+				<xs:annotation>
+					<xs:documentation>Ratio of co-injected beam port through (delivered) power to total NBI power. Is set to 1 for purely perpendicular injection</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="power_ic" type="summary_dynamic_flt_1d_1">
 				<xs:annotation>
 					<xs:documentation>Total IC power coupled to the plasma</xs:documentation>
@@ -3132,18 +3208,68 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_wall">
+		<xs:annotation>
+			<xs:documentation>Wall characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="material" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Wall material</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/materials_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="evaporation" type="summary_static_str_0d">
+				<xs:annotation>
+					<xs:documentation>Chemical formula of the evaporated material or gas used to cover the vaccum vessel wall. NONE for no evaporation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_limiter">
+		<xs:annotation>
+			<xs:documentation>Limiter characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="material" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Limiter material</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/materials_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="summary">
 		<xs:annotation>
 			<xs:documentation>Summary of physics quantities from a simulation or an experiment. Dynamic quantities are either taken at given time slices (indicated in the "time" vector) or time-averaged over an interval (in such case the "time_width" of the interval is indicated and the "time" vector represents the end of each time interval).</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
-				<lifecycle_last_change>3.17.1</lifecycle_last_change>
+				<lifecycle_last_change>3.19.2</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="configuration" type="summary_static_str_0d">
+					<xs:annotation>
+						<xs:documentation>Device configuration (the content may be device-specific)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="magnetic_shear_flag" type="summary_static_int_0d">
+					<xs:annotation>
+						<xs:documentation>Magnetic field shear indicator for stellarators: 0 for shearless stellarators (W7-A, W7-AS, W7-X); 1, otherwise. See [Stroth U. et al 1996 Nucl. Fusion 36 1063]</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="stationary_phase_flag" type="summary_dynamic_int_1d_1">
+					<xs:annotation>
+						<xs:documentation>This flag is set to one if the pulse is in a stationary phase from the point of the of the energy content (if the time derivative of the energy dW/dt can be neglected when calculating tau_E as W/(P_abs-dW/dt).)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="global_quantities" type="summary_global_quantities">
 					<xs:annotation>
 						<xs:documentation>Various global quantities derived from the profiles</xs:documentation>
@@ -3228,6 +3354,16 @@
 				<xs:element name="scrape_off_layer" type="summary_sol">
 					<xs:annotation>
 						<xs:documentation>Scrape-Off-Layer (SOL) characteristics</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="wall" type="summary_wall">
+					<xs:annotation>
+						<xs:documentation>Wall characteristics</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="limiter" type="summary_limiter">
+					<xs:annotation>
+						<xs:documentation>Limiter characteristics</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="time_width">
