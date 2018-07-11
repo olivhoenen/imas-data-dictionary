@@ -406,27 +406,6 @@
 					<xs:documentation>Description of the method used to reconstruct the bulk ion poloidal velocity</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity_doppler">
-				<xs:annotation>
-					<xs:documentation>Doppler velocity of the bulk ion (oriented counter-clockwise when seen from above) at the channel measurement point</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>time</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity_doppler_method" type="identifier">
-				<xs:annotation>
-					<xs:documentation>Description of the method used to reconstruct the bulk ion Doppler velocity</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="zeff">
 				<xs:annotation>
 					<xs:documentation>Local ionic effective charge at the channel measurement point</xs:documentation>
@@ -593,6 +572,48 @@
 					<xs:documentation>Description of the method used to derive the emitting ion temperature</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="velocity_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal velocity of the emitting ion (oriented counter-clockwise when seen from above) at the channel measurement point</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="velocity_tor_method" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Description of the method used to reconstruct the emitting ion toroidal velocity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_pol">
+				<xs:annotation>
+					<xs:documentation>Poloidal velocity of the emitting ion (oriented clockwise when seen from front on the right side of the tokamak axi-symmetry axis) at the channel measurement point</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="velocity_pol_method" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Description of the method used to reconstruct the emitting ion poloidal velocity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="velocity_doppler">
 				<xs:annotation>
 					<xs:documentation>Doppler velocity of the emitting ion (oriented counter-clockwise when seen from above) at the channel measurement point</xs:documentation>
@@ -622,12 +643,12 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_i">
+			<xs:element name="n_i_over_n_e">
 				<xs:annotation>
-					<xs:documentation>Ion density (of the emmitting ion) at the channel measurement point</xs:documentation>
+					<xs:documentation>Emitting ion concentration (ratio of the emitting ion density over the electron density) at the channel measurement point</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
-						<units>m^-3</units>
+						<units>-</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -638,7 +659,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_i_method" type="identifier">
+			<xs:element name="n_i_over_n_e_method" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Description of the method used to derive the emitting ion density</xs:documentation>
 				</xs:annotation>
