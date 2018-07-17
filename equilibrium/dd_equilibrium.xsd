@@ -802,26 +802,26 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="standard_deviation">
+			<xs:element name="position_reconstructed" type="rz0d_dynamic_aos">
 				<xs:annotation>
-					<xs:documentation>Standard deviation of the measurement</xs:documentation>
+					<xs:documentation>Position estimated from the reconstructed equilibrium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chi_squared_r">
+				<xs:annotation>
+					<xs:documentation>Squared error on the major radius normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>as_parent</units>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="position_reconstructed" type="rz0d_dynamic_aos">
+			<xs:element name="chi_squared_z">
 				<xs:annotation>
-					<xs:documentation>Position estimated from the reconstructed equilibrium</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="chi_squared">
-				<xs:annotation>
-					<xs:documentation>Chi-squared difference of (reconstructed-measured)</xs:documentation>
+					<xs:documentation>Squared error on the altitude normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
@@ -901,18 +901,6 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="standard_deviation">
-				<xs:annotation>
-					<xs:documentation>Standard deviation of the measurement</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="reconstructed">
 				<xs:annotation>
 					<xs:documentation>Value calculated from the reconstructed equilibrium</xs:documentation>
@@ -927,7 +915,7 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Chi-squared difference of (reconstructed-measured)</xs:documentation>
+					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
@@ -1002,18 +990,6 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="standard_deviation">
-				<xs:annotation>
-					<xs:documentation>Standard deviation of the measurement</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="reconstructed">
 				<xs:annotation>
 					<xs:documentation>Value calculated from the reconstructed equilibrium</xs:documentation>
@@ -1028,7 +1004,7 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Chi-squared difference of (reconstructed-measured)</xs:documentation>
+					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
@@ -1036,114 +1012,6 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="equilibrium_constraints_1D">
-		<xs:annotation>
-			<xs:documentation>Vector constraint (from a 1D array of measurements)</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="measured">
-				<xs:annotation>
-					<xs:documentation>Measured values</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="source">
-				<xs:annotation>
-					<xs:documentation>Path to the source data for this measurement in the IMAS data dictionary</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="time_measurement">
-				<xs:annotation>
-					<xs:documentation>Exact time slices used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>s</units>
-						<coordinate1>../measured</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="exact">
-				<xs:annotation>
-					<xs:documentation>Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../measured</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="weight">
-				<xs:annotation>
-					<xs:documentation>Weight given to each measured value</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<coordinate1>../measured</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="standard_deviation">
-				<xs:annotation>
-					<xs:documentation>Standard deviation of the measurement</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../measured</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="reconstructed">
-				<xs:annotation>
-					<xs:documentation>Value calculated from the reconstructed equilibrium</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../measured</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="chi_squared">
-				<xs:annotation>
-					<xs:documentation>Chi-squared difference of (reconstructed-measured)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../measured</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -2312,7 +2180,7 @@
 						<lifecycle_status>alpha</lifecycle_status>
 						<lifecycle_version>3.17.0</lifecycle_version>
 					</xs:appinfo>
-					<xs:documentation>In case of equilibrium reconstruction under constraints, measurements used to constrain the equilibrium, reconstructed values and accuracy of the fit</xs:documentation>
+					<xs:documentation>In case of equilibrium reconstruction under constraints, measurements used to constrain the equilibrium, reconstructed values and accuracy of the fit. The names of the child nodes correspond to the following definition: the solver aims at minimizing a cost function defined as : J=1/2*sum_i [ weight_i^2 (reconstructed_i - measured_i)^2 / sigma_i^2 ]. in which sigma_i is the standard deviation of the measurement error (to be found in the IDS of the measurement)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="global_quantities" type="equlibrium_global_quantities">
@@ -2370,7 +2238,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.18.0</lifecycle_last_change>
+				<lifecycle_last_change>3.19.2</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
