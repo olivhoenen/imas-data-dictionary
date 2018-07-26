@@ -379,12 +379,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="radiance_spectra">
+			<xs:element name="radiance_spectral">
 				<xs:annotation>
-					<xs:documentation>Calibrated spectra</xs:documentation>
+					<xs:documentation>Calibrated spectral radiance (radiance per unit wavelength)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
-						<units>m^-2.s^-1.sr^-1</units>
+						<units>(photons).m^-2.s^-1.sr^-1.m^-1</units>
 						<type>dynamic</type>
 						<coordinate1>../wavelengths</coordinate1>
 						<coordinate2>time</coordinate2>
@@ -397,12 +397,12 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="intensity_spectra">
+			<xs:element name="intensity_spectrum">
 				<xs:annotation>
-					<xs:documentation>Intensity spectra (not calibrated)</xs:documentation>
+					<xs:documentation>Intensity spectrum (not calibrated), i.e. number of photoelectrons detected by unit time by a wavelength pixel of the channel, taking into account electronic gain compensation and channels relative calibration</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
-						<units>s^-1</units>
+						<units>(counts) s^-1</units>
 						<type>dynamic</type>
 						<coordinate1>../wavelengths</coordinate1>
 						<coordinate2>time</coordinate2>
@@ -440,7 +440,7 @@
 					<xs:documentation>Radiance calibration</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m^-2.sr^-1</units>
+						<units>m^-3.sr^-1</units>
 						<coordinate1>../wavelengths</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
