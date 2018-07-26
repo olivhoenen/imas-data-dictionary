@@ -2790,7 +2790,15 @@
 			</xs:element>
 			<xs:element name="power" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
-					<xs:documentation>NBI power coupled to the plasma by this unit</xs:documentation>
+					<xs:documentation>NBI power coupled to the plasma by this unit (i.e. without shine-through and fast ion losses)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_launched" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>NBI power launched into the vacuum vessel from this unit</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -2905,7 +2913,15 @@
 			</xs:element>
 			<xs:element name="power" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
-					<xs:documentation>Electron cyclotron heating power coupled to the plasma</xs:documentation>
+					<xs:documentation>Electron cyclotron heating power coupled to the plasma from this launcher</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_launched" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>Electron cyclotron heating power launched  into the vacuum vessel from this launcher</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -2960,7 +2976,15 @@
 			</xs:element>
 			<xs:element name="power" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
-					<xs:documentation>LH heating power coupled to the plasma</xs:documentation>
+					<xs:documentation>LH heating power coupled to the plasma from this launcher</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_launched" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>LH heating power launched  into the vacuum vessel from this launcher</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -3041,7 +3065,15 @@
 			</xs:element>
 			<xs:element name="power" type="summary_dynamic_flt_1d_2">
 				<xs:annotation>
-					<xs:documentation>IC heating power coupled to the plasma</xs:documentation>
+					<xs:documentation>IC heating power coupled to the plasma from this launcher</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_launched" type="summary_dynamic_flt_1d_2">
+				<xs:annotation>
+					<xs:documentation>IC heating power launched  into the vacuum vessel from this launcher</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -3114,9 +3146,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_ec_delivered" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_ec" type="summary_dynamic_flt_1d_1">
 				<xs:annotation>
-					<xs:documentation>Total EC power delivered from EC antennas</xs:documentation>
+					<xs:documentation>Total EC power launched from EC antennas into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -3130,17 +3162,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_nbi_delivered" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_nbi" type="summary_dynamic_flt_1d_1">
 				<xs:annotation>
-					<xs:documentation>Total NBI power delivered from  neutral beam injectors</xs:documentation>
+					<xs:documentation>Total NBI power launched from neutral beam injectors into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="co_injected_nbi_delivered_power_ratio" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_nbi_co_injected_ratio" type="summary_dynamic_flt_1d_1">
 				<xs:annotation>
-					<xs:documentation>Ratio of co-injected beam port through (delivered) power to total NBI power. Is set to 1 for purely perpendicular injection</xs:documentation>
+					<xs:documentation>Ratio of co-injected beam launched power to total NBI launched power. Is set to 1 for purely perpendicular injection</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
 					</xs:appinfo>
@@ -3154,9 +3186,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_ic_delivered" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_ic" type="summary_dynamic_flt_1d_1">
 				<xs:annotation>
-					<xs:documentation>Total IC power delivered from IC antennas</xs:documentation>
+					<xs:documentation>Total IC power launched from IC antennas into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -3170,9 +3202,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_lh_delivered" type="summary_dynamic_flt_1d_1">
+			<xs:element name="power_launched_lh" type="summary_dynamic_flt_1d_1">
 				<xs:annotation>
-					<xs:documentation>Total LH power delivered from LH antennas</xs:documentation>
+					<xs:documentation>Total LH power launched from LH antennas into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -3271,6 +3303,11 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="tag" type="entry_tag">
+					<xs:annotation>
+						<xs:documentation>Tag qualifying this data entry (or a list of data entries)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="configuration" type="summary_static_str_0d">
 					<xs:annotation>
 						<xs:documentation>Device configuration (the content may be device-specific)</xs:documentation>
