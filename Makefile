@@ -1,7 +1,7 @@
 
 include Makefile.common
 
-DD_FILES=dd_data_dictionary.xml IDSDef.xml IDSNames.txt dd_data_dictionary_validation.txt AoS1_descendents_with_timebase.xml
+DD_FILES=dd_data_dictionary.xml IDSDef.xml IDSNames.txt dd_data_dictionary_validation.txt count_AoS1_descendents_with_timebase.xml
 HTMLDOC_FILES=$(wildcard $(addprefix html_documentation/,*.html css/*.css img/*.png js/*js))
 HTMLDOC_FILES_IDS=$(wildcard $(addprefix html_documentation/,$(addsuffix /*.*,$(shell cat IDSNames.txt))))
 
@@ -47,7 +47,7 @@ IDSDef.xml: dd_data_dictionary.xml
 dd_data_dictionary.xml: %: %.xsd %.xsl
 	$(xslt2proc)
 
-AoS1_descendents_with_timebase.xml: %: dd_data_dictionary.xml count_AoS1_descendents_with_timebase.xsl
+count_AoS1_descendents_with_timebase.xml: %: dd_data_dictionary.xml %.xsl
 	$(xslt2proc)
 
 html_documentation/html_documentation.html: dd_data_dictionary.xml dd_data_dictionary_html_documentation.xsl
