@@ -10,6 +10,87 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="mhd_coordinate_system">
+		<xs:annotation>
+			<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Values of the major radius on the grid</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>../../grid/dim2</coordinate2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Values of the Height on the grid</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>../../grid/dim2</coordinate2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="jacobian">
+				<xs:annotation>
+					<xs:documentation>Absolute value of the jacobian of the coordinate system</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>../../grid/dim2</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tensor_covariant">
+				<xs:annotation>
+					<xs:documentation>Covariant metric tensor on every point of the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>../../grid/dim2</coordinate2>
+						<coordinate3>1...3</coordinate3>
+						<coordinate4>1...3</coordinate4>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_4D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tensor_contravariant">
+				<xs:annotation>
+					<xs:documentation>Contravariant metric tensor on every point of the grid described by grid_type</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>../../grid/dim2</coordinate2>
+						<coordinate3>1...3</coordinate3>
+						<coordinate4>1...3</coordinate4>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_4D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="complex_2d_dynamic_aos_mhd_linear_vector">
 		<xs:annotation>
 			<xs:documentation>Structure (temporary) for real and imaginary part, while waiting for the implementation of complex numbers, dynamic within a type 3 array of structure (index on time))</xs:documentation>
@@ -129,6 +210,11 @@
 					<xs:documentation>Definition of the 2D grid</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="coordinate_system" type="mhd_coordinate_system">
+				<xs:annotation>
+					<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="a_field_perturbed" type="mhd_linear_vector">
 				<xs:annotation>
 					<xs:documentation>Pertubed vector potential for given toroidal mode number</xs:documentation>
@@ -163,6 +249,11 @@
 			<xs:element name="grid" type="equilibrium_profiles_2d_grid">
 				<xs:annotation>
 					<xs:documentation>Definition of the 2D grid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="coordinate_system" type="mhd_coordinate_system">
+				<xs:annotation>
+					<xs:documentation>Flux surface coordinate system on a square grid of flux and poloidal angle</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="displacement_perpendicular" type="complex_2d_dynamic_aos_mhd_scalar">
@@ -339,7 +430,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.11.0</lifecycle_last_change>
+				<lifecycle_last_change>3.19.2</lifecycle_last_change>				
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
