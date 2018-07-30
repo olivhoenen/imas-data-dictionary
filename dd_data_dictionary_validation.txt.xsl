@@ -18,6 +18,7 @@ and not (.//field[not(@coordinate4) and (@data_type='FLT_4D' or @data_type='FLT_
 and not (.//field[not(@coordinate5) and (@data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
 and not (.//field[not(@coordinate6) and (@data_type='FLT_6D' or @data_type='CPX_6D' )])
 and not (.//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_0D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D')])
+and not (.//field[@units and not(@units='UTC' or @units='Atomic Mass Unit' or @units='Elementary Charge Unit') and (contains(@data_type,'STR_') or contains(@data_type,'INT_') or contains(@data_type,'str_') or contains(@data_type,'int_'))])
 and not (.//field[@maxoccur='unbounded' and @type='dynamic' and ancestor::field[@maxoccur='unbounded' and @type='dynamic']])
 and not (.//field[@maxoccur='unbounded' and not(@type='dynamic') and not(ancestor::field[@maxoccur='unbounded' and @type='dynamic'])])
 and not (.//field[(@data_type='FLT_0D' or @data_type='INT_0D' or @data_type='CPX_0D' or @data_type='STR_0D') and @type='dynamic' and not(ancestor::field[@maxoccur='unbounded' and @type='dynamic'])])
@@ -54,6 +55,10 @@ IDS <xsl:value-of select="@name"/> is valid.</xsl:when><xsl:otherwise><!-- Creat
 <!-- Test the presence of the "units" metadata for FLT and CPX data (R5.3) -->
 <xsl:apply-templates select=".//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_0D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D')]">
 <xsl:with-param name="error_description" select="'This field must have a units attribute'"/>
+</xsl:apply-templates>
+<!-- Test that INT and STR data have no "units" metadata (R5.3), although some exceptions are possible for specific cases (UTC, Elementary charge or atomic mass units) -->
+<xsl:apply-templates select=".//field[@units and not(@units='UTC' or @units='Atomic Mass Unit' or @units='Elementary Charge Unit') and (contains(@data_type,'STR_') or contains(@data_type,'INT_') or contains(@data_type,'str_') or contains(@data_type,'int_'))]">
+<xsl:with-param name="error_description" select="'This field should NOT have a units attribute'"/>
 </xsl:apply-templates>
 <!-- Test the presence of nested AoS 3 (illegal) -->
 <xsl:apply-templates select=".//field[@maxoccur='unbounded' and @type='dynamic' and ancestor::field[@maxoccur='unbounded' and @type='dynamic']]">
