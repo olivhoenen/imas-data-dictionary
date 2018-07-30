@@ -1558,6 +1558,19 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="rotation_frequency_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal rotation frequency</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>rad.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="temperature">
 				<xs:annotation>
 					<xs:documentation>Temperature</xs:documentation>
@@ -1902,6 +1915,19 @@
 						<lifecycle_version>3.3.0</lifecycle_version>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>m.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rotation_frequency_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal rotation frequency (average over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>rad.s^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
