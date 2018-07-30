@@ -338,12 +338,12 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="radiance_spectral">
+			<xs:element name="radiance">
 				<xs:annotation>
-					<xs:documentation>Calibrated spectral radiance (radiance per unit wavelength) of the fast ion charge exchange spectrum assuming the shape is pre-defined (e.g. by the Fokker-Planck slowing-down function)</xs:documentation>
+					<xs:documentation>Calibrated radiance of the fast ion charge exchange spectrum assuming the shape is pre-defined (e.g. by the Fokker-Planck slowing-down function). Note: radiance is integrated over the sightline crossing the neutral beam</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
-						<units>(photons) m^-2.s^-1.sr^-1.m^-1</units>
+						<units>(photons) m^-2.s^-1.sr^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -597,7 +597,7 @@
 			</xs:element>
 			<xs:element name="radiances">
 				<xs:annotation>
-					<xs:documentation>Calibrated intensities of the 9 splitted lines (Stark effect due to Lorentz electric field)</xs:documentation>
+					<xs:documentation>Calibrated intensities of the 9 splitted lines (Stark effect due to Lorentz electric field). Note: radiances are integrated over the sightline crossing the neutral beam</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<units>(photons) m^-2.s^-1.sr^-1</units>
