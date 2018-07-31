@@ -756,11 +756,11 @@
 			</xs:element>
 			<xs:element name="flux">
 				<xs:annotation>
-					<xs:documentation>Radiation flux from Unit Ring Source in recent detector's converter (1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
+					<xs:documentation>Radiation flux from Unit Ring Source in recent detector's converter</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<coordinate1>1...N</coordinate1>
-						<coordinate2>../../../unit_source(:)/energy(:)</coordinate2>
+						<coordinate1>../../../../detectors</coordinate1>
+						<coordinate2>../energy</coordinate2>
 						<units>m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -770,11 +770,11 @@
 			</xs:element>
 			<xs:element name="d2flux_drdz">
 				<xs:annotation>
-					<xs:documentation>Second deriviation of Radiation flux from Unit Ring Source in recent detector's converter for "spline" reconstruction(1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
+					<xs:documentation>Second deriviation of Radiation flux from Unit Ring Source in recent detector's converter for "spline" reconstruction</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<coordinate1>1...N</coordinate1>
-						<coordinate2>../../../unit_source(:)/energy(:)</coordinate2>
+						<coordinate1>../../../../detectors</coordinate1>
+						<coordinate2>../energy</coordinate2>
 						<units>m^-4</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -784,11 +784,11 @@
 			</xs:element>
 			<xs:element name="reaction_rate">
 				<xs:annotation>
-					<xs:documentation>Reaction Rate on converter's material from Unit Ring Source in recent detector's converter (1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
+					<xs:documentation>Reaction Rate on converter's material from Unit Ring Source in recent detector's converter</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<coordinate1>1...N</coordinate1>
-						<coordinate2>../../../unit_source(:)/energy(:)</coordinate2>
+						<coordinate1>../../../../detectors</coordinate1>
+						<coordinate2>../energy</coordinate2>
 						<units>m^-3</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -798,11 +798,11 @@
 			</xs:element>
 			<xs:element name="sensitivity">
 				<xs:annotation>
-					<xs:documentation>Sensitivity of converter's material in recent detector's converter (1 - Number of Detector, 2 - Energy of particles)</xs:documentation>
+					<xs:documentation>Sensitivity of converter's material in recent detector's converter</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<coordinate1>1...N</coordinate1>
-						<coordinate2>../../../unit_source(:)/energy(:)</coordinate2>
+						<coordinate1>../../../../detectors</coordinate1>
+						<coordinate2>../energy</coordinate2>
 						<units>cps.m^2.s</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -829,7 +829,7 @@
 				<xs:annotation>
 					<xs:documentation>Plasma reaction (1 - 'DT'; 2 - 'DD')</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>index</coordinate1>
+						<coordinate1>1...2</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -849,7 +849,7 @@
 				<xs:annotation>
 					<xs:documentation>Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>index</coordinate1>
+						<coordinate1>1...2</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
