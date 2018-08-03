@@ -284,6 +284,14 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="power_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of power used in the sibling power node (defining which power is referred to in this pulse_schedule). Index = 1: power _launched, 2: power_forward</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Power</xs:documentation>
@@ -336,6 +344,14 @@
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of power used in the sibling power node (defining which power is referred to in this pulse_schedule). Index = 1: power _launched, 2: power_forward</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
@@ -414,6 +430,14 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="power_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of power used in the sibling power node (defining which power is referred to in this pulse_schedule). Index = 1: power _launched, 2: power_forward</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Power</xs:documentation>
@@ -480,6 +504,14 @@
 					<xs:documentation>Species injected by the NBI unit (may be more than one in case the unit injects a gas mixture)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of power used in the sibling power node (defining which power is referred to in this pulse_schedule). Index = 1: power _launched, 2: power_forward</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -945,7 +977,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
-				<lifecycle_last_change>3.17.0</lifecycle_last_change>
+				<lifecycle_last_change>3.21.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
