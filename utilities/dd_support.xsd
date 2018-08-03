@@ -1471,7 +1471,7 @@
 			</xs:element>
 			<xs:element name="z_average">
 				<xs:annotation>
-					<xs:documentation>Average Z of the charge state bundle (equal to z_min if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:documentation>Average Z of the charge state bundle, volume averaged over the plasma radius (equal to z_min if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>dynamic</type>
@@ -1483,7 +1483,7 @@
 			</xs:element>
 			<xs:element name="z_square_average">
 				<xs:annotation>
-					<xs:documentation>Average Z square of the charge state bundle (equal to z_min if no bundle), = sum (Z^2*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:documentation>Average Z square of the charge state bundle, volume averaged over the plasma radius (equal to z_min square if no bundle), = sum (Z^2*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>dynamic</type>
@@ -1491,6 +1491,32 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_average_1d">
+				<xs:annotation>
+					<xs:documentation>Average charge profile of the charge state bundle (equal to z_min if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_average_square_1d">
+				<xs:annotation>
+					<xs:documentation>Average sqare charge profile of the charge state bundle (equal to z_min square if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ionisation_potential">
