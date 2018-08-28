@@ -738,6 +738,83 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+		<xs:complexType name="code_with_timebase">
+		<xs:annotation>
+			<xs:documentation>Decription of code-specific parameters, when they are gathered below an array of structure (e.g. in case of multiple models or sources gathered in a single IDS). The only difference with the generic code element is the existence of a data+time structure for the dynamic signals (output_flag)</xs:documentation>
+		</xs:annotation>
+			<xs:sequence>
+				<xs:element name="name">
+					<xs:annotation>
+						<xs:documentation>Name of software used</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="commit">
+					<xs:annotation>
+						<xs:documentation>Unique commit reference of software</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="version">
+					<xs:annotation>
+						<xs:documentation>Unique version (tag) of software</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="repository">
+					<xs:annotation>
+						<xs:documentation>URL of software repository</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="parameters">
+					<xs:annotation>
+						<xs:documentation>List of the code specific parameters in XML format</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="output_flag">
+					<xs:annotation>
+						<xs:documentation>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
 	<xs:element name="plasma_composition">
 		<xs:annotation>
 			<xs:documentation>Generic declaration of Plasma Composition for a simulation</xs:documentation>
