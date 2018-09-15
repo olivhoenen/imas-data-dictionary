@@ -38,39 +38,21 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="radiance">
+			<xs:element name="radiance" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Calibrated, background subtracted radiance (integrated over the spectrum for this line)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>m^-2.s^-1.sr^-1</units>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="intensity">
+			<xs:element name="intensity" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Non-calibrated intensity (integrated over the spectrum for this line)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>time</coordinate1>
 						<units>s^-1</units>
-						<type>dynamic</type>
-						<coordinate1>time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="time"/>
-						<xs:group ref="FLT_1D"/>
-					</xs:sequence>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
