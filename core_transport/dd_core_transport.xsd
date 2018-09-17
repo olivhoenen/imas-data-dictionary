@@ -942,6 +942,17 @@
 			<xs:documentation>Transport coefficients for a given model</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="comment">
+				<xs:annotation>
+					<xs:documentation>Any comment describing the model</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="identifier" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Transport model identifier</xs:documentation>
@@ -971,6 +982,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="code" type="code_with_timebase">
+				<xs:annotation>
+					<xs:documentation>Code-specific parameters used for this model</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="core_transport">
@@ -979,7 +995,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.18.0</lifecycle_last_change>
+				<lifecycle_last_change>3.21.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
