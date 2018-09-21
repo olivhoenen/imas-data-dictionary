@@ -122,7 +122,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e_line" type="signal_flt_1d">
+			<xs:element name="n_e_line" type="signal_flt_1d_validity">
 				<xs:annotation>
 					<xs:documentation>Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)</xs:documentation>
 					<xs:appinfo>
@@ -130,35 +130,13 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e_line_validity">
-				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the n_e_line data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="n_e_line_average" type="signal_flt_1d">
+			<xs:element name="n_e_line_average" type="signal_flt_1d_validity">
 				<xs:annotation>
 					<xs:documentation>Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight</xs:documentation>
 					<xs:appinfo>
 						<units>m^-3</units>
 					</xs:appinfo>
 				</xs:annotation>
-			</xs:element>
-			<xs:element name="n_e_line_average_validity">
-				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the n_e_line_average data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -168,7 +146,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.15.0</lifecycle_version>
-				<lifecycle_last_change>3.19.1</lifecycle_last_change>
+				<lifecycle_last_change>3.20.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -182,7 +160,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="n_e_volume_average" type="signal_flt_1d">
+				<xs:element name="n_e_volume_average" type="signal_flt_1d_validity">
 					<xs:annotation>
 						<xs:documentation>Volume average plasma density estimated from the line densities measured by the various channels</xs:documentation>
 						<xs:appinfo>
@@ -190,35 +168,13 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="n_e_volume_average_validity">
-					<xs:annotation>
-						<xs:documentation>Indicator of the validity of the n_e_volume_average data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="INT_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="electrons_n" type="signal_flt_1d">
+				<xs:element name="electrons_n" type="signal_flt_1d_validity">
 					<xs:annotation>
 						<xs:documentation>Total number of electrons in the plasma, estimated from the line densities measured by the various channels</xs:documentation>
 						<xs:appinfo>
 							<units>-</units>
 						</xs:appinfo>
 					</xs:annotation>
-				</xs:element>
-				<xs:element name="electrons_n_validity">
-					<xs:annotation>
-						<xs:documentation>Indicator of the validity of the electrons_n data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="INT_0D"/>
-					</xs:complexType>
 				</xs:element>
 				<xs:element ref="code"/>
 				<xs:element ref="time"/>
