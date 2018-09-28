@@ -81,60 +81,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="amns_data_process_element">
-		<xs:annotation>
-			<xs:documentation>Constituent entering in the composition of a reactant or product (constant)</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="label">
-				<xs:annotation>
-					<xs:documentation>String identifier for reaction constituent (e.g. "D", "C")</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="a">
-				<xs:annotation>
-					<xs:documentation>Number of nucleons in the nucleus (nuclear mass); 0 if none (e-, gamma); Not set if not important (e.g. for an atomic process that is not isotope dependent)</xs:documentation>
-					<xs:appinfo>
-						<units>Atomic Mass Unit</units>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z_n">
-				<xs:annotation>
-					<xs:documentation>Nuclear charge. 0 if none (e-, gamma)</xs:documentation>
-					<xs:appinfo>
-						<units>Elementary Charge Unit</units>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="multiplicity">
-				<xs:annotation>
-					<xs:documentation>Multiplicity of the atom in the molecule</xs:documentation>
-					<xs:appinfo>
-						<units>Elementary Charge Unit</units>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="amns_data_process_reactant">
 		<xs:annotation>
 			<xs:documentation>Process reactant or product definition</xs:documentation>
@@ -151,9 +97,9 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="element" type="amns_data_process_element" maxOccurs="5">
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>List of elements forming the atom (in such cas, this array should be of size 1) or molecule</xs:documentation>
+					<xs:documentation>List of elements forming the atom (in such case, this array should be of size 1) or molecule. Mass of atom and nuclear charge should be set to 0 for photons and electrons. The mass of atom shouldn't be set for an atomic process that is not isotope dependent.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -634,7 +580,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.18.0</lifecycle_last_change>
+				<lifecycle_last_change>3.21.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
