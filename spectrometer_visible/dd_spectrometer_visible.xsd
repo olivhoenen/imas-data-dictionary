@@ -506,6 +506,23 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="etendue">
+				<xs:annotation>
+					<xs:documentation>Etendue (geometric extent) of the channel's optical system</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^2.str</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="etendue_method" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Method used to calculate the etendue. Index = 0 : exact calculation with a 4D integral; 1 : approximation with first order formula (detector surface times solid angle subtended by the apertures); 2 : other methods</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="line_of_sight" type="line_of_sight_2points">
 				<xs:annotation>
 					<xs:documentation>Description of the line of sight of the channel, given by 2 points</xs:documentation>
@@ -579,7 +596,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.3.1</lifecycle_version>
-				<lifecycle_last_change>3.19.2</lifecycle_last_change>
+				<lifecycle_last_change>3.21.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
