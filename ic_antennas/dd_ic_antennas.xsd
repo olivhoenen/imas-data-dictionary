@@ -137,6 +137,127 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="ic_antennas_matching_element">
+		<xs:annotation>
+			<xs:documentation>Matching element</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of the matching element. Index = 1 : capacitor (fill capacitance); Index = 2 : stub (fill phase)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="capacitance">
+				<xs:annotation>
+					<xs:documentation>Capacitance of the macthing element</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>F</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase delay induced by the stub</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ic_antennas_measurement">
+		<xs:annotation>
+			<xs:documentation>Voltage or current measurement</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="position" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the measurement</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="amplitude">
+				<xs:annotation>
+					<xs:documentation>Amplitude of the measurement</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase of the measurement</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ic_antennas_strap">
 		<xs:annotation>
 			<xs:documentation>Properties of IC antenna strap</xs:documentation>
@@ -207,6 +328,175 @@
 						<xs:group ref="FLT_1D"/>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ic_antennas_antenna_module">
+		<xs:annotation>
+			<xs:documentation>Module of an IC antenna</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the module</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the module</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="frequency">
+				<xs:annotation>
+					<xs:documentation>Frequency</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_launched">
+				<xs:annotation>
+					<xs:documentation>Power launched from this module into the vacuum vessel</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_forward">
+				<xs:annotation>
+					<xs:documentation>Forward power arriving to the back of the module</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_reflected">
+				<xs:annotation>
+					<xs:documentation>Reflected power</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reflection_coefficient">
+				<xs:annotation>
+					<xs:documentation>Power reflection coefficient</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase of the forward power arriving at the back of this module</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="voltage" type="ic_antennas_measurement" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Set of voltage measurements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="current" type="ic_antennas_measurement" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Set of current measurements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pressure" type="ic_antennas_measurement" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Set of pressure measurements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>Pa</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="matching_element" type="ic_antennas_matching_element" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Set of matching elements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="strap" type="ic_antennas_strap" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Set of IC antenna straps</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -293,7 +583,7 @@
 			</xs:element>
 			<xs:element name="frequency">
 				<xs:annotation>
-					<xs:documentation>Frequency</xs:documentation>
+					<xs:documentation>Frequency (average over modules)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>time</coordinate1>
@@ -307,9 +597,9 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="power">
+			<xs:element name="power_launched">
 				<xs:annotation>
-					<xs:documentation>Power</xs:documentation>
+					<xs:documentation>Power launched from this antenna into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>time</coordinate1>
@@ -323,9 +613,41 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="strap" type="ic_antennas_strap" maxOccurs="10">
+			<xs:element name="power_forward">
 				<xs:annotation>
-					<xs:documentation>Properties of IC antenna straps</xs:documentation>
+					<xs:documentation>Forward power arriving to the back of the antenna</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_reflected">
+				<xs:annotation>
+					<xs:documentation>Reflected power</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>time</coordinate1>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="FLT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="module" type="ic_antennas_antenna_module" maxOccurs="8">
+				<xs:annotation>
+					<xs:documentation>Set of antenna modules (each module is fed by a single transmission line)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>

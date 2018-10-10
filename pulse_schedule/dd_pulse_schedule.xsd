@@ -284,6 +284,11 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="power_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of power used in the sibling power node (defining which power is referred to in this pulse_schedule). Index = 1: power _launched, 2: power_forward</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Power</xs:documentation>
@@ -336,6 +341,11 @@
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of power used in the sibling power node (defining which power is referred to in this pulse_schedule). Index = 1: power _launched, 2: power_forward</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
@@ -414,6 +424,11 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="power_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of power used in the sibling power node (defining which power is referred to in this pulse_schedule). Index = 1: power _launched, 2: power_forward</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Power</xs:documentation>
@@ -481,6 +496,11 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of power used in the sibling power node (defining which power is referred to in this pulse_schedule). Index = 1: power _launched, 2: power_forward</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="power" type="pulse_schedule_reference">
@@ -945,7 +965,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
-				<lifecycle_last_change>3.17.0</lifecycle_last_change>
+				<lifecycle_last_change>3.21.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
@@ -977,7 +997,7 @@
 						<xs:documentation>Gas injection system and density control references</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="event" type="pulse_schedule_event" maxOccurs="50">
+				<xs:element name="event" type="pulse_schedule_event" maxOccurs="130">
 					<xs:annotation>
 						<xs:documentation>List of events, either predefined triggers  or events recorded during the pulse</xs:documentation>
 						<xs:appinfo>

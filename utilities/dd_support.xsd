@@ -738,6 +738,83 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="code_with_timebase">
+		<xs:annotation>
+			<xs:documentation>Description of code-specific parameters when they are gathered below an array of structure (e.g. in case of multiple models or sources gathered in a single IDS). The only difference with the generic code element is the existence of a data+time structure for the dynamic signals (output_flag)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of software used</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="commit">
+				<xs:annotation>
+					<xs:documentation>Unique commit reference of software</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="version">
+				<xs:annotation>
+					<xs:documentation>Unique version (tag) of software</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="repository">
+				<xs:annotation>
+					<xs:documentation>URL of software repository</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parameters">
+				<xs:annotation>
+					<xs:documentation>List of the code specific parameters in XML format</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="output_flag">
+				<xs:annotation>
+					<xs:documentation>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="time"/>
+						<xs:group ref="INT_1D"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="plasma_composition">
 		<xs:annotation>
 			<xs:documentation>Generic declaration of Plasma Composition for a simulation</xs:documentation>
@@ -1471,7 +1548,7 @@
 			</xs:element>
 			<xs:element name="z_average">
 				<xs:annotation>
-					<xs:documentation>Average Z of the charge state bundle (equal to z_min if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:documentation>Average Z of the charge state bundle, volume averaged over the plasma radius (equal to z_min if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>dynamic</type>
@@ -1483,7 +1560,7 @@
 			</xs:element>
 			<xs:element name="z_square_average">
 				<xs:annotation>
-					<xs:documentation>Average Z square of the charge state bundle (equal to z_min if no bundle), = sum (Z^2*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:documentation>Average Z square of the charge state bundle, volume averaged over the plasma radius (equal to z_min squared if no bundle), = sum (Z^2*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>dynamic</type>
@@ -1491,6 +1568,32 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_average_1d">
+				<xs:annotation>
+					<xs:documentation>Average charge profile of the charge state bundle (equal to z_min if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_average_square_1d">
+				<xs:annotation>
+					<xs:documentation>Average square charge profile of the charge state bundle (equal to z_min squared if no bundle), = sum (Z^2*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>-</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ionisation_potential">
@@ -1555,8 +1658,23 @@
 					<xs:documentation>Velocity</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.21.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="rotation_frequency_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal rotation frequency (i.e. toroidal velocity divided by the major radius at which the toroidal velocity is taken)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<units>rad.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="temperature">
 				<xs:annotation>
@@ -1734,7 +1852,7 @@
 			</xs:element>
 			<xs:element name="z_ion_square_1d">
 				<xs:annotation>
-					<xs:documentation>Average sqare charge of the ion species (sum of states square charge weighted by state density and divided by ion density)</xs:documentation>
+					<xs:documentation>Average square charge of the ion species (sum of states square charge weighted by state density and divided by ion density)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<units>-</units>
@@ -1909,11 +2027,26 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="rotation_frequency_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal rotation frequency  (i.e. toroidal velocity divided by the major radius at which the toroidal velocity is taken) (average over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>rad.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="velocity" type="core_profiles_vector_components_2">
 				<xs:annotation>
 					<xs:documentation>Velocity (average over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.21.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2001,6 +2134,8 @@
 					<xs:documentation>Velocity</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.21.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2254,6 +2389,8 @@
 					<xs:documentation>Velocity (average over charge states when multiple charge states are considered)</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.21.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2459,6 +2596,8 @@
 				<xs:annotation>
 					<xs:documentation>Velocity</xs:documentation>
 					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.21.0</lifecycle_version>
 						<units>m.s^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -2820,6 +2959,32 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="energies">
+				<xs:annotation>
+					<xs:documentation>Array of discrete energy values inside the band</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>eV</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="detection_efficiency">
+				<xs:annotation>
+					<xs:documentation>Probability of detection of a photon impacting the detector as a function of its energy </xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>-</units>
+						<coordinate1>../energies</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -5011,6 +5176,18 @@
 				<xs:annotation>
 					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="surface">
+				<xs:annotation>
+					<xs:documentation>Surface of the detector/aperture, derived from the above geometric data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
