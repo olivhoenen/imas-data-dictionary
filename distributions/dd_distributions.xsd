@@ -2344,6 +2344,31 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="distributions_d_fast_filter">
+		<xs:annotation>
+			<xs:documentation>Description of how the fast and the thermal particle populations are separated</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="method" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Method used to separate the fast and thermal particle population (indices TBD)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy">
+				<xs:annotation>
+					<xs:documentation>Energy at which the fast and thermal particle populations were separated, as a function of radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>eV</units>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="distributions_d_profiles_1d">
 		<xs:annotation>
 			<xs:documentation>1D profiles from the distribution, for a given time slice</xs:documentation>
@@ -2352,6 +2377,11 @@
 			<xs:element name="grid" type="core_radial_grid">
 				<xs:annotation>
 					<xs:documentation>Radial grid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fast_filter" type="distributions_d_fast_filter">
+				<xs:annotation>
+					<xs:documentation>Description of how the fast and the thermal particle populations are separated</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="density">
@@ -2788,31 +2818,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="distributions_d_fast_filter">
-		<xs:annotation>
-			<xs:documentation>Description of how the fast and the thermal particle populations are separated</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="method" type="identifier">
-				<xs:annotation>
-					<xs:documentation>Method used to separate the fast and thermal particle population (indices TBD)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="energy">
-				<xs:annotation>
-					<xs:documentation>Energy at which the fast and thermal particle populations were separated, as a function of radius</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>eV</units>
-						<coordinate1>TBD</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="distributions_d">
 		<xs:annotation>
 			<xs:documentation>Description of a given distribution function</xs:documentation>
@@ -2848,11 +2853,6 @@
 			<xs:element name="species" type="distribution_species">
 				<xs:annotation>
 					<xs:documentation>Species described by this distribution</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="fast_filter" type="distributions_d_fast_filter">
-				<xs:annotation>
-					<xs:documentation>Description of how the fast and the thermal particle populations are separated</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="global_quantities" type="distributions_d_global_quantities" maxOccurs="unbounded">
@@ -2919,7 +2919,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.2.1</lifecycle_version>
-				<lifecycle_last_change>3.15.1</lifecycle_last_change>
+				<lifecycle_last_change>3.21.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
