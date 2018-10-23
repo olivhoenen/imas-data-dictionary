@@ -21,7 +21,7 @@
 		<xsl:param name="nodes" as="node()*"/>
 		<xsl:value-of select="$nodes[1]/@maxoccur*count($nodes[1]//field[@timebasepath]) + $nodes[2]/@maxoccur*count($nodes[2]//field[@timebasepath]) + $nodes[3]/@maxoccur*count($nodes[3]//field[@timebasepath])" />
 	</xsl:function>
-	<xsl:function name="local:count-nodes-4-non-nested" as="xs:anyAtomicType">
+	<xsl:function name="local:count-nodes-4-nested" as="xs:anyAtomicType">
 		<xsl:param name="nodes" as="node()*"/>
 		<xsl:choose>
 		<xsl:when test="$nodes[3]//field[@maxoccur and not(@maxoccur='unbounded')]"> <!-- Case of node[4] being nested being node[3] -->
@@ -29,6 +29,17 @@
 		</xsl:when>
         <xsl:otherwise>    <!-- Case of 4 non-nested AoS nodes -->
 		    <xsl:value-of select="$nodes[1]/@maxoccur*count($nodes[1]//field[@timebasepath]) + $nodes[2]/@maxoccur*count($nodes[2]//field[@timebasepath]) + $nodes[3]/@maxoccur*count($nodes[3]//field[@timebasepath]) + $nodes[4]/@maxoccur*count($nodes[4]//field[@timebasepath])" />
+        </xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<xsl:function name="local:count-nodes-6-nested" as="xs:anyAtomicType">
+		<xsl:param name="nodes" as="node()*"/>
+		<xsl:choose>
+		<xsl:when test="$nodes[1]//field[@maxoccur and not(@maxoccur='unbounded')]"> <!-- Case of node[1] being the parent of the 5 other nodes (siblings) -->
+		   <xsl:value-of select="$nodes[1]/@maxoccur*count($nodes[1]//field[@timebasepath]) +  $nodes[1]/@maxoccur * ($nodes[2]/@maxoccur*count($nodes[2]//field[@timebasepath]) + $nodes[3]/@maxoccur*count($nodes[3]//field[@timebasepath]) + $nodes[4]/@maxoccur*count($nodes[4]//field[@timebasepath]) + $nodes[5]/@maxoccur*count($nodes[5]//field[@timebasepath]) + $nodes[6]/@maxoccur*count($nodes[6]//field[@timebasepath]) )" />
+		</xsl:when>
+        <xsl:otherwise>    <!-- Case of 6 non-nested AoS nodes -->
+		    <xsl:value-of select="$nodes[1]/@maxoccur*count($nodes[1]//field[@timebasepath]) + $nodes[2]/@maxoccur*count($nodes[2]//field[@timebasepath]) + $nodes[3]/@maxoccur*count($nodes[3]//field[@timebasepath]) + $nodes[4]/@maxoccur*count($nodes[4]//field[@timebasepath]) + $nodes[5]/@maxoccur*count($nodes[5]//field[@timebasepath]) + $nodes[6]/@maxoccur*count($nodes[6]//field[@timebasepath]) " />
         </xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -54,21 +65,25 @@
 						<!-- Count all fields having a timebasepath argument + the AoS3 which are dynamic as well -->
 					</xsl:when>
 					<xsl:when test="count(.//field[@maxoccur and .//field[@timebasepath]])=1"> <!-- When there is a single static AoS descendent -->
-						<!-- The first term with the check of no nested struct_array ancestors avoid counting twice the children of further static AoS descendents ... which are also counted (correctly) in the local:count-nodes function ... -->
+						<!-- The first term with the check of no nested struct_array ancestors avoids counting twice the children of further static AoS descendents ... which are also counted (correctly) in the local:count-nodes function ... -->
 						<xsl:attribute name="max_dynamic_nodes" select="(count(.//field[@timebasepath] and not(ancestor::*[@data_type='struct_array' and ancestor::*[@data_type='struct_array']])) + count(.//field[@maxoccur='unbounded' and not(ancestor::*[@maxoccur='unbounded'])]) + local:count-nodes(.//field[@maxoccur and .//field[@timebasepath]]) ) * @maxoccur"/>
 					</xsl:when>
 					<xsl:when test="count(.//field[@maxoccur and .//field[@timebasepath]])=2"> <!-- When there are two non-nested static AoS descendents -->
-						<!-- The first term with the check of no nested struct_array ancestors avoid counting twice the children of further static AoS descendents ... which are also counted (correctly) in the local:count-nodes function ... -->
+						<!-- The first term with the check of no nested struct_array ancestors avoids counting twice the children of further static AoS descendents ... which are also counted (correctly) in the local:count-nodes function ... -->
 						<xsl:attribute name="max_dynamic_nodes" select="(count(.//field[@timebasepath] and not(ancestor::*[@data_type='struct_array' and ancestor::*[@data_type='struct_array']])) + count(.//field[@maxoccur='unbounded' and not(ancestor::*[@maxoccur='unbounded'])]) + local:count-nodes-2-non-nested(.//field[@maxoccur and .//field[@timebasepath]]) ) * @maxoccur"/>
 					</xsl:when>
 					<xsl:when test="count(.//field[@maxoccur and .//field[@timebasepath]])=3"> <!-- When there are three non-nested static AoS descendents -->
-						<!-- The first term with the check of no nested struct_array ancestors avoid counting twice the children of further static AoS descendents ... which are also counted (correctly) in the local:count-nodes function ... -->
+						<!-- The first term with the check of no nested struct_array ancestors avoids counting twice the children of further static AoS descendents ... which are also counted (correctly) in the local:count-nodes function ... -->
 						<xsl:attribute name="max_dynamic_nodes" select="(count(.//field[@timebasepath] and not(ancestor::*[@data_type='struct_array' and ancestor::*[@data_type='struct_array']])) + count(.//field[@maxoccur='unbounded' and not(ancestor::*[@maxoccur='unbounded'])]) + local:count-nodes-3-non-nested(.//field[@maxoccur and .//field[@timebasepath]]) ) * @maxoccur"/>
 					</xsl:when>
-					<xsl:when test="count(.//field[@maxoccur and .//field[@timebasepath]])=4"> <!-- When there are 4 non-nested static AoS descendents -->
-						<!-- The first term with the check of no nested struct_array ancestors avoid counting twice the children of further static AoS descendents ... which are also counted (correctly) in the local:count-nodes function ... -->
-						<xsl:attribute name="max_dynamic_nodes" select="(count(.//field[@timebasepath and not(ancestor::*[@data_type='struct_array' and ancestor::*[@data_type='struct_array']])]) + count(.//field[@maxoccur='unbounded' and not(ancestor::*[@maxoccur='unbounded'])]) + local:count-nodes-4-non-nested(.//field[@maxoccur and .//field[@timebasepath]]) ) * @maxoccur"/>
+					<xsl:when test="count(.//field[@maxoccur and .//field[@timebasepath]])=4"> <!-- When there are 4 possibly nested static AoS descendents (e.g. charge_exchange)-->
+						<!-- The first term with the check of no nested struct_array ancestors avoids counting twice the children of further static AoS descendents ... which are also counted (correctly) in the local:count-nodes function ... -->
+						<xsl:attribute name="max_dynamic_nodes" select="(count(.//field[@timebasepath and not(ancestor::*[@data_type='struct_array' and ancestor::*[@data_type='struct_array']])]) + count(.//field[@maxoccur='unbounded' and not(ancestor::*[@maxoccur='unbounded'])]) + local:count-nodes-4-nested(.//field[@maxoccur and .//field[@timebasepath]]) ) * @maxoccur"/>
 					</xsl:when>
+					<xsl:when test="count(.//field[@maxoccur and .//field[@timebasepath]])=6"> <!-- When there are 6 possibly nested static AoS descendents (e.g. ic_antennas) -->
+						<!-- The first term with the check of no nested struct_array ancestors avoids counting twice the children of further static AoS descendents ... which are also counted (correctly) in the local:count-nodes function ... -->
+						<xsl:attribute name="max_dynamic_nodes" select="(count(.//field[@timebasepath] and not(ancestor::*[@data_type='struct_array' and ancestor::*[@data_type='struct_array']])) + count(.//field[@maxoccur='unbounded' and not(ancestor::*[@maxoccur='unbounded'])]) + local:count-nodes-6-nested(.//field[@maxoccur and .//field[@timebasepath]]) ) * @maxoccur"/>
+					</xsl:when>						
 					<xsl:otherwise>
 						<xsl:attribute name="max_dynamic_nodes" select="'ERROR : unexpected case'"/>
 					</xsl:otherwise>
