@@ -10,6 +10,25 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="gyrokinectics_species_collisionality">
+		<xs:annotation>
+			<xs:documentation>Collisionality of a given species against another one</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="collisionality_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised collisionality between the two species (given by the two nested array of structure parents)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="gyrokinectics_species">
 		<xs:annotation>
 			<xs:documentation>List of species</xs:documentation>
@@ -98,6 +117,19 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="fluxes_integrated_norm" type="gyrokinectics_fluxes">
+				<xs:annotation>
+					<xs:documentation>Normalised fluxes integrated over the kx and ky grids used in a non-linear run (therefore they have no dependence on the wavevector) in the laboratory frame, for a given species</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="collisionality_against_species" type="gyrokinectics_species_collisionality" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Collisionality of this species against the set of species</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../species</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -309,9 +341,21 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="collisionality_reference">
+			<xs:element name="debye_length_reference">
 				<xs:annotation>
-					<xs:documentation>Reference collisionality (see detailed documentation at the root of the IDS)</xs:documentation>
+					<xs:documentation>Debye length computed from the reference quantities (see detailed documentation at the root of the IDS)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="shearing_rate_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised ExB shearing rate (for non-linear runs only)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -372,17 +416,6 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="collisions_ei_only">
-				<xs:annotation>
-					<xs:documentation>Flag = 1 if only electron to main ion collisions are retained, 0 otherwise</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="collisions_momentum_conservation">
 				<xs:annotation>
 					<xs:documentation>Flag = 1 if the collision operator conserves momentum, 0 otherwise</xs:documentation>
@@ -427,16 +460,28 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="collision_enhancement_factor">
+			<xs:element name="non_linear_run">
 				<xs:annotation>
-					<xs:documentation>Enhancement factor for electron-main ion collisionaility (e.g. to account for impurities)</xs:documentation>
+					<xs:documentation>Flag = 1 if this is a non-linear run, 0 for a linear run</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time_interval_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised time interval used to average fluxes and moments from non-linear runs</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>1...2</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -704,34 +749,19 @@
 			<xs:documentation>Turbulent fluxes for a given eigenmode and a given species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="particles_laboratory" type="gyrokinectics_flux">
+			<xs:element name="particles" type="gyrokinectics_flux">
 				<xs:annotation>
 					<xs:documentation>Contributions to the normalised particle flux, in the laboratory frame</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="particles_rotating" type="gyrokinectics_flux">
-				<xs:annotation>
-					<xs:documentation>Contributions to the normalised particle flux, in the rotating frame</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="energy_laboratory" type="gyrokinectics_flux">
+			<xs:element name="energy" type="gyrokinectics_flux">
 				<xs:annotation>
 					<xs:documentation>Contributions to the normalised energy flux, in the laboratory frame</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy_rotating" type="gyrokinectics_flux">
-				<xs:annotation>
-					<xs:documentation>Contributions to the normalised energy flux, in the rotating frame</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_tor_laboratory" type="gyrokinectics_flux">
+			<xs:element name="momentum_tor" type="gyrokinectics_flux">
 				<xs:annotation>
 					<xs:documentation>Contributions to the normalised toroidal momentum flux, in the laboratory frame</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="momentum_tor_rotating" type="gyrokinectics_flux">
-				<xs:annotation>
-					<xs:documentation>Contributions to the normalised toroidal momentum flux, in the rotating frame</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -748,7 +778,7 @@
 			</xs:element>
 			<xs:element name="fluxes_norm" type="gyrokinectics_fluxes">
 				<xs:annotation>
-					<xs:documentation>Normalised fluxes</xs:documentation>
+					<xs:documentation>Normalised fluxes in the laboratory frame</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
