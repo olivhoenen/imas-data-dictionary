@@ -10,25 +10,6 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="gyrokinectics_species_collisionality">
-		<xs:annotation>
-			<xs:documentation>Collisionality of a given species against another one</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="collisionality_norm">
-				<xs:annotation>
-					<xs:documentation>Normalised collisionality between the two species (given by the two nested array of structure parents)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="gyrokinectics_species">
 		<xs:annotation>
 			<xs:documentation>List of species</xs:documentation>
@@ -117,19 +98,6 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="fluxes_integrated_norm" type="gyrokinectics_fluxes">
-				<xs:annotation>
-					<xs:documentation>Normalised fluxes integrated over the kx and ky grids used in a non-linear run (therefore they have no dependence on the wavevector) in the laboratory frame, for a given species</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="collisionality_against_species" type="gyrokinectics_species_collisionality" maxOccurs="10">
-				<xs:annotation>
-					<xs:documentation>Collisionality of this species against the set of species</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../species</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -397,6 +365,17 @@
 			<xs:element name="include_b_field_parallel">
 				<xs:annotation>
 					<xs:documentation>Flag = 1 if fluctuations of the parallel magnetic field are retained, 0 otherwise</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inconsistent_curvature_drift">
+				<xs:annotation>
+					<xs:documentation>Flag =1 if the beta_prime contribution to the curvature drift is neglected, 0 otherwise. Only allowed in combination with the neglect of parallel magnetic field fluctuations</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
@@ -701,68 +680,154 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="gyrokinectics_flux">
-		<xs:annotation>
-			<xs:documentation>Turbulent fluxes for a given eigenmode, a given species and a given flux type</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="phi_potential">
-				<xs:annotation>
-					<xs:documentation>Contribution of the perturbed electrostatic potential to the normalised flux</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="a_field_parallel">
-				<xs:annotation>
-					<xs:documentation>Contribution of the perturbed parallel electromagnetic potential to the normalised flux</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b_field_parallel">
-				<xs:annotation>
-					<xs:documentation>Contribution of the perturbed parallel magnetic field to the normalised flux</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="gyrokinectics_fluxes">
 		<xs:annotation>
 			<xs:documentation>Turbulent fluxes for a given eigenmode and a given species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="particles" type="gyrokinectics_flux">
+			<xs:element name="particles_phi_potential">
 				<xs:annotation>
-					<xs:documentation>Contributions to the normalised particle flux, in the laboratory frame</xs:documentation>
+					<xs:documentation>Contribution of the perturbed electrostatic potential to the normalised particle flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="energy" type="gyrokinectics_flux">
+			<xs:element name="particles_a_field_parallel">
 				<xs:annotation>
-					<xs:documentation>Contributions to the normalised energy flux, in the laboratory frame</xs:documentation>
+					<xs:documentation>Contribution of the perturbed parallel electromagnetic potential to the normalised particle flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="momentum_tor" type="gyrokinectics_flux">
+			<xs:element name="particles_b_field_parallel">
 				<xs:annotation>
-					<xs:documentation>Contributions to the normalised toroidal momentum flux, in the laboratory frame</xs:documentation>
+					<xs:documentation>Contribution of the perturbed parallel magnetic field to the normalised particle flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="energy_phi_potential">
+				<xs:annotation>
+					<xs:documentation>Contribution of the perturbed electrostatic potential to the normalised energy flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="energy_a_field_parallel">
+				<xs:annotation>
+					<xs:documentation>Contribution of the perturbed parallel electromagnetic potential to the normalised energy flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="energy_b_field_parallel">
+				<xs:annotation>
+					<xs:documentation>Contribution of the perturbed parallel magnetic field to the normalised energy flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="momentum_tor_parallel_phi_potential">
+				<xs:annotation>
+					<xs:documentation>Contribution of the perturbed electrostatic potential to the parallel component of the normalised toroidal momentum flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="momentum_tor_parallel_a_field_parallel">
+				<xs:annotation>
+					<xs:documentation>Contribution of the perturbed parallel electromagnetic potential to the parallel component of the normalised toroidal momentum flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="momentum_tor_parallel_b_field_parallel">
+				<xs:annotation>
+					<xs:documentation>Contribution of the perturbed parallel magnetic field to the parallel component of the normalised toroidal momentum flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="momentum_tor_perpendicular_phi_potential">
+				<xs:annotation>
+					<xs:documentation>Contribution of the perturbed electrostatic potential to the perpendicular component of the normalised toroidal momentum flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="momentum_tor_perpendicular_a_field_parallel">
+				<xs:annotation>
+					<xs:documentation>Contribution of the perturbed parallel electromagnetic potential to the perpendicular component of the normalised toroidal momentum flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="momentum_tor_perpendicular_b_field_parallel">
+				<xs:annotation>
+					<xs:documentation>Contribution of the perturbed parallel magnetic field to the perpendicular component of the normalised toroidal momentum flux</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -771,7 +836,7 @@
 			<xs:documentation>Turbulent fluxes and moments for a given eigenmode and a given species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="moments_norm" type="gyrokinectics_moments">
+			<xs:element name="moments_norm_rotating_frame" type="gyrokinectics_moments">
 				<xs:annotation>
 					<xs:documentation>Moments (normalised) of the perturbed distribution function defined in the rotating frame</xs:documentation>
 				</xs:annotation>
@@ -1051,7 +1116,7 @@
 	<xs:element name="gyrokinetics">
 		<xs:annotation>
 			<xs:documentation>Description of a gyrokinetic simulation (delta-f, flux-tube). All quantities within this IDS are normalised (apart from time), thus independent of rhostar, consistently with the local approximation and
-a spectral representation is assumed in the perpendicular plane (i.e. homogeneous turbulence).</xs:documentation>
+a spectral representation is assumed in the perpendicular plane (i.e. homogeneous turbulence). All quantities are given in the laboratory frame, except the moments of the perturbed distribution function which are given in the rotating frame.</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.19.0</lifecycle_version>
@@ -1096,6 +1161,28 @@ a spectral representation is assumed in the perpendicular plane (i.e. homogeneou
 						<xs:documentation>Set of wavevectors</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="collisionality_norm">
+					<xs:annotation>
+						<xs:documentation>Normalised collisionality between two species</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<coordinate1>../species</coordinate1>
+							<coordinate2>../species</coordinate2>
+							<units>-</units>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_2D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="fluxes_integrated_norm" type="gyrokinectics_fluxes" maxOccurs="10">
+					<xs:annotation>
+						<xs:documentation>Normalised fluxes integrated over the kx and ky grids used in a non-linear run (therefore they have no dependence on the wavevector) in the laboratory frame, for a given species</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>../species</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
