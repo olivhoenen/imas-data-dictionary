@@ -56,7 +56,8 @@
 	<xsl:template name="count_dynamic_signals" match="field">
 		<xsl:if test="not(ancestor::*[@data_type='struct_array'])">
 			<!-- Do something only if this is the top level of AoS (not other AoS ancestor), since this is the only one corresponding to an explicit node in the MDS model tree, otherwise skip the whole template -->
-			<xsl:element name="{@name}">
+			<xsl:element name="AoS">
+			<xsl:attribute name="path" select="@path"/>
 				<xsl:choose>
 					<!--<xsl:when test=".//field[@maxoccur and not(contains(@maxoccur,'unbounded'))]">-->
 					<xsl:when test="not(.//field[@maxoccur and .//field[@timebasepath]])">
