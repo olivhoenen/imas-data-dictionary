@@ -1,6 +1,14 @@
 
 include Makefile.common
 
+ifneq ("no","$(strip $(SYS_WIN))")
+	JAVA = $(JAVA_HOME)/bin/java
+	CFLAGS+= -DWIN32
+	CXXFLAGS+= -DWIN32
+else
+	JAVA = java
+endif
+
 DD_FILES=dd_data_dictionary.xml IDSDef.xml IDSNames.txt dd_data_dictionary_validation.txt count_AoS1_descendents_with_timebase.xml
 HTMLDOC_FILES=$(wildcard $(addprefix html_documentation/,*.html css/*.css img/*.png js/*js))
 HTMLDOC_FILES_IDS=$(wildcard $(addprefix html_documentation/,$(addsuffix /*.*,$(shell cat IDSNames.txt))))
@@ -67,6 +75,6 @@ endef
 define xslt2proc
 @# Expect prerequisites: <xmlfile> <xslfile>
 $(if $(SAXONICAJAR),,$(error Invalid /path/to/saxon9he.jar in CLASSPATH. Forgot to load module?))
-java net.sf.saxon.Transform -threads:4 -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ || { rm -f $@ ; exit 1 ; }
+$(JAVA) net.sf.saxon.Transform -threads:4 -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ || { rm -f $@ ; exit 1 ; }
 endef
 
