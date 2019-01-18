@@ -5930,6 +5930,46 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="version_dd_al">
+		<xs:annotation>
+			<xs:documentation>Version of the access layer package used to PUT this IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data_dictionary">
+				<xs:annotation>
+					<xs:documentation>Version of Data Dictionary used to PUT this IDS</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="access_layer">
+				<xs:annotation>
+					<xs:documentation>Version of Access Layer used to PUT this IDS</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="access_layer_language">
+				<xs:annotation>
+					<xs:documentation>Programming language of the Access Layer high level API used to PUT this IDS</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="data_entry">
 		<xs:annotation>
 			<xs:documentation>Definition of a data entry</xs:documentation>
@@ -6052,6 +6092,11 @@
 					<xs:complexType>
 						<xs:group ref="STR_0D"/>
 					</xs:complexType>
+				</xs:element>
+				<xs:element name="version_put" type="version_dd_al">
+					<xs:annotation>
+						<xs:documentation>Version of the access layer package used to PUT this IDS</xs:documentation>
+					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
