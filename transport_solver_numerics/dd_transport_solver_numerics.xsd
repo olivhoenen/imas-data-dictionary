@@ -1864,6 +1864,36 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="numerics_convergence_equations_single_delta">
+		<xs:annotation>
+			<xs:documentation>Delta between two iterations of the solvers on a given transport equation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value of the relative deviation</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="expression">
+				<xs:annotation>
+					<xs:documentation>Expression used by the solver to calculate the relative deviation</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="numerics_convergence_equations_single">
 		<xs:annotation>
 			<xs:documentation>Convergence details of a given transport equation</xs:documentation>
@@ -1879,6 +1909,11 @@
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="delta_relative" type="numerics_convergence_equations_single_delta">
+				<xs:annotation>
+					<xs:documentation>Relative deviation on the primary quantity of the transport equation between the present and the  previous iteration of the solver</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -2518,7 +2553,7 @@ core_profiles/profiles_1d/ion(1)/density)</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.17.0</lifecycle_last_change>
+				<lifecycle_last_change>3.22.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
