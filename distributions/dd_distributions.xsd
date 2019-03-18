@@ -10,7 +10,6 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-
 	<xs:complexType name="distributions_d_ggd_expansion">
 		<xs:annotation>
 			<xs:documentation>Expansion of the distribution function for a given time slice, using a GGD representation</xs:documentation>
@@ -2894,6 +2893,7 @@
 						<xs:documentation>Set of distribution functions. Every distribution function has to be associated with only one particle species, specified in distri_vec/species/, but there could be multiple distribution function for each species. In this case, the fast particle populations should be superposed</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
+							<appendable_by_appender_actor>yes</appendable_by_appender_actor>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
