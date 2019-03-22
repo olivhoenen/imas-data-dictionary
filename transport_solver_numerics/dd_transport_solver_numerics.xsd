@@ -2414,16 +2414,11 @@ core_profiles/profiles_1d/ion(1)/density)</xs:documentation>
 			<xs:documentation>Boundary conditions for a 1D transport equation</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="identifier" type="identifier_dynamic_aos3">
-				<xs:annotation>
-					<xs:documentation>Identifier of the boundary condition</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="type" type="identifier_dynamic_aos3">
 				<xs:annotation>
 					<xs:documentation>Boundary condition type</xs:documentation>
 					<xs:appinfo>
-						<doc_identifier>transport_solver_numerics/transport_solver_numerics_bc_identifier.xml</doc_identifier>
+						<doc_identifier>transport_solver_numerics/transport_solver_numerics_bc_type.xml</doc_identifier>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2462,6 +2457,14 @@ core_profiles/profiles_1d/ion(1)/density)</xs:documentation>
 			<xs:element name="primary_quantity" type="numerics_solver_1d_equation_primary">
 				<xs:annotation>
 					<xs:documentation>Profile and derivatives of the primary quantity of the transport equation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="computation_mode" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Computation mode for this equation</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>transport_solver_numerics/transport_solver_numerics_computation_mode.xml</doc_identifier>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="boundary_condition" type="numerics_solver_1d_equation_bc" maxOccurs="unbounded">
