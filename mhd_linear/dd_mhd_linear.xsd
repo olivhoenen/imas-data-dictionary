@@ -124,6 +124,36 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="coefficients_real">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients, to be used for a high precision evaluation of the physical quantity (real part) with finite elements, provided on the 2D grid</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/dim1</coordinate1>
+						<coordinate2>../../../grid/dim2</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="coefficients_imaginary">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients, to be used for a high precision evaluation of the physical quantity (imaginary part) with finite elements, provided on the 2D grid</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/dim1</coordinate1>
+						<coordinate2>../../../grid/dim2</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="complex_2d_dynamic_aos_mhd_scalar">
@@ -157,6 +187,69 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="coefficients_real">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients, to be used for a high precision evaluation of the physical quantity (real part) with finite elements, provided on the 2D grid</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>../../grid/dim2</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="coefficients_imaginary">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients, to be used for a high precision evaluation of the physical quantity (imaginary part) with finite elements, provided on the 2D grid</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>../../grid/dim2</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="complex_1d_mhd_alfven_spectrum">
+		<xs:annotation>
+			<xs:documentation>Structure for real and imaginary part of the Alfven shear spectrum</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="real">
+				<xs:annotation>
+					<xs:documentation>Real part of the frequency, for a given radial position and every root found at this position</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s^-1</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="imaginary">
+				<xs:annotation>
+					<xs:documentation>Imaginary part of the frequency, for a given radial position and every root found at this position</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s^-1</units>
+						<coordinate1>../real</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -346,6 +439,30 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="phi_potential_perturbed" type="complex_2d_dynamic_aos_mhd_scalar">
+				<xs:annotation>
+					<xs:documentation>Perturbed electrostatic potential for given toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="psi_potential_perturbed" type="complex_2d_dynamic_aos_mhd_scalar">
+				<xs:annotation>
+					<xs:documentation>Perturbed electromagnetic super potential for given toroidal mode number, see ref [Antonsen/Lane Phys Fluids 23(6) 1980, formula 34], so that A_field_parallel=1/(i*2pi*frequency) (grad psi_potential)_parallel</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="alfven_frequency_spectrum" type="complex_1d_mhd_alfven_spectrum" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Local shear Alfven frequency spectrum as a function of radius (only in case grid/dim1 is a radial coordinate)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/dim1</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="mhd_linear_time_slice_toroidal_modes">
@@ -382,6 +499,18 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="amplitude_multiplier">
+				<xs:annotation>
+					<xs:documentation>Multiplier that is needed to convert the linear mode structures to the amplitude of a non-linearly saturated mode in physical units. If empty, it means that the structures contains no information about non-linearly saturated mode</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -430,12 +559,28 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.19.2</lifecycle_last_change>				
+				<lifecycle_last_change>3.22.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="perturbation_type" type="identifier">
+					<xs:annotation>
+						<xs:documentation>Type of the perturbation described in this IDS</xs:documentation>
+						<xs:appinfo>
+							<doc_identifier>mhd_linear/mhd_linear_perturbation_identifier.xml</doc_identifier>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="model_type" type="identifier">
+					<xs:annotation>
+						<xs:documentation>Type of model used to populate this IDS</xs:documentation>
+						<xs:appinfo>
+							<doc_identifier>mhd_linear/mhd_linear_model_identifier.xml</doc_identifier>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</xs:documentation>
