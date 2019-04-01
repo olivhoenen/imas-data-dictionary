@@ -373,9 +373,9 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="inconsistent_curvature_drift">
+			<xs:element name="include_full_curvature_drift">
 				<xs:annotation>
-					<xs:documentation>Flag = 1 if the beta_prime contribution to the curvature drift is neglected, 0 otherwise. Only allowed in combination with the neglect of parallel magnetic field fluctuations</xs:documentation>
+					<xs:documentation>Flag = 1 if all contributions to the curvature drift are included (including beta_prime), 0 otherwise. Neglecting the beta_prime contribution (Flag=0) is only recommended together with the neglect of parallel magnetic field fluctuations</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
@@ -1112,6 +1112,27 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="gyrokinetics_collisions">
+		<xs:annotation>
+			<xs:documentation>Collisions related quantities</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="collisionality_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised collisionality between two species</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../species</coordinate1>
+						<coordinate2>../../species</coordinate2>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="gyrokinetics">
 		<xs:annotation>
 			<xs:documentation>Description of a gyrokinetic simulation (delta-f, flux-tube). All quantities within this IDS are normalised (apart from time), thus independent of rhostar, consistently with the local approximation and
@@ -1155,6 +1176,11 @@ a spectral representation is assumed in the perpendicular plane (i.e. homogeneou
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="collisions" type="gyrokinetics_collisions">
+					<xs:annotation>
+						<xs:documentation>Collisions related quantities</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="wavevector" type="gyrokinetics_wavevector" maxOccurs="10">
 					<xs:annotation>
 						<xs:documentation>Set of wavevectors</xs:documentation>
@@ -1162,20 +1188,6 @@ a spectral representation is assumed in the perpendicular plane (i.e. homogeneou
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
-				</xs:element>
-				<xs:element name="collisionality_norm">
-					<xs:annotation>
-						<xs:documentation>Normalised collisionality between two species</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-							<coordinate1>../species</coordinate1>
-							<coordinate2>../species</coordinate2>
-							<units>-</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
 				</xs:element>
 				<xs:element name="fluxes_integrated_norm" type="gyrokinetics_fluxes" maxOccurs="10">
 					<xs:annotation>
