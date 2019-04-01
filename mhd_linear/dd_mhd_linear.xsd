@@ -223,7 +223,7 @@
 	</xs:complexType>
 	<xs:complexType name="complex_1d_mhd_alfven_spectrum">
 		<xs:annotation>
-			<xs:documentation>Structure for real and imaginary part of the Alfven shear spectrum</xs:documentation>
+			<xs:documentation>Structure for real and imaginary part of the shear Alfvén spectrum</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="real">
@@ -449,7 +449,7 @@
 			</xs:element>
 			<xs:element name="psi_potential_perturbed" type="complex_2d_dynamic_aos_mhd_scalar">
 				<xs:annotation>
-					<xs:documentation>Perturbed electromagnetic super potential for given toroidal mode number, see ref [Antonsen/Lane Phys Fluids 23(6) 1980, formula 34], so that A_field_parallel=1/(i*2pi*frequency) (grad psi_potential)_parallel</xs:documentation>
+					<xs:documentation>Perturbed electromagnetic super-potential for given toroidal mode number, see ref [Antonsen/Lane Phys Fluids 23(6) 1980, formula 34], so that A_field_parallel=1/(i*2pi*frequency) (grad psi_potential)_parallel</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
 					</xs:appinfo>
@@ -457,7 +457,7 @@
 			</xs:element>
 			<xs:element name="alfven_frequency_spectrum" type="complex_1d_mhd_alfven_spectrum" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Local shear Alfven frequency spectrum as a function of radius (only in case grid/dim1 is a radial coordinate)</xs:documentation>
+					<xs:documentation>Local shear Alfvén spectrum as a function of radius (only in case grid/dim1 is a radial coordinate)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../grid/dim1</coordinate1>
 					</xs:appinfo>
@@ -473,6 +473,36 @@
 			<xs:element name="n_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal mode number of the MHD mode</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="m_pol_dominant">
+				<xs:annotation>
+					<xs:documentation>Dominant poloidal mode number defining the mode rational surface; for TAEs the lower of the two main m's has to be specified</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ballooning_type" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Ballooning type of the mode : ballooning 0; anti-ballooning:1; flute-like:2</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>mhd_linear/mhd_linear_perturbation_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="radial_mode_number">
+				<xs:annotation>
+					<xs:documentation>Radial mode number</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
