@@ -59,6 +59,49 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="langmuir_probes_multi_temperature">
+		<xs:annotation>
+			<xs:documentation>Structure for multi-temperature fits</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="t_e">
+				<xs:annotation>
+					<xs:documentation>Electron temperature</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="t_i">
+				<xs:annotation>
+					<xs:documentation>Ion temperature</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for the multi-temperature fits</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="langmuir_probes_probe">
 		<xs:annotation>
 			<xs:documentation>Single Langmuir probe description</xs:documentation>
@@ -239,11 +282,19 @@
 			</xs:element>
 			<xs:element name="time" type="flt_1d_type">
 				<xs:annotation>
-					<xs:documentation>Timebase for the dynamic nodes of this probe</xs:documentation>
+					<xs:documentation>Timebase for the dynamic nodes of this probe located at this level of the IDS structure</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<type>dynamic</type>
 						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="multi_temperature_fits" type="langmuir_probes_multi_temperature" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation>Set of temperatures describing the electron and ion distribution functions in case of multi-temperature fits</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
