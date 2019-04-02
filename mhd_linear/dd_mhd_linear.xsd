@@ -470,6 +470,14 @@
 			<xs:documentation>Vector of toroidal modes</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="perturbation_type" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Type of the perturbation</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>mhd_linear/mhd_linear_perturbation_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="n_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal mode number of the MHD mode</xs:documentation>
@@ -595,14 +603,6 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="perturbation_type" type="identifier">
-					<xs:annotation>
-						<xs:documentation>Type of the perturbation described in this IDS</xs:documentation>
-						<xs:appinfo>
-							<doc_identifier>mhd_linear/mhd_linear_perturbation_identifier.xml</doc_identifier>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
 				<xs:element name="model_type" type="identifier">
 					<xs:annotation>
 						<xs:documentation>Type of model used to populate this IDS</xs:documentation>
