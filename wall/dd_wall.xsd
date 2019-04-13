@@ -509,6 +509,20 @@
 					<xs:documentation>Irregular outline of the limiting surface. Do NOT repeat the first point for closed contours</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="phi_extensions">
+				<xs:annotation>
+					<xs:documentation>Simplified description of toroidal angle extensions of the unit, by a list of zones defined by their center and full width (in toroidal angle).  In each of these zones, the unit outline remains the same. Leave this node empty for an axisymmetric unit. The first dimension gives the center and full width toroidal angle values for the unit. The second dimension represents the toroidal occurrences of the unit countour (i.e. the number of toroidal zones).</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+						<coordinate1>1...2</coordinate1>
+						<coordinate2>1...N</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="resistivity">
 				<xs:annotation>
 					<xs:documentation>Resistivity of the limiter unit</xs:documentation>
@@ -578,6 +592,20 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="phi_extensions">
+				<xs:annotation>
+					<xs:documentation>Simplified description of toroidal angle extensions of the unit, by a list of zones defined by their center and full width (in toroidal angle).  In each of these zones, the unit outline remains the same. Leave this node empty for an axisymmetric unit. The first dimension gives the center and full width toroidal angle values for the unit. The second dimension represents the toroidal occurrences of the unit countour (i.e. the number of toroidal zones).</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+						<coordinate1>1...2</coordinate1>
+						<coordinate2>1...N</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="resistivity">
 				<xs:annotation>
@@ -710,7 +738,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.19.0</lifecycle_last_change>
+				<lifecycle_last_change>3.23.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -723,7 +751,7 @@
 				</xs:element>
 				<xs:element name="description_2d" type="wall_2d" maxOccurs="3">
 					<xs:annotation>
-						<xs:documentation>Set of 2D wall descriptions, for each type of possible physics or engineering configurations necessary (gas tight vs wall with ports and holes, coarse vs fine representation, single contour limiter, disjoint gapped plasma facing components, ...).</xs:documentation>
+						<xs:documentation>Set of 2D wall descriptions, for each type of possible physics or engineering configurations necessary (gas tight vs wall with ports and holes, coarse vs fine representation, single contour limiter, disjoint gapped plasma facing components, ...). A simplified description of the toroidal extension of the 2D contours is also provided by using the phi_extensions nodes.</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
