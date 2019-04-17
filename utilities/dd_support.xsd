@@ -2442,11 +2442,9 @@
 			</xs:element>
 			<xs:element name="velocity" type="core_profiles_vector_components_2">
 				<xs:annotation>
-					<xs:documentation>Velocity (average over charge states when multiple charge states are considered)</xs:documentation>
+					<xs:documentation>Velocity (average over charge states when multiple charge states are considered) at the position of maximum major radius on every flux surface</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.21.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -3306,6 +3304,33 @@
 						<units>V.m^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="phi_potential">
+				<xs:annotation>
+					<xs:documentation>Electrostatic potential, averaged on the magnetic flux surface</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rotation_frequency_tor_sonic">
+				<xs:annotation>
+					<xs:documentation>Derivative of the flux surface averaged electrostatic potential with respect to the poloidal flux, multiplied by -1. This quantity is the toroidal angular rotation frequency due to the ExB drift, introduced in formula (43) of Hinton and Wong, Physics of Fluids 3082 (1985), also referred to as sonic flow in regimes in which the toroidal velocity is dominant over the poloidal velocity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>s^-1</units>
+						<type>dynamic</type>
+						<url>https://doi.org/10.1063/1.865350</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="q">
 				<xs:annotation>
