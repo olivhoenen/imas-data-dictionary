@@ -80,23 +80,23 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="intensity" type="signal_flt_2d">
+			<xs:element name="brightness" type="signal_flt_2d">
 				<xs:annotation>
-					<xs:documentation>Intensity of the soft X-rays received on the detector, in multiple energy bands if available from the detector</xs:documentation>
+					<xs:documentation>Power flux received by the detector, per unit solid angle and per unit area, in multiple energy bands if available from the detector</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../energy_band</coordinate1>
 						<coordinate2>time</coordinate2>
-						<units>m^-2.s^-1.sr^-1</units>
+						<units>W.m^-2.sr^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_density" type="signal_flt_2d">
+			<xs:element name="power" type="signal_flt_2d">
 				<xs:annotation>
-					<xs:documentation>Power received on the detector per unit surface, in multiple energy bands if available from the detector</xs:documentation>
+					<xs:documentation>Power received on the detector, in multiple energy bands if available from the detector</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../energy_band</coordinate1>
 						<coordinate2>time</coordinate2>
-						<units>W.m^-2</units>
+						<units>W</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -124,7 +124,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.10.2</lifecycle_version>
-				<lifecycle_last_change>3.21.0</lifecycle_last_change>
+				<lifecycle_last_change>3.23.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
