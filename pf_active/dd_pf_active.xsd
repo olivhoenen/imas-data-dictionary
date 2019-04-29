@@ -175,7 +175,7 @@
 			</xs:element>
 			<xs:element name="voltage" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Voltage at the supply output</xs:documentation>
+					<xs:documentation>Voltage at the supply output (Vside1-Vside2)</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
 					</xs:appinfo>
@@ -183,7 +183,7 @@
 			</xs:element>
 			<xs:element name="current" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Current at the supply output, defined positive if it flows from point 1 to point 2 of the component in the pfcircuit description</xs:documentation>
+					<xs:documentation>Current at the supply output, defined positive if it flows from point 1 to point 2 in the circuit connected to the supply (outside the supply)</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
 					</xs:appinfo>
@@ -231,7 +231,7 @@
 			</xs:element>
 			<xs:element name="connections">
 				<xs:annotation>
-					<xs:documentation>Description of the supplies and coils connections (nodes) across the circuit. Nodes of the circuit are listed as the first dimension of the matrix. Supplies (listed first) and coils (listed second) SIDES are listed as the second dimension. Thus the second dimension has a size equal to 2*(N_supplies+N_coils). The (i,j) matrix elements are 1 if the j-th supply or coil side is connected to the i-th node, or 0 otherwise.</xs:documentation>
+					<xs:documentation>Description of the supplies and coils connections (nodes) across the circuit. Nodes of the circuit are listed as the first dimension of the matrix. Supplies (listed first) and coils (listed second) SIDES are listed as the second dimension. Thus the second dimension has a size equal to 2*(N_supplies+N_coils). N_supplies (resp. N_coils) is the total number of supplies (resp. coils) listed in the supply (resp.coil) array of structure, i.e. including also supplies/coils that are not part of the actual circuit. The (i,j) matrix elements are 1 if the j-th supply or coil side is connected to the i-th node, or 0 otherwise. For coils, sides are listed so that a current flowing from side 1 to side 2 (inside the coil) is positive (i.e. counter-clockwise when seen from above).</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -362,7 +362,7 @@
 			</xs:element>
 			<xs:element name="current" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Current in the coil</xs:documentation>
+					<xs:documentation>Current in the coil, positive when counter-clockwise when seen from above</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
 					</xs:appinfo>
@@ -370,7 +370,7 @@
 			</xs:element>
 			<xs:element name="voltage" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Voltage on the coil terminals</xs:documentation>
+					<xs:documentation>Voltage on the coil terminals (Vside1-Vside2)</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
 					</xs:appinfo>
@@ -447,7 +447,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.22.0</lifecycle_last_change>
+				<lifecycle_last_change>3.22.1</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
