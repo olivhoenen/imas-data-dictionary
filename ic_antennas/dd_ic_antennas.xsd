@@ -216,9 +216,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="phase" type="signal_flt_1d">
+			<xs:element name="phase_forward" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Phase of the forward power arriving at the back of this module</xs:documentation>
+					<xs:documentation>Phase of the forward power with respect to the first module</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phase_reflected" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Phase of the reflected power with respect to the forward power of this module</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
 					</xs:appinfo>
@@ -408,7 +416,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.7.0</lifecycle_version>
-				<lifecycle_last_change>3.21.1</lifecycle_last_change>
+				<lifecycle_last_change>3.23.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
