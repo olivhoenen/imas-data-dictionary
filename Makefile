@@ -1,12 +1,9 @@
 
 include Makefile.common
 
-ifneq ("no","$(strip $(SYS_WIN))")
-	JAVA = $(JAVA_HOME)/bin/java
-	CFLAGS+= -DWIN32
-	CXXFLAGS+= -DWIN32
-else
-	JAVA = java
+# Include OS-specific Makefile, if exists.
+ifneq (,$(wildcard Makefile.$(SYSTEM)))
+include Makefile.$(SYSTEM)
 endif
 
 DD_FILES=dd_data_dictionary.xml IDSDef.xml IDSNames.txt dd_data_dictionary_validation.txt count_AoS1_descendents_with_timebase.xml
