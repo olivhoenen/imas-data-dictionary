@@ -4,6 +4,29 @@ export DD_BUILD ?= $(realpath $(CURDIR)/$(dir $(lastword $(MAKEFILE_LIST))))
 # If no IMAS_INSTALL_DIR is set, stage install here
 export IMAS_INSTALL_DIR ?= $(DD_BUILD)/install
 
+# Discover operating system environment
+UNAME_S:=$(shell uname -s)
+# Example values are plenty:
+# Linux linux linux-*
+# MSYS_NT-6.1 MINGW64_NT-6.1 MINGW32_NT-6.1
+# Darwin darwin*
+# SunOS solaris
+# AIX
+# So instead of this, use a simplified string in Makefiles and in
+# 'include Makefile.$(SYSTEM)' statements throughout.
+ifneq (,$(findstring inux,$(UNAME_S)))
+SYSTEM:=Linux
+endif
+ifneq (,$(findstring _NT,$(UNAME_S)))
+SYSTEM:=Windows
+endif
+ifneq (,$(findstring arwin,$(UNAME_S)))
+SYSTEM:=MacOS
+endif
+ifneq (,$(VERBOSE))
+$(info INFO: $(UNAME_S) SYSTEM=$(SYSTEM))
+endif
+
 # Standard GNU/Linux installation directory variables
 prefix = $(IMAS_INSTALL_DIR)
 exec_prefix = $(prefix)
@@ -25,3 +48,4 @@ INSTALL = install
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 
+JAVA = java
