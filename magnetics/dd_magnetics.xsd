@@ -37,6 +37,14 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Flux loop type</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>magnetics/magnetics_flux_loop_type_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="position" type="rzphi0d_static" maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation>List of (R,Z,phi) points defining the position of the loop (see data structure documentation FLUXLOOPposition.pdf)</xs:documentation>
@@ -46,6 +54,42 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="indices_differential">
+				<xs:annotation>
+					<xs:documentation>Indices (from the flux_loop array of structure) of the two flux loops used to build the flux difference flux(second index) - flux(first index). Use only if ../type/index = 6, leave empty otherwise</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...2</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="area">
+				<xs:annotation>
+					<xs:documentation>Effective area (ratio between flux and average magnetic field over the loop)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gm9">
+				<xs:annotation>
+					<xs:documentation>Integral of 1/R over the loop area (ratio between flux and magnetic rigidity R0.B0). Use only if ../type/index = 3 to 6, leave empty otherwise.</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="flux" type="signal_flt_1d_validity">
 				<xs:annotation>
 					<xs:documentation>Measured flux</xs:documentation>
@@ -53,6 +97,39 @@
 						<units>Wb</units>
 					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="magnetics_bpol_probe_non_linear">
+		<xs:annotation>
+			<xs:documentation>Non-linear response of the probe</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="b_field_linear">
+				<xs:annotation>
+					<xs:documentation>Array of magnetic field values (corresponding to the assumption of a linear relation between magnetic field and probe coil current), for each of which the probe non-linear response is given in ../b_field_non_linear</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b_field_non_linear">
+				<xs:annotation>
+					<xs:documentation>Magnetic field value taking into account the non-linear response of the probe</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>../b_field_linear</coordinate1>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -83,6 +160,14 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Probe type</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>magnetics/magnetics_probe_type_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="position" type="rzphi0d_static">
 				<xs:annotation>
 					<xs:documentation>R, Z, Phi position of the coil centre</xs:documentation>
@@ -111,6 +196,31 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="indices_differential">
+				<xs:annotation>
+					<xs:documentation>Indices (from the bpol_probe array of structure) of the two probes used to build the field difference field(second index) - field(first index). Use only if ../type/index = 6, leave empty otherwise</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...2</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="bandwidth_3db">
+				<xs:annotation>
+					<xs:documentation>3dB bandwith (first index : lower frequency bound, second index : upper frequency bound)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...2</coordinate1>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="area">
@@ -156,6 +266,19 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="voltage" type="signal_flt_1d_validity">
+				<xs:annotation>
+					<xs:documentation>Voltage on the coil terminals</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="non_linear_response" type="magnetics_bpol_probe_non_linear">
+				<xs:annotation>
+					<xs:documentation>Non-linear response of the probe (typically in case of a Hall probe)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="magnetics_method">
@@ -198,7 +321,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.21.1</lifecycle_last_change>
+				<lifecycle_last_change>3.23.2</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -215,6 +338,14 @@
 				<xs:element name="bpol_probe" type="magnetics_bpol_probe" maxOccurs="200">
 					<xs:annotation>
 						<xs:documentation>Poloidal field probes</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="btor_probe" type="magnetics_bpol_probe" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Toroidal field probes</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
