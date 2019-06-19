@@ -10,44 +10,100 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="rzphi2d_dynamic_aos1">
+	<xs:complexType name="reflectometer_profile_position">
 		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z, Phi positions (2D, dynamic within a type 1 array of structure (indexed on objects, data/time structure)</xs:documentation>
+			<xs:documentation>R, Z, Phi, psi, rho_tor_norm and theta positions associated to the electron density reconstruction (2D, dynamic within a type 1 array of structure)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="r" type="signal_flt_2d">
+			<xs:element name="r">
 				<xs:annotation>
 					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
+						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>1...N</coordinate1>
-						<coordinate2>time</coordinate2>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="z" type="signal_flt_2d">
+			<xs:element name="z">
 				<xs:annotation>
 					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
+						<type>dynamic</type>
 						<units>m</units>
 						<coordinate1>1...N</coordinate1>
-						<coordinate1_same_as>../../r/data</coordinate1_same_as>
-						<coordinate2>time</coordinate2>
-						<coordinate2_same_as>../../r/data</coordinate2_same_as>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi" type="signal_flt_2d">
+			<xs:element name="phi">
 				<xs:annotation>
-					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:documentation>Major radius</xs:documentation>
 					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Toroidal angle</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal flux</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="theta">
+				<xs:annotation>
+					<xs:documentation>Poloidal angle (oriented clockwise when viewing the poloidal cross section on the right hand side of the tokamak axis of symmetry, with the origin placed on the plasma magnetic axis)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
 						<units>rad</units>
 						<coordinate1>1...N</coordinate1>
-						<coordinate1_same_as>../../r/data</coordinate1_same_as>
-						<coordinate2>time</coordinate2>
-						<coordinate2_same_as>../../r/data</coordinate2_same_as>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -134,7 +190,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="position" type="rzphi2d_dynamic_aos1">
+			<xs:element name="position" type="reflectometer_profile_position">
 				<xs:annotation>
 					<xs:documentation>Position of the density measurements</xs:documentation>
 				</xs:annotation>
@@ -144,9 +200,7 @@
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
-						<coordinate1_same_as>../position/r/data</coordinate1_same_as>
 						<coordinate2>time</coordinate2>
-						<coordinate2_same_as>../position/r/data</coordinate2_same_as>
 						<units>m^-3</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -159,7 +213,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.11.0</lifecycle_version>
-				<lifecycle_last_change>3.11.0</lifecycle_last_change>
+				<lifecycle_last_change>3.23.3</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
