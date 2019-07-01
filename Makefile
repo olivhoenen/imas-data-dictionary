@@ -62,8 +62,12 @@ IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
 	$(xsltproc)
 
 # Generic Dependencies
-# Note: be sure to set CLASSPATH='/path/to/saxon9he.jar;...' in your environment
-SAXONICAJAR=$(wildcard $(filter %saxon9he.jar,$(subst :, ,$(CLASSPATH))))
+
+# Check that "saxon9he.jar" utility is set in CLASSPATH and exists
+# File name may be different depending on site
+SAXONJARFILE?=saxon9he.jar
+SAXONICAJAR?=$(firstword $(filter %$(SAXONJARFILE), $(wildcard $(subst :, ,$(CLASSPATH)))))
+
 # Canned recipes
 define xsltproc
 @# Expect prerequisites: <xmlfile> <xslfile>
@@ -71,7 +75,7 @@ xsltproc $(word 2,$^) $< > $@ || { rm -f $@ ; exit 1 ;}
 endef
 define xslt2proc
 @# Expect prerequisites: <xmlfile> <xslfile>
-$(if $(SAXONICAJAR),,$(error Invalid /path/to/saxon9he.jar in CLASSPATH. Forgot to load module?))
+$(if $(SAXONICAJAR),,$(error Invalid /path/to/$(SAXONJARFILE) in CLASSPATH ($(CLASSPATH)); or File not found: $(SAXONICAJAR) (Forgot to load Saxon module?)))
 $(JAVA) net.sf.saxon.Transform -threads:4 -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ || { rm -f $@ ; exit 1 ; }
 endef
 
