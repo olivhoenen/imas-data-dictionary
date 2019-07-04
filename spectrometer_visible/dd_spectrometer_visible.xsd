@@ -10,6 +10,37 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="spectro_vis_channel_wavelength_calibration">
+		<xs:annotation>
+			<xs:documentation>Wavelength calibration</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="offset">
+				<xs:annotation>
+					<xs:documentation>Offset</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gain">
+				<xs:annotation>
+					<xs:documentation>Gain</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectro_vis_channel_processed_line">
 		<xs:annotation>
 			<xs:documentation>Description of a processed line</xs:documentation>
@@ -17,7 +48,7 @@
 		<xs:sequence>
 			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>String identifying the processed line (e.g. WI, OI, DI)</xs:documentation>
+					<xs:documentation>String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
@@ -527,7 +558,7 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="processed_line" type="spectro_vis_channel_processed_line" maxOccurs="10">
+			<xs:element name="processed_line" type="spectro_vis_channel_processed_line" maxOccurs="20">
 				<xs:annotation>
 					<xs:documentation>Set of processed spectral lines</xs:documentation>
 					<xs:appinfo>
@@ -558,6 +589,11 @@
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="wavelength_calibration" type="spectro_vis_channel_wavelength_calibration">
+				<xs:annotation>
+					<xs:documentation>Wavelength calibration data. The wavelength is obtained from the pixel index k by: wavelength =  k * gain + offset. k is starting from 1.</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="wavelength_calibration_date">
 				<xs:annotation>
@@ -702,7 +738,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.3.1</lifecycle_version>
-				<lifecycle_last_change>3.23.0</lifecycle_last_change>
+				<lifecycle_last_change>3.23.4</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
