@@ -319,9 +319,9 @@
 		<xs:annotation>
 			<xs:documentation>Magnetic diagnostics for equilibrium identification and plasma shape control.</xs:documentation>
 			<xs:appinfo>
-				<lifecycle_status>alpha</lifecycle_status>
-				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.23.2</lifecycle_last_change>
+				<lifecycle_status>active</lifecycle_status>
+				<lifecycle_version>3.24.0</lifecycle_version>
+				<lifecycle_last_change>3.24.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -340,10 +340,20 @@
 						<xs:documentation>Poloidal field probes</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
+							<lifecycle_status>obsolescent</lifecycle_status>
+							<lifecycle_version>3.24.0</lifecycle_version>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="btor_probe" type="magnetics_bpol_probe" maxOccurs="20">
+				<xs:element name="b_field_pol_probe" type="magnetics_bpol_probe" maxOccurs="200">
+					<xs:annotation>
+						<xs:documentation>Poloidal field probes</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="b_field_tor_probe" type="magnetics_bpol_probe" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>Toroidal field probes</xs:documentation>
 						<xs:appinfo>
