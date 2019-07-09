@@ -10,6 +10,96 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="magnetics_rogowski">
+		<xs:annotation>
+			<xs:documentation>Rogowski coil</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the coil</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>ID of the coil</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="measured_quantity" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Quantity measured by the sensor</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>magnetics/magnetics_rogoswki_measured_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="position" type="rzphi0d_static" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>List of (R,Z,phi) points defining the position of the coil guiding center</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="indices_compound">
+				<xs:annotation>
+					<xs:documentation>Indices (from the rogowski_coil array of structure) of the partial Rogoswkis used to build the coumpound signal (sum of the partial Rogoswki signals) Use only if ../measure_quantity/index = 5, leave empty otherwise</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="area">
+				<xs:annotation>
+					<xs:documentation>Effective area of the loop wrapped around the guiding center. In case of multiple layers, sum of the areas of each layer</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="turns_per_metre">
+				<xs:annotation>
+					<xs:documentation>Number of turns per unit length. In case of multiple layers, turns are counted for a single layer</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current" type="signal_flt_1d_validity">
+				<xs:annotation>
+					<xs:documentation>Measured current inside the Rogowski coil contour. The normal direction to the Rogowski coil is defined by the order of points in the list of guiding centre positions. The current is positive when oriented in the same direction as the normal. </xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="magnetics_flux_loop">
 		<xs:annotation>
 			<xs:documentation>Flux loops</xs:documentation>
@@ -356,6 +446,14 @@
 				<xs:element name="b_field_tor_probe" type="magnetics_bpol_probe" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>Toroidal field probes</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="rogowski_coil" type="magnetics_rogowski" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Set of Rogowski coils</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
