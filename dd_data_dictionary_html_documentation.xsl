@@ -163,7 +163,19 @@
         </table>
            </xsl:if>
            </td>
-           <td><xsl:value-of select="@data_type"/><xsl:if test="@maxoccur"> [max_size=<xsl:value-of select="@maxoccur"/>]</xsl:if></td>  
+           <td>
+<xsl:choose>
+<xsl:when test="@data_type='flt_type'">FLT_0D</xsl:when>
+<xsl:when test="@data_type='flt_1d_type'">FLT_1D</xsl:when>
+<xsl:when test="@data_type='int_type'">INT_0D</xsl:when>
+<xsl:when test="@data_type='int_1d_type'">INT_1D</xsl:when>
+<xsl:when test="@data_type='str_type'">STR_0D</xsl:when>
+<xsl:when test="@data_type='str_1d_type'">STR_1D</xsl:when>
+<xsl:otherwise><xsl:value-of select="@data_type"/><xsl:if test="@maxoccur"> [max_size=<xsl:value-of select="@maxoccur"/>]</xsl:if>  
+</xsl:otherwise>
+</xsl:choose>        
+           </td>
+           
   
 <td>
 <xsl:if test="@coordinate1"> <!--If there is at least one axis-->
