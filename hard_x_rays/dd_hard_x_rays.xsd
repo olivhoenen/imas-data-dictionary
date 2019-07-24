@@ -56,7 +56,7 @@
 				<xs:annotation>
 					<xs:documentation>Radial profile of the plasma emissivity in this energy band</xs:documentation>
 					<xs:appinfo>
-					   <type>dynamic</type>
+						<type>dynamic</type>
 						<coordinate1>../rho_tor_norm</coordinate1>
 						<coordinate2>../time</coordinate2>
 						<units>(photons).m^-3.str^-1.s^-1</units>
@@ -192,41 +192,15 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="brightness" type="signal_flt_2d">
+			<xs:element name="radiance" type="signal_flt_2d_validity">
 				<xs:annotation>
-					<xs:documentation>Power flux received by the detector, per unit solid angle and per unit area (i.e. power divided by the etendue), in multiple energy bands if available from the detector</xs:documentation>
+					<xs:documentation>Photons received by the detector per unit time, per unit solid angle and per unit area (i.e. photon flux divided by the etendue), in multiple energy bands if available from the detector</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../energy_band</coordinate1>
 						<coordinate2>time</coordinate2>
-						<units>W.m^-2.sr^-1</units>
+						<units>(photons).s^-1.m^-2.sr^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
-			</xs:element>
-			<xs:element name="power" type="signal_flt_2d">
-				<xs:annotation>
-					<xs:documentation>Power received on the detector, in multiple energy bands if available from the detector</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../energy_band</coordinate1>
-						<coordinate2>time</coordinate2>
-						<units>W</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="validity_timed" type="signal_int_1d">
-				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the channel as a function of time (0 means valid, negative values mean non-valid)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="validity">
-				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the channel for the whole acquisition period (0 means valid, negative values mean non-valid)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -236,7 +210,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.23.3</lifecycle_version>
-				<lifecycle_last_change>3.23.3</lifecycle_last_change>
+				<lifecycle_last_change>3.24.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
