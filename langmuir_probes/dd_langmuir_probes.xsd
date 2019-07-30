@@ -10,6 +10,92 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="langmuir_probes_physical_quantity">
+		<xs:annotation>
+			<xs:documentation>Similar to a signal (FLT_1D) but with time base one level above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity_timed">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="langmuir_probes_plunge_physical_quantity">
+		<xs:annotation>
+			<xs:documentation>Similar to a signal (FLT_1D) but with time_within_plunge base one level above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../../time_within_plunge</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity_timed">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time_within_plunge</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="langmuir_probes_position_reciprocating">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi positions (1D, dynamic within a type 1 array of structure and with a common time base one level above)</xs:documentation>
@@ -24,7 +110,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>../../time</coordinate1>
+						<coordinate1>../../time_within_plunge</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -37,7 +123,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>../../time</coordinate1>
+						<coordinate1>../../time_within_plunge</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -50,11 +136,34 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>rad</units>
-						<coordinate1>../../time</coordinate1>
+						<coordinate1>../../time_within_plunge</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity_timed">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the position data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../time_within_plunge</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the position data for the whole plunge. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -64,35 +173,25 @@
 			<xs:documentation>Structure for multi-temperature fits</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="t_e">
+			<xs:element name="t_e" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>eV</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="t_i">
+			<xs:element name="t_i" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Ion temperature</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>eV</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="time" type="flt_1d_type">
 				<xs:annotation>
-					<xs:documentation>Timebase for the multi-temperature fits</xs:documentation>
+					<xs:documentation>Timebase for the dynamic nodes of this probe located at this level of the IDS structure</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<type>dynamic</type>
@@ -102,9 +201,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="langmuir_probes_probe">
+	<xs:complexType name="langmuir_probes_embedded">
 		<xs:annotation>
-			<xs:documentation>Single Langmuir probe description</xs:documentation>
+			<xs:documentation>Embedded Langmuir probe description</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
@@ -129,164 +228,88 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="reciprocating">
+			<xs:element name="position" type="rzphi0d_static">
 				<xs:annotation>
-					<xs:documentation>Flag telling whether the probe is reciprocating (1) or fixed (0)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="position_static" type="rzphi0d_static">
-				<xs:annotation>
-					<xs:documentation>Position of the measurements in case of fixed probe</xs:documentation>
+					<xs:documentation>Position of the measurements</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="position_reciprocating" type="langmuir_probes_position_reciprocating">
-				<xs:annotation>
-					<xs:documentation>Position of the measurements in case of reciprocating probe</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="potential_floating">
+			<xs:element name="potential_floating" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Floating potential</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>V</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="potential_plasma">
+			<xs:element name="potential_plasma" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Plasma potential</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>V</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="t_e">
+			<xs:element name="t_e" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>eV</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_e">
+			<xs:element name="n_e" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>m^-3</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="t_i">
+			<xs:element name="t_i" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Ion temperature</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>eV</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="j_ion_parallel">
+			<xs:element name="j_ion_parallel" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Ion parallel current density at the probe position</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>A.m^-2</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="saturation_current_ion">
+			<xs:element name="saturation_current_ion" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Ion saturation current measured by the probe</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>A</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="heat_flux_parallel">
+			<xs:element name="heat_flux_parallel" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Parallel heat flux at the probe position</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>W.m^-2</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_field_angle">
+			<xs:element name="b_field_angle" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
 					<xs:documentation>Incident angle of the magnetic field with respect to PFC surface</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
 						<units>rad</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="mach_number_parallel">
+			<xs:element name="distance_separatrix" type="langmuir_probes_physical_quantity">
 				<xs:annotation>
-					<xs:documentation>Parallel Mach number (only for reciprocating probies)</xs:documentation>
+					<xs:documentation>Distance of the measurement position to the separatrix (positive means the measurement is outside of the separatrix)</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
-						<units>-</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="time" type="flt_1d_type">
-				<xs:annotation>
-					<xs:documentation>Timebase for the dynamic nodes of this probe located at this level of the IDS structure</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<type>dynamic</type>
-						<units>s</units>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -298,6 +321,176 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for the dynamic nodes of this probe located at this level of the IDS structure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="langmuir_probes_plunge">
+		<xs:annotation>
+			<xs:documentation>Plunge of a reciprocating probe</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="position" type="langmuir_probes_position_reciprocating">
+				<xs:annotation>
+					<xs:documentation>Position of the measurements</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="potential_floating" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Floating potential</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="potential_plasma" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Plasma potential</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Electron temperature</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_e" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Electron density</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_i" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Ion temperature</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="j_ion_parallel" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Ion parallel current density at the probe position</xs:documentation>
+					<xs:appinfo>
+						<units>A.m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saturation_current_ion" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Ion saturation current measured by the probe</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="heat_flux_parallel" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Parallel heat flux at the probe position</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="b_field_angle" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Incident angle of the magnetic field with respect to PFC surface</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="distance_separatrix" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Distance of the measurement position to the separatrix (positive means the measurement is outside of the separatrix)</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mach_number_parallel" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Parallel Mach number</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time_within_plunge">
+				<xs:annotation>
+					<xs:documentation>Time vector for describing the dynamics within the plunge</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time of maximum penetration of the probe during a given plunge</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="langmuir_probes_reciprocating">
+		<xs:annotation>
+			<xs:documentation>Reciprocating probe</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the probe</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>ID of the probe</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="plunge" type="langmuir_probes_plunge" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of plunges of this probe during the pulse, each plunge being recorded as a time slice from the Access Layer point of view. The time child node corresponds to the time of maximum penetration of the probe during a given plunge. The dynamics of physicas quantities within the plunge are described via the time_within_plunge vector.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="langmuir_probes">
@@ -306,15 +499,23 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.22.0</lifecycle_version>
-				<lifecycle_last_change>3.22.0</lifecycle_last_change>
+				<lifecycle_last_change>3.24.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="probe" type="langmuir_probes_probe" maxOccurs="150">
+				<xs:element name="embedded" type="langmuir_probes_embedded" maxOccurs="100">
 					<xs:annotation>
-						<xs:documentation>Set of probes or probe pins</xs:documentation>
+						<xs:documentation>Set of embedded (in a plasma facing component) probes or probe pins</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="reciprocating" type="langmuir_probes_reciprocating" maxOccurs="100">
+					<xs:annotation>
+						<xs:documentation>Set of reciprocating probes or probe pins</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
