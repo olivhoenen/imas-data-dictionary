@@ -5139,6 +5139,64 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="rzphi1d_dynamic_aos1_common_time">
+		<xs:annotation>
+			<xs:documentation>Structure for R, Z, Phi positions (1D, dynamic within a type 1 array of structure and with a common time base at the same level)</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time for the R,Z,phi coordinates</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rzphirhopsitheta1d_dynamic_aos1">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi, rho_tor_norm, psi, theta positions (1D, dynamic within a type 1 array of structures (indexed on objects, data/time structure)</xs:documentation>

@@ -3,7 +3,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
 	<!-- This IDS should be made simpler if we would find a way to avoid a systematic data/time construct (due to temporary limitation in the XSD processing) -->
-	<xs:complexType name="ec_antennas_beam_spot">
+	<xs:complexType name="ec_launchers_beam_spot">
 		<xs:annotation>
 			<xs:documentation>Spot ellipse characteristics</xs:documentation>
 		</xs:annotation>
@@ -28,7 +28,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="ec_antennas_beam_phase">
+	<xs:complexType name="ec_launchers_beam_phase">
 		<xs:annotation>
 			<xs:documentation>Phase ellipse characteristics</xs:documentation>
 		</xs:annotation>
@@ -53,31 +53,31 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="ec_antennas_beam">
+	<xs:complexType name="ec_launchers_beam">
 		<xs:annotation>
 			<xs:documentation>Beam characteristics</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="spot" type="ec_antennas_beam_spot">
+			<xs:element name="spot" type="ec_launchers_beam_spot">
 				<xs:annotation>
 					<xs:documentation>Spot ellipse characteristics</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="phase" type="ec_antennas_beam_phase">
+			<xs:element name="phase" type="ec_launchers_beam_phase">
 				<xs:annotation>
 					<xs:documentation>Phase ellipse characteristics</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="ec_antennas_antenna">
+	<xs:complexType name="ec_launchers_mirror">
 		<xs:annotation>
-			<xs:documentation>Electron Cyclotron Antenna</xs:documentation>
+			<xs:documentation>Electron Cyclotron launcher mirror</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the antenna (unique within the set of all antennas of the experiment)</xs:documentation>
+					<xs:documentation>Name of the mirror</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -88,7 +88,70 @@
 			</xs:element>
 			<xs:element name="identifier">
 				<xs:annotation>
-					<xs:documentation>Identifier of the antenna (unique within the set of all antennas of the experiment)</xs:documentation>
+					<xs:documentation>Identifier of the mirror</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_launched" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Power launched from this mirror into the vacuum vessel</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="launching_position" type="rzphi1d_dynamic_aos1_common_time">
+				<xs:annotation>
+					<xs:documentation>Launching position of the beam</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="launching_angle_pol" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="launching_angle_tor" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam" type="ec_launchers_beam">
+				<xs:annotation>
+					<xs:documentation>Beam characteristics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ec_launchers_launcher">
+		<xs:annotation>
+			<xs:documentation>Electron Cyclotron launcher</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the launcher (unique within the set of all launchers of the experiment)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the launcher (unique within the set of all launchers of the experiment)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -111,7 +174,7 @@
 			</xs:element>
 			<xs:element name="power_launched" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Power launched from this antenna into the vacuum vessel</xs:documentation>
+					<xs:documentation>Power launched from this launcher into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -122,37 +185,24 @@
 					<xs:documentation>Incoming wave mode (+ or -1 for O/X mode)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="launching_position" type="rzphi1d_dynamic_aos1">
-				<xs:annotation>
-					<xs:documentation>Launching position of the beam</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="launching_angle_pol" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;</xs:documentation>
-					<xs:appinfo>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="launching_angle_tor" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi</xs:documentation>
-					<xs:appinfo>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="beam" type="ec_antennas_beam">
+			<xs:element name="beam" type="ec_launchers_beam">
 				<xs:annotation>
 					<xs:documentation>Beam characteristics</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="mirror" type="ec_launchers_mirror" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Set of mirrors</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="ec_antennas">
+	<xs:element name="ec_launchers">
 		<xs:annotation>
-			<xs:documentation>Antenna systems for heating and current drive in the electron cyclotron (EC) frequencies.</xs:documentation>
+			<xs:documentation>Launchers for heating and current drive in the electron cyclotron (EC) frequencies.</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.7.0</lifecycle_version>
@@ -163,9 +213,9 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="antenna" type="ec_antennas_antenna" maxOccurs="10">
+				<xs:element name="launcher" type="ec_launchers_launcher" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>Set of Electron Cyclotron antennas</xs:documentation>
+						<xs:documentation>Set of Electron Cyclotron launchers</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
