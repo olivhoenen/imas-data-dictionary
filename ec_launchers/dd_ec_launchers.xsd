@@ -105,27 +105,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="launching_position" type="rzphi1d_dynamic_aos1_common_time">
-				<xs:annotation>
-					<xs:documentation>Launching position of the beam</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="launching_angle_pol" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;</xs:documentation>
-					<xs:appinfo>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="launching_angle_tor" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi</xs:documentation>
-					<xs:appinfo>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="beam" type="ec_launchers_beam">
 				<xs:annotation>
 					<xs:documentation>Beam characteristics</xs:documentation>
@@ -160,17 +139,13 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="frequency">
+			<xs:element name="frequency" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Frequency</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
 						<units>Hz</units>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="power_launched" type="signal_flt_1d">
 				<xs:annotation>
@@ -185,17 +160,30 @@
 					<xs:documentation>Incoming wave mode (+ or -1 for O/X mode)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="launching_position" type="rzphi1d_dynamic_aos1_common_time">
+				<xs:annotation>
+					<xs:documentation>Launching position of the beam</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="launching_angle_pol" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="launching_angle_tor" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="beam" type="ec_launchers_beam">
 				<xs:annotation>
 					<xs:documentation>Beam characteristics</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="mirror" type="ec_launchers_mirror" maxOccurs="5">
-				<xs:annotation>
-					<xs:documentation>Set of mirrors</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
