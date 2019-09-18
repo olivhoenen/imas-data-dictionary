@@ -10,7 +10,7 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="spectrometer_x_rays_crystal_filter">
+	<xs:complexType name="spectrometer_x_ray_crystal_filter">
 		<xs:annotation>
 			<xs:documentation>Characteristics of the filter window</xs:documentation>
 		</xs:annotation>
@@ -40,7 +40,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="spectrometer_x_rays_crystal_camera">
+	<xs:complexType name="spectrometer_x_ray_crystal_camera">
 		<xs:annotation>
 			<xs:documentation>Characteristics of the camera used</xs:documentation>
 		</xs:annotation>
@@ -95,7 +95,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="spectrometer_x_rays_crystal_crystal">
+	<xs:complexType name="spectrometer_x_ray_crystal_crystal">
 		<xs:annotation>
 			<xs:documentation>Characteristics of the crystal used</xs:documentation>
 		</xs:annotation>
@@ -104,7 +104,7 @@
 				<xs:annotation>
 					<xs:documentation>Geometry of the crystal</xs:documentation>
 					<xs:appinfo>
-						<doc_identifier>spectrometer_x_rays_crystal/spectrometer_x_rays_crystal_geometry_identifier.xml</doc_identifier>
+						<doc_identifier>spectrometer_x_ray_crystal/spectrometer_x_ray_crystal_geometry_identifier.xml</doc_identifier>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -227,7 +227,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="spectrometer_x_rays_crystal_frame">
+	<xs:complexType name="spectrometer_x_ray_crystal_frame">
 		<xs:annotation>
 			<xs:documentation>Frame of a camera</xs:documentation>
 		</xs:annotation>
@@ -258,7 +258,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="spectrometer_x_rays_crystal">
+	<xs:element name="spectrometer_x_ray_crystal">
 		<xs:annotation>
 			<xs:documentation>X-crystal spectrometer diagnostic</xs:documentation>
 			<xs:appinfo>
@@ -312,17 +312,17 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="crystal" type="spectrometer_x_rays_crystal_crystal">
+				<xs:element name="crystal" type="spectrometer_x_ray_crystal_crystal">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the crystal used</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="filter_window" type="spectrometer_x_rays_crystal_filter">
+				<xs:element name="filter_window" type="spectrometer_x_ray_crystal_filter">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the filter window</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="camera" type="spectrometer_x_rays_crystal_camera">
+				<xs:element name="camera" type="spectrometer_x_ray_crystal_camera">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the camera used</xs:documentation>
 					</xs:annotation>
@@ -354,7 +354,7 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="frame" type="spectrometer_x_rays_crystal_frame" maxOccurs="unbounded">
+				<xs:element name="frame" type="spectrometer_x_ray_crystal_frame" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Set of frames</xs:documentation>
 						<xs:appinfo>
