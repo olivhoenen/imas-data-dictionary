@@ -7,7 +7,7 @@
 <!-- A completely generic algorithm couldn't be found, but the present one covers all cases encountered in the DD so far, and will the AoS with an error if an unexpected is encountered -->
 <!-- The cases treated so far are : static AoS with 0 to 4 (non-nested) static AoS descendents and any number of dynamic AoS descendents. A static AoS descendent having no dynamic signal in it counts for 0 and doesn't break the algorithm -->
 <xsl:stylesheet xmlns:yaslt="http://www.mod-xslt2.com/ns/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" extension-element-prefixes="yaslt" xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:local="http://www.example.com/functions/local" exclude-result-prefixes="local xs">
-	<xsl:output method="xml" encoding="UTF-8"/>
+	<xsl:output method="xml" encoding="UTF-8" indent="yes"/>
 	<!-- Function for multiplying the number of descendents with timebasepath attribute by the occurrence of the child AoS -->
 	<xsl:function name="local:count-nodes" as="xs:anyAtomicType">
 		<xsl:param name="nodes" as="node()*"/>
