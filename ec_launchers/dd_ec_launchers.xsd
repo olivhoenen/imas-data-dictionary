@@ -157,7 +157,7 @@
 			</xs:element>
 			<xs:element name="mode" type="signal_int_1d">
 				<xs:annotation>
-					<xs:documentation>Incoming wave mode (+ or -1 for O/X mode)</xs:documentation>
+					<xs:documentation>Identifier for the main plasma wave mode excited by the EC beam. For the ordinary mode (O-mode), mode/data=1. For the extraordinary mode (X-mode), mode/data=-1</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="launching_position" type="rzphi1d_dynamic_aos1_common_time">
@@ -165,17 +165,17 @@
 					<xs:documentation>Launching position of the beam</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="launching_angle_pol" type="signal_flt_1d">
+			<xs:element name="steering_angle_pol" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R;</xs:documentation>
+					<xs:documentation>Steering angle of the EC beam in the R,Z plane (from the -R axis towards the -Z axis), angle_pol=atan2(-k_Z,-k_R), where k_Z and k_R are the Z and R components of the mean wave vector in the EC beam</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="launching_angle_tor" type="signal_flt_1d">
+			<xs:element name="steering_angle_tor" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi</xs:documentation>
+					<xs:documentation>Steering angle of the EC beam away from the poloidal plane that is increasing towards the positive phi axis, angle_tor=arcsin(k_phi/k), where k_phi is the component of the wave vector in the phi direction and k is the length of the wave vector. Here the term wave vector refers to the mean wave vector in the EC beam</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
 					</xs:appinfo>
