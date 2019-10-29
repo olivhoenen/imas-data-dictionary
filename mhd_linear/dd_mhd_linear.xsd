@@ -545,6 +545,18 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Additional phase offset of mode</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="amplitude_multiplier">
 				<xs:annotation>
 					<xs:documentation>Multiplier that is needed to convert the linear mode structures to the amplitude of a non-linearly saturated mode in physical units. If empty, it means that the structures contains no information about non-linearly saturated mode</xs:documentation>
@@ -576,7 +588,7 @@
 		<xs:sequence>
 			<xs:element name="toroidal_mode" type="mhd_linear_time_slice_toroidal_modes" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Vector of toroidal modes</xs:documentation>
+					<xs:documentation>Vector of toroidal modes. Each mode is described as exp(i(n_tor.phi - m_pol.theta - 2.pi.frequency.t - phase)) </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -599,7 +611,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.23.1</lifecycle_last_change>
+				<lifecycle_last_change>3.25.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
