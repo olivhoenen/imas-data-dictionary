@@ -314,7 +314,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the antenna</xs:documentation>
+					<xs:documentation>Name of the launcher</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -325,7 +325,7 @@
 			</xs:element>
 			<xs:element name="identifier">
 				<xs:annotation>
-					<xs:documentation>Identifier of the antenna</xs:documentation>
+					<xs:documentation>Identifier of the launcher</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -347,14 +347,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="phase" type="pulse_schedule_reference">
-				<xs:annotation>
-					<xs:documentation>Phase</xs:documentation>
-					<xs:appinfo>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="frequency" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Frequency</xs:documentation>
@@ -371,17 +363,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="launching_angle_pol" type="pulse_schedule_reference">
+			<xs:element name="steering_angle_pol" type="pulse_schedule_reference">
 				<xs:annotation>
-					<xs:documentation>Poloidal launching angle between the horizontal plane and the poloidal component of the nominal beam centerline. tan(angle_pol)=-k_z/k_R. Positive means wave launched downwards, negative means wave launched upwards</xs:documentation>
+					<xs:documentation>Steering angle of the EC beam in the R,Z plane (from the -R axis towards the -Z axis), angle_pol=atan2(-k_Z,-k_R), where k_Z and k_R are the Z and R components of the mean wave vector in the EC beam</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="launching_angle_tor" type="pulse_schedule_reference">
+			<xs:element name="steering_angle_tor" type="pulse_schedule_reference">
 				<xs:annotation>
-					<xs:documentation>Toroidal launching angle between the poloidal plane and the nominal beam centerline. sin(angle_tor)=k_phi. Positive sign means the waves is injected anti-clockwise when viewed from above.</xs:documentation>
+					<xs:documentation>Steering angle of the EC beam away from the poloidal plane that is increasing towards the positive phi axis, angle_tor=arcsin(k_phi/k), where k_phi is the component of the wave vector in the phi direction and k is the length of the wave vector. Here the term wave vector refers to the mean wave vector in the EC beam</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
 					</xs:appinfo>
@@ -578,9 +570,9 @@
 			<xs:documentation>Electron cyclotron heating and current drive system</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="antenna" type="pulse_schedule_ec_antenna" maxOccurs="10">
+			<xs:element name="launcher" type="pulse_schedule_ec_antenna" maxOccurs="10">
 				<xs:annotation>
-					<xs:documentation>Set of ECRH antennas</xs:documentation>
+					<xs:documentation>Set of ECRH launchers</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
