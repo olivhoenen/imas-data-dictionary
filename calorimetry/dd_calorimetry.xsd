@@ -37,7 +37,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_in"  type="signal_flt_1d_validity">
+			<xs:element name="temperature_in" type="signal_flt_1d_validity">
 				<xs:annotation>
 					<xs:documentation>Temperature of the coolant when entering the loop</xs:documentation>
 					<xs:appinfo>
@@ -45,7 +45,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="temperature_out"  type="signal_flt_1d_validity">
+			<xs:element name="temperature_out" type="signal_flt_1d_validity">
 				<xs:annotation>
 					<xs:documentation>Temperature of the coolant when exiting the loop</xs:documentation>
 					<xs:appinfo>
@@ -142,6 +142,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="transit_time" type="signal_flt_1d_validity">
+				<xs:annotation>
+					<xs:documentation>Transit time for the coolant to go from the input to the output of the component</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="calorimetry_group">
@@ -187,7 +195,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.23.4</lifecycle_version>
-				<lifecycle_last_change>3.24.0</lifecycle_last_change>
+				<lifecycle_last_change>3.25.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
