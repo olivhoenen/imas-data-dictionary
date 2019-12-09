@@ -10,49 +10,6 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="langmuir_probes_physical_quantity">
-		<xs:annotation>
-			<xs:documentation>Similar to a signal (FLT_1D) but with time base one level above</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="data">
-				<xs:annotation>
-					<xs:documentation>Data</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="validity_timed">
-				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="validity">
-				<xs:annotation>
-					<xs:documentation>Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="langmuir_probes_plunge_physical_quantity">
 		<xs:annotation>
 			<xs:documentation>Similar to a signal (FLT_1D) but with time_within_plunge base one level above</xs:documentation>
@@ -173,7 +130,7 @@
 			<xs:documentation>Structure for multi-temperature fits</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="t_e" type="langmuir_probes_physical_quantity">
+			<xs:element name="t_e" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
@@ -181,7 +138,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i" type="langmuir_probes_physical_quantity">
+			<xs:element name="t_i" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Ion temperature</xs:documentation>
 					<xs:appinfo>
@@ -233,7 +190,7 @@
 					<xs:documentation>Position of the measurements</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="potential_floating" type="langmuir_probes_physical_quantity">
+			<xs:element name="potential_floating" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Floating potential</xs:documentation>
 					<xs:appinfo>
@@ -241,7 +198,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="potential_plasma" type="langmuir_probes_physical_quantity">
+			<xs:element name="potential_plasma" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Plasma potential</xs:documentation>
 					<xs:appinfo>
@@ -249,7 +206,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e" type="langmuir_probes_physical_quantity">
+			<xs:element name="t_e" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
@@ -257,7 +214,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e" type="langmuir_probes_physical_quantity">
+			<xs:element name="n_e" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Electron density</xs:documentation>
 					<xs:appinfo>
@@ -265,7 +222,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i" type="langmuir_probes_physical_quantity">
+			<xs:element name="t_i" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Ion temperature</xs:documentation>
 					<xs:appinfo>
@@ -273,7 +230,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_ion_parallel" type="langmuir_probes_physical_quantity">
+			<xs:element name="j_ion_parallel" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Ion parallel current density at the probe position</xs:documentation>
 					<xs:appinfo>
@@ -281,7 +238,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="saturation_current_ion" type="langmuir_probes_physical_quantity">
+			<xs:element name="saturation_current_ion" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Ion saturation current measured by the probe</xs:documentation>
 					<xs:appinfo>
@@ -289,7 +246,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="heat_flux_parallel" type="langmuir_probes_physical_quantity">
+			<xs:element name="heat_flux_parallel" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Parallel heat flux at the probe position</xs:documentation>
 					<xs:appinfo>
@@ -297,7 +254,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field_angle" type="langmuir_probes_physical_quantity">
+			<xs:element name="b_field_angle" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Incident angle of the magnetic field with respect to PFC surface</xs:documentation>
 					<xs:appinfo>
@@ -305,7 +262,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="distance_separatrix" type="langmuir_probes_physical_quantity">
+			<xs:element name="distance_separatrix" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Distance of the measurement position to the separatrix (positive means the measurement is outside of the separatrix)</xs:documentation>
 					<xs:appinfo>
