@@ -385,6 +385,18 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="line_labels">
+				<xs:annotation>
+					<xs:documentation>String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../processed_lines</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="line_radiances" type="signal_flt_2d">
 				<xs:annotation>
 					<xs:documentation>Calibrated, background subtracted line integrals </xs:documentation>
@@ -774,7 +786,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.3.1</lifecycle_version>
-				<lifecycle_last_change>3.24.0</lifecycle_last_change>
+				<lifecycle_last_change>3.25.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
