@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
+<?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./$GET[stylesheet]" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
+<?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:element name="numerics">
+		<xs:annotation>
+			<xs:documentation>Numeric parameters passed as argument to a component or a workflow. Most quantities are dynamic in this IDS in order to record the history of the numerics parameters at each execution of the component or workflow (so one time index = one execution of the component). Provide as input to the component a single time slice from this IDS containing the relevant parameters.</xs:documentation>
+			<xs:appinfo>
+				<lifecycle_status>alpha</lifecycle_status>
+				<lifecycle_version>3.26.0</lifecycle_version>
+				<lifecycle_last_change>3.26.0</lifecycle_last_change>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ids_properties"/>
+				<xs:element name="time_start">
+					<xs:annotation>
+						<xs:documentation>Start time</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<units>s</units>
+							<coordinate1>../time</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_1D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="time_step">
+					<xs:annotation>
+						<xs:documentation>Time interval between main steps (if relevant and constant during one execution of the component)</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<units>s</units>
+							<coordinate1>../time</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_1D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="time_end">
+					<xs:annotation>
+						<xs:documentation>End time</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<units>s</units>
+							<coordinate1>../time</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_1D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
