@@ -4,7 +4,7 @@
 <!-- Voir pourquoi cette syntaxe ne fonctionne pas pour désigner le fichier cible ... cas HTML seulement ? > <xsl:result-document href="ids_cocos_transformations_symbolic_table.csv"> -->
 <xsl:template match="/*">%leaf_name;label_transformation;transformation_expression;leaf_name_matlab;length_i;length_j
 %;;;;set length to '[1]' for i or j so if no {i} or {j} in leaf_name_matlab do the whole just once;
-<xsl:apply-templates select="//field[@cocos_leaf_name and not(contains(@name,'_error_'))]"/>
+<xsl:apply-templates select="//field[@cocos_leaf_name and not(contains(@name,'_error_')) and ancestor::IDS]"/>
 <!-- skipping error bar nodes, which are handled directly by the coco_transform routine, since this creates otherwise differences of treatment between simple leaves and e.g. signal type structures-->
 </xsl:template>
 
