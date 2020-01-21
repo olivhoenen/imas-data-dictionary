@@ -1060,7 +1060,7 @@
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
 				<lifecycle_last_change>3.25.0</lifecycle_last_change>
-				<specific_validation_rules>yes</specific_validation_rules>				
+				<specific_validation_rules>yes</specific_validation_rules>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -1069,6 +1069,10 @@
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in Rho_Tor definition and in the normalization of current densities)</xs:documentation>
+						<xs:appinfo>
+							<cocos_alias>IDSPATH</cocos_alias>
+							<cocos_replace>core_sources.vacuum_toroidal_field</cocos_replace>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="source" type="core_sources_source" maxOccurs="80">
