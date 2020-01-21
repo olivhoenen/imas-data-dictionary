@@ -39,7 +39,12 @@
 			</xs:element>
 			<xs:element name="position" type="rzphi0d_static">
 				<xs:annotation>
-					<xs:documentation>Position of the measurements (intersection between laser beam and line of sight)</xs:documentation>
+					<xs:documentation>Average position of the measurements (intersection between laser beam and line of sight)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="delta_position" type="rzphi1d_dynamic_aos1_common_time">
+				<xs:annotation>
+					<xs:documentation>Incremental variation of the position of the measurements, due to e.g. different lasers not intersecting the line of sight at the same position. The actual position is then the static position + delta_position</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="t_e" type="signal_flt_1d">
@@ -66,7 +71,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.0.4</lifecycle_last_change>
+				<lifecycle_last_change>3.28.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
