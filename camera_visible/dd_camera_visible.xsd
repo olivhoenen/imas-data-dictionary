@@ -55,99 +55,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="camera_visible_aperture">
-		<xs:annotation>
-			<xs:documentation>Aperture for a visible camera</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="geometry_type">
-				<xs:annotation>
-					<xs:documentation>Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.</xs:documentation>
-					<xs:appinfo>
-						<Type>static</Type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="centre" type="rzphi0d_static">
-				<xs:annotation>
-					<xs:documentation>If geometry_type=2, coordinates of the center of the circle. If geometry_type=1, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="radius">
-				<xs:annotation>
-					<xs:documentation>Radius of the circle, used only if geometry_type = 2</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="x1_unit_vector" type="xyz0d_static">
-				<xs:annotation>
-					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented is the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="x2_unit_vector" type="xyz0d_static">
-				<xs:annotation>
-					<xs:documentation>Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="x3_unit_vector" type="xyz0d_static">
-				<xs:annotation>
-					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="outline" type="x1x21d_static">
-				<xs:annotation>
-					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="surface">
-				<xs:annotation>
-					<xs:documentation>Surface of the detector/aperture, derived from the above geometric data</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m^2</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="viewing_angle_alpha_bounds">
-				<xs:annotation>
-					<xs:documentation>Minimum and maximum values of alpha angle of the field of view, where alpha is the agle between the axis X3 and projection of the chord of view  on the plane X1X3 counted clockwise from the top view of X2 axis.</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>rad</units>
-						<coordinate1>1...2</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="viewing_angle_beta_bounds">
-				<xs:annotation>
-					<xs:documentation>Minimum and maximum values of beta angle of the field of view, where beta is the angle between the axis X3 and projection of the chord of view on the plane X2X3 counted clockwise from the top view of X1 axis.</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>rad</units>
-						<coordinate1>1...2</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="camera_visible_frame">
 		<xs:annotation>
 			<xs:documentation>Frame of a camera</xs:documentation>
@@ -321,13 +228,39 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="aperture" type="camera_visible_aperture" maxOccurs="3">
+			<xs:element name="aperture" type="detector_aperture" maxOccurs="3">
 				<xs:annotation>
 					<xs:documentation>Description of apertures between plasma and the detectors (position, outline shape and orientation)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="viewing_angle_alpha_bounds">
+				<xs:annotation>
+					<xs:documentation>Minimum and maximum values of alpha angle of the field of view, where alpha is the agle between the axis X3 and projection of the chord of view  on the plane X1X3 counted clockwise from the top view of X2 axis. X1, X2, X3 are the ones of the first aperture (i.e. the closest to the plasma).</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+						<coordinate1>1...2</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="viewing_angle_beta_bounds">
+				<xs:annotation>
+					<xs:documentation>Minimum and maximum values of beta angle of the field of view, where beta is the angle between the axis X3 and projection of the chord of view on the plane X2X3 counted clockwise from the top view of X1 axis. X1, X2, X3 are the ones of the first aperture (i.e. the closest to the plasma).</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+						<coordinate1>1...2</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="detector" type="camera_visible_detector" maxOccurs="10">
 				<xs:annotation>
