@@ -55,13 +55,23 @@
 					<xs:documentation>Passive loop current</xs:documentation>
 					<xs:appinfo>
 						<Type>dynamic</Type>
-						<coordinate1>/time</coordinate1>
+						<coordinate1>../time</coordinate1>
 						<Units>A</Units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for the dynamic nodes of this loop located at this level of the IDS structure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
