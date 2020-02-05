@@ -182,7 +182,7 @@
 			</xs:element>
 			<xs:element name="flux" type="signal_flt_1d_validity">
 				<xs:annotation>
-					<xs:documentation>Measured magnetic field flux in loop along negative Z-axis (compliant to cocos=11 flux convention)</xs:documentation>
+					<xs:documentation>Measured magnetic flux over loop in which Z component of normal to loop is directed downwards (negative grad Z direction)</xs:documentation>
 					<xs:appinfo>
 						<units>Wb</units>
 					</xs:appinfo>
@@ -278,7 +278,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>rad</units>
-                        <url>magnetics/magnetics_angles.svg</url>
+						<url>magnetics/magnetics_angles.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -287,11 +287,11 @@
 			</xs:element>
 			<xs:element name="toroidal_angle">
 				<xs:annotation>
-					<xs:documentation>Angle of the projection of the sensor normal vector (n) in the horizontal plane with the increasing R-axis (counter-clockwise as in cocos=11 phi-like angle). Zero if sensor normal vector fully in R-Z plane. Values in [-Pi/2,+Pi/2]</xs:documentation>
+					<xs:documentation>Angle of the projection of the sensor normal vector (n) in the horizontal plane with the increasing R direction (i.e. grad(R)) (angle is counter-clockwise from above as in cocos=11 phi-like angle). Values should be taken modulo pi with values within (-pi/2,pi/2]. Zero if projected sensor normal is parallel to grad(R), pi/2 if it is parallel to grad(phi).</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>rad</units>
-                        <url>magnetics/magnetics_angles.svg</url>
+						<url>magnetics/magnetics_angles.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
