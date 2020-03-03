@@ -3637,6 +3637,63 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="detector_wavelength">
+		<xs:annotation>
+			<xs:documentation>Detector wavelength range and detection efficiency</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="wavelength_lower">
+				<xs:annotation>
+					<xs:documentation>Lower bound of the detector wavelength range</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="wavelength_upper">
+				<xs:annotation>
+					<xs:documentation>Upper bound of the detector wavelength range</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="wavelengths">
+				<xs:annotation>
+					<xs:documentation>Array of wavelength values</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="detection_efficiency">
+				<xs:annotation>
+					<xs:documentation>Probability of detection of a photon impacting the detector as a function of its wavelength </xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>-</units>
+						<coordinate1>../wavelengths</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="filter_wavelength">
 		<xs:annotation>
 			<xs:documentation>Spectrocscopy filter wavelength range and detection efficiency</xs:documentation>
