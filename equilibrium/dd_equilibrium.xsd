@@ -163,8 +163,8 @@
 					<xs:appinfo>
 						<units>-</units>
 						<type>dynamic</type>
-					    <url>equilibrium/DefinitionEqBoundary.svg</url>
-				</xs:appinfo>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
@@ -1185,6 +1185,15 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="pf_passive_current" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Current in a set of axisymmetric passive conductors</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>IDS:pf_passive/loop</coordinate1>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="pressure" type="equilibrium_constraints_0D" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of total pressure estimates</xs:documentation>
@@ -1206,6 +1215,14 @@
 			<xs:element name="x_point" type="equilibrium_constraints_pure_position" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Array of X-points, for each of them the RZ position is given</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="strike_point" type="equilibrium_constraints_pure_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Array of strike points, for each of them the RZ position is given</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -2286,7 +2303,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.21.0</lifecycle_last_change>
+				<lifecycle_last_change>3.28.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
