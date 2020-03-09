@@ -1976,8 +1976,8 @@
 		<xs:annotation>
 			<xs:documentation>Core profile fit information</xs:documentation>
 			<xs:appinfo>
-			    <aos3Parent>yes</aos3Parent>
-		    </xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="measured">
@@ -5795,6 +5795,50 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rz1d_static_closed_flag">
+		<xs:annotation>
+			<xs:documentation>Structure for list of R, Z positions (1D, constant) and closed flag</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="closed">
+				<xs:annotation>
+					<xs:documentation>Flag identifying whether the contour is closed (1) or open (0)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

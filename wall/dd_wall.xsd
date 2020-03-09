@@ -371,7 +371,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="outline" type="rz1d_static">
+			<xs:element name="outline" type="rz1d_static_closed_flag">
 				<xs:annotation>
 					<xs:documentation>Outline of the block element. Do NOT repeat the first point for closed contours</xs:documentation>
 				</xs:annotation>
@@ -415,12 +415,12 @@
 			<xs:documentation>2D vessel annular description</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="outline_inner" type="rz1d_static">
+			<xs:element name="outline_inner" type="rz1d_static_closed_flag">
 				<xs:annotation>
 					<xs:documentation>Inner vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="outline_outer" type="rz1d_static">
+			<xs:element name="outline_outer" type="rz1d_static_closed_flag">
 				<xs:annotation>
 					<xs:documentation>Outer vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
 				</xs:annotation>
@@ -751,7 +751,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.25.0</lifecycle_last_change>
+				<lifecycle_last_change>3.28.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
