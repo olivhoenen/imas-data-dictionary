@@ -425,6 +425,24 @@
 					<xs:documentation>Outer vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="centreline" type="rz1d_static_closed_flag">
+				<xs:annotation>
+					<xs:documentation>Centreline, i.e. middle of the vessel layer as a series of point. Do NOT repeat the first point for closed contours</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="thickness">
+				<xs:annotation>
+					<xs:documentation>Thickness of the vessel layer  in the perpendicular direction to the centreline. Thickness(i) is the thickness of the layer between centreline/r(i),z(i) and centreline/r(i+1),z(i+1)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../centreline/r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="resistivity">
 				<xs:annotation>
 					<xs:documentation>Resistivity of the vessel unit</xs:documentation>
@@ -455,9 +473,20 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the vessel unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="annular" type="wall_2d_vessel_annular">
 				<xs:annotation>
-					<xs:documentation>Annular representation of a vessel layer by two contours, inner and outer</xs:documentation>
+					<xs:documentation>Annular representation of a vessel layer by two contours, inner and outer. Alternatively, the vessel layer can be described by a centreline and thickness. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="element" type="wall_2d_vessel_element" maxOccurs="38">
