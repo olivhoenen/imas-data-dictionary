@@ -6469,6 +6469,170 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="vessel_2d_element">
+		<xs:annotation>
+			<xs:documentation>2D vessel block element description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the block element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="rz1d_static_closed_flag">
+				<xs:annotation>
+					<xs:documentation>Outline of the block element. Do NOT repeat the first point for closed contours</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resistivity">
+				<xs:annotation>
+					<xs:documentation>Resistivity of the block element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>ohm.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_tor" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Toroidal current induced in this block element</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resistance">
+				<xs:annotation>
+					<xs:documentation>Resistance of the block element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>Ohm</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="vessel_2d_annular">
+		<xs:annotation>
+			<xs:documentation>2D vessel annular description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="outline_inner" type="rz1d_static_closed_flag">
+				<xs:annotation>
+					<xs:documentation>Inner vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="outline_outer" type="rz1d_static_closed_flag">
+				<xs:annotation>
+					<xs:documentation>Outer vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="centreline" type="rz1d_static_closed_flag">
+				<xs:annotation>
+					<xs:documentation>Centreline, i.e. middle of the vessel layer as a series of point. Do NOT repeat the first point for closed contours</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="thickness">
+				<xs:annotation>
+					<xs:documentation>Thickness of the vessel layer  in the perpendicular direction to the centreline. Thickness(i) is the thickness of the layer between centreline/r(i),z(i) and centreline/r(i+1),z(i+1)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../centreline/r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="resistivity">
+				<xs:annotation>
+					<xs:documentation>Resistivity of the vessel unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>ohm.m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="vessel_2d_unit">
+		<xs:annotation>
+			<xs:documentation>2D vessel unit description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the unit</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="annular" type="vessel_2d_annular">
+				<xs:annotation>
+					<xs:documentation>Annular representation of a layer by two contours, inner and outer. Alternatively, the layer can be described by a centreline and thickness. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="element" type="vessel_2d_element" maxOccurs="38">
+				<xs:annotation>
+					<xs:documentation>Set of block elements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="vessel_2d">
+		<xs:annotation>
+			<xs:documentation>2D vessel description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of the description. index = 0 for the official single/multiple annular representation and 1 for the official block element representation for each unit. Additional representations needed on a code-by-code basis follow same incremental pair tagging starting on index=2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unit" type="vessel_2d_unit" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Set of units</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="waves_coherent_wave_identifier">
 		<xs:annotation>
 			<xs:documentation>Wave identifier</xs:documentation>
