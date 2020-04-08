@@ -6124,6 +6124,60 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="line_of_sight_2points_dynamic_aos1">
+		<xs:annotation>
+			<xs:documentation>Generic description of a line of sight, defined by two points, dynamic within an AoS1 (1st point fixed, 2nd point is dynamic)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="first_point" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the first point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="second_point" type="rzphi1d_dynamic_aos1_common_time">
+				<xs:annotation>
+					<xs:documentation>Position of the second point (possibly dynamic)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="moving_mode" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Moving mode of the line of sight. Index = 0 : no movement, fixed position. Index = 1 : oscillating</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="position_parameter" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>In case of line of sight moving during a pulse, position parameter allowing to record and compute the line of sight position as a function of time</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="amplitude_parameter">
+				<xs:annotation>
+					<xs:documentation>Amplitude of the line of sight position parameter oscillation (in case moving_mode/index = 1)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="period">
+				<xs:annotation>
+					<xs:documentation>Period of the line of sight oscillation (in case moving_mode/index = 1)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="line_of_sight_2points_dynamic_aos3">
 		<xs:annotation>
 			<xs:documentation>Generic description of a line of sight, defined by two points, dynamic within a type 3 array of structures (index on time)</xs:documentation>
