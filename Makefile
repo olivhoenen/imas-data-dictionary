@@ -9,6 +9,7 @@ endif
 DD_FILES=dd_data_dictionary.xml IDSDef.xml IDSNames.txt dd_data_dictionary_validation.txt
 HTMLDOC_FILES=$(wildcard $(addprefix html_documentation/,*.html css/*.css img/*.png js/*js))
 HTMLDOC_FILES_IDS=$(wildcard $(addprefix html_documentation/,$(addsuffix /*.*,$(shell cat IDSNames.txt))))
+COCOS_FILES=$(wildcard $(addprefix html_documentation/cocos/,*.csv))
 
 .PHONY: all clean test install
 all: dd htmldoc test
@@ -22,7 +23,7 @@ test: dd_data_dictionary_validation.txt
 install: dd_install htmldoc_install
 
 .PHONY: htmldoc htmldoc_clean htmldoc_install
-htmldoc: IDSNames.txt html_documentation/html_documentation.html
+htmldoc: IDSNames.txt html_documentation/html_documentation.html html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv
 htmldoc_clean:
 	$(if $(wildcard .gitignore),git clean -f -X -d -- html_documentation,$(warning This target depends on .gitignore))
 htmldoc_install: htmldoc
@@ -31,6 +32,8 @@ htmldoc_install: htmldoc
 	$(INSTALL_DATA) $(filter %.css,$(HTMLDOC_FILES)) $(htmldir)/imas/css
 	$(INSTALL_DATA) $(filter %.js,$(HTMLDOC_FILES)) $(htmldir)/imas/js
 	$(INSTALL_DATA) $(filter %.png,$(HTMLDOC_FILES)) $(htmldir)/imas/img
+	$(mkdir_p) $(htmldir)/imas/cocos
+	$(INSTALL_DATA) $(filter %.csv,$(COCOS_FILES)) $(htmldir)/imas/cocos
 	$(mkdir_p) $(addprefix $(htmldir)/imas/,$(sort $(dir $(HTMLDOC_FILES_IDS:html_documentation/%=%))))
 	$(foreach idsdir,$(sort $(dir $(HTMLDOC_FILES_IDS))),\
 		$(INSTALL_DATA) $(idsdir)/* $(htmldir)/imas/$(idsdir:html_documentation/%=%) ;\
@@ -53,6 +56,9 @@ dd_data_dictionary.xml: %: %.xsd %.xsl
 	$(xslt2proc)
 
 html_documentation/html_documentation.html: dd_data_dictionary.xml dd_data_dictionary_html_documentation.xsl
+	$(xslt2proc)
+
+html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv: dd_data_dictionary.xml ids_cocos_transformations_symbolic_table.csv.xsl
 	$(xslt2proc)
 
 IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
