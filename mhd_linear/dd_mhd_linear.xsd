@@ -314,11 +314,19 @@
 			<xs:element name="grid" type="equilibrium_profiles_2d_grid">
 				<xs:annotation>
 					<xs:documentation>Definition of the 2D grid (the content of dim1 and dim2 is defined by the selected grid_type)</xs:documentation>
+					<xs:appinfo>
+						<cocos_alias>IDSPATH</cocos_alias>
+						<cocos_replace>mhd_linear.time_slice{i}.toroidal_mode{j}.vacuum</cocos_replace>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="coordinate_system" type="mhd_coordinate_system">
 				<xs:annotation>
 					<xs:documentation>Flux surface coordinate system of the equilibrium used for the MHD calculation on a square grid of flux and poloidal angle</xs:documentation>
+					<xs:appinfo>
+						<cocos_alias>IDSPATH</cocos_alias>
+						<cocos_replace>mhd_linear.time_slice{i}.toroidal_mode{j}.vacuum.coordinate_system</cocos_replace>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="a_field_perturbed" type="mhd_linear_vector">
@@ -355,11 +363,19 @@
 			<xs:element name="grid" type="equilibrium_profiles_2d_grid">
 				<xs:annotation>
 					<xs:documentation>Definition of the 2D grid (the content of dim1 and dim2 is defined by the selected grid_type)</xs:documentation>
+					<xs:appinfo>
+						<cocos_alias>IDSPATH</cocos_alias>
+						<cocos_replace>mhd_linear.time_slice{i}.toroidal_mode{j}.plasma</cocos_replace>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="coordinate_system" type="mhd_coordinate_system">
 				<xs:annotation>
 					<xs:documentation>Flux surface coordinate system of the equilibrium used for the MHD calculation on a square grid of flux and poloidal angle</xs:documentation>
+					<xs:appinfo>
+						<cocos_alias>IDSPATH</cocos_alias>
+						<cocos_replace>mhd_linear.time_slice{i}.toroidal_mode{j}.plasma.coordinate_system</cocos_replace>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="displacement_perpendicular" type="complex_2d_dynamic_aos_mhd_scalar">
@@ -641,6 +657,10 @@
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</xs:documentation>
+						<xs:appinfo>
+							<cocos_alias>IDSPATH</cocos_alias>
+							<cocos_replace>mhd_linear.vacuum_toroidal_field</cocos_replace>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="time_slice" type="mhd_linear_time_slice" maxOccurs="unbounded">

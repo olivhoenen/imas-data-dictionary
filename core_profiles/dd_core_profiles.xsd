@@ -22,6 +22,9 @@
 						<coordinate1>../../time</coordinate1>
 						<units>A</units>
 						<type>dynamic</type>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>core_profiles.global_quantities.ip</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -35,6 +38,9 @@
 						<coordinate1>../../time</coordinate1>
 						<units>A</units>
 						<type>dynamic</type>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>core_profiles.global_quantities.current_non_inductive</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -48,6 +54,9 @@
 						<coordinate1>../../time</coordinate1>
 						<units>A</units>
 						<type>dynamic</type>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>core_profiles.global_quantities.current_bootstrap</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -61,6 +70,9 @@
 						<coordinate1>../../time</coordinate1>
 						<units>V</units>
 						<type>dynamic</type>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>core_profiles.global_quantities.v_loop</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -181,6 +193,8 @@
 						<xs:appinfo>
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>
+							<cocos_alias>IDSPATH</cocos_alias>
+							<cocos_replace>core_profiles.profiles_1d{i}</cocos_replace>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -192,6 +206,10 @@
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
 						<xs:documentation>Characteristics of the vacuum toroidal field (used in rho_tor definition and in the normalization of current densities)</xs:documentation>
+						<xs:appinfo>
+							<cocos_alias>IDSPATH</cocos_alias>
+							<cocos_replace>core_profiles.vacuum_toroidal_field</cocos_replace>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
