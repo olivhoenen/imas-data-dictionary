@@ -292,7 +292,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
 								<xsl:for-each select="xs:annotation/xs:appinfo/*">
 									<!-- Generic method for declaring all appinfo as attributes-->
-									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_upper'"/></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_upper'"/></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 										<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
 										<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
 										<xsl:attribute name="timebasepath">
@@ -317,7 +317,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
 								<xsl:for-each select="xs:annotation/xs:appinfo/*">
 									<!-- Generic method for declaring all appinfo as attributes-->
-									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_lower'"/></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 										<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
 										<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
 										<xsl:attribute name="timebasepath">
@@ -347,7 +347,13 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<xsl:otherwise>
 															<xsl:attribute name="type">constant</xsl:attribute>														
 														</xsl:otherwise>
-														</xsl:choose>							</field>
+														</xsl:choose>			
+								   <xsl:if test="contains(./xs:annotation/xs:appinfo/change_nbc_description,'leaf_renamed')">
+                                        <xsl:attribute name="change_nbc_version"><xsl:value-of select="./xs:annotation/xs:appinfo/change_nbc_version"/></xsl:attribute>	                                     
+                                         <xsl:attribute name="change_nbc_description"><xsl:value-of select="./xs:annotation/xs:appinfo/change_nbc_description"/></xsl:attribute>	
+                                        <xsl:attribute name="change_nbc_previous_name"><xsl:value-of select="concat(./xs:annotation/xs:appinfo/change_nbc_previous_name,'_error_index')"/></xsl:attribute>	   
+								   </xsl:if>				
+							</field>
 						</xsl:if>
 					</xsl:when>
 					<xsl:otherwise>
@@ -546,7 +552,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:attribute>
 														<xsl:for-each select="xs:annotation/xs:appinfo/*">
 															<!-- Generic method for declaring all appinfo as attributes-->
-															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_upper'"/></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 															<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
 														</xsl:for-each>
 													</field>
@@ -567,7 +573,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:sequence/xs:group/@ref"/></xsl:attribute>
 														<xsl:for-each select="xs:annotation/xs:appinfo/*">
 															<!-- Generic method for declaring all appinfo as attributes-->
-															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
+															<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat(../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_lower'"/></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name,'/data')"/><xsl:with-param name="coordinatePath" select="concat('../',.)"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 															<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
 														</xsl:for-each>
 													</field>
@@ -586,7 +592,12 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 														</xsl:choose>
 														<xsl:attribute name="documentation">Index in the error_description list for &quot;data&quot;</xsl:attribute>
 														<xsl:attribute name="data_type">int_type</xsl:attribute>
-														<xsl:attribute name="type">constant</xsl:attribute>														
+														<xsl:attribute name="type">constant</xsl:attribute>	
+														<xsl:if test="contains(./xs:annotation/xs:appinfo/change_nbc_description,'leaf_renamed')">
+                                        <xsl:attribute name="change_nbc_version"><xsl:value-of select="./xs:annotation/xs:appinfo/change_nbc_version"/></xsl:attribute>	                                     
+                                         <xsl:attribute name="change_nbc_description"><xsl:value-of select="./xs:annotation/xs:appinfo/change_nbc_description"/></xsl:attribute>	
+                                        <xsl:attribute name="change_nbc_previous_name"><xsl:value-of select="concat(./xs:annotation/xs:appinfo/change_nbc_previous_name,'_error_index')"/></xsl:attribute>	   
+								   </xsl:if>																	
 													</field>
 												</xsl:if>
 											</xsl:if>

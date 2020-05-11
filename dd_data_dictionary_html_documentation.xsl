@@ -162,6 +162,12 @@
         </tr>
         </table>
            </xsl:if>
+           <xsl:if test="@cocos_label_transformation">. This quantity is COCOS-dependent, with the following transformation :
+                <table border="1">
+                      <thead><td>Label</td><td>Expression</td></thead>
+                      <tr><td><xsl:value-of select="@cocos_label_transformation"/></td><td><xsl:value-of select="@cocos_transformation_expression"/></td></tr>
+        </table>
+           </xsl:if>
            </td>
            <td>
 <xsl:choose>

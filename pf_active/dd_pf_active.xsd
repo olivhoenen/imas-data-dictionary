@@ -186,6 +186,9 @@
 					<xs:documentation>Current at the supply output, defined positive if it flows from point 1 to point 2 in the circuit connected to the supply (outside the supply)</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>pf_active.supply{i}.current.data</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -256,6 +259,9 @@
 					<xs:documentation>Current in the circuit between the sides of the group of supplies (only for circuits with a single supply or in which supplies are grouped)</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>pf_active.circuit{i}.current.data</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -365,6 +371,9 @@
 					<xs:documentation>Current in the coil, positive when counter-clockwise when seen from above</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>pf_active.coil{i}.current.data</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

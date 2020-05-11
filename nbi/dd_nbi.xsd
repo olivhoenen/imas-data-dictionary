@@ -57,6 +57,11 @@
 			<xs:element name="positions" type="rzphi1d_static">
 				<xs:annotation>
 					<xs:documentation>Position of each beamlet</xs:documentation>
+					<xs:appinfo>
+						<cocos_label_transformation>tor_angle_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>nbi.unit{i}.beamlets_group{j}.beamlets.positions.phi</cocos_leaf_name_aos_indices>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="tangency_radii">
@@ -74,7 +79,7 @@
 			</xs:element>
 			<xs:element name="angles">
 				<xs:annotation>
-					<xs:documentation>Angle of inclination between a line at the centre of a beamlet and the horiontal plane, for each beamlet</xs:documentation>
+					<xs:documentation>Angle of inclination between a line at the centre of a beamlet and the horizontal plane, for each beamlet</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>rad</units>
@@ -206,7 +211,11 @@
 			<xs:element name="position" type="rzphi0d_static">
 				<xs:annotation>
 					<xs:documentation>R, Z, Phi position of the beamlet group centre</xs:documentation>
-					<xs:appinfo/>
+					<xs:appinfo>
+						<cocos_label_transformation>tor_angle_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>nbi.unit{i}.beamlets_group{j}.position.phi</cocos_leaf_name_aos_indices>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="tangency_radius">
@@ -247,6 +256,9 @@
 					<xs:documentation>Direction of the beam seen from above the torus: -1 = clockwise; 1 = counter clockwise</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<cocos_label_transformation>phi_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>nbi.unit{i}.beamlets_group{j}.direction</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
