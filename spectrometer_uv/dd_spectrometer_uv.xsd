@@ -191,12 +191,12 @@
 			<xs:documentation>Grating description</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="geometry_type" type="identifier_static">
+			<xs:element name="type" type="identifier_static">
 				<xs:annotation>
-					<xs:documentation>Grating geometry. Index = 1 : spherical. Index = 2 : toric</xs:documentation>
+					<xs:documentation>Grating type. Index = 1 : ruled. Index = 2 : holographic</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="grooves_per_length">
+			<xs:element name="groove_density">
 				<xs:annotation>
 					<xs:documentation>Number of grooves per unit length</xs:documentation>
 					<xs:appinfo>
@@ -207,6 +207,11 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometry_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Grating geometry. Index = 1 : spherical. Index = 2 : toric</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="centre" type="rzphi0d_static">
 				<xs:annotation>
@@ -414,7 +419,7 @@
 				<xs:annotation>
 					<xs:documentation>Indicator of the validity of the data for each wavelength and each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
 					<xs:appinfo>
- 					   <coordinate1>../wavelengths</coordinate1>
+						<coordinate1>../wavelengths</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -436,8 +441,8 @@
 			<xs:documentation>Spectrometer in uv light range diagnostic</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
-				<lifecycle_version>3.29.0</lifecycle_version>
-				<lifecycle_last_change>3.29.0</lifecycle_last_change>
+				<lifecycle_version>3.28.2</lifecycle_version>
+				<lifecycle_last_change>3.28.2</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -448,7 +453,7 @@
 						<xs:documentation>Etendue (geometric extent) of the optical system</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
-							<units>m^2.str</units>
+							<units>m^2.sr</units>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
