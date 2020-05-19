@@ -2,8 +2,11 @@
 <?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./%24GET%5Bstylesheet%5D" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xsl:stylesheet xmlns:yaslt="http://www.mod-xslt2.com/ns/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" extension-element-prefixes="yaslt" xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:local="http://www.example.com/functions/local" exclude-result-prefixes="local xs">
+
 	<!-- -->
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+	<xsl:param name="DD_GIT_DESCRIBE" as="xs:string" required="yes"/>
+
 	<!-- This script transforms the collection of XSD files forming the Data Dictionary into a single XML file describing explicitly all nodes with their characteristics-->
 	<!-- The resulting XML file makes further work on the data dictionary much easier, since it describes explicitely the whole schema (includes and references are solved) -->
 	<!-- Author:F. Imbeaux, CEA, adapted from xsd2CPODef7 of EU-ITM -->
@@ -64,6 +67,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 	<!-- A first scan is performed on the top-level elements to find out the IDS components and to declare them each time a IDS is found, its elements are scanned via apply'templates in IMPLEMENT mode -->
 	<xsl:template match="/*">
 		<IDSs>
+		  <!-- Stores version of DD -->
+		  <version>
+		    <xsl:value-of select="$DD_GIT_DESCRIBE"/>
+		  </version>
 		<utilities>
         <!-- Declare complex types from Utilities -->
         <xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:complexType">

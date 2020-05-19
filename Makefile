@@ -88,6 +88,6 @@ endef
 define xslt2proc
 @# Expect prerequisites: <xmlfile> <xslfile>
 $(if $(SAXONICAJAR),,$(error Invalid /path/to/$(SAXONJARFILE) in CLASSPATH ($(CLASSPATH)); or File not found: $(SAXONICAJAR) (Forgot to load Saxon module?)))
-$(JAVA) net.sf.saxon.Transform -threads:4 -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ || { rm -f $@ ; exit 1 ; }
+$(JAVA) net.sf.saxon.Transform -threads:4 -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ DD_GIT_DESCRIBE=$(DD_GIT_DESCRIBE) || { rm -f $@ ; exit 1 ; }
 endef
 

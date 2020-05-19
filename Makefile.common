@@ -27,6 +27,12 @@ ifneq (,$(VERBOSE))
 $(info INFO: $(UNAME_S) SYSTEM=$(SYSTEM))
 endif
 
+ifndef DD_GIT_DESCRIBE
+DD_GIT_DESCRIBE:=$(shell git describe) # not sure we want a fallback with IMAS_VERSION: || echo $(IMAS_VERSION))
+endif
+# export variables for child programs (if not already)
+export DD_GIT_DESCRIBE UAL_GIT_DESCRIBE
+
 # Standard GNU/Linux installation directory variables
 prefix = $(IMAS_INSTALL_DIR)
 exec_prefix = $(prefix)
