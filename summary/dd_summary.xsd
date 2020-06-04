@@ -2334,6 +2334,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="fusion_gain" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Fusion gain : ratio of the power provided by fusion reactions to the auxiliary power needed to heat the plasma. Often noted as Q in the litterature.</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="h_98" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Energy confinement time enhancement factor over the IPB98(y,2) scaling</xs:documentation>
@@ -2374,6 +2382,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="ratio_tau_helium_fuel" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Ratio Helium confinement time over fuel confinement time</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="resistance" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Plasma electric resistance</xs:documentation>
@@ -2409,6 +2425,38 @@
 			<xs:element name="power_radiated" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Radiated power</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_line" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Radiated power from line radiation</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_bremsstrahlung" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Radiated power from Bremsstrahlung</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_synchrotron" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Radiated power from synchrotron radiation</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_loss" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Power through separatrix</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -3001,6 +3049,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="power_additional" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Total additional external power (NBI+EC+IC+LH, without ohmic) coupled to the plasma</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="summary_disruption">
@@ -3088,7 +3144,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.22.0</lifecycle_version>
-				<lifecycle_last_change>3.25.0</lifecycle_last_change>
+				<lifecycle_last_change>3.29.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
