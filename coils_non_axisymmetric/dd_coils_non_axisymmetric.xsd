@@ -185,34 +185,12 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.19.1</lifecycle_version>
-				<lifecycle_last_change>3.22.0</lifecycle_last_change>
+				<lifecycle_last_change>3.28.2</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="is_periodic">
-					<xs:annotation>
-						<xs:documentation>Flag indicating whether coils are described one by one in the coil() structure (flag=0) or whether the coil structure represents only coils having different characteristics (flag = 1, n_coils must be filled in that case). In the latter case, the coil() sequence is repeated periodically around the torus.</xs:documentation>
-						<xs:appinfo>
-							<type>static</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="INT_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="coils_n">
-					<xs:annotation>
-						<xs:documentation>Number of coils around the torus, in case is_periodic = 1</xs:documentation>
-						<xs:appinfo>
-							<type>static</type>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="INT_0D"/>
-					</xs:complexType>
-				</xs:element>
 				<xs:element name="coil" type="coil" maxOccurs="32">
 					<xs:annotation>
 						<xs:documentation>Set of coils</xs:documentation>
