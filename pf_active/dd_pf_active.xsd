@@ -358,6 +358,14 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="b_field_max_timed" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Maximum absolute value of the magnetic field on the conductor surface</xs:documentation>
+					<xs:appinfo>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="element" type="pf_coils_elements" maxOccurs="328">
 				<xs:annotation>
 					<xs:documentation>Each PF coil is comprised of a number of cross-section elements described  individually</xs:documentation>
@@ -387,9 +395,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="pf_vertical_forces">
+	<xs:complexType name="pf_forces">
 		<xs:annotation>
-			<xs:documentation>Vertical forces on the axisymmetric PF+CS coil system</xs:documentation>
+			<xs:documentation>Forces on the axisymmetric PF+CS coil system</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
@@ -405,7 +413,7 @@
 			</xs:element>
 			<xs:element name="combination">
 				<xs:annotation>
-					<xs:documentation>Coils involved in the force combinations. Normally the vertical force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination</xs:documentation>
+					<xs:documentation>Coils involved in the force combinations. Normally the force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -418,7 +426,7 @@
 			</xs:element>
 			<xs:element name="limit_max">
 				<xs:annotation>
-					<xs:documentation>Vertical force combination limit</xs:documentation>
+					<xs:documentation>Force combination limit</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>N</units>
@@ -430,7 +438,7 @@
 			</xs:element>
 			<xs:element name="limit_min">
 				<xs:annotation>
-					<xs:documentation>Vertical force combination limit</xs:documentation>
+					<xs:documentation>Force combination limit</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>N</units>
@@ -442,7 +450,7 @@
 			</xs:element>
 			<xs:element name="force" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Force </xs:documentation>
+					<xs:documentation>Force (positive when upwards for a vertical force, positive when outwards for a radial force) </xs:documentation>
 					<xs:appinfo>
 						<units>N</units>
 					</xs:appinfo>
@@ -456,7 +464,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.23.1</lifecycle_last_change>
+				<lifecycle_last_change>3.29.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
@@ -471,9 +479,17 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="vertical_force" type="pf_vertical_forces" maxOccurs="20">
+				<xs:element name="vertical_force" type="pf_forces" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>Vertical forces on the axisymmetric PF coil system</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="radial_force" type="pf_forces" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Radial forces on the axisymmetric PF coil system</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
