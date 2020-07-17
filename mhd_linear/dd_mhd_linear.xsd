@@ -267,6 +267,46 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="complex_3d_mhd_stress_tensor">
+		<xs:annotation>
+			<xs:documentation>Structure for real and imaginary part of MHD stress tensors</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="real">
+				<xs:annotation>
+					<xs:documentation>Real part of the stress tensor, for various radial positions</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>N.m^-2</units>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="imaginary">
+				<xs:annotation>
+					<xs:documentation>Imaginary part of the frequency, for a given radial position and every root found at this position</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s^-1</units>
+						<units>N.m^-2</units>
+						<coordinate1>../../grid/dim1</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate2_same_as>../real</coordinate2_same_as>
+						<coordinate3>1...N</coordinate3>
+						<coordinate3_same_as>../real</coordinate3_same_as>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="mhd_linear_vector">
 		<xs:annotation>
 			<xs:documentation>Vector structure for the MHD IDS</xs:documentation>
@@ -492,6 +532,21 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="stress_maxwell" type="complex_3d_mhd_stress_tensor">
+				<xs:annotation>
+					<xs:documentation>Maxwell stress tensor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="stress_reynolds" type="complex_3d_mhd_stress_tensor">
+				<xs:annotation>
+					<xs:documentation>Reynolds stress tensor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ntv" type="complex_3d_mhd_stress_tensor">
+				<xs:annotation>
+					<xs:documentation>Neoclassical toroidal viscosity tensor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="mhd_linear_time_slice_toroidal_modes">
@@ -640,7 +695,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.28.0</lifecycle_last_change>
+				<lifecycle_last_change>3.29.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -653,6 +708,36 @@
 							<doc_identifier>mhd_linear/mhd_linear_model_identifier.xml</doc_identifier>
 						</xs:appinfo>
 					</xs:annotation>
+				</xs:element>
+				<xs:element name="equations" type="identifier">
+					<xs:annotation>
+						<xs:documentation>Type of MHD equations used to populate this IDS</xs:documentation>
+						<xs:appinfo>
+							<doc_identifier>mhd_linear/mhd_linear_equations_identifier.xml</doc_identifier>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="fluids_n">
+					<xs:annotation>
+						<xs:documentation>Number of fluids considered in the model (1 or 2)</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="INT_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ideal_flag">
+					<xs:annotation>
+						<xs:documentation>1 if ideal MHD is used to populate this IDS, 0 for resistive MHD</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="INT_0D"/>
+					</xs:complexType>
 				</xs:element>
 				<xs:element name="vacuum_toroidal_field" type="b_tor_vacuum_1">
 					<xs:annotation>
