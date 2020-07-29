@@ -420,14 +420,44 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="diamagnetic_flux" type="signal_flt_1d">
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="magnetics_method_new">
+		<xs:annotation>
+			<xs:documentation>Processed quantities derived from the magnetic measurements, using various methods</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="method_name">
 				<xs:annotation>
-					<xs:documentation>Diamagnetic flux</xs:documentation>
+					<xs:documentation>Name of the calculation method</xs:documentation>
 					<xs:appinfo>
-						<units>Wb</units>
-						<cocos_label_transformation>b0_like</cocos_label_transformation>
-						<cocos_transformation_expression>.sigma_b0_eff</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>magnetics.method{i}.diamagnetic_flux.data</cocos_leaf_name_aos_indices>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -439,7 +469,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.24.0</lifecycle_version>
-				<lifecycle_last_change>3.27.0</lifecycle_last_change>
+				<lifecycle_last_change>3.30.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -496,6 +526,32 @@
 						<xs:documentation>A method generating processed quantities derived from the magnetic measurements</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
+							<lifecycle_status>obsolescent</lifecycle_status>
+							<lifecycle_version>3.30.0</lifecycle_version>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ip" type="magnetics_method_new" maxOccurs="5">
+					<xs:annotation>
+						<xs:documentation>Plasma current. Positive sign means anti-clockwise when viewed from above. The array of structure corresponds to a set of calculation methods (starting with the generally recommended method).</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+							<units>A</units>
+							<cocos_label_transformation>ip_like</cocos_label_transformation>
+							<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+							<cocos_leaf_name_aos_indices>magnetics.ip{i}.data</cocos_leaf_name_aos_indices>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="diamagnetic_flux" type="magnetics_method_new" maxOccurs="5">
+					<xs:annotation>
+						<xs:documentation>Diamagnetic flux. The array of structure corresponds to a set of calculation methods (starting with the generally recommended method).</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+							<units>Wb</units>
+							<cocos_label_transformation>b0_like</cocos_label_transformation>
+							<cocos_transformation_expression>.sigma_b0_eff</cocos_transformation_expression>
+							<cocos_leaf_name_aos_indices>magnetics.diamagnetic_flux{i}.data</cocos_leaf_name_aos_indices>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
