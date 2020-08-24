@@ -341,6 +341,140 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="spectro_vis_channel_polarization">
+		<xs:annotation>
+			<xs:documentation>Physics quantities measured from polarized light spectroscopy</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="e_field_lh_r">
+				<xs:annotation>
+					<xs:documentation>Lower Hybrid electric field component in the major radius direction</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="e_field_lh_z">
+				<xs:annotation>
+					<xs:documentation>Lower Hybrid electric field component in the vertical direction</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+            <xs:element name="e_field_lh_tor">
+				<xs:annotation>
+					<xs:documentation>Lower Hybrid electric field component in the toroidal direction</xs:documentation>
+					<xs:appinfo>
+						<units>V.m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b_field_modulus">
+				<xs:annotation>
+					<xs:documentation>Modulus of the magnetic field (always positive, irrespective of the sign convention for the B-field direction), obtained from Zeeman effect fit</xs:documentation>
+					<xs:appinfo>
+						<units>T</units>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_e">
+				<xs:annotation>
+					<xs:documentation>Electron density, obtained from Stark broadening fit</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="temperature_cold_neutrals">
+				<xs:annotation>
+					<xs:documentation>Fit of cold neutrals temperature</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="temperature_hot_neutrals">
+				<xs:annotation>
+					<xs:documentation>Fit of hot neutrals temperature</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="velocity_cold_neutrals">
+				<xs:annotation>
+					<xs:documentation>Projection of the cold neutral velocity along the line of sight, positive when going from first point to second point of the line of sight</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="velocity_hot_neutrals">
+				<xs:annotation>
+					<xs:documentation>Projection of the hot neutral velocity along the line of sight, positive when going from first point to second point of the line of sight</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for dynamic quantities at this level of the data structure</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectro_vis_channel_resolution">
 		<xs:annotation>
 			<xs:documentation>In case of active spectroscopy, spatial resolution of the measurement</xs:documentation>
@@ -747,6 +881,22 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="polarizer" type="detector_aperture">
+				<xs:annotation>
+					<xs:documentation>Polarizer description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="polarizer_active">
+				<xs:annotation>
+					<xs:documentation>Indicator of whether a polarizer is present and active in the optical system (set to 1 in this case, set to 0 or leave empty ottherwise)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="grating_spectrometer" type="spectro_vis_channel_grating">
 				<xs:annotation>
 					<xs:documentation>Quantities measured by the channel if connected to a grating spectrometer</xs:documentation>
@@ -778,6 +928,11 @@
 					<xs:documentation>Isotope ratios and related information</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="polarization_spectroscopy" type="spectro_vis_channel_polarization">
+				<xs:annotation>
+					<xs:documentation>Physics quantities measured from polarized light spectroscopy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="spectrometer_visible">
@@ -786,7 +941,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.3.1</lifecycle_version>
-				<lifecycle_last_change>3.26.0</lifecycle_last_change>
+				<lifecycle_last_change>3.29.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
