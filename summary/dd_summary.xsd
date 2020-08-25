@@ -790,7 +790,7 @@
 			</xs:element>
 			<xs:element name="q" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>Safety factor</xs:documentation>
+					<xs:documentation>Safety factor (IMAS uses COCOS=11: only positive when toroidal current and magnetic field are in same direction)</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
 					</xs:appinfo>
@@ -2099,33 +2099,45 @@
 		<xs:sequence>
 			<xs:element name="ip" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>Total plasma current</xs:documentation>
+					<xs:documentation>Total plasma current (toroidal component). Positive sign means anti-clockwise when viewed from above.</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>summary.global_quantities.ip.value</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="current_non_inductive" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>Total non-inductive parallel current</xs:documentation>
+					<xs:documentation>Total non-inductive current (toroidal component). Positive sign means anti-clockwise when viewed from above.</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>summary.global_quantities.current_non_inductive.value</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="current_bootstrap" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>Bootstrap parallel current</xs:documentation>
+					<xs:documentation>Bootstrap current (toroidal component). Positive sign means anti-clockwise when viewed from above.</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>summary.global_quantities.current_bootstrap.value</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="current_ohm" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>Ohmic parallel current</xs:documentation>
+					<xs:documentation>Ohmic current (toroidal component). Positive sign means anti-clockwise when viewed from above.</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>summary.global_quantities.current_ohm</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2139,9 +2151,12 @@
 			</xs:element>
 			<xs:element name="v_loop" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>LCFS loop voltage</xs:documentation>
+					<xs:documentation>LCFS loop voltage (positive value drives positive ohmic current that flows anti-clockwise when viewed from above)</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>summary.global_quantities.v_loop.value</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2400,9 +2415,12 @@
 			</xs:element>
 			<xs:element name="q_95" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>q at the 95% poloidal flux surface</xs:documentation>
+					<xs:documentation>q at the 95% poloidal flux surface (IMAS uses COCOS=11: only positive when toroidal current and magnetic field are in same direction)</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<cocos_label_transformation>q_like</cocos_label_transformation>
+						<cocos_transformation_expression>.fact_q</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>summary.global_quantities.q_95.value</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
