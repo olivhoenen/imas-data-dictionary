@@ -4,6 +4,83 @@
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="equilibrium_gap">
+		<xs:annotation>
+			<xs:documentation>Gap for describing the plasma boundary</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the gap</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the gap</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius of the reference point</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height of the reference point</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="angle">
+				<xs:annotation>
+					<xs:documentation>Angle between the direction in which the gap is measured (in the poloidal cross-section) and the horizontal axis. </xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value of the gap, i.e. distance between the reference point and the separatrix along the gap direction</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_profiles_1d_rz1d_dynamic_aos">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z positions (1D list of Npoints, dynamic within a type 3 array of structures (index on time)), with coordinates referring to profiles_1d/psi</xs:documentation>
@@ -258,6 +335,14 @@
 			<xs:element name="active_limiter_point" type="rz0d_dynamic_aos">
 				<xs:annotation>
 					<xs:documentation>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="gap" type="equilibrium_gap" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of gaps, defined by a reference point and a direction.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -2371,7 +2456,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.28.0</lifecycle_last_change>
+				<lifecycle_last_change>3.31.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
