@@ -75,10 +75,16 @@ IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
 
 # Generic Dependencies
 
+SAXON := $(shell command -v saxon 2> /dev/null)
+ifeq ($(SAXON),)
 # Check that "saxon9he.jar" utility is set in CLASSPATH and exists
 # File name may be different depending on site
 SAXONJARFILE?=saxon9he.jar
 SAXONICAJAR?=$(firstword $(filter %$(SAXONJARFILE), $(wildcard $(subst :, ,$(CLASSPATH)))))
+$(if $(SAXONICAJAR),,$(error Invalid /path/to/$(SAXONJARFILE) in CLASSPATH ($(CLASSPATH)); or File not found: $(SAXONICAJAR) (Forgot to load Saxon module?)))
+SAXON := $(JAVA) net.sf.saxon.Transform
+endif
+
 
 # Canned recipes
 define xsltproc
@@ -87,7 +93,5 @@ xsltproc $(word 2,$^) $< > $@ || { rm -f $@ ; exit 1 ;}
 endef
 define xslt2proc
 @# Expect prerequisites: <xmlfile> <xslfile>
-$(if $(SAXONICAJAR),,$(error Invalid /path/to/$(SAXONJARFILE) in CLASSPATH ($(CLASSPATH)); or File not found: $(SAXONICAJAR) (Forgot to load Saxon module?)))
-$(JAVA) net.sf.saxon.Transform -threads:4 -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ DD_GIT_DESCRIBE=$(DD_GIT_DESCRIBE) || { rm -f $@ ; exit 1 ; }
+$(SAXON) -threads:4 -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ DD_GIT_DESCRIBE=$(DD_GIT_DESCRIBE) || { rm -f $@ ; exit 1 ; }
 endef
-
