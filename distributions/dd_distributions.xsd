@@ -103,6 +103,49 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="distributions_d_global_quantities_thermalised">
+		<xs:annotation>
+			<xs:documentation>Global quantities for thermalisation source/sinks</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="particles">
+				<xs:annotation>
+					<xs:documentation>Source rate of thermal particles due to the thermalisation of fast particles</xs:documentation>
+					<xs:appinfo>
+						<units>s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power">
+				<xs:annotation>
+					<xs:documentation>Power input to the thermal particle population due to the thermalisation of fast particles</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="torque">
+				<xs:annotation>
+					<xs:documentation>Torque input to the thermal particle population due to the thermalisation of fast particles</xs:documentation>
+					<xs:appinfo>
+						<units>N.m</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="distributions_d_global_quantities_source">
 		<xs:annotation>
 			<xs:documentation>Global quantities for a given source/sink term</xs:documentation>
@@ -560,6 +603,11 @@
 					<xs:documentation>Power and torque exchanged between the species described by the distribution and the different plasma species through collisions</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="thermalisation" type="distributions_d_global_quantities_thermalised">
+				<xs:annotation>
+					<xs:documentation>Volume integrated source of thermal particles, momentum and energy due to thermalisation. Here thermalisation refers to non-thermal particles, sufficiently assimilated to the thermal background to be re-categorised as thermal particles. Note that this source may also be negative if thermal particles are being accelerated such that they form a distinct non-thermal contribution, e.g. due run-away of RF interactions.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="source" type="distributions_d_global_quantities_source" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of volume integrated sources and sinks of particles, momentum and energy included in the Fokker-Planck modelling, related to the various waves or particle source processes affecting the distribution</xs:documentation>
@@ -581,7 +629,7 @@
 	</xs:complexType>
 	<xs:complexType name="distributions_d_profiles_1d_thermalised">
 		<xs:annotation>
-			<xs:documentation>1D profiles of termalisation source/sinks</xs:documentation>
+			<xs:documentation>1D profiles of thermalisation source/sinks</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="particles">
@@ -2884,7 +2932,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.2.1</lifecycle_version>
-				<lifecycle_last_change>3.21.0</lifecycle_last_change>
+				<lifecycle_last_change>3.30.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
