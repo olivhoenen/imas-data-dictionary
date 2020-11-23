@@ -367,7 +367,7 @@
 			</xs:element>
 			<xs:element name="surface_area">
 				<xs:annotation>
-					<xs:documentation>Area of the probe surface exposed to the plasma</xs:documentation>
+					<xs:documentation>Area of the probe surface exposed to the plasma (use when assuming constant effective collection area)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m^2</units>
@@ -376,6 +376,14 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="surface_area_effective" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Effective collection area of the probe surface, varying with time due to e.g. changes in the magnetic field line incidence angle</xs:documentation>
+					<xs:appinfo>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="v_floating" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
