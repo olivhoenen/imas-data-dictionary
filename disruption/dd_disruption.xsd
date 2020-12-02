@@ -125,6 +125,19 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="power_parallel_halo">
+				<xs:annotation>
+					<xs:documentation>Power of the parallel heat flux in the halo region</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../time</coordinate1>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="power_radiated_electrons_impurities">
 				<xs:annotation>
 					<xs:documentation>Total power radiated by electrons on impurities</xs:documentation>
@@ -177,6 +190,19 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="energy_parallel_halo">
+				<xs:annotation>
+					<xs:documentation>Cumulated parallel energy (integral of the heat flux parallel power over the disruption duration) in the halo region</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../time</coordinate1>
+						<units>J</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="energy_radiated_electrons_impurities">
 				<xs:annotation>
 					<xs:documentation>Total cumulated energy (integral of the power over the disruption duration) radiated by electrons on impurities</xs:documentation>
@@ -196,6 +222,19 @@
 					<xs:appinfo>
 						<coordinate1>../../time</coordinate1>
 						<units>J</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi_halo_boundary">
+				<xs:annotation>
+					<xs:documentation>Poloidal flux at halo region boundary</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../time</coordinate1>
+						<units>Wb</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -274,7 +313,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.25.0</lifecycle_version>
-				<lifecycle_last_change>3.25.0</lifecycle_last_change>
+				<lifecycle_last_change>3.31.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
