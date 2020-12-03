@@ -288,6 +288,58 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="power_from_plasma_radiated">
+				<xs:annotation>
+					<xs:documentation>Power radiated from plasma onto the wall</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_from_plasma_conducted">
+				<xs:annotation>
+					<xs:documentation>Power conducted from the plasma onto the wall</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_from_plasma_convected">
+				<xs:annotation>
+					<xs:documentation>Power convected from the plasma onto the wall</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_from_plasma_charge_exchange">
+				<xs:annotation>
+					<xs:documentation>Power from the plasma lost in charge exchange reactions</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="power_to_cooling">
 				<xs:annotation>
 					<xs:documentation>Power to cooling systems</xs:documentation>
@@ -616,12 +668,32 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.28.0</lifecycle_last_change>
+				<lifecycle_last_change>3.31.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="first_wall_surface_area">
+					<xs:annotation>
+						<xs:documentation>First wall surface area</xs:documentation>
+						<xs:appinfo>
+							<units>m^2</units>
+							<type>static</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="first_wall_heat_flux_peak" type="signal_flt_1d">
+					<xs:annotation>
+						<xs:documentation>Peak heat flux on the first wall</xs:documentation>
+						<xs:appinfo>
+							<units>W.m^-2</units>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="global_quantities" type="wall_global_quantitites">
 					<xs:annotation>
 						<xs:documentation>Simple 0D description of plasma-wall interaction</xs:documentation>
