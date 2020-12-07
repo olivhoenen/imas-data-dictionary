@@ -164,6 +164,36 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="data_flt_0d_constant_validity">
+		<xs:annotation>
+			<xs:documentation>Constant data (FLT_0D) with validity flag</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="signal_flt_1d">
 		<xs:annotation>
 			<xs:documentation>Signal (FLT_1D) with its time base</xs:documentation>
