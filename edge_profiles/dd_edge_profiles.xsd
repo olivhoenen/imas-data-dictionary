@@ -579,7 +579,7 @@
 				<xs:annotation>
 					<xs:documentation>Cumulative and average ionisation potential to reach a given bundle. Defined as sum (x_z* (sum of Epot from z'=0 to z-1)), where Epot is the ionisation potential of ion Xz_+, and x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
 					<xs:appinfo>
-						<units>Elementary Charge Unit</units>
+						<units>eV</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -589,7 +589,7 @@
 			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:documentation>String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -799,7 +799,7 @@
 			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:documentation>String identifying ion (e.g. H, D, T, He, C, D2, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1040,7 +1040,7 @@
 			</xs:element>
 			<xs:element name="multiple_states_flag">
 				<xs:annotation>
-					<xs:documentation>Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:documentation>Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -1634,7 +1634,7 @@
 			</xs:element>
 			<xs:element name="ion" type="edge_profile_ions" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Quantities related to the different ion species</xs:documentation>
+					<xs:documentation>Quantities related to the different ion species, in the sense of isonuclear or isomolecular sequences. Ionisation states (and other types of states) must be differentiated at the state level below</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
