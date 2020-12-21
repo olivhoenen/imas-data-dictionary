@@ -440,7 +440,7 @@
 			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:documentation>String identifying ion (e.g. H, D, T, He, C, D2, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -477,7 +477,7 @@
 			</xs:element>
 			<xs:element name="multiple_states_flag">
 				<xs:annotation>
-					<xs:documentation>Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
+					<xs:documentation>Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -523,7 +523,7 @@
 			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)</xs:documentation>
+					<xs:documentation>String identifying ion (e.g. H, D, T, He, C, D2, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -608,7 +608,7 @@
 			</xs:element>
 			<xs:element name="ion" type="edge_transport_model_ggd_fast_ion" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients and flux integrals related to the various ion species</xs:documentation>
+					<xs:documentation>Transport coefficients and flux integrals related to the various ion species, in the sense of isonuclear or isomolecular sequences. Ionisation states (and other types of states) must be differentiated at the state level below</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -691,7 +691,7 @@
 			</xs:element>
 			<xs:element name="ion" type="edge_transport_model_ion" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients related to the various ion and neutral species</xs:documentation>
+					<xs:documentation>Transport coefficients related to the various ion species, in the sense of isonuclear or isomolecular sequences. Ionisation states (and other types of states) must be differentiated at the state level below</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -699,7 +699,7 @@
 			</xs:element>
 			<xs:element name="neutral" type="edge_transport_model_neutral" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Transport coefficients related to the various ion and neutral species</xs:documentation>
+					<xs:documentation>Transport coefficients related to the various neutral species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
