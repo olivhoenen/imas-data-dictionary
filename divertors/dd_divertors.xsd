@@ -41,7 +41,7 @@
 			</xs:element>
 			<xs:element name="sol_heat_decay_length">
 				<xs:annotation>
-					<xs:documentation>Heat flux decay length in SOL at equatorial mid-plane</xs:documentation>
+					<xs:documentation>Heat flux decay length in SOL at divertor entrance, mapped to the mid-plane</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
@@ -53,7 +53,7 @@
 			</xs:element>
 			<xs:element name="sol_heat_spreading_length">
 				<xs:annotation>
-					<xs:documentation>Heat flux spreading length in SOL at equatorial mid-plane</xs:documentation>
+					<xs:documentation>Heat flux spreading length in SOL at equatorial mid-plane PROVIDE FORMULA OR PRECISE DEFINITION</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
@@ -132,7 +132,7 @@
 			</xs:element>
 			<xs:element name="heat_flux_steady_limit_max">
 				<xs:annotation>
-					<xs:documentation>Maximum steady state heat flux allowed on divertor target surface</xs:documentation>
+					<xs:documentation>Maximum steady state heat flux allowed on divertor target surface (engineering design limit)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>W.m^-2</units>
@@ -144,7 +144,7 @@
 			</xs:element>
 			<xs:element name="temperature_limit_max">
 				<xs:annotation>
-					<xs:documentation>Maximum temperature allowed on divertor target surface</xs:documentation>
+					<xs:documentation>Maximum surface target temperature allowed to prevent damage (melting, recrystallization, sublimation, etc...)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>K</units>
@@ -154,9 +154,21 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="heat_flux_peak" type="signal_flt_1d">
+			<xs:element name="t_e_target_sputtering_limit_max">
 				<xs:annotation>
-					<xs:documentation>Peak heat flux on the divertor target surface</xs:documentation>
+					<xs:documentation>Maximum plasma temperature allowed on the divertor target to avoid excessive sputtering</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_flux_peak" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Peak power flux on the divertor target surface</xs:documentation>
 					<xs:appinfo>
 						<units>W.m^-2</units>
 					</xs:appinfo>
@@ -164,9 +176,10 @@
 			</xs:element>
 			<xs:element name="flux_expansion" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Magnetic flux expansion (DETAILED DEFINITION AND UNITS TBD)</xs:documentation>
+					<xs:documentation>Magnetic flux expansion as defined by Stangeby : ratio between the poloidal field at the midplane separatrix and the poloidal field at the strike-point see formula attached, where u means upstream (midplane separatrix) and t means at divertor target (downstream).</xs:documentation>
 					<xs:appinfo>
-						<units>W.m^-2</units>
+						<units>-</units>
+						<url>divertors/flux_expansion.png</url>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -184,14 +197,6 @@
 					<xs:documentation>Angle between field lines projected in poloidal plane and target, measured clockwise from the target to the projected field lines</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="extension_pol_norm" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Target length in poloidal plane normalized to the plasma minor radius</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -232,6 +237,78 @@
 					<xs:documentation>Power fraction incident on the target (normalized to the total power incident on the divertor)</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_incident" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Total power incident on this target. This power is split in the various physical categories listed below</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_conducted" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Power conducted by the plasma on this divertor target</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_convected" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Power convected by the plasma on this divertor target</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_radiated" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Net radiated power on this divertor target (incident - reflected)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_black_body" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Black body radiated power emitted from this divertor target (emissivity is included)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_neutrals" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Net power from neutrals on this divertor target (positive means power is deposited on the target)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_recombination_plasma" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Power deposited on this divertor target due to recombination of plasma ions</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_recombination_neutrals" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Power deposited on this divertor target due to recombination of neutrals into a ground state (e.g. molecules)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_currents" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Power deposited on this divertor target due to electric currents (positive means power is deposited on the target)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -282,7 +359,7 @@
 			</xs:element>
 			<xs:element name="power_incident" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Total power incident on the divertor. This power is split in conducted, convected, radiated, and charge exchange components.</xs:documentation>
+					<xs:documentation>Total power incident on the divertor (sum over all targets). This power is split in the various physical categories listed below</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -290,7 +367,7 @@
 			</xs:element>
 			<xs:element name="power_conducted" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Power conducted on the divertor targets</xs:documentation>
+					<xs:documentation>Power conducted by the plasma on the divertor targets (sum over all targets)</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -298,7 +375,7 @@
 			</xs:element>
 			<xs:element name="power_convected" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Power convected on the divertor targets</xs:documentation>
+					<xs:documentation>Power convected by the plasma on the divertor targets (sum over all targets)</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
@@ -306,21 +383,53 @@
 			</xs:element>
 			<xs:element name="power_radiated" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Power radiated in the divertor region</xs:documentation>
+					<xs:documentation>Net radiated power on the divertor targets (incident - reflected) (sum over all targets)</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_charge_exchange" type="signal_flt_1d">
+			<xs:element name="power_black_body" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Power lost on charge exchange reactions in the divertor region</xs:documentation>
+					<xs:documentation>Black body radiated power emitted from the divertor targets (emissivity is included) (sum over all targets)</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="particle_flux_recycled" type="signal_flt_1d">
+			<xs:element name="power_neutrals" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Net power from neutrals on the divertor targets (positive means power is deposited on the target) (sum over all targets)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_recombination_plasma" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Power deposited on the divertor targets due to recombination of plasma ions (sum over all targets)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_recombination_neutrals" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Power deposited on the divertor targets due to recombination of neutrals into a ground state (e.g. molecules) (sum over all targets)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_currents" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Power deposited on the divertor targets due to electric currents (positive means power is deposited on the target) (sum over all targets)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="particle_flux_recycled_total" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Total recycled particle flux from  the divertor (in equivalent electrons)</xs:documentation>
 					<xs:appinfo>
@@ -342,7 +451,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="divertor" type="divertor" maxOccurs="2">
+				<xs:element name="divertor" type="divertor" maxOccurs="8">
 					<xs:annotation>
 						<xs:documentation>Set of divertors</xs:documentation>
 						<xs:appinfo>

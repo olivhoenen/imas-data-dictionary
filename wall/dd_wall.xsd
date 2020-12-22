@@ -275,9 +275,25 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="power_from_plasma">
+			<xs:element name="power_incident">
 				<xs:annotation>
-					<xs:documentation>Power flowing from the plasma to the wall</xs:documentation>
+					<xs:documentation>Total power incident on the wall. This power is split in the various physical categories listed below</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../time</coordinate1>
+						<change_nbc_version>3.31.0</change_nbc_version> 
+						<change_nbc_description>leaf_renamed</change_nbc_description> 
+						<change_nbc_previous_name>power_from_plasma</change_nbc_previous_name> 
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_conducted">
+				<xs:annotation>
+					<xs:documentation>Power conducted by the plasma onto the wall</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>W</units>
@@ -288,9 +304,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="power_from_plasma_radiated">
+			<xs:element name="power_convected">
 				<xs:annotation>
-					<xs:documentation>Power radiated from plasma onto the wall</xs:documentation>
+					<xs:documentation>Power convected by the plasma onto the wall</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>W</units>
@@ -301,9 +317,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="power_from_plasma_conducted">
+			<xs:element name="power_radiated">
 				<xs:annotation>
-					<xs:documentation>Power conducted from the plasma onto the wall</xs:documentation>
+					<xs:documentation>Net radiated power from plasma onto the wall (incident-reflected)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>W</units>
@@ -314,9 +330,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="power_from_plasma_convected">
+			<xs:element name="power_black_body">
 				<xs:annotation>
-					<xs:documentation>Power convected from the plasma onto the wall</xs:documentation>
+					<xs:documentation>Black body radiated power emitted from the wall (emissivity is included)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>W</units>
@@ -327,9 +343,48 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="power_from_plasma_charge_exchange">
+			<xs:element name="power_neutrals">
 				<xs:annotation>
-					<xs:documentation>Power from the plasma lost in charge exchange reactions</xs:documentation>
+					<xs:documentation>Net power from neutrals on the wall  (positive means power is deposited on the wall)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_recombination_plasma">
+				<xs:annotation>
+					<xs:documentation>Power deposited on the wall due to recombination of plasma ions</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_recombination_neutrals">
+				<xs:annotation>
+					<xs:documentation>Power deposited on the wall due to recombination of neutrals into a ground state (e.g. molecules)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_currents">
+				<xs:annotation>
+					<xs:documentation>Power deposited on the wall due to electric currents (positive means power is deposited on the target)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>W</units>
@@ -686,9 +741,9 @@
 						<xs:group ref="FLT_0D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="first_wall_heat_flux_peak" type="signal_flt_1d">
+				<xs:element name="first_wall_power_flux_peak" type="signal_flt_1d">
 					<xs:annotation>
-						<xs:documentation>Peak heat flux on the first wall</xs:documentation>
+						<xs:documentation>Peak power flux on the first wall</xs:documentation>
 						<xs:appinfo>
 							<units>W.m^-2</units>
 						</xs:appinfo>
