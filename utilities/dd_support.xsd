@@ -5342,6 +5342,52 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="rzphi1d_grid">
+		<xs:annotation>
+			<xs:documentation>R, Z, Phi structured grid, in which R, Z and phi don't necessarily have the same number of elements</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>rad</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rzphi1d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi positions (1D, static)</xs:documentation>
