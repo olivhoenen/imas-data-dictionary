@@ -20,7 +20,7 @@
 			</xs:element>
 			<xs:element name="reference" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Reference waveform</xs:documentation>
+					<xs:documentation>Reference waveform. Caution : error bars of the reference/data node are not used in the usual sense, instead they are used to describe the control envelope, with a meaning depending on the chosen envelope_type option.</xs:documentation>
 					<xs:appinfo>
 						<units>mixed</units>
 					</xs:appinfo>
@@ -28,7 +28,7 @@
 			</xs:element>
 			<xs:element name="reference_type">
 				<xs:annotation>
-					<xs:documentation>Reference type:  0:relative; 1: absolute; refers to the reference/data node</xs:documentation>
+					<xs:documentation>Reference type:  0:relative (don't use for the moment, to be defined later when segments are introduced in the IDS structure); 1: absolute: the reference time trace is provided in the reference/data node</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
@@ -39,7 +39,7 @@
 			</xs:element>
 			<xs:element name="envelope_type">
 				<xs:annotation>
-					<xs:documentation>Envelope type:  0:relative; 1: absolute; refers to the envelope bounds which are given by the reference/data_error_upper and reference/data_error_lower nodes </xs:documentation>
+					<xs:documentation>Envelope type:  0:relative: means that the envelope upper and lower bound values are defined respectively as reference.data * reference.data_error_upper and reference.data * reference.data_error_lower. 1: absolute: the envelope upper and lower bound values are given respectively by reference/data_error_upper and reference/data_error_lower. Lower are upper are taken in the strict mathematical sense, without considering absolute values of the data</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
@@ -369,8 +369,8 @@
 					<xs:appinfo>
 						<units>rad</units>
 						<change_nbc_version>3.26.0</change_nbc_version>
-                        <change_nbc_description>structure_renamed</change_nbc_description>
-                        <change_nbc_previous_name>launching_angle_pol</change_nbc_previous_name>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>launching_angle_pol</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -380,8 +380,8 @@
 					<xs:appinfo>
 						<units>rad</units>
 						<change_nbc_version>3.26.0</change_nbc_version>
-                        <change_nbc_description>structure_renamed</change_nbc_description>
-                        <change_nbc_previous_name>launching_angle_tor</change_nbc_previous_name>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>launching_angle_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -878,7 +878,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
-				<lifecycle_last_change>3.25.0</lifecycle_last_change>
+				<lifecycle_last_change>3.31.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
