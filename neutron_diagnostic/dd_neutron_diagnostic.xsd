@@ -55,6 +55,34 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_event">
+		<xs:annotation>
+			<xs:documentation>Event in the detector</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of the event</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>neutron_diagnostic/neutron_event_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>Array of values for the event</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="neutron_diagnostic_field_of_view">
 		<xs:annotation>
 			<xs:documentation>Field of view</xs:documentation>
@@ -77,13 +105,72 @@
 			</xs:element>
 			<xs:element name="emission_grid" type="rzphi1d_grid">
 				<xs:annotation>
-					<xs:documentation>Grid defining the light emission cells</xs:documentation>
+					<xs:documentation>Grid defining the neutron emission cells in the plasma</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="direction_to_detector" type="xyz3d_static">
 				<xs:annotation>
 					<xs:documentation>Vector that points from the centre of the voxel to the centre of the detector, described in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis.</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_green">
+		<xs:annotation>
+			<xs:documentation>Green functions</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="source_neutron_energies">
+				<xs:annotation>
+					<xs:documentation>Array of source neutron energy bins</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>eV</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="event_in_detector" type="neutron_diagnostic_event">
+				<xs:annotation>
+					<xs:documentation>5th dimension for the Green functions representing values of events measured in the detector.The type of events monitored depends on the detector and can be defined by the user. It can be energy of neutrons, or electrical signal, or TOF (defined by type below)</xs:documentation>
+					</xs:annotation>
+		     </xs:element>
+			<xs:element name="neutron_flux">
+				<xs:annotation>
+					<xs:documentation>Grouped neutron flux in the detector from one neutron energy bin emitted by the current plasma voxel towards the detector</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^-2.neutron^-1</units>
+						<coordinate1>../../field_of_view/emission_grid/r</coordinate1>
+						<coordinate2>../../field_of_view/emission_grid/z</coordinate2>
+						<coordinate3>../../field_of_view/emission_grid/phi</coordinate3>
+						<coordinate4>../source_neutron_energies</coordinate4>
+						<coordinate5>../event_in_detector/values</coordinate5>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_5D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="response_function">
+				<xs:annotation>
+					<xs:documentation>Number of events occurring in the detector from one neutron energy bin emitted by the current plasma voxel towards the detector</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>events.neutron^-1</units>
+						<coordinate1>../../field_of_view/emission_grid/r</coordinate1>
+						<coordinate2>../../field_of_view/emission_grid/z</coordinate2>
+						<coordinate3>../../field_of_view/emission_grid/phi</coordinate3>
+						<coordinate4>../source_neutron_energies</coordinate4>
+						<coordinate5>../event_in_detector/values</coordinate5>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_5D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -704,6 +791,11 @@
 			<xs:element name="field_of_view" type="neutron_diagnostic_field_of_view">
 				<xs:annotation>
 					<xs:documentation>Field of view associated to this detector. The field of view is described by a voxelized plasma volume. Each voxel, with indexes i_R, i_Z, and i_phi, has an associated solid angle scalar and a detector direction vector.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="green_functions" type="neutron_diagnostic_green">
+				<xs:annotation>
+					<xs:documentation>Green function coefficients used to represent the detector response based on its field of view</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
