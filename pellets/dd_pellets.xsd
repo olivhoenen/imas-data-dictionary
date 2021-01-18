@@ -11,6 +11,47 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
 	<!--The time slices in this IDS are defined as the time at which the pellet is fully ablated and provides a core_instant_change. This time is slightly different from the pellet injection time (from the pulse schedule) and the pellet injector is not described (needs likely a separate IDS) -->
+	<xs:complexType name="pellets_propellant_gas">
+		<xs:annotation>
+			<xs:documentation>Description of the propellant gas with its number of atoms</xs:documentation>
+			<xs:appinfo>
+				<coordinate1>1...N</coordinate1>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the gas molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the neutral molecule (e.g. H2, D2, T2, N2, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="molecules_n">
+				<xs:annotation>
+					<xs:documentation>Number of molecules of the propellant gas injected in the vacuum vessel when launching the pellet</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="pellets_time_slice_pellet_shape">
 		<xs:annotation>
 			<xs:documentation>Initial shape of a pellet at launch</xs:documentation>
@@ -81,7 +122,7 @@
 					<xs:documentation>Material density of the species in the pellet</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>-</units>
+						<units>atoms.m^-3</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -90,7 +131,7 @@
 			</xs:element>
 			<xs:element name="fraction">
 				<xs:annotation>
-					<xs:documentation>Fraction of the species atoms in the pellet</xs:documentation>
+					<xs:documentation>Atomic fraction of the species in the pellet</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -255,7 +296,7 @@
 			</xs:element>
 			<xs:element name="species" type="pellets_time_slice_pellet_species" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of species included in the pellet composition</xs:documentation>
+					<xs:documentation>Set of atomic species included in the pellet composition</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -281,6 +322,11 @@
 			<xs:element name="path_profiles" type="pellets_time_slice_pellet_path_profiles">
 				<xs:annotation>
 					<xs:documentation>1-D profiles of plasma and pellet along the pellet path </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="propellant_gas" type="pellets_propellant_gas">
+				<xs:annotation>
+					<xs:documentation>Propellant gas</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -315,7 +361,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.0.4</lifecycle_last_change>
+				<lifecycle_last_change>3.31.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
