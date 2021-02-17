@@ -23,7 +23,7 @@
 
 <!-- First make a list of IDS with the Links-->
 <table border="1">
-        <thead style="color:#ff0000"><td>IDS name</td><td>Description</td><td>Max. occurrence number</td></thead>
+        <thead style="color:#ff0000"><td>IDS name</td><td>Description</td><td>Max. occurrence number (limited in MDS+ backend only)</td></thead>
         
 <xsl:for-each select="IDS">
 <tr>
@@ -177,7 +177,7 @@
 <xsl:when test="@data_type='int_1d_type'">INT_1D</xsl:when>
 <xsl:when test="@data_type='str_type'">STR_0D</xsl:when>
 <xsl:when test="@data_type='str_1d_type'">STR_1D</xsl:when>
-<xsl:otherwise><xsl:value-of select="@data_type"/><xsl:if test="@maxoccur"> [max_size=<xsl:value-of select="@maxoccur"/>]</xsl:if>  
+<xsl:otherwise><xsl:value-of select="@data_type"/><xsl:if test="@maxoccur"> [max_size=<xsl:value-of select="@maxoccur"/> (limited in MDS+ backend only)]</xsl:if>  
 </xsl:otherwise>
 </xsl:choose>        
            </td>
