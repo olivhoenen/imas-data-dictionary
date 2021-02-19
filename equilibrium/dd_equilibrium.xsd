@@ -337,6 +337,11 @@
 					<xs:documentation>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="closest_wall_point" type="rz0d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>RZ position of the point of the first wall which is the closest to plasma boundary</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="gap" type="equilibrium_gap" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of gaps, defined by a reference point and a direction.</xs:documentation>
@@ -589,6 +594,49 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="equilibrium_global_quantities_current_center">
+		<xs:annotation>
+			<xs:documentation>R, Z, and Vz of current center, dynamic within a type 3 array of structure (index on time)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius of the current center, defined as integral over the poloidal cross section of (j_tor*r*dS) / Ip</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height of the current center, defined as integral over the poloidal cross section of (j_tor*z*dS) / Ip</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="velocity_z">
+				<xs:annotation>
+					<xs:documentation>Vertical velocity of the current center</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_global_quantities_magnetic_axis">
 		<xs:annotation>
 			<xs:documentation>R, Z, and Btor at magnetic axis, dynamic within a type 3 array of structure (index on time)</xs:documentation>
@@ -837,6 +885,11 @@
 					<xs:documentation>Magnetic axis position and toroidal field</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="current_center" type="equilibrium_global_quantities_current_center">
+				<xs:annotation>
+					<xs:documentation>Position and vertical velocity of the current center</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="q_axis">
 				<xs:annotation>
 					<xs:documentation>q at the magnetic axis</xs:documentation>
@@ -892,6 +945,33 @@
 						<units>J</units>
 						<lifecycle_status>obsolescent</lifecycle_status>
 						<lifecycle_version>3.14.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi_external_average">
+				<xs:annotation>
+					<xs:documentation>Average (over the plasma poloidal cross section) plasma poloidal magnetic flux produced by all external circuits (CS and PF coils, eddy currents, VS in-vessel coils), given by the following formula : int(psi_external.j_tor.dS) / Ip</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Wb</units>
+						<cocos_label_transformation>psi_like</cocos_label_transformation>
+						<cocos_transformation_expression>.fact_psi</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.global_quantities.psi_external_average</cocos_leaf_name_aos_indices>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="plasma_inductance">
+				<xs:annotation>
+					<xs:documentation>Plasma inductance 2 E_magnetic/Ip^2, where E_magnetic = 1/2 * int(psi.j_tor.dS) (integral over the plasma poloidal cross-section)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>H</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2468,7 +2548,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.31.0</lifecycle_last_change>
+				<lifecycle_last_change>3.32.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
