@@ -3947,7 +3947,7 @@
 			</xs:element>
 			<xs:element name="n_tor">
 				<xs:annotation>
-					<xs:documentation>Array of toroidal mode numbers</xs:documentation>
+					<xs:documentation>Array of toroidal mode numbers, n_tor, where quantities vary as exp(i.n_tor.phi) and phi runs anticlockwise when viewed from above</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<type>dynamic</type>
@@ -3959,7 +3959,7 @@
 			</xs:element>
 			<xs:element name="m_pol">
 				<xs:annotation>
-					<xs:documentation>Array of poloidal mode numbers</xs:documentation>
+					<xs:documentation>Array of poloidal mode numbers, where quantities vary as exp(-i.m_pol.theta) and theta is the angle defined by the choice of ../../coordinate_identifier, with its centre at the magnetic axis recalled at the root of this IDS</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<type>dynamic</type>
@@ -4047,14 +4047,12 @@
 			</xs:element>
 			<xs:element name="orbit_integrals" type="distribution_markers_orbit">
 				<xs:annotation>
-					<xs:documentation>Integrals along the markers orbit. These dimensionless expressions are of the form:
-(1/tau) integral (f(n_tor,m_pol,k,q,...) dt) during a time tau, where tau is the transit/trapping time of the marker and f() a dimensionless function (often a phase factor) of the equilibrium (e.g. q) and perturbation (Fourier harmonics n_tor,m_pol and bounce harmonic k) along the particles orbits. In fact the integrals are taken during the last orbit of each marker at the time value of the time node below.</xs:documentation>
+					<xs:documentation>Integrals along the markers orbit. These dimensionless expressions are of the form: (1/tau) integral (f(n_tor,m_pol,k,q,...) dt) during a time tau, where tau is the transit/trapping time of the marker and f() a dimensionless function (often a phase factor) of the equilibrium (e.g. q) and perturbation (Fourier harmonics n_tor,m_pol and bounce harmonic k) along the particles orbits. In fact the integrals are taken during the last orbit of each marker at the time value of the time node below.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="orbit_integrals_instant" type="distribution_markers_orbit_instant">
 				<xs:annotation>
-					<xs:documentation>Integrals along the markers orbit. These dimensionless expressions are of the form:
-(1/tau) integral (f(n_tor,m_pol,k,q,...) dt) for a number of time intervals time_orbit smaller than tau, where tau is the transit/trapping time of the marker and f() a dimensionless function (often a phase factor) of the equilibrium (e.g. q) and perturbation (Fourier harmonics n_tor,m_pol and bounce harmonic k) along the particles orbits. In fact the integrals are taken during the last orbit of each marker at the time value of the time node below.</xs:documentation>
+					<xs:documentation>Integrals along the markers orbit. These dimensionless expressions are of the form: (1/tau) integral (f(n_tor,m_pol,k,q,...) dt) for a number of time intervals time_orbit smaller than tau, where tau is the transit/trapping time of the marker and f() a dimensionless function (often a phase factor) of the equilibrium (e.g. q) and perturbation (Fourier harmonics n_tor,m_pol and bounce harmonic k) along the particles orbits. In fact the integrals are taken during the last orbit of each marker at the time value of the time node below.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="time" type="flt_type">
