@@ -335,6 +335,61 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="gyrokinetics_input_normalizing">
+		<xs:annotation>
+			<xs:documentation>GK normalizing quantities</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="t_e">
+				<xs:annotation>
+					<xs:documentation>Electron temperature at outboard equatorial midplane of the flux surface (poloidal_angle = 0)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>eV</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_e">
+				<xs:annotation>
+					<xs:documentation>Electron density at outboard equatorial midplane of the flux surface (poloidal_angle = 0)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius of the flux surface of interest, defined as (min(R)+max(R))/2</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b_field_tor">
+				<xs:annotation>
+					<xs:documentation>Toroidal magnetic field at major radius r</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>T</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="gyrokinetics_model">
 		<xs:annotation>
 			<xs:documentation>Description of the GK model assumptions</xs:documentation>
@@ -465,9 +520,212 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="gyrokinetics_moments_particles">
+		<xs:annotation>
+			<xs:documentation>Turbulent moments for a given eigenmode and a given species, no gyroaverages</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="density_real">
+				<xs:annotation>
+					<xs:documentation>Normalised density (real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="density_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised density (imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_parallel_real">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel current density (real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_parallel_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel current density (imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_parallel_real">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel temperature (real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_parallel_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel temperature (imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_perpendicular_real">
+				<xs:annotation>
+					<xs:documentation>Normalised perpendicular temperature (real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pressure_perpendicular_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised perpendicular temperature (imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="heat_flux_parallel_real">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel heat flux (integral of 0.5 * m * v_par * v^2, real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="heat_flux_parallel_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel heat flux (integral over 0.5 * m * v_par * v^2, imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_parallel_energy_perpendicular_square_real">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_par * v_perp^2, real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_parallel_energy_perpendicular_square_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_par * v_perp^2, imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_perpendicular_square_energy_real">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_perp^2 * v^2, real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_perpendicular_square_energy_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_perp^2 * v^2, imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="gyrokinetics_moments">
 		<xs:annotation>
-			<xs:documentation>Turbulent moments for a given eigenmode and a given species</xs:documentation>
+			<xs:documentation>Turbulent moments for a given eigenmode and a given species, with gyroaverages</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="density_real">
@@ -526,9 +784,9 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity_parallel_real">
+			<xs:element name="j_parallel_real">
 				<xs:annotation>
-					<xs:documentation>Normalised parallel velocity (real part)</xs:documentation>
+					<xs:documentation>Normalised parallel current density (real part)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -540,9 +798,9 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity_parallel_imaginary">
+			<xs:element name="j_parallel_imaginary">
 				<xs:annotation>
-					<xs:documentation>Normalised parallel velocity (imaginary part)</xs:documentation>
+					<xs:documentation>Normalised parallel current density (imaginary part)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -554,9 +812,9 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity_parallel_gyroaveraged_real">
+			<xs:element name="j_parallel_gyroaveraged_real">
 				<xs:annotation>
-					<xs:documentation>Normalised parallel velocity (gyroaveraged, real part) </xs:documentation>
+					<xs:documentation>Normalised parallel current density (gyroaveraged, real part) </xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -568,9 +826,9 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity_parallel_gyroaveraged_imaginary">
+			<xs:element name="j_parallel_gyroaveraged_imaginary">
 				<xs:annotation>
-					<xs:documentation>Normalised parallel velocity (gyroaveraged, imaginary part) </xs:documentation>
+					<xs:documentation>Normalised parallel current density (gyroaveraged, imaginary part) </xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -582,7 +840,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_parallel_real">
+			<xs:element name="pressure_parallel_real">
 				<xs:annotation>
 					<xs:documentation>Normalised parallel temperature (real part)</xs:documentation>
 					<xs:appinfo>
@@ -596,7 +854,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_parallel_imaginary">
+			<xs:element name="pressure_parallel_imaginary">
 				<xs:annotation>
 					<xs:documentation>Normalised parallel temperature (imaginary part)</xs:documentation>
 					<xs:appinfo>
@@ -610,7 +868,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_parallel_gyroaveraged_real">
+			<xs:element name="pressure_parallel_gyroaveraged_real">
 				<xs:annotation>
 					<xs:documentation>Normalised parallel temperature (gyroaveraged, real part) </xs:documentation>
 					<xs:appinfo>
@@ -624,7 +882,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_parallel_gyroaveraged_imaginary">
+			<xs:element name="pressure_parallel_gyroaveraged_imaginary">
 				<xs:annotation>
 					<xs:documentation>Normalised parallel temperature (gyroaveraged, imaginary part) </xs:documentation>
 					<xs:appinfo>
@@ -638,7 +896,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_perpendicular_real">
+			<xs:element name="pressure_perpendicular_real">
 				<xs:annotation>
 					<xs:documentation>Normalised perpendicular temperature (real part)</xs:documentation>
 					<xs:appinfo>
@@ -652,7 +910,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_perpendicular_imaginary">
+			<xs:element name="pressure_perpendicular_imaginary">
 				<xs:annotation>
 					<xs:documentation>Normalised perpendicular temperature (imaginary part)</xs:documentation>
 					<xs:appinfo>
@@ -666,7 +924,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_perpendicular_gyroaveraged_real">
+			<xs:element name="pressure_perpendicular_gyroaveraged_real">
 				<xs:annotation>
 					<xs:documentation>Normalised perpendicular temperature (gyroaveraged, real part) </xs:documentation>
 					<xs:appinfo>
@@ -680,9 +938,93 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="temperature_perpendicular_gyroaveraged_imaginary">
+			<xs:element name="pressure_perpendicular_gyroaveraged_imaginary">
 				<xs:annotation>
 					<xs:documentation>Normalised perpendicular temperature (gyroaveraged, imaginary part) </xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="heat_flux_parallel_real">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel heat flux (integral of 0.5 * m * v_par * v^2, real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="heat_flux_parallel_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel heat flux (integral over 0.5 * m * v_par * v^2, imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_parallel_energy_perpendicular_square_real">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_par * v_perp^2, real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_parallel_energy_perpendicular_square_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_par * v_perp^2, imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_perpendicular_square_energy_real">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_perp^2 * v^2, real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_perpendicular_square_energy_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_perp^2 * v^2, imaginary part)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -852,14 +1194,34 @@
 			<xs:documentation>Turbulent fluxes and moments for a given eigenmode and a given species</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="moments_norm_rotating_frame" type="gyrokinetics_moments">
+			<xs:element name="moments_norm_gyrocenter" type="gyrokinetics_moments">
 				<xs:annotation>
-					<xs:documentation>Moments (normalised) of the perturbed distribution function defined in the rotating frame</xs:documentation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="fluxes_norm" type="gyrokinetics_fluxes">
+			<xs:element name="moments_norm_particle" type="gyrokinetics_moments_particles">
 				<xs:annotation>
-					<xs:documentation>Normalised fluxes in the laboratory frame</xs:documentation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of particles</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_norm_gyrocenter" type="gyrokinetics_fluxes">
+				<xs:annotation>
+					<xs:documentation>Normalised gyrocenter fluxes in the laboratory frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_norm_gyrocenter_rotating_frame" type="gyrokinetics_fluxes">
+				<xs:annotation>
+					<xs:documentation>Normalised gyrocenter fluxes in the rotating frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_norm_particle" type="gyrokinetics_fluxes">
+				<xs:annotation>
+					<xs:documentation>Normalised particle fluxes in the laboratory frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_norm_particle_rotating_frame" type="gyrokinetics_fluxes">
+				<xs:annotation>
+					<xs:documentation>Normalised particle fluxes in the rotating frame</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1176,7 +1538,7 @@
 	</xs:complexType>
 	<xs:element name="gyrokinetics">
 		<xs:annotation>
-			<xs:documentation>Description of a gyrokinetic simulation (delta-f, flux-tube). All quantities within this IDS are normalised (apart from time), thus independent of rhostar, consistently with the local approximation and a spectral representation is assumed in the perpendicular plane (i.e. homogeneous turbulence). All quantities are given in the laboratory frame, except the moments of the perturbed distribution function which are given in the rotating frame.</xs:documentation>
+			<xs:documentation>Description of a gyrokinetic simulation (delta-f, flux-tube). All quantities within this IDS are normalised (apart from time and from the normalizing quantities structure), thus independent of rhostar, consistently with the local approximation and a spectral representation is assumed in the perpendicular plane (i.e. homogeneous turbulence). All quantities are given in the laboratory frame, except the moments of the perturbed distribution function which are given in the rotating frame.</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.22.0</lifecycle_version>
@@ -1192,6 +1554,11 @@
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="normalizing_quantities" type="gyrokinetics_input_normalizing">
+					<xs:annotation>
+						<xs:documentation>Physical quantities used for normalization (useful to link to the original simulation/experience)</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="flux_surface" type="gyrokinetics_flux_surface">
