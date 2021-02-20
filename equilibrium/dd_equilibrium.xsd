@@ -132,6 +132,38 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="equilibrium_boundary_second_separatrix">
+		<xs:annotation>
+			<xs:documentation>Geometry of the plasma boundary at the secondary separatrix</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="outline" type="rz1d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>RZ outline of the plasma boundary</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Value of the poloidal flux at the separatrix</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Array of X-points, for each of them the RZ position is given</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_boundary_separatrix">
 		<xs:annotation>
 			<xs:documentation>Geometry of the plasma boundary at the separatrix</xs:documentation>
@@ -339,7 +371,7 @@
 			</xs:element>
 			<xs:element name="closest_wall_point" type="rz0d_dynamic_aos">
 				<xs:annotation>
-					<xs:documentation>RZ position of the point of the first wall which is the closest to plasma boundary</xs:documentation>
+					<xs:documentation>(R, Z) position of the point of the first wall which is the closest to plasma boundary</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="gap" type="equilibrium_gap" maxOccurs="unbounded">
@@ -594,9 +626,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="equilibrium_global_quantities_current_center">
+	<xs:complexType name="equilibrium_global_quantities_current_centre">
 		<xs:annotation>
-			<xs:documentation>R, Z, and Vz of current center, dynamic within a type 3 array of structure (index on time)</xs:documentation>
+			<xs:documentation>R, Z, and vertical velocity of current centre, dynamic within a type 3 array of structure (index on time)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
@@ -885,9 +917,9 @@
 					<xs:documentation>Magnetic axis position and toroidal field</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="current_center" type="equilibrium_global_quantities_current_center">
+			<xs:element name="current_centre" type="equilibrium_global_quantities_current_centre">
 				<xs:annotation>
-					<xs:documentation>Position and vertical velocity of the current center</xs:documentation>
+					<xs:documentation>Position and vertical velocity of the current centre</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="q_axis">
@@ -2478,6 +2510,11 @@
 			<xs:element name="boundary_separatrix" type="equilibrium_boundary_separatrix">
 				<xs:annotation>
 					<xs:documentation>Description of the plasma boundary at the separatrix</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="boundary_secondary_separatrix" type="equilibrium_boundary_second_separatrix">
+				<xs:annotation>
+					<xs:documentation>Geometry of the secondary separatrix, defined as the outer flux surface with an X-point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="constraints" type="equilibrium_constraints">
