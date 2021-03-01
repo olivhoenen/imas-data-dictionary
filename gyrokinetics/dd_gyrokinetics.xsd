@@ -980,6 +980,34 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="heat_flux_parallel_gyroaveraged_real">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel heat flux (integral of 0.5 * m * v_par * v^2, gyroaveraged, real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="heat_flux_parallel_gyroaveraged_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised parallel heat flux (integral over 0.5 * m * v_par * v^2, gyroaveraged, imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="v_parallel_energy_perpendicular_square_real">
 				<xs:annotation>
 					<xs:documentation>Normalised moment (integral over 0.5 * m * v_par * v_perp^2, real part)</xs:documentation>
@@ -1008,6 +1036,34 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="v_parallel_energy_perpendicular_square_gyroaveraged_real">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_par * v_perp^2, gyroaveraged, real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_parallel_energy_perpendicular_square_gyroaveraged_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_par * v_perp^2, gyroaveraged, imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="v_perpendicular_square_energy_real">
 				<xs:annotation>
 					<xs:documentation>Normalised moment (integral over 0.5 * m * v_perp^2 * v^2, real part)</xs:documentation>
@@ -1025,6 +1081,34 @@
 			<xs:element name="v_perpendicular_square_energy_imaginary">
 				<xs:annotation>
 					<xs:documentation>Normalised moment (integral over 0.5 * m * v_perp^2 * v^2, imaginary part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_perpendicular_square_energy_gyroaveraged_real">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_perp^2 * v^2, gyroaveraged, real part)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<coordinate1>../../../poloidal_angle</coordinate1>
+						<coordinate2>../../../time_norm</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="v_perpendicular_square_energy_gyroaveraged_imaginary">
+				<xs:annotation>
+					<xs:documentation>Normalised moment (integral over 0.5 * m * v_perp^2 * v^2, gyroaveraged, imaginary part)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -1543,6 +1627,7 @@
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.22.0</lifecycle_version>
 				<lifecycle_last_change>3.22.0</lifecycle_last_change>
+				<url>https://gitlab.com/gkdb/gkdb/raw/master/doc/general/IOGKDB.pdf</url>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -1599,7 +1684,7 @@
 				</xs:element>
 				<xs:element name="fluxes_integrated_norm" type="gyrokinetics_fluxes" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>Normalised fluxes integrated over the kx and ky grids used in a non-linear run (therefore they have no dependence on the wavevector) in the laboratory frame, for a given species</xs:documentation>
+						<xs:documentation>Normalised fluxes of particles (not the gyrocentres) integrated over the kx and ky grids used in a non-linear run (therefore they have no dependence on the wavevector) in the laboratory frame, for a given species, and integrated in time over the duration model/time_interval_norm</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>../species</coordinate1>
 						</xs:appinfo>

@@ -132,6 +132,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:attribute name="lifecycle_version"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_version"/></xsl:attribute>
 							<xsl:attribute name="lifecycle_last_change"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_last_change"/></xsl:attribute>
 							<xsl:if test="xs:annotation/xs:appinfo/specific_validation_rules"><xsl:attribute name="specific_validation_rules"><xsl:value-of select="xs:annotation/xs:appinfo/specific_validation_rules"/></xsl:attribute></xsl:if>
+							<xsl:if test="xs:annotation/xs:appinfo/url"><xsl:attribute name="url"><xsl:value-of select="xs:annotation/xs:appinfo/url"/></xsl:attribute></xsl:if>
 							<!-- Scan its components in IMPLEMENT mode -->
 							<xsl:apply-templates select="xs:complexType" mode="IMPLEMENT">
 								<xsl:with-param name="currPath" select="''"/>
