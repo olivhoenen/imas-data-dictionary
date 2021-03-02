@@ -3885,7 +3885,7 @@
 		<xs:sequence>
 			<xs:element name="expressions">
 				<xs:annotation>
-					<xs:documentation>List of the expressions f(n_tor,m_pol,k,q,...) used in the orbit integrals</xs:documentation>
+					<xs:documentation>List of the expressions f(eq) used in the orbit integrals</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<type>dynamic</type>
@@ -4047,12 +4047,12 @@
 			</xs:element>
 			<xs:element name="orbit_integrals" type="distribution_markers_orbit">
 				<xs:annotation>
-					<xs:documentation>Integrals along the markers orbit. These dimensionless expressions are of the form: (1/tau) integral (f(n_tor,m_pol,k,q,...) dt) during a time tau, where tau is the transit/trapping time of the marker and f() a dimensionless function (often a phase factor) of the equilibrium (e.g. q) and perturbation (Fourier harmonics n_tor,m_pol and bounce harmonic k) along the particles orbits. In fact the integrals are taken during the last orbit of each marker at the time value of the time node below.</xs:documentation>
+					<xs:documentation>Integrals along the markers orbit. These dimensionless expressions are of the form: (1/tau) integral (f(n_tor,m_pol,k,eq,...) dt) from time - tau to time, where tau is the transit/trapping time of the marker and f() a dimensionless function (phase factor,drift,etc) of the equilibrium (e.g. q) and perturbation (Fourier harmonics n_tor,m_pol and bounce harmonic k) along the particles orbits. In fact the integrals are taken during the last orbit of each marker at the time value of the time node below</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="orbit_integrals_instant" type="distribution_markers_orbit_instant">
 				<xs:annotation>
-					<xs:documentation>Integrals along the markers orbit. These dimensionless expressions are of the form: (1/tau) integral (f(n_tor,m_pol,k,q,...) dt) for a number of time intervals time_orbit smaller than tau, where tau is the transit/trapping time of the marker and f() a dimensionless function (often a phase factor) of the equilibrium (e.g. q) and perturbation (Fourier harmonics n_tor,m_pol and bounce harmonic k) along the particles orbits. In fact the integrals are taken during the last orbit of each marker at the time value of the time node below.</xs:documentation>
+					<xs:documentation>Integrals/quantities along the markers orbit. These dimensionless expressions are of the form: (1/tau) integral ( f(eq) dt) from time - tau to time_orbit for different values of time_orbit in the interval from time - tau to time, where tau is the transit/trapping time of the marker and f(eq) a dimensionless function (phase, drift,q,etc) of the equilibrium along the markers orbits. The integrals are taken during the last orbit of each marker at the time value of the time node below</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="time" type="flt_type">
