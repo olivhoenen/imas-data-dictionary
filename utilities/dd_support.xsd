@@ -3920,7 +3920,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -3995,7 +3995,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_5D"/>
+					<xs:group ref="CPX_5D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -7813,6 +7813,114 @@
 		</xs:sequence>
 	</xs:group>
 	<xs:simpleType name="cpx_2d_type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\[\[\s+(,\s+)*\](,\[\s+(,\s+)*\])*\]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:group name="CPX_3D">
+		<xs:annotation>
+			<xs:documentation>3-dimension complex Data Item</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="class_of" type="xs:string" fixed="CPX_3D">
+				<xs:annotation>
+					<xs:documentation>Class of Data Item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data" type="cpx_3d_type">
+				<xs:annotation>
+					<xs:documentation>The data content of this node</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:group ref="data_properties">
+				<xs:annotation>
+					<xs:documentation>General properties of a Data Item</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+		</xs:sequence>
+	</xs:group>
+	<xs:simpleType name="cpx_3d_type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\[\[\s+(,\s+)*\](,\[\s+(,\s+)*\])*\]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:group name="CPX_4D">
+		<xs:annotation>
+			<xs:documentation>4-dimension complex Data Item</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="class_of" type="xs:string" fixed="CPX_4D">
+				<xs:annotation>
+					<xs:documentation>Class of Data Item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data" type="cpx_4d_type">
+				<xs:annotation>
+					<xs:documentation>The data content of this node</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:group ref="data_properties">
+				<xs:annotation>
+					<xs:documentation>General properties of a Data Item</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+		</xs:sequence>
+	</xs:group>
+	<xs:simpleType name="cpx_4d_type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\[\[\s+(,\s+)*\](,\[\s+(,\s+)*\])*\]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:group name="CPX_5D">
+		<xs:annotation>
+			<xs:documentation>5-dimension complex Data Item</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="class_of" type="xs:string" fixed="CPX_5D">
+				<xs:annotation>
+					<xs:documentation>Class of Data Item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data" type="cpx_5d_type">
+				<xs:annotation>
+					<xs:documentation>The data content of this node</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:group ref="data_properties">
+				<xs:annotation>
+					<xs:documentation>General properties of a Data Item</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+		</xs:sequence>
+	</xs:group>
+	<xs:simpleType name="cpx_5d_type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\[\[\s+(,\s+)*\](,\[\s+(,\s+)*\])*\]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:group name="CPX_6D">
+		<xs:annotation>
+			<xs:documentation>6-dimension complex Data Item</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="class_of" type="xs:string" fixed="CPX_6D">
+				<xs:annotation>
+					<xs:documentation>Class of Data Item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data" type="cpx_6d_type">
+				<xs:annotation>
+					<xs:documentation>The data content of this node</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:group ref="data_properties">
+				<xs:annotation>
+					<xs:documentation>General properties of a Data Item</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+		</xs:sequence>
+	</xs:group>
+	<xs:simpleType name="cpx_6d_type">
 		<xs:restriction base="xs:string">
 			<xs:pattern value="\[\[\s+(,\s+)*\](,\[\s+(,\s+)*\])*\]"/>
 		</xs:restriction>
