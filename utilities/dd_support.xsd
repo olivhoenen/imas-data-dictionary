@@ -4055,6 +4055,17 @@
 					<xs:documentation>Integrals/quantities along the markers orbit. These dimensionless expressions are of the form: (1/tau) integral ( f(eq) dt) from time - tau to time_orbit for different values of time_orbit in the interval from time - tau to time, where tau is the transit/trapping time of the marker and f(eq) a dimensionless function (phase, drift,q,etc) of the equilibrium along the markers orbits. The integrals are taken during the last orbit of each marker at the time value of the time node below</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="toroidal_mode">
+				<xs:annotation>
+					<xs:documentation>In case the orbit integrals are calculated for a given MHD perturbation, index of the toroidal mode considered. Refers to the time_slice/toroidal_mode array of the MHD_LINEAR IDS in which this perturbation is described</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="time" type="flt_type">
 				<xs:annotation>
 					<xs:documentation>Time</xs:documentation>
