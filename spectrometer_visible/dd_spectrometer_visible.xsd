@@ -10,6 +10,101 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="spectro_vis_geometry_matrix_emission">
+		<xs:annotation>
+			<xs:documentation>Emission grid for the geometry matrix of the detector</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Grid type</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>spectrometer_visible/spectrometer_visible_emissivity_grid_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dim1">
+				<xs:annotation>
+					<xs:documentation>First dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dim2">
+				<xs:annotation>
+					<xs:documentation>Second dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dim3">
+				<xs:annotation>
+					<xs:documentation>Third dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="spectro_vis_geometry_matrix">
+		<xs:annotation>
+			<xs:documentation>Geometry matrix of the detector</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>The Ray Transfer Matrix (RTM, or geometry matrix) here provides transformation of the signal from each individual unit light source (voxel) to the receiver (detector or head of an optic fibre). The emission profile has [photons.m^-3.s^-1.sr^-1] units and radiance signal has [photons.m^-2.s^-1.sr^-1] units. So the RTM has [m] units. The three dimensions correspond to the light emission grid.</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>../emission_grid/dim1</coordinate1>
+						<coordinate2>../emission_grid/dim2</coordinate2>
+						<coordinate3>../emission_grid/dim3</coordinate3>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="voxel_map">
+				<xs:annotation>
+					<xs:documentation>Voxel map for geometry matrix. The cells with same number are merged in the computation into a single emission source meta-cell. Cells with number -1 are excluded. Count starts from 0.</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>../emission_grid/dim1</coordinate1>
+						<coordinate2>../emission_grid/dim2</coordinate2>
+						<coordinate3>../emission_grid/dim3</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="emission_grid" type="spectro_vis_geometry_matrix_emission">
+				<xs:annotation>
+					<xs:documentation>Grid defining the light emission cells</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectro_vis_channel_wavelength_calibration">
 		<xs:annotation>
 			<xs:documentation>Wavelength calibration</xs:documentation>
@@ -372,7 +467,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-            <xs:element name="e_field_lh_tor">
+			<xs:element name="e_field_lh_tor">
 				<xs:annotation>
 					<xs:documentation>Lower Hybrid electric field component in the toroidal direction</xs:documentation>
 					<xs:appinfo>
@@ -792,7 +887,7 @@
 	</xs:complexType>
 	<xs:complexType name="spectro_vis_channel">
 		<xs:annotation>
-			<xs:documentation>Charge exchange channel</xs:documentation>
+			<xs:documentation>Visible spectroscopy channel</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name">
@@ -933,6 +1028,11 @@
 					<xs:documentation>Physics quantities measured from polarized light spectroscopy</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="geometry_matrix" type="spectro_vis_geometry_matrix">
+				<xs:annotation>
+					<xs:documentation>Description of geometry matrix (ray transfer matrix)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="spectrometer_visible">
@@ -941,7 +1041,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.3.1</lifecycle_version>
-				<lifecycle_last_change>3.30.0</lifecycle_last_change>
+				<lifecycle_last_change>3.32.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
