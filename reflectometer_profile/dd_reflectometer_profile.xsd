@@ -214,6 +214,34 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="cut_off_frequency_v">
+				<xs:annotation>
+					<xs:documentation>Cut-off frequency for V band</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../n_e/data</coordinate1_same_as>
+						<coordinate2>../n_e/time</coordinate2>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cut_off_frequency_w">
+				<xs:annotation>
+					<xs:documentation>Cut-off frequency for W band</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../n_e/data</coordinate1_same_as>
+						<coordinate2>../n_e/time</coordinate2>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="reflectometer_profile">
@@ -222,7 +250,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.11.0</lifecycle_version>
-				<lifecycle_last_change>3.25.0</lifecycle_last_change>
+				<lifecycle_last_change>3.32.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
