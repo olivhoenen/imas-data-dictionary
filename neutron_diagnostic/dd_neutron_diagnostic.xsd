@@ -832,17 +832,6 @@
 	</xs:complexType>
 	<xs:complexType name="neutron_diagnostic_unit_source_radiation_reaction">
 		<xs:sequence>
-			<xs:element name="index">
-				<xs:annotation>
-					<xs:documentation>Index of plasma reaction type. To be removed, since it is given by the index of the reaction array above.</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="energy">
 				<xs:annotation>
 					<xs:documentation>Energy boundaries for Detector Radiator Flux</xs:documentation>
@@ -916,17 +905,6 @@
 	</xs:complexType>
 	<xs:complexType name="neutron_diagnostic_unit_source_radiation">
 		<xs:sequence>
-			<xs:element name="index">
-				<xs:annotation>
-					<xs:documentation>Index of radiation type. TO BE REMOVED, since it is given by the index of the radiation array above.</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="reaction" type="neutron_diagnostic_unit_source_radiation_reaction" maxOccurs="2">
 				<xs:annotation>
 					<xs:documentation>Plasma reaction (1 - 'DT'; 2 - 'DD')</xs:documentation>
