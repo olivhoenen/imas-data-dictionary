@@ -6708,7 +6708,7 @@
 			</xs:element>
 			<xs:element name="length">
 				<xs:annotation>
-					<xs:documentation>Length</xs:documentation>
+					<xs:documentation>Length of the element in the R direction</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -6720,7 +6720,7 @@
 			</xs:element>
 			<xs:element name="thickness">
 				<xs:annotation>
-					<xs:documentation>Thickness</xs:documentation>
+					<xs:documentation>Thickness of the element in the Z direction</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -6732,10 +6732,10 @@
 			</xs:element>
 			<xs:element name="alpha">
 				<xs:annotation>
-					<xs:documentation>Inclination of first angle TBD</xs:documentation>
+					<xs:documentation>Inclination of first angle. For parallelogram with sides parallel to z-axis:  beta=0, alpha is angle measured counter-clockwise of devation of horizontal line from outward directed radial vector</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m</units>
+						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -6744,10 +6744,10 @@
 			</xs:element>
 			<xs:element name="beta">
 				<xs:annotation>
-					<xs:documentation>Inclination of second angle TBD</xs:documentation>
+					<xs:documentation>Inclination of second angle. For parallelogram with sides parallel to r-axis:  alpha=0, beta is angle measured counter-clockwise of devation of vertical line from outward directed radial vector.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m</units>
+						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -6885,7 +6885,7 @@
 			</xs:element>
 			<xs:element name="oblique" type="oblique_static">
 				<xs:annotation>
-					<xs:documentation>Trapezoidal description of the element</xs:documentation>
+					<xs:documentation>Parallelogram description of the element</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="arcs_of_circle" type="arcs_of_circle_static">
