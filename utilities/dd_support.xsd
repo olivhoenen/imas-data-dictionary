@@ -6679,7 +6679,7 @@
 	</xs:complexType>
 	<xs:complexType name="oblique_static">
 		<xs:annotation>
-			<xs:documentation>Oblique description of a 2D object</xs:documentation>
+			<xs:documentation>Description of a 2D parallelogram</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
@@ -6688,6 +6688,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -6700,30 +6701,33 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="length">
+			<xs:element name="length_alpha">
 				<xs:annotation>
-					<xs:documentation>Length of the element in the R direction</xs:documentation>
+					<xs:documentation>Length of the parallelogram side inclined with angle alpha with respect to the major radius axis</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="thickness">
+			<xs:element name="length_beta">
 				<xs:annotation>
-					<xs:documentation>Thickness of the element in the Z direction</xs:documentation>
+					<xs:documentation>Length of the parallelogram side inclined with angle beta with respect to the height axis</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -6732,10 +6736,11 @@
 			</xs:element>
 			<xs:element name="alpha">
 				<xs:annotation>
-					<xs:documentation>Inclination of first angle. For parallelogram with sides parallel to z-axis:  beta=0, alpha is angle measured counter-clockwise of devation of horizontal line from outward directed radial vector</xs:documentation>
+					<xs:documentation>Inclination of first angle measured counter-clockwise from horizontal outwardly directed radial vector (grad R).</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>rad</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -6744,10 +6749,11 @@
 			</xs:element>
 			<xs:element name="beta">
 				<xs:annotation>
-					<xs:documentation>Inclination of second angle. For parallelogram with sides parallel to r-axis:  alpha=0, beta is angle measured counter-clockwise of devation of vertical line from outward directed radial vector.</xs:documentation>
+					<xs:documentation>Inclination of second angle measured counter-clockwise from vertically upwards directed vector (grad Z). If both alpha and beta are zero (rectangle) then the simpler rectangular elements description should be used.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>rad</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
