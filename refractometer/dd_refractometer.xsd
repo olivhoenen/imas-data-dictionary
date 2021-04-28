@@ -10,6 +10,143 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="refractometer_shape_approximation">
+		<xs:annotation>
+			<xs:documentation>Shape approximation for the electron density profile</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="formula">
+				<xs:annotation>
+					<xs:documentation>Analytical formula representing the electron density profile as a function of a radial coordinate and adjustable parameters f(rho_tor_norm, alpha1, ... alphaN)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parameters">
+				<xs:annotation>
+					<xs:documentation>Values of the formula's parameters alpha1, ..., alphaN</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../../n_e_line/time</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="refractometer_channel_bandwidth">
+		<xs:annotation>
+			<xs:documentation>refractometer channel bandwidth</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="frequency_main">
+				<xs:annotation>
+					<xs:documentation>Main frequency used to probe the plasma (before upshifting and modulating)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase">
+				<xs:annotation>
+					<xs:documentation>Phase of the envelope of the probing signal, relative to the phase at launch</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../time</coordinate1>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="q_component">
+				<xs:annotation>
+					<xs:documentation>Q component of the IQ detector used to retrieve the phase of signal's envelope, sampled on a high resolution time_detector grid just before each measurement time slice represented by the ../time vector</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../time_detector</coordinate1_same_as>
+						<coordinate2>../time</coordinate2>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="i_component">
+				<xs:annotation>
+					<xs:documentation>I component of the IQ detector used to retrieve the phase of signal's envelope, sampled on a high resolution time_detector grid just before each measurement time slice represented by the ../time vector</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../time_detector</coordinate1_same_as>
+						<coordinate2>../time</coordinate2>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_e_line" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Integral of the electron density along the line of sight, deduced from the envelope phase measurements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<units>m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phase_quadrature" type="signal_flt_2d">
+				<xs:annotation>
+					<xs:documentation>In-phase and Quadrature components of the analysed signal. They are returned by an IQ-detector, that takes carrying and reference signals as the input and yields I and Q components. These are respectively stored as the first and the second index of the first dimension of the data child.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...2</coordinate1>
+						<coordinate2>time</coordinate2>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time_detector">
+				<xs:annotation>
+					<xs:documentation>High sampling timebase of the IQ-detector signal measurements</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../time</coordinate2>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for this bandwidth</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="refractometer_channel">
 		<xs:annotation>
 			<xs:documentation>refractometer channel</xs:documentation>
@@ -53,38 +190,12 @@
 					<xs:documentation>Description of the line of sight. The first point corresponds to the probing wave emission point. The second point corresponds to the probing wave detection point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sweep_time">
+			<xs:element name="bandwidth" type="refractometer_channel_bandwidth" maxOccurs="10">
 				<xs:annotation>
-					<xs:documentation>Duration of a sweep</xs:documentation>
+					<xs:documentation>Set of frequency bandwidths</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
-						<units>s</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="frequencies">
-				<xs:annotation>
-					<xs:documentation>Array of frequencies scanned during a sweep</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>Hz</units>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="phase" type="signal_flt_2d">
-				<xs:annotation>
-					<xs:documentation>Measured phase of the envelope of the probing signal for each frequency and time slice (corresponding to the begin time of a sweep), relative to the phase at launch</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../frequencies</coordinate1>
-						<coordinate2>time</coordinate2>
-						<units>rad</units>
+						<coordinate1>1...N
+					</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -97,14 +208,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="phase_quadrature" type="signal_flt_2d">
+			<xs:element name="n_e_profile_approximation" type="refractometer_shape_approximation">
 				<xs:annotation>
-					<xs:documentation>In-phase and Quadrature components of the analysed signal. They are returned by an IQ-detector, that takes carrying and reference signals as the input and yields I and Q components. These are respectively stored as the first and the second index of the first dimension of the data child.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>time</coordinate2>
-						<units>V</units>
-					</xs:appinfo>
+					<xs:documentation>Approximation of the radial electron density profile with an array of parameters and an approximation formula, used by post-processing programs for the identification of the electron density profile.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -115,7 +221,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.31.0</lifecycle_version>
-				<lifecycle_last_change>3.31.0</lifecycle_last_change>
+				<lifecycle_last_change>3.32.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -134,7 +240,7 @@
 				</xs:element>
 				<xs:element name="channel" type="refractometer_channel" maxOccurs="5">
 					<xs:annotation>
-						<xs:documentation>Set of channels, e.g. different reception antennas or frequency bandwidths of the refractometer</xs:documentation>
+						<xs:documentation>Set of channels, e.g. different reception antennas of the refractometer</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
