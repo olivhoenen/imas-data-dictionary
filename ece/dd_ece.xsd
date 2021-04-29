@@ -4,6 +4,73 @@
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="ece_channel_beam_spot">
+		<xs:annotation>
+			<xs:documentation>Spot ellipse characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="size" type="signal_flt_2d">
+				<xs:annotation>
+					<xs:documentation>Size of the spot ellipse</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...2</coordinate1>
+						<coordinate2>time</coordinate2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="angle" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Rotation angle for the spot ellipse</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ece_channel_beam_phase">
+		<xs:annotation>
+			<xs:documentation>Phase ellipse characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="curvature" type="signal_flt_2d">
+				<xs:annotation>
+					<xs:documentation>Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...2</coordinate1>
+						<coordinate2>time</coordinate2>
+						<units>m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="angle" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Rotation angle for the phase ellipse</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ece_channel_beam">
+		<xs:annotation>
+			<xs:documentation>Beam characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="spot" type="ece_channel_beam_spot">
+				<xs:annotation>
+					<xs:documentation>Spot ellipse characteristics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phase" type="ece_channel_beam_phase">
+				<xs:annotation>
+					<xs:documentation>Phase ellipse characteristics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ece_channel">
 		<xs:annotation>
 			<xs:documentation>Charge exchange channel</xs:documentation>
@@ -44,6 +111,18 @@
 					<xs:documentation>Harmonic detected by the channel. 1 corresponds to the "O1" mode, while 2 corresponds to the "X2" mode. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="if_bandwidth">
+				<xs:annotation>
+					<xs:documentation>Full-width of the Intermediate Frequency (IF) bandpass filter</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="position" type="rzphirhopsitheta1d_dynamic_aos1_common_time_1">
 				<xs:annotation>
 					<xs:documentation>Position of the measurements (taking into account the suprathermal shift)</xs:documentation>
@@ -80,12 +159,17 @@
 			</xs:element>
 			<xs:element name="time" type="flt_1d_type">
 				<xs:annotation>
-					<xs:documentation>Timebase for the processed dynamic data of this channel</xs:documentation>
+					<xs:documentation>Timebase for the processed dynamic data of this channel (outside of the beam structure)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<type>dynamic</type>
 						<units>s</units>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam" type="ece_channel_beam">
+				<xs:annotation>
+					<xs:documentation>ECE Gaussian optics parameters taken at the line_of_sight/first_point position (for synthetic modelling of the ECE emission)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -96,7 +180,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.2.1</lifecycle_version>
-				<lifecycle_last_change>3.26.0</lifecycle_last_change>
+				<lifecycle_last_change>3.32.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -104,7 +188,7 @@
 				<xs:element ref="ids_properties"/>
 				<xs:element name="line_of_sight" type="line_of_sight_2points">
 					<xs:annotation>
-						<xs:documentation>Description of the line of sight of the diagnostic (valid for all channels), defined by two points</xs:documentation>
+						<xs:documentation>Description of the line of sight of the diagnostic (valid for all channels), defined by two points. By convention, the first point is the closest to the diagnostic</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="t_e_central" type="signal_flt_1d_validity_position">
@@ -118,6 +202,14 @@
 				<xs:element name="channel" type="ece_channel" maxOccurs="100">
 					<xs:annotation>
 						<xs:documentation>Set of channels (frequency)</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="polarizer" type="polarizer" maxOccurs="3">
+					<xs:annotation>
+						<xs:documentation>Set of polarizers placed in front of the diagnostic (if any). Polarizers are assumed to be orthogonal to the line of sight, so that the x3 unit vector is aligned with the line of sight</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>

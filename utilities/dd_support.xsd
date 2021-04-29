@@ -6484,6 +6484,57 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="polarizer">
+		<xs:annotation>
+			<xs:documentation>Generic description of a polarizer (extension of the detector_aperture complex type)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="centre" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane polarizer. This origin is located within the polarizer area.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="radius">
+				<xs:annotation>
+					<xs:documentation>Radius of the circle, used only if geometry_type = 2</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x1_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x2_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x3_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the polarizer plane and oriented towards the plasma.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="polarization_angle">
+				<xs:annotation>
+					<xs:documentation>Alignment angle of the polarizer in the (x1,x2) plane. Electric fields parallel to the polarizer angle will be reflected. The angle is defined with respect to the x1 unit vector, positive in the counter-clockwise direction when looking towards the plasma</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="line_of_sight_2points">
 		<xs:annotation>
 			<xs:documentation>Generic description of a line of sight, defined by two points</xs:documentation>
