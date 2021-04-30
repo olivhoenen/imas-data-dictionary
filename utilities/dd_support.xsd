@@ -6679,15 +6679,16 @@
 	</xs:complexType>
 	<xs:complexType name="oblique_static">
 		<xs:annotation>
-			<xs:documentation>Oblique description of a 2D object</xs:documentation>
+			<xs:documentation>Description of a 2D parallelogram</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="r">
 				<xs:annotation>
-					<xs:documentation>Geometric centre R</xs:documentation>
+					<xs:documentation>Major radius of the reference point (from which the alpha and beta angles are defined, marked by a + on the diagram)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -6696,34 +6697,37 @@
 			</xs:element>
 			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>Geometric centre Z</xs:documentation>
+					<xs:documentation>Height of the reference point (from which the alpha and beta angles are defined, marked by a + on the diagram)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="length">
+			<xs:element name="length_alpha">
 				<xs:annotation>
-					<xs:documentation>Length</xs:documentation>
+					<xs:documentation>Length of the parallelogram side inclined with angle alpha with respect to the major radius axis</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="thickness">
+			<xs:element name="length_beta">
 				<xs:annotation>
-					<xs:documentation>Thickness</xs:documentation>
+					<xs:documentation>Length of the parallelogram side inclined with angle beta with respect to the height axis</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -6732,10 +6736,11 @@
 			</xs:element>
 			<xs:element name="alpha">
 				<xs:annotation>
-					<xs:documentation>Inclination of first angle TBD</xs:documentation>
+					<xs:documentation>Inclination of first angle measured counter-clockwise from horizontal outwardly directed radial vector (grad R).</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m</units>
+						<units>rad</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -6744,10 +6749,11 @@
 			</xs:element>
 			<xs:element name="beta">
 				<xs:annotation>
-					<xs:documentation>Inclination of second angle TBD</xs:documentation>
+					<xs:documentation>Inclination of second angle measured counter-clockwise from vertically upwards directed vector (grad Z). If both alpha and beta are zero (rectangle) then the simpler rectangular elements description should be used.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m</units>
+						<units>rad</units>
+						<url>utilities/parallelogram.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -6885,7 +6891,7 @@
 			</xs:element>
 			<xs:element name="oblique" type="oblique_static">
 				<xs:annotation>
-					<xs:documentation>Trapezoidal description of the element</xs:documentation>
+					<xs:documentation>Parallelogram description of the element</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="arcs_of_circle" type="arcs_of_circle_static">
