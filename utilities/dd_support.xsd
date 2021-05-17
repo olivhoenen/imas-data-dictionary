@@ -4700,6 +4700,20 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="geometry_2d">
+				<xs:annotation>
+					<xs:documentation>2D geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. Typically, the first dimension represents the object coordinates, while the second dimension would represent the values of the various degrees of freedom of the finite element attached to the object.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="generic_grid_dynamic_space_dimension">
