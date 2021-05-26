@@ -2848,6 +2848,24 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="j_total" type="generic_grid_vector_components" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Total current density, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>A.m^-2</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="j_parallel" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Current due to parallel electric and thermo-electric conductivity and potential and electron temperature gradients along the field line, differences away from ambipolar flow in the parallel direction between ions and electrons (this is not the parallel component of j_total)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>A.m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="j_anomalous" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Anomalous current density, given on various grid subsets</xs:documentation>
@@ -2993,7 +3011,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.22.0</lifecycle_version>
-				<lifecycle_last_change>3.25.0</lifecycle_last_change>
+				<lifecycle_last_change>3.33.0</lifecycle_last_change>
 				<specific_validation_rules>yes</specific_validation_rules>
 			</xs:appinfo>
 		</xs:annotation>

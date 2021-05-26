@@ -103,6 +103,60 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="divertor_target_tile">
+		<xs:annotation>
+			<xs:documentation>Divertor tile description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the tile</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Alphanumeric identifier of tile</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="surface_outline" type="rzphi1d_static">
+				<xs:annotation>
+					<xs:documentation>Outline of the tile surface facing the plasma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="surface_area">
+				<xs:annotation>
+					<xs:documentation>Area of the tile surface facing the plasma</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_incident" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Total current incident on this tile</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="divertor_target">
 		<xs:annotation>
 			<xs:documentation>Divertor target description</xs:documentation>
@@ -312,6 +366,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="tile" type="divertor_target_tile" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>Set of divertor tiles belonging to this target</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="divertor">
@@ -445,7 +507,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.31.0</lifecycle_version>
-				<lifecycle_last_change>3.31.1</lifecycle_last_change>
+				<lifecycle_last_change>3.33.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
