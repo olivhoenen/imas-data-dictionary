@@ -79,6 +79,7 @@
         <p>Lifecycle status: <xsl:value-of select="@lifecycle_status"/> since version <xsl:value-of select="@lifecycle_version"/></p> <!-- Write the IDS Lifecycle information -->
         <p>Last change occured on version: <xsl:value-of select="@lifecycle_last_change"/></p> <!-- Write the IDS Lifecycle information -->
         <p><a href="html_documentation.html">Back to top IDS list</a></p>
+   		<button onclick="window.location.href='{@name}_flat.html'">Flat display</button>
 		<button onclick="ToggleErrorDisplay('body>table')">Show/Hide errorbar nodes</button>  By convention, only the upper error node should be filled in case of symmetrical error bars. The upper and lower errors are absolute and defined positive, the effective values of the data will be within the interval [data-data_error_lower, data+data_error_upper]. Thus whatever the sign of data, data_error_lower relates to the lower bound and data_error_upper to the upper bound of the error bar interval.
         <br/>   
         <br/>          
@@ -94,7 +95,38 @@
 </body>
 </html>
 </xsl:result-document>
-        </xsl:for-each>
+<xsl:result-document href="html_documentation/{@name}_flat.html">
+<html>
+      <head>
+       <title>Data Dictionary HTML documentation</title>
+        <style type="text/css">
+			p {color:black;font-size:12pt;font-weight:normal;}
+			p.name {color:red;font-size:18pt;font-weight:bold;}
+			p.welcome {color:#3333aa; font-size:20pt; font-weight:bold; text-align:center;}
+			span.head {color:#3333aa; font-size:12pt; font-weight:bold; }
+       </style>
+       	<link href="css/jquery.treetable.css" rel="stylesheet" type="text/css"/>
+		<link href="css/maketree.css" rel="stylesheet"/>
+      </head>
+      <body>
+        <p class="welcome">ITER Physics Data Model Documentation for <xsl:value-of select="@name"/></p>
+        <p><xsl:value-of select="@documentation"/><xsl:if test="@url"> Click here for <a href="{@url}">further documentation</a>.</xsl:if></p> <!-- Write the IDS description -->
+        <p>Notation of array of structure indices: itime indicates a time index; i1, i2, i3, ... indicate other indices with their depth in the IDS. This notation clarifies the path of a given node, but should not be used to compare indices of different nodes (they may have different meanings).</p>
+        <p>Lifecycle status: <xsl:value-of select="@lifecycle_status"/> since version <xsl:value-of select="@lifecycle_version"/></p> <!-- Write the IDS Lifecycle information -->
+        <p>Last change occured on version: <xsl:value-of select="@lifecycle_last_change"/></p> <!-- Write the IDS Lifecycle information -->
+        <p><a href="html_documentation.html">Back to top IDS list</a></p>
+   		<button onclick="window.location.href='{@name}.html'">Expandable display</button> You are now in flat display mode, note that errorbars are not visible in this mode
+        <br/>   
+        <br/>          
+        <table border="1">
+        <thead style="color:#ff0000"><td>Full path name</td><td>Description</td><td>Data Type</td><td>Coordinates</td></thead>
+        <xsl:apply-templates select="field"/>
+        </table>
+        <p><a href="html_documentation.html">Back to top IDS list</a></p>
+</body>
+</html>
+</xsl:result-document>
+</xsl:for-each>
 
 <!--Fourth: write the physics constant page-->
 <xsl:result-document href="html_documentation/dd_constants.html">
