@@ -282,9 +282,9 @@
 						<type>dynamic</type>
 						<units>W</units>
 						<coordinate1>../../time</coordinate1>
-						<change_nbc_version>3.31.0</change_nbc_version> 
-						<change_nbc_description>leaf_renamed</change_nbc_description> 
-						<change_nbc_previous_name>power_from_plasma</change_nbc_previous_name> 
+						<change_nbc_version>3.31.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_from_plasma</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -723,12 +723,17 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.31.0</lifecycle_last_change>
+				<lifecycle_last_change>3.33.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="temperature_reference" type="temperature_reference">
+					<xs:annotation>
+						<xs:documentation>Reference temperature for which the machine description data is given in this IDS</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="first_wall_surface_area">
 					<xs:annotation>
 						<xs:documentation>First wall surface area</xs:documentation>
