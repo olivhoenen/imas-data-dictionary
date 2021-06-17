@@ -7425,6 +7425,18 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:group>
+	<xs:element name="latency">
+		<xs:annotation>
+			<xs:documentation>For diagnostic IDSs : upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network. For actuator IDSs : upper bound of the delay between input command received from the RT network and actuator starting to react. Applies globally to the system described by this IDS unless specific latencies (e.g. channel-specific or antenna-specific) are provided at a deeper level in the IDS structure.</xs:documentation>
+			<xs:appinfo>
+				<type>static</type>
+				<units>s</units>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:group ref="FLT_0D"/>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="time" type="flt_1d_type">
 		<xs:annotation>
 			<xs:documentation>Generic time</xs:documentation>
