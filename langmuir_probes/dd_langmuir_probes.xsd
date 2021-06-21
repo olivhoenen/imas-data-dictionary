@@ -114,6 +114,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="v_floating_sigma" type="langmuir_probes_plunge_physical_quantity_2">
+				<xs:annotation>
+					<xs:documentation>Standard deviation of the floating potential</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="t_e" type="langmuir_probes_plunge_physical_quantity_2">
 				<xs:annotation>
 					<xs:documentation>Electron temperature</xs:documentation>
@@ -141,6 +149,30 @@
 			<xs:element name="ion_saturation_current" type="langmuir_probes_plunge_physical_quantity_2">
 				<xs:annotation>
 					<xs:documentation>Ion saturation current measured by the probe</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion_saturation_current_skew" type="langmuir_probes_plunge_physical_quantity_2">
+				<xs:annotation>
+					<xs:documentation>Skew of the ion saturation current measured by the probe</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion_saturation_current_curtosis" type="langmuir_probes_plunge_physical_quantity_2">
+				<xs:annotation>
+					<xs:documentation>Pearson curtosis of the ion saturation current measured by the probe</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion_saturation_current_sigma" type="langmuir_probes_plunge_physical_quantity_2">
+				<xs:annotation>
+					<xs:documentation>Standard deviation of the ion saturation current measured by the probe</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
 					</xs:appinfo>
@@ -396,6 +428,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="v_floating_sigma" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Standard deviation of the floating potential</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="v_plasma" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Plasma potential</xs:documentation>
@@ -442,6 +482,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="j_i_parallel_sigma" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Standard deviation of ion parallel current density at the probe position</xs:documentation>
+					<xs:appinfo>
+						<units>A.m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="ion_saturation_current" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Ion saturation current measured by the probe</xs:documentation>
@@ -450,6 +498,30 @@
 						<change_nbc_version>3.30.0</change_nbc_version>
 						<change_nbc_description>leaf_renamed</change_nbc_description>
 						<change_nbc_previous_name>saturation_current_ion</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion_saturation_current_skew" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Skew of the ion saturation current measured by the probe</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion_saturation_current_curtosis" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Pearson curtosis of the ion saturation current measured by the probe</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ion_saturation_current_sigma" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Standard deviation of the ion saturation current measured by the probe</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -469,11 +541,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="distance_separatrix" type="physical_quantity_flt_1d_time_1">
+			<xs:element name="distance_separatrix_midplane" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
-					<xs:documentation>Distance of the measurement position to the separatrix (positive means the measurement is outside of the separatrix)</xs:documentation>
+					<xs:documentation>Distance between the measurement position and the separatrix, mapped along flux surfaces to the outboard midplane, in the major radius direction. Positive value means the measurement is outside of the separatrix.</xs:documentation>
 					<xs:appinfo>
 						<units>m</units>
+						<change_nbc_version>3.33.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>distance_separatrix</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -558,9 +633,20 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="distance_separatrix" type="langmuir_probes_plunge_physical_quantity">
+			<xs:element name="distance_separatrix_midplane" type="langmuir_probes_plunge_physical_quantity">
 				<xs:annotation>
-					<xs:documentation>Distance of the measurement position to the separatrix (positive means the measurement is outside of the separatrix)</xs:documentation>
+					<xs:documentation>Distance between the measurement position and the separatrix, mapped along flux surfaces to the outboard midplane, in the major radius direction. Positive value means the measurement is outside of the separatrix.</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>3.33.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>distance_separatrix</change_nbc_previous_name>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="distance_x_point_z" type="langmuir_probes_plunge_physical_quantity">
+				<xs:annotation>
+					<xs:documentation>Distance in the z direction of the measurement position to the closest X-point (Zmeasurement-Zx_point)</xs:documentation>
 					<xs:appinfo>
 						<units>m</units>
 					</xs:appinfo>
@@ -661,6 +747,19 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
+				<xs:element name="equilibrium_id" type="ids_identification">
+					<xs:annotation>
+						<xs:documentation>ID of the IDS equilibrium used to map measurements - we may decide that this is superseeded when the systematic documentation of input provenance is adopted</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="midplane" type="identifier_static">
+					<xs:annotation>
+						<xs:documentation>Choice of midplane definition for the mapping of measurements on an equilibrium</xs:documentation>
+						<xs:appinfo>
+							<doc_identifier>utilities/midplane_identifier.xml</doc_identifier>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="embedded" type="langmuir_probes_embedded" maxOccurs="100">
 					<xs:annotation>
 						<xs:documentation>Set of embedded (in a plasma facing component) probes</xs:documentation>
