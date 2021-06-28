@@ -186,6 +186,7 @@
            <xsl:if test="@Type"> {<xsl:value-of select="@Type"/>}</xsl:if>
           <xsl:if test="@units"> [<xsl:value-of select="@units"/>]</xsl:if>
                     <xsl:if test="@Units"> [<xsl:value-of select="@Units"/>]</xsl:if>
+           <xsl:if test="@introduced_after_version">. Introduced after DD version <xsl:value-of select="@introduced_after_version"/></xsl:if> 
            <xsl:if test="@doc_identifier">. Available options (refer to the children of this identifier structure) :
                 <table border="1">
                       <thead><td>Name</td><td>Index</td><td>Description</td></thead>
