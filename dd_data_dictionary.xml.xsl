@@ -282,7 +282,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							</xsl:for-each>
 						</field>
 						<!-- Then we test if the type is real or complex, if so add *_error nodes to the structure for the errorbars -->
-						<xsl:if test="contains(xs:complexType/xs:group/@ref,'FLT') or contains(xs:complexType/xs:group/@ref,'CPX')">
+						<xsl:if test="(contains(xs:complexType/xs:group/@ref,'FLT') or contains(xs:complexType/xs:group/@ref,'CPX')) and not(contains(@name,'_limit_'))">
 							<field>
 								<!-- _error_upper field -->
 								<xsl:attribute name="name"><xsl:value-of select="concat(@name,'_error_upper')"/></xsl:attribute>
@@ -542,7 +542,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 													</xsl:for-each>
 												</field>
 												<!-- Then we test if the type is real or complex, if so add *_error nodes to the structure for the errorbars -->
-												<xsl:if test="contains(xs:complexType/xs:sequence/xs:group/@ref,'FLT') or contains(xs:complexType/xs:sequence/xs:group/@ref,'CPX')">
+												<xsl:if test="(contains(xs:complexType/xs:sequence/xs:group/@ref,'FLT') or contains(xs:complexType/xs:sequence/xs:group/@ref,'CPX')) and not(contains(@name,'_limit_'))">
 													<field>
 														<!-- _error_upper field -->
 														<xsl:attribute name="name"><xsl:value-of select="'data_error_upper'"/></xsl:attribute>
