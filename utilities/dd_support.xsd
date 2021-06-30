@@ -7340,63 +7340,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="ids_identification">
-		<xs:annotation>
-			<xs:documentation>Identifier of an IDS</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>IDS name</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="occurrence">
-				<xs:annotation>
-					<xs:documentation>IDS occurrence</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="data_entry" type="data_entry">
-				<xs:annotation>
-					<xs:documentation>Data entry to which this IDS belongs</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ids_provenance_node_source">
-		<xs:annotation>
-			<xs:documentation>Provenance information for a given source of the IDS</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="non_imas_data">
-				<xs:annotation>
-					<xs:documentation>In case of a simple import procedure of non-IMAS data, this is the command used to import the source, or the persistent identifier of the data source </xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="ids" type="ids_identification">
-				<xs:annotation>
-					<xs:documentation>Source IDS identification in an IMAS data entry</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="ids_provenance_node">
 		<xs:annotation>
 			<xs:documentation>Provenance information for a given node of the IDS</xs:documentation>
@@ -7413,14 +7356,17 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="source" type="ids_provenance_node_source" maxOccurs="20">
+			<xs:element name="sources">
 				<xs:annotation>
-					<xs:documentation>Set of sources used to import or calculate this node. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the "code" structure at the root of the IDS. The source can be an IDS (fill the ids structure below) or non-IDS data imported directly from an non-IMAS database (fill the non_imas_data string below). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources</xs:documentation>
+					<xs:documentation>List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the "code" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -7504,9 +7450,11 @@
 				</xs:element>
 				<xs:element name="source">
 					<xs:annotation>
-						<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+						<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...). Superseeded by the new provenance structure.</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
+							<lifecycle_status>obsolescent</lifecycle_status>
+							<lifecycle_version>3.33.0</lifecycle_version>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
@@ -7549,14 +7497,17 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="ids_id" type="ids_identification">
+				<xs:element name="identifier">
 					<xs:annotation>
-						<xs:documentation>Identification of this IDS within the IMAS data entry from which it was read from. Filled dynamically by the GET call that has read this IDS</xs:documentation>
+						<xs:documentation>Unique identifier of this IDS via a URI or a persistent identifier. Filled dynamically by the GET call that has read this IDS</xs:documentation>
 						<xs:appinfo>
 							<lifecycle_status>alpha</lifecycle_status>
 							<lifecycle_version>3.33.0</lifecycle_version>
 						</xs:appinfo>
 					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
