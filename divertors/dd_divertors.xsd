@@ -74,35 +74,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="divertor_sol_current">
-		<xs:annotation>
-			<xs:documentation>Divertor poloidal SOL current measurement</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>Name of the measured signal</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="identifier">
-				<xs:annotation>
-					<xs:documentation>Alphanumeric identifier of the measured signal</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="divertor_target_tile">
 		<xs:annotation>
 			<xs:documentation>Divertor tile description</xs:documentation>
@@ -154,6 +125,17 @@
 						<units>A</units>
 					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="shunt_index">
+				<xs:annotation>
+					<xs:documentation>If the tile carries a measurement shunt, index of that shunt (in the magnetics IDS shunt array)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -540,14 +522,6 @@
 				<xs:element name="divertor" type="divertor" maxOccurs="8">
 					<xs:annotation>
 						<xs:documentation>Set of divertors</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="poloidal_sol_current" type="divertor_sol_current" maxOccurs="20">
-					<xs:annotation>
-						<xs:documentation>Set of axisymmetric divertor tiles through which poloidal currents in SOL are measured using shunt resistances. Tiles are modelled as piecewise straight line segments in the poloidal plane.</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
