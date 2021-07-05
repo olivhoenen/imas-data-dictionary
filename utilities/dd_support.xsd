@@ -7301,6 +7301,40 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="ids_identification">
+		<xs:annotation>
+			<xs:documentation>Identifier of an IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>IDS name</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="occurrence">
+				<xs:annotation>
+					<xs:documentation>IDS occurrence</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="data_entry" type="data_entry">
+				<xs:annotation>
+					<xs:documentation>Data entry to which this IDS belongs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="ids_properties">
 		<xs:annotation>
 			<xs:documentation>Interface Data Structure properties. This element identifies the node above as an IDS</xs:documentation>
