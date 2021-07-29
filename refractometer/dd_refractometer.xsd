@@ -63,6 +63,7 @@
 						<type>dynamic</type>
 						<coordinate1>../time</coordinate1>
 						<units>rad</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -78,6 +79,7 @@
 						<coordinate1_same_as>../time_detector</coordinate1_same_as>
 						<coordinate2>../time</coordinate2>
 						<units>V</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -93,6 +95,7 @@
 						<coordinate1_same_as>../time_detector</coordinate1_same_as>
 						<coordinate2>../time</coordinate2>
 						<units>V</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -126,7 +129,8 @@
 						<coordinate2>../time</coordinate2>
 						<type>dynamic</type>
 						<units>s</units>
-					</xs:appinfo>
+						<introduced_after_version>3.32.1</introduced_after_version>
+				</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
@@ -139,6 +143,7 @@
 						<coordinate1>1...N</coordinate1>
 						<type>dynamic</type>
 						<units>s</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -243,7 +248,19 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="latency"/>
+				<xs:element name="latency">
+					<xs:annotation>
+						<xs:documentation>Upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network.</xs:documentation>
+						<xs:appinfo>
+							<type>static</type>
+							<units>s</units>
+							<introduced_after_version>3.32.1</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element ref="code"/>
 				<xs:element ref="time"/>
 			</xs:sequence>

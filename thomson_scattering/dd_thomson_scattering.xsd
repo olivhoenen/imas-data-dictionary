@@ -52,6 +52,7 @@
 					<xs:documentation>Distance between the measurement position and the separatrix, mapped along flux surfaces to the outboard midplane, in the major radius direction. Positive value means the measurement is outside of the separatrix.</xs:documentation>
 					<xs:appinfo>
 						<units>m</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -88,6 +89,9 @@
 				<xs:element name="equilibrium_id" type="ids_identification">
 					<xs:annotation>
 						<xs:documentation>ID of the IDS equilibrium used to map measurements - we may decide that this is superseeded when the systematic documentation of input provenance is adopted</xs:documentation>
+						<xs:appinfo>
+							<introduced_after_version>3.32.1</introduced_after_version>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="midplane" type="identifier_static">
@@ -95,6 +99,7 @@
 						<xs:documentation>Choice of midplane definition for the mapping of measurements on an equilibrium</xs:documentation>
 						<xs:appinfo>
 							<doc_identifier>utilities/midplane_identifier.xml</doc_identifier>
+							<introduced_after_version>3.32.1</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -106,7 +111,19 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="latency"/>
+				<xs:element name="latency">
+					<xs:annotation>
+						<xs:documentation>Upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network.</xs:documentation>
+						<xs:appinfo>
+							<type>static</type>
+							<units>s</units>
+							<introduced_after_version>3.32.1</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element ref="code"/>
 				<xs:element ref="time"/>
 			</xs:sequence>

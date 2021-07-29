@@ -119,6 +119,7 @@
 					<xs:documentation>Standard deviation of the floating potential, corresponding to the fluctuations of the quantity over time</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -159,6 +160,7 @@
 					<xs:documentation>Ion saturation current density</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -167,6 +169,7 @@
 					<xs:documentation>Skew of the ion saturation current density</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -175,6 +178,7 @@
 					<xs:documentation>Pearson kurtosis of the ion saturation current density</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -183,6 +187,7 @@
 					<xs:documentation>Standard deviation of the ion saturation current density, corresponding to the fluctuations of the quantity over time</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -441,6 +446,7 @@
 					<xs:documentation>Standard deviation of the floating potential, corresponding to the fluctuations of the quantity over time</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -495,6 +501,7 @@
 					<xs:documentation>Standard deviation of ion parallel current density at the probe position</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -514,6 +521,7 @@
 					<xs:documentation>Ion saturation current density</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -522,6 +530,7 @@
 					<xs:documentation>Skew of the ion saturation current density</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -530,6 +539,7 @@
 					<xs:documentation>Pearson kurtosis of the ion saturation current density</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -538,6 +548,7 @@
 					<xs:documentation>Standard deviation of the ion saturation current density, corresponding to the fluctuations of the quantity over time</xs:documentation>
 					<xs:appinfo>
 						<units>A.m^-2</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -565,6 +576,7 @@
 						<change_nbc_version>3.33.0</change_nbc_version>
 						<change_nbc_description>structure_renamed</change_nbc_description>
 						<change_nbc_previous_name>distance_separatrix</change_nbc_previous_name>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -656,6 +668,7 @@
 						<change_nbc_version>3.33.0</change_nbc_version>
 						<change_nbc_description>structure_renamed</change_nbc_description>
 						<change_nbc_previous_name>distance_separatrix</change_nbc_previous_name>
+						<introduced_after_version>3.32.1</introduced_after_version>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -665,6 +678,7 @@
 					<xs:documentation>Distance in the z direction of the measurement position to the closest X-point (Zmeasurement-Zx_point)</xs:documentation>
 					<xs:appinfo>
 						<units>m</units>
+						<introduced_after_version>3.32.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -766,6 +780,9 @@
 				<xs:element name="equilibrium_id" type="ids_identification">
 					<xs:annotation>
 						<xs:documentation>ID of the IDS equilibrium used to map measurements - we may decide that this is superseeded when the systematic documentation of input provenance is adopted</xs:documentation>
+						<xs:appinfo>
+							<introduced_after_version>3.32.1</introduced_after_version>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="midplane" type="identifier_static">
@@ -773,6 +790,7 @@
 						<xs:documentation>Choice of midplane definition for the mapping of measurements on an equilibrium (use the lowest index number if more than one value is relevant)</xs:documentation>
 						<xs:appinfo>
 							<doc_identifier>utilities/midplane_identifier.xml</doc_identifier>
+							<introduced_after_version>3.32.1</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -792,7 +810,19 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="latency"/>
+				<xs:element name="latency">
+					<xs:annotation>
+						<xs:documentation>Upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network.</xs:documentation>
+						<xs:appinfo>
+							<type>static</type>
+							<units>s</units>
+							<introduced_after_version>3.32.1</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element ref="code"/>
 				<xs:element ref="time"/>
 			</xs:sequence>
