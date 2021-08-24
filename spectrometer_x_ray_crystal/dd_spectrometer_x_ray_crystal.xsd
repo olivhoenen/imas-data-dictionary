@@ -45,6 +45,17 @@
 			<xs:documentation>Characteristics of the camera used</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>ID of the camera</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="pixel_dimensions">
 				<xs:annotation>
 					<xs:documentation>Pixel dimension in each direction (horizontal, vertical)</xs:documentation>
@@ -100,6 +111,17 @@
 			<xs:documentation>Characteristics of the crystal used</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>ID of the crystal</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="geometry_type" type="identifier_static">
 				<xs:annotation>
 					<xs:documentation>Geometry of the crystal</xs:documentation>
@@ -227,6 +249,119 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="spectrometer_x_ray_crystal_reflector">
+		<xs:annotation>
+			<xs:documentation>Characteristics of the reflector used</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>ID of the reflector</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometry_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Geometry of the reflector</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>spectrometer_x_ray_crystal/spectrometer_x_ray_reflector_geometry_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="width">
+				<xs:annotation>
+					<xs:documentation>Horizontal width of the reflector</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="height">
+				<xs:annotation>
+					<xs:documentation>Height of the reflector (vertical direction)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="curvature_horizontal">
+				<xs:annotation>
+					<xs:documentation>Radius of curvature in the horizontal direction, to be filled only for geometry_type/index = 2, 3 or 4</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="angular_span_horizontal">
+				<xs:annotation>
+					<xs:documentation>Angular span in the horizontal direction, to be filled only for geometry_type/index = 2, 3 or 4</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="curvature_vertical">
+				<xs:annotation>
+					<xs:documentation>Radius of curvature in the vertical direction, to be filled only for geometry_type/index = 4</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="angular_span_vertical">
+				<xs:annotation>
+					<xs:documentation>Angular span in the vertical direction, to be filled only for geometry_type/index = 4</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="rz1d_static">
+				<xs:annotation>
+					<xs:documentation>Irregular outline of the reflector, to be filled only for geometry_type/index = 5. Do NOT repeat the first point.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="summit" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the middle point on the crystal surface</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x3_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the crystal plane and oriented towards the plasma.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectrometer_x_ray_crystal_frame">
 		<xs:annotation>
 			<xs:documentation>Frame of a camera</xs:documentation>
@@ -258,135 +393,164 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="spectrometer_x_ray_crystal_channel">
+		<xs:annotation>
+			<xs:documentation>X-crystal spectrometer channel</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="integration_time">
+				<xs:annotation>
+					<xs:documentation>Integration time of the measurement</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="energy_bound_lower">
+				<xs:annotation>
+					<xs:documentation>Lower energy bound for the photon detection, for each pixel (horizontal, vertical)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>eV</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../wavelength_frames</coordinate1_same_as>
+						<coordinate2>../z_frames</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="energy_bound_upper">
+				<xs:annotation>
+					<xs:documentation>Upper energy bound for the photon detection, for each pixel (horizontal, vertical)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>eV</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../wavelength_frames</coordinate1_same_as>
+						<coordinate2>../z_frames</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="aperture" type="detector_aperture">
+				<xs:annotation>
+					<xs:documentation>Collimating aperture</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reflector" type="spectrometer_x_ray_crystal_reflector" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Set of reflectors (optional) reflecting the light coming from the plasma towards the crystal. If empty, means that the plasma light directly arrives on the crystal.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="crystal" type="spectrometer_x_ray_crystal_crystal">
+				<xs:annotation>
+					<xs:documentation>Characteristics of the crystal used</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="filter_window" type="spectrometer_x_ray_crystal_filter">
+				<xs:annotation>
+					<xs:documentation>Characteristics of the filter window</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="camera" type="spectrometer_x_ray_crystal_camera">
+				<xs:annotation>
+					<xs:documentation>Characteristics of the camera used</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_frames">
+				<xs:annotation>
+					<xs:documentation>Height of the observed zone at the focal plane in the plasma, corresponding to the vertical dimension of the frame</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="wavelength_frames">
+				<xs:annotation>
+					<xs:documentation>Wavelength of incoming photons on each pixel of the frames, mainly varying accross the horizontal dimension of the frame. However a 2D map of the wavelength is given since it is not constant vertically due to the elliptical curvature of the photon iso-surfaces</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../z_frames</coordinate2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="frame" type="spectrometer_x_ray_crystal_frame" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of frames</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_i_proxy" type="signal_flt_2d_validity">
+				<xs:annotation>
+					<xs:documentation>Ion temperature (proxy estimated directly from the camera, without tomographic inversion)</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+						<coordinate1>../z_frames</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e_proxy" type="signal_flt_2d_validity">
+				<xs:annotation>
+					<xs:documentation>Electron temperature (proxy estimated directly from the camera, without tomographic inversion)</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+						<coordinate1>../z_frames</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_tor_proxy" type="signal_flt_2d_validity">
+				<xs:annotation>
+					<xs:documentation>Toroidal velocity (proxy estimated directly from the camera, without tomographic inversion)</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<coordinate1>../z_frames</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="spectrometer_x_ray_crystal">
 		<xs:annotation>
 			<xs:documentation>X-crystal spectrometer diagnostic</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.26.0</lifecycle_version>
-				<lifecycle_last_change>3.33.0</lifecycle_last_change>
+				<lifecycle_last_change>3.33.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="integration_time">
+				<xs:element name="channel" type="spectrometer_x_ray_crystal_channel" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>Integration time of the measurement</xs:documentation>
+						<xs:documentation>Measurement channel, composed of a camera, a crystal, and (optional) a set of reflectors. The light coming from the plasma passes through the (optional) set of reflectors, then the crystal and arrives at the camera</xs:documentation>
 						<xs:appinfo>
-							<type>static</type>
-							<units>s</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="energy_bound_lower">
-					<xs:annotation>
-						<xs:documentation>Lower energy bound for the photon detection, for each pixel (horizontal, vertical)</xs:documentation>
-						<xs:appinfo>
-							<type>static</type>
-							<units>eV</units>
-							<coordinate1>1...N</coordinate1>
-							<coordinate1_same_as>../wavelength_frames</coordinate1_same_as>
-							<coordinate2>../z_frames</coordinate2>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="energy_bound_upper">
-					<xs:annotation>
-						<xs:documentation>Upper energy bound for the photon detection, for each pixel (horizontal, vertical)</xs:documentation>
-						<xs:appinfo>
-							<type>static</type>
-							<units>eV</units>
-							<coordinate1>1...N</coordinate1>
-							<coordinate1_same_as>../wavelength_frames</coordinate1_same_as>
-							<coordinate2>../z_frames</coordinate2>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="crystal" type="spectrometer_x_ray_crystal_crystal">
-					<xs:annotation>
-						<xs:documentation>Characteristics of the crystal used</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="filter_window" type="spectrometer_x_ray_crystal_filter">
-					<xs:annotation>
-						<xs:documentation>Characteristics of the filter window</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="camera" type="spectrometer_x_ray_crystal_camera">
-					<xs:annotation>
-						<xs:documentation>Characteristics of the camera used</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="z_frames">
-					<xs:annotation>
-						<xs:documentation>Height of the observed zone at the focal plane in the plasma, corresponding to the vertical dimension of the frame</xs:documentation>
-						<xs:appinfo>
-							<type>static</type>
-							<coordinate1>1...N</coordinate1>
-							<units>m</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_1D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="wavelength_frames">
-					<xs:annotation>
-						<xs:documentation>Wavelength of incoming photons on each pixel of the frames, mainly varying accross the horizontal dimension of the frame. However a 2D map of the wavelength is given since it is not constant vertically due to the elliptical curvature of the photon iso-surfaces</xs:documentation>
-						<xs:appinfo>
-							<type>static</type>
-							<coordinate1>1...N</coordinate1>
-							<coordinate2>../z_frames</coordinate2>
-							<units>m</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_2D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="frame" type="spectrometer_x_ray_crystal_frame" maxOccurs="unbounded">
-					<xs:annotation>
-						<xs:documentation>Set of frames</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>time</coordinate1>
-							<type>dynamic</type>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="t_i_proxy" type="signal_flt_2d_validity">
-					<xs:annotation>
-						<xs:documentation>Ion temperature (proxy estimated directly from the camera, without tomographic inversion)</xs:documentation>
-						<xs:appinfo>
-							<units>eV</units>
-							<coordinate1>../z_frames</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="t_e_proxy" type="signal_flt_2d_validity">
-					<xs:annotation>
-						<xs:documentation>Electron temperature (proxy estimated directly from the camera, without tomographic inversion)</xs:documentation>
-						<xs:appinfo>
-							<units>eV</units>
-							<coordinate1>../z_frames</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="velocity_tor_proxy" type="signal_flt_2d_validity">
-					<xs:annotation>
-						<xs:documentation>Toroidal velocity (proxy estimated directly from the camera, without tomographic inversion)</xs:documentation>
-						<xs:appinfo>
-							<units>m.s^-1</units>
-							<coordinate1>../z_frames</coordinate1>
+							<coordinate1>1...N
+						</coordinate1>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
