@@ -2,7 +2,7 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="sdn_topic">
+	<xs:complexType name="pcs_topic">
 		<xs:annotation>
 			<xs:documentation>List of the topics</xs:documentation>
 		</xs:annotation>
@@ -18,9 +18,9 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="signal" type="sdn_allocatable_signals" maxOccurs="100">
+			<xs:element name="signal" type="pcs_allocatable_signals" maxOccurs="100">
 				<xs:annotation>
-					<xs:documentation>List of signals which can be allocated to the SDN</xs:documentation>
+					<xs:documentation>List of signals that are allocated to the PCS interface</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -28,7 +28,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="sdn_allocatable_signals">
+	<xs:complexType name="pcs_allocatable_signals">
 		<xs:annotation>
 			<xs:documentation>List of signals which can be allocated to the SDN</xs:documentation>
 		</xs:annotation>
@@ -81,21 +81,21 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="sdn">
+	<xs:element name="pcs">
 		<xs:annotation>
-			<xs:documentation>Description of the Synchronous Data Network parameters and the signals on it</xs:documentation>
+			<xs:documentation>Description of the interface to the Plasma Control System (PCS)</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
-				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.8.0</lifecycle_last_change>
+				<lifecycle_version>3.33.1</lifecycle_version>
+				<lifecycle_last_change>3.33.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="topic" type="sdn_topic" maxOccurs="20">
+				<xs:element name="topic" type="pcs_topic" maxOccurs="20">
 					<xs:annotation>
-						<xs:documentation>List of topics. SDN signals are grouped by topic</xs:documentation>
+						<xs:documentation>List of topics. Signals are grouped by topic</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
