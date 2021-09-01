@@ -108,12 +108,12 @@
 	</xs:complexType>
 	<xs:complexType name="spectrometer_x_ray_crystal_crystal">
 		<xs:annotation>
-			<xs:documentation>Characteristics of the crystal used</xs:documentation>
+			<xs:documentation>Characteristics of the crystal used, extension of the generic description of a small plane or curved object (crystal, reflector, ...)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="identifier">
 				<xs:annotation>
-					<xs:documentation>ID of the crystal</xs:documentation>
+					<xs:documentation>ID of the object</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -124,38 +124,28 @@
 			</xs:element>
 			<xs:element name="geometry_type" type="identifier_static">
 				<xs:annotation>
-					<xs:documentation>Geometry of the crystal</xs:documentation>
+					<xs:documentation>Geometry of the object</xs:documentation>
 					<xs:appinfo>
-						<doc_identifier>spectrometer_x_ray_crystal/spectrometer_x_ray_crystal_geometry_identifier.xml</doc_identifier>
+						<doc_identifier>utilities/curved_object_geometry_identifier.xml</doc_identifier>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="material">
+			<xs:element name="material" type="identifier_static">
 				<xs:annotation>
-					<xs:documentation>Material of the crystal</xs:documentation>
+					<xs:documentation>Material of the object</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
+						<doc_identifier>utilities/materials_identifier.xml</doc_identifier>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="width">
+			<xs:element name="centre" type="rzphi0d_static">
 				<xs:annotation>
-					<xs:documentation>Horizontal width of the crystal</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
+					<xs:documentation>Coordinates of the origin of the local coordinate system (X1,X2,X3) describing the object. This origin is located within the object area and should be the middle point of the object surface. If geometry_type=2, it's the centre of the circular object. If geometry_type=3, it's the centre of the rectangular object. </xs:documentation>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="height">
+			<xs:element name="radius">
 				<xs:annotation>
-					<xs:documentation>Height of the crystal (vertical direction)</xs:documentation>
+					<xs:documentation>Radius of the circle, used only if geometry_type/index = 2</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -165,63 +155,118 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="curvature_horizontal">
+			<xs:element name="x1_unit_vector" type="xyz0d_static">
 				<xs:annotation>
-					<xs:documentation>Radius of curvature in the horizontal direction, to be filled only for shape/index = 2, 3 or 4</xs:documentation>
+					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
+						<url>utilities/detector_aperture_coordinates.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="angular_span_horizontal">
+			<xs:element name="x2_unit_vector" type="xyz0d_static">
 				<xs:annotation>
-					<xs:documentation>Angular span in the horizontal direction, to be filled only for geometry_type/index = 2, 3 or 4</xs:documentation>
+					<xs:documentation>Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.</xs:documentation>
 					<xs:appinfo>
-						<type>static</type>
-						<units>rad</units>
+						<url>utilities/detector_aperture_coordinates.svg</url>
 					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="curvature_vertical">
-				<xs:annotation>
-					<xs:documentation>Radius of curvature in the vertical direction, to be filled only for geometry_type/index = 4</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="angular_span_vertical">
-				<xs:annotation>
-					<xs:documentation>Angular span in the vertical direction, to be filled only for geometry_type/index = 4</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="summit" type="rzphi0d_static">
-				<xs:annotation>
-					<xs:documentation>Position of the middle point on the crystal surface</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="x3_unit_vector" type="xyz0d_static">
 				<xs:annotation>
-					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the crystal plane and oriented towards the plasma.</xs:documentation>
+					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the object surface and oriented towards the plasma.</xs:documentation>
+					<xs:appinfo>
+						<url>utilities/detector_aperture_coordinates.svg</url>
+					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="x1_width">
+				<xs:annotation>
+					<xs:documentation>Full width of the object in the X1 direction, used only if geometry_type/index = 3</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x2_width">
+				<xs:annotation>
+					<xs:documentation>Full width of the object in the X2 direction, used only if geometry_type/index = 3 and 4</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="x1x21d_static">
+				<xs:annotation>
+					<xs:documentation>Irregular outline of the object in the (X1, X2) coordinate system, used only if geometry_type/index=1. Do NOT repeat the first point.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x1_curvature">
+				<xs:annotation>
+					<xs:documentation>Radius of curvature in the X1 direction, to be filled only for geometry_type/index = 4, 5 or 6</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x1_angular_span">
+				<xs:annotation>
+					<xs:documentation>Angular span in the X1 direction, to be filled only for geometry_type/index = 4, 5 or 6</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x2_curvature">
+				<xs:annotation>
+					<xs:documentation>Radius of curvature in the X2 direction, to be filled only for geometry_type/index = 4 or 6</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x2_angular_span">
+				<xs:annotation>
+					<xs:documentation>Angular span in the X2 direction, to be filled only for geometry_type/index = 5 or 6</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="surface">
+				<xs:annotation>
+					<xs:documentation>Surface of the object, derived from the above geometric data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="wavelength_bragg">
 				<xs:annotation>
@@ -246,119 +291,6 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="spectrometer_x_ray_crystal_reflector">
-		<xs:annotation>
-			<xs:documentation>Characteristics of the reflector used</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="identifier">
-				<xs:annotation>
-					<xs:documentation>ID of the reflector</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="geometry_type" type="identifier_static">
-				<xs:annotation>
-					<xs:documentation>Geometry of the reflector</xs:documentation>
-					<xs:appinfo>
-						<doc_identifier>spectrometer_x_ray_crystal/spectrometer_x_ray_reflector_geometry_identifier.xml</doc_identifier>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="width">
-				<xs:annotation>
-					<xs:documentation>Horizontal width of the reflector</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="height">
-				<xs:annotation>
-					<xs:documentation>Height of the reflector (vertical direction)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="curvature_horizontal">
-				<xs:annotation>
-					<xs:documentation>Radius of curvature in the horizontal direction, to be filled only for geometry_type/index = 2, 3 or 4</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="angular_span_horizontal">
-				<xs:annotation>
-					<xs:documentation>Angular span in the horizontal direction, to be filled only for geometry_type/index = 2, 3 or 4</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="curvature_vertical">
-				<xs:annotation>
-					<xs:documentation>Radius of curvature in the vertical direction, to be filled only for geometry_type/index = 4</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="angular_span_vertical">
-				<xs:annotation>
-					<xs:documentation>Angular span in the vertical direction, to be filled only for geometry_type/index = 4</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="outline" type="rz1d_static">
-				<xs:annotation>
-					<xs:documentation>Irregular outline of the reflector, to be filled only for geometry_type/index = 5. Do NOT repeat the first point.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="summit" type="rzphi0d_static">
-				<xs:annotation>
-					<xs:documentation>Position of the middle point on the crystal surface</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="x3_unit_vector" type="xyz0d_static">
-				<xs:annotation>
-					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the crystal plane and oriented towards the plasma.</xs:documentation>
-				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -445,7 +377,7 @@
 					<xs:documentation>Collimating aperture</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="reflector" type="spectrometer_x_ray_crystal_reflector" maxOccurs="10">
+			<xs:element name="reflector" type="curved_object" maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation>Set of reflectors (optional) reflecting the light coming from the plasma towards the crystal. If empty, means that the plasma light directly arrives on the crystal.</xs:documentation>
 					<xs:appinfo>
