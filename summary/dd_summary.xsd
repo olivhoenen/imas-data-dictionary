@@ -2747,6 +2747,10 @@
 	<xs:complexType name="summary_neutron_reaction">
 		<xs:annotation>
 			<xs:documentation>Neutron fluxes per reaction</xs:documentation>
+			<xs:appinfo>
+				<lifecycle_status>obsolescent</lifecycle_status>
+				<lifecycle_version>3.34.0</lifecycle_version>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="total" type="summary_dynamic_flt_1d_root">
@@ -2783,9 +2787,52 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_neutron_rates_reaction">
+		<xs:annotation>
+			<xs:documentation>Neutron rates per reaction</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="total" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Total neutron rate coming from this reaction</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="thermal" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Neutron rate coming from thermal plasma</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam_thermal" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Neutron rate coming from NBI beam - plasma reactions</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam_beam" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Neutron rate coming from NBI beam self reactions</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_neutron">
 		<xs:annotation>
 			<xs:documentation>Description of neutron fluxes</xs:documentation>
+			<xs:appinfo>
+				<lifecycle_status>obsolescent</lifecycle_status>
+				<lifecycle_version>3.34.0</lifecycle_version>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="total" type="summary_dynamic_flt_1d_root">
@@ -2830,6 +2877,53 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_neutron_rates">
+		<xs:annotation>
+			<xs:documentation>Description of neutron rates</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="total" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Total neutron rate from all reactions</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="thermal" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Neutron rate from all plasma thermal reactions</xs:documentation>
+					<xs:appinfo>
+						<units>Hz</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dd" type="summary_neutron_rates_reaction">
+				<xs:annotation>
+					<xs:documentation>Neutron rates from DD reactions</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dt" type="summary_neutron_rates_reaction">
+				<xs:annotation>
+					<xs:documentation>Neutron rates from DT reactions</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tt" type="summary_neutron_rates_reaction">
+				<xs:annotation>
+					<xs:documentation>Neutron rates from TT reactions</xs:documentation>
+					<xs:appinfo>
+						<catalogue_name>suffix</catalogue_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_fusion">
 		<xs:annotation>
 			<xs:documentation>Fusion reactions</xs:documentation>
@@ -2857,11 +2951,26 @@
 			<xs:element name="neutron_fluxes" type="summary_neutron">
 				<xs:annotation>
 					<xs:documentation>Neutron fluxes from various reactions</xs:documentation>
+					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.34.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="neutron_rates" type="summary_neutron_rates">
+				<xs:annotation>
+					<xs:documentation>Neutron rates from various reactions</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>3.34.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>neutron_fluxes</change_nbc_previous_name>
+						<introduced_after_version>3.33.0</introduced_after_version>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="neutron_power_total" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>Total neutron power (from all reactions). Sum of the flux of each neutron source type (DT, TT, DD for thermal, beam-plasma, beam-beam) times the averaged (born) energy of neutron for each type of reaction</xs:documentation>
+					<xs:documentation>Total neutron power (from all reactions). Sum over each type of reaction (DD, DT, TT for thermal, beam-plasma, beam-beam, etc.) of the neutron production rate times the average neutron birth energy</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 					</xs:appinfo>
