@@ -4665,7 +4665,7 @@
 			</xs:element>
 			<xs:element name="geometry">
 				<xs:annotation>
-					<xs:documentation>Geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. </xs:documentation>
+					<xs:documentation>Geometry data associated with the object, its detailed content is defined by ../../geometry_content. Its dimension depends on the type of object, geometry and coordinate considered. </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>mixed</units>
@@ -4716,6 +4716,14 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometry_content" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Content of the ../object/geometry node for this dimension</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/ggd_geometry_content_identifier.xml</doc_identifier>
+					</xs:appinfo>					
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
