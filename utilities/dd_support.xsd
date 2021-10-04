@@ -1378,6 +1378,68 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="code_constant">
+		<xs:annotation>
+			<xs:documentation>Description of code-specific parameters without dynamic output_flag parameter</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of software used</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="commit">
+				<xs:annotation>
+					<xs:documentation>Unique commit reference of software</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="version">
+				<xs:annotation>
+					<xs:documentation>Unique version (tag) of software</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="repository">
+				<xs:annotation>
+					<xs:documentation>URL of software repository</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parameters">
+				<xs:annotation>
+					<xs:documentation>List of the code specific parameters in XML format</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="plasma_composition">
 		<xs:annotation>
 			<xs:documentation>Generic declaration of Plasma Composition for a simulation</xs:documentation>
@@ -7466,6 +7528,52 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="ids_provenance_node">
+		<xs:annotation>
+			<xs:documentation>Provenance information for a given node of the IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="path">
+				<xs:annotation>
+					<xs:documentation>Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sources">
+				<xs:annotation>
+					<xs:documentation>List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the "code" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ids_provenance">
+		<xs:annotation>
+			<xs:documentation>Provenance information about the IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="node" type="ids_provenance_node" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child "path" node empty</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ids_identification">
 		<xs:annotation>
 			<xs:documentation>Identifier of an IDS</xs:documentation>
@@ -7530,9 +7638,11 @@
 				</xs:element>
 				<xs:element name="source">
 					<xs:annotation>
-						<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)</xs:documentation>
+						<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...). Superseeded by the new provenance structure.</xs:documentation>
 						<xs:appinfo>
 							<type>constant</type>
+							<lifecycle_status>obsolescent</lifecycle_status>
+							<lifecycle_version>3.34.0</lifecycle_version>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
@@ -7564,6 +7674,15 @@
 				<xs:element name="version_put" type="version_dd_al">
 					<xs:annotation>
 						<xs:documentation>Version of the access layer package used to PUT this IDS</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="provenance" type="ids_provenance">
+					<xs:annotation>
+						<xs:documentation>Provenance information about this IDS</xs:documentation>
+						<xs:appinfo>
+							<lifecycle_status>alpha</lifecycle_status>
+							<lifecycle_version>3.33.0</lifecycle_version>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
