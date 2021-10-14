@@ -6471,7 +6471,7 @@
 		<xs:sequence>
 			<xs:element name="geometry_type">
 				<xs:annotation>
-					<xs:documentation>Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular', 3:'rectangle'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.  In case of 'rectangle', the surface is a rectangle defined by its centre, widths in the X1 and X2 directions, and normal vector oriented towards the plasma X3.</xs:documentation>
+					<xs:documentation>Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular', 3:'rectangle'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. Note that there is some flexibility here and the data provider should choose the most convenient coordinate system for the object, respecting the definitions of (X1,X2,X3) indicated below. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.  In case of 'rectangle', the surface is a rectangle defined by its centre, widths in the X1 and X2 directions, and normal vector oriented towards the plasma X3.</xs:documentation>
 					<xs:appinfo>
 						<Type>static</Type>
 					</xs:appinfo>
@@ -6499,7 +6499,7 @@
 			</xs:element>
 			<xs:element name="x1_unit_vector" type="xyz0d_static">
 				<xs:annotation>
-					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
+					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is more horizontal than X2 (has a smaller abs(Z) component) and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
 					<xs:appinfo>
 						<url>utilities/detector_aperture_coordinates.svg</url>
 					</xs:appinfo>
@@ -6564,6 +6564,154 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="curved_object">
+		<xs:annotation>
+			<xs:documentation>Generic description of a small plane or curved object (crystal, reflector, ...), using a generalization of the detector_aperture complexType</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>ID of the object</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometry_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Geometry of the object contour. Note that there is some flexibility in the choice of the local coordinate system (X1,X2,X3). The data provider should choose the most convenient coordinate system for the object, respecting the definitions of (X1,X2,X3) indicated below.</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/curved_object_geometry_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="curvature_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Curvature of the object.</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/curved_object_curvature_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="material" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Material of the object</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/materials_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="centre" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Coordinates of the origin of the local coordinate system (X1,X2,X3) describing the object. This origin is located within the object area and should be the middle point of the object surface. If geometry_type=2, it's the centre of the circular object. If geometry_type=3, it's the centre of the rectangular object. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="radius">
+				<xs:annotation>
+					<xs:documentation>Radius of the circle, used only if geometry_type/index = 2</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x1_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is more horizontal than X2 (has a smaller abs(Z) component) and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
+					<xs:appinfo>
+						<url>utilities/detector_aperture_coordinates.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x2_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.</xs:documentation>
+					<xs:appinfo>
+						<url>utilities/detector_aperture_coordinates.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x3_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the object surface and oriented towards the plasma.</xs:documentation>
+					<xs:appinfo>
+						<url>utilities/detector_aperture_coordinates.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x1_width">
+				<xs:annotation>
+					<xs:documentation>Full width of the object in the X1 direction, used only if geometry_type/index = 3</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x2_width">
+				<xs:annotation>
+					<xs:documentation>Full width of the object in the X2 direction, used only if geometry_type/index = 3</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="x1x21d_static">
+				<xs:annotation>
+					<xs:documentation>Irregular outline of the object in the (X1, X2) coordinate system, used only if geometry_type/index=1. Do NOT repeat the first point.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x1_curvature">
+				<xs:annotation>
+					<xs:documentation>Radius of curvature in the X1 direction, to be filled only for curvature_type/index = 2, 4 or 5</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x2_curvature">
+				<xs:annotation>
+					<xs:documentation>Radius of curvature in the X2 direction, to be filled only for curvature_type/index = 3 or 5</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="surface">
+				<xs:annotation>
+					<xs:documentation>Surface of the object, derived from the above geometric data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="polarizer">
 		<xs:annotation>
 			<xs:documentation>Generic description of a polarizer (extension of the detector_aperture complex type)</xs:documentation>
@@ -6571,7 +6719,7 @@
 		<xs:sequence>
 			<xs:element name="centre" type="rzphi0d_static">
 				<xs:annotation>
-					<xs:documentation>If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane polarizer. This origin is located within the polarizer area.</xs:documentation>
+					<xs:documentation>If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane polarizer. This origin is located within the polarizer area. Note that there is some flexibility here and the data provider should choose the most convenient coordinate system for the object, respecting the definitions of (X1,X2,X3) indicated below.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="radius">
@@ -6588,7 +6736,7 @@
 			</xs:element>
 			<xs:element name="x1_unit_vector" type="xyz0d_static">
 				<xs:annotation>
-					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
+					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is more horizontal than X2 (has a smaller abs(Z) component) and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="x2_unit_vector" type="xyz0d_static">
