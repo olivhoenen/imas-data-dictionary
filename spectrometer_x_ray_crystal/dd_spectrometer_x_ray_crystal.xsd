@@ -109,104 +109,7 @@
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="spectrometer_x_ray_crystal_filter">
-		<xs:annotation>
-			<xs:documentation>Characteristics of the filter window</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="material">
-				<xs:annotation>
-					<xs:documentation>Material of the filter window</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="thickness">
-				<xs:annotation>
-					<xs:documentation>Thickness of the filter window</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="spectrometer_x_ray_crystal_camera">
-		<xs:annotation>
-			<xs:documentation>Characteristics of the camera used</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="identifier">
-				<xs:annotation>
-					<xs:documentation>ID of the camera</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pixel_dimensions">
-				<xs:annotation>
-					<xs:documentation>Pixel dimension in each direction (horizontal, vertical)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...2</coordinate1>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pixel_n">
-				<xs:annotation>
-					<xs:documentation>Number of pixels in each direction (horizontal, vertical)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...2</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="camera_dimensions">
-				<xs:annotation>
-					<xs:documentation>Total camera dimension in each direction (horizontal, vertical)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...2</coordinate1>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="centre" type="rzphi0d_static">
-				<xs:annotation>
-					<xs:documentation>Position of the camera centre</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="x3_unit_vector" type="xyz0d_static">
-				<xs:annotation>
-					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the camera plane and oriented towards the plasma.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="spectrometer_x_ray_crystal_crystal">
+	</xs:complexType>	<xs:complexType name="spectrometer_x_ray_crystal_crystal">
 		<xs:annotation>
 			<xs:documentation>Characteristics of the crystal used, extension of the generic description of a small plane or curved object (crystal, reflector, ...)</xs:documentation>
 		</xs:annotation>
@@ -474,12 +377,12 @@
 					<xs:documentation>Characteristics of the crystal used</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="filter_window" type="spectrometer_x_ray_crystal_filter">
+			<xs:element name="filter_window" type="filter_window">
 				<xs:annotation>
 					<xs:documentation>Characteristics of the filter window</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="camera" type="spectrometer_x_ray_crystal_camera">
+			<xs:element name="camera" type="camera_geometry">
 				<xs:annotation>
 					<xs:documentation>Characteristics of the camera used</xs:documentation>
 				</xs:annotation>
