@@ -18,9 +18,13 @@
       <body>
               <p class="welcome">ITER Physics Data Model Documentation : Top level (list of all IDSs)</p>
               <p>The ITER Physics Data Model follows the COCOS = 11 coordinate convention. The COCOS conventions are defined in [O. Sauter and S.Yu. Medvedev, Computer Physics Communications 184 (2013) 293]</p>
+			  <p>Mathematical operators :
+			  <ul>
+						<li><a href="http://www-fusion.ciemat.es/wiki/Flux_coordinates#Flux_Surface_Average">Flux surface average</a></li>
+			  </ul>
+			  </p>
        		  <p><a href="dd_versions.html">Data Dictionary version history</a></p>
        		  <p><a href="dd_constants.html">Physics constants</a></p>
-
 <!-- First make a list of IDS with the Links-->
 <table border="1">
         <thead style="color:#ff0000"><td>IDS name</td><td>Description</td><td>Max. occurrence number (limited in MDS+ backend only)</td></thead>
