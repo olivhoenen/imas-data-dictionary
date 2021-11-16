@@ -13,8 +13,7 @@ COCOS_FILES=$(wildcard $(addprefix html_documentation/cocos/,*.csv))
 
 # Identifiers definition files
 ID_IDENT = $(wildcard */*_identifier.xml)
-ID_CONST = ./utilities/constants_module.xml
-ID_FILES = $(ID_IDENT) $(ID_CONST)
+ID_FILES = $(ID_IDENT)
 
 .PHONY: all clean test install
 all: dd htmldoc test
@@ -53,7 +52,7 @@ dd_install: $(DD_FILES)
 	$(INSTALL_DATA) $(filter-out IDSDef.xml,$^) $(includedir)
 	ln -sf dd_data_dictionary.xml $(includedir)/IDSDef.xml
 
-identifiers_install: $(ID_IDENT) $(ID_CONST)
+identifiers_install: $(ID_IDENT)
 	$(mkdir_p) $(foreach subdir,$(sort $(^D)),$(includedir)/$(subdir))
 	$(foreach F,$^,$(INSTALL_DATA) $(F) $(includedir)/$(dir $(F));)
 
