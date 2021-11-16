@@ -24,7 +24,6 @@
 			  </ul>
 			  </p>
        		  <p><a href="dd_versions.html">Data Dictionary version history</a></p>
-       		  <p><a href="dd_constants.html">Physics constants</a></p>
 <!-- First make a list of IDS with the Links-->
 <table border="1">
         <thead style="color:#ff0000"><td>IDS name</td><td>Description</td><td>Max. occurrence number (limited in MDS+ backend only)</td></thead>
@@ -137,15 +136,6 @@
   <xsl:template match="int">
   <!-- Construction of a table for the identifier documentation (doc_identifier)-->
   <tr><td><xsl:value-of select="@name"/></td><td><xsl:value-of select="."/></td><td><xsl:value-of select="@description"/></td></tr>
-  </xsl:template>
-  
-  <xsl:template match="float">
-  <!-- Construction of a table for physics constants-->
-  <tr><td><xsl:value-of select="@name"/></td>
-  <td><xsl:value-of select="@description"/> [<xsl:choose>
-  <xsl:when test="@units"><xsl:value-of select="@units"/></xsl:when>
-  <xsl:otherwise>-</xsl:otherwise>
-  </xsl:choose>]</td><td><xsl:value-of select="."/></td></tr>
   </xsl:template>
 
  <xsl:template match="field">
