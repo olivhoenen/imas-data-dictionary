@@ -1759,98 +1759,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="camera_geometry">
-		<xs:annotation>
-			<xs:documentation>Camera geometry. The orientation of the camera is described as follows : pixels are aligned along x1 and x2 unit vectors while x3 is normal to the detector plane.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="identifier">
-				<xs:annotation>
-					<xs:documentation>ID of the camera</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pixel_dimensions">
-				<xs:annotation>
-					<xs:documentation>Pixel dimension in each direction (x1, x2)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...2</coordinate1>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pixels_n">
-				<xs:annotation>
-					<xs:documentation>Number of pixels in each direction (x1, x2)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...2</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pixel_position" type="rzphi2d_static">
-				<xs:annotation>
-					<xs:documentation>Position of the centre of each pixel. First dimension : line index (x1 axis). Second dimension: column index (x2 axis).</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="camera_dimensions">
-				<xs:annotation>
-					<xs:documentation>Total camera dimension in each direction (x1, x2)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...2</coordinate1>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="centre" type="rzphi0d_static">
-				<xs:annotation>
-					<xs:documentation>Position of the camera centre</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="x1_unit_vector" type="xyz0d_static">
-				<xs:annotation>
-					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is more horizontal than X2 (has a smaller abs(Z) component) and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
-					<xs:appinfo>
-						<url>utilities/detector_aperture_coordinates.svg</url>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="x2_unit_vector" type="xyz0d_static">
-				<xs:annotation>
-					<xs:documentation>Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.</xs:documentation>
-					<xs:appinfo>
-						<url>utilities/detector_aperture_coordinates.svg</url>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="x3_unit_vector" type="xyz0d_static">
-				<xs:annotation>
-					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the camera plane and oriented towards the plasma.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="line_of_sight" type="line_of_sight_2points_rzphi_2d">
-				<xs:annotation>
-					<xs:documentation>Description of the line of sight for each pixel, given by 2 points. For each coordinate : first dimension : line index (x1 axis); second dimension: column index (x2 axis).</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="psi_normalization">
 		<xs:annotation>
 			<xs:documentation>Quantities used to normalize psi, as a function of time</xs:documentation>
@@ -7131,6 +7039,98 @@
 			<xs:element name="third_point" type="rzphi0d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the third point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="camera_geometry">
+		<xs:annotation>
+			<xs:documentation>Camera geometry. The orientation of the camera is described as follows : pixels are aligned along x1 and x2 unit vectors while x3 is normal to the detector plane.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>ID of the camera</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pixel_dimensions">
+				<xs:annotation>
+					<xs:documentation>Pixel dimension in each direction (x1, x2)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...2</coordinate1>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pixels_n">
+				<xs:annotation>
+					<xs:documentation>Number of pixels in each direction (x1, x2)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...2</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pixel_position" type="rzphi2d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the centre of each pixel. First dimension : line index (x1 axis). Second dimension: column index (x2 axis).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="camera_dimensions">
+				<xs:annotation>
+					<xs:documentation>Total camera dimension in each direction (x1, x2)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...2</coordinate1>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="centre" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the camera centre</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x1_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is more horizontal than X2 (has a smaller abs(Z) component) and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
+					<xs:appinfo>
+						<url>utilities/detector_aperture_coordinates.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x2_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.</xs:documentation>
+					<xs:appinfo>
+						<url>utilities/detector_aperture_coordinates.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x3_unit_vector" type="xyz0d_static">
+				<xs:annotation>
+					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the camera plane and oriented towards the plasma.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="line_of_sight" type="line_of_sight_2points_rzphi_2d">
+				<xs:annotation>
+					<xs:documentation>Description of the line of sight for each pixel, given by 2 points. For each coordinate : first dimension : line index (x1 axis); second dimension: column index (x2 axis).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
