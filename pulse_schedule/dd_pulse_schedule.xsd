@@ -714,6 +714,16 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="n_e_line_method" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Method for n_e_line calculation : Index = 1: integral over a line of sight in the whole vacuum chamber, 2 : integral over a line of sight within the LCFS, 3 : integral of a 1D core profile over rho_tor_norm up to the LCFS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_e_line_of_sight" type="line_of_sight_3points">
+				<xs:annotation>
+					<xs:documentation>Description of the line of sight for calculating n_e, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="n_e_volume_average" type="pulse_schedule_reference">
 				<xs:annotation>
 					<xs:documentation>Volume averaged electron density (average over the plasma volume up to the LCFS)</xs:documentation>
@@ -729,6 +739,16 @@
 					<xs:appinfo>
 						<units>-</units>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zeff_method" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Method for zeff calculation : Index = 1: average over a line of sight in the whole vacuum chamber, 2 : average over a line of sight within the LCFS, 3 : average of a 1D core profile over rho_tor_norm up to the LCFS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zeff_line_of_sight" type="line_of_sight_3points">
+				<xs:annotation>
+					<xs:documentation>Description of the line of sight for calculating zeff, defined by two points when the beam is not reflected, a third point is added to define the reflected beam path</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="n_t_over_n_d" type="pulse_schedule_reference">
