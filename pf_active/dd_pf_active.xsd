@@ -336,18 +336,15 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="function_indices">
+			<xs:element name="function" type="identifier_static" maxOccurs="6">
 				<xs:annotation>
-					<xs:documentation>List of functions for which this coil may be used (a given coil can have multiple functions, so this node is the list of indices of the various functions). 0 : generate flux (drive toroidal current), 1 : generate magnetic field for shaping, 2 : generate magnetic field for vertical force balance</xs:documentation>
+					<xs:documentation>Set of functions for which this coil may be used</xs:documentation>
 					<xs:appinfo>
 						<introduced_after_version>3.34.0</introduced_after_version>
 						<coordinate1>1...N</coordinate1>
-						<type>static</type>
+						<doc_identifier>pf_active/pf_active_coil_function_identifier.xml</doc_identifier>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="resistance">
 				<xs:annotation>
@@ -519,7 +516,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.34.1</lifecycle_last_change>
+				<lifecycle_last_change>3.35.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
