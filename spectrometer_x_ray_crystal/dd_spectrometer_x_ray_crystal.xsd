@@ -10,6 +10,52 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="spectrometer_x_ray_crystal_flt_2d_time_1">
+		<xs:annotation>
+			<xs:documentation>Similar to a signal (FLT_2D) but with time base one level above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../../time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity_timed">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectrometer_x_ray_crystal_instrument_function">
 		<xs:annotation>
 			<xs:documentation>Instrument function</xs:documentation>
@@ -358,7 +404,7 @@
 					<xs:documentation>For each profile point, a line of sight is defined by a first point given by the centre of the crystal and a second point described here. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="lines_of_sight_rho_tor_norm" type="physical_quantity_flt_2d_time_1">
+			<xs:element name="lines_of_sight_rho_tor_norm" type="spectrometer_x_ray_crystal_flt_2d_time_1">
 				<xs:annotation>
 					<xs:documentation>Shortest distance in rho_tor_norm between lines of sight and magnetic axis, signed with following convention : positive (resp. negative) means the point of shortest distance is above (resp. below) the magnetic axis</xs:documentation>
 					<xs:appinfo>
@@ -367,7 +413,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i" type="physical_quantity_flt_2d_time_1">
+			<xs:element name="t_i" type="spectrometer_x_ray_crystal_flt_2d_time_1">
 				<xs:annotation>
 					<xs:documentation>Ion temperature (estimated from a spectral fit directly on the output line-integrated signal, without tomographic inversion)</xs:documentation>
 					<xs:appinfo>
@@ -376,7 +422,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e" type="physical_quantity_flt_2d_time_1">
+			<xs:element name="t_e" type="spectrometer_x_ray_crystal_flt_2d_time_1">
 				<xs:annotation>
 					<xs:documentation>Electron temperature (estimated from a spectral fit directly on the output line-integrated signal, without tomographic inversion)</xs:documentation>
 					<xs:appinfo>
@@ -385,7 +431,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="velocity_tor" type="physical_quantity_flt_2d_time_1">
+			<xs:element name="velocity_tor" type="spectrometer_x_ray_crystal_flt_2d_time_1">
 				<xs:annotation>
 					<xs:documentation>Toroidal velocity (estimated from a spectral fit directly on the output line-integrated signal, without tomographic inversion)</xs:documentation>
 					<xs:appinfo>
