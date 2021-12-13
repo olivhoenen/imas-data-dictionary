@@ -71,6 +71,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		  <version>
 		    <xsl:value-of select="$DD_GIT_DESCRIBE"/>
 		  </version>
+		  <!-- Stores COCOS choice for this version of DD -->
+		  <cocos>
+		    <xsl:value-of select="./xs:element/xs:annotation/xs:appinfo/cocos"/>
+		  </cocos>
 		<utilities>
         <!-- Declare complex types from Utilities -->
         <xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:complexType">
