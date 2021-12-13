@@ -17,7 +17,7 @@
       </head>
       <body>
               <p class="welcome">ITER Physics Data Model Documentation : Top level (list of all IDSs)</p>
-              <p>The ITER Physics Data Model follows the COCOS = 11 coordinate convention. The COCOS conventions are defined in [O. Sauter and S.Yu. Medvedev, Computer Physics Communications 184 (2013) 293]</p>
+              <p>This version of the ITER Physics Data Model follows the COCOS = <xsl:value-of select="./cocos"/> coordinate convention. The COCOS conventions are defined in [O. Sauter and S.Yu. Medvedev, Computer Physics Communications 184 (2013) 293]</p>
 			  <p>Mathematical operators :
 			  <ul>
 						<li><a href="http://www-fusion.ciemat.es/wiki/Flux_coordinates#Flux_Surface_Average">Flux surface average</a></li>
