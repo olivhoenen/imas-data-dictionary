@@ -684,7 +684,7 @@
 	</xs:complexType>
 	<xs:complexType name="physical_quantity_flt_1d_time_1">
 		<xs:annotation>
-			<xs:documentation>Similar to a signal (FLT_1D) but with time base one level above</xs:documentation>
+			<xs:documentation>Similar to a signal (FLT_1D) but with time base one level above (NB : since this is described in the utilities section, the timebase must be directly below the closest AoS)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="data">
@@ -699,6 +699,52 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity_timed">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="physical_quantity_flt_2d_time_1">
+		<xs:annotation>
+			<xs:documentation>Similar to a signal (FLT_2D) but with time base one level above (NB : since this is described in the utilities section, the timebase must be directly below the closest AoS)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../../time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="validity_timed">

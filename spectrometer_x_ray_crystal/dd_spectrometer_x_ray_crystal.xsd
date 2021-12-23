@@ -10,6 +10,52 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="spectrometer_x_ray_crystal_flt_2d_time_1">
+		<xs:annotation>
+			<xs:documentation>Similar to a signal (FLT_2D) but with time base one level above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>as_parent</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>../../time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity_timed">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectrometer_x_ray_crystal_instrument_function">
 		<xs:annotation>
 			<xs:documentation>Instrument function</xs:documentation>
@@ -137,7 +183,7 @@
 				<xs:annotation>
 					<xs:documentation>Curvature of the object.</xs:documentation>
 					<xs:appinfo>
-						<doc_identifier>utilities/curved_object_geometry_identifier.xml</doc_identifier>
+						<doc_identifier>utilities/curved_object_curvature_identifier.xml</doc_identifier>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -279,6 +325,41 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="thickness">
+				<xs:annotation>
+					<xs:documentation>Thickness of the crystal</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<introduced_after_version>3.34.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cut">
+				<xs:annotation>
+					<xs:documentation>Miller indices characterizing the cut of the crystal (can be of length 3 or 4)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3.34.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="mesh_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Crystal mesh type</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>spectrometer_x_ray_crystal/crystal_mesh_identifier.xml</doc_identifier>
+						<introduced_after_version>3.34.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="spectrometer_x_ray_crystal_frame">
@@ -286,15 +367,16 @@
 			<xs:documentation>Frame of a camera</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="photon_count">
+			<xs:element name="counts_n">
 				<xs:annotation>
-					<xs:documentation>Detected photon count per unit time on each pixel of the frame</xs:documentation>
+					<xs:documentation>Number of counts detected on each pixel of the frame during one exposure time</xs:documentation>
 					<xs:appinfo>
-						<units>(counts).s^-1</units>
+						<units>-</units>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
 						<coordinate1_same_as>../../wavelength_frames</coordinate1_same_as>
 						<coordinate2>../../z_frames</coordinate2>
+						<introduced_after_version>3.34.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -312,14 +394,72 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="spectrometer_x_ray_crystal_proxy">
+		<xs:annotation>
+			<xs:documentation>X-ray crystal spectrometer profile proxy</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lines_of_sight_second_point" type="rzphi1d_static">
+				<xs:annotation>
+					<xs:documentation>For each profile point, a line of sight is defined by a first point given by the centre of the crystal and a second point described here. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lines_of_sight_rho_tor_norm" type="spectrometer_x_ray_crystal_flt_2d_time_1">
+				<xs:annotation>
+					<xs:documentation>Shortest distance in rho_tor_norm between lines of sight and magnetic axis, signed with following convention : positive (resp. negative) means the point of shortest distance is above (resp. below) the magnetic axis</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<coordinate1>../lines_of_sight_second_point/r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_i" type="spectrometer_x_ray_crystal_flt_2d_time_1">
+				<xs:annotation>
+					<xs:documentation>Ion temperature (estimated from a spectral fit directly on the output line-integrated signal, without tomographic inversion)</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+						<coordinate1>../lines_of_sight_second_point/r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e" type="spectrometer_x_ray_crystal_flt_2d_time_1">
+				<xs:annotation>
+					<xs:documentation>Electron temperature (estimated from a spectral fit directly on the output line-integrated signal, without tomographic inversion)</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+						<coordinate1>../lines_of_sight_second_point/r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_tor" type="spectrometer_x_ray_crystal_flt_2d_time_1">
+				<xs:annotation>
+					<xs:documentation>Toroidal velocity (estimated from a spectral fit directly on the output line-integrated signal, without tomographic inversion)</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<coordinate1>../lines_of_sight_second_point/r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for the dynamic nodes of this probe located at this level of the IDS structure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectrometer_x_ray_crystal_channel">
 		<xs:annotation>
 			<xs:documentation>X-crystal spectrometer channel</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="integration_time">
+			<xs:element name="exposure_time">
 				<xs:annotation>
-					<xs:documentation>Integration time of the measurement</xs:documentation>
+					<xs:documentation>Exposure time of the measurement</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>s</units>
@@ -423,30 +563,39 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_i_proxy" type="signal_flt_2d_validity">
+			<xs:element name="energies">
 				<xs:annotation>
-					<xs:documentation>Ion temperature (proxy estimated directly from the camera, without tomographic inversion)</xs:documentation>
+					<xs:documentation>Array of energy values for tabulation of the detection efficiency</xs:documentation>
 					<xs:appinfo>
+						<type>static</type>
 						<units>eV</units>
-						<coordinate1>../z_frames</coordinate1>
+						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3.34.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="t_e_proxy" type="signal_flt_2d_validity">
+			<xs:element name="detection_efficiency">
 				<xs:annotation>
-					<xs:documentation>Electron temperature (proxy estimated directly from the camera, without tomographic inversion)</xs:documentation>
+					<xs:documentation>Probability of detection of a photon impacting the detector as a function of its energy </xs:documentation>
 					<xs:appinfo>
-						<units>eV</units>
-						<coordinate1>../z_frames</coordinate1>
+						<type>static</type>
+						<units>-</units>
+						<coordinate1>../energies</coordinate1>
+						<introduced_after_version>3.34.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity_tor_proxy" type="signal_flt_2d_validity">
+			<xs:element name="profiles_line_integrated" type="spectrometer_x_ray_crystal_proxy">
 				<xs:annotation>
-					<xs:documentation>Toroidal velocity (proxy estimated directly from the camera, without tomographic inversion)</xs:documentation>
+					<xs:documentation>Profiles proxies are given in the vertical direction of the detector. They are estimated directly from the camera, without tomographic inversion. Binning is allowed so the number of profile points may be lower than the length of z_frames. Physical quantities deduced from the measured spectra are given for each profile point. They correspond to the spectra integrated along lines of sight, defined by a first point given by the centre of the crystal and a second point (depending on the profile point) described below.</xs:documentation>
 					<xs:appinfo>
-						<units>m.s^-1</units>
-						<coordinate1>../z_frames</coordinate1>
+						<introduced_after_version>3.34.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
