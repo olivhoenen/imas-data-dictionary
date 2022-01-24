@@ -191,9 +191,12 @@
 					<xs:documentation>Description of the line of sight of the channel, given by 2 points</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="filter_window" type="filter_window">
+			<xs:element name="filter_window" type="filter_window" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>Characteristics of the filter window</xs:documentation>
+					<xs:documentation>Set of filter windows</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="energy_band" type="detector_energy_band" maxOccurs="8">

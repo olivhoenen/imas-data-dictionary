@@ -155,7 +155,8 @@
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
-	</xs:complexType>	<xs:complexType name="spectrometer_x_ray_crystal_crystal">
+	</xs:complexType>
+	<xs:complexType name="spectrometer_x_ray_crystal_crystal">
 		<xs:annotation>
 			<xs:documentation>Characteristics of the crystal used, extension of the generic description of a small plane or curved object (crystal, reflector, ...)</xs:documentation>
 		</xs:annotation>
@@ -517,9 +518,12 @@
 					<xs:documentation>Characteristics of the crystal used</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="filter_window" type="filter_window">
+			<xs:element name="filter_window" type="filter_window" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>Characteristics of the filter window</xs:documentation>
+					<xs:documentation>Set of filter windows</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="camera" type="camera_geometry">
