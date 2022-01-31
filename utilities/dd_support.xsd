@@ -7579,6 +7579,61 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="annulus_static">
+		<xs:annotation>
+			<xs:documentation>Annulus description (2D object)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Centre major radius</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Centre height</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="radius_inner">
+				<xs:annotation>
+					<xs:documentation>Inner radius</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="radius_outer">
+				<xs:annotation>
+					<xs:documentation>Outer radius</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="outline_2d_geometry_static">
 		<xs:annotation>
 			<xs:documentation>Description of 2D geometry</xs:documentation>
@@ -7586,7 +7641,7 @@
 		<xs:sequence>
 			<xs:element name="geometry_type">
 				<xs:annotation>
-					<xs:documentation>Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique', 4:'arcs of circle') </xs:documentation>
+					<xs:documentation>Type used to describe the element shape (1:'outline', 2:'rectangle', 3:'oblique', 4:'arcs of circle, 5: 'annulus') </xs:documentation>
 					<xs:appinfo>
 						<Type>static</Type>
 					</xs:appinfo>
@@ -7613,6 +7668,14 @@
 			<xs:element name="arcs_of_circle" type="arcs_of_circle_static">
 				<xs:annotation>
 					<xs:documentation>Description of the element contour by a set of arcs of circle. For each of these, the position of the start point is given together with the curvature radius. The end point is given by the start point of the next arc of circle.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="annulus" type="annulus_static">
+				<xs:annotation>
+					<xs:documentation>The element is an annulus of  center r, z, with inner radius radius_inner and outer radius radius_outer</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.34.0</introduced_after_version>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
