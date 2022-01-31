@@ -86,15 +86,19 @@
 				</xs:element>
 				<xs:element name="quantum_efficiency">
 					<xs:annotation>
-						<xs:documentation>Quantum efficiency of the detector, i.e. conversion factor multiplying the number of counts to obtain the number of photons impacting the detector, tabulated as a function of the photon energy</xs:documentation>
+						<xs:documentation>Quantum efficiency of the detector, i.e. conversion factor multiplying the number of counts to obtain the number of photons impacting the detector, tabulated as a function of the photon energy, for each pixel of the detector. If all pixels have the same quantum efficiency, just set the size of the first and second dimensions to 1</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
-							<coordinate1>../photon_energy</coordinate1>
+							<coordinate1>1...N</coordinate1>
+							<coordinate1_same_as>../frame/counts_n OR 1</coordinate1_same_as>
+							<coordinate2>1...N</coordinate2>
+							<coordinate2_same_as>../frame/counts_n OR 1</coordinate2_same_as>							
+							<coordinate3>../photon_energy</coordinate3>
 							<units>-</units>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:group ref="FLT_1D"/>
+						<xs:group ref="FLT_3D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="energy_threshold_lower">
