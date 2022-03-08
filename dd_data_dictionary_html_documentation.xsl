@@ -17,14 +17,13 @@
       </head>
       <body>
               <p class="welcome">ITER Physics Data Model Documentation : Top level (list of all IDSs)</p>
-              <p>The ITER Physics Data Model follows the COCOS = 11 coordinate convention. The COCOS conventions are defined in [O. Sauter and S.Yu. Medvedev, Computer Physics Communications 184 (2013) 293]</p>
+              <p>This version of the ITER Physics Data Model follows the COCOS = <xsl:value-of select="./cocos"/> coordinate convention. The COCOS conventions are defined in [O. Sauter and S.Yu. Medvedev, Computer Physics Communications 184 (2013) 293]</p>
 			  <p>Mathematical operators :
 			  <ul>
 						<li><a href="http://www-fusion.ciemat.es/wiki/Flux_coordinates#Flux_Surface_Average">Flux surface average</a></li>
 			  </ul>
 			  </p>
        		  <p><a href="dd_versions.html">Data Dictionary version history</a></p>
-       		  <p><a href="dd_constants.html">Physics constants</a></p>
 <!-- First make a list of IDS with the Links-->
 <table border="1">
         <thead style="color:#ff0000"><td>IDS name</td><td>Description</td><td>Max. occurrence number (limited in MDS+ backend only)</td></thead>
@@ -132,45 +131,11 @@
 </xsl:result-document>
 </xsl:for-each>
 
-<!--Fourth: write the physics constant page-->
-<xsl:result-document href="html_documentation/dd_constants.html">
-<html>
-      <head>
-       <title>IMAS physics constants</title>
-        <style type="text/css">
-			p {color:black;font-size:12pt;font-weight:normal;}
-			p.name {color:red;font-size:18pt;font-weight:bold;}
-			p.welcome {color:#3333aa; font-size:20pt; font-weight:bold; text-align:center;}
-			span.head {color:#3333aa; font-size:12pt; font-weight:bold; }
-       </style>
-      </head>
-      <body>
-        <p class="welcome">IMAS physics constants</p>
-        <p>Last change occured on version: <xsl:value-of select="document('utilities/constants_module.xml')/constants/@lifecycle_last_change"/></p> <!-- Write the IDS Lifecycle information -->
-        <p><a href="html_documentation.html">Back to top IDS list</a></p>
-        <table border="1">
-        <thead style="color:#ff0000"><td>Name</td><td>Description</td><td>Value</td></thead>
-        <xsl:apply-templates select="document('utilities/constants_module.xml')/*/float"/>
-        </table>
-        <p><a href="html_documentation.html">Back to top IDS list</a></p>
-      </body>
-</html>
-</xsl:result-document>
-
   </xsl:template>
   
   <xsl:template match="int">
   <!-- Construction of a table for the identifier documentation (doc_identifier)-->
   <tr><td><xsl:value-of select="@name"/></td><td><xsl:value-of select="."/></td><td><xsl:value-of select="@description"/></td></tr>
-  </xsl:template>
-  
-  <xsl:template match="float">
-  <!-- Construction of a table for physics constants-->
-  <tr><td><xsl:value-of select="@name"/></td>
-  <td><xsl:value-of select="@description"/> [<xsl:choose>
-  <xsl:when test="@units"><xsl:value-of select="@units"/></xsl:when>
-  <xsl:otherwise>-</xsl:otherwise>
-  </xsl:choose>]</td><td><xsl:value-of select="."/></td></tr>
   </xsl:template>
 
  <xsl:template match="field">

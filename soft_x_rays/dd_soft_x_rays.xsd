@@ -72,6 +72,15 @@
 					<xs:documentation>Description of the line of sight of the channel, given by 2 points</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="filter_window" type="filter_window" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Set of filter windows</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3.34.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="energy_band" type="detector_energy_band" maxOccurs="8">
 				<xs:annotation>
 					<xs:documentation>Set of energy bands in which photons are counted by the detector</xs:documentation>
@@ -124,7 +133,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.10.2</lifecycle_version>
-				<lifecycle_last_change>3.33.0</lifecycle_last_change>
+				<lifecycle_last_change>3.35.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>

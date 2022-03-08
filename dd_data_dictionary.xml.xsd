@@ -15,6 +15,7 @@
 	<xs:include schemaLocation="calorimetry/dd_calorimetry.xsd"/>
 	<xs:include schemaLocation="camera_ir/dd_camera_ir.xsd"/>
 	<xs:include schemaLocation="camera_visible/dd_camera_visible.xsd"/>
+	<xs:include schemaLocation="camera_x_rays/dd_camera_x_rays.xsd"/>
 	<xs:include schemaLocation="charge_exchange/dd_charge_exchange.xsd"/>
 	<xs:include schemaLocation="coils_non_axisymmetric/dd_coils_non_axisymmetric.xsd"/>
 	<xs:include schemaLocation="controllers/dd_controllers.xsd"/>
@@ -78,6 +79,9 @@
 	<xs:element name="physics_data_dictionary">
 		<xs:annotation>
 			<xs:documentation>Root of the Physics Data Dictionary</xs:documentation>
+			<xs:appinfo>
+				<cocos>11</cocos>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
@@ -88,6 +92,7 @@
 				<xs:element ref="calorimetry" maxOccurs="2"/>
 				<xs:element ref="camera_ir" maxOccurs="10"/>
 				<xs:element ref="camera_visible" maxOccurs="20"/>
+				<xs:element ref="camera_x_rays" maxOccurs="6"/>
 				<xs:element ref="charge_exchange" maxOccurs="4"/>
 				<xs:element ref="coils_non_axisymmetric" maxOccurs="5"/>
 				<xs:element ref="controllers" maxOccurs="2"/>
