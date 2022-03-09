@@ -151,9 +151,10 @@
 
            <td><xsl:value-of select="@documentation"/>
            <xsl:if test="@url"> Click here for <a href="{@url}">further documentation</a>.</xsl:if>
+           <xsl:if test="@url_protected"> Click here for <a href="{@url_protected}">further documentation</a> (or contact imas@iter.org if you can't access this page).</xsl:if>
            <xsl:if test="@type"> {<xsl:value-of select="@type"/>}</xsl:if>
            <xsl:if test="@Type"> {<xsl:value-of select="@Type"/>}</xsl:if>
-          <xsl:if test="@units"> [<xsl:value-of select="@units"/>]</xsl:if>
+           <xsl:if test="@units"> [<xsl:value-of select="@units"/>]</xsl:if>
                     <xsl:if test="@Units"> [<xsl:value-of select="@Units"/>]</xsl:if>
            <xsl:if test="@introduced_after_version">. Introduced after DD version <xsl:value-of select="@introduced_after_version"/></xsl:if> 
            <xsl:if test="@doc_identifier">. Available options (refer to the children of this identifier structure) :
