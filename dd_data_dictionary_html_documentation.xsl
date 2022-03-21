@@ -83,7 +83,7 @@
         <p>Last change occured on version: <xsl:value-of select="@lifecycle_last_change"/></p> <!-- Write the IDS Lifecycle information -->
         <p><a href="html_documentation.html">Back to top IDS list</a></p>
    		<button onclick="window.location.href='{@name}_flat.html'">Flat display</button>
-		<button onclick="ToggleErrorDisplay('body>table')">Show/Hide errorbar nodes</button>  By convention, only the upper error node should be filled in case of symmetrical error bars. The upper and lower errors are absolute and defined positive, the effective values of the data will be within the interval [data-data_error_lower, data+data_error_upper]. Thus whatever the sign of data, data_error_lower relates to the lower bound and data_error_upper to the upper bound of the error bar interval.
+		<button onclick="ToggleErrorDisplay('body>table')">Show/Hide errorbar nodes</button>  By convention, only the upper error node should be filled in case of symmetrical error bars. The upper and lower errors are absolute and defined positive, and represent one standard deviation of the data. The effective values of the data (within one standard deviation) will be within the interval [data-data_error_lower, data+data_error_upper]. Thus whatever the sign of data, data_error_lower relates to the lower bound and data_error_upper to the upper bound of the error bar interval.
         <br/>   
         <br/>          
         <table border="1">
