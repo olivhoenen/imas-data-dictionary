@@ -507,7 +507,7 @@
 			</xs:element>
 			<xs:element name="time_interval_norm">
 				<xs:annotation>
-					<xs:documentation>Normalised time interval used to average fluxes and moments from non-linear runs</xs:documentation>
+					<xs:documentation>Normalised time interval used to average fluxes in non-linear runs</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -1021,6 +1021,17 @@
 			<xs:documentation>Output of the GK calculation for a given eigenmode</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="poloidal_turns">
+				<xs:annotation>
+					<xs:documentation>Number of poloidal turns considered in the flux-tube simulation</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="growth_rate_norm">
 				<xs:annotation>
 					<xs:documentation>Growth rate</xs:documentation>
@@ -1208,7 +1219,12 @@
 					<xs:appinfo>
 						<coordinate1>../../../species</coordinate1>
 					</xs:appinfo>
-					<xs:documentation>Fluxes and moments of the perturbed distribution function, for this eigenmode and for each species</xs:documentation>
+					<xs:documentation>Fluxes and moments of the perturbed distribution function, for this eigenmode and for each species. The fluxes are time averaged for non-linear runs (using model/ time_interval_norm) and given at the last time step for linear runs. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="code_partial_with_timebase">
+				<xs:annotation>
+					<xs:documentation>Code-specific parameters used for this eigenmode</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1240,17 +1256,6 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="poloidal_turns">
-				<xs:annotation>
-					<xs:documentation>Number of poloidal turns considered in the flux-tube simulation</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="eigenmode" type="gyrokinetics_eigenmode" maxOccurs="5">
@@ -1286,7 +1291,7 @@
 	</xs:complexType>
 	<xs:element name="gyrokinetics">
 		<xs:annotation>
-			<xs:documentation>Description of a gyrokinetic simulation (delta-f, flux-tube). All quantities within this IDS are normalised (apart from time and from the normalizing quantities structure), thus independent of rhostar, consistently with the local approximation and a spectral representation is assumed in the perpendicular plane (i.e. homogeneous turbulence). All quantities are given in the laboratory frame, except the moments of the perturbed distribution function which are given in the rotating frame.</xs:documentation>
+			<xs:documentation>Description of a gyrokinetic simulation (delta-f, flux-tube). All quantities within this IDS are normalised (apart from time and from the normalizing quantities structure), thus independent of rhostar, consistently with the local approximation and a spectral representation is assumed in the perpendicular plane (i.e. homogeneous turbulence).</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.22.0</lifecycle_version>
@@ -1348,7 +1353,7 @@
 				</xs:element>
 				<xs:element name="fluxes_integrated_norm" type="gyrokinetics_fluxes" maxOccurs="10">
 					<xs:annotation>
-						<xs:documentation>Normalised fluxes of particles computed in the laboratory frame per species and integrated over the time interval specified in model/time_interval_norm (non-linear runs only)</xs:documentation>
+						<xs:documentation>Normalised fluxes of particles computed in the laboratory frame per species, summed over all wavevectors, and averaged over the time interval specified in model/time_interval_norm (non-linear runs only)</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>../species</coordinate1>
 						</xs:appinfo>

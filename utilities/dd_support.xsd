@@ -1357,6 +1357,29 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="code_partial_with_timebase">
+		<xs:annotation>
+			<xs:documentation>Description of code-specific parameters - without code identification - when they are gathered below an array of structure (e.g. in case of multiple models or sources gathered in a single IDS). Data+time structure for the dynamic signals (output_flag)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="parameters">
+				<xs:annotation>
+					<xs:documentation>List of the code specific parameters in XML format</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="output_flag" type="signal_int_1d">
+				<xs:annotation>
+					<xs:documentation>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="code_with_timebase">
 		<xs:annotation>
 			<xs:documentation>Description of code-specific parameters when they are gathered below an array of structure (e.g. in case of multiple models or sources gathered in a single IDS). The only difference with the generic code element is the existence of a data+time structure for the dynamic signals (output_flag)</xs:documentation>
