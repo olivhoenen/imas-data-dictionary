@@ -1357,9 +1357,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="code_partial_with_timebase">
+	<xs:complexType name="code_partial_constant">
 		<xs:annotation>
-			<xs:documentation>Description of code-specific parameters - without code identification - when they are gathered below an array of structure (e.g. in case of multiple models or sources gathered in a single IDS). Data+time structure for the dynamic signals (output_flag)</xs:documentation>
+			<xs:documentation>Description of code-specific parameters and constant output flag</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="parameters">
@@ -1373,10 +1373,13 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="output_flag" type="signal_int_1d">
+			<xs:element name="output_flag">
 				<xs:annotation>
 					<xs:documentation>Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.</xs:documentation>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
