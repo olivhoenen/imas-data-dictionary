@@ -358,6 +358,15 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="resistance_additional" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Additional resistance due to e.g. dynamically switchable resistors. The coil effective resistance is obtained by adding this dynamic quantity to the static resistance of the coil. </xs:documentation>
+					<xs:appinfo>
+						<units>Ohm</units>
+						<introduced_after_version>3.36.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="energy_limit_max">
 				<xs:annotation>
 					<xs:documentation>Maximum Energy to be dissipated in the coil</xs:documentation>
@@ -439,7 +448,7 @@
 			</xs:element>
 			<xs:element name="voltage" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Voltage on the coil terminals (Vside1-Vside2)</xs:documentation>
+					<xs:documentation>Voltage on the coil terminals (Vside1-Vside2) - including additional resistors if any</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
 					</xs:appinfo>
@@ -516,7 +525,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.35.0</lifecycle_last_change>
+				<lifecycle_last_change>3.36.1</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
