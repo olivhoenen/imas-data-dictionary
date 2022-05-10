@@ -839,6 +839,43 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="pulse_schedule_pf_active_supply">
+		<xs:annotation>
+			<xs:documentation>PF supply</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the supply</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of the supply</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="voltage" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Voltage at the supply output (Vside1-Vside2)</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="pulse_schedule_pf_active_coil">
 		<xs:annotation>
 			<xs:documentation>PF coil</xs:documentation>
@@ -900,6 +937,14 @@
 			<xs:element name="coil" type="pulse_schedule_pf_active_coil" maxOccurs="32">
 				<xs:annotation>
 					<xs:documentation>Set of poloidal field coils</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="supply" type="pulse_schedule_pf_active_supply" maxOccurs="32">
+				<xs:annotation>
+					<xs:documentation>Set of PF power supplies</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
