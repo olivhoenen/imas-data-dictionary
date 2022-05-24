@@ -2,48 +2,6 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="pf_active_global_quantities">
-		<xs:annotation>
-			<xs:documentation>Various global quantities related to pf_active IDS</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="psi_coils_average">
-				<xs:annotation>
-					<xs:documentation>Average (over the plasma poloidal cross section) plasma poloidal magnetic flux produced by the coils listed under psi_coils_list (sum over the coils), given by the following formula : int(psi_coils.j_tor.dS) / Ip</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../time</coordinate1>
-						<units>Wb</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="psi_coils_list">
-				<xs:annotation>
-					<xs:documentation>List of coil indices (from pf_active/coil) used for calculating psi_coils_average</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="time" type="flt_1d_type">
-				<xs:annotation>
-					<xs:documentation>Time array for quantities at this level</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<type>dynamic</type>
-						<units>s</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="pf_supplies">
 		<xs:annotation>
 			<xs:documentation>PF power supplies</xs:documentation>
@@ -532,11 +490,6 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="global_quantities" type="pf_active_global_quantities">
-					<xs:annotation>
-						<xs:documentation>Global quantities</xs:documentation>
-					</xs:annotation>
-				</xs:element>
 				<xs:element name="coil" type="pf_coils" maxOccurs="32">
 					<xs:annotation>
 						<xs:documentation>Active PF coils</xs:documentation>
