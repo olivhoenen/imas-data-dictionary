@@ -3,8 +3,9 @@
 <header>List of boundary condition types for 1D transport solvers</header>
 <dd_instance xpath="equilibrium/time_slice/convergence/grad_shafranov_deviation_expression"/>
 
-<int name="absolute_gs_error" description="Absolute error on the Grad-Shafranov equation, &lt;|Del* psi - j_tor*R / (Del* psi)|&gt;, averaged over the plasma poloidal cross-section" unique="yes">1</int>
-<int name="root_mean_square_gs_error" description="Relative error on the Grad-Shafranov equation, sqrt((&lt;Del* psi - j_tor*R / (Del* psi)&gt;)^2 / &lt;Del* psi&gt;  ^2), averaged over the plasma poloidal cross-section" unique="yes">2</int>
-<int name="absolute_gs_error_max" description="Maximum of the absolute error in the poloidal flux (see absolute_gs_error) between last and subsequent iterations" unique="yes">3</int>
-
+<int name="absolute_gs_difference" description="Average absolute difference of the Grad-Shafranov equation, &lt;|Del* psi - j_tor*R|&gt;, averaged over the plasma poloidal cross-section" unique="yes">1</int>
+<int name="root_mean_square_gs_difference" description="Root mean square difference of the Grad-Shafranov equation, sqrt(&lt;(Del* psi - j_tor*R)^2 &gt;), averaged over the plasma poloidal cross-section" unique="yes">2</int>
+<int name="max_absolute_gs_error_iterations" description="Maximum of the absolute error in the poloidal flux (see max_absolute_gs_error) between last and subsequent iterations" unique="yes">3</int>
+<int name="max_absolute_gs_error" description="Maximum absolute error of the Grad-Shafranov equation, max(|Del* psi - j_tor*R|) / max(|Del* psi|), over the plasma poloidal cross-section" unique="yes">4</int>
+<int name="max_root_mean_square_gs_error" description="Root maximum square error of the Grad-Shafranov equation, sqrt(max((Del* psi - j_tor*R)^2) / max((Del* psi)^2)), over the plasma poloidal cross-section" unique="yes">5</int>
 </constants>
