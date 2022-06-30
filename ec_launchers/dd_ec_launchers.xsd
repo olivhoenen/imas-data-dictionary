@@ -13,7 +13,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>../time</coordinate1>
+						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -52,7 +52,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>../time</coordinate1>
+						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -65,22 +65,12 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>rad</units>
-						<coordinate1>../time</coordinate1>
+						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="time" type="flt_1d_type">
-				<xs:annotation>
-					<xs:documentation>Time for the R,Z,phi coordinates</xs:documentation>
-					<xs:appinfo>
-						<units>s</units>
-						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -95,7 +85,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../launching_position/time</coordinate2>
+						<coordinate2>../../time</coordinate2>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -108,7 +98,7 @@
 					<xs:documentation>Rotation angle for the spot ellipse</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../launching_position/time</coordinate1>
+						<coordinate1>../../time</coordinate1>
 						<units>rad</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -129,7 +119,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../launching_position/time</coordinate2>
+						<coordinate2>../../time</coordinate2>
 						<units>m^-1</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -143,7 +133,7 @@
 					<xs:appinfo>
 						<units>rad</units>
 						<type>dynamic</type>
-						<coordinate1>../../launching_position/time</coordinate1>
+						<coordinate1>../../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -217,7 +207,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>rad</units>
-						<coordinate1>../launching_position/time</coordinate1>
+						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -230,7 +220,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>rad</units>
-						<coordinate1>../launching_position/time</coordinate1>
+						<coordinate1>../time</coordinate1>
 						<cocos_label_transformation>tor_angle_like</cocos_label_transformation>
 						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
 						<cocos_leaf_name_aos_indices>ec_launchers.launcher{i}.steering_angle_tor.data</cocos_leaf_name_aos_indices>
@@ -248,6 +238,16 @@
 			<xs:element name="phase" type="ec_launchers_beam_phase">
 				<xs:annotation>
 					<xs:documentation>Phase ellipse characteristics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Time base used for position, angle, spot and phase quantities</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
