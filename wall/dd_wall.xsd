@@ -96,6 +96,32 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="wall_global_quantitites_neutral_origin">
+		<xs:annotation>
+			<xs:documentation>This structure allows distinguishing the species at the origin of the sputtering</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="element" type="plasma_composition_neutral_element_constant" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H, D, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="wall_global_quantitites_neutral">
 		<xs:annotation>
 			<xs:documentation>Simple 0D description of plasma-wall interaction, related to a given neutral species</xs:documentation>
@@ -214,32 +240,39 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="incident_species" type="wall_global_quantitites_neutral_origin" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Incident species at the origin of the sputtering</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="sputtering_physical_coefficient">
 				<xs:annotation>
-					<xs:documentation>Effective coefficient of physical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)</xs:documentation>
+					<xs:documentation>Effective coefficient of physical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast), due to a given incident species (second dimension)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
 						<coordinate1>1...3</coordinate1>
-						<coordinate2>/time</coordinate2>
+						<coordinate2>../incident_species</coordinate2>
+						<coordinate3>/time</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="sputtering_chemical_coefficient">
 				<xs:annotation>
-					<xs:documentation>Effective coefficient of chemical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast)</xs:documentation>
+					<xs:documentation>Effective coefficient of chemical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast), due to a given incident species (second dimension)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
 						<coordinate1>1...3</coordinate1>
-						<coordinate2>/time</coordinate2>
+						<coordinate2>../incident_species</coordinate2>
+						<coordinate3>/time</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -723,7 +756,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.33.0</lifecycle_last_change>
+				<lifecycle_last_change>3.37.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -734,7 +767,7 @@
 						<xs:documentation>Reference temperature for which the machine description data is given in this IDS</xs:documentation>
 						<xs:appinfo>
 							<introduced_after_version>3.32.1</introduced_after_version>
-						</xs:appinfo>	
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="first_wall_surface_area">
@@ -756,6 +789,18 @@
 							<units>W.m^-2</units>
 						</xs:appinfo>
 					</xs:annotation>
+				</xs:element>
+				<xs:element name="volume">
+					<xs:annotation>
+						<xs:documentation>Volume avalaible to gas or plasma inside the vacuum vessel</xs:documentation>
+						<xs:appinfo>
+							<units>m^3</units>
+							<type>static</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_0D"/>
+					</xs:complexType>
 				</xs:element>
 				<xs:element name="global_quantities" type="wall_global_quantitites">
 					<xs:annotation>
