@@ -103,7 +103,7 @@
 		<xs:sequence>
 			<xs:element name="element" type="plasma_composition_neutral_element_constant" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>List of elements forming the atom or molecule</xs:documentation>
+					<xs:documentation>List of elements forming the atom or molecule of the incident species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -111,13 +111,55 @@
 			</xs:element>
 			<xs:element name="label">
 				<xs:annotation>
-					<xs:documentation>String identifying the species (e.g. H, D, CD4, ...)</xs:documentation>
+					<xs:documentation>String identifying the incident species (e.g. H, D, CD4, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="energies">
+				<xs:annotation>
+					<xs:documentation>Array of energies of this incident species, on which the sputtering_physical_coefficient is tabulated</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>eV</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sputtering_physical_coefficient">
+				<xs:annotation>
+					<xs:documentation>Effective coefficient of physical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast), due to this incident species and for various energies (third dimension)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...3</coordinate1>
+						<coordinate2>../energies</coordinate2>
+						<coordinate3>/time</coordinate3>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sputtering_chemical_coefficient">
+				<xs:annotation>
+					<xs:documentation>Effective coefficient of chemical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast), due to this incident species</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...3</coordinate1>
+						<coordinate2>/time</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -242,41 +284,11 @@
 			</xs:element>
 			<xs:element name="incident_species" type="wall_global_quantitites_neutral_origin" maxOccurs="10">
 				<xs:annotation>
-					<xs:documentation>Incident species at the origin of the sputtering</xs:documentation>
+					<xs:documentation>Sputtering coefficients due to a set of incident species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-			</xs:element>
-			<xs:element name="sputtering_physical_coefficient">
-				<xs:annotation>
-					<xs:documentation>Effective coefficient of physical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast), due to a given incident species (second dimension)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<coordinate1>1...3</coordinate1>
-						<coordinate2>../incident_species</coordinate2>
-						<coordinate3>/time</coordinate3>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="sputtering_chemical_coefficient">
-				<xs:annotation>
-					<xs:documentation>Effective coefficient of chemical sputtering for various neutral types (first dimension: 1: cold; 2: thermal; 3: fast), due to a given incident species (second dimension)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<coordinate1>1...3</coordinate1>
-						<coordinate2>../incident_species</coordinate2>
-						<coordinate3>/time</coordinate3>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
