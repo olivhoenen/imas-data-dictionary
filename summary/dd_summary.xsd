@@ -639,6 +639,153 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_gas_injection_cumulated">
+		<xs:annotation>
+			<xs:documentation>List of ion species and other gas cumulated injection related quantities</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="total" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Total gas cumulated injection (sum over species)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="midplane" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Cumulated gas injection from all valves located near the equatorial midplane</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="top" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Cumulated gas injection from all valves located near the top of the vaccuum chamber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bottom" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Cumulated gas injection from all valves located near near the bottom of the vaccuum chamber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hydrogen" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Hydrogen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deuterium" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Deuterium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tritium" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Tritium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="helium_3" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Helium isotope with 3 nucleons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="helium_4" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Helium isotope with 4 nucleons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="impurity_seeding" type="summary_constant_int_0d">
+				<xs:annotation>
+					<xs:documentation>Flag set to 1 if any gas other than H, D, T, He is puffed during the pulse, 0 otherwise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beryllium" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Beryllium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lithium" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Lithium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="carbon" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Carbon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oxygen" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Oxygen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nitrogen" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Nitrogen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="neon" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Neon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="argon" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Argon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="xenon" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Xenon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="krypton" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Krypton</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="methane" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Methane (CH4)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="methane_carbon_13" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Methane (CH4 with carbon 13)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="methane_deuterated" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Deuterated methane (CD4)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="silane" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Silane (SiH4)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ethylene" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Ethylene (C2H4)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ethane" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Ethane (C2H6)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="propane" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Propane (C3H8)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ammonia" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Ammonia (NH3)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ammonia_deuterated" type="summary_dynamic_flt_1d_root_parent_2">
+				<xs:annotation>
+					<xs:documentation>Deuterated ammonia (ND3)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_gas_injection">
 		<xs:annotation>
 			<xs:documentation>List of ion species and other gas injection related quantities</xs:documentation>
@@ -3720,6 +3867,15 @@
 						<xs:documentation>Gas injection rates in equivalent electrons.s^-1</xs:documentation>
 						<xs:appinfo>
 							<units>electrons.s^-1</units>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="gas_injection_cumulated" type="summary_gas_injection">
+					<xs:annotation>
+						<xs:documentation>Cumulated gas injection since the plasma breakdown in equivalent electrons</xs:documentation>
+						<xs:appinfo>
+							<units>electrons</units>
+							<introduced_after_version>3.36.0</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
