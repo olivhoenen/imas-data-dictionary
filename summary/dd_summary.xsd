@@ -639,29 +639,29 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="summary_gas_injection_cumulated">
+	<xs:complexType name="summary_gas_injection_accumulated">
 		<xs:annotation>
-			<xs:documentation>List of ion species and other gas cumulated injection related quantities</xs:documentation>
+			<xs:documentation>List of accumulated ion species and other related quantities within volume enclosed by first wall contour</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="total" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
-					<xs:documentation>Total gas cumulated injection (sum over species)</xs:documentation>
+					<xs:documentation>Total accumulated injected gas (sum over species)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="midplane" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
-					<xs:documentation>Cumulated gas injection from all valves located near the equatorial midplane</xs:documentation>
+					<xs:documentation>Accumulated gas injected from all valves located near the equatorial midplane</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="top" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
-					<xs:documentation>Cumulated gas injection from all valves located near the top of the vaccuum chamber</xs:documentation>
+					<xs:documentation>Accumulated gas injected from all valves located near the top of the vacuum chamber</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="bottom" type="summary_dynamic_flt_1d_root_parent_2">
 				<xs:annotation>
-					<xs:documentation>Cumulated gas injection from all valves located near near the bottom of the vaccuum chamber</xs:documentation>
+					<xs:documentation>Accumulated gas injected from all valves located near near the bottom of the vacuum chamber</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="hydrogen" type="summary_dynamic_flt_1d_root_parent_2">
@@ -3870,9 +3870,9 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="gas_injection_cumulated" type="summary_gas_injection">
+				<xs:element name="gas_injection_accumulated" type="summary_gas_injection_accumulated">
 					<xs:annotation>
-						<xs:documentation>Cumulated gas injection since the plasma breakdown in equivalent electrons</xs:documentation>
+						<xs:documentation>Accumulated injected gas since the plasma breakdown in equivalent electrons</xs:documentation>
 						<xs:appinfo>
 							<units>electrons</units>
 							<introduced_after_version>3.36.0</introduced_after_version>
