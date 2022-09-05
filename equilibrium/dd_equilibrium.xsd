@@ -1097,6 +1097,23 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="v_external">
+				<xs:annotation>
+					<xs:documentation>External voltage, i.e. time derivative of psi_external_average (with a minus sign : - d_psi_external_average/d_time)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>V</units>
+						<cocos_label_transformation>ip_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>core_profiles.global_quantities.v_loop</cocos_leaf_name_aos_indices>
+						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.global_quantities.v_external</cocos_leaf_name_aos_indices>
+						<introduced_after_version>3.37.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="plasma_inductance">
 				<xs:annotation>
 					<xs:documentation>Plasma inductance 2 E_magnetic/Ip^2, where E_magnetic = 1/2 * int(psi.j_tor.dS) (integral over the plasma poloidal cross-section)</xs:documentation>
@@ -3074,7 +3091,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.37.0</lifecycle_last_change>
+				<lifecycle_last_change>3.38.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
