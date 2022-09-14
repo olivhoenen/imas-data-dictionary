@@ -4624,6 +4624,68 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Component along the major radius axis, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../radial</coordinate1_same_as>
+						<units>as_parent</units>
+						<introduced_after_version>3.37.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="r_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../radial</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+						<introduced_after_version>3.37.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Component along the height axis, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../radial</coordinate1_same_as>
+						<units>as_parent</units>
+						<introduced_after_version>3.37.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../radial</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+						<introduced_after_version>3.37.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="generic_grid_matrix">
@@ -7758,7 +7820,7 @@
 				<xs:annotation>
 					<xs:documentation>The element is approximated by a rectangle defined by a central segment and a thickness in the direction perpendicular to the segment</xs:documentation>
 					<xs:appinfo>
-					<introduced_after_version>3.36.0</introduced_after_version>
+						<introduced_after_version>3.36.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
