@@ -79,7 +79,7 @@
 					<xs:documentation>The Ray Transfer Matrix (RTM, or geometry matrix) here provides transformation of the signal from each individual unit light source (voxel) to the receiver (detector or head of an optic fibre). The emission profile has [photons.m^-3.s^-1.sr^-1] units and radiance signal has [photons.m^-2.s^-1.sr^-1] units. So the RTM has [m] units. This data is stored in a sparse form, i.e. the array contains only the non-zero element of the Ray transfer matrix. The voxel index corresponding to an element of this array can be found in voxel_indices</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<coordinate1>../voxel_indices</coordinate1>
+						<coordinate1>1...N</coordinate1>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -92,7 +92,7 @@
 					<xs:documentation>List of voxel indices (defined in the voxel map) used in the sparse data array</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<coordinate1>1...N</coordinate1>
+						<coordinate1>../data</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

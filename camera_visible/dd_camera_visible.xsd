@@ -17,19 +17,15 @@
 		<xs:sequence>
 			<xs:element name="data">
 				<xs:annotation>
-					<xs:documentation>The Ray Transfer Matrix (RTM, or geometry matrix) here provides transformation of the signal from each individual unit light source (voxel) to the receiver (detector or head of an optic fibre). The emission profile has [photons.m^-3.s^-1.sr^-1] units and radiance signal has [photons.m^-2.s^-1.sr^-1] units. So the RTM has [m] units. The first two dimension correspond to the detector pixels : first dimension : line index (horizontal axis); second dimension: column index (vertical axis). The third dimension corresponds to the voxel_indices array.This data is stored in a sparse form, i.e. the array contains only the non-zero element of the Ray transfer matrix. The voxel index corresponding to an element of this array (third dimension) can be found in voxel_indices</xs:documentation>
+					<xs:documentation>The Ray Transfer Matrix (RTM, or geometry matrix) here provides transformation of the signal from each individual unit light source (voxel) to each pixel of the receiver (detector). The emission profile has [photons.m^-3.s^-1.sr^-1] units and radiance signal has [photons.m^-2.s^-1.sr^-1] units. So the RTM has [m] units. This data is stored in a sparse form, i.e. the array contains only the non-zero element of the Ray transfer matrix. The voxel index corresponding to an element of this array can be found in voxel_indices. The pixel indices corresponding to an element of this array can be found in pixel_indices</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
-						<coordinate1_same_as>../../../frame/image_raw</coordinate1_same_as>
-						<coordinate2>1...N</coordinate2>
-						<coordinate2_same_as>../../../frame/image_raw</coordinate2_same_as>
-						<coordinate3>../voxel_indices</coordinate3>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_3D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="voxel_indices">
@@ -37,11 +33,24 @@
 					<xs:documentation>List of voxel indices (defined in the voxel map) used in the sparse data array</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<coordinate1>1...N</coordinate1>
+						<coordinate1>../data</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pixel_indices">
+				<xs:annotation>
+					<xs:documentation>List of pixel indices used in the sparse data array. The first dimension refers to the data array index. The second dimension lists the line index (horizontal axis) in first position, then the column index (vertical axis).</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>../data</coordinate1>
+						<coordinate1>1...2</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
