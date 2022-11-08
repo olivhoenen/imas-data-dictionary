@@ -35,18 +35,10 @@ config.read(join_path(PWD, "configuration.ini"))
 
 SAXONICA_JAR = config["BUILD"]["SAXONICA_JAR"]
 DD_GIT_DESCRIBE = str(
-    subprocess.check_output(["git", "describe"], cwd=PWD)
-    .decode()
-    .strip()
+    subprocess.check_output(["git", "describe"], cwd=PWD).decode().strip()
 )
 
-if not os.path.islink(join_path(PWD, "IDSDef.xml")):
-                os.symlink(
-                    "dd_data_dictionary.xml",
-                    "IDSDef.xml",
-                )
-                
-                
+
 def generate_dd_data_dictionary():
     dd_data_dictionary_generation_command = (
         "java"
@@ -61,7 +53,8 @@ def generate_dd_data_dictionary():
         + " DD_GIT_DESCRIBE="
         + DD_GIT_DESCRIBE
     )
-    proc = subprocess.Popen(dd_data_dictionary_generation_command.split(),
+    proc = subprocess.Popen(
+        dd_data_dictionary_generation_command.split(),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         # env=env,
@@ -72,8 +65,15 @@ def generate_dd_data_dictionary():
 
     if proc.returncode != 0:
         assert False, stderr
-            
-#TODO Check the problem of generation
+    else:
+        if not os.path.islink(join_path(PWD, "IDSDef.xml")):
+            os.symlink(
+                "dd_data_dictionary.xml",
+                "IDSDef.xml",
+            )
+
+
+# TODO Check the problem of generation
 def generate_html_documentation():
     html_documentation_generation_command = (
         "java"
@@ -88,7 +88,8 @@ def generate_html_documentation():
         + " DD_GIT_DESCRIBE="
         + DD_GIT_DESCRIBE
     )
-    proc = subprocess.Popen(html_documentation_generation_command.split(),
+    proc = subprocess.Popen(
+        html_documentation_generation_command.split(),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         # env=env,
@@ -99,8 +100,12 @@ def generate_html_documentation():
 
     if proc.returncode != 0:
         assert False, stderr
-    
-    shutil.copy("utilities/coordinate_identifier.xml", "html_documentation/utilities/coordinate_identifier.xml")
+
+    shutil.copy(
+        "utilities/coordinate_identifier.xml",
+        "html_documentation/utilities/coordinate_identifier.xml",
+    )
+
 
 def generate_ids_cocos_transformations_symbolic_table():
     ids_cocos_transformations_symbolic_table_generation_command = (
@@ -116,7 +121,8 @@ def generate_ids_cocos_transformations_symbolic_table():
         + " DD_GIT_DESCRIBE="
         + DD_GIT_DESCRIBE
     )
-    proc = subprocess.Popen(ids_cocos_transformations_symbolic_table_generation_command.split(),
+    proc = subprocess.Popen(
+        ids_cocos_transformations_symbolic_table_generation_command.split(),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         # env=env,
@@ -128,13 +134,14 @@ def generate_ids_cocos_transformations_symbolic_table():
     if proc.returncode != 0:
         assert False, stderr
 
+
 def generate_idsnames():
     proc = subprocess.Popen(
-                    [
-                        "xsltproc",
-                        join_path(PWD, "IDSNames.txt.xsl"),
-                        join_path(PWD, "dd_data_dictionary.xml"),
-                    ],
+        [
+            "xsltproc",
+            join_path(PWD, "IDSNames.txt.xsl"),
+            join_path(PWD, "dd_data_dictionary.xml"),
+        ],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         # env=env,
@@ -148,8 +155,8 @@ def generate_idsnames():
     else:
         f = open("IDSNames.txt", "w")
         f.write(stdout)
-        f.close()        
-        
+        f.close()
+
 
 def generate_dd_data_dictionary_validation():
     dd_data_dictionary_validation_generation_command = (
@@ -157,7 +164,8 @@ def generate_dd_data_dictionary_validation():
         + " dd_data_dictionary_validation.txt.xsl"
         + " dd_data_dictionary.xml"
     )
-    proc = subprocess.Popen(dd_data_dictionary_validation_generation_command.split(),
+    proc = subprocess.Popen(
+        dd_data_dictionary_validation_generation_command.split(),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True,
@@ -166,30 +174,15 @@ def generate_dd_data_dictionary_validation():
     (stdout, stderr) = proc.communicate()
 
     if proc.returncode != 0:
-        assert False, stderr   
+        assert False, stderr
     else:
         f = open("dd_data_dictionary_validation.txt", "w")
         f.write(stdout)
-        f.close()   
-                         
-# generate_dd_data_dictionary()
-generate_html_documentation()        
-# generate_ids_cocos_transformations_symbolic_table()
-# generate_idsnames()
-# generate_dd_data_dictionary_validation()
+        f.close()
 
-#             define xslt2proc
-# @# Expect prerequisites: <xmlfile> <xslfile>
-# $(SAXON) -threads:4 -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ DD_GIT_DESCRIBE=$(DD_GIT_DESCRIBE) || { rm -f $@ ; exit 1 ; }
-# endef
 
-# xsltproc $(word 2,$^) $< > $@ || { rm -f $@ ; exit 1 ;}
-# html_documentation/html_documentation.html: dd_data_dictionary.xml dd_data_dictionary_html_documentation.xsl
-# 	$(xslt2proc)
-# 	cp utilities/coordinate_identifier.xml html_documentation/utilities/coordinate_identifier.xml
-
-# html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv: dd_data_dictionary.xml ids_cocos_transformations_symbolic_table.csv.xsl
-# 	$(xslt2proc)
-
-# IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
-# 	$(xsltproc)
+generate_dd_data_dictionary()
+generate_html_documentation()
+generate_ids_cocos_transformations_symbolic_table()
+generate_idsnames()
+generate_dd_data_dictionary_validation()
