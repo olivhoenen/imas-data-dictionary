@@ -159,6 +159,7 @@ def ignored_files(adir, filenames):
     ]
 
 
-shutil.copytree(
-    "utilities", os.path.join(includedir, "utilities"), ignore=ignored_files
-)
+if not os.path.exists(os.path.join(includedir, "utilities")):
+    shutil.copytree(
+        "utilities", os.path.join(includedir, "utilities"), ignore=ignored_files
+    )
