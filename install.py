@@ -59,7 +59,6 @@ html_files = [
     for f in listdir("html_documentation")
     if isfile(join("html_documentation", f))
 ]
-print(html_files)
 html_files_command = (
     "install -m 644 " + " ".join(html_files) + " " + os.path.join(htmldir, "imas")
 )
