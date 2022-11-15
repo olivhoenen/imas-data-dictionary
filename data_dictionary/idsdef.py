@@ -1,7 +1,14 @@
 #!/usr/bin/env python
-import xml.etree.ElementTree as ET
 import os
+import re
 import sys
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+
+def major_minor_micro(version):
+    major, minor, micro = re.search("(\d+)\.(\d+)\.(\d+)", version).groups()
+    return int(major), int(minor), int(micro)
 
 
 class IDSDef:
@@ -14,11 +21,44 @@ class IDSDef:
     def __init__(self):
         # parse the XML def
         try:
-            imaspref = os.environ["IMAS_PREFIX"]
-            tree = ET.parse(imaspref + "/include/IDSDef.xml")
+            idsdef_path = ""
+            if "IMAS_PREFIX1" in os.environ:
+                imaspref = os.environ["IMAS_PREFIX"]
+                idsdef_path = imaspref + "/include/IDSDef.xml"
+            else:  # Get latest version from dd python package
+                current_python_path = sys.prefix
+                software_path = os.path.join(current_python_path, "../../")
+                if os.path.exists(software_path + "/data_dictionary"):
+                    dd_path = os.path.join(software_path, "data_dictionary")
+                    dd_versions_list = os.listdir(dd_path)
+                    latest = max(dd_versions_list, key=major_minor_micro)
+                    folder_to_look = os.path.join(dd_path, latest)
+                    for root, dirs, files in os.walk(folder_to_look):
+                        for file in files:
+                            if file.endswith("IDSDef.xml"):
+                                idsdef_path = os.path.join(root, file)
+                                break
+            if idsdef_path == "":  # if still empty get the path from local directory
+                local_directory = os.path.join(str(Path.home()), ".local")
+                reg_compile = re.compile("dd_*")
+                version_list = [
+                    dirname
+                    for dirname in os.listdir(local_directory)
+                    if reg_compile.match(dirname)
+                ]
+                latest_version = max(version_list, key=major_minor_micro)
+                folder_to_look = os.path.join(local_directory, latest_version)
+                for root, dirs, files in os.walk(folder_to_look):
+                    for file in files:
+                        if file.endswith("IDSDef.xml"):
+                            idsdef_path = os.path.join(root, file)
+                            break
+            tree = ET.parse(idsdef_path)
             self.root = tree.getroot()
             self.version = self.root.findtext("./version", default="N/A")
             self.cocos = self.root.findtext("./cocos", default="N/A")
+            # print("IDSDefinitions Path:", idsdef_path)
+            # print("IDSDefinitions Version:", self.version)
         except:
             print(
                 "Error while trying to access IDSDef.xml, make sure you've loaded IMAS module",
@@ -62,6 +102,7 @@ class IDSDef:
 
     def version():
         """Returns the current Data-Dictionary version."""
+        return self.version
 
 
 def main():
