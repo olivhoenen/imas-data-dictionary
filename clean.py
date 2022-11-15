@@ -3,8 +3,7 @@ import glob
 import os
 import shutil
 
-
-CLEAN_FILES = "dd_data_dictionary.xml dd_data_dictionary_validation.txt IDSDef.xml IDSNames.txt ./html_documentation/*.html ./html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv ./install/*.*".split(
+CLEAN_FILES = "./build ./dist ./*.egg-info dd_data_dictionary.xml dd_data_dictionary_validation.txt IDSDef.xml IDSNames.txt ./html_documentation/*.html ./html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv ./install/*.*".split(
     " "
 )
 EXCEPTION_FILES = "./html_documentation/dd_versions.html".split(" ")
