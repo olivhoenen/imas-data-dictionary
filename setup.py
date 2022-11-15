@@ -7,8 +7,9 @@ current_directory = pathlib.Path(__file__).parent.resolve()
 long_description = (current_directory / "README.md").read_text(encoding="utf-8")
 
 paths = []
-for schema in os.listdir("schemas"):
-    paths.append(("schemas/" + schema, glob.glob("schemas/" + schema + "/*.*")))
+version = versioneer.get_version()
+for (path, directories, filenames) in os.walk("install"):
+    paths.append((path.replace("install", "dd_" + version), glob.glob(path + "/*.*")))
 
 setup(
     name="data_dictionary",
