@@ -8,8 +8,13 @@ long_description = (current_directory / "README.md").read_text(encoding="utf-8")
 
 paths = []
 version = versioneer.get_version()
-for (path, directories, filenames) in os.walk("install"):
-    paths.append((path.replace("install", "dd_" + version), glob.glob(path + "/*.*")))
+if os.path.exists("install"):
+    for (path, directories, filenames) in os.walk("install"):
+        paths.append(
+            (path.replace("install", "dd_" + version), glob.glob(path + "/*.*"))
+        )
+else:
+    print("Installing without data dictionary IDSDef.xml")
 
 setup(
     name="data_dictionary",
