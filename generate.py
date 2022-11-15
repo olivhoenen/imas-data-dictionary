@@ -1,17 +1,11 @@
-import configparser
 import os
 import shutil
 import subprocess
 from argparse import ArgumentParser
-from distutils.dir_util import copy_tree
-from pathlib import Path
 
 PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
-assert (
-    os.path.isfile(os.path.join(PWD, "configuration.ini")) is True
-), "Couldn't find configuration ini file. Please execute using command [python configure.py]"
-
+SAXON_VERSIONS = ["saxon-he-10.3.jar", "saxon9he.jar"]
 
 parser = ArgumentParser()
 parser.add_argument("--test", action="store_true")
@@ -29,11 +23,25 @@ def join_path(path1="", path2=""):
     return os.path.normpath(os.path.join(path1, path2))
 
 
-# read config file
-config = configparser.ConfigParser()
-config.read(join_path(PWD, "configuration.ini"))
+if "CLASSPATH" in os.environ:
+    saxonica_jar = ""
+    if "CLASSPATH" in os.environ:
+        classpaths = os.environ["CLASSPATH"]
+        classpaths = classpaths.split(":")
+        for saxon_version in SAXON_VERSIONS:
+            saxonica_jar_list = [
+                classpath for classpath in classpaths if saxon_version in classpath
+            ]
+            if saxonica_jar_list:
+                saxonica_jar = saxonica_jar_list[0]
+                break
 
-SAXONICA_JAR = config["BUILD"]["SAXONICA_JAR"]
+    assert saxonica_jar != "", "Relevant Saxon Jar not found"
+    SAXONICA_JAR = saxonica_jar
+else:
+    raise ValueError(
+        "Looks like Saxon module is not loaded. module - avail saxon ; module load <saxon module>"
+    )
 DD_GIT_DESCRIBE = str(
     subprocess.check_output(["git", "describe"], cwd=PWD).decode().strip()
 )
