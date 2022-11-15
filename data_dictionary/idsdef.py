@@ -22,7 +22,7 @@ class IDSDef:
         # parse the XML def
         try:
             idsdef_path = ""
-            if "IMAS_PREFIX1" in os.environ:
+            if "IMAS_PREFIX" in os.environ:
                 imaspref = os.environ["IMAS_PREFIX"]
                 idsdef_path = imaspref + "/include/IDSDef.xml"
             else:  # Get latest version from dd python package
@@ -100,7 +100,7 @@ class IDSDef:
 
         return f.attrib
 
-    def version():
+    def version(self):
         """Returns the current Data-Dictionary version."""
         return self.version
 
