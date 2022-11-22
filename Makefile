@@ -12,7 +12,8 @@ HTMLDOC_FILES_IDS=$(wildcard $(addprefix html_documentation/,$(addsuffix /*.*,$(
 COCOS_FILES=$(wildcard $(addprefix html_documentation/cocos/,*.csv))
 
 # Identifiers definition files
-ID_IDENT = $(wildcard */*_identifier.xml)
+ID_IDENT = $(wildcard schemas/*/*_identifier.xml)
+ID_IDENT_WITHOUT_SCHEMA = $(dir $(subst schemas/,,$(ID_IDENT)))
 ID_FILES = $(ID_IDENT)
 
 .PHONY: all clean test install
@@ -53,8 +54,8 @@ dd_install: $(DD_FILES)
 	ln -sf dd_data_dictionary.xml $(includedir)/IDSDef.xml
 
 identifiers_install: $(ID_IDENT)
-	$(mkdir_p) $(foreach subdir,$(sort $(^D)),$(includedir)/$(subdir))
-	$(foreach F,$^,$(INSTALL_DATA) $(F) $(includedir)/$(dir $(F));)
+	$(mkdir_p) $(foreach subdir,$(sort dir $(ID_IDENT_WITHOUT_SCHEMA)),$(includedir)/$(subdir))
+	$(foreach F,$^,$(INSTALL_DATA) $(F) $(includedir)/$(dir $(subst schemas/,,$(F)));)
 
 # Compatibility target
 IDSDef.xml: dd_data_dictionary.xml
@@ -65,7 +66,6 @@ dd_data_dictionary.xml: %: %.xsd %.xsl
 
 html_documentation/html_documentation.html: dd_data_dictionary.xml dd_data_dictionary_html_documentation.xsl
 	$(xslt2proc)
-	cp utilities/coordinate_identifier.xml html_documentation/utilities/coordinate_identifier.xml
 
 html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv: dd_data_dictionary.xml ids_cocos_transformations_symbolic_table.csv.xsl
 	$(xslt2proc)

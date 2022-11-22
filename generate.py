@@ -7,16 +7,6 @@ PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
 SAXON_VERSIONS = ["saxon-he-10.3.jar", "saxon9he.jar"]
 
-parser = ArgumentParser()
-parser.add_argument("--test", action="store_true")
-parser.add_argument("--no_test", dest="test", action="store_false")
-parser.set_defaults(test=False)
-
-parser.add_argument("--identifiers", action="store_true")
-parser.add_argument("--no_identifiers", dest="identifiers", action="store_false")
-parser.set_defaults(identifiers=False)
-
-args = parser.parse_args()
 
 
 def join_path(path1="", path2=""):
@@ -110,7 +100,7 @@ def generate_html_documentation():
         assert False, stderr
 
     shutil.copy(
-        "utilities/coordinate_identifier.xml",
+        "schemas/utilities/coordinate_identifier.xml",
         "html_documentation/utilities/coordinate_identifier.xml",
     )
 
