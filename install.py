@@ -157,14 +157,14 @@ def ignored_files(adir, filenames):
     ]
 
 
-if not os.path.exists(os.path.join(includedir, "schemas/utilities")):
+if not os.path.exists(os.path.join(includedir, "utilities")):
     shutil.copytree(
-        "schemas/utilities", os.path.join(includedir, "schemas/utilities"), ignore=ignored_files
+        "utilities", os.path.join(includedir, "utilities"), ignore=ignored_files
     )
 
 # Identifiers definition files
 ID_IDENT=[]
-for root, dirs, files in os.walk("schemas"):
+for root, dirs, files in os.walk("."):
     for filename in files:
         if filename.endswith("_identifier.xml"):
             ID_IDENT.append(os.path.join(root, filename))

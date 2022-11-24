@@ -7,10 +7,10 @@
 <xsl:template match="/*">
 <!-- Tests for the utilities section -->
 <xsl:choose>
-<xsl:when test="not(./schemas/utilities//field[@timebasepath=''])">
+<xsl:when test="not(./utilities//field[@timebasepath=''])">
 The utilities section is valid</xsl:when>
 <xsl:otherwise>
-The utilities section has errors:<xsl:apply-templates select="./schemas/utilities//field[@timebasepath='']">
+The utilities section has errors:<xsl:apply-templates select="./utilities//field[@timebasepath='']">
 <xsl:with-param name="error_description" select="'Problem in the timebasepath computation or in the specification of the time coordinate : this field has an empty timebasepath attribute'"/>
 </xsl:apply-templates>
 </xsl:otherwise>

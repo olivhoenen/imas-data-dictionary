@@ -43,13 +43,13 @@
 </p>
 <table border="1">
         <thead style="color:#ff0000"><td>Generic structure name</td><td>Description</td></thead>
-<xsl:for-each select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType">
+<xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:complexType">
 <tr>
 	<td><xsl:value-of select="@name"/></td>
 	<td><xsl:value-of select="xs:annotation/xs:documentation"/></td>
 </tr>
 </xsl:for-each>
-<xsl:for-each select="document('schemas/utilities/dd_support.xsd')/*/xs:element">
+<xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:element">
 <tr>
 	<td><xsl:value-of select="@name"/></td>
 	<td><xsl:value-of select="./xs:annotation/xs:documentation"/></td>

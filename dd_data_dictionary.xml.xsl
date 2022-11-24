@@ -77,7 +77,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		  </cocos>
 		<utilities>
         <!-- Declare complex types from Utilities -->
-        <xsl:for-each select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType">
+        <xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:complexType">
         <field>
         <xsl:attribute name="name" select="@name"/>
         <xsl:attribute name="data_type" select="'structure'"/>
@@ -94,7 +94,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
           </field>
         </xsl:for-each>
         <!-- Declare Elements from Utilities (only those being the root of a structure, simple elements are not needed in IDSDef.xml)-->
-        <xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:element[./xs:complexType]" mode="IMPLEMENT">
+        <xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[./xs:complexType]" mode="IMPLEMENT">
 <xsl:with-param name="structure_reference" select="'self'"/>
 <xsl:with-param name="aosLevel" select="1"/>
 <xsl:with-param name="aos3Parent" select="xs:annotation/xs:appinfo/aos3Parent"/>
@@ -649,7 +649,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:with-param name="actRef" select="$thisRef"/>
 			<xsl:with-param name="maxOcc" select="$maxOcc"/>
 		</xsl:apply-templates>
-		<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]" mode="DECLARE"/>
+		<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]" mode="DECLARE"/>
 	</xsl:template>
 	<xsl:template match="xs:include" mode="DECLARE">
 		<xsl:param name="actRef"/>
@@ -666,7 +666,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath_doc"/>
 		<xsl:param name="aosLevel"/>
 		<xsl:choose>
-			<xsl:when test="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisRef]">
+			<xsl:when test="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisRef]">
 				when the reference to be included is a complexType defined in utilities : NEVER HAPPENS
 				CHECK RESULT HERE IF THIS APPEARS
 				<xsl:apply-templates select="document('utilities.xsd')/*/xs:complexType[@name=$thisRef]" mode="IMPLEMENT">
@@ -676,9 +676,9 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					<xsl:with-param name="parentmachine" select="yes"/>
 				</xsl:apply-templates>
 			</xsl:when>
-			<xsl:when test="document('schemas/utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]">
+			<xsl:when test="document('utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]">
 				<!-- when the reference to be included is an element defined in utilities -->
-				<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]" mode="IMPLEMENT">
+				<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]" mode="IMPLEMENT">
 					<xsl:with-param name="currPath" select="$currPath"/>
 					<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 					<xsl:with-param name="aosLevel" select="$aosLevel"/>
@@ -711,15 +711,15 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<!-- in the schemas, this property is flagged by <xs:appinfo>parent-dependent</xs:appinfo> -->
 			<!-- this is checked now, and  this information is passed using the parentmachine and parenttime parameters to the IMPLEMENT templates -->
 			<!-- some draft of the parentunit information is done here ... not sure it is reliable yet for the units !! (used by ISE only for the moment) -->
-			<xsl:when test="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]">
+			<xsl:when test="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]">
 				<!-- if the complexType definition is in Utilities-->
 				<xsl:choose>
-					<xsl:when test="contains(string(document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]/xs:annotation/xs:appinfo), 'parent-dependent')">
+					<xsl:when test="contains(string(document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]/xs:annotation/xs:appinfo), 'parent-dependent')">
 						<xsl:choose>
 							<xsl:when test="contains(string(xs:annotation/xs:appinfo), 'machine description')">
 								<xsl:choose>
 									<xsl:when test="contains(string(xs:annotation/xs:documentation), 'Time-dependent')">
-										<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+										<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
@@ -730,7 +730,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										</xsl:apply-templates>
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+										<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
@@ -744,7 +744,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:otherwise>
 								<xsl:choose>
 									<xsl:when test="contains(string(xs:annotation/xs:documentation), 'Time-dependent')">
-										<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+										<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
@@ -754,7 +754,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										</xsl:apply-templates>
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+										<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
@@ -771,7 +771,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 						<!-- Just check whether the data is an experimental data type (has an implication for exp2ITM) -->
 						<xsl:choose>
 							<xsl:when test="$thisType='exp0D' or $thisType='exp1D' or $thisType='exp2D'">
-								<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+								<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 									<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 									<xsl:with-param name="currPath" select="$currPath"/>
 									<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
@@ -781,7 +781,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								</xsl:apply-templates>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+								<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 									<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 									<xsl:with-param name="currPath" select="$currPath"/>
 									<xsl:with-param name="currPath_doc" select="$currPath_doc"/>

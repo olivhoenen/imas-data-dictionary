@@ -100,7 +100,7 @@ def generate_html_documentation():
         assert False, stderr
 
     shutil.copy(
-        "schemas/utilities/coordinate_identifier.xml",
+        "utilities/coordinate_identifier.xml",
         "html_documentation/utilities/coordinate_identifier.xml",
     )
 
