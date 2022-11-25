@@ -37,6 +37,7 @@ htmldoc = [
     "html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv",
 ]
 
+
 def execute_command(command_to_execute):
     proc = subprocess.Popen(
         command_to_execute.split(),
@@ -163,22 +164,21 @@ if not os.path.exists(os.path.join(includedir, "utilities")):
     )
 
 # Identifiers definition files
-ID_IDENT=[]
-for root, dirs, files in os.walk("."):
+exclude = set(["install", "data_dictionary", "dist", "build"])
+
+ID_IDENT = []
+for root, dirs, files in os.walk(".", topdown=True):
+    dirs[:] = [d for d in dirs if d not in exclude]
     for filename in files:
         if filename.endswith("_identifier.xml"):
             ID_IDENT.append(os.path.join(root, filename))
-              
+
 
 for file_path in ID_IDENT:
     directory_path = os.path.dirname(file_path)
     directory_name = os.path.basename(directory_path)
     Path(includedir + "/" + directory_name).mkdir(parents=True, exist_ok=True)
     identifiers_command = (
-        "install -m 644 "
-        + file_path
-        + " "
-        + os.path.join(includedir, directory_name)
+        "install -m 644 " + file_path + " " + os.path.join(includedir, directory_name)
     )
     execute_command(identifiers_command)
- 

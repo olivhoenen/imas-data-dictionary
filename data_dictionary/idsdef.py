@@ -1,4 +1,46 @@
 #!/usr/bin/env python
+
+"""
+Usage
+
+$ python data_dictionary/idsdef.py amns_data ids_properties/comment
+Any comment describing the content of this IDS
+
+$ python data_dictionary/idsdef.py info amns_data ids_properties/comment -a
+name: comment
+path: ids_properties/comment
+path_doc: ids_properties/comment
+documentation: Any comment describing the content of this IDS
+data_type: STR_0D
+type: constant
+
+$ python data_dictionary/idsdef.py info amns_data ids_properties/comment -m
+This is Data Dictionary version = 3.37.0, following COCOS = 11
+==============================================================
+Any comment describing the content of this IDS
+$   
+
+$ python data_dictionary/idsdef.py info amns_data ids_properties/comment -s data_type
+STR_0D
+$  
+
+$ python data_dictionary/idsdef.py idsnames 
+amns_data
+barometry
+bolometer
+bremsstrahlung_visible
+...
+
+$ python data_dictionary/idsdef.py search -t ggd 
+distribution_sources/source/ggd
+distributions/distribution/ggd
+edge_profiles/grid_ggd
+        ggd
+        ggd_fast
+edge_sources/grid_ggd
+        source/ggd
+...
+"""
 import os
 import re
 import sys
@@ -57,21 +99,19 @@ class IDSDef:
             self.root = tree.getroot()
             self.version = self.root.findtext("./version", default="N/A")
             self.cocos = self.root.findtext("./cocos", default="N/A")
-            # print("IDSDefinitions Path:", idsdef_path)
-            # print("IDSDefinitions Version:", self.version)
         except:
             print(
                 "Error while trying to access IDSDef.xml, make sure you've loaded IMAS module",
                 file=sys.stderr,
             )
 
-    def getField(self, struct, field):
+    def get_field(self, struct, field):
         """Recursive function which returns the node corresponding to a given field which is a descendant of struct."""
         elt = struct.find('./field[@name="' + field[0] + '"]')
         if elt == None:
             raise Exception("Element '" + field[0] + "' not found")
         if len(field) > 1:
-            f = self.getField(elt, field[1:])
+            f = self.get_field(elt, field[1:])
         else:
             # specific generic node for which the useful doc is from the parent
             if field[0] != "value":
@@ -92,7 +132,7 @@ class IDSDef:
             fields = path.split("/")
 
             try:
-                f = self.getField(ids, fields)
+                f = self.get_field(ids, fields)
             except Exception as exc:
                 raise ValueError("Error while accessing {path}: {str(exc)}")
         else:
@@ -104,23 +144,61 @@ class IDSDef:
         """Returns the current Data-Dictionary version."""
         return self.version
 
+    def get_ids_names(self):
+        return [ids.attrib["name"] for ids in self.root.findall("IDS")]
+
+    def find_in_ids(self, text_to_search=""):
+        search_result = {}
+        for ids in self.root.findall("IDS"):
+            is_top_node = False
+            top_node_name = ""
+            search_result_for_ids = []
+            for field in ids.iter("field"):
+                if field.attrib["name"].find(text_to_search) != -1:
+                    if not is_top_node:
+                        is_top_node = True
+                        top_node_name = ids.attrib["name"] + "/" + field.attrib["path"]
+                    else:
+                        search_result_for_ids.append(field.attrib["path"])
+            search_result[top_node_name] = search_result_for_ids
+        return search_result
+
 
 def main():
     import argparse
     import sys
 
-    parser = argparse.ArgumentParser(
-        description="Query the IDS XML Definition for documentation"
+    idsdef_parser = argparse.ArgumentParser(description="IDS Def Utilities")
+    subparsers = idsdef_parser.add_subparsers(help="sub-commands help")
+
+    idsnames_command_parser = subparsers.add_parser("idsnames", help="print ids names")
+    idsnames_command_parser.set_defaults(cmd="idsnames")
+
+    search_command_parser = subparsers.add_parser("search", help="Search in ids")
+    search_command_parser.set_defaults(cmd="search")
+    search_option = search_command_parser.add_mutually_exclusive_group()
+    search_option.add_argument(
+        "-t",
+        "--text",
+        type=str,
+        default=None,
+        help="Text to search in all IDSes \t(default=%(default)s)",
     )
-    parser.add_argument("ids", type=str, help="IDS name")
-    parser.add_argument(
+
+    info_command_parser = subparsers.add_parser(
+        "info", help="Query the IDS XML Definition for documentation"
+    )
+    info_command_parser.set_defaults(cmd="info")
+
+    info_command_parser.add_argument("ids", type=str, help="IDS name")
+    info_command_parser.add_argument(
         "path",
         type=str,
         nargs="?",
         default=None,
         help="Path for field of interest within the IDS",
     )
-    opt = parser.add_mutually_exclusive_group()
+    opt = info_command_parser.add_mutually_exclusive_group()
     opt.add_argument("-a", "--all", action="store_true", help="Print all attributes")
     opt.add_argument(
         "-s",
@@ -129,30 +207,42 @@ def main():
         default="documentation",
         help="Select attribute to be printed \t(default=%(default)s)",
     )
-    parser.add_argument(
+    info_command_parser.add_argument(
         "-m",
         "--metaData",
         action="store_true",
         help="Print associated meta-data (version and cocos)",
     )
-    args = parser.parse_args()
+    args = idsdef_parser.parse_args()
 
-    try:
-        dd = IDSDef()
-        f = dd.query(args.ids, args.path)
-    except ValueError as ve:
-        print(f"{ve}", file=sys.stderr)
+    # Create IDSDef Object
+    idsdef_object = IDSDef()
 
-    if args.metaData:
-        mstr = f"This is Data Dictionary version = {dd.version}, following COCOS = {dd.cocos}"
-        print(mstr)
-        print("=" * len(mstr))
+    if args.cmd == "info":
+        attribute_dict = idsdef_object.query(args.ids, args.path)
 
-    if args.all:
-        for a in f.keys():
-            print(a + ": " + f[a])
-    else:
-        print(f[args.select])
+        if args.metaData:
+            mstr = f"This is Data Dictionary version = {idsdef_object.version}, following COCOS = {idsdef_object.cocos}"
+            print(mstr)
+            print("=" * len(mstr))
+
+        if args.all:
+            for a in attribute_dict.keys():
+                print(a + ": " + attribute_dict[a])
+        else:
+            print(attribute_dict[args.select])
+    elif args.cmd == "idsnames":
+        for name in idsdef_object.get_ids_names():
+            print(name)
+    elif args.cmd == "search":
+        if args.text != "":
+            result = idsdef_object.find_in_ids(args.text.strip())
+            for key, items in result.items():
+                print(key)
+                for item in items:
+                    print("\t" + item)
+        else:
+            print("Please provide text to search in IDSes")
 
 
 if __name__ == "__main__":
