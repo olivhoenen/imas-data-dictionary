@@ -214,6 +214,13 @@ def main():
         help="Print associated meta-data (version and cocos)",
     )
     args = idsdef_parser.parse_args()
+    try:
+        if args.cmd == None:
+            idsdef_parser.print_help()
+            return
+    except AttributeError:
+        idsdef_parser.print_help()
+        return
 
     # Create IDSDef Object
     idsdef_object = IDSDef()
@@ -235,14 +242,16 @@ def main():
         for name in idsdef_object.get_ids_names():
             print(name)
     elif args.cmd == "search":
-        if args.text != "":
+        if args.text != "" and args.text != None:
             result = idsdef_object.find_in_ids(args.text.strip())
             for key, items in result.items():
                 print(key)
                 for item in items:
                     print("\t" + item)
         else:
+            search_command_parser.print_help()
             print("Please provide text to search in IDSes")
+            return
 
 
 if __name__ == "__main__":
