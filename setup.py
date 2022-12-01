@@ -2,9 +2,24 @@ from setuptools import setup
 import pathlib
 import os, glob
 import versioneer
+from generate import generate_dd_data_dictionary
+from generate import generate_html_documentation
+from generate import generate_ids_cocos_transformations_symbolic_table
+from generate import generate_idsnames
+from generate import generate_dd_data_dictionary_validation
 
 current_directory = pathlib.Path(__file__).parent.resolve()
 long_description = (current_directory / "README.md").read_text(encoding="utf-8")
+
+# Generate idsdef.xml
+generate_dd_data_dictionary()
+generate_html_documentation()
+generate_ids_cocos_transformations_symbolic_table()
+generate_idsnames()
+generate_dd_data_dictionary_validation()
+
+# install
+import install
 
 paths = []
 version = versioneer.get_version()
@@ -13,8 +28,9 @@ if os.path.exists("install"):
         paths.append(
             (path.replace("install", "dd_" + version), glob.glob(path + "/*.*"))
         )
+    print("Found IDSDef.xml " + str(paths))
 else:
-    print("Installing without data dictionary IDSDef.xml")
+    raise Exception("Couldn't find IDSDef.xml")
 
 setup(
     name="data_dictionary",

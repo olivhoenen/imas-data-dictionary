@@ -1,37 +1,15 @@
 import os
 import shutil
 import subprocess
-from argparse import ArgumentParser
 
 PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
-SAXON_VERSIONS = ["saxon-he-10.3.jar", "saxon9he.jar"]
-
 
 
 def join_path(path1="", path2=""):
     return os.path.normpath(os.path.join(path1, path2))
 
 
-if "CLASSPATH" in os.environ:
-    saxonica_jar = ""
-    if "CLASSPATH" in os.environ:
-        classpaths = os.environ["CLASSPATH"]
-        classpaths = classpaths.split(":")
-        for saxon_version in SAXON_VERSIONS:
-            saxonica_jar_list = [
-                classpath for classpath in classpaths if saxon_version in classpath
-            ]
-            if saxonica_jar_list:
-                saxonica_jar = saxonica_jar_list[0]
-                break
-
-    assert saxonica_jar != "", "Relevant Saxon Jar not found"
-    SAXONICA_JAR = saxonica_jar
-else:
-    raise ValueError(
-        "Looks like Saxon module is not loaded. module - avail saxon ; module load <saxon module>"
-    )
 DD_GIT_DESCRIBE = str(
     subprocess.check_output(["git", "describe"], cwd=PWD).decode().strip()
 )
@@ -178,9 +156,9 @@ def generate_dd_data_dictionary_validation():
         f.write(stdout)
         f.close()
 
-
-generate_dd_data_dictionary()
-generate_html_documentation()
-generate_ids_cocos_transformations_symbolic_table()
-generate_idsnames()
-generate_dd_data_dictionary_validation()
+if __name__ == "__main__":
+    generate_dd_data_dictionary()
+    generate_html_documentation()
+    generate_ids_cocos_transformations_symbolic_table()
+    generate_idsnames()
+    generate_dd_data_dictionary_validation()
