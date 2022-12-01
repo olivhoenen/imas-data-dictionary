@@ -43,15 +43,12 @@ edge_sources/grid_ggd
         source/ggd
 ...
 """
-import logging
 import os
 import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-# ...
-# print("Executing module :" + __file__)
 
 
 def major_minor_micro(version):
