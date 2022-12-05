@@ -236,9 +236,7 @@ def main():
     # Create IDSDef Object
     idsdef_object = IDSDef()
     if args.cmd == "idspath":
-        print("module :" + __file__)
-        print("path : " + idsdef_object.get_idsdef_path())
-        print("version : " + idsdef_object.get_version())
+        print(idsdef_object.get_idsdef_path())
     if args.cmd == "info":
         attribute_dict = idsdef_object.query(args.ids, args.path)
 
