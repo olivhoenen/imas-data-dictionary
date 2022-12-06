@@ -3,6 +3,9 @@
 """
 Usage
 
+$ python idsdef metadata
+This is Data Dictionary version = 3.37.0, following COCOS = 11
+
 $ python idsdef info amns_data ids_properties/comment -a
 name: comment
 path: ids_properties/comment
@@ -22,9 +25,7 @@ STR_0D
 $  
 
 $ python idsdef idspath
-module :/home/ITER/sawantp1/.local/lib/python3.8/site-packages/data_dictionary/idsdef.py
-path : /home/ITER/sawantp1/.local/dd_3.37.1+54.g20c6794.dirty/include/IDSDef.xml
-version : 3.37.1-54-g20c6794
+/home/ITER/sawantp1/.local/dd_3.37.1+54.g20c6794.dirty/include/IDSDef.xml
 
 $ python idsdef idsnames 
 amns_data
@@ -33,7 +34,7 @@ bolometer
 bremsstrahlung_visible
 ...
 
-$ python idsdef search -t ggd 
+$ python idsdef search ggd 
 distribution_sources/source/ggd
 distributions/distribution/ggd
 edge_profiles/grid_ggd
@@ -48,7 +49,6 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
-
 
 
 def major_minor_micro(version):
@@ -182,6 +182,9 @@ def main():
     )
     idspath_command_parser.set_defaults(cmd="idspath")
 
+    metadata_command_parser = subparsers.add_parser("metadata", help="print metadata")
+    metadata_command_parser.set_defaults(cmd="metadata")
+
     idsnames_command_parser = subparsers.add_parser("idsnames", help="print ids names")
     idsnames_command_parser.set_defaults(cmd="idsnames")
 
@@ -189,10 +192,9 @@ def main():
     search_command_parser.set_defaults(cmd="search")
     search_option = search_command_parser.add_mutually_exclusive_group()
     search_option.add_argument(
-        "-t",
-        "--text",
-        type=str,
-        default=None,
+        "text",
+        nargs="?",
+        default="",
         help="Text to search in all IDSes \t(default=%(default)s)",
     )
 
@@ -218,12 +220,6 @@ def main():
         default="documentation",
         help="Select attribute to be printed \t(default=%(default)s)",
     )
-    info_command_parser.add_argument(
-        "-m",
-        "--metaData",
-        action="store_true",
-        help="Print associated meta-data (version and cocos)",
-    )
     args = idsdef_parser.parse_args()
     try:
         if args.cmd == None:
@@ -235,16 +231,15 @@ def main():
 
     # Create IDSDef Object
     idsdef_object = IDSDef()
+    if args.cmd == "metadata":
+        mstr = f"This is Data Dictionary version = {idsdef_object.version}, following COCOS = {idsdef_object.cocos}"
+        print(mstr)
+        print("=" * len(mstr))
+
     if args.cmd == "idspath":
         print(idsdef_object.get_idsdef_path())
     if args.cmd == "info":
         attribute_dict = idsdef_object.query(args.ids, args.path)
-
-        if args.metaData:
-            mstr = f"This is Data Dictionary version = {idsdef_object.version}, following COCOS = {idsdef_object.cocos}"
-            print(mstr)
-            print("=" * len(mstr))
-
         if args.all:
             for a in attribute_dict.keys():
                 print(a + ": " + attribute_dict[a])
@@ -254,6 +249,7 @@ def main():
         for name in idsdef_object.get_ids_names():
             print(name)
     elif args.cmd == "search":
+        print(args.text)
         if args.text != "" and args.text != None:
             result = idsdef_object.find_in_ids(args.text.strip())
             for key, items in result.items():

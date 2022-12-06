@@ -55,8 +55,11 @@ def execute_command(command_to_execute):
 
 def install_html_files():
     Path(htmldir + "/imas").mkdir(parents=True, exist_ok=True)
+
     dd_versions = [
-        "html_documentation/dd_versions.html",
+        "html_documentation/" + f
+        for f in listdir("html_documentation")
+        if isfile(join("html_documentation", f))
     ]
     html_files_command = (
         "install -m 644 " + " ".join(dd_versions) + " " + os.path.join(htmldir, "imas")
@@ -108,6 +111,7 @@ def install_img_files():
     )
     execute_command(img_files_command)
 
+
 def install_utilities_files():
     Path(htmldir + "/imas/utilities").mkdir(parents=True, exist_ok=True)
     utilities_files = [
@@ -122,6 +126,7 @@ def install_utilities_files():
         + os.path.join(htmldir, "imas/utilities")
     )
     execute_command(utilities_files_command)
+
 
 def install_cocos_csv_files():
     Path(htmldir + "/imas/cocos").mkdir(parents=True, exist_ok=True)
