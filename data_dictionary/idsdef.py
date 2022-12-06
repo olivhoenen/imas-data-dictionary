@@ -162,12 +162,12 @@ class IDSDef:
             search_result_for_ids = []
             for field in ids.iter("field"):
                 if field.attrib["name"].find(text_to_search) != -1:
+                    search_result_for_ids.append(field.attrib["path"])
                     if not is_top_node:
                         is_top_node = True
-                        top_node_name = ids.attrib["name"] + "/" + field.attrib["path"]
-                    else:
-                        search_result_for_ids.append(field.attrib["path"])
-            search_result[top_node_name] = search_result_for_ids
+                        top_node_name = ids.attrib["name"] 
+            if top_node_name: # add to dict only if something is found
+                search_result[top_node_name] = search_result_for_ids
         return search_result
 
 
@@ -190,12 +190,11 @@ def main():
 
     search_command_parser = subparsers.add_parser("search", help="Search in ids")
     search_command_parser.set_defaults(cmd="search")
-    search_option = search_command_parser.add_mutually_exclusive_group()
-    search_option.add_argument(
+    search_command_parser.add_argument(
         "text",
         nargs="?",
         default="",
-        help="Text to search in all IDSes \t(default=%(default)s)",
+        help="Text to search in all IDSes",
     )
 
     info_command_parser = subparsers.add_parser(
@@ -249,11 +248,11 @@ def main():
         for name in idsdef_object.get_ids_names():
             print(name)
     elif args.cmd == "search":
-        print(args.text)
         if args.text != "" and args.text != None:
+            print(f"Searching for '{args.text}'.")
             result = idsdef_object.find_in_ids(args.text.strip())
             for key, items in result.items():
-                print(key)
+                print(f"{key}:")
                 for item in items:
                     print("\t" + item)
         else:
