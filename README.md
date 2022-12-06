@@ -10,3 +10,14 @@ IDSs of the Data Dictionary follow a strict lifecycle that aims at controlling t
 As it is generic and machine agnostic by design, the IMAS Data Model, and by extension its implementation as the Data Dictionary, have the potential to serve as a data standard for the fusion community. As such, it benefits from the wide involvement of specialists and active users and developers in the various areas being described. If you want to contribute to the improvement of the Data Dictionary, either as a developer, a specific system/area specilist or an occasional user providing feedback, please look at [CONTRIBUTING.md](CONTRIBUTING.md).
 
 
+# Python installation
+Data dictionary can be installed using python pip install. Following is the process for the same.
+Generate idsdef.xml once files are checked out
+
+pip install . --user
+
+Clean all files
+python clean.py
+
+Testing
+python test.py

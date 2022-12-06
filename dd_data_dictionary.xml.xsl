@@ -719,7 +719,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:when test="contains(string(xs:annotation/xs:appinfo), 'machine description')">
 								<xsl:choose>
 									<xsl:when test="contains(string(xs:annotation/xs:documentation), 'Time-dependent')">
-										<xsl:apply-templates select="document('utilities/dd_Support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+										<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 											<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
