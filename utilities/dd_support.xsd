@@ -86,37 +86,86 @@
 			<xs:documentation>Standard type for identifiers (static, 1D). The three fields: name, index and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name">
+			<xs:element name="names">
 				<xs:annotation>
-					<xs:documentation>Short string identifier</xs:documentation>
+					<xs:documentation>Short string identifiers</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="STR_0D"/>
+					<xs:group ref="STR_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="index">
+			<xs:element name="indices">
 				<xs:annotation>
-					<xs:documentation>Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.</xs:documentation>
+					<xs:documentation>Integer identifiers (enumeration index within a list). Private identifier values must be indicated by a negative index.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<coordinate1>../names</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_0D"/>
+					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="description">
+			<xs:element name="descriptions">
 				<xs:annotation>
 					<xs:documentation>Verbose description</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<coordinate1>../names</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="STR_0D"/>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="identifier_dynamic_aos3_1d">
+		<xs:annotation>
+			<xs:documentation>Standard type for identifiers (1D arrays for each node), dynamic within type 3 array of structures (index on time). The three fields: name, index and description are all representations of the same information. Associated with each application of this identifier-type, there should be a translation table defining the three fields for all objects to be identified.</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="names">
+				<xs:annotation>
+					<xs:documentation>Short string identifiers</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="indices">
+				<xs:annotation>
+					<xs:documentation>Integer identifiers (enumeration index within a list). Private identifier values must be indicated by a negative index.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../names</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="descriptions">
+				<xs:annotation>
+					<xs:documentation>Verbose description</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../names</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -4386,6 +4435,43 @@
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_identifier">
+		<xs:annotation>
+			<xs:documentation>Identifier values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifiers" type="identifier_dynamic_aos3_1d">
+				<xs:annotation>
+					<xs:documentation>Identifier values, one value is provided per element in the grid subset. If the size of the child arrays is 1, their value applies to all elements of the subset.</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
