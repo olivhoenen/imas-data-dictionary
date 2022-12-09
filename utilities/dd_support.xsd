@@ -5196,7 +5196,7 @@
 			</xs:element>
 			<xs:element name="path">
 				<xs:annotation>
-					<xs:documentation>Path of the grid, including the IDS name, in case of implicit reference to a grid_ggd node described in another IDS. To be filled only if the grid is not described explicitly in this grid_ggd structure. Example syntax: IDS::wall/0/description_ggd(1)/grid_ggd, means that the grid is located in the wall IDS, occurrence 0, with relative path description_ggd(1)/grid_ggd, using Fortran index convention (here : first index of the array)</xs:documentation>
+					<xs:documentation>Path of the grid, including the IDS name, in case of implicit reference to a grid_ggd node described in another IDS. To be filled only if the grid is not described explicitly in this grid_ggd structure. Example syntax: 'wall:0/description_ggd(1)/grid_ggd', means that the grid is located in the wall IDS, occurrence 0, with ids path 'description_ggd(1)/grid_ggd'. Refer to <url>IDS-path-syntax.md</url> for more details about IDS paths</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -8387,7 +8387,7 @@
 		<xs:sequence>
 			<xs:element name="path">
 				<xs:annotation>
-					<xs:documentation>Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS</xs:documentation>
+					<xs:documentation>Path of the node within the IDS, following the syntax given in <url>utilities/IDS-path-syntax.md</url>. If empty, means the provenance information applies to the whole IDS</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 					</xs:appinfo>
@@ -8398,7 +8398,7 @@
 			</xs:element>
 			<xs:element name="sources">
 				<xs:annotation>
-					<xs:documentation>List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the "code" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources</xs:documentation>
+					<xs:documentation>List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the "code" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in <url>utilities/IMAS-URI-scheme.md</url>) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<coordinate1>1...N</coordinate1>
