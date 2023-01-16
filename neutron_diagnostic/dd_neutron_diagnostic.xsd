@@ -133,9 +133,15 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="event_in_detector" type="neutron_diagnostic_event">
+			<xs:element name="event_in_detector_neutron_flux" type="neutron_diagnostic_event">
 				<xs:annotation>
-					<xs:documentation>5th dimension for the Green functions representing values of events measured in the detector.The type of events monitored depends on the detector and can be defined by the user. It can be energy of neutrons, or electrical signal, or TOF (defined by type below)</xs:documentation>
+					<xs:documentation>5th dimension for the neutron_flux Green function representing values of events measured in the detector. The type of events monitored depends on the detector and can be defined by the user. It can be energy of neutrons, or electrical signal, or time of flight ... (defined by type below)</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.38.0</introduced_after_version>
+						<change_nbc_version>3.38.1</change_nbc_version>
+                        <change_nbc_description>structure_renamed</change_nbc_description>
+                        <change_nbc_previous_name>event_in_detector</change_nbc_previous_name>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="neutron_flux">
@@ -148,12 +154,23 @@
 						<coordinate2>../../field_of_view/emission_grid/z</coordinate2>
 						<coordinate3>../../field_of_view/emission_grid/phi</coordinate3>
 						<coordinate4>../source_neutron_energies</coordinate4>
-						<coordinate5>../event_in_detector/values</coordinate5>
+						<coordinate5>../event_in_detector_neutron_flux/values</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_5D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="event_in_detector_response_function" type="neutron_diagnostic_event">
+				<xs:annotation>
+					<xs:documentation>5th dimension for the response_function Green function representing values of events measured in the detector. The type of events monitored depends on the detector and can be defined by the user. It can be energy of neutrons, or electrical signal, or time of flight ... (defined by type below)</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.38.0</introduced_after_version>
+						<change_nbc_version>3.38.1</change_nbc_version>
+                        <change_nbc_description>structure_renamed</change_nbc_description>
+                        <change_nbc_previous_name>event_in_detector</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="response_function">
 				<xs:annotation>
@@ -165,7 +182,7 @@
 						<coordinate2>../../field_of_view/emission_grid/z</coordinate2>
 						<coordinate3>../../field_of_view/emission_grid/phi</coordinate3>
 						<coordinate4>../source_neutron_energies</coordinate4>
-						<coordinate5>../event_in_detector/values</coordinate5>
+						<coordinate5>../event_in_detector_response_function/values</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -941,7 +958,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
-				<lifecycle_last_change>3.33.0</lifecycle_last_change>
+				<lifecycle_last_change>3.38.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
