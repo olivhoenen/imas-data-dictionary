@@ -340,6 +340,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<field>
 								<!-- _error_index field -->
 								<xsl:attribute name="name"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
+								<xsl:attribute name="lifecycle_status">obsolescent</xsl:attribute>
+								<xsl:attribute name="lifecycle_version">3.38.1</xsl:attribute>
 								<xsl:choose>
 									<xsl:when test="$currPath=''">
 										<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
@@ -592,6 +594,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 													<field>
 														<!-- _error_index field -->
 														<xsl:attribute name="name">data_error_index</xsl:attribute>
+														<xsl:attribute name="lifecycle_status">obsolescent</xsl:attribute>
+														<xsl:attribute name="lifecycle_version">3.38.1</xsl:attribute>
 														<xsl:choose>
 															<xsl:when test="$currPath=''">
 																<xsl:attribute name="path"><xsl:value-of select="concat(@name,'/data_error_index')"/></xsl:attribute>
