@@ -77,11 +77,6 @@ IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
 
 SAXON := $(shell command -v saxon 2> /dev/null)
 ifeq ($(SAXON),)
-# Check that "saxon9he.jar" utility is set in CLASSPATH and exists
-# File name may be different depending on site
-SAXONJARFILE?=saxon9he.jar
-SAXONICAJAR?=$(firstword $(filter %$(SAXONJARFILE), $(wildcard $(subst :, ,$(CLASSPATH)))))
-$(if $(SAXONICAJAR),,$(error Invalid /path/to/$(SAXONJARFILE) in CLASSPATH ($(CLASSPATH)); or File not found: $(SAXONICAJAR) (Forgot to load Saxon module?)))
 SAXON := $(JAVA) net.sf.saxon.Transform
 endif
 
