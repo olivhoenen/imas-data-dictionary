@@ -337,11 +337,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										</xsl:if>
 								</xsl:for-each>
 							</field>
-							<field>
-								<!-- _error_index field -->
+							<!-- <field>  _error_index field is removed in DDv4, those lines are turned into comments
 								<xsl:attribute name="name"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
 								<xsl:attribute name="lifecycle_status">obsolescent</xsl:attribute>
-								<xsl:attribute name="lifecycle_version">3.39.0</xsl:attribute>
+								<xsl:attribute name="lifecycle_version">3.39.0</xsl:attribute> 
 								<xsl:choose>
 									<xsl:when test="$currPath=''">
 										<xsl:attribute name="path"><xsl:value-of select="concat(@name,'_error_index')"/></xsl:attribute>
@@ -356,7 +355,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:attribute name="data_type">int_type</xsl:attribute>
 <xsl:choose>
 														<xsl:when test="contains($currPath_doc,'(itime)') or contains($aos3Parent,'yes')">
-															<xsl:attribute name="type">dynamic</xsl:attribute> <!-- the node must be dynamic if it has any dynamic (type 3) AoS ancestor, although this is likely overkill to specify a time-dependent error expression -->
+															<xsl:attribute name="type">dynamic</xsl:attribute> 
 														</xsl:when>
 														<xsl:otherwise>
 															<xsl:attribute name="type">constant</xsl:attribute>														
@@ -367,7 +366,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
                                          <xsl:attribute name="change_nbc_description"><xsl:value-of select="./xs:annotation/xs:appinfo/change_nbc_description"/></xsl:attribute>	
                                         <xsl:attribute name="change_nbc_previous_name"><xsl:value-of select="concat(./xs:annotation/xs:appinfo/change_nbc_previous_name,'_error_index')"/></xsl:attribute>	   
 								   </xsl:if>				
-							</field>
+							</field> -->
 						</xsl:if>
 					</xsl:when>
 					<xsl:otherwise>
@@ -591,8 +590,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 															<!-- We just add ../ to all coordinates since their are viewed from the data node, one level below the original parent <xsl:value-of select="."/></xsl:attribute>-->
 														</xsl:for-each>
 													</field>
-													<field>
-														<!-- _error_index field -->
+													<!-- <field> _error_index field is removed in DDv4, those lines are turned into comments
 														<xsl:attribute name="name">data_error_index</xsl:attribute>
 														<xsl:attribute name="lifecycle_status">obsolescent</xsl:attribute>
 														<xsl:attribute name="lifecycle_version">3.39.0</xsl:attribute>
@@ -614,7 +612,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
                                          <xsl:attribute name="change_nbc_description"><xsl:value-of select="./xs:annotation/xs:appinfo/change_nbc_description"/></xsl:attribute>	
                                         <xsl:attribute name="change_nbc_previous_name"><xsl:value-of select="concat(./xs:annotation/xs:appinfo/change_nbc_previous_name,'_error_index')"/></xsl:attribute>	   
 								   </xsl:if>																	
-													</field>
+													</field> -->
 												</xsl:if>
 											</xsl:if>
 										</xsl:otherwise>
