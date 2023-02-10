@@ -632,16 +632,6 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity" type="edge_profiles_vector_components_3">
-				<xs:annotation>
-					<xs:documentation>Velocity</xs:documentation>
-					<xs:appinfo>
-						<units>m.s^-1</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.21.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="rotation_frequency_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal rotation frequency (i.e. toroidal velocity divided by the major radius at which the toroidal velocity is taken)</xs:documentation>
@@ -987,36 +977,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal velocity (average over charge states when multiple charge states are considered)</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../../grid/rho_pol_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity_pol">
-				<xs:annotation>
-					<xs:documentation>Poloidal velocity (average over charge states when multiple charge states are considered)</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../../grid/rho_pol_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="rotation_frequency_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal rotation frequency  (i.e. toroidal velocity divided by the major radius at which the toroidal velocity is taken) (average over charge states when multiple charge states are considered)</xs:documentation>
@@ -1117,16 +1077,6 @@
 					<xs:documentation>Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
 					<xs:appinfo>
 						<doc_identifier>utilities/neutrals_identifier.xml</doc_identifier>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity" type="edge_profiles_vector_components_3">
-				<xs:annotation>
-					<xs:documentation>Velocity</xs:documentation>
-					<xs:appinfo>
-						<units>m.s^-1</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.21.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1378,16 +1328,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity" type="edge_profiles_vector_components_2">
-				<xs:annotation>
-					<xs:documentation>Velocity (average over charge states when multiple charge states are considered)</xs:documentation>
-					<xs:appinfo>
-						<units>m.s^-1</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.21.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="multiple_states_flag">
 				<xs:annotation>
 					<xs:documentation>Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
@@ -1558,46 +1498,6 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal velocity</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../../grid/rho_pol_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity_pol">
-				<xs:annotation>
-					<xs:documentation>Poloidal velocity</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../../grid/rho_pol_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity" type="edge_profiles_vector_components_2">
-				<xs:annotation>
-					<xs:documentation>Velocity</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.21.0</lifecycle_version>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
 			</xs:element>
 			<xs:element name="collisionality_norm">
 				<xs:annotation>
@@ -1865,21 +1765,6 @@
 					<xs:appinfo>
 						<coordinate1>../grid/rho_pol_norm</coordinate1>
 						<units>ohm^-1.m^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="e_field_parallel">
-				<xs:annotation>
-					<xs:documentation>Parallel electric field = average(E.B) / B0, where edge_profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../grid/rho_pol_norm</coordinate1>
-						<units>V.m^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
