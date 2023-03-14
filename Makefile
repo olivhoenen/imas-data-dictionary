@@ -10,6 +10,7 @@ DD_FILES=dd_data_dictionary.xml IDSDef.xml IDSNames.txt dd_data_dictionary_valid
 HTMLDOC_FILES=$(wildcard $(addprefix html_documentation/,*.html css/*.css img/*.png js/*js))
 HTMLDOC_FILES_IDS=$(wildcard $(addprefix html_documentation/,$(addsuffix /*.*,$(shell cat IDSNames.txt))))
 COCOS_FILES=$(wildcard $(addprefix html_documentation/cocos/,*.csv))
+UTILITIES_FILES=$(wildcard $(addprefix html_documentation/utilities/,*.*))
 
 # Identifiers definition files
 ID_IDENT = $(wildcard */*_identifier.xml)
@@ -36,6 +37,8 @@ htmldoc_install: htmldoc
 	$(INSTALL_DATA) $(filter %.css,$(HTMLDOC_FILES)) $(htmldir)/imas/css
 	$(INSTALL_DATA) $(filter %.js,$(HTMLDOC_FILES)) $(htmldir)/imas/js
 	$(INSTALL_DATA) $(filter %.png,$(HTMLDOC_FILES)) $(htmldir)/imas/img
+	$(mkdir_p) $(htmldir)/imas/utilities
+	$(INSTALL_DATA) $(UTILITIES_FILES) $(htmldir)/imas/utilities
 	$(mkdir_p) $(htmldir)/imas/cocos
 	$(INSTALL_DATA) $(filter %.csv,$(COCOS_FILES)) $(htmldir)/imas/cocos
 	$(mkdir_p) $(addprefix $(htmldir)/imas/,$(sort $(dir $(HTMLDOC_FILES_IDS:html_documentation/%=%))))
