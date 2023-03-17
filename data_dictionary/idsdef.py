@@ -165,9 +165,25 @@ class IDSDef:
                     search_result_for_ids.append(field.attrib["path"])
                     if not is_top_node:
                         is_top_node = True
-                        top_node_name = ids.attrib["name"] 
-            if top_node_name: # add to dict only if something is found
+                        top_node_name = ids.attrib["name"]
+            if top_node_name:  # add to dict only if something is found
                 search_result[top_node_name] = search_result_for_ids
+        return search_result
+
+    def list_ids_fields(self, idsname=""):
+        search_result = {}
+        for ids in self.root.findall("IDS"):
+            if ids.attrib["name"] == idsname.lower():
+                is_top_node = False
+                top_node_name = ""
+                search_result_for_ids = []
+                for field in ids.iter("field"):
+                    search_result_for_ids.append(field.attrib["path"])
+                    if not is_top_node:
+                        is_top_node = True
+                        top_node_name = ids.attrib["name"]
+                if top_node_name:  # add to dict only if something is found
+                    search_result[top_node_name] = search_result_for_ids
         return search_result
 
 
@@ -195,6 +211,17 @@ def main():
         nargs="?",
         default="",
         help="Text to search in all IDSes",
+    )
+
+    idsfields_command_parser = subparsers.add_parser(
+        "idsfields", help="shows all fields from ids"
+    )
+    idsfields_command_parser.set_defaults(cmd="idsfields")
+    idsfields_command_parser.add_argument(
+        "idsname",
+        type=str,
+        default="",
+        help="Provide ids Name",
     )
 
     info_command_parser = subparsers.add_parser(
@@ -258,6 +285,22 @@ def main():
         else:
             search_command_parser.print_help()
             print("Please provide text to search in IDSes")
+            return
+    elif args.cmd == "idsfields":
+        if args.idsname != "" and args.idsname != None:
+            result = idsdef_object.list_ids_fields(args.idsname.strip())
+            if bool(result) == True:
+                print(f"Listing all fields from ids :'{args.idsname}'")
+                for key, items in result.items():
+                    for item in items:
+                        print(item)
+            else:
+                idsfields_command_parser.print_help()
+                print("Please provide valid IDS name")
+                return
+        else:
+            idsfields_command_parser.print_help()
+            print("Please provide valid IDS name")
             return
 
 
