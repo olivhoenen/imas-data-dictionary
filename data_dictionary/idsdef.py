@@ -178,7 +178,10 @@ class IDSDef:
                 top_node_name = ""
                 search_result_for_ids = []
                 for field in ids.iter("field"):
-                    search_result_for_ids.append(field.attrib["path"])
+                    field_path = re.sub(
+                        "\(([^:][^itime]*?)\)", "()", field.attrib["path_doc"]
+                    )
+                    search_result_for_ids.append(field_path)
                     if not is_top_node:
                         is_top_node = True
                         top_node_name = ids.attrib["name"]
