@@ -4490,9 +4490,68 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_scalar_complex">
+		<xs:annotation>
+			<xs:documentation>Scalar complex values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>One scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="CPX_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../values</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="CPX_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_scalar">
 		<xs:annotation>
-			<xs:documentation>Scalar values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:documentation>Scalar real values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
 			<xs:appinfo>
 				<aos3Parent>yes</aos3Parent>
 			</xs:appinfo>
