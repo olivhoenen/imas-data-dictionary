@@ -1,7 +1,39 @@
 from setuptools import setup
 import pathlib
 import os, glob
+import sys
+
+
+
+def is_git_repo(repo_path):
+    import git
+    try:
+        _ = git.Repo(repo_path).git_dir
+        return True
+    except git.exc.InvalidGitRepositoryError:
+        return False
+        
+project_file_path = ""
+
+if "PROJECT_PATH"  in os.environ.keys():
+    project_path = os.environ.get("PROJECT_PATH")
+    if os.path.isdir(project_path):
+        project_file_path = project_path
+        print("Path from environment variable PROJECT_PATH : ",project_file_path)
+
+if project_file_path == "":
+    project_file_path = os.path.realpath(os.path.dirname(__file__))
+    print("Path from local directory : ",project_file_path)
+
+if not is_git_repo(project_file_path) or project_file_path == "":
+    print("Project file path :", project_file_path)
+    print("Is git repo :",  is_git_repo(project_file_path))
+    raise Exception("Please set path of the repository using export PROJECT_PATH=<path of the project>")
+
+sys.path.append(project_file_path)
+
 import versioneer
+
 from generate import generate_dd_data_dictionary
 from generate import generate_html_documentation
 from generate import generate_ids_cocos_transformations_symbolic_table

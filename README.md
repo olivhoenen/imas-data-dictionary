@@ -14,6 +14,7 @@ As it is generic and machine agnostic by design, the IMAS Data Model, and by ext
 Data dictionary can be installed using python pip install. Following is the process for the same.
 Generate idsdef.xml once files are checked out
 
+export PROJECT_PATH=`pwd`
 pip install . --user
 
 Clean all files
