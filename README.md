@@ -24,8 +24,9 @@ cd data_dictionary
 pip install . [--user]
 
 # if installing with other ways
-# 1> if building traditional python setup.py install
+# 1> if installing with traditional setuptools method
 python install gitpython 
+python setup.py install
 
 # 2> if building using python -m build
 export PROJECT_PATH=`pwd` 
