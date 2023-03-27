@@ -14,11 +14,26 @@ As it is generic and machine agnostic by design, the IMAS Data Model, and by ext
 Data dictionary can be installed using python pip install. Following is the process for the same.
 Generate idsdef.xml once files are checked out
 
-export PROJECT_PATH=`pwd`
-pip install . --user
 
-Clean all files
+```sh
+module load Python/3.8.6-GCCcore-10.2.0
+module load Saxon-HE/11.4-Java-11
+
+git clone ssh://git@git.iter.org/imas/data-dictionary.git
+cd data_dictionary
+pip install . [--user]
+
+# if installing with other ways
+# 1> if building traditional python setup.py install
+python install gitpython 
+
+# 2> if building using python -m build
+export PROJECT_PATH=`pwd` 
+python -m build
+
+# Clean all files
 python clean.py
 
-Testing
+# Testing
 python test.py
+```
