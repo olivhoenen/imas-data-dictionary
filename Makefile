@@ -23,7 +23,7 @@ clean: # dd_clean htmldoc_clean
 	$(if $(wildcard .gitignore),git clean -f -X -d,$(RM) -f $(DD_FILES))
 
 test: dd_data_dictionary_validation.txt
-	grep -i Error $< >&2 && exit 1 || grep valid $<
+	grep -i -w Error $< >&2 && exit 1 || grep valid $<
 
 install: dd_install identifiers_install htmldoc_install
 
