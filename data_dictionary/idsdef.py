@@ -64,39 +64,40 @@ class IDSDef:
     cocos = None
 
     def __init__(self):
-        # parse the XML def
+        # Find and parse XML definitions
         self.idsdef_path = ""
-        if "IMAS_PREFIX" in os.environ:
-            imaspref = os.environ["IMAS_PREFIX"]
-            self.idsdef_path = imaspref + "/include/IDSDef.xml"
-        else:  # Get latest version from dd python package
-            current_python_path = sys.prefix
-            software_path = os.path.join(current_python_path, "../../")
-            if os.path.exists(software_path + "/data_dictionary"):
-                dd_path = os.path.join(software_path, "data_dictionary")
-                dd_versions_list = os.listdir(dd_path)
-                latest = max(dd_versions_list, key=major_minor_micro)
-                folder_to_look = os.path.join(dd_path, latest)
-                for root, dirs, files in os.walk(folder_to_look):
-                    for file in files:
-                        if file.endswith("IDSDef.xml"):
-                            self.idsdef_path = os.path.join(root, file)
-                            break
-        if self.idsdef_path == "":  # if still empty get the path from local directory
-            local_directory = os.path.join(str(Path.home()), ".local")
+        if self.idsdef_path=="":  
+            # Check idsdef.xml installed in Python environment system as well as local
+            local_path =  os.path.join(str(Path.home()), ".local")
+            python_env_list= [sys.prefix, local_path]
             reg_compile = re.compile("dd_*")
-            version_list = [
-                dirname
-                for dirname in os.listdir(local_directory)
-                if reg_compile.match(dirname)
-            ]
-            latest_version = max(version_list, key=major_minor_micro)
-            folder_to_look = os.path.join(local_directory, latest_version)
-            for root, dirs, files in os.walk(folder_to_look):
-                for file in files:
-                    if file.endswith("IDSDef.xml"):
-                        self.idsdef_path = os.path.join(root, file)
-                        break
+            version_list = None
+            python_env_path = ""
+            for python_env in python_env_list:
+                version_list = [
+                    dirname
+                    for dirname in os.listdir(python_env)
+                    if reg_compile.match(dirname)
+                ]
+                if len(version_list) != 0:
+                    python_env_path = python_env
+                    break
+            if version_list is not None:
+                if len(version_list) != 0:
+                    latest_version = max(version_list, key=major_minor_micro)
+                    folder_to_look = os.path.join(python_env_path, latest_version)
+                    for root, dirs, files in os.walk(folder_to_look):
+                        for file in files:
+                            if file.endswith("IDSDef.xml"):
+                                self.idsdef_path = os.path.join(root, file)
+                                break
+        # Fallback to IMAS_PREFIX environment variable
+        if self.idsdef_path=="":
+            if "IMAS_PREFIX" in os.environ:
+                imaspref = os.environ["IMAS_PREFIX"]
+                self.idsdef_path = imaspref + "/include/IDSDef.xml"
+        
+        # Still you can't find idsdef.xml then crash badly
         if self.idsdef_path == "":
             raise Exception(
                 "Error while trying to access IDSDef.xml, make sure you've loaded IMAS module",
@@ -179,8 +180,12 @@ class IDSDef:
                 search_result_for_ids = []
                 for field in ids.iter("field"):
                     field_path = re.sub(
-                        "\(([^:][^itime]*?)\)", "()", field.attrib["path_doc"]
+                        "\(([^:][^itime]*?)\)", "(:)", field.attrib["path_doc"]
                     )
+                    if "timebasepath" in field.attrib.keys():
+                        field_path = re.sub(
+                        "\(([:]*?)\)$", "(itime)", field_path
+                        )
                     search_result_for_ids.append(field_path)
                     if not is_top_node:
                         is_top_node = True
