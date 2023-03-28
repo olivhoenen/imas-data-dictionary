@@ -15,6 +15,17 @@
 			<xs:documentation>Fourier decompositions of the normal components of the B-field for a given control surface</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the control surface</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="outline" type="rz1d_constant">
 				<xs:annotation>
 					<xs:documentation>Set of points defining the surface in a poloidal plane. The surface then extends in the toroidal direction in an axisymmetric way</xs:documentation>
@@ -79,7 +90,7 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_field_phi">
+			<xs:element name="b_field_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal component of the vacuum error magnetic field on the various surface points</xs:documentation>
 					<xs:appinfo>
@@ -151,8 +162,8 @@
 						<type>static</type>
 						<units>T</units>
 						<coordinate1>../grid/r</coordinate1>
-						<coordinate2>../grid/z</coordinate2>
-						<coordinate3>../grid/phi</coordinate3>
+						<coordinate2>../grid/phi</coordinate2>
+						<coordinate3>../grid/z</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -166,32 +177,46 @@
 						<type>static</type>
 						<units>T</units>
 						<coordinate1>../grid/r</coordinate1>
-						<coordinate2>../grid/z</coordinate2>
-						<coordinate3>../grid/phi</coordinate3>
+						<coordinate2>../grid/phi</coordinate2>
+						<coordinate3>../grid/z</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_field_phi">
+			<xs:element name="b_field_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal component of the vacuum error magnetic field</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>T</units>
 						<coordinate1>../grid/r</coordinate1>
-						<coordinate2>../grid/z</coordinate2>
-						<coordinate3>../grid/phi</coordinate3>
+						<coordinate2>../grid/phi</coordinate2>
+						<coordinate3>../grid/z</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="ripple_amplitude">
+				<xs:annotation>
+					<xs:documentation>Value of (b_field_max-b_field_min)/(b_field_max+b_field_min), where b_field_max resp. b_field_min) is the maximum (resp. minimum) of the magnetic field amplitude over a 2pi rotation in toroidal angle phi at a given R, Z position. </xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>-</units>
+						<coordinate1>../grid/r</coordinate1>
+						<coordinate2>../grid/z</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="error_b_field">
+	<xs:element name="b_field_non_axisymmetric">
 		<xs:annotation>
 			<xs:documentation>Vacuum 3d error magnetic field (the full 3d magnetic field with the axisymmetric components subtracted)</xs:documentation>
 			<xs:appinfo>
