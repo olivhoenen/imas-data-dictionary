@@ -1297,20 +1297,6 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="multiplicity">
-				<xs:annotation>
-					<xs:documentation>Multiplicity of the atom</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.15.0</lifecycle_version>
-						<units>Elementary Charge Unit</units>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="plasma_composition_neutral_element">
@@ -1354,20 +1340,6 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="multiplicity">
-				<xs:annotation>
-					<xs:documentation>Multiplicity of the atom</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.15.0</lifecycle_version>
-						<units>Elementary Charge Unit</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -2611,16 +2583,6 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity" type="core_profiles_vector_components_3">
-				<xs:annotation>
-					<xs:documentation>Velocity</xs:documentation>
-					<xs:appinfo>
-						<units>m.s^-1</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.21.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="rotation_frequency_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal rotation frequency (i.e. toroidal velocity divided by the major radius at which the toroidal velocity is taken)</xs:documentation>
@@ -2966,36 +2928,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal velocity (average over charge states when multiple charge states are considered)</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity_pol">
-				<xs:annotation>
-					<xs:documentation>Poloidal velocity (average over charge states when multiple charge states are considered)</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="rotation_frequency_tor">
 				<xs:annotation>
 					<xs:documentation>Toroidal rotation frequency  (i.e. toroidal velocity divided by the major radius at which the toroidal velocity is taken) (average over charge states when multiple charge states are considered)</xs:documentation>
@@ -3096,16 +3028,6 @@
 					<xs:documentation>Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
 					<xs:appinfo>
 						<doc_identifier>utilities/neutrals_identifier.xml</doc_identifier>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="velocity" type="core_profiles_vector_components_3">
-				<xs:annotation>
-					<xs:documentation>Velocity</xs:documentation>
-					<xs:appinfo>
-						<units>m.s^-1</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.21.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -3357,16 +3279,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="velocity" type="core_profiles_vector_components_2">
-				<xs:annotation>
-					<xs:documentation>Velocity (average over charge states when multiple charge states are considered)</xs:documentation>
-					<xs:appinfo>
-						<units>m.s^-1</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.21.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="multiple_states_flag">
 				<xs:annotation>
 					<xs:documentation>Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure</xs:documentation>
@@ -3537,46 +3449,6 @@
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal velocity</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity_pol">
-				<xs:annotation>
-					<xs:documentation>Poloidal velocity</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../../grid/rho_tor_norm</coordinate1>
-						<units>m.s^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="velocity" type="core_profiles_vector_components_2">
-				<xs:annotation>
-					<xs:documentation>Velocity</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.21.0</lifecycle_version>
-						<units>m.s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
 			</xs:element>
 			<xs:element name="collisionality_norm">
 				<xs:annotation>
@@ -3844,21 +3716,6 @@
 					<xs:appinfo>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>ohm^-1.m^-1</units>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="e_field_parallel">
-				<xs:annotation>
-					<xs:documentation>Parallel electric field = average(E.B) / B0, where Core_Profiles/Vacuum_Toroidal_Field/ B0</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>V.m^-1</units>
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -5537,216 +5394,6 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_4D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g11_covariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g11,  covariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g12_covariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g12, covariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g13_covariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g13, covariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g22_covariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g22, covariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g23_covariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g23,  covariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g33_covariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g33, covariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g11_contravariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g11, contravariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-						<cocos_label_transformation>grid_type_dim1_dim1_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dim1*.fact_dim1</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>IDSPATH.g11_contravariant</cocos_leaf_name_aos_indices>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g12_contravariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g12, contravariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-						<cocos_label_transformation>grid_type_dim1_dim2_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dim1*.fact_dim2</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>IDSPATH.g12_contravariant</cocos_leaf_name_aos_indices>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g13_contravariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g13,  contravariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-						<cocos_label_transformation>grid_type_dim1_dim3_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dim1*.fact_dim3</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>IDSPATH.g13_contravariant</cocos_leaf_name_aos_indices>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g22_contravariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g22,  contravariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-						<cocos_label_transformation>grid_type_dim2_dim2_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dim2*.fact_dim2</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>IDSPATH.g22_contravariant</cocos_leaf_name_aos_indices>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g23_contravariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g23, contravariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-						<cocos_label_transformation>grid_type_dim2_dim3_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dim2*.fact_dim3</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>IDSPATH.g23_contravariant</cocos_leaf_name_aos_indices>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="g33_contravariant">
-				<xs:annotation>
-					<xs:documentation>metric coefficients g33,  contravariant metric tensor for the grid described by grid_type</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.4.0</lifecycle_version>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>mixed</units>
-						<cocos_label_transformation>grid_type_dim3_dim3_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dim3*.fact_dim3</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>IDSPATH.g33_contravariant</cocos_leaf_name_aos_indices>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -8609,19 +8256,6 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="INT_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="source">
-					<xs:annotation>
-						<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...). Superseeded by the new provenance structure.</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-							<lifecycle_status>obsolescent</lifecycle_status>
-							<lifecycle_version>3.34.0</lifecycle_version>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="STR_0D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="provider">

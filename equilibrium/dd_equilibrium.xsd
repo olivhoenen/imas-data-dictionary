@@ -504,35 +504,12 @@
 					<xs:documentation>RZ outline of the plasma boundary</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="lcfs" type="rz1d_dynamic_aos">
-				<xs:annotation>
-					<xs:documentation>RZ description of the plasma boundary</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.5.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="psi_norm">
 				<xs:annotation>
 					<xs:documentation>Value of the normalised poloidal flux at which the boundary is taken (typically 99.x %), the flux being normalised to its value at the separatrix</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b_flux_pol_norm">
-				<xs:annotation>
-					<xs:documentation>Value of the normalised poloidal flux at which the boundary is taken</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.18.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -797,23 +774,6 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_tor">
-				<xs:annotation>
-					<xs:documentation>Total toroidal magnetic field at the magnetic axis</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.5.0</lifecycle_version>
-						<type>dynamic</type>
-						<units>T</units>
-						<cocos_label_transformation>b0_like</cocos_label_transformation>
-						<cocos_transformation_expression>.sigma_b0_eff</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.global_quantities.magnetic_axis.b_tor</cocos_leaf_name_aos_indices>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="b_field_tor">
 				<xs:annotation>
 					<xs:documentation>Total toroidal magnetic field at the magnetic axis</xs:documentation>
@@ -1062,20 +1022,6 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>J</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="w_mhd">
-				<xs:annotation>
-					<xs:documentation>Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>J</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.14.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2544,21 +2490,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_average">
-				<xs:annotation>
-					<xs:documentation>Flux surface averaged B</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../psi</coordinate1>
-						<units>T</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.5.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="b_field_average">
 				<xs:annotation>
 					<xs:documentation>Flux surface averaged modulus of B (always positive, irrespective of the sign convention for the B-field direction).</xs:documentation>
@@ -2572,21 +2503,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_min">
-				<xs:annotation>
-					<xs:documentation>Minimum(B) on the flux surface</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../psi</coordinate1>
-						<units>T</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.5.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="b_field_min">
 				<xs:annotation>
 					<xs:documentation>Minimum(modulus(B)) on the flux surface (always positive, irrespective of the sign convention for the B-field direction)</xs:documentation>
@@ -2594,21 +2510,6 @@
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<units>T</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b_max">
-				<xs:annotation>
-					<xs:documentation>Maximum(B) on the flux surface</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../psi</coordinate1>
-						<units>T</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.5.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2797,22 +2698,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_r">
-				<xs:annotation>
-					<xs:documentation>R component of the poloidal magnetic field</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>T</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.5.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="b_field_r">
 				<xs:annotation>
 					<xs:documentation>R component of the poloidal magnetic field</xs:documentation>
@@ -2827,22 +2712,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_z">
-				<xs:annotation>
-					<xs:documentation>Z component of the poloidal magnetic field</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>T</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.5.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="b_field_z">
 				<xs:annotation>
 					<xs:documentation>Z component of the poloidal magnetic field</xs:documentation>
@@ -2851,22 +2720,6 @@
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<units>T</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal component of the magnetic field</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>T</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.5.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2897,15 +2750,6 @@
 			<xs:documentation>Equilibrium ggd representation</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="grid" type="generic_grid_dynamic">
-				<xs:annotation>
-					<xs:documentation>Grid description</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.17.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="r" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Values of the major radius on various grid subsets</xs:documentation>
