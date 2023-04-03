@@ -10,14 +10,26 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="stokes_initial">
+	<xs:complexType name="stokes_dynamic">
 		<xs:annotation>
-			<xs:documentation>Initial Stokes vector components</xs:documentation>
+			<xs:documentation>Dynamic Stokes vector components</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="s0">
+				<xs:annotation>
+					<xs:documentation>S0 component of the unit Stokes vector</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="s1">
 				<xs:annotation>
-					<xs:documentation>First component of the unit Stokes vector</xs:documentation>
+					<xs:documentation>S1 component of the unit Stokes vector</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -29,7 +41,7 @@
 			</xs:element>
 			<xs:element name="s2">
 				<xs:annotation>
-					<xs:documentation>Second component of the unit Stokes vector</xs:documentation>
+					<xs:documentation>S2 component of the unit Stokes vector</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -41,7 +53,71 @@
 			</xs:element>
 			<xs:element name="s3">
 				<xs:annotation>
-					<xs:documentation>Third component of the unit Stokes vector</xs:documentation>
+					<xs:documentation>S3 component of the unit Stokes vector</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="stokes_initial">
+		<xs:annotation>
+			<xs:documentation>Initial Stokes vector components</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="s0">
+				<xs:annotation>
+					<xs:documentation>S0 component of the unit Stokes vector</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="s1">
+				<xs:annotation>
+					<xs:documentation>S1 component of the unit Stokes vector</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="s2">
+				<xs:annotation>
+					<xs:documentation>S2 component of the unit Stokes vector</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="s3">
+				<xs:annotation>
+					<xs:documentation>S3 component of the unit Stokes vector</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
@@ -123,9 +199,40 @@
 						<xs:group ref="FLT_0D"/>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="outline" type="rzphi1d_static">
+					<xs:annotation>
+						<xs:documentation>FOCS outline</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="b_field_z" type="signal_flt_2d_validity">
+					<xs:annotation>
+						<xs:documentation>Vertical component of the magnetic field on each point of the FOCS outline</xs:documentation>
+						<xs:appinfo>
+							<units>T</units>
+							<coordinate1>../outline/r</coordinate1>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="stokes_initial" type="stokes_initial">
 					<xs:annotation>
 						<xs:documentation>Initial Stokes vector at the entrance of the FOCS</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="stokes_output" type="stokes_dynamic" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Stokes vector at the output of the FOCS as a function of time</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>time</coordinate1>
+							<type>dynamic</type>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="current" type="signal_flt_1d_validity">
+					<xs:annotation>
+						<xs:documentation>Total toroidal current flowing through the area outlined by the FOCS</xs:documentation>
+						<xs:appinfo>
+							<units>A</units>
+						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="latency">
