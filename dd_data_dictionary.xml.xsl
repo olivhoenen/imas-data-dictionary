@@ -371,10 +371,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 						</xsl:if>
 					</xsl:when>
 					<xsl:otherwise>
-						<!-- Otherwise the type is defined somewhere else (dd_support.xsd) or is a complex type  -->
+						<!-- Otherwise the type is a complex type (structure or struct_array defined by its @type), or a root element defined in dd_support.xsd (e.g. ids_properties)  -->
 						<xsl:choose>
 							<xsl:when test="@type">
-								<!-- It is an external reference -->
+								<!-- It is a complex type (structure or struct_array defined by its @type) -->
 								<field>
 									<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
                                     <xsl:attribute name="structure_reference"><xsl:value-of select="@type"/></xsl:attribute>
@@ -499,7 +499,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								</field>
 							</xsl:when>
 							<xsl:otherwise>
-								<!-- It is a complexType -->
+								<!-- It is a root element defined in dd_support.xsd (e.g. ids_properties) -->
 								<field>
 									<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
 									<xsl:attribute name="structure_reference"><xsl:value-of select="$structure_reference"/></xsl:attribute>
