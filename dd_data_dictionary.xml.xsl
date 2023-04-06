@@ -392,6 +392,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:when test="@maxOccurs='unbounded' or @maxOccurs &gt; 1">
 											<xsl:attribute name="data_type">struct_array</xsl:attribute>
 											<xsl:attribute name="maxoccur"><xsl:value-of select="@maxOccurs"/></xsl:attribute>
+											<xsl:if test="contains(xs:annotation/xs:appinfo/coordinate1,'time')"><xsl:attribute name="timebasepath">time</xsl:attribute></xsl:if>
 											<xsl:choose>
 												<xsl:when test="$currPath_doc=''">
 													<xsl:attribute name="path_doc"><xsl:value-of select="@name"/><xsl:call-template name="aosIndex"><xsl:with-param name="aosLevel" select="$aosLevel"/></xsl:call-template></xsl:attribute>
@@ -518,6 +519,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:when test="@maxOccurs='unbounded' or @maxOccurs &gt; 1">
 											<xsl:attribute name="data_type">struct_array</xsl:attribute>
 											<xsl:attribute name="maxoccur"><xsl:value-of select="@maxOccurs"/></xsl:attribute>
+											<xsl:if test="contains(xs:annotation/xs:appinfo/coordinate1,'time')"><xsl:attribute name="timebasepath">time</xsl:attribute></xsl:if>
 											<xsl:if test="xs:annotation/xs:appinfo/coordinate1">
 												<xsl:attribute name="coordinate1"><xsl:value-of select="xs:annotation/xs:appinfo/coordinate1"/></xsl:attribute>
 											</xsl:if>
