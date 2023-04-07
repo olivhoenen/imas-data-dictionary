@@ -1245,7 +1245,7 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="position" type="rzphi0d_dynamic_aos3">
+			<xs:element name="position" type="rzphipsirho0d_dynamic_aos3">
 				<xs:annotation>
 					<xs:documentation>Position at which this measurement is given</xs:documentation>
 				</xs:annotation>
@@ -1896,7 +1896,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+			<xs:element name="n_e" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of local density measurements</xs:documentation>
 					<xs:appinfo>
@@ -1934,12 +1934,24 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pressure" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+			<xs:element name="pressure" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of total pressure estimates</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>Pa</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pressure_rotational" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of rotational pressure estimates. The rotational pressure is defined as R0^2*rho*omega^2 / 2
+where omega is the toroidal rotation frequency, rho=ne(R0,psi)*m, and m is the plasma equivalent mass.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>Pa</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+						<url>https://doi.org/10.13182/FST48-968</url>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -3113,7 +3125,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.38.0</lifecycle_last_change>
+				<lifecycle_last_change>3.39.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
