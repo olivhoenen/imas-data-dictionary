@@ -15,17 +15,6 @@
 			<xs:documentation>Fourier decompositions of the normal components of the B-field for a given control surface</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>Name of the control surface</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="outline" type="rz1d_dynamic_aos">
 				<xs:annotation>
 					<xs:documentation>Set of points defining the surface in a poloidal plane. The surface then extends in the toroidal direction in an axisymmetric way</xs:documentation>
@@ -218,7 +207,7 @@
 				<xs:annotation>
 					<xs:documentation>Magnetic field components and Fourier decomposition of the normal components of the magnetic field for a set of given control surfaces </xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
+						<coordinate1>../../control_surface_names</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -245,7 +234,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ids_properties"/>
-				<xs:element name="name">
+				<xs:element name="configuration">
 					<xs:annotation>
 						<xs:documentation>In case of a constant (single time slice) b_field description, name of the corresponding scenario/configuration</xs:documentation>
 						<xs:appinfo>
@@ -254,6 +243,17 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="control_surface_names">
+					<xs:annotation>
+						<xs:documentation>List of control surface names, refers to the ../time_slice/control_surface index</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="time_slice" type="b_field_na_time_slice" maxOccurs="unbounded">
