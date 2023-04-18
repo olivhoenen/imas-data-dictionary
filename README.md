@@ -29,38 +29,51 @@ to contribute to the improvement of the Data Dictionary, either as a
 developer, a specific system/area specilist or an occasional user
 providing feedback, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-# Python installation
-> Prerequisite : Python and Saxon library should be installed
+# Installation
+It is possible to install Data dictionary in the Python environment.
 
-> The Data Dictionary can be installed using python pip install as
-described below.  The ``idsdef.xml`` file can be generated once the
-files are checked out.
+> Prerequisite : Python and Saxon library should be preinstalled
 
+## Procedure
 ```sh
 git clone ssh://git@git.iter.org/imas/data-dictionary.git
 cd data_dictionary
 
 pip install . [--user]
-
-# if installing with other ways
-
-# 1> if building using python -m build
-export PROJECT_PATH=`pwd` 
-python -m build
-
-# 2> if installing with traditional setuptools method
-pip install gitpython # Versioneer dependency is handled in toml file for pep518
-python setup.py install
-# Clean all files
-python clean.py
-
-# Testing
-python test.py
 ```
-# IDSDEF utility
 
-Once the Data Dictionary is installed you can use ``idsdef`` on the
-command line interface.  It provides useful fetaures such as showing
+## Installed Contents
+* Directories
+
+Installer creates directory with version/tag information prefix with `dd` e.g. `dd_3.38.1+40.g8064759`.
+It has `include` and `share` directory.
+
+* include directory - xml files
+
+XML files including `IDSdef.xml` are copied in the `include` directory. 
+$PYTHON_PATH/dd_3.38.1+40.g8064759/include
+```
+$ ls
+core_instant_changes               edge_sources    magnetics           refractometer
+core_sources                       edge_transport  mhd_linear          spectrometer_visible
+core_transport                     equilibrium     neutron_diagnostic  spectrometer_x_ray_crystal
+dd_data_dictionary_validation.txt  IDSDef.xml      pf_active           utilities
+dd_data_dictionary.xml             IDSNames.txt    radiation
+```
+* share directory - documentation
+
+Installer installs html documentation. You can find it at following path
+$PYTHON_PATH/share/doc/imas
+and can be accessible using following command
+```
+$ firefox $PYTHON_PATH/share/doc/imas/html_documentation.html
+```
+* Python scripts
+
+Installer provides `idsdef` utility which can be used on the command line interface. 
+
+# IDSDEF utility
+idsdef provides useful features such as showing
 metadata, listing all variables, searching for text in IDS fields,
 etc.
 
