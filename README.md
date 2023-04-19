@@ -26,13 +26,13 @@ potential to serve as a data standard for the fusion community. As
 such, it benefits from the wide involvement of specialists and active
 users and developers in the various areas being described. If you want
 to contribute to the improvement of the Data Dictionary, either as a
-developer, a specific system/area specilist or an occasional user
+developer, a specific system/area specialist or an occasional user
 providing feedback, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 # Installation
-It is possible to install Data dictionary in the Python environment.
+It's possible to install the Data Dictionary within a Python environment.
 
-> Prerequisite : Python and Saxon library should be preinstalled
+> Prerequisite : A Python interpreter and the Saxon library should be preinstalled
 
 ## Procedure
 ```sh
@@ -43,14 +43,14 @@ pip install . [--user]
 ```
 
 ## Installed Contents
-* Directories
+### Directories
 
-Installer creates directory with version/tag information prefix with `dd` e.g. `dd_3.38.1+40.g8064759`.
-It has `include` and `share` directory.
+The installer creates a directory with the version/tag information prefixed with `dd_` e.g. `dd_3.38.1+40.g8064759`.
+It has `include` and `share` directories.
 
-* include directory - xml files
+#### The include directory - xml files
 
-XML files including `IDSdef.xml` are copied in the `include` directory. 
+XML files including `IDSdef.xml` are copied into the `include` directory. 
 $PYTHON_PATH/dd_3.38.1+40.g8064759/include
 ```
 $ ls
@@ -60,7 +60,7 @@ core_transport                     equilibrium     neutron_diagnostic  spectrome
 dd_data_dictionary_validation.txt  IDSDef.xml      pf_active           utilities
 dd_data_dictionary.xml             IDSNames.txt    radiation
 ```
-* share directory - documentation
+#### The share directory - documentation
 
 Installer installs html documentation. You can find it at following path
 $PYTHON_PATH/share/doc/imas
@@ -68,12 +68,12 @@ and can be accessible using following command
 ```
 $ firefox $PYTHON_PATH/share/doc/imas/html_documentation.html
 ```
-* Python scripts
+### Python scripts
 
 Installer provides `idsdef` utility which can be used on the command line interface. 
 
 # IDSDEF utility
-idsdef provides useful features such as showing
+The `idsdef` command provides useful features such as showing
 metadata, listing all variables, searching for text in IDS fields,
 etc.
 
