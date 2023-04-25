@@ -71,7 +71,7 @@ html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv: dd_data_d
 	$(xslt2proc)
 
 IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
-	$(xsltproc)
+	$(xslt2proc)
 
 # Generic Dependencies
 
