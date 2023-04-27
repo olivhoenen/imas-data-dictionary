@@ -54,6 +54,7 @@ dd_install: $(DD_FILES)
 	$(mkdir_p) $(includedir)
 	$(INSTALL_DATA) $(filter-out IDSDef.xml,$^) $(includedir)
 	ln -sf dd_data_dictionary.xml $(includedir)/IDSDef.xml
+	pip install . --target $(prefix)/python/lib 
 
 identifiers_install: $(ID_IDENT)
 	$(mkdir_p) $(foreach subdir,$(sort $(^D)),$(includedir)/$(subdir))
