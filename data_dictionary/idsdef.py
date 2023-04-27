@@ -155,14 +155,17 @@ class IDSDef:
     def get_ids_names(self):
         return [ids.attrib["name"] for ids in self.root.findall("IDS")]
 
-    def find_in_ids(self, text_to_search=""):
+    def find_in_ids(self, text_to_search="", strict=False):
         search_result = {}
+        regex_to_search = text_to_search
+        if strict:
+            regex_to_search = f"^{text_to_search}$"
         for ids in self.root.findall("IDS"):
             is_top_node = False
             top_node_name = ""
             search_result_for_ids = []
             for field in ids.iter("field"):
-                if field.attrib["name"].find(text_to_search) != -1:
+                if re.match(regex_to_search, field.attrib["name"]):
                     search_result_for_ids.append(field.attrib["path"])
                     if not is_top_node:
                         is_top_node = True
@@ -219,6 +222,11 @@ def main():
         nargs="?",
         default="",
         help="Text to search in all IDSes",
+    )
+    search_command_parser.add_argument(
+        "-s", "--strict",
+        action="store_true",
+        help="Perform a strict search, ie, the text has to match exactly within a word, eg: 'value' does not match 'values'",
     )
 
     idsfields_command_parser = subparsers.add_parser(
@@ -285,7 +293,7 @@ def main():
     elif args.cmd == "search":
         if args.text != "" and args.text != None:
             print(f"Searching for '{args.text}'.")
-            result = idsdef_object.find_in_ids(args.text.strip())
+            result = idsdef_object.find_in_ids(args.text.strip(), strict=args.strict)
             for key, items in result.items():
                 print(f"{key}:")
                 for item in items:
