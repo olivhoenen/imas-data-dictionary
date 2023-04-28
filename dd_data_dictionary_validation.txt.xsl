@@ -2,13 +2,14 @@
 <?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./$GET[stylesheet]" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <!-- This stylesheet implements some validation tests on IDSDef.xml -->
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet xmlns:yaslt="http://www.mod-xslt2.com/ns/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" extension-element-prefixes="yaslt" xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:local="http://www.example.com/functions/local" exclude-result-prefixes="local xs">
 <xsl:output method="text" encoding="UTF-8"/>
 <xsl:template match="/*">
 <!-- Tests for the utilities section -->
 <xsl:choose>
 <xsl:when test="not(./utilities//field[@timebasepath=''])">
-The utilities section is valid</xsl:when>
+The utilities section is valid
+</xsl:when>
 <xsl:otherwise>
 The utilities section has errors:<xsl:apply-templates select="./utilities//field[@timebasepath='']">
 <xsl:with-param name="error_description" select="'Problem in the timebasepath computation or in the specification of the time coordinate : this field has an empty timebasepath attribute'"/>
