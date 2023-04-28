@@ -136,9 +136,15 @@ def generate_idsnames():
 
 def generate_dd_data_dictionary_validation():
     dd_data_dictionary_validation_generation_command = (
-        "xsltproc"
+        "java"
+        + " net.sf.saxon.Transform"
+        + " -threads:4"
+        + " -t -warnings:fatal -s:"
+        + "dd_data_dictionary.xml"
+        + " -xsl:"
         + " dd_data_dictionary_validation.txt.xsl"
-        + " dd_data_dictionary.xml"
+        + " -o:"
+        + " dd_data_dictionary_validation.txt"
     )
     proc = subprocess.Popen(
         dd_data_dictionary_validation_generation_command.split(),
@@ -151,10 +157,6 @@ def generate_dd_data_dictionary_validation():
 
     if proc.returncode != 0:
         assert False, stderr
-    else:
-        f = open("dd_data_dictionary_validation.txt", "w")
-        f.write(stdout)
-        f.close()
 
 if __name__ == "__main__":
     generate_dd_data_dictionary()
