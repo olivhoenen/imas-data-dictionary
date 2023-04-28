@@ -145,8 +145,6 @@ def generate_dd_data_dictionary_validation():
         + " dd_data_dictionary_validation.txt.xsl"
         + " -o:"
         + " dd_data_dictionary_validation.txt"
-        + " DD_GIT_DESCRIBE="
-        + DD_GIT_DESCRIBE
     )
     proc = subprocess.Popen(
         dd_data_dictionary_validation_generation_command.split(),
