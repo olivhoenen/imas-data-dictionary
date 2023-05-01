@@ -81,6 +81,8 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
 <xsl:apply-templates select=".//field[@timebasepath='']">
 <xsl:with-param name="error_description" select="'Problem in the timebasepath computation or in the specification of the time coordinate : this field has an empty timebasepath attribute'"/>
 </xsl:apply-templates>
+<!-- Coordinate checks -->
+<xsl:apply-templates select="." mode="coordinate_validation"/>
 </xsl:variable>
 <xsl:choose>
     <xsl:when test="not(string($test_output))">
@@ -96,8 +98,268 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
 
 <!-- A generic template for printing the out_come of an error detection (adds a line to the output text report with the description of the error) -->
 <xsl:template name ="print_error" match="field">
-<xsl:param name ="error_description"/>
-    Error in <xsl:value-of select="@path_doc"/>: <xsl:value-of select="$error_description"/>
+<xsl:param name ="error_description"/>    Error in <xsl:value-of select="@path_doc"/>: <xsl:value-of select="$error_description"/><xsl:text>&#10;</xsl:text>
+</xsl:template>
+
+<!-- ====================== Coordinate validation checks ======================================= -->
+<xsl:template match="IDS" mode="coordinate_validation">
+<xsl:for-each select=".//field">
+    <!-- Skip checks for 0D types and structs -->
+    <xsl:if test="not(matches(@data_type, '^((INT|STR|FLT|CPX)_0D|structure|int_type|flt_type|str_type)$'))">
+        <xsl:if test="@coordinate1">
+            <xsl:apply-templates select="." mode="coordinate_validation">
+                <xsl:with-param name="dimension" select="1"/>
+                <xsl:with-param name="coordinate" select="@coordinate1"/>
+                <xsl:with-param name="coordinate_same_as" select="@coordinate1_same_as"/>
+            </xsl:apply-templates>
+        </xsl:if>
+        <xsl:if test="@coordinate2">
+            <xsl:apply-templates select="." mode="coordinate_validation">
+                <xsl:with-param name="dimension" select="2"/>
+                <xsl:with-param name="coordinate" select="@coordinate2"/>
+                <xsl:with-param name="coordinate_same_as" select="@coordinate2_same_as"/>
+            </xsl:apply-templates>
+        </xsl:if>
+        <xsl:if test="@coordinate3">
+            <xsl:apply-templates select="." mode="coordinate_validation">
+                <xsl:with-param name="dimension" select="3"/>
+                <xsl:with-param name="coordinate" select="@coordinate3"/>
+                <xsl:with-param name="coordinate_same_as" select="@coordinate3_same_as"/>
+            </xsl:apply-templates>
+        </xsl:if>
+        <xsl:if test="@coordinate4">
+            <xsl:apply-templates select="." mode="coordinate_validation">
+                <xsl:with-param name="dimension" select="4"/>
+                <xsl:with-param name="coordinate" select="@coordinate4"/>
+                <xsl:with-param name="coordinate_same_as" select="@coordinate4_same_as"/>
+            </xsl:apply-templates>
+        </xsl:if>
+        <xsl:if test="@coordinate5">
+            <xsl:apply-templates select="." mode="coordinate_validation">
+                <xsl:with-param name="dimension" select="5"/>
+                <xsl:with-param name="coordinate" select="@coordinate5"/>
+                <xsl:with-param name="coordinate_same_as" select="@coordinate5_same_as"/>
+            </xsl:apply-templates>
+        </xsl:if>
+        <xsl:if test="@coordinate6">
+            <xsl:apply-templates select="." mode="coordinate_validation">
+                <xsl:with-param name="dimension" select="6"/>
+                <xsl:with-param name="coordinate" select="@coordinate6"/>
+                <xsl:with-param name="coordinate_same_as" select="@coordinate6_same_as"/>
+            </xsl:apply-templates>
+        </xsl:if>
+    </xsl:if>
+</xsl:for-each>
+</xsl:template>
+<!-- Validate a specific coordinate (prevent duplication for coordinate1, 2, ...) -->
+<xsl:template match="field" mode="coordinate_validation">
+    <xsl:param name="dimension"/> <!-- Current dimension being checked: 1...6-->
+    <xsl:param name="coordinate"/> <!-- Value of @coordinate{dimension} -->
+    <xsl:param name="coordinate_same_as"/> <!-- Value of @coordinate{dimension}_same_as -->
+    <!-- Validate coordinate_same_as -->
+    <xsl:if test="not(not($coordinate_same_as))">
+        <xsl:if test="$coordinate != '1...N'">
+            <xsl:apply-templates select=".">
+            <xsl:with-param name="error_description" select="concat('coordinate', $dimension, '_same_as is provided, but coordinate', $dimension, ' is not 1...N')"/>
+            </xsl:apply-templates>
+        </xsl:if>
+        <xsl:apply-templates select="." mode="validate_coordinate">
+            <xsl:with-param name="path" select="$coordinate_same_as"/>
+            <xsl:with-param name="attr" select="concat('coordinate', $dimension, '_same_as')"/>
+        </xsl:apply-templates>
+    </xsl:if>
+    <!-- Validate coordinate -->
+    <xsl:apply-templates select="." mode="validate_coordinate">
+        <xsl:with-param name="path" select="$coordinate"/>
+        <xsl:with-param name="attr" select="concat('coordinate', $dimension)"/>
+    </xsl:apply-templates>
+</xsl:template>
+<!-- Validate the value of a coordinate field -->
+<xsl:template match="field" mode="validate_coordinate">
+    <xsl:param name="path"/>
+    <xsl:param name="fullpath" select="$path"/>
+    <xsl:param name="attr"/>
+    <xsl:choose>
+        <!-- Allow multiple paths/fixed sizes separated by ' OR ' -->
+        <xsl:when test="contains($path, ' OR ')">
+            <!-- Recurse into self after splitting each part of the path -->
+            <xsl:variable name="field" select="."/>
+            <xsl:for-each select="tokenize($path, ' OR ')">
+                <xsl:apply-templates select="$field" mode="validate_coordinate">
+                    <xsl:with-param name="path" select="."/>
+                    <xsl:with-param name="fullpath" select="$fullpath"/>
+                    <xsl:with-param name="attr" select="$attr"/>
+                </xsl:apply-templates>
+            </xsl:for-each>
+        </xsl:when>
+        <!-- Fixed size checks: '1...N' and '1...i' with i = 1, 2, ... -->
+        <xsl:when test="starts-with($path, '1...')">
+            <xsl:variable name="num" select="substring-after($path, '1...')"/>
+            <xsl:if test="$num != 'N' and not(matches($num, '^[1-9][0-9]*$'))">
+                <xsl:apply-templates select=".">
+                <xsl:with-param name="error_description" select="concat('Invalid ', $attr, ': `', $fullpath, '`')"/>
+                </xsl:apply-templates>
+            </xsl:if>
+        </xsl:when>
+        <!-- Cross IDS links: 'IDS:{IDS name}/{path in IDS} -->
+        <xsl:when test="starts-with($path, 'IDS:')">
+            <!-- Verify the IDS name is valid, then continue checking the path in the other IDS -->
+            <xsl:variable name="ids_name" select="substring-before(substring-after($path, 'IDS:'), '/')"/>
+            <xsl:variable name="ids" select="//IDS[@name=$ids_name]"/>
+            <xsl:choose>
+                <xsl:when test="count($ids) = 0">
+                    <xsl:apply-templates select=".">
+                    <xsl:with-param name="error_description"
+                        select="concat('Invalid ', $attr, ': `', $fullpath, '`. Unknown IDS `', $ids_name, '`')"/>
+                    </xsl:apply-templates>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- Parse and validate path -->
+                    <xsl:apply-templates select="." mode="validate_path">
+                        <xsl:with-param name="path" select="substring-after($path, '/')"/>
+                        <xsl:with-param name="fullpath" select="$fullpath"/>
+                        <xsl:with-param name="attr" select="$attr"/>
+                        <xsl:with-param name="ids_or_current_field" select="$ids"/>
+                    </xsl:apply-templates>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:when>
+        <!-- References to other elements in the same IDS -->
+        <xsl:otherwise>
+            <xsl:apply-templates select="." mode="validate_path">
+                <xsl:with-param name="path" select="$path"/>
+                <xsl:with-param name="fullpath" select="$fullpath"/>
+                <xsl:with-param name="attr" select="$attr"/>
+                <xsl:with-param name="ids_or_current_field" select="ancestor::IDS"/>
+            </xsl:apply-templates>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+<!--
+    Validate a coordinate path reference: path must exist and have the correct type
+
+    This template is called recursively for descending into the IDS tree. For example with path:
+        coherent_wave(i1)/profiles_2d(itime)/time
+    
+    The first call provides the top-level IDS with path: coherent_wave(i1)/profiles_2d(itime)/time
+        This finds the field "coherent_wave" and verifies the index (i1) is valid
+    The second call provides the coherent_wave field as ids_or_current_field with path: profiles_2d(itime)/time
+        This finds the field "profiles_2d" and verifies the index (itime) is valid
+    The third call provides the profiles_2d field as ids_or_current_field with path: time
+        This finds the field "time" (there is no index to validate)
+        The path is then fully resolved and we check that the "time" field has the correct type
+-->
+<xsl:template match="field" mode="validate_path">
+    <!-- Path to check, e.g. 'coherent_wave(i1)/profiles_2d(itime)/time' -->
+    <xsl:param name="path"/>
+    <!-- Full coordinate path (incl. e.g. ' OR '), only used for generating the error messages -->
+    <xsl:param name="fullpath"/>
+    <!-- Attribute name that is checked, e.g. coordinate1, coordinate4_same_as -->
+    <xsl:param name="attr"/>
+    <!-- IDS or parent field of the next part of the path -->
+    <xsl:param name="ids_or_current_field"/>
+    <!-- Is this path used as an index in another path -->
+    <xsl:param name="is_index" select="false()"/>
+    
+    <!-- 
+        Do some computation. E.g. for path = coherent_wave(i1)/profiles_2d(itime)/time this sets:
+            next_path := profiles_2d(itime)/time
+            current_chunk := coherent_wave(i1)
+            current_field := coherent_wave
+            index_with_parentheses := (i1)
+    -->
+    <xsl:variable name="next_path"
+        select="replace($path, '^[0-9a-z_]+(\(([^()]*|\([^()]*\))*\))?/?', '')"/>
+    <xsl:variable name="current_chunk" select="replace(substring($path, 1, string-length($path) - string-length($next_path)), '/$', '')"/>
+    <xsl:variable name="current_field" select="substring-before(concat($current_chunk, '('), '(')"/>
+    <xsl:variable name="index_with_parentheses" select="substring-after($current_chunk, $current_field)"/>
+
+    <!-- Check that the referred element exists-->
+    <xsl:variable name="current_field_node" select="$ids_or_current_field/field[@name=$current_field]"/>
+    <xsl:choose>
+        <xsl:when test="count($current_field_node) != 1">
+            <xsl:apply-templates select=".">
+            <xsl:with-param name="error_description" select="concat('Invalid ', $attr, ': `', $fullpath, '`. Unknown element `', $current_field, '`')"/>
+            </xsl:apply-templates>
+        </xsl:when>
+        <xsl:otherwise>
+            <!-- Validate index -->
+            <xsl:choose>
+                <!-- Validate (i1), (i2), ... -->
+                <xsl:when test="matches($index_with_parentheses, '^\(i[1-9]\)$')">
+                    <!-- This can only be resolved when the struct_array is a parent node of the referent. -->
+                    <xsl:if test="not(starts-with(@path, $current_field_node/@path))">
+                        <xsl:apply-templates select=".">
+                        <xsl:with-param name="error_description" select="concat('Invalid ', $attr, ': `', $fullpath, '`. Array of structures `', $current_field, '` is not an ancestor node.')"/>
+                        </xsl:apply-templates>
+                    </xsl:if>
+                </xsl:when>
+                <!-- No validation for (itime), see IMAS-4675 -->
+                <xsl:when test="matches($index_with_parentheses, '^\(itime\)$')"/>
+                <!-- Explicit index >= 1 is also fine, e.g. in coordinate_system(process(i1)/coordinate_index)/coordinate(1) -->
+                <xsl:when test="matches($index_with_parentheses, '^\([1-9][0-9]*\)$')"/>
+                <!-- The index refers to another node, e.g. coordinate_system(process(i1)/coordinate_index). Validate that path: -->
+                <xsl:when test="$index_with_parentheses">
+                    <xsl:apply-templates select="." mode="validate_path">
+                        <xsl:with-param name="path" select="substring($index_with_parentheses, 2, string-length($index_with_parentheses)-2)"/>
+                        <xsl:with-param name="fullpath" select="$fullpath"/>
+                        <xsl:with-param name="attr" select="$attr"/>
+                        <xsl:with-param name="ids_or_current_field" select="ancestor::IDS"/>
+                        <xsl:with-param name="is_index" select="true()"/>
+                    </xsl:apply-templates>
+                </xsl:when>
+            </xsl:choose>
+
+            <xsl:choose>
+                <!-- Recurse into self when the path is not yet fully resolved: -->
+                <xsl:when test="$next_path">
+                    <xsl:apply-templates select="." mode="validate_path">
+                        <xsl:with-param name="path" select="$next_path"/>
+                        <xsl:with-param name="fullpath" select="$fullpath"/>
+                        <xsl:with-param name="attr" select="$attr"/>
+                        <xsl:with-param name="ids_or_current_field" select="$current_field_node"/>
+                        <xsl:with-param name="is_index" select="$is_index"/>
+                    </xsl:apply-templates>
+                </xsl:when>
+                <!-- We are fully resolved, check that this node has the correct data type -->
+                <xsl:when test="$is_index">
+                    <!-- Index nodes must be a int_0D or (legacy) int_type -->
+                    <xsl:if test="not(matches($current_field_node/@data_type, '(INT_0D|int_type)'))">
+                        <xsl:apply-templates select=".">
+                        <xsl:with-param name="error_description" select="concat('Invalid ', $attr, ': `', $fullpath, '`. Referred index element `', $current_field_node/@path, '` has incorrect data type `', $current_field_node/@data_type, '`')"/>
+                        </xsl:apply-templates>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!--
+                        - same_as coordinates must have the correct number of dimensions (>= the dimension we are)
+                        - struct_array coordinate must be 0D when the coordinate is inside self, otherwise 1D
+                        - otherwise the coordinate must be a 1D data type or struct_array without index
+                    -->
+                    <xsl:variable name="coor_dim" select="substring($attr, 11, 1)"/>
+                    <xsl:if test="
+                    not(
+                        contains($attr, 'same_as') and (
+                            $coor_dim='1' and $current_field_node/@data_type = 'struct_array'
+                            or matches($current_field_node/@data_type, concat('_[', $coor_dim, '-6]D'))
+                        )
+                        or @data_type = 'struct_array' and (
+                            starts-with($current_field_node/@path, @path) and matches($current_field_node/@data_type, '(_0D|int_type|flt_type|str_type)')
+                            or not(starts-with($current_field_node/@path, @path)) and matches($current_field_node/@data_type, '(_1D|_1d_type|struct_array)')
+                        )
+                        or @data_type != 'struct_array' and (
+                            matches($current_field_node/@data_type, '(_1D|_1d_type)')
+                            or ($current_field_node/@data_type = 'struct_array' and not($index_with_parentheses))
+                        )
+                    )">
+                        <xsl:apply-templates select=".">
+                        <xsl:with-param name="error_description" select="concat('Invalid ', $attr, ': `', $fullpath, '`. Referred element has incorrect data type `', $current_field_node/@data_type, '`')"/>
+                        </xsl:apply-templates>
+                    </xsl:if>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:otherwise>
+    </xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>
