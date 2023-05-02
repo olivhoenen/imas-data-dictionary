@@ -106,73 +106,31 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
 <xsl:for-each select=".//field">
     <!-- Skip checks for 0D types and structs -->
     <xsl:if test="not(matches(@data_type, '^((INT|STR|FLT|CPX)_0D|structure|int_type|flt_type|str_type)$'))">
-        <xsl:if test="@coordinate1">
-            <xsl:apply-templates select="." mode="coordinate_validation">
-                <xsl:with-param name="dimension" select="1"/>
-                <xsl:with-param name="coordinate" select="@coordinate1"/>
-                <xsl:with-param name="coordinate_same_as" select="@coordinate1_same_as"/>
+        <!-- Magic to loop over all (max 6) defined coordinate attributes -->
+        <xsl:for-each select="attribute::*[matches(name(), '^coordinate[1-6]$')]">
+            <xsl:variable name="coordinate" select="string(.)"/>
+            <xsl:variable name="name_same_as" select="concat(name(), '_same_as')"/>
+            <xsl:variable name="coordinate_same_as" select="string(../attribute::*[name() = $name_same_as])"/>
+            <!-- Validate coordinate_same_as -->
+            <xsl:if test="not(not($coordinate_same_as))">
+                <xsl:if test="$coordinate != '1...N'">
+                    <xsl:apply-templates select="..">
+                    <xsl:with-param name="error_description" select="concat($name_same_as, ' is provided, but ', name(), ' is not 1...N')"/>
+                    </xsl:apply-templates>
+                </xsl:if>
+                <xsl:apply-templates select=".." mode="validate_coordinate">
+                    <xsl:with-param name="path" select="$coordinate_same_as"/>
+                    <xsl:with-param name="attr" select="$name_same_as"/>
+                </xsl:apply-templates>
+            </xsl:if>
+            <!-- Validate coordinate -->
+            <xsl:apply-templates select=".." mode="validate_coordinate">
+                <xsl:with-param name="path" select="$coordinate"/>
+                <xsl:with-param name="attr" select="name()"/>
             </xsl:apply-templates>
-        </xsl:if>
-        <xsl:if test="@coordinate2">
-            <xsl:apply-templates select="." mode="coordinate_validation">
-                <xsl:with-param name="dimension" select="2"/>
-                <xsl:with-param name="coordinate" select="@coordinate2"/>
-                <xsl:with-param name="coordinate_same_as" select="@coordinate2_same_as"/>
-            </xsl:apply-templates>
-        </xsl:if>
-        <xsl:if test="@coordinate3">
-            <xsl:apply-templates select="." mode="coordinate_validation">
-                <xsl:with-param name="dimension" select="3"/>
-                <xsl:with-param name="coordinate" select="@coordinate3"/>
-                <xsl:with-param name="coordinate_same_as" select="@coordinate3_same_as"/>
-            </xsl:apply-templates>
-        </xsl:if>
-        <xsl:if test="@coordinate4">
-            <xsl:apply-templates select="." mode="coordinate_validation">
-                <xsl:with-param name="dimension" select="4"/>
-                <xsl:with-param name="coordinate" select="@coordinate4"/>
-                <xsl:with-param name="coordinate_same_as" select="@coordinate4_same_as"/>
-            </xsl:apply-templates>
-        </xsl:if>
-        <xsl:if test="@coordinate5">
-            <xsl:apply-templates select="." mode="coordinate_validation">
-                <xsl:with-param name="dimension" select="5"/>
-                <xsl:with-param name="coordinate" select="@coordinate5"/>
-                <xsl:with-param name="coordinate_same_as" select="@coordinate5_same_as"/>
-            </xsl:apply-templates>
-        </xsl:if>
-        <xsl:if test="@coordinate6">
-            <xsl:apply-templates select="." mode="coordinate_validation">
-                <xsl:with-param name="dimension" select="6"/>
-                <xsl:with-param name="coordinate" select="@coordinate6"/>
-                <xsl:with-param name="coordinate_same_as" select="@coordinate6_same_as"/>
-            </xsl:apply-templates>
-        </xsl:if>
+        </xsl:for-each>
     </xsl:if>
 </xsl:for-each>
-</xsl:template>
-<!-- Validate a specific coordinate (prevent duplication for coordinate1, 2, ...) -->
-<xsl:template match="field" mode="coordinate_validation">
-    <xsl:param name="dimension"/> <!-- Current dimension being checked: 1...6-->
-    <xsl:param name="coordinate"/> <!-- Value of @coordinate{dimension} -->
-    <xsl:param name="coordinate_same_as"/> <!-- Value of @coordinate{dimension}_same_as -->
-    <!-- Validate coordinate_same_as -->
-    <xsl:if test="not(not($coordinate_same_as))">
-        <xsl:if test="$coordinate != '1...N'">
-            <xsl:apply-templates select=".">
-            <xsl:with-param name="error_description" select="concat('coordinate', $dimension, '_same_as is provided, but coordinate', $dimension, ' is not 1...N')"/>
-            </xsl:apply-templates>
-        </xsl:if>
-        <xsl:apply-templates select="." mode="validate_coordinate">
-            <xsl:with-param name="path" select="$coordinate_same_as"/>
-            <xsl:with-param name="attr" select="concat('coordinate', $dimension, '_same_as')"/>
-        </xsl:apply-templates>
-    </xsl:if>
-    <!-- Validate coordinate -->
-    <xsl:apply-templates select="." mode="validate_coordinate">
-        <xsl:with-param name="path" select="$coordinate"/>
-        <xsl:with-param name="attr" select="concat('coordinate', $dimension)"/>
-    </xsl:apply-templates>
 </xsl:template>
 <!-- Validate the value of a coordinate field -->
 <xsl:template match="field" mode="validate_coordinate">
