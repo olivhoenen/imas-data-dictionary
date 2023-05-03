@@ -117,13 +117,13 @@ class IDSDef:
         """Returns the current Data-Dictionary version."""
         return self.version
 
-    def get_field(self, struct, field):
+    def __get_field(self, struct, field):
         """Recursive function which returns the node corresponding to a given field which is a descendant of struct."""
         elt = struct.find('./field[@name="' + field[0] + '"]')
         if elt == None:
             raise Exception("Element '" + field[0] + "' not found")
         if len(field) > 1:
-            f = self.get_field(elt, field[1:])
+            f = self.__get_field(elt, field[1:])
         else:
             # specific generic node for which the useful doc is from the parent
             if field[0] != "value":
@@ -144,7 +144,7 @@ class IDSDef:
             fields = path.split("/")
 
             try:
-                f = self.get_field(ids, fields)
+                f = self.__get_field(ids, fields)
             except Exception as exc:
                 raise ValueError("Error while accessing {path}: {str(exc)}")
         else:
