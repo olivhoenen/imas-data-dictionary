@@ -810,15 +810,15 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath"/>
 		<xsl:param name="coordinatePath"/>
 		<xsl:choose>
-     		<xsl:when test="starts-with($coordinatePath,'/')">
+     		<xsl:when test="starts-with($coordinatePath,'/') and not(contains($coordinatePath,'OR'))">
 		       <!-- Case of a coordinate path expressed relative to the IDS root or nearest AoS parent (special case for the utilities section, e.g. /time). We then just get rid of the initial slash for the absolute coordinate attribute (to avoid users having to learn this initial / convention) -->
 		       <xsl:value-of select="substring($coordinatePath,2)"/>  
 		    </xsl:when>
-			<xsl:when test="contains($coordinatePath,'...')">
+			<xsl:when test="contains($coordinatePath,'...') and not(contains($coordinatePath,'OR'))">
 				<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
 				<xsl:value-of select="replace($coordinatePath,'../','')"/>
 			</xsl:when>
-			<xsl:when test="contains($coordinatePath,'IDS')">
+			<xsl:when test="contains($coordinatePath,'IDS') and not(contains($coordinatePath,'OR'))">
 				<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
 				<xsl:value-of select="$coordinatePath"/>
 			</xsl:when>
@@ -828,6 +828,9 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
                    <xsl:when test="contains(substring-after($coordinatePath,' OR '),' OR ')">
                         <xsl:value-of select="concat(local:getAbsolutePath(concat($currPath,'/',substring-before($coordinatePath,' OR '))),' OR ',local:getAbsolutePath(concat($currPath,'/',substring-before(substring-after($coordinatePath,' OR '),' OR '))),' OR ', local:getAbsolutePath(concat($currPath,'/',substring-after(substring-after($coordinatePath,' OR '),' OR '))))"/>
                    </xsl:when>
+                    <xsl:when test="contains(substring-after($coordinatePath,' OR '),'...')">
+                       <xsl:value-of select="concat(local:getAbsolutePath(concat($currPath,'/',substring-before($coordinatePath,' OR '))),' OR ',substring-after($coordinatePath,' OR '))"/>
+                    </xsl:when>
                    <xsl:otherwise>
   				        <xsl:value-of select="concat(local:getAbsolutePath(concat($currPath,'/',substring-before($coordinatePath,' OR '))),' OR ',local:getAbsolutePath(concat($currPath,'/',substring-after($coordinatePath,' OR '))))"/>             
                    </xsl:otherwise>				
