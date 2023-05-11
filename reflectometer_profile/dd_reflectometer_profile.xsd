@@ -156,12 +156,28 @@
 			</xs:element>
 			<xs:element name="line_of_sight_emission" type="line_of_sight_2points">
 				<xs:annotation>
-					<xs:documentation>Description of the line of sight of the emission antenna. The first point corresponds to the antenna mouth. The second point correspond to the interception of the line of sight with the reflection surface on the inner wall.</xs:documentation>
+					<xs:documentation>Description of the line of sight of the emission antenna. The first point corresponds to the centre of the antenna mouth. The second point correspond to the interception of the line of sight with the reflection surface on the inner wall.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="line_of_sight_detection" type="line_of_sight_2points">
 				<xs:annotation>
-					<xs:documentation>Description of the line of sight of the detection antenna, to be filled only if its position is distinct from the emission antenna. The first point corresponds to the antenna mouth. The second point correspond to the interception of the line of sight with the reflection surface on the inner wall.</xs:documentation>
+					<xs:documentation>Description of the line of sight of the detection antenna, to be filled only if its position is distinct from the emission antenna. The first point corresponds to the centre of the antenna mouth. The second point correspond to the interception of the line of sight with the reflection surface on the inner wall.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="antenna_emission" type="detector_aperture">
+				<xs:annotation>
+					<xs:documentation>Geometry of the emission antenna</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="antenna_detection" type="detector_aperture">
+				<xs:annotation>
+					<xs:documentation>Geometry of the detection antenna, to be filled only if it is distinct from the emission antenna.</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sweep_time">
@@ -196,6 +212,16 @@
 						<coordinate1>../frequencies</coordinate1>
 						<coordinate2>time</coordinate2>
 						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="amplitude" type="signal_flt_2d">
+				<xs:annotation>
+					<xs:documentation>Measured amplitude of the detected probing wave for each frequency and time slice (corresponding to the begin time of a sweep)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../frequencies</coordinate1>
+						<coordinate2>time</coordinate2>
+						<units>V</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -237,7 +263,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.11.0</lifecycle_version>
-				<lifecycle_last_change>3.33.0</lifecycle_last_change>
+				<lifecycle_last_change>3.39.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
