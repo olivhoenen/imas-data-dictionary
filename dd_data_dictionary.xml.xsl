@@ -2,11 +2,9 @@
 <?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./%24GET%5Bstylesheet%5D" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <xsl:stylesheet xmlns:yaslt="http://www.mod-xslt2.com/ns/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" extension-element-prefixes="yaslt" xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:local="http://www.example.com/functions/local" exclude-result-prefixes="local xs">
-
 	<!-- -->
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 	<xsl:param name="DD_GIT_DESCRIBE" as="xs:string" required="yes"/>
-
 	<!-- This script transforms the collection of XSD files forming the Data Dictionary into a single XML file describing explicitly all nodes with their characteristics-->
 	<!-- The resulting XML file makes further work on the data dictionary much easier, since it describes explicitely the whole schema (includes and references are solved) -->
 	<!-- Author:F. Imbeaux, CEA, adapted from xsd2CPODef7 of EU-ITM -->
@@ -67,40 +65,41 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 	<!-- A first scan is performed on the top-level elements to find out the IDS components and to declare them each time a IDS is found, its elements are scanned via apply'templates in IMPLEMENT mode -->
 	<xsl:template match="/*">
 		<IDSs>
-		  <!-- Stores version of DD -->
-		  <version>
-		    <xsl:value-of select="$DD_GIT_DESCRIBE"/>
-		  </version>
-		  <!-- Stores COCOS choice for this version of DD -->
-		  <cocos>
-		    <xsl:value-of select="./xs:element/xs:annotation/xs:appinfo/cocos"/>
-		  </cocos>
-		<utilities>
-        <!-- Declare complex types from Utilities -->
-        <xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:complexType">
-        <field>
-        <xsl:attribute name="name" select="@name"/>
-        <xsl:attribute name="data_type" select="'structure'"/>
-        <xsl:attribute name="structure_reference" select="'self'"/>
-        <xsl:attribute name="documentation" select="xs:annotation/xs:documentation"/>
-        <xsl:call-template name="doImplementType">
-                   <xsl:with-param name="thisType" select="@name"/>
-					<xsl:with-param name="currPath" select="''"/>    <!-- Overloading of this parameter to pass the information that we are processing the utilities section -->
-					<xsl:with-param name="currPath_doc" select="''"/>
+			<!-- Stores version of DD -->
+			<version>
+				<xsl:value-of select="$DD_GIT_DESCRIBE"/>
+			</version>
+			<!-- Stores COCOS choice for this version of DD -->
+			<cocos>
+				<xsl:value-of select="./xs:element/xs:annotation/xs:appinfo/cocos"/>
+			</cocos>
+			<utilities>
+				<!-- Declare complex types from Utilities -->
+				<xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:complexType">
+					<field>
+						<xsl:attribute name="name" select="@name"/>
+						<xsl:attribute name="data_type" select="'structure'"/>
+						<xsl:attribute name="structure_reference" select="'self'"/>
+						<xsl:attribute name="documentation" select="xs:annotation/xs:documentation"/>
+						<xsl:call-template name="doImplementType">
+							<xsl:with-param name="thisType" select="@name"/>
+							<xsl:with-param name="currPath" select="''"/>
+							<!-- Overloading of this parameter to pass the information that we are processing the utilities section -->
+							<xsl:with-param name="currPath_doc" select="''"/>
+							<xsl:with-param name="aosLevel" select="1"/>
+							<xsl:with-param name="aos3Parent" select="xs:annotation/xs:appinfo/aos3Parent"/>
+							<xsl:with-param name="structure_reference" select="'self'"/>
+						</xsl:call-template>
+					</field>
+				</xsl:for-each>
+				<!-- Declare Elements from Utilities (only those being the root of a structure, simple elements are not needed in IDSDef.xml)-->
+				<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[./xs:complexType]" mode="IMPLEMENT">
+					<xsl:with-param name="structure_reference" select="'self'"/>
 					<xsl:with-param name="aosLevel" select="1"/>
 					<xsl:with-param name="aos3Parent" select="xs:annotation/xs:appinfo/aos3Parent"/>
-					<xsl:with-param name="structure_reference" select="'self'"/>
-          </xsl:call-template>
-          </field>
-        </xsl:for-each>
-        <!-- Declare Elements from Utilities (only those being the root of a structure, simple elements are not needed in IDSDef.xml)-->
-        <xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[./xs:complexType]" mode="IMPLEMENT">
-<xsl:with-param name="structure_reference" select="'self'"/>
-<xsl:with-param name="aosLevel" select="1"/>
-<xsl:with-param name="aos3Parent" select="xs:annotation/xs:appinfo/aos3Parent"/>
-        </xsl:apply-templates> 
-		</utilities>
-	<!-- Scan for top-level elements (IDSs) -->
+				</xsl:apply-templates>
+			</utilities>
+			<!-- Scan for top-level elements (IDSs) -->
 			<xsl:apply-templates select="*/*/*/xs:element" mode="DECLARE">
 				<xsl:with-param name="currPath" select="''"/>
 				<xsl:with-param name="currPath_doc" select="''"/>
@@ -135,8 +134,12 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:attribute name="lifecycle_status"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_status"/></xsl:attribute>
 							<xsl:attribute name="lifecycle_version"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_version"/></xsl:attribute>
 							<xsl:attribute name="lifecycle_last_change"><xsl:value-of select="xs:annotation/xs:appinfo/lifecycle_last_change"/></xsl:attribute>
-							<xsl:if test="xs:annotation/xs:appinfo/specific_validation_rules"><xsl:attribute name="specific_validation_rules"><xsl:value-of select="xs:annotation/xs:appinfo/specific_validation_rules"/></xsl:attribute></xsl:if>
-							<xsl:if test="xs:annotation/xs:appinfo/url"><xsl:attribute name="url"><xsl:value-of select="xs:annotation/xs:appinfo/url"/></xsl:attribute></xsl:if>
+							<xsl:if test="xs:annotation/xs:appinfo/specific_validation_rules">
+								<xsl:attribute name="specific_validation_rules"><xsl:value-of select="xs:annotation/xs:appinfo/specific_validation_rules"/></xsl:attribute>
+							</xsl:if>
+							<xsl:if test="xs:annotation/xs:appinfo/url">
+								<xsl:attribute name="url"><xsl:value-of select="xs:annotation/xs:appinfo/url"/></xsl:attribute>
+							</xsl:if>
 							<!-- Scan its components in IMPLEMENT mode -->
 							<xsl:apply-templates select="xs:complexType" mode="IMPLEMENT">
 								<xsl:with-param name="currPath" select="''"/>
@@ -183,8 +186,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath"/>
 		<xsl:param name="currPath_doc"/>
 		<xsl:param name="aosLevel"/>
-        <xsl:param name="aos3Parent"/>
-        <xsl:param name="structure_reference"/>
+		<xsl:param name="aos3Parent"/>
+		<xsl:param name="structure_reference"/>
 		<xsl:param name="parentmachine"/>
 		<xsl:param name="parenttime"/>
 		<xsl:param name="parentunit"/>
@@ -201,8 +204,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:with-param name="currPath" select="$currPath"/>
 			<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 			<xsl:with-param name="aosLevel" select="$aosLevel"/>
-            <xsl:with-param name="aos3Parent" select="$aos3Parent"/>
-            <xsl:with-param name="structure_reference" select="$structure_reference"/>
+			<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
+			<xsl:with-param name="structure_reference" select="$structure_reference"/>
 			<xsl:with-param name="parentmachine" select="$parentmachine"/>
 			<xsl:with-param name="parenttime" select="$parenttime"/>
 			<xsl:with-param name="parentunit" select="$parentunit"/>
@@ -252,10 +255,9 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<!-- Generic method for declaring all appinfo as attributes-->
 								<xsl:attribute name="{name(.)}"><xsl:value-of select="."/></xsl:attribute>
 								<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
-										<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
-										<xsl:attribute name="timebasepath">
-										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="''"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="''"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
-										</xsl:if>
+								<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
+									<xsl:attribute name="timebasepath"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="''"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="''"/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
+								</xsl:if>
 							</xsl:for-each>
 						</field>
 					</xsl:when>
@@ -278,11 +280,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:for-each select="xs:annotation/xs:appinfo/*">
 								<!-- Generic method for declaring all appinfo as attributes-->
 								<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-										<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
-										<xsl:if test="contains(lower-case(name(.)),'coordinate') and ends-with(.,'time')">
-										<xsl:attribute name="timebasepath">
-										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/><xsl:with-param name="utilities_aoscontext" select="../utilities_aoscontext"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
-										</xsl:if>
+								<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
+								<xsl:if test="contains(lower-case(name(.)),'coordinate') and ends-with(.,'time')">
+									<xsl:attribute name="timebasepath"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/><xsl:with-param name="utilities_aoscontext" select="../utilities_aoscontext"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
+								</xsl:if>
 							</xsl:for-each>
 						</field>
 						<!-- Then we test if the type is real or complex, if so add *_error nodes to the structure for the errorbars -->
@@ -305,11 +306,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:for-each select="xs:annotation/xs:appinfo/*">
 									<!-- Generic method for declaring all appinfo as attributes-->
 									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_upper'"/></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_upper'"/></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-										<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
-										<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
-										<xsl:attribute name="timebasepath">
-										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/><xsl:with-param name="utilities_aoscontext" select="../utilities_aoscontext"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
-										</xsl:if>
+									<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
+									<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
+										<xsl:attribute name="timebasepath"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/><xsl:with-param name="utilities_aoscontext" select="../utilities_aoscontext"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
+									</xsl:if>
 								</xsl:for-each>
 							</field>
 							<field>
@@ -330,11 +330,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<xsl:for-each select="xs:annotation/xs:appinfo/*">
 									<!-- Generic method for declaring all appinfo as attributes-->
 									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_lower'"/></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
-										<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
-										<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
-										<xsl:attribute name="timebasepath">
-										<xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/><xsl:with-param name="utilities_aoscontext" select="../utilities_aoscontext"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
-										</xsl:if>
+									<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
+									<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
+										<xsl:attribute name="timebasepath"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/><xsl:with-param name="utilities_aoscontext" select="../utilities_aoscontext"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildRelativeAosParentPath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="aosLevel" select="$aosLevel - 1"/><xsl:with-param name="structure_reference" select="$structure_reference"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:attribute>
+									</xsl:if>
 								</xsl:for-each>
 							</field>
 						</xsl:if>
@@ -346,7 +345,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								<!-- It is an external reference -->
 								<field>
 									<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
-                                    <xsl:attribute name="structure_reference"><xsl:value-of select="@type"/></xsl:attribute>
+									<xsl:attribute name="structure_reference"><xsl:value-of select="@type"/></xsl:attribute>
 									<xsl:choose>
 										<xsl:when test="$currPath=''">
 											<xsl:attribute name="path"><xsl:value-of select="@name"/></xsl:attribute>
@@ -361,6 +360,9 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:when test="@maxOccurs='unbounded' or @maxOccurs &gt; 1">
 											<xsl:attribute name="data_type">struct_array</xsl:attribute>
 											<xsl:attribute name="maxoccur"><xsl:value-of select="@maxOccurs"/></xsl:attribute>
+											<xsl:if test="contains(xs:annotation/xs:appinfo/coordinate1,'time')">
+												<xsl:attribute name="timebasepath">time</xsl:attribute>
+											</xsl:if>
 											<xsl:choose>
 												<xsl:when test="$currPath_doc=''">
 													<xsl:attribute name="path_doc"><xsl:value-of select="@name"/><xsl:call-template name="aosIndex"><xsl:with-param name="aosLevel" select="$aosLevel"/></xsl:call-template></xsl:attribute>
@@ -487,6 +489,9 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 										<xsl:when test="@maxOccurs='unbounded' or @maxOccurs &gt; 1">
 											<xsl:attribute name="data_type">struct_array</xsl:attribute>
 											<xsl:attribute name="maxoccur"><xsl:value-of select="@maxOccurs"/></xsl:attribute>
+											<xsl:if test="contains(xs:annotation/xs:appinfo/coordinate1,'time')">
+												<xsl:attribute name="timebasepath">time</xsl:attribute>
+											</xsl:if>
 											<xsl:if test="xs:annotation/xs:appinfo/coordinate1">
 												<xsl:attribute name="coordinate1"><xsl:value-of select="xs:annotation/xs:appinfo/coordinate1"/></xsl:attribute>
 											</xsl:if>
@@ -736,7 +741,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 									<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 									<xsl:with-param name="aosLevel" select="$aosLevel"/>
 									<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
-									<xsl:with-param name="structure_reference" select="$structure_reference"/>																		
+									<xsl:with-param name="structure_reference" select="$structure_reference"/>
 									<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 								</xsl:apply-templates>
 							</xsl:otherwise>
@@ -757,7 +762,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 											<xsl:with-param name="aosLevel" select="$aosLevel"/>
-											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
+											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 											<xsl:with-param name="parentmachine" select="'yes'"/>
 											<xsl:with-param name="parenttime" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
@@ -768,7 +773,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 											<xsl:with-param name="aosLevel" select="$aosLevel"/>
-											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
+											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 											<xsl:with-param name="parentmachine" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
@@ -783,7 +788,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 											<xsl:with-param name="aosLevel" select="$aosLevel"/>
-   									        <xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
+											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 											<xsl:with-param name="parenttime" select="'yes'"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
@@ -793,7 +798,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 											<xsl:with-param name="currPath" select="$currPath"/>
 											<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 											<xsl:with-param name="aosLevel" select="$aosLevel"/>
-											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
+											<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 											<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 										</xsl:apply-templates>
 									</xsl:otherwise>
@@ -807,26 +812,26 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:with-param name="currPath" select="$currPath"/>
 							<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 							<xsl:with-param name="aosLevel" select="$aosLevel"/>
-							<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
+							<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
 							<xsl:with-param name="parentunit" select="substring-before(substring-after(string(xs:annotation/xs:documentation),'['),']')"/>
 						</xsl:apply-templates>
 					</xsl:otherwise>
 				</xsl:choose>
-			</xsl:when>		
+			</xsl:when>
 			<xsl:otherwise>
 				<xsl:for-each select="/*/xs:include[not(contains(@schemaLocation,'utilities'))]">
 					<!-- Complex Type not yet found, need to scan other included schemas -->
 					<!-- FOUND INCLUDE <xsl:value-of select="@schemaLocation"/> -->
-						<xsl:if test="document(@schemaLocation)/*/xs:complexType[@name=$thisType]">
-							<!-- FOUND ELEMENT <xsl:value-of select="$thisType"/> -->
-							<xsl:apply-templates select="document(@schemaLocation)/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
-								<!--This fills the complexType from its definition in the included schema (if it is there and not in the local schema, neither in utilities)-->
-								<xsl:with-param name="currPath" select="$currPath"/>
-								<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
-								<xsl:with-param name="aosLevel" select="$aosLevel"/>
-								<xsl:with-param name="aos3Parent" select="$aos3Parent"/>									
-							</xsl:apply-templates>
-						</xsl:if>
+					<xsl:if test="document(@schemaLocation)/*/xs:complexType[@name=$thisType]">
+						<!-- FOUND ELEMENT <xsl:value-of select="$thisType"/> -->
+						<xsl:apply-templates select="document(@schemaLocation)/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+							<!--This fills the complexType from its definition in the included schema (if it is there and not in the local schema, neither in utilities)-->
+							<xsl:with-param name="currPath" select="$currPath"/>
+							<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
+							<xsl:with-param name="aosLevel" select="$aosLevel"/>
+							<xsl:with-param name="aos3Parent" select="$aos3Parent"/>
+						</xsl:apply-templates>
+					</xsl:if>
 				</xsl:for-each>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -844,47 +849,40 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="coordinate"/>
 		<xsl:param name="currPath"/>
 		<xsl:param name="coordinatePath"/>
-		<xsl:choose>
-     		<xsl:when test="starts-with($coordinatePath,'/') and not(contains($coordinatePath,'OR'))">
-		       <!-- Case of a coordinate path expressed relative to the IDS root or nearest AoS parent (special case for the utilities section, e.g. /time). We then just get rid of the initial slash for the absolute coordinate attribute (to avoid users having to learn this initial / convention) -->
-		       <xsl:value-of select="substring($coordinatePath,2)"/>  
-		    </xsl:when>
-			<xsl:when test="contains($coordinatePath,'...') and not(contains($coordinatePath,'OR'))">
-				<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
-				<xsl:value-of select="replace($coordinatePath,'../','')"/>
-			</xsl:when>
-			<xsl:when test="contains($coordinatePath,'IDS') and not(contains($coordinatePath,'OR'))">
-				<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
-				<xsl:value-of select="$coordinatePath"/>
-			</xsl:when>
-			<xsl:when test="contains($coordinatePath,' OR ')">
-				<!-- Case of multiple possible coordinate nodes (maximum 2 OR statements considered) -->
+		<xsl:analyze-string select="$coordinatePath" regex=" OR ">  <!-- Identifies the OR statement and cuts the full coordinate string into a sequence of individual coordinates (non-matching the OR statement), then each individual coordinate is processed independently --> 
+			<xsl:matching-substring>
+				<xsl:value-of select="' OR '"/> 	<!-- Output the OR statements as is -->
+			</xsl:matching-substring>
+			<xsl:non-matching-substring>  <!-- Processes each individual coordinate between OR statements (or the unique coordinate if there is no OR statement) -->
 				<xsl:choose>
-                   <xsl:when test="contains(substring-after($coordinatePath,' OR '),' OR ')">
-                        <xsl:value-of select="concat(local:getAbsolutePath(concat($currPath,'/',substring-before($coordinatePath,' OR '))),' OR ',local:getAbsolutePath(concat($currPath,'/',substring-before(substring-after($coordinatePath,' OR '),' OR '))),' OR ', local:getAbsolutePath(concat($currPath,'/',substring-after(substring-after($coordinatePath,' OR '),' OR '))))"/>
-                   </xsl:when>
-                    <xsl:when test="contains(substring-after($coordinatePath,' OR '),'...')">
-                       <xsl:value-of select="concat(local:getAbsolutePath(concat($currPath,'/',substring-before($coordinatePath,' OR '))),' OR ',substring-after($coordinatePath,' OR '))"/>
-                    </xsl:when>
-                   <xsl:otherwise>
-  				        <xsl:value-of select="concat(local:getAbsolutePath(concat($currPath,'/',substring-before($coordinatePath,' OR '))),' OR ',local:getAbsolutePath(concat($currPath,'/',substring-after($coordinatePath,' OR '))))"/>             
-                   </xsl:otherwise>				
-				</xsl:choose>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:choose>
-					<xsl:when test="contains($coordinatePath,'../')">
-						<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',$coordinatePath))"/>
+					<xsl:when test="starts-with(.,'/')">
+						<!-- Case of a coordinate path expressed relative to the IDS root or nearest AoS parent (special case for the utilities section, e.g. /time). We then just get rid of the initial slash for the absolute coordinate attribute (to avoid users having to learn this initial / convention) -->
+						<xsl:value-of select="substring(.,2)"/>
+					</xsl:when>
+					<xsl:when test="contains(.,'...')">
+						<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
+						<xsl:value-of select="replace(.,'../','')"/>
+					</xsl:when>
+					<xsl:when test="contains(.,'IDS')">
+						<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
+						<xsl:value-of select="."/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="concat($currPath,'/',$coordinatePath)"/>
+						<xsl:choose>
+							<xsl:when test="contains(.,'../')">
+								<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',.))"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="concat($currPath,'/',.)"/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:otherwise>
 				</xsl:choose>
-			</xsl:otherwise>
-		</xsl:choose>
+			</xsl:non-matching-substring>
+		</xsl:analyze-string>
 	</xsl:template>
 	<!-- Template dedicated to building relative Path from the nearest static AoS parent, to calculate the time coordinate relative path for the new low level. It first calculates the absolute path of the coordinate, exactly as done in the BuildAbsolutePath template, then extracts the substring after the last AoS parent (detected thanks to aosLevel param) -->
-		<!-- NB does handle the detection of (itime) in case of a dynamic AoS parent, but this attribute will anyway not be used in this case because there is no need to specify a time coordinate ! -->
+	<!-- NB does handle the detection of (itime) in case of a dynamic AoS parent, but this attribute will anyway not be used in this case because there is no need to specify a time coordinate ! -->
 	<xsl:template name="BuildRelativeAosParentPath">
 		<xsl:param name="coordinate"/>
 		<xsl:param name="currPath"/>
@@ -893,10 +891,10 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="structure_reference"/>
 		<xsl:param name="utilities_aoscontext"/>
 		<xsl:choose>
-		      <xsl:when test="starts-with($coordinatePath,'/')">
-		       <!-- Case of a coordinate path expressed relative to the IDS root (special case needed for the utilities section but also directly understandable in the main IDS section by the Low Level, e.g. /time). We then keep the initial slash and display it as it is, the AL will know how to interpret it -->
-		       <xsl:value-of select="$coordinatePath"/>  
-		    </xsl:when>
+			<xsl:when test="starts-with($coordinatePath,'/')">
+				<!-- Case of a coordinate path expressed relative to the IDS root (special case needed for the utilities section but also directly understandable in the main IDS section by the Low Level, e.g. /time). We then keep the initial slash and display it as it is, the AL will know how to interpret it -->
+				<xsl:value-of select="$coordinatePath"/>
+			</xsl:when>
 			<xsl:when test="contains($coordinatePath,'...')">
 				<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
 				<xsl:value-of select="replace($coordinatePath,'../','')"/>
@@ -906,52 +904,57 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 				<xsl:value-of select="$coordinatePath"/>
 			</xsl:when>
 			<xsl:when test="contains($currPath,'(i1)')">
-			    <!-- There is at least one static AoS ancestor, process the path to make it relative to the nearest one -->
+				<!-- There is at least one static AoS ancestor, process the path to make it relative to the nearest one -->
 				<xsl:choose>
 					<xsl:when test="contains($coordinatePath,'../')">
 						<xsl:value-of select="substring-after(local:getAbsolutePath(concat($currPath,'/',$coordinatePath)),concat('(i',$aosLevel,')/'))"/>
 					</xsl:when>
 					<xsl:otherwise>
-					<xsl:choose>
-						<xsl:when test="$coordinatePath"> <!--if coordinatePath is not empty-->
-						    <xsl:value-of select="substring-after(concat($currPath,'/',$coordinatePath),concat('(i',$aosLevel,')/'))"/>
-						</xsl:when>
-						<xsl:otherwise>  
-							<xsl:value-of select="substring-after($currPath,concat('(i',$aosLevel,')/'))"/>
-						</xsl:otherwise>
-						</xsl:choose>		
+						<xsl:choose>
+							<xsl:when test="$coordinatePath">
+								<!--if coordinatePath is not empty-->
+								<xsl:value-of select="substring-after(concat($currPath,'/',$coordinatePath),concat('(i',$aosLevel,')/'))"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="substring-after($currPath,concat('(i',$aosLevel,')/'))"/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise>
-			<!-- Case with no static AoS ancestor, simply calculate the absolute path as in the BuilAbsolutePath template -->
-                <xsl:choose>
-                    <xsl:when test="contains($structure_reference,'self')">
-                	       <!-- Case of a coordinate path expressed relative to the root of the utilities complexType or element (special case for the utilities section). We then keep the initial anti-slash in the utilities section only and display it as it is, the AL will transform it properly -->
-                    		<xsl:choose>
-						    <xsl:when test="$coordinatePath and $utilities_aoscontext"> <!--if coordinatePath and utilities_aoscontext are not empty. Case of a relative path going above the top of the utilities complex Type, in such case we assume that the path is valid wrt the parent aos root and thus we don't add the \, even for utilities (the AL will handle it with the AoS context) -->
-						    <xsl:value-of select="local:getAbsolutePath($coordinatePath)"/>
-						    </xsl:when>
-						    <xsl:when test="$coordinatePath"> <!--if coordinatePath is not empty-->
-						    <xsl:value-of select="concat('\',local:getAbsolutePath($coordinatePath))"/>
-						    </xsl:when>
-						    <xsl:otherwise> <!--Then it is a time array itself arriving with the information in $currPath in utilities (this may be a specific processing but should be the only case -->
-						    <xsl:value-of select="concat('\',$currPath)"/>
-						    </xsl:otherwise>
-						    </xsl:choose>
-                    </xsl:when>
+				<!-- Case with no static AoS ancestor, simply calculate the absolute path as in the BuilAbsolutePath template -->
+				<xsl:choose>
+					<xsl:when test="contains($structure_reference,'self')">
+						<!-- Case of a coordinate path expressed relative to the root of the utilities complexType or element (special case for the utilities section). We then keep the initial anti-slash in the utilities section only and display it as it is, the AL will transform it properly -->
+						<xsl:choose>
+							<xsl:when test="$coordinatePath and $utilities_aoscontext">
+								<!--if coordinatePath and utilities_aoscontext are not empty. Case of a relative path going above the top of the utilities complex Type, in such case we assume that the path is valid wrt the parent aos root and thus we don't add the \, even for utilities (the AL will handle it with the AoS context) -->
+								<xsl:value-of select="local:getAbsolutePath($coordinatePath)"/>
+							</xsl:when>
+							<xsl:when test="$coordinatePath">
+								<!--if coordinatePath is not empty-->
+								<xsl:value-of select="concat('\',local:getAbsolutePath($coordinatePath))"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<!--Then it is a time array itself arriving with the information in $currPath in utilities (this may be a specific processing but should be the only case -->
+								<xsl:value-of select="concat('\',$currPath)"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
 					<xsl:when test="contains($coordinatePath,'../')">
 						<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',$coordinatePath))"/>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:choose>
-						<xsl:when test="$coordinatePath"> <!--if coordinatePath is not empty-->
-						    <xsl:value-of select="concat($currPath,'/',$coordinatePath)"/>
-						</xsl:when>
-						<xsl:otherwise>  
-							 <xsl:value-of select="$currPath"/>
-						</xsl:otherwise>
-						</xsl:choose>					
+							<xsl:when test="$coordinatePath">
+								<!--if coordinatePath is not empty-->
+								<xsl:value-of select="concat($currPath,'/',$coordinatePath)"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$currPath"/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:otherwise>
@@ -968,5 +971,5 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:when test="contains($data_type,'5d') or contains($data_type,'5D')">(:,:,:,:,:)</xsl:when>
 			<xsl:when test="contains($data_type,'6d') or contains($data_type,'6D')">(:,:,:,:,:,:)</xsl:when>
 		</xsl:choose>
-	</xsl:template>			
+	</xsl:template>
 </xsl:stylesheet>
