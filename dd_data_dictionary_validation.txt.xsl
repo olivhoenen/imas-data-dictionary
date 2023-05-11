@@ -2,13 +2,14 @@
 <?modxslt-stylesheet type="text/xsl" media="fuffa, screen and $GET[stylesheet]" href="./$GET[stylesheet]" alternate="no" title="Translation using provided stylesheet" charset="ISO-8859-1" ?>
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="ISO-8859-1" ?>
 <!-- This stylesheet implements some validation tests on IDSDef.xml -->
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet xmlns:yaslt="http://www.mod-xslt2.com/ns/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" extension-element-prefixes="yaslt" xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:local="http://www.example.com/functions/local" exclude-result-prefixes="local xs">
 <xsl:output method="text" encoding="UTF-8"/>
 <xsl:template match="/*">
 <!-- Tests for the utilities section -->
 <xsl:choose>
 <xsl:when test="not(./utilities//field[@timebasepath=''])">
-The utilities section is valid</xsl:when>
+The utilities section is valid
+</xsl:when>
 <xsl:otherwise>
 The utilities section has errors:<xsl:apply-templates select="./utilities//field[@timebasepath='']">
 <xsl:with-param name="error_description" select="'Problem in the timebasepath computation or in the specification of the time coordinate : this field has an empty timebasepath attribute'"/>
@@ -18,48 +19,30 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
 
 <!-- Tests are done for each IDS -->
 <xsl:for-each select="IDS">
-<!-- First a general test here on all conditions to generate the "IDS is VALID" statement. This test consists in having success on all tests, i.e. all individual tests expressions are assembled here with AND NOT() statements. We therefore have to copy here with "and not()" all individual tests listed in the second xsl:when statement  -->
-<xsl:choose>
-<xsl:when test="not(.//field[not(@type) and not(@data_type='structure') and not(@data_type='struct_array')])
-and not(.//field[not(@coordinate1) and (@data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_1D' or @data_type='INT_2D' or @data_type='INT_3D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' or @data_type='STR_1D' or @data_type='struct_array' )])
-and not (.//field[not(@coordinate2) and (@data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_2D' or @data_type='INT_3D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
-and not (.//field[not(@coordinate3) and (@data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_3D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
-and not (.//field[not(@coordinate4) and (@data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
-and not (.//field[not(@coordinate5) and (@data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_5D' or @data_type='CPX_6D' )])
-and not (.//field[not(@coordinate6) and (@data_type='FLT_6D' or @data_type='CPX_6D' )])
-and not (.//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_0D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D')])
-and not (.//field[@units and not(@units='UTC' or @units='Atomic Mass Unit' or @units='Elementary Charge Unit') and (contains(@data_type,'STR_') or contains(@data_type,'INT_') or contains(@data_type,'str_') or contains(@data_type,'int_'))])
-and not (.//field[@maxoccur='unbounded' and @type='dynamic' and ancestor::field[@maxoccur='unbounded' and @type='dynamic']])
-and not (.//field[@maxoccur='unbounded' and not(@type='dynamic') and not(ancestor::field[@maxoccur='unbounded' and @type='dynamic'])])
-and not (.//field[(@data_type='FLT_0D' or @data_type='INT_0D' or @data_type='CPX_0D' or @data_type='STR_0D') and @type='dynamic' and not(ancestor::field[@maxoccur='unbounded' and @type='dynamic'])])
-and not (.//field[@data_type='structure' and @type])
-and not (.//field[(not(@data_type='structure') and not(@data_type='struct_array')) and not(@type='dynamic') and (ancestor::field[@maxoccur='unbounded' and @type='dynamic'])])
-and not (.//field[@timebasepath=''])
-">
-IDS <xsl:value-of select="@name"/> is valid.</xsl:when>
-<xsl:otherwise><!-- Create error table and populate it with results of the various tests, which are applied sequentially, each test corresponding to a particular type of error  -->
-IDS <xsl:value-of select="@name"/> has errors: <!-- Test the presence of the "type" metadata (R5.2) -->
+<!-- First execute all tests. If any fail, their output will be stored in $test_output -->
+<xsl:variable name="test_output">
+<!-- Test the presence of the "type" metadata (R5.2) -->
 <xsl:apply-templates select=".//field[not(@type) and not(@data_type='structure') and not(@data_type='struct_array')]">
 <xsl:with-param name="error_description" select="'This field must have a type attribute (constant/static/dynamic)'"/>
 </xsl:apply-templates>
 <!-- Test the presence of the "coordinate1" metadata for 1D+ data (R5.4) -->
-<xsl:apply-templates select=".//field[not(@coordinate1) and (@data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_1D' or @data_type='INT_2D' or @data_type='INT_3D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' or @data_type='STR_1D' or @data_type='struct_array' )]">
+<xsl:apply-templates select=".//field[not(@coordinate1) and (matches(@data_type, '^FLT_[1-6]D$') or matches(@data_type, '^INT_[1-4]D$') or matches(@data_type, '^CPX_[1-6]D$') or @data_type='STR_1D' or @data_type='struct_array' )]">
 <xsl:with-param name="error_description" select="'This field must have a coordinate1 attribute'"/>
 </xsl:apply-templates>
 <!-- Test the presence of the "coordinate2" metadata for 2D+ data (R5.4) -->
-<xsl:apply-templates select=".//field[not(@coordinate2) and (@data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_2D' or @data_type='INT_3D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )]">
+<xsl:apply-templates select=".//field[not(@coordinate2) and (matches(@data_type, '^FLT_[2-6]D$') or matches(@data_type, '^INT_[2-4]D$') or matches(@data_type, '^CPX_[2-6]D$'))]">
 <xsl:with-param name="error_description" select="'This field must have a coordinate2 attribute'"/>
 </xsl:apply-templates>
 <!-- Test the presence of the "coordinate3" metadata for 3D+ data (R5.4) -->
-<xsl:apply-templates select=".//field[not(@coordinate3) and (@data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='INT_3D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )]">
+<xsl:apply-templates select=".//field[not(@coordinate3) and (matches(@data_type, '^FLT_[3-6]D$') or matches(@data_type, '^INT_[3-4]D$') or matches(@data_type, '^CPX_[3-6]D$'))]">
 <xsl:with-param name="error_description" select="'This field must have a coordinate3 attribute'"/>
 </xsl:apply-templates>
 <!-- Test the presence of the "coordinate4" metadata for 4D+ data (R5.4) -->
-<xsl:apply-templates select=".//field[not(@coordinate4) and (@data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D' )]">
+<xsl:apply-templates select=".//field[not(@coordinate4) and (matches(@data_type, '^FLT_[4-6]D$') or @data_type='INT_4D' or matches(@data_type, '^CPX_[4-6]D$'))]">
 <xsl:with-param name="error_description" select="'This field must have a coordinate4 attribute'"/>
 </xsl:apply-templates>
 <!-- Test the presence of the "coordinate5" metadata for 5D+ data (R5.4) -->
-<xsl:apply-templates select=".//field[not(@coordinate5) and (@data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_5D' or @data_type='CPX_6D' )]">
+<xsl:apply-templates select=".//field[not(@coordinate5) and (matches(@data_type, '^FLT_[5-6]D$') or matches(@data_type, '^CPX_[5-6]D$'))]">
 <xsl:with-param name="error_description" select="'This field must have a coordinate5 attribute'"/>
 </xsl:apply-templates>
 <!-- Test the presence of the "coordinate6" metadata for 6D+ data (R5.4) -->
@@ -98,7 +81,15 @@ IDS <xsl:value-of select="@name"/> has errors: <!-- Test the presence of the "ty
 <xsl:apply-templates select=".//field[@timebasepath='']">
 <xsl:with-param name="error_description" select="'Problem in the timebasepath computation or in the specification of the time coordinate : this field has an empty timebasepath attribute'"/>
 </xsl:apply-templates>
-</xsl:otherwise>
+</xsl:variable>
+<xsl:choose>
+    <xsl:when test="not(string($test_output))">
+        <xsl:value-of select="concat('IDS ', @name, ' is valid.&#xA;')"/>
+    </xsl:when>
+    <xsl:otherwise>
+        <xsl:value-of select="concat('IDS ', @name, ' has errors:&#xA;')"/>
+        <xsl:value-of select="$test_output"/>
+    </xsl:otherwise>
 </xsl:choose>
 </xsl:for-each>
 </xsl:template>
