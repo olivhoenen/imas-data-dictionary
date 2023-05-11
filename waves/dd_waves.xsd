@@ -1823,12 +1823,12 @@
 			</xs:element>
 			<xs:element name="e_field" type="waves_coherent_wave_full_wave_e_field">
 				<xs:annotation>
-					<xs:documentation>Components of the wave electric field, represented as proportional to exp(i(n_tor.phi - m_pol.theta - 2.pi.frequency.t - phase))</xs:documentation>
+					<xs:documentation>Components of the wave electric field, represented as Fourier coefficients E(n_tor,frequency) such that the electric is equal to real(E(n_tor,frequency).exp(i(n_tor.phi - 2.pi.frequency.t)))</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="b_field" type="waves_coherent_wave_full_wave_b_field">
 				<xs:annotation>
-					<xs:documentation>Components of the wave magnetic field, represented as proportional to exp(i(n_tor.phi - m_pol.theta - 2.pi.frequency.t - phase))</xs:documentation>
+					<xs:documentation>Components of the wave magnetic field, , represented as Fourier coefficients B(n_tor,frequency) such that the electric is equal to real(B(n_tor,frequency).exp(i(n_tor.phi - 2.pi.frequency.t)))</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="k_perpendicular" type="generic_grid_scalar" maxOccurs="unbounded">
