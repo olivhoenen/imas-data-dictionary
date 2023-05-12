@@ -232,6 +232,17 @@
 						<xs:documentation>Time at which the pulse ended on the experiment (if relevant), expressed in Unix Epoch time. Temporarily represented as two integers, since for the moment IMAS is missing 64bits long integers to represent epoch time with nanoseconds resolution</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="pulse_processing_time_begin">
+					<xs:annotation>
+						<xs:documentation>For experimental processed data, date and time (UTC) at which the pulse data processing started on the experiment (if relevant), expressed in a human readable form (ISO 8601) : the format of the string shall be : YYYY-MM-DDTHH:MM:SSZ. Example : 2020-07-24T14:19:00Z</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="simulation" type="dataset_description_simulation">
 					<xs:annotation>
 						<xs:documentation>Description of the general simulation characteristics, if this dataset has been produced by a simulation. Several nodes describe typical time-dependent simulation with a time evolution as the main loop</xs:documentation>
