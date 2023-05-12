@@ -8017,68 +8017,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="data_entry">
-		<xs:annotation>
-			<xs:documentation>Definition of a data entry</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="user">
-				<xs:annotation>
-					<xs:documentation>Username</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="machine">
-				<xs:annotation>
-					<xs:documentation>Name of the experimental device to which this data is related</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pulse_type">
-				<xs:annotation>
-					<xs:documentation>Type of the data entry, e.g. "pulse", "simulation", ...</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pulse">
-				<xs:annotation>
-					<xs:documentation>Pulse number</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="run">
-				<xs:annotation>
-					<xs:documentation>Run number</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="ids_plugins_node">
 		<xs:annotation>
 			<xs:documentation>Plugins information for a given node of the IDS</xs:documentation>
@@ -8192,40 +8130,6 @@
 						<type>constant</type>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ids_identification">
-		<xs:annotation>
-			<xs:documentation>Identifier of an IDS</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>IDS name</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="occurrence">
-				<xs:annotation>
-					<xs:documentation>IDS occurrence</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="data_entry" type="data_entry">
-				<xs:annotation>
-					<xs:documentation>Data entry to which this IDS belongs</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
