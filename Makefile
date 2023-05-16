@@ -10,6 +10,7 @@ DD_FILES=dd_data_dictionary.xml IDSDef.xml IDSNames.txt dd_data_dictionary_valid
 HTMLDOC_FILES=$(wildcard $(addprefix html_documentation/,*.html css/*.css img/*.png js/*js))
 HTMLDOC_FILES_IDS=$(wildcard $(addprefix html_documentation/,$(addsuffix /*.*,$(shell cat IDSNames.txt))))
 COCOS_FILES=$(wildcard $(addprefix html_documentation/cocos/,*.csv))
+UTILITIES_FILES=$(wildcard $(addprefix html_documentation/utilities/,*.*))
 
 # Identifiers definition files
 ID_IDENT = $(wildcard */*_identifier.xml)
@@ -22,7 +23,7 @@ clean: # dd_clean htmldoc_clean
 	$(if $(wildcard .gitignore),git clean -f -X -d,$(RM) -f $(DD_FILES))
 
 test: dd_data_dictionary_validation.txt
-	grep -i Error $< >&2 && exit 1 || grep valid $<
+	grep -i -w Error $< >&2 && exit 1 || grep valid $<
 
 install: dd_install identifiers_install htmldoc_install
 
@@ -36,6 +37,8 @@ htmldoc_install: htmldoc
 	$(INSTALL_DATA) $(filter %.css,$(HTMLDOC_FILES)) $(htmldir)/imas/css
 	$(INSTALL_DATA) $(filter %.js,$(HTMLDOC_FILES)) $(htmldir)/imas/js
 	$(INSTALL_DATA) $(filter %.png,$(HTMLDOC_FILES)) $(htmldir)/imas/img
+	$(mkdir_p) $(htmldir)/imas/utilities
+	$(INSTALL_DATA) $(UTILITIES_FILES) $(htmldir)/imas/utilities
 	$(mkdir_p) $(htmldir)/imas/cocos
 	$(INSTALL_DATA) $(filter %.csv,$(COCOS_FILES)) $(htmldir)/imas/cocos
 	$(mkdir_p) $(addprefix $(htmldir)/imas/,$(sort $(dir $(HTMLDOC_FILES_IDS:html_documentation/%=%))))
@@ -51,6 +54,10 @@ dd_install: $(DD_FILES)
 	$(mkdir_p) $(includedir)
 	$(INSTALL_DATA) $(filter-out IDSDef.xml,$^) $(includedir)
 	ln -sf dd_data_dictionary.xml $(includedir)/IDSDef.xml
+	pip install . --target $(prefix)/python/lib
+	$(mkdir_p) $(prefix)/bin
+	ln -sf $(prefix)/python/lib/bin/idsdef  $(prefix)/bin/idsdef
+	
 
 identifiers_install: $(ID_IDENT)
 	$(mkdir_p) $(foreach subdir,$(sort $(^D)),$(includedir)/$(subdir))
@@ -71,7 +78,7 @@ html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv: dd_data_d
 	$(xslt2proc)
 
 IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
-	$(xsltproc)
+	$(xslt2proc)
 
 # Generic Dependencies
 

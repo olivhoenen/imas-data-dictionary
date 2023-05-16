@@ -194,9 +194,39 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="spectro_vis_channel_processed_line_filter">
+		<xs:annotation>
+			<xs:documentation>Description of a processed line for filter spectrometers</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="wavelength_central">
+				<xs:annotation>
+					<xs:documentation>Central wavelength of the processed line</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectro_vis_channel_processed_line">
 		<xs:annotation>
-			<xs:documentation>Description of a processed line</xs:documentation>
+			<xs:documentation>Description of a processed line for grating spectrometers</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="label">
@@ -654,131 +684,80 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="spectro_vis_channel_filter_filter">
+		<xs:annotation>
+			<xs:documentation>Filter description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="wavelength_central">
+				<xs:annotation>
+					<xs:documentation>Central wavelength of the filter</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="wavelength_width">
+				<xs:annotation>
+					<xs:documentation>Filter transmission function width (at 90% level)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="spectro_vis_channel_filter">
 		<xs:annotation>
 			<xs:documentation>Filter spectrometer</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="processed_lines">
+			<xs:element name="filter" type="spectro_vis_channel_filter_filter">
 				<xs:annotation>
-					<xs:documentation>Central wavelength of the processed lines</xs:documentation>
+					<xs:documentation>Filter description</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
-						<units>m</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="processed_line" type="spectro_vis_channel_processed_line_filter" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Set of processed spectral lines (normally a single line is filtered out, but it may happen in some cases that several lines go through the filter). </xs:documentation>
+					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="line_labels">
-				<xs:annotation>
-					<xs:documentation>String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../processed_lines</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="line_radiances" type="signal_flt_2d">
-				<xs:annotation>
-					<xs:documentation>Calibrated, background subtracted line integrals </xs:documentation>
-					<xs:appinfo>
-						<units>m^-2.s^-1.sr^-1</units>
-						<coordinate1>../processed_lines (coordinate1 of the 'data' child)</coordinate1>
+						<introduced_after_version>3.38.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="line_radiances_adjusted" type="signal_flt_2d">
+			<xs:element name="output_voltage" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Calibrated, background subtracted line integrals, adjusted as if the line was centred at the peak responsivity of the system (for this line)</xs:documentation>
-					<xs:appinfo>
-						<units>m^-2.s^-1.sr^-1</units>
-						<coordinate1>../processed_lines (coordinate1 of the 'data' child)</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="line_power_radiances" type="signal_flt_2d">
-				<xs:annotation>
-					<xs:documentation>Calibrated, background subtracted power radiances</xs:documentation>
-					<xs:appinfo>
-						<units>W.m^-2.sr^-1</units>
-						<coordinate1>../processed_lines (coordinate1 of the 'data' child)</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="raw_lines">
-				<xs:annotation>
-					<xs:documentation>Central wavelength of the raw lines</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>m</units>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="output_voltage" type="signal_flt_2d">
-				<xs:annotation>
-					<xs:documentation>Raw voltage output of the whole acquisition chain for each raw line</xs:documentation>
+					<xs:documentation>Raw voltage output of the whole acquisition chain</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
-						<coordinate1>../raw_lines (coordinate1 of the 'data' child)</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="photoelectric_voltage" type="signal_flt_2d">
+			<xs:element name="photoelectric_voltage" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Gain corrected and background subtracted voltage for each raw line</xs:documentation>
+					<xs:documentation>Gain corrected and background subtracted voltage</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
-						<coordinate1>../raw_lines (coordinate1 of the 'data' child)</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="photon_count" type="signal_flt_2d">
+			<xs:element name="photon_count" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Detected photon count for each raw line</xs:documentation>
+					<xs:documentation>Detected photon count</xs:documentation>
 					<xs:appinfo>
 						<units>s^-1</units>
-						<coordinate1>../raw_lines (coordinate1 of the 'data' child)</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="line_intensities" type="signal_flt_2d">
-				<xs:annotation>
-					<xs:documentation>Line gross integral intensities</xs:documentation>
-					<xs:appinfo>
-						<units>m^-2.s^-1.sr^-1</units>
-						<coordinate1>../raw_lines (coordinate1 of the 'data' child)</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="calibrated_lines">
-				<xs:annotation>
-					<xs:documentation>Central wavelength of the calibrated lines</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>m</units>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="calibrated_line_integrals" type="signal_flt_2d">
-				<xs:annotation>
-					<xs:documentation>Calibrated line gross areas integrals </xs:documentation>
-					<xs:appinfo>
-						<units>m^-2.s^-1.sr^-1</units>
-						<coordinate1>../calibrated_lines (coordinate1 of the 'data' child)</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -794,16 +773,35 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="wavelengths">
+				<xs:annotation>
+					<xs:documentation>Array of wavelengths for radiance calibration</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="radiance_calibration">
 				<xs:annotation>
 					<xs:documentation>Radiance calibration</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m^-2.sr^-1</units>
+						<units>m^-3.sr^-1</units>
+						<coordinate1>../wavelengths</coordinate1>
+						<introduced_after_version>3.38.1</introduced_after_version>
+						<change_nbc_version>3.39.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>FLT_0D</change_nbc_previous_type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="radiance_calibration_date">
@@ -815,6 +813,20 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sensitivity">
+				<xs:annotation>
+					<xs:documentation>Photoelectric sensitivity of the detector. This is the conversion factor from the received power on the detector into electric voltage depending on the wavelength</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>V.W^-1</units>
+						<coordinate1>../wavelengths</coordinate1>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -1114,7 +1126,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.3.1</lifecycle_version>
-				<lifecycle_last_change>3.38.0</lifecycle_last_change>
+				<lifecycle_last_change>3.39.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
