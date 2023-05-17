@@ -8,7 +8,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.0.0</lifecycle_last_change>
+				<lifecycle_last_change>3.39.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
@@ -45,7 +45,7 @@
 				</xs:element>
 				<xs:element name="mutual_loops_active">
 					<xs:annotation>
-						<xs:documentation>Mutual inductance coupling from active coils to poloidal flux loops</xs:documentation>
+						<xs:documentation>Mutual inductance coupling from active coils to flux loops</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
@@ -57,14 +57,18 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="field_probes_active">
+				<xs:element name="b_field_pol_probes_active">
 					<xs:annotation>
 						<xs:documentation>Poloidal field coupling from active coils to poloidal field probes</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>T/A</units>
-							<coordinate1>../poloidal_probes</coordinate1>
+							<coordinate1>../b_field_pol_probes</coordinate1>
 							<coordinate2>../active_coils</coordinate2>
+							<coordinate1>IDS:magnetics/b_field_pol_probe</coordinate1>
+							<change_nbc_version>3.39.0</change_nbc_version>
+							<change_nbc_description>leaf_renamed</change_nbc_description>
+							<change_nbc_previous_name>field_probes_active</change_nbc_previous_name>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
@@ -87,7 +91,7 @@
 				</xs:element>
 				<xs:element name="mutual_loops_passive">
 					<xs:annotation>
-						<xs:documentation>Mutual  inductance coupling from passive  loops to poloidal flux loops</xs:documentation>
+						<xs:documentation>Mutual inductance coupling from passive loops to flux loops</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
@@ -99,41 +103,44 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="field_probes_passive">
+				<xs:element name="b_field_pol_probes_passive">
 					<xs:annotation>
 						<xs:documentation>Poloidal field coupling from passive loops to poloidal field probes</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>T/A</units>
-							<coordinate1>../poloidal_probes</coordinate1>
+							<coordinate1>../b_field_pol_probes</coordinate1>
 							<coordinate2>../passive_loops</coordinate2>
+							<change_nbc_version>3.39.0</change_nbc_version>
+							<change_nbc_description>leaf_renamed</change_nbc_description>
+							<change_nbc_previous_name>field_probes_passive</change_nbc_previous_name>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="mutual_grid_grid">
+				<xs:element name="mutual_plasma_plasma">
 					<xs:annotation>
-						<xs:documentation>Mutual inductance from equilibrium grid to itself</xs:documentation>
+						<xs:documentation>Mutual inductance coupling from plasma filaments to plasma filaments</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
-							<coordinate1>../grid_points</coordinate1>
-							<coordinate2>../grid_points</coordinate2>
+							<coordinate1>../plasma_filaments</coordinate1>
+							<coordinate2>../plasma_filaments</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="mutual_grid_active">
+				<xs:element name="mutual_plasma_active">
 					<xs:annotation>
-						<xs:documentation>Mutual inductance coupling from active coils to equilibrium grid  </xs:documentation>
+						<xs:documentation>Mutual inductance coupling from active coils to plasma filaments</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
-							<coordinate1>../grid_points</coordinate1>
+							<coordinate1>../plasma_filaments</coordinate1>
 							<coordinate2>../active_coils</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
@@ -141,13 +148,13 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="mutual_grid_passive">
+				<xs:element name="mutual_plasma_passive">
 					<xs:annotation>
-						<xs:documentation>Mutual inductance coupling from passive loops to equilibrium grid</xs:documentation>
+						<xs:documentation>Mutual inductance coupling from passive loops to plasma filaments</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
-							<coordinate1>../grid_points</coordinate1>
+							<coordinate1>../plasma_filaments</coordinate1>
 							<coordinate2>../passive_loops</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
@@ -155,28 +162,28 @@
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="field_probes_grid">
+				<xs:element name="b_field_pol_probes_grid">
 					<xs:annotation>
-						<xs:documentation>Poloidal field coupling from equilibrium grid to poloidal field probes</xs:documentation>
+						<xs:documentation>Poloidal field coupling from plasma filaments to poloidal field probes</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>T/A</units>
-							<coordinate1>../poloidal_probes</coordinate1>
-							<coordinate2>../grid_points</coordinate2>
+							<coordinate1>../b_field_pol_probes</coordinate1>
+							<coordinate2>../plasma_filaments</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="FLT_2D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="mutual_loops_grid">
+				<xs:element name="mutual_loops_plasma">
 					<xs:annotation>
-						<xs:documentation>Mutual inductance from equilibrium grid to poloidal flux loops </xs:documentation>
+						<xs:documentation>Mutual inductance from plasma filaments to poloidal flux loops </xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
 							<coordinate1>../flux_loops</coordinate1>
-							<coordinate2>../grid_points</coordinate2>
+							<coordinate2>../plasma_filaments</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
@@ -185,7 +192,7 @@
 				</xs:element>
 				<xs:element name="active_coils">
 					<xs:annotation>
-						<xs:documentation>List of the names of the active PF+CS coils</xs:documentation>
+						<xs:documentation>List of URIs of the active coils considered in the IDS</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<coordinate1>IDS:pf_active/coil</coordinate1>
@@ -197,7 +204,7 @@
 				</xs:element>
 				<xs:element name="passive_loops">
 					<xs:annotation>
-						<xs:documentation>List of the names of the passive loops</xs:documentation>
+						<xs:documentation>List of URIs of the passive loops considered in the IDS</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<coordinate1>IDS:pf_passive/loop</coordinate1>
@@ -207,12 +214,15 @@
 						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="poloidal_probes">
+				<xs:element name="b_field_pol_probes">
 					<xs:annotation>
-						<xs:documentation>List of the names of poloidal field probes</xs:documentation>
+						<xs:documentation>List of URIs of the poloidal field probes considered in the IDS</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
-							<coordinate1>IDS:magnetics/bpol_probe</coordinate1>
+							<coordinate1>IDS:magnetics/b_field_pol_probe</coordinate1>
+							<change_nbc_version>3.39.0</change_nbc_version>
+							<change_nbc_description>leaf_renamed</change_nbc_description>
+							<change_nbc_previous_name>poloidal_probes</change_nbc_previous_name>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
@@ -221,7 +231,7 @@
 				</xs:element>
 				<xs:element name="flux_loops">
 					<xs:annotation>
-						<xs:documentation>List of the names of the axisymmetric flux loops</xs:documentation>
+						<xs:documentation>List of URIs of the flux loops considered in the IDS</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<coordinate1>IDS:magnetics/flux_loop</coordinate1>
@@ -231,12 +241,13 @@
 						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="grid_points">
+				<xs:element name="plasma_filaments">
 					<xs:annotation>
-						<xs:documentation>List of the names of the plasma region grid points</xs:documentation>
+						<xs:documentation>List of URIs of the plasma filaments considered in the IDS</xs:documentation>
 						<xs:appinfo>
-							<type>constant</type>
-							<coordinate1>1...N</coordinate1>
+							<type>static</type>
+							<coordinate1>IDS:pf_plasma/filament</coordinate1>
+							<introduced_after_version>3.38.1</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
