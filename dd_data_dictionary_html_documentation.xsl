@@ -188,7 +188,7 @@
   
 <td>
 <xsl:if test="@coordinate1"> <!--If there is at least one axis-->
-1- <xsl:value-of select="@coordinate1"/><br/>
+1- <xsl:value-of select="@coordinate1"/><xsl:apply-templates mode="print_alternative_coordinate" select="ancestor::IDS//field[@alternative_coordinate1 and not(contains(@name,'error_'))]"><xsl:with-param name="coordinate"><xsl:value-of select="@coordinate1"/></xsl:with-param></xsl:apply-templates><br/>
 <xsl:if test="@coordinate2">
 2- <xsl:value-of select="@coordinate2"/><br/>
 <xsl:if test="@coordinate3">
@@ -210,4 +210,12 @@
   <!-- Recursively process the children -->
   <xsl:apply-templates select="field"/>
  </xsl:template>
+
+<!-- This template verifies whether the scanned field (having alternative_coordinate1 attribute) is the primary coordinate of the current node scanned in the main template. If so, append the list of alternative coordinates to the primary coordinate, separated by an extra semicolumn -->
+<xsl:template mode="print_alternative_coordinate" match="field">  
+    <xsl:param name="coordinate"/>
+	<xsl:if test="substring-before(@path_doc,'(:)')=$coordinate">; <xsl:value-of select="replace(@alternative_coordinate1,';','; ')"/>
+   </xsl:if>
+</xsl:template>
+
 </xsl:stylesheet>
