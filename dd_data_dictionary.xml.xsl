@@ -849,35 +849,48 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="coordinate"/>
 		<xsl:param name="currPath"/>
 		<xsl:param name="coordinatePath"/>
-		<xsl:analyze-string select="$coordinatePath" regex=" OR ">  <!-- Identifies the OR statement and cuts the full coordinate string into a sequence of individual coordinates (non-matching the OR statement), then each individual coordinate is processed independently --> 
+		<xsl:analyze-string select="$coordinatePath" regex=" OR ">
+			<!-- Identifies the OR statement and cuts the full coordinate string into a sequence of individual coordinates (non-matching the OR statement), then each individual coordinate is processed independently -->
 			<xsl:matching-substring>
-				<xsl:value-of select="' OR '"/> 	<!-- Output the OR statements as is -->
+				<xsl:value-of select="' OR '"/>
+				<!-- Output the OR statements as is -->
 			</xsl:matching-substring>
-			<xsl:non-matching-substring>  <!-- Processes each individual coordinate between OR statements (or the unique coordinate if there is no OR statement) -->
-				<xsl:choose>
-					<xsl:when test="starts-with(.,'/')">
-						<!-- Case of a coordinate path expressed relative to the IDS root or nearest AoS parent (special case for the utilities section, e.g. /time). We then just get rid of the initial slash for the absolute coordinate attribute (to avoid users having to learn this initial / convention) -->
-						<xsl:value-of select="substring(.,2)"/>
-					</xsl:when>
-					<xsl:when test="contains(.,'...')">
-						<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
-						<xsl:value-of select="replace(.,'../','')"/>
-					</xsl:when>
-					<xsl:when test="contains(.,'IDS')">
-						<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
-						<xsl:value-of select="."/>
-					</xsl:when>
-					<xsl:otherwise>
+			<xsl:non-matching-substring>
+				<!-- Processes each individual coordinate between OR statements (or the unique coordinate if there is no OR statement) -->
+				<xsl:analyze-string select="." regex=";">
+					<!-- Identifies the ; separator and cuts the full coordinate string into a sequence of individual coordinates (non-matching the ; separator), then each individual coordinate is processed independently -->
+					<xsl:matching-substring>
+						<xsl:value-of select="';'"/>
+						<!-- Output the ; separator as is -->
+					</xsl:matching-substring>
+					<xsl:non-matching-substring>
+						<!-- Processes each individual coordinate between ; separators (or the unique coordinate if there is no ; separator) -->
 						<xsl:choose>
-							<xsl:when test="contains(.,'../')">
-								<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',.))"/>
+							<xsl:when test="starts-with(.,'/')">
+								<!-- Case of a coordinate path expressed relative to the IDS root or nearest AoS parent (special case for the utilities section, e.g. /time). We then just get rid of the initial slash for the absolute coordinate attribute (to avoid users having to learn this initial / convention) -->
+								<xsl:value-of select="substring(.,2)"/>
+							</xsl:when>
+							<xsl:when test="contains(.,'...')">
+								<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
+								<xsl:value-of select="replace(.,'../','')"/>
+							</xsl:when>
+							<xsl:when test="contains(.,'IDS')">
+								<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
+								<xsl:value-of select="."/>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="concat($currPath,'/',.)"/>
+								<xsl:choose>
+									<xsl:when test="contains(.,'../')">
+										<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',.))"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="concat($currPath,'/',.)"/>
+									</xsl:otherwise>
+								</xsl:choose>
 							</xsl:otherwise>
 						</xsl:choose>
-					</xsl:otherwise>
-				</xsl:choose>
+					</xsl:non-matching-substring>
+				</xsl:analyze-string>
 			</xsl:non-matching-substring>
 		</xsl:analyze-string>
 	</xsl:template>
