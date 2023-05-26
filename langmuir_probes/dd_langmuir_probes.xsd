@@ -612,7 +612,7 @@
 			</xs:element>
 			<xs:element name="collector" type="langmuir_probes_plunge_collector" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of probe collectors including measurements specific to each collector</xs:documentation>
+					<xs:documentation>Set of probe collectors including measurements specific to each collector. The number of collectors (size of this array of structure) is assumed to remain constant for all plunges</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -747,7 +747,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>m^2</units>
-						<coordinate1>plunge/collector</coordinate1>
+						<coordinate1>../plunge(itime)/collector</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -756,7 +756,7 @@
 			</xs:element>
 			<xs:element name="plunge" type="langmuir_probes_plunge" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of plunges of this probe during the pulse, each plunge being recorded as a time slice from the Access Layer point of view. The time child node corresponds to the time of maximum penetration of the probe during a given plunge. The dynamics of physicas quantities within the plunge are described via the time_within_plunge vector.</xs:documentation>
+					<xs:documentation>Set of plunges of this probe during the pulse, each plunge being recorded as a time slice from the Access Layer point of view. The time child node corresponds to the time of maximum penetration of the probe during a given plunge. The dynamics of physical quantities within the plunge are described via the time_within_plunge vector.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
