@@ -266,6 +266,12 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
                         <xsl:with-param name="is_index" select="true()"/>
                     </xsl:apply-templates>
                 </xsl:when>
+                <!-- No index provided otherwise, which is a problem when the current element is an AoS and the coordinate refers to an item in the AoS: -->
+                <xsl:when test="$current_field_node/@data_type = 'struct_array' and $next_path">
+                    <xsl:apply-templates select=".">
+                        <xsl:with-param name="error_description" select="concat('Invalid ', $attr, ': `', $fullpath, '`. No index provided for array of structures `', $current_field, '`.')"/>
+                    </xsl:apply-templates>
+                </xsl:when>
             </xsl:choose>
 
             <xsl:choose>
