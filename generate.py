@@ -142,9 +142,9 @@ def generate_dd_data_dictionary_validation():
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
-        + " dd_data_dictionary_validation.txt.xsl"
+        + "dd_data_dictionary_validation.txt.xsl"
         + " -o:"
-        + " dd_data_dictionary_validation.txt"
+        + "dd_data_dictionary_validation.txt"
     )
     proc = subprocess.Popen(
         dd_data_dictionary_validation_generation_command.split(),

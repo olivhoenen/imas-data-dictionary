@@ -287,7 +287,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>../../time_within_plunge</coordinate1>
+						<coordinate1>../../../time_within_plunge</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -300,7 +300,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
-						<coordinate1>../../time_within_plunge</coordinate1>
+						<coordinate1>../../../time_within_plunge</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -313,7 +313,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>rad</units>
-						<coordinate1>../../time_within_plunge</coordinate1>
+						<coordinate1>../../../time_within_plunge</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -325,7 +325,7 @@
 					<xs:documentation>Indicator of the validity of the position data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../../time_within_plunge</coordinate1>
+						<coordinate1>../../../time_within_plunge</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -560,6 +560,15 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="fluence" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Positive charge fluence normal to an ideal axisymmetric surface of the divertor (assuming no shaping), estimated at the probe location.</xs:documentation>
+					<xs:appinfo>
+						<units>m^-2</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="b_field_angle" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Incident angle of the magnetic field with respect to PFC surface</xs:documentation>
@@ -612,7 +621,7 @@
 			</xs:element>
 			<xs:element name="collector" type="langmuir_probes_plunge_collector" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of probe collectors including measurements specific to each collector</xs:documentation>
+					<xs:documentation>Set of probe collectors including measurements specific to each collector. The number of collectors (size of this array of structure) is assumed to remain constant for all plunges</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -747,7 +756,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>m^2</units>
-						<coordinate1>plunge/collector</coordinate1>
+						<coordinate1>../plunge(itime)/collector</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -756,7 +765,7 @@
 			</xs:element>
 			<xs:element name="plunge" type="langmuir_probes_plunge" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of plunges of this probe during the pulse, each plunge being recorded as a time slice from the Access Layer point of view. The time child node corresponds to the time of maximum penetration of the probe during a given plunge. The dynamics of physicas quantities within the plunge are described via the time_within_plunge vector.</xs:documentation>
+					<xs:documentation>Set of plunges of this probe during the pulse, each plunge being recorded as a time slice from the Access Layer point of view. The time child node corresponds to the time of maximum penetration of the probe during a given plunge. The dynamics of physical quantities within the plunge are described via the time_within_plunge vector.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>time</coordinate1>
 						<type>dynamic</type>
@@ -771,7 +780,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.22.0</lifecycle_version>
-				<lifecycle_last_change>3.33.0</lifecycle_last_change>
+				<lifecycle_last_change>3.39.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>

@@ -23,7 +23,7 @@ clean: # dd_clean htmldoc_clean
 	$(if $(wildcard .gitignore),git clean -f -X -d,$(RM) -f $(DD_FILES))
 
 test: dd_data_dictionary_validation.txt
-	grep -i Error $< >&2 && exit 1 || grep valid $<
+	grep -i -w Error $< >&2 && exit 1 || grep valid $<
 
 install: dd_install identifiers_install htmldoc_install
 
@@ -54,6 +54,10 @@ dd_install: $(DD_FILES)
 	$(mkdir_p) $(includedir)
 	$(INSTALL_DATA) $(filter-out IDSDef.xml,$^) $(includedir)
 	ln -sf dd_data_dictionary.xml $(includedir)/IDSDef.xml
+	pip install . --target $(prefix)/python/lib
+	$(mkdir_p) $(prefix)/bin
+	ln -sf $(prefix)/python/lib/bin/idsdef  $(prefix)/bin/idsdef
+	
 
 identifiers_install: $(ID_IDENT)
 	$(mkdir_p) $(foreach subdir,$(sort $(^D)),$(includedir)/$(subdir))
