@@ -113,11 +113,11 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
             <xsl:variable name="coordinate_same_as" select="string(../attribute::*[name() = $name_same_as])"/>
             <!-- Validate coordinate_same_as -->
             <xsl:if test="not(not($coordinate_same_as))">
-                <xsl:if test="$coordinate != '1...N'">
+                <!-- <xsl:if test="$coordinate != '1...N'">
                     <xsl:apply-templates select="..">
                     <xsl:with-param name="error_description" select="concat($name_same_as, ' is provided, but ', name(), ' is not 1...N')"/>
                     </xsl:apply-templates>
-                </xsl:if>
+                </xsl:if> -->
                 <xsl:apply-templates select=".." mode="validate_coordinate">
                     <xsl:with-param name="path" select="$coordinate_same_as"/>
                     <xsl:with-param name="attr" select="$name_same_as"/>
