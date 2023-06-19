@@ -1406,6 +1406,134 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="reflectometer_profile_position_2d">
+		<xs:annotation>
+			<xs:documentation>R, Z, Phi, psi, rho_tor_norm and theta positions associated to the electron density reconstruction (2D, dynamic within a type 1 array of structure)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+						<change_nbc_version>3.23.3</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>r/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+						<change_nbc_version>3.23.3</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>z/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+						<change_nbc_version>3.23.3</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>phi/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Poloidal flux</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised toroidal flux coordinate</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_pol_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised poloidal flux coordinate = sqrt((psi(rho)-psi(magnetic_axis)) / (psi(LCFS)-psi(magnetic_axis)))</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="theta">
+				<xs:annotation>
+					<xs:documentation>Poloidal angle (oriented clockwise when viewing the poloidal cross section on the right hand side of the tokamak axis of symmetry, with the origin placed on the plasma magnetic axis)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="code_partial_constant">
 		<xs:annotation>
 			<xs:documentation>Description of code-specific parameters and constant output flag</xs:documentation>
@@ -5870,6 +5998,132 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="distributions_d_ggd_expansion">
+		<xs:annotation>
+			<xs:documentation>Expansion of the distribution function for a given time slice, using a GGD representation</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_subset" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Values of the distribution function expansion, for various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="distributions_d_ggd">
+		<xs:annotation>
+			<xs:documentation>Distribution function for a given time slice, using a GGD representation</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid" type="generic_grid_dynamic">
+				<xs:annotation>
+					<xs:documentation>Grid description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="temperature">
+				<xs:annotation>
+					<xs:documentation>Reference temperature profile used to define the local thermal energy and the thermal velocity (for normalisation of the grid coordinates)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../profiles_1d(itime)/grid/rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="expansion" type="distributions_d_ggd_expansion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Distribution function expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>(m.s^-1)^-3.m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expansion_fd3v" type="distributions_d_ggd_expansion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Distribution function multiplied by the volume of the local velocity cell d3v, expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m^-3</units>
+						<introduced_after>3.34.0</introduced_after>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="distributions_d_ggd_nogrid">
+		<xs:annotation>
+			<xs:documentation>Distribution function for a given time slice, using a GGD representation assumed outside of the structure</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="temperature">
+				<xs:annotation>
+					<xs:documentation>Reference temperature profile used to define the local thermal energy and the thermal velocity (for normalisation of the grid coordinates)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../profiles_1d(itime)/grid/rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="expansion" type="distributions_d_ggd_expansion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Distribution function expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>(m.s^-1)^-3.m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expansion_fd3v" type="distributions_d_ggd_expansion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Distribution function multiplied by the volume of the local velocity cell d3v, expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m^-3</units>
+						<introduced_after>3.34.0</introduced_after>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="delta_rzphi0d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi relative positions (0D, static)</xs:documentation>
@@ -7017,6 +7271,52 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="xyz0d_dynamic_aos3">
+		<xs:annotation>
+			<xs:documentation>Structure for list of X, Y, Z components (0D, dynamic within an AoS3)</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x">
+				<xs:annotation>
+					<xs:documentation>Component along X axis</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="y">
+				<xs:annotation>
+					<xs:documentation>Component along Y axis</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Component along Z axis</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="xyz2d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for list of X, Y, Z components (2D, static)</xs:documentation>
@@ -7338,6 +7638,113 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="flat_object_orientation_aos3">
+		<xs:annotation>
+			<xs:documentation>Dynamic description of X1, X2, X3 vectors for a planar object within an AoS type 3</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x1_unit_vector" type="xyz0d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is more horizontal than X2 (has a smaller abs(Z) component) and oriented in the positive phi direction (counter-clockwise when viewing from above). </xs:documentation>
+					<xs:appinfo>
+						<url>utilities/detector_aperture_coordinates.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x2_unit_vector" type="xyz0d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.</xs:documentation>
+					<xs:appinfo>
+						<url>utilities/detector_aperture_coordinates.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x3_unit_vector" type="xyz0d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.</xs:documentation>
+					<xs:appinfo>
+						<url>utilities/detector_aperture_coordinates.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="flat_object_static">
+		<xs:annotation>
+			<xs:documentation>Static part of the description of a planar object</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="geometry_type">
+				<xs:annotation>
+					<xs:documentation>Type of geometry used to describe the surface of the detector or aperture (1:'outline', 2:'circular', 3:'rectangle'). In case of 'outline', the surface is described by an outline of point in a local coordinate system defined by a centre and three unit vectors X1, X2, X3. Note that there is some flexibility here and the data provider should choose the most convenient coordinate system for the object, respecting the definitions of (X1,X2,X3) indicated below. In case of 'circular', the surface is a circle defined by its centre, radius, and normal vector oriented towards the plasma X3.  In case of 'rectangle', the surface is a rectangle defined by its centre, widths in the X1 and X2 directions, and normal vector oriented towards the plasma X3.</xs:documentation>
+					<xs:appinfo>
+						<Type>static</Type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="centre" type="rzphi0d_static">
+				<xs:annotation>
+					<xs:documentation>If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="radius">
+				<xs:annotation>
+					<xs:documentation>Radius of the circle, used only if geometry_type = 2</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x1_width">
+				<xs:annotation>
+					<xs:documentation>Full width of the aperture in the X1 direction, used only if geometry_type = 3</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x2_width">
+				<xs:annotation>
+					<xs:documentation>Full width of the aperture in the X2 direction, used only if geometry_type = 3</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outline" type="x1x21d_static">
+				<xs:annotation>
+					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="surface">
+				<xs:annotation>
+					<xs:documentation>Surface of the detector/aperture, derived from the above geometric data</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m^2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
