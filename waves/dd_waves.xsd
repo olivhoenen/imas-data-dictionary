@@ -116,6 +116,74 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="waves_beam_spot">
+		<xs:annotation>
+			<xs:documentation>Spot ellipse characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="size">
+				<xs:annotation>
+					<xs:documentation>Size of the spot ellipse: distance between the central ray and the peripheral rays in the horizontal (first index of the first coordinate) and vertical direction (second index of the first coordinate)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...2</coordinate1>
+						<coordinate2>../../length</coordinate2>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="angle">
+				<xs:annotation>
+					<xs:documentation>Rotation angle for the spot ellipse</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate2>../../length</coordinate2>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="waves_beam_phase">
+		<xs:annotation>
+			<xs:documentation>Phase ellipse characteristics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="curvature">
+				<xs:annotation>
+					<xs:documentation>Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams, in the horizontal direction (first index of the first coordinate) and in the vertical direction (second index of the first coordinate)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...2</coordinate1>
+						<coordinate2>../../length</coordinate2>
+						<units>m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="angle">
+				<xs:annotation>
+					<xs:documentation>Rotation angle for the phase ellipse</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="waves_rzphipsitheta1d_dynamic_aos3">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi, Psi, Theta positions (1D, dynamic within a type 3 array of structure)</xs:documentation>
@@ -628,6 +696,22 @@
 					<xs:documentation>Quantities related to the different ion species</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="spot" type="waves_beam_spot">
+				<xs:annotation>
+					<xs:documentation>Spot ellipse characteristics</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phase" type="waves_beam_phase">
+				<xs:annotation>
+					<xs:documentation>Phase ellipse characteristics</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.39.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2577,7 +2661,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.5.0</lifecycle_version>
-				<lifecycle_last_change>3.39.0</lifecycle_last_change>
+				<lifecycle_last_change>3.39.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
