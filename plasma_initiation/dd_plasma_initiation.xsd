@@ -123,57 +123,37 @@
 			<xs:documentation>Global quantities</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="b_field_stray">
+			<xs:element name="b_field_stray" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Stray magnetic field at plasma position</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
 						<units>T</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_field_perpendicular">
+			<xs:element name="b_field_perpendicular" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Perpendicular magnetic field at plasma position. b_field_perpendicular = sqrt(b_field_stray^2+b_field_eddy^2) </xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
 						<units>T</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="connection_length">
+			<xs:element name="connection_length" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Average length of open magnetic field lines. In the case of fully closed field lines, connection_length = 1</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
 						<units>m</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="coulomb_logarithm">
+			<xs:element name="coulomb_logarithm" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Coulomb logarithm</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../time</coordinate1>
 						<units>-</units>
-						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -183,7 +163,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.38.0</lifecycle_version>
-				<lifecycle_last_change>3.38.0</lifecycle_last_change>
+				<lifecycle_last_change>3.39.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
