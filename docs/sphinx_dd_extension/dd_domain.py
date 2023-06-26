@@ -24,6 +24,7 @@ from sphinx.roles import XRefRole
 from sphinx.util.docutils import SphinxDirective, switch_source_input
 from sphinx.util.nodes import make_id, make_refnode, nested_parse_with_titles
 from sphinx.util.typing import OptionSpec
+from sphinx.writers.html5 import HTML5Translator
 
 
 logger = logging.getLogger(__name__)
@@ -343,6 +344,38 @@ class DDDomain(Domain):
         if target is None:
             return None
         return f"{ids_name}/{target}" if ids_name else target
+
+
+# Monkeypatch:
+def visit_desc(self, node: Element) -> None:
+    self.body.append(self.starttag(node, 'details'))
+
+def depart_desc(self, node: Element) -> None:
+    self.body.append('</details>\n\n')
+
+def visit_desc_signature(self, node: Element) -> None:
+    # the id is set automatically
+    self.body.append(self.starttag(node, 'summary'))
+    self.protect_literal_text += 1
+
+def depart_desc_signature(self, node: Element) -> None:
+    self.protect_literal_text -= 1
+    if not node.get('is_multiline'):
+        self.add_permalink_ref(node, 'Permalink to this definition')
+    self.body.append('</summary>\n')
+
+def visit_desc_content(self, node: Element) -> None:
+    pass
+
+def depart_desc_content(self, node: Element) -> None:
+    pass
+
+HTML5Translator.visit_desc = visit_desc
+HTML5Translator.depart_desc = depart_desc
+HTML5Translator.visit_desc_signature = visit_desc_signature
+HTML5Translator.depart_desc_signature = depart_desc_signature
+HTML5Translator.visit_desc_content = visit_desc_content
+HTML5Translator.depart_desc_content = depart_desc_content
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:

@@ -7,16 +7,15 @@ The Data Dictionary indicates a strict data type for each node in an IDS.
 
 .. note::
 
-    Please check the Access Layer documentation for more information how these
-    data types map to the programming language that you use.
-
-    .. todo:: Link to AL docs
+    Please check the :ref:`Access Layer documentation <AL docs>` for more
+    information how these data types map to the programming language that you
+    use.
 
 
 Structural data types
 ---------------------
 
-.. dd:data_type:: struct
+.. dd:data_type:: structure
 
     A structure node.
 

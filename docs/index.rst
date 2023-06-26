@@ -1,6 +1,13 @@
 IMAS Data Dictionary documentation
 ==================================
 
+The IMAS Data Dictionary (DD) defines the standardized data structures used
+for IMAS data. See :ref:`introduction` for more background about the Data
+Dictionary and IMAS in general.
+
+View the :ref:`reference` for a detailed reference of all IDSs, or use the
+`search bar <?q=>`_ to look for specific IDSs or nodes.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents

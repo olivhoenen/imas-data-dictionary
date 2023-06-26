@@ -1,3 +1,5 @@
+.. _`coordinates`:
+
 Coordinates and time handling
 =============================
 
