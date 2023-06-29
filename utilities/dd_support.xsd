@@ -5998,6 +5998,132 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="distributions_d_ggd_expansion">
+		<xs:annotation>
+			<xs:documentation>Expansion of the distribution function for a given time slice, using a GGD representation</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_subset" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Values of the distribution function expansion, for various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="distributions_d_ggd">
+		<xs:annotation>
+			<xs:documentation>Distribution function for a given time slice, using a GGD representation</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid" type="generic_grid_dynamic">
+				<xs:annotation>
+					<xs:documentation>Grid description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="temperature">
+				<xs:annotation>
+					<xs:documentation>Reference temperature profile used to define the local thermal energy and the thermal velocity (for normalisation of the grid coordinates)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../profiles_1d(itime)/grid/rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="expansion" type="distributions_d_ggd_expansion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Distribution function expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>(m.s^-1)^-3.m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expansion_fd3v" type="distributions_d_ggd_expansion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Distribution function multiplied by the volume of the local velocity cell d3v, expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m^-3</units>
+						<introduced_after>3.34.0</introduced_after>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="distributions_d_ggd_nogrid">
+		<xs:annotation>
+			<xs:documentation>Distribution function for a given time slice, using a GGD representation assumed outside of the structure</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="temperature">
+				<xs:annotation>
+					<xs:documentation>Reference temperature profile used to define the local thermal energy and the thermal velocity (for normalisation of the grid coordinates)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../../profiles_1d(itime)/grid/rho_tor_norm</coordinate1>
+						<units>eV</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="expansion" type="distributions_d_ggd_expansion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Distribution function expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>(m.s^-1)^-3.m^-3</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expansion_fd3v" type="distributions_d_ggd_expansion" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Distribution function multiplied by the volume of the local velocity cell d3v, expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m^-3</units>
+						<introduced_after>3.34.0</introduced_after>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="delta_rzphi0d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi relative positions (0D, static)</xs:documentation>
