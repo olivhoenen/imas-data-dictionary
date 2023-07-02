@@ -334,6 +334,40 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="diameter">
+				<xs:annotation>
+					<xs:documentation>Pellet diameter</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="length">
+				<xs:annotation>
+					<xs:documentation>Pellet length (cylindrical pellet)</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="shell" type="spi_shell">
+				<xs:annotation>
+					<xs:documentation>Shell-layer around of the unshattered pellet</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="core" type="spi_shell">
+				<xs:annotation>
+					<xs:documentation>Core of the unshattered pellet</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="spi_opd">
@@ -430,11 +464,6 @@
 			<xs:element name="propellant_gas" type="spi_gas">
 				<xs:annotation>
 					<xs:documentation>Description of the propellant gas</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="shell" type="spi_shell">
-				<xs:annotation>
-					<xs:documentation>Shell-layer around of the unshattered pellet</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="injection_direction" type="xyz0d_constant">
