@@ -274,7 +274,7 @@
 				<xs:annotation>
 					<xs:documentation>Quantities related to the different ion species, in the sense of isonuclear or isomolecular sequences. The set of ion species of this array must be the same as the one defined in profiles_1d/ion, at the time slice indicated in ion_time_slice</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>../../profiles_1d/ion</coordinate1>
+						<coordinate1>../../profiles_1d(itime)/ion</coordinate1>
 						<introduced_after_version>3.33.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
@@ -645,6 +645,17 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="ion_index">
+				<xs:annotation>
+					<xs:documentation>Index of the corresponding ion species in the ../../../profiles_1d/ion array</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="temperature">
 				<xs:annotation>
 					<xs:documentation>Temperature (average over charge states when multiple charge states are considered)</xs:documentation>
@@ -820,7 +831,7 @@
 			</xs:element>
 			<xs:element name="ion" type="core_profile_2d_ions" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Quantities related to the different ion species, in the sense of isonuclear or isomolecular sequences. Ionisation states (or other types of states) must be differentiated at the state level below</xs:documentation>
+					<xs:documentation>2D quantities related to the different ion species, in the sense of isonuclear or isomolecular sequences. Ionisation states (or other types of states) must be differentiated at the state level below. This array doesn't necessarily have the same size as the profiles_1d/ion array, since 2D data may be relevant only for a subset of ion species.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>

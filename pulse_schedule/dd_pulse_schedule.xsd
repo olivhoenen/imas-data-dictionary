@@ -548,6 +548,15 @@
 					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="power" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Total IC power (sum over the antennas)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="pulse_schedule_lh">
@@ -566,6 +575,15 @@
 			<xs:element name="mode" type="signal_int_1d">
 				<xs:annotation>
 					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Total LH power (sum over the antennas)</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -708,17 +726,27 @@
 			</xs:element>
 			<xs:element name="n_e_line" type="pulse_schedule_reference">
 				<xs:annotation>
-					<xs:documentation>Line integrated electron density</xs:documentation>
+					<xs:documentation>Line integrated electron density over a line of sight in the whole vacuum chamber</xs:documentation>
 					<xs:appinfo>
 						<units>m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e_line_method" type="identifier_static">
+			<xs:element name="n_e_line_lcfs" type="pulse_schedule_reference">
 				<xs:annotation>
-					<xs:documentation>Method for n_e_line calculation : Index = 1: integral over a line of sight in the whole vacuum chamber, 2 : integral over a line of sight within the LCFS, 3 : integral of a 1D core profile over rho_tor_norm up to the LCFS</xs:documentation>
+					<xs:documentation>Line integrated electron density over a line of sight within the LCFS</xs:documentation>
 					<xs:appinfo>
-						<introduced_after_version>3.34.0</introduced_after_version>
+						<units>m^-2</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_e_profile_average" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Integral of a 1D core profile over rho_tor_norm up to the LCFS</xs:documentation>
+					<xs:appinfo>
+						<units>m^-3</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -981,6 +1009,7 @@
 					<xs:documentation>Elongation of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -989,6 +1018,7 @@
 					<xs:documentation>Elongation (upper half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -997,6 +1027,7 @@
 					<xs:documentation>Elongation (lower half w.r.t. geometric axis) of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1005,6 +1036,7 @@
 					<xs:documentation>Triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1013,6 +1045,7 @@
 					<xs:documentation>Upper triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1021,6 +1054,73 @@
 					<xs:documentation>Lower triangularity of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="triangularity_inner" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Inner triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="triangularity_outer" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Outer triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="triangularity_minor" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Minor triangularity of the plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+						<url>equilibrium/DefinitionEqBoundary.svg</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="squareness_upper_outer" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Upper outer squareness of the plasma boundary (definition from T. Luce, Plasma Phys. Control. Fusion 55 (2013) 095009)</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="squareness_upper_inner" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Upper inner squareness of the plasma boundary (definition from T. Luce, Plasma Phys. Control. Fusion 55 (2013) 095009)</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="squareness_lower_outer" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Lower outer squareness of the plasma boundary (definition from T. Luce, Plasma Phys. Control. Fusion 55 (2013) 095009)</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="squareness_lower_inner" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Lower inner squareness of the plasma boundary (definition from T. Luce, Plasma Phys. Control. Fusion 55 (2013) 095009)</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<introduced_after_version>3.38.1</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1050,6 +1150,24 @@
 					<xs:documentation>Set of (R,Z) points defining the outline of the plasma boundary</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_r_max" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Height of the separatrix point of maximum major radius</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.38.1</introduced_after_version>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z_r_min" type="pulse_schedule_reference">
+				<xs:annotation>
+					<xs:documentation>Height of the separatrix point of minimum major radius</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.38.1</introduced_after_version>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1095,7 +1213,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
-				<lifecycle_last_change>3.37.1</lifecycle_last_change>
+				<lifecycle_last_change>3.39.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
