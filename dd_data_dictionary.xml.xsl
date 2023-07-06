@@ -314,8 +314,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								</xsl:choose>
 								<xsl:attribute name="documentation"><xsl:value-of select="concat('Upper error for &quot;',@name,'&quot;')"/></xsl:attribute>
 								<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
-								<xsl:for-each select="xs:annotation/xs:appinfo/*[not(contains(name(.),'alternative_coordinate'))]"> 
-                               <!-- Generic method for declaring all appinfo as attributes, but don't propagate the alternative_coordinate attribute to the errorbar nodes -->
+								<xsl:for-each select="xs:annotation/xs:appinfo/*[not(contains(name(.),'alternative_coordinate'))]">
+									<!-- Generic method for declaring all appinfo as attributes, but don't propagate the alternative_coordinate attribute to the errorbar nodes -->
 									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="parentCoordinate1" select="$parentCoordinate1"/><xsl:with-param name="parentCoordinate2" select="$parentCoordinate2"/><xsl:with-param name="parentCoordinate3" select="$parentCoordinate3"/><xsl:with-param name="parentCoordinate4" select="$parentCoordinate4"/><xsl:with-param name="parentCoordinate5" select="$parentCoordinate5"/><xsl:with-param name="parentCoordinate6" select="$parentCoordinate6"/></xsl:call-template></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_upper'"/></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="parentCoordinate1" select="$parentCoordinate1"/><xsl:with-param name="parentCoordinate2" select="$parentCoordinate2"/><xsl:with-param name="parentCoordinate3" select="$parentCoordinate3"/><xsl:with-param name="parentCoordinate4" select="$parentCoordinate4"/><xsl:with-param name="parentCoordinate5" select="$parentCoordinate5"/><xsl:with-param name="parentCoordinate6" select="$parentCoordinate6"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_upper'"/></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 									<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
 									<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
@@ -338,8 +338,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								</xsl:choose>
 								<xsl:attribute name="documentation"><xsl:value-of select="concat('Lower error for &quot;',@name,'&quot;')"/></xsl:attribute>
 								<xsl:attribute name="data_type"><xsl:value-of select="xs:complexType/xs:group/@ref"/></xsl:attribute>
-								<xsl:for-each select="xs:annotation/xs:appinfo/*[not(contains(name(.),'alternative_coordinate'))]"> 								
-                                <!-- Generic method for declaring all appinfo as attributes, but don't propagate the alternative_coordinate attribute to the errorbar nodes -->
+								<xsl:for-each select="xs:annotation/xs:appinfo/*[not(contains(name(.),'alternative_coordinate'))]">
+									<!-- Generic method for declaring all appinfo as attributes, but don't propagate the alternative_coordinate attribute to the errorbar nodes -->
 									<xsl:attribute name="{lower-case(name(.))}"><xsl:choose><xsl:when test="contains(lower-case(name(.)),'coordinate')"><xsl:choose><xsl:when test="$currPath=''"><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="../../../@name"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="parentCoordinate1" select="$parentCoordinate1"/><xsl:with-param name="parentCoordinate2" select="$parentCoordinate2"/><xsl:with-param name="parentCoordinate3" select="$parentCoordinate3"/><xsl:with-param name="parentCoordinate4" select="$parentCoordinate4"/><xsl:with-param name="parentCoordinate5" select="$parentCoordinate5"/><xsl:with-param name="parentCoordinate6" select="$parentCoordinate6"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="BuildAbsolutePath"><xsl:with-param name="coordinate" select="lower-case(name(.))"/><xsl:with-param name="currPath" select="concat($currPath_doc,'/',../../../@name)"/><xsl:with-param name="coordinatePath" select="."/><xsl:with-param name="parentCoordinate1" select="$parentCoordinate1"/><xsl:with-param name="parentCoordinate2" select="$parentCoordinate2"/><xsl:with-param name="parentCoordinate3" select="$parentCoordinate3"/><xsl:with-param name="parentCoordinate4" select="$parentCoordinate4"/><xsl:with-param name="parentCoordinate5" select="$parentCoordinate5"/><xsl:with-param name="parentCoordinate6" select="$parentCoordinate6"/></xsl:call-template></xsl:otherwise></xsl:choose></xsl:when><xsl:when test="contains(name(.),'change_nbc_previous_name')"><xsl:value-of select="."/><xsl:value-of select="'_error_lower'"/></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose></xsl:attribute>
 									<!-- Write a timebasepath attribute (coordinate path relative to the nearest AoS parent) in case the appinfo is a coordinate to a timebase -->
 									<xsl:if test="contains(lower-case(name(.)),'coordinate') and (ends-with(.,'time') or ../../../@name='time')">
@@ -706,77 +706,87 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			</xsl:matching-substring>
 			<xsl:non-matching-substring>
 				<!-- Processes each individual coordinate between OR statements (or the unique coordinate if there is no OR statement) -->
-				<xsl:choose>
-					<xsl:when test="matches(.,'as_parent')">
-						<!-- The coordinate is as_parent, so write down the coordinate of the parent -->
+				<xsl:analyze-string select="." regex=";">
+					<!-- Identifies the ; separator and cuts the full coordinate string into a sequence of individual coordinates (non-matching the ; separator), then each individual coordinate is processed independently -->
+					<xsl:matching-substring>
+						<xsl:value-of select="';'"/>
+						<!-- Output the ; separator as is -->
+					</xsl:matching-substring>
+					<xsl:non-matching-substring>
+						<!-- Processes each individual coordinate between ; separators (or the unique coordinate if there is no ; separator) -->
 						<xsl:choose>
-							<xsl:when test="contains($coordinate,'1')">
-								<xsl:call-template name="BuildAbsolutePath">
-									<xsl:with-param name="coordinate" select="$coordinate"/>
-									<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
-									<xsl:with-param name="coordinatePath" select="$parentCoordinate1"/>
-								</xsl:call-template>
+							<xsl:when test="matches(.,'as_parent')">
+								<!-- The coordinate is as_parent, so write down the coordinate of the parent -->
+								<xsl:choose>
+									<xsl:when test="contains($coordinate,'1')">
+										<xsl:call-template name="BuildAbsolutePath">
+											<xsl:with-param name="coordinate" select="$coordinate"/>
+											<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
+											<xsl:with-param name="coordinatePath" select="$parentCoordinate1"/>
+										</xsl:call-template>
+									</xsl:when>
+									<xsl:when test="contains($coordinate,'2')">
+										<xsl:call-template name="BuildAbsolutePath">
+											<xsl:with-param name="coordinate" select="$coordinate"/>
+											<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
+											<xsl:with-param name="coordinatePath" select="$parentCoordinate2"/>
+										</xsl:call-template>
+									</xsl:when>
+									<xsl:when test="contains($coordinate,'3')">
+										<xsl:call-template name="BuildAbsolutePath">
+											<xsl:with-param name="coordinate" select="$coordinate"/>
+											<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
+											<xsl:with-param name="coordinatePath" select="$parentCoordinate3"/>
+										</xsl:call-template>
+									</xsl:when>
+									<xsl:when test="contains($coordinate,'4')">
+										<xsl:call-template name="BuildAbsolutePath">
+											<xsl:with-param name="coordinate" select="$coordinate"/>
+											<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
+											<xsl:with-param name="coordinatePath" select="$parentCoordinate4"/>
+										</xsl:call-template>
+									</xsl:when>
+									<xsl:when test="contains($coordinate,'5')">
+										<xsl:call-template name="BuildAbsolutePath">
+											<xsl:with-param name="coordinate" select="$coordinate"/>
+											<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
+											<xsl:with-param name="coordinatePath" select="$parentCoordinate5"/>
+										</xsl:call-template>
+									</xsl:when>
+									<xsl:when test="contains($coordinate,'6')">
+										<xsl:call-template name="BuildAbsolutePath">
+											<xsl:with-param name="coordinate" select="$coordinate"/>
+											<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
+											<xsl:with-param name="coordinatePath" select="$parentCoordinate6"/>
+										</xsl:call-template>
+									</xsl:when>
+								</xsl:choose>
 							</xsl:when>
-							<xsl:when test="contains($coordinate,'2')">
-								<xsl:call-template name="BuildAbsolutePath">
-									<xsl:with-param name="coordinate" select="$coordinate"/>
-									<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
-									<xsl:with-param name="coordinatePath" select="$parentCoordinate2"/>
-								</xsl:call-template>
+							<xsl:when test="starts-with(.,'/')">
+								<!-- Case of a coordinate path expressed relative to the IDS root or nearest AoS parent (special case for the utilities section, e.g. /time). We then just get rid of the initial slash for the absolute coordinate attribute (to avoid users having to learn this initial / convention) -->
+								<xsl:value-of select="substring(.,2)"/>
 							</xsl:when>
-							<xsl:when test="contains($coordinate,'3')">
-								<xsl:call-template name="BuildAbsolutePath">
-									<xsl:with-param name="coordinate" select="$coordinate"/>
-									<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
-									<xsl:with-param name="coordinatePath" select="$parentCoordinate3"/>
-								</xsl:call-template>
+							<xsl:when test="contains(.,'...')">
+								<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
+								<xsl:value-of select="replace(.,'../','')"/>
 							</xsl:when>
-							<xsl:when test="contains($coordinate,'4')">
-								<xsl:call-template name="BuildAbsolutePath">
-									<xsl:with-param name="coordinate" select="$coordinate"/>
-									<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
-									<xsl:with-param name="coordinatePath" select="$parentCoordinate4"/>
-								</xsl:call-template>
-							</xsl:when>
-							<xsl:when test="contains($coordinate,'5')">
-								<xsl:call-template name="BuildAbsolutePath">
-									<xsl:with-param name="coordinate" select="$coordinate"/>
-									<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
-									<xsl:with-param name="coordinatePath" select="$parentCoordinate5"/>
-								</xsl:call-template>
-							</xsl:when>
-							<xsl:when test="contains($coordinate,'6')">
-								<xsl:call-template name="BuildAbsolutePath">
-									<xsl:with-param name="coordinate" select="$coordinate"/>
-									<xsl:with-param name="currPath" select="concat($currPath,'/..')"/>
-									<xsl:with-param name="coordinatePath" select="$parentCoordinate6"/>
-								</xsl:call-template>
-							</xsl:when>
-						</xsl:choose>
-					</xsl:when>
-					<xsl:when test="starts-with(.,'/')">
-						<!-- Case of a coordinate path expressed relative to the IDS root or nearest AoS parent (special case for the utilities section, e.g. /time). We then just get rid of the initial slash for the absolute coordinate attribute (to avoid users having to learn this initial / convention) -->
-						<xsl:value-of select="substring(.,2)"/>
-					</xsl:when>
-					<xsl:when test="contains(.,'...')">
-						<!-- Case of a main coordinate, e.g. 1...N just reproduce it in the tag although remove any '../' at the beginning that could happen in case of a DATA/TIME construct -->
-						<xsl:value-of select="replace(.,'../','')"/>
-					</xsl:when>
-					<xsl:when test="contains(.,'IDS')">
-						<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
-						<xsl:value-of select="."/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:choose>
-							<xsl:when test="contains(.,'../')">
-								<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',.))"/>
+							<xsl:when test="contains(.,'IDS')">
+								<!-- Case of a coordinate in another IDS. In this case, absolute path is given, just reproduce it in the tag -->
+								<xsl:value-of select="."/>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="concat($currPath,'/',.)"/>
+								<xsl:choose>
+									<xsl:when test="contains(.,'../')">
+										<xsl:value-of select="local:getAbsolutePath(concat($currPath,'/',.))"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="concat($currPath,'/',.)"/>
+									</xsl:otherwise>
+								</xsl:choose>
 							</xsl:otherwise>
 						</xsl:choose>
-					</xsl:otherwise>
-				</xsl:choose>
+					</xsl:non-matching-substring>
+				</xsl:analyze-string>
 			</xsl:non-matching-substring>
 		</xsl:analyze-string>
 	</xsl:template>
