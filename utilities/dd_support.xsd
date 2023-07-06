@@ -4773,6 +4773,43 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_identifier_single">
+		<xs:annotation>
+			<xs:documentation>Identifier value (single value per subset) on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Identifier value for the grid subset</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_vector">
 		<xs:annotation>
 			<xs:documentation>Vector values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
