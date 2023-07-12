@@ -2,6 +2,174 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="pulse_schedule_reference_pf_active">
+		<xs:annotation>
+			<xs:documentation>Pulse schedule reference for the pf_active structure</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reference_name">
+				<xs:annotation>
+					<xs:documentation>Reference name (e.g. in the native pulse schedule system of the device)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reference">
+				<xs:annotation>
+					<xs:documentation>Reference waveform. Caution : error bars of the reference/data node are not used in the usual sense, instead they are used to describe the control envelope, with a meaning depending on the chosen envelope_type option.</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<type>dynamic</type>
+						<coordinate1>/pf_active/time</coordinate1>
+						<change_nbc_version>3.40.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>reference/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reference_type">
+				<xs:annotation>
+					<xs:documentation>Reference type:  0:relative (don't use for the moment, to be defined later when segments are introduced in the IDS structure); 1: absolute: the reference time trace is provided in the reference/data node</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="envelope_type">
+				<xs:annotation>
+					<xs:documentation>Envelope type:  0:relative: means that the envelope upper and lower bound values are defined respectively as reference.data * reference.data_error_upper and reference.data * reference.data_error_lower. 1: absolute: the envelope upper and lower bound values are given respectively by reference/data_error_upper and reference/data_error_lower. Lower are upper are taken in the strict mathematical sense, without considering absolute values of the data</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_reference_density">
+		<xs:annotation>
+			<xs:documentation>Pulse schedule reference for the density_control structure</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reference_name">
+				<xs:annotation>
+					<xs:documentation>Reference name (e.g. in the native pulse schedule system of the device)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reference">
+				<xs:annotation>
+					<xs:documentation>Reference waveform. Caution : error bars of the reference/data node are not used in the usual sense, instead they are used to describe the control envelope, with a meaning depending on the chosen envelope_type option.</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<type>dynamic</type>
+						<coordinate1>/density_control/time</coordinate1>
+						<change_nbc_version>3.40.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>reference/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reference_type">
+				<xs:annotation>
+					<xs:documentation>Reference type:  0:relative (don't use for the moment, to be defined later when segments are introduced in the IDS structure); 1: absolute: the reference time trace is provided in the reference/data node</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="envelope_type">
+				<xs:annotation>
+					<xs:documentation>Envelope type:  0:relative: means that the envelope upper and lower bound values are defined respectively as reference.data * reference.data_error_upper and reference.data * reference.data_error_lower. 1: absolute: the envelope upper and lower bound values are given respectively by reference/data_error_upper and reference/data_error_lower. Lower are upper are taken in the strict mathematical sense, without considering absolute values of the data</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="pulse_schedule_reference_nbi">
+		<xs:annotation>
+			<xs:documentation>Pulse schedule reference for the nbi structure</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reference_name">
+				<xs:annotation>
+					<xs:documentation>Reference name (e.g. in the native pulse schedule system of the device)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reference">
+				<xs:annotation>
+					<xs:documentation>Reference waveform. Caution : error bars of the reference/data node are not used in the usual sense, instead they are used to describe the control envelope, with a meaning depending on the chosen envelope_type option.</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<type>dynamic</type>
+						<coordinate1>/nbi/time</coordinate1>
+						<change_nbc_version>3.40.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>reference/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="reference_type">
+				<xs:annotation>
+					<xs:documentation>Reference type:  0:relative (don't use for the moment, to be defined later when segments are introduced in the IDS structure); 1: absolute: the reference time trace is provided in the reference/data node</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="envelope_type">
+				<xs:annotation>
+					<xs:documentation>Envelope type:  0:relative: means that the envelope upper and lower bound values are defined respectively as reference.data * reference.data_error_upper and reference.data * reference.data_error_lower. 1: absolute: the envelope upper and lower bound values are given respectively by reference/data_error_upper and reference/data_error_lower. Lower are upper are taken in the strict mathematical sense, without considering absolute values of the data</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="pulse_schedule_reference_lh">
 		<xs:annotation>
 			<xs:documentation>Pulse schedule reference for the lh structure</xs:documentation>
@@ -24,7 +192,7 @@
 					<xs:appinfo>
 						<units>mixed</units>
 						<type>dynamic</type>
-						<coordinate1>/ec/time</coordinate1>
+						<coordinate1>/lh/time</coordinate1>
 						<change_nbc_version>3.40.0</change_nbc_version>
 						<change_nbc_description>leaf_renamed</change_nbc_description>
 						<change_nbc_previous_name>reference/data</change_nbc_previous_name>
@@ -226,9 +394,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="pulse_schedule_reference">
+	<xs:complexType name="pulse_schedule_reference_no_aos">
 		<xs:annotation>
-			<xs:documentation>General structure for pulse schedule reference. NB: we propose to use the automatically generated reference/data_error_upper and reference/data_error_lower nodes to describe the upper of lower bound of the envelope of the waveform, since they almost have the same meaning and are already set on the same time base as reference/data.</xs:documentation>
+			<xs:documentation>Pulse schedule reference with relative path to common time not traversing an AoS</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="reference_name">
@@ -242,13 +410,21 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="reference" type="signal_flt_1d">
+			<xs:element name="reference">
 				<xs:annotation>
 					<xs:documentation>Reference waveform. Caution : error bars of the reference/data node are not used in the usual sense, instead they are used to describe the control envelope, with a meaning depending on the chosen envelope_type option.</xs:documentation>
 					<xs:appinfo>
 						<units>mixed</units>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+						<change_nbc_version>3.40.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>reference/data</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="reference_type">
 				<xs:annotation>
@@ -707,7 +883,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power" type="pulse_schedule_reference">
+			<xs:element name="power" type="pulse_schedule_reference_nbi">
 				<xs:annotation>
 					<xs:documentation>Power launched from this unit into the vacuum vessel</xs:documentation>
 					<xs:appinfo>
@@ -715,7 +891,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="energy" type="pulse_schedule_reference">
+			<xs:element name="energy" type="pulse_schedule_reference_nbi">
 				<xs:annotation>
 					<xs:documentation>Full energy of the injected species (acceleration of a single atom)</xs:documentation>
 					<xs:appinfo>
@@ -738,17 +914,37 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="mode" type="signal_int_1d">
-				<xs:annotation>
-					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="power" type="pulse_schedule_reference">
+			<xs:element name="power" type="pulse_schedule_reference_nbi">
 				<xs:annotation>
 					<xs:documentation>Total NBI power (sum over the units)</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 						<introduced_after_version>3.34.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
+						<type>dynamic</type>
+						<change_nbc_version>3.40.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>mode/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for the dynamic nodes located at this level of the IDS structure and below</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -940,7 +1136,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="n_i_volume_average" type="pulse_schedule_reference">
+			<xs:element name="n_i_volume_average" type="pulse_schedule_reference_density">
 				<xs:annotation>
 					<xs:documentation>Volume averaged ion density (average over the plasma volume up to the LCFS)</xs:documentation>
 					<xs:appinfo>
@@ -977,7 +1173,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="flow_rate" type="pulse_schedule_reference">
+			<xs:element name="flow_rate" type="pulse_schedule_reference_density">
 				<xs:annotation>
 					<xs:documentation>Flow rate of the valve</xs:documentation>
 					<xs:appinfo>
@@ -1008,7 +1204,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e_line" type="pulse_schedule_reference">
+			<xs:element name="n_e_line" type="pulse_schedule_reference_density">
 				<xs:annotation>
 					<xs:documentation>Line integrated electron density over a line of sight in the whole vacuum chamber</xs:documentation>
 					<xs:appinfo>
@@ -1016,7 +1212,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e_line_lcfs" type="pulse_schedule_reference">
+			<xs:element name="n_e_line_lcfs" type="pulse_schedule_reference_density">
 				<xs:annotation>
 					<xs:documentation>Line integrated electron density over a line of sight within the LCFS</xs:documentation>
 					<xs:appinfo>
@@ -1025,7 +1221,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e_profile_average" type="pulse_schedule_reference">
+			<xs:element name="n_e_profile_average" type="pulse_schedule_reference_density">
 				<xs:annotation>
 					<xs:documentation>Integral of a 1D core profile over rho_tor_norm up to the LCFS</xs:documentation>
 					<xs:appinfo>
@@ -1042,7 +1238,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_e_volume_average" type="pulse_schedule_reference">
+			<xs:element name="n_e_volume_average" type="pulse_schedule_reference_density">
 				<xs:annotation>
 					<xs:documentation>Volume averaged electron density (average over the plasma volume up to the LCFS)</xs:documentation>
 					<xs:appinfo>
@@ -1051,7 +1247,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="zeff" type="pulse_schedule_reference">
+			<xs:element name="zeff" type="pulse_schedule_reference_density">
 				<xs:annotation>
 					<xs:documentation>Line averaged effective charge</xs:documentation>
 					<xs:appinfo>
@@ -1075,7 +1271,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_t_over_n_d" type="pulse_schedule_reference">
+			<xs:element name="n_t_over_n_d" type="pulse_schedule_reference_density">
 				<xs:annotation>
 					<xs:documentation>Average ratio of tritium over deuterium density</xs:documentation>
 					<xs:appinfo>
@@ -1083,17 +1279,12 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="n_h_over_n_d" type="pulse_schedule_reference">
+			<xs:element name="n_h_over_n_d" type="pulse_schedule_reference_density">
 				<xs:annotation>
 					<xs:documentation>Average ratio of hydrogen over deuterium density</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
 					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="mode" type="signal_int_1d">
-				<xs:annotation>
-					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ion" type="pulse_schedule_density_control_ion" maxOccurs="20">
@@ -1105,6 +1296,31 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
+						<type>dynamic</type>
+						<change_nbc_version>3.40.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>mode/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for the dynamic nodes located at this level of the IDS structure and below</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="pulse_schedule_flux_control">
@@ -1112,7 +1328,7 @@
 			<xs:documentation>Flux control references</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="i_plasma" type="pulse_schedule_reference">
+			<xs:element name="i_plasma" type="pulse_schedule_reference_no_aos">
 				<xs:annotation>
 					<xs:documentation>Plasma current</xs:documentation>
 					<xs:appinfo>
@@ -1120,7 +1336,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="loop_voltage" type="pulse_schedule_reference">
+			<xs:element name="loop_voltage" type="pulse_schedule_reference_no_aos">
 				<xs:annotation>
 					<xs:documentation>Loop voltage</xs:documentation>
 					<xs:appinfo>
@@ -1128,7 +1344,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="li_3" type="pulse_schedule_reference">
+			<xs:element name="li_3" type="pulse_schedule_reference_no_aos">
 				<xs:annotation>
 					<xs:documentation>Internal inductance</xs:documentation>
 					<xs:appinfo>
@@ -1136,7 +1352,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="beta_normal" type="pulse_schedule_reference">
+			<xs:element name="beta_normal" type="pulse_schedule_reference_no_aos">
 				<xs:annotation>
 					<xs:documentation>Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA]</xs:documentation>
 					<xs:appinfo>
@@ -1144,9 +1360,29 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="mode" type="signal_int_1d">
+			<xs:element name="mode">
 				<xs:annotation>
 					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
+						<type>dynamic</type>
+						<change_nbc_version>3.40.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>mode/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for the dynamic nodes located at this level of the IDS structure and below</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1178,7 +1414,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="voltage" type="pulse_schedule_reference">
+			<xs:element name="voltage" type="pulse_schedule_reference_pf_active">
 				<xs:annotation>
 					<xs:documentation>Voltage at the supply output (Vside1-Vside2)</xs:documentation>
 					<xs:appinfo>
@@ -1215,7 +1451,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="current" type="pulse_schedule_reference">
+			<xs:element name="current" type="pulse_schedule_reference_pf_active">
 				<xs:annotation>
 					<xs:documentation>Current fed in the coil (for 1 turn, to be multiplied by the number of turns to obtain the generated magnetic field), positive when flowing from side 1 to side 2 of the coil (inside the coil), this numbering being made consistently with the convention that the current is counter-clockwise when seen from above.</xs:documentation>
 					<xs:appinfo>
@@ -1226,7 +1462,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="resistance_additional" type="pulse_schedule_reference">
+			<xs:element name="resistance_additional" type="pulse_schedule_reference_pf_active">
 				<xs:annotation>
 					<xs:documentation>Additional resistance due to e.g. dynamically switchable resistors</xs:documentation>
 					<xs:appinfo>
@@ -1257,9 +1493,29 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="mode" type="signal_int_1d">
+			<xs:element name="mode">
 				<xs:annotation>
 					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
+						<type>dynamic</type>
+						<change_nbc_version>3.40.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>mode/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for the dynamic nodes located at this level of the IDS structure and below</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1496,7 +1752,7 @@
 			<xs:appinfo>machine description</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="b_field_tor_vacuum_r" type="pulse_schedule_reference">
+			<xs:element name="b_field_tor_vacuum_r" type="pulse_schedule_reference_no_aos">
 				<xs:annotation>
 					<xs:documentation>Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above</xs:documentation>
 					<xs:appinfo>
@@ -1504,9 +1760,29 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="mode" type="signal_int_1d">
+			<xs:element name="mode">
 				<xs:annotation>
 					<xs:documentation>Control mode (operation mode and/or settings used by the controller)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../time</coordinate1>
+						<type>dynamic</type>
+						<change_nbc_version>3.40.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>mode/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Timebase for the dynamic nodes located at this level of the IDS structure and below</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
