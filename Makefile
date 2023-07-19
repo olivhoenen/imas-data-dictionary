@@ -85,7 +85,7 @@ SAXON := $(shell command -v saxon 2> /dev/null)
 ifeq ($(SAXON),)
 SAXON := $(JAVA) net.sf.saxon.Transform
 endif
-# Saxon -threads is only valid from 9.14:
+# Saxon -threads is only valid from 9.4:
 SAXON_THREADS := $(shell sv=$$($(SAXON) -t 2>&1 | head -1);\
 	major=$$(echo $${sv} | sed "s/Saxon[^ ]* \([0-9]\+\).*/\1/");\
 	minor=$$(echo $${sv} | sed "s/Saxon[^ ]* [0-9]\+\.\([0-9]\+\).*/\1/");\
