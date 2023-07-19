@@ -57,7 +57,6 @@ dd_install: $(DD_FILES)
 	pip install . --target $(prefix)/python/lib
 	$(mkdir_p) $(prefix)/bin
 	ln -sf $(prefix)/python/lib/bin/idsdef  $(prefix)/bin/idsdef
-	
 
 identifiers_install: $(ID_IDENT)
 	$(mkdir_p) $(foreach subdir,$(sort $(^D)),$(includedir)/$(subdir))
@@ -86,6 +85,14 @@ SAXON := $(shell command -v saxon 2> /dev/null)
 ifeq ($(SAXON),)
 SAXON := $(JAVA) net.sf.saxon.Transform
 endif
+# Saxon -threads is only valid from 9.14:
+SAXON_THREADS := $(shell sv=$$($(SAXON) -t 2>&1 | head -1);\
+	major=$$(echo $${sv} | sed "s/Saxon[^ ]* \([0-9]\+\).*/\1/");\
+	minor=$$(echo $${sv} | sed "s/Saxon[^ ]* [0-9]\+\.\([0-9]\+\).*/\1/");\
+	minor=$$(printf %02d $${minor});\
+	sv=$${major}$${minor};\
+	if [ $${sv} -ge 904 ]; then echo "-threads:4"; else echo ""; fi;\
+)
 
 
 # Canned recipes
@@ -95,5 +102,5 @@ xsltproc $(word 2,$^) $< > $@ || { rm -f $@ ; exit 1 ;}
 endef
 define xslt2proc
 @# Expect prerequisites: <xmlfile> <xslfile>
-$(SAXON) -threads:4 -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ DD_GIT_DESCRIBE=$(DD_GIT_DESCRIBE) || { rm -f $@ ; exit 1 ; }
+$(SAXON) $(SAXON_THREADS) -t -warnings:fatal -s:$< -xsl:$(word 2,$^) > $@ DD_GIT_DESCRIBE=$(DD_GIT_DESCRIBE) || { rm -f $@ ; exit 1 ; }
 endef
