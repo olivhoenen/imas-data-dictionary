@@ -133,7 +133,7 @@ def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
         assert False, stderr
 
 
-def generate_idsnames(extra_opts=""):
+def generate_idsnames():
     proc = subprocess.Popen(
         [
             "xsltproc",
@@ -189,5 +189,5 @@ if __name__ == "__main__":
     generate_dd_data_dictionary(extra_opts=threads)
     generate_html_documentation(extra_opts=threads)
     generate_ids_cocos_transformations_symbolic_table(extra_opts=threads)
-    generate_idsnames(extra_opts=threads)
+    generate_idsnames()
     generate_dd_data_dictionary_validation(extra_opts=threads)
