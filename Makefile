@@ -91,7 +91,7 @@ SAXON_THREADS := $(shell sv=$$($(SAXON) -t 2>&1 | head -1);\
 	minor=$$(echo $${sv} | sed "s/Saxon[^ ]* [0-9]\+\.\([0-9]\+\).*/\1/");\
 	minor=$$(printf %02d $${minor});\
 	sv=$${major}$${minor};\
-	if [ $${sv} -ge 914 ]; then echo "-threads:4"; else echo ""; fi;\
+	if [ $${sv} -ge 904 ]; then echo "-threads:4"; else echo ""; fi;\
 )
 
 

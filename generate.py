@@ -36,11 +36,12 @@ def saxon_version(verb=False)->int:
         version = 0
     return version
 
-def generate_dd_data_dictionary(threads=""):
+
+def generate_dd_data_dictionary(extra_opts=""):
     dd_data_dictionary_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + threads
+        + extra_opts
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml.xsd"
         + " -xsl:"
@@ -71,11 +72,11 @@ def generate_dd_data_dictionary(threads=""):
 
 
 # TODO Check the problem of generation
-def generate_html_documentation(threads=""):
+def generate_html_documentation(extra_opts=""):
     html_documentation_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + threads
+        + extra_opts
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
@@ -104,11 +105,11 @@ def generate_html_documentation(threads=""):
     )
 
 
-def generate_ids_cocos_transformations_symbolic_table(threads=""):
+def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
     ids_cocos_transformations_symbolic_table_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + threads
+        + extra_opts
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
@@ -132,7 +133,7 @@ def generate_ids_cocos_transformations_symbolic_table(threads=""):
         assert False, stderr
 
 
-def generate_idsnames(threads=""):
+def generate_idsnames(extra_opts=""):
     proc = subprocess.Popen(
         [
             "xsltproc",
@@ -155,11 +156,11 @@ def generate_idsnames(threads=""):
         f.close()
 
 
-def generate_dd_data_dictionary_validation(threads=""):
+def generate_dd_data_dictionary_validation(extra_opts=""):
     dd_data_dictionary_validation_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + threads
+        + extra_opts
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
@@ -183,10 +184,10 @@ if __name__ == "__main__":
     
     # Can we use threads in this version of Saxon?
     threads = ""
-    if saxon_version() >= 914: threads = " -threads:4"
+    if saxon_version() >= 904: threads = " -threads:4"
     
-    generate_dd_data_dictionary(threads)
-    generate_html_documentation(threads)
-    generate_ids_cocos_transformations_symbolic_table(threads)
-    generate_idsnames(threads)
-    generate_dd_data_dictionary_validation(threads)
+    generate_dd_data_dictionary(extra_opts=threads)
+    generate_html_documentation(extra_opts=threads)
+    generate_ids_cocos_transformations_symbolic_table(extra_opts=threads)
+    generate_idsnames(extra_opts=threads)
+    generate_dd_data_dictionary_validation(extra_opts=threads)
