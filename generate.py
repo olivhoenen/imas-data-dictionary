@@ -1,6 +1,7 @@
 import os
 import shutil
 import subprocess
+import re
 
 PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
@@ -15,11 +16,31 @@ DD_GIT_DESCRIBE = str(
 )
 
 
-def generate_dd_data_dictionary():
+def saxon_version(verb=False)->int:
+    cmd = ["java", "net.sf.saxon.Transform", "-t"]
+    try:
+        out = subprocess.run(cmd,
+                             capture_output=True,
+                             text=True,
+                             check=False)
+        line = out.stderr.split('\n')[0]
+        version = re.search(r"Saxon.* +(\d+)\.(\d+)", line)
+        if (verb):
+            print("Got Saxon version:", version.group(1), version.group(2))
+        major = int(version.group(1)) * 100
+        minor = int(version.group(2))
+        version = major + minor
+    except:
+        if (verb):
+            print("Error: can't get Saxon version.")
+        version = 0
+    return version
+
+def generate_dd_data_dictionary(threads=""):
     dd_data_dictionary_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + " -threads:4"
+        + threads
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml.xsd"
         + " -xsl:"
@@ -50,11 +71,11 @@ def generate_dd_data_dictionary():
 
 
 # TODO Check the problem of generation
-def generate_html_documentation():
+def generate_html_documentation(threads=""):
     html_documentation_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + " -threads:4"
+        + threads
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
@@ -83,11 +104,11 @@ def generate_html_documentation():
     )
 
 
-def generate_ids_cocos_transformations_symbolic_table():
+def generate_ids_cocos_transformations_symbolic_table(threads=""):
     ids_cocos_transformations_symbolic_table_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + " -threads:4"
+        + threads
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
@@ -111,7 +132,7 @@ def generate_ids_cocos_transformations_symbolic_table():
         assert False, stderr
 
 
-def generate_idsnames():
+def generate_idsnames(threads=""):
     proc = subprocess.Popen(
         [
             "xsltproc",
@@ -134,11 +155,11 @@ def generate_idsnames():
         f.close()
 
 
-def generate_dd_data_dictionary_validation():
+def generate_dd_data_dictionary_validation(threads=""):
     dd_data_dictionary_validation_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + " -threads:4"
+        + threads
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
@@ -159,8 +180,13 @@ def generate_dd_data_dictionary_validation():
         assert False, stderr
 
 if __name__ == "__main__":
-    generate_dd_data_dictionary()
-    generate_html_documentation()
-    generate_ids_cocos_transformations_symbolic_table()
-    generate_idsnames()
-    generate_dd_data_dictionary_validation()
+    
+    # Can we use threads in this version of Saxon?
+    threads = ""
+    if saxon_version() >= 914: threads = " -threads:4"
+    
+    generate_dd_data_dictionary(threads)
+    generate_html_documentation(threads)
+    generate_ids_cocos_transformations_symbolic_table(threads)
+    generate_idsnames(threads)
+    generate_dd_data_dictionary_validation(threads)
