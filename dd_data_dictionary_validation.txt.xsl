@@ -129,6 +129,26 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
                 <xsl:with-param name="attr" select="name()"/>
             </xsl:apply-templates>
         </xsl:for-each>
+        <xsl:if test="@alternative_coordinate1">
+            <xsl:variable name="field" select="."/>
+            <!-- alternative coordinates are separated by a ';' -->
+            <xsl:if test="matches(@alternative_coordinate1, '^;|;;|;$|^$')">
+                <xsl:apply-templates select=".">
+                <xsl:with-param name="error_description" select="concat('Invalid alternative_coordinate1: `', @alternative_coordinate1, '` has an empty alternative coordinate.')"/>
+                </xsl:apply-templates>
+            </xsl:if>
+            <xsl:analyze-string select="@alternative_coordinate1" regex=";">
+                <xsl:non-matching-substring>
+                    <!-- validate the alternative coordinate -->
+                    <xsl:apply-templates select="$field" mode="validate_path">
+                        <xsl:with-param name="path" select="."/>
+                        <xsl:with-param name="fullpath" select="."/>
+                        <xsl:with-param name="attr" select="'alternative_coordinate1'"/>
+                        <xsl:with-param name="ids_or_current_field" select="$field/ancestor::IDS"/>
+                    </xsl:apply-templates>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:if>
     </xsl:if>
 </xsl:for-each>
 </xsl:template>
