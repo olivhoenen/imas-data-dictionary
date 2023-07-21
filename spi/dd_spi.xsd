@@ -2,9 +2,9 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="spi_species">
+	<xs:complexType name="spi_species_density">
 		<xs:annotation>
-			<xs:documentation>Species included in pellet composition</xs:documentation>
+			<xs:documentation>Species included in pellet composition, with species density</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="a">
@@ -52,6 +52,48 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="spi_species_fraction">
+		<xs:annotation>
+			<xs:documentation>Species included in pellet composition, with species atomic fraction</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="a">
+				<xs:annotation>
+					<xs:documentation>Mass of atom</xs:documentation>
+					<xs:appinfo>
+						<units>Atomic Mass Unit</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_n">
+				<xs:annotation>
+					<xs:documentation>Nuclear charge</xs:documentation>
+					<xs:appinfo>
+						<units>Elementary Charge Unit</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="label">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H, D, T, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="fraction">
@@ -130,7 +172,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="species" type="spi_species" maxOccurs="3">
+			<xs:element name="species" type="spi_species_density" maxOccurs="3">
 				<xs:annotation>
 					<xs:documentation>Atomic species in the fragment composition</xs:documentation>
 					<xs:appinfo>
@@ -199,7 +241,7 @@
 			<xs:documentation>SPI shell</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="species" type="spi_species" maxOccurs="3">
+			<xs:element name="species" type="spi_species_density" maxOccurs="3">
 				<xs:annotation>
 					<xs:documentation>Atomic species in the shell composition</xs:documentation>
 					<xs:appinfo>
@@ -239,7 +281,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="species" type="spi_species" maxOccurs="3">
+			<xs:element name="species" type="spi_species_fraction" maxOccurs="3">
 				<xs:annotation>
 					<xs:documentation>Atomic species in the gas composition</xs:documentation>
 					<xs:appinfo>
