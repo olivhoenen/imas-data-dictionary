@@ -66,7 +66,7 @@ class IDSDef:
     def __init__(self):
         # Find and parse XML definitions
         self.idsdef_path = ""
-        if self.idsdef_path=="":  
+        if not self.idsdef_path:  
             # Check idsdef.xml installed in Python environment system as well as local
             local_path =  os.path.join(str(Path.home()), ".local")
             python_env_list= [sys.prefix, local_path]
@@ -79,35 +79,31 @@ class IDSDef:
                     for dirname in os.listdir(python_env)
                     if reg_compile.match(dirname)
                 ]
-                if len(version_list) != 0:
+                if version_list:
                     python_env_path = python_env
                     break
-            if version_list is not None:
-                if len(version_list) != 0:
-                    latest_version = max(version_list, key=major_minor_micro)
-                    folder_to_look = os.path.join(python_env_path, latest_version)
-                    for root, dirs, files in os.walk(folder_to_look):
-                        for file in files:
-                            if file.endswith("IDSDef.xml"):
-                                self.idsdef_path = os.path.join(root, file)
-                                break
+            if version_list is not None and len(version_list) != 0:
+                latest_version = max(version_list, key=major_minor_micro)
+                folder_to_look = os.path.join(python_env_path, latest_version)
+                for root, dirs, files in os.walk(folder_to_look):
+                    for file in files:
+                        if file.endswith("IDSDef.xml"):
+                            self.idsdef_path = os.path.join(root, file)
+                            break
         # Fallback to IMAS_PREFIX environment variable
-        if self.idsdef_path=="":
-            if "IMAS_PREFIX" in os.environ:
-                imaspref = os.environ["IMAS_PREFIX"]
-                self.idsdef_path = imaspref + "/include/IDSDef.xml"
-        
-        # Still you can't find idsdef.xml then crash badly
-        if self.idsdef_path == "":
+        if not self.idsdef_path and "IMAS_PREFIX" in os.environ:
+            imaspref = os.environ["IMAS_PREFIX"]
+            self.idsdef_path = f"{imaspref}/include/IDSDef.xml"
+
+        if not self.idsdef_path:
             raise Exception(
                 "Error while trying to access IDSDef.xml, make sure you've loaded IMAS module",
                 file=sys.stderr,
             )
-        else:
-            tree = ET.parse(self.idsdef_path)
-            self.root = tree.getroot()
-            self.version = self.root.findtext("./version", default="N/A")
-            self.cocos = self.root.findtext("./cocos", default="N/A")
+        tree = ET.parse(self.idsdef_path)
+        self.root = tree.getroot()
+        self.version = self.root.findtext("./version", default="N/A")
+        self.cocos = self.root.findtext("./cocos", default="N/A")
 
     def get_idsdef_path(self):
         "Get selected idsdef.xml path"
@@ -117,25 +113,21 @@ class IDSDef:
         """Returns the current Data-Dictionary version."""
         return self.version
 
-    def __get_field(self, struct, field):
+    def __get_field(self, struct, field):  # sourcery skip: raise-specific-error
         """Recursive function which returns the node corresponding to a given field which is a descendant of struct."""
-        elt = struct.find('./field[@name="' + field[0] + '"]')
-        if elt == None:
-            raise Exception("Element '" + field[0] + "' not found")
+        elt = struct.find(f'./field[@name="{field[0]}"]')
+        if elt is None:
+            raise Exception(f"Element '{field[0]}' not found")
         if len(field) > 1:
-            f = self.__get_field(elt, field[1:])
+            return self.__get_field(elt, field[1:])
         else:
             # specific generic node for which the useful doc is from the parent
-            if field[0] != "value":
-                f = elt
-            else:
-                f = struct
-        return f
+            return elt if field[0] != "value" else struct
 
     def query(self, ids, path=None):
         """Returns attributes of the selected ids/path node as a dictionary."""
         ids = self.root.find(f"./IDS[@name='{ids}']")
-        if ids == None:
+        if ids is None:
             raise ValueError(
                 f"Error getting the IDS, please check that '{ids}' corresponds to a valid IDS name"
             )
@@ -146,7 +138,7 @@ class IDSDef:
             try:
                 f = self.__get_field(ids, fields)
             except Exception as exc:
-                raise ValueError("Error while accessing {path}: {str(exc)}")
+                raise ValueError("Error while accessing {path}: {str(exc)}") from exc
         else:
             f = ids
 
@@ -163,10 +155,17 @@ class IDSDef:
         for ids in self.root.findall("IDS"):
             is_top_node = False
             top_node_name = ""
-            search_result_for_ids = []
+            search_result_for_ids = {}
             for field in ids.iter("field"):
                 if re.match(regex_to_search, field.attrib["name"]):
-                    search_result_for_ids.append(field.attrib["path"])
+                    attributes = {}
+                    
+                    if "units" in field.attrib.keys():
+                        attributes["units"] = field.attrib["units"]
+                    if "documentation" in field.attrib.keys():
+                        attributes["documentation"] = field.attrib["documentation"]
+                        
+                    search_result_for_ids[field.attrib["path"]] = attributes 
                     if not is_top_node:
                         is_top_node = True
                         top_node_name = ids.attrib["name"]
@@ -180,8 +179,15 @@ class IDSDef:
             if ids.attrib["name"] == idsname.lower():
                 is_top_node = False
                 top_node_name = ""
-                search_result_for_ids = []
+                search_result_for_ids = {}
                 for field in ids.iter("field"):
+                    attributes = {}
+                    
+                    if "units" in field.attrib.keys():
+                        attributes["units"] = field.attrib["units"]
+                    if "documentation" in field.attrib.keys():
+                        attributes["documentation"] = field.attrib["documentation"]
+
                     field_path = re.sub(
                         "\(([^:][^itime]*?)\)", "(:)", field.attrib["path_doc"]
                     )
@@ -189,7 +195,7 @@ class IDSDef:
                         field_path = re.sub(
                         "\(([:]*?)\)$", "(itime)", field_path
                         )
-                    search_result_for_ids.append(field_path)
+                    search_result_for_ids[field_path] = attributes
                     if not is_top_node:
                         is_top_node = True
                         top_node_name = ids.attrib["name"]
@@ -229,6 +235,12 @@ def main():
         help="Perform a strict search, ie, the text has to match exactly within a word, eg: 'value' does not match 'values'",
     )
 
+    search_command_parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Shows description along with unit",
+    )
+    
     idsfields_command_parser = subparsers.add_parser(
         "idsfields", help="shows all fields from ids"
     )
@@ -239,7 +251,11 @@ def main():
         default="",
         help="Provide ids Name",
     )
-
+    idsfields_command_parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Shows description along with unit",
+    )
     info_command_parser = subparsers.add_parser(
         "info", help="Query the IDS XML Definition for documentation"
     )
@@ -264,7 +280,7 @@ def main():
     )
     args = idsdef_parser.parse_args()
     try:
-        if args.cmd == None:
+        if args.cmd is None:
             idsdef_parser.print_help()
             return
     except AttributeError:
@@ -284,32 +300,47 @@ def main():
         attribute_dict = idsdef_object.query(args.ids, args.path)
         if args.all:
             for a in attribute_dict.keys():
-                print(a + ": " + attribute_dict[a])
+                print(f"{a}: {attribute_dict[a]}")
         else:
             print(attribute_dict[args.select])
     elif args.cmd == "idsnames":
         for name in idsdef_object.get_ids_names():
             print(name)
     elif args.cmd == "search":
-        if args.text != "" and args.text != None:
+        if args.text not in ["", None]:
             print(f"Searching for '{args.text}'.")
             result = idsdef_object.find_in_ids(args.text.strip(), strict=args.strict)
-            for key, items in result.items():
-                print(f"{key}:")
-                for item in items:
-                    print("\t" + item)
+            for ids_name, fields in result.items():
+                print(f"{ids_name}:")
+                for field, attributes in fields.items():
+                    print(field)
+                    if args.verbose:
+                        if "documentation" in attributes.keys():
+                            documentation = attributes["documentation"]
+                            print(f"\tDescription : {documentation}")
+                        if "units" in attributes.keys():
+                            units = attributes["units"]
+                            print(f"\tUnit : {units}")
         else:
             search_command_parser.print_help()
             print("Please provide text to search in IDSes")
             return
     elif args.cmd == "idsfields":
-        if args.idsname != "" and args.idsname != None:
+        if args.idsname not in ["", None]:
             result = idsdef_object.list_ids_fields(args.idsname.strip())
-            if bool(result) == True:
+            if bool(result):
                 print(f"Listing all fields from ids :'{args.idsname}'")
-                for key, items in result.items():
-                    for item in items:
-                        print(item)
+                for ids_name, fields in result.items():
+                    print(ids_name)
+                    for field, attributes in fields.items():
+                        print(field)
+                        if args.verbose:
+                            if "documentation" in attributes.keys():
+                                documentation = attributes["documentation"]
+                                print(f"\tDescription : {documentation}")
+                            if "units" in attributes.keys():
+                                units = attributes["units"]
+                                print(f"\tUnit : {units}")
             else:
                 idsfields_command_parser.print_help()
                 print("Please provide valid IDS name")
