@@ -6644,6 +6644,55 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="rzphi1d_dynamic_root_time">
+		<xs:annotation>
+			<xs:documentation>Structure for R, Z, Phi positions (1D, dynamic), using the root time of the IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>/time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>/time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>/time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rzphirhopsitheta1d_dynamic_aos1">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi, rho_tor_norm, psi, theta positions (1D, dynamic within a type 1 array of structures (indexed on objects, data/time structure)</xs:documentation>
@@ -7345,6 +7394,49 @@
 					<xs:documentation>Component along Z axis</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="xyz0d_constant">
+		<xs:annotation>
+			<xs:documentation>Structure for list of X, Y, Z components (0D, constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x">
+				<xs:annotation>
+					<xs:documentation>Component along X axis</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="y">
+				<xs:annotation>
+					<xs:documentation>Component along Y axis</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Component along Z axis</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
 						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
