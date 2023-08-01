@@ -2,13 +2,79 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="em_coupling_matrix">
+		<xs:annotation>
+			<xs:documentation>User-defined coupling matrix</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of this coupling matrix</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="quantity" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Physical quantity contained in the coupling matrix</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>em_coupling/em_coupling_quantity_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rows_uri">
+				<xs:annotation>
+					<xs:documentation>List of URIs corresponding to the rows (1st dimension) of the coupling matrix</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<url>utilities/IMAS-URI-scheme.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="columns_uri">
+				<xs:annotation>
+					<xs:documentation>List of URIs corresponding to the columns (2nd dimension) of the coupling matrix</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...N</coordinate1>
+						<url>utilities/IMAS-URI-scheme.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Coupling matrix</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>H</units>
+						<coordinate1>../rows_uri</coordinate1>
+						<coordinate2>../columns_uri</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="em_coupling">
 		<xs:annotation>
 			<xs:documentation>Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.39.0</lifecycle_last_change>
+				<lifecycle_last_change>3.40.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
@@ -122,12 +188,12 @@
 				</xs:element>
 				<xs:element name="mutual_plasma_plasma">
 					<xs:annotation>
-						<xs:documentation>Mutual inductance coupling from plasma filaments to plasma filaments</xs:documentation>
+						<xs:documentation>Mutual inductance coupling from plasma elements to plasma elements</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
-							<coordinate1>../plasma_filaments</coordinate1>
-							<coordinate2>../plasma_filaments</coordinate2>
+							<coordinate1>../plasma_elements</coordinate1>
+							<coordinate2>../plasma_elements</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
@@ -136,11 +202,11 @@
 				</xs:element>
 				<xs:element name="mutual_plasma_active">
 					<xs:annotation>
-						<xs:documentation>Mutual inductance coupling from active coils to plasma filaments</xs:documentation>
+						<xs:documentation>Mutual inductance coupling from active coils to plasma elements</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
-							<coordinate1>../plasma_filaments</coordinate1>
+							<coordinate1>../plasma_elements</coordinate1>
 							<coordinate2>../active_coils</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
@@ -150,11 +216,11 @@
 				</xs:element>
 				<xs:element name="mutual_plasma_passive">
 					<xs:annotation>
-						<xs:documentation>Mutual inductance coupling from passive loops to plasma filaments</xs:documentation>
+						<xs:documentation>Mutual inductance coupling from passive loops to plasma elements</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
-							<coordinate1>../plasma_filaments</coordinate1>
+							<coordinate1>../plasma_elements</coordinate1>
 							<coordinate2>../passive_loops</coordinate2>
 						</xs:appinfo>
 					</xs:annotation>
@@ -164,12 +230,12 @@
 				</xs:element>
 				<xs:element name="b_field_pol_probes_plasma">
 					<xs:annotation>
-						<xs:documentation>Poloidal field coupling from plasma filaments to poloidal field probes</xs:documentation>
+						<xs:documentation>Poloidal field coupling from plasma elements to poloidal field probes</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>T/A</units>
 							<coordinate1>../b_field_pol_probes</coordinate1>
-							<coordinate2>../plasma_filaments</coordinate2>
+							<coordinate2>../plasma_elements</coordinate2>
 							<url>utilities/IMAS-URI-scheme.md</url>
 						</xs:appinfo>
 					</xs:annotation>
@@ -179,12 +245,12 @@
 				</xs:element>
 				<xs:element name="mutual_loops_plasma">
 					<xs:annotation>
-						<xs:documentation>Mutual inductance from plasma filaments to poloidal flux loops </xs:documentation>
+						<xs:documentation>Mutual inductance from plasma elements to poloidal flux loops </xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>H</units>
 							<coordinate1>../flux_loops</coordinate1>
-							<coordinate2>../plasma_filaments</coordinate2>
+							<coordinate2>../plasma_elements</coordinate2>
 							<url>utilities/IMAS-URI-scheme.md</url>
 						</xs:appinfo>
 					</xs:annotation>
@@ -247,18 +313,27 @@
 						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="plasma_filaments">
+				<xs:element name="plasma_elements">
 					<xs:annotation>
-						<xs:documentation>List of URIs of the plasma filaments considered in the IDS</xs:documentation>
+						<xs:documentation>List of URIs of the plasma elements considered in the IDS</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
-							<coordinate1>IDS:pf_plasma/filament</coordinate1>
-							<introduced_after_version>3.38.1</introduced_after_version>
+							<coordinate1>IDS:pf_plasma/element</coordinate1>
+							<introduced_after_version>3.39.0</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:group ref="STR_1D"/>
 					</xs:complexType>
+				</xs:element>
+				<xs:element name="coupling_matrix" type="em_coupling_matrix" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Set of user-defined coupling matrices, complementary to the other system-based coupling matrices of this IDS</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+							<introduced_after_version>3.39.0</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
 				<xs:element ref="time"/>
