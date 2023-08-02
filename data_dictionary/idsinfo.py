@@ -3,10 +3,10 @@
 """
 Usage
 
-$ python idsdef metadata
+$ python idsinfo metadata
 This is Data Dictionary version = 3.37.0, following COCOS = 11
 
-$ python idsdef info amns_data ids_properties/comment -a
+$ python idsinfo info amns_data ids_properties/comment -a
 name: comment
 path: ids_properties/comment
 path_doc: ids_properties/comment
@@ -14,27 +14,27 @@ documentation: Any comment describing the content of this IDS
 data_type: STR_0D
 type: constant
 
-$ python idsdef info amns_data ids_properties/comment -m
+$ python idsinfo info amns_data ids_properties/comment -m
 This is Data Dictionary version = 3.37.0, following COCOS = 11
 ==============================================================
 Any comment describing the content of this IDS
 $   
 
-$ python idsdef info amns_data ids_properties/comment -s data_type
+$ python idsinfo info amns_data ids_properties/comment -s data_type
 STR_0D
 $  
 
-$ python idsdef idspath
+$ python idsinfo idspath
 /home/ITER/sawantp1/.local/dd_3.37.1+54.g20c6794.dirty/include/IDSDef.xml
 
-$ python idsdef idsnames 
+$ python idsinfo idsnames 
 amns_data
 barometry
 bolometer
 bremsstrahlung_visible
 ...
 
-$ python idsdef search ggd 
+$ python idsinfo search ggd 
 distribution_sources/source/ggd
 distributions/distribution/ggd
 edge_profiles/grid_ggd
