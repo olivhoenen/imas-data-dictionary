@@ -38,7 +38,6 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     "sphinx_immaterial",
-    "sphinxcontrib.details.directive",
     "sphinx_dd_extension.dd_domain",
     "sphinx_dd_extension.autodoc",
 ]
