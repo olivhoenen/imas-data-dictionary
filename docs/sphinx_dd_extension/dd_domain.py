@@ -10,10 +10,11 @@ import re
 from typing import cast, Iterable, Optional, Dict, List, Tuple, Any
 
 from docutils import nodes
+from docutils.statemachine import StringList
 from docutils.nodes import Element, Node
 from docutils.parsers.rst import directives
 from sphinx import addnodes
-from sphinx.addnodes import desc_signature, pending_xref
+from sphinx.addnodes import desc_content, desc_signature, pending_xref
 from sphinx.application import Sphinx
 from sphinx.builders import Builder
 from sphinx.directives import ObjectDescription
@@ -141,13 +142,15 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
         return ""
 
 
-class IDS(SphinxDirective):
-    """Directive to mark the description of a Data Dictionary IDS."""
+class _TopLevel(SphinxDirective):
+    """Directive to mark the description of a Data Dictionary IDS/utility."""
 
     has_content = True
     required_arguments = 1
     optional_arguments = 0
     final_argument_whitespace = False
+
+    refname = ""
 
     def run(self) -> List[Node]:
         """Run this directive.
@@ -170,18 +173,51 @@ class IDS(SphinxDirective):
         ret = []
         if not noindex:
             # note ids to the domain
-            node_id = make_id(self.env, self.state.document, "ids", ids_name)
+            node_id = make_id(self.env, self.state.document, self.refname, ids_name)
             target = nodes.target("", "", ids=[node_id])
             self.set_source_info(target)
             self.state.document.note_explicit_target(target)
 
-            domain.note_object(ids_name, "ids", node_id, location=target)
+            domain.note_object(ids_name, self.refname, node_id, location=target)
             ret.append(target)
-            indextext = f"ids; {ids_name}"
+            indextext = f"{self.refname}; {ids_name}"
             inode = addnodes.index(entries=[("pair", indextext, node_id, "", None)])
             ret.append(inode)
         ret.extend(content_node.children)
         return ret
+
+
+class IDS(_TopLevel):
+    """Directive to mark the description of a Data Dictionary IDS."""
+
+    refname = "ids"
+
+
+class Util(_TopLevel):
+    """Directive to mark the description of a Data Dictionary utility node."""
+
+    refname = "util"
+
+
+class UtilReference(DDNode):
+    """Directive to mark that a node is a reference to a utility struct."""
+
+    def handle_signature(self, sig: str, signode: desc_signature) -> Tuple[str, str]:
+        # reference is guaranteed to not have whitespace, but path may have (?)
+        *sigs, reference = sig.split()
+        sig = sig.join(sigs)
+        self.options["data_type"] = "structure"
+        self.options["reference"] = reference
+        return super().handle_signature(sig, signode)
+
+    def transform_content(self, contentnode: desc_content) -> None:
+        reference = self.options["reference"]
+        content = StringList()
+        content.append(
+            f"See common IDS structure reference: :dd:util:`{reference}`.",
+            *self.get_source_info(),
+        )
+        self.state.nested_parse(content, 0, contentnode)
 
 
 class IDSXRefRole(XRefRole):
@@ -216,6 +252,9 @@ class DDDomain(Domain):
     object_types = {
         # IDSs
         "ids": ObjType("IDS", "ids"),
+        # Utility structures
+        "util": ObjType("utility", "util"),
+        "util-ref": ObjType("utility", "util"),
         # IDS nodes
         "node": ObjType("node", "node"),
         # Data types
@@ -223,13 +262,14 @@ class DDDomain(Domain):
     }
     directives = {
         "ids": IDS,
+        "util": Util,
+        "util-ref": UtilReference,
         "node": DDNode,
-        # TODO: make a separate directive for data_type (based on glossary term?)
         "data_type": DDNode,
-        # TODO: add directive for type (=dynamic/constant/static)
     }
     roles = {
         "ids": IDSXRefRole(),
+        "util": IDSXRefRole(),
         "node": IDSXRefRole(),
         "data_type": IDSXRefRole(),
     }
@@ -348,27 +388,33 @@ class DDDomain(Domain):
 
 # Monkeypatch:
 def visit_desc(self, node: Element) -> None:
-    self.body.append(self.starttag(node, 'details'))
+    self.body.append(self.starttag(node, "details"))
+
 
 def depart_desc(self, node: Element) -> None:
-    self.body.append('</details>\n\n')
+    self.body.append("</details>\n\n")
+
 
 def visit_desc_signature(self, node: Element) -> None:
     # the id is set automatically
-    self.body.append(self.starttag(node, 'summary'))
+    self.body.append(self.starttag(node, "summary"))
     self.protect_literal_text += 1
+
 
 def depart_desc_signature(self, node: Element) -> None:
     self.protect_literal_text -= 1
-    if not node.get('is_multiline'):
-        self.add_permalink_ref(node, 'Permalink to this definition')
-    self.body.append('</summary>\n')
+    if not node.get("is_multiline"):
+        self.add_permalink_ref(node, "Permalink to this definition")
+    self.body.append("</summary>\n")
+
 
 def visit_desc_content(self, node: Element) -> None:
     pass
 
+
 def depart_desc_content(self, node: Element) -> None:
     pass
+
 
 HTML5Translator.visit_desc = visit_desc
 HTML5Translator.depart_desc = depart_desc

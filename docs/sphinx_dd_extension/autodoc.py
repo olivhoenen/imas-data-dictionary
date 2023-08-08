@@ -2,7 +2,8 @@
 """
 
 from pathlib import Path
-from textwrap import indent
+import re
+from textwrap import dedent, indent
 from typing import Any, Dict
 from xml.etree import ElementTree
 
@@ -13,16 +14,33 @@ from sphinx.util.docutils import SphinxDirective
 from sphinx.util.nodes import nested_parse_with_titles
 
 
+DOCUMENTED_UTILITIES = ["ids_properties", "code"]
+
+
 class DDAutoDoc(SphinxDirective):
     final_argument_whitespace = True
 
     def run(self) -> None:
+        rst = dedent("""
+            .. toctree::
+                :caption: IDS reference
+                :name: dd-reference-toc
+                :glob:
+                :maxdepth: 1
+
+                generated/ids/*
+
+            .. toctree::
+                :caption: Common IDS structures reference
+                :name: dd-reference-toc-util
+                :glob:
+                :maxdepth: 1
+
+                generated/util/*
+                """)
         self.result = StringList()
-        self.result.append(".. toctree::", *self.get_source_info())
-        self.result.append("  :glob:", *self.get_source_info())
-        self.result.append("  :maxdepth: 1", *self.get_source_info())
-        self.result.append("", *self.get_source_info())
-        self.result.append("  generated/*", *self.get_source_info())
+        for line in rst.splitlines():
+            self.result.append(line, *self.get_source_info())
 
         # handle result
         node = nodes.section()
@@ -32,32 +50,61 @@ class DDAutoDoc(SphinxDirective):
         return node.children
 
 
+def rst_escape(text: str):
+    return re.sub(r"[*`_|\\]", r"\\0", text)
+
+
 def generate_dd_docs(app: Sphinx):
     """Read IDSDef.xml and generate rst source files for all IDSs."""
     etree = ElementTree.parse("../IDSDef.xml")
     for ids in etree.iterfind("IDS"):
         idsname = ids.get("name")
-        # if idsname > 'c': break
         if not idsname:
             raise RuntimeError("Empty IDS name!")
-        docname = "generated/" + idsname
+        docname = "generated/ids/" + idsname
         docfile = docname + ".rst"
         Path(docfile).parent.mkdir(parents=True, exist_ok=True)
         Path(docfile).write_text(ids2rst(ids))
+    for util in DOCUMENTED_UTILITIES:
+        node = etree.find(f"utilities/field[@name='{util}']")
+        if not node:
+            raise RuntimeError(f"Utility {util} does not exist in DD XML")
+        docname = "generated/util/" + util
+        docfile = docname + ".rst"
+        Path(docfile).parent.mkdir(parents=True, exist_ok=True)
+        Path(docfile).write_text(util2rst(node))
+
+
+def util2rst(node: ElementTree.Element) -> str:
+    """Convert a utilities/field node to rst documentation."""
+    result = []
+    name = node.get("name")
+    title = f"``{name}`` structure"
+    result.append(title)
+    result.append("=" * len(title))
+    result.append("")
+    result.append(f".. dd:util:: {name}")
+    # TODO: options for utils?
+    result.append("")
+    result.append(indent(rst_escape(node.get("documentation")), "  "))
+    result.append("")
+    result.append(children2rst(node, 1))
+    result.append("")
+    return "\n".join(result)
 
 
 def ids2rst(ids: ElementTree.Element) -> str:
     """Convert an IDS Element to rst documentation."""
     result = []
     name = ids.get("name")
-    title = f"``{name}`` reference"
+    title = f"``{name}``"
     result.append(title)
     result.append("=" * len(title))
     result.append("")
     result.append(f".. dd:ids:: {name}")
     # TODO: options for IDS
     result.append("")
-    result.append(indent(ids.get("documentation"), "  "))
+    result.append(indent(rst_escape(ids.get("documentation")), "  "))
     result.append("")
     result.append(children2rst(ids, 1))
     result.append("")
@@ -66,6 +113,11 @@ def ids2rst(ids: ElementTree.Element) -> str:
 
 def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     """Convert an IDS Field element to rst documentation."""
+    if field.get("structure_reference") in DOCUMENTED_UTILITIES:
+        util = field.get("structure_reference")
+        assert len(util.split()) == 1, "structure_reference contains whitespace"
+        path = field.get('path_doc')
+        return f"{'  ' * level}.. dd:util-ref:: {path} {util}\n"
     result = []
     result.append(f"{'  ' * level}.. dd:node:: {field.get('path_doc')}")
     # options for nodes
@@ -77,14 +129,10 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     # TODO: error
     # TODO: coordinates
     result.append("")
-    result.append(field.get("documentation"))
+    result.append(rst_escape(field.get("documentation")))
     result.append("")
     level += 1
-    return (
-        f"\n{'  '*level}".join(result)
-        + "\n"
-        + children2rst(field, level)
-    )
+    return f"\n{'  '*level}".join(result) + "\n" + children2rst(field, level)
 
 
 def children2rst(element: ElementTree.ElementTree, level: int) -> str:
