@@ -53,7 +53,7 @@ class DDAutoDoc(SphinxDirective):
 
 
 def rst_escape(text: str):
-    return re.sub(r"([*`_|\\])", r"\1", text)
+    return re.sub(r"([*`|\\])", r"\\\1", text)
 
 
 def parse_lifecycle_status(field: ElementTree.Element) -> List[str]:
