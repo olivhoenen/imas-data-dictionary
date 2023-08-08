@@ -4,7 +4,7 @@
 from pathlib import Path
 import re
 from textwrap import dedent, indent
-from typing import Any, Dict
+from typing import Any, Dict, List
 from xml.etree import ElementTree
 
 from docutils import nodes
@@ -21,7 +21,8 @@ class DDAutoDoc(SphinxDirective):
     final_argument_whitespace = True
 
     def run(self) -> None:
-        rst = dedent("""
+        rst = dedent(
+            """
             .. toctree::
                 :caption: IDS reference
                 :name: dd-reference-toc
@@ -37,7 +38,8 @@ class DDAutoDoc(SphinxDirective):
                 :maxdepth: 1
 
                 generated/util/*
-                """)
+                """
+        )
         self.result = StringList()
         for line in rst.splitlines():
             self.result.append(line, *self.get_source_info())
@@ -51,7 +53,31 @@ class DDAutoDoc(SphinxDirective):
 
 
 def rst_escape(text: str):
-    return re.sub(r"[*`_|\\]", r"\\0", text)
+    return re.sub(r"([*`_|\\])", r"\1", text)
+
+
+def parse_lifecycle_status(field: ElementTree.Element) -> List[str]:
+    result = []
+    lifecycle_status = field.get("lifecycle_status")
+    lifecycle_version = field.get("lifecycle_version")
+    lifecycle_last_change = field.get("lifecycle_last_change")
+
+    if lifecycle_status == "obsolescent":
+        result.append(f".. deprecated:: {lifecycle_version}")
+    elif lifecycle_status == "alpha":
+        result.append(f".. versionadded:: {lifecycle_version}")
+        result.append(f"  Alpha since version {lifecycle_version}.")
+    elif lifecycle_status == "active":
+        result.append(f".. versionadded:: {lifecycle_version}")
+        result.append(f"  Active since version {lifecycle_version}.")
+
+    if lifecycle_last_change:
+        result.append(f".. versionchanged:: {lifecycle_last_change}")
+        result.append(f"  Last change occurred in version {lifecycle_last_change}.")
+
+    if result:
+        result.append("")
+    return result
 
 
 def generate_dd_docs(app: Sphinx):
@@ -88,6 +114,7 @@ def util2rst(node: ElementTree.Element) -> str:
     result.append("")
     result.append(indent(rst_escape(node.get("documentation")), "  "))
     result.append("")
+    result.append(indent("\n".join(parse_lifecycle_status(node)), "  "))
     result.append(children2rst(node, 1))
     result.append("")
     return "\n".join(result)
@@ -106,6 +133,7 @@ def ids2rst(ids: ElementTree.Element) -> str:
     result.append("")
     result.append(indent(rst_escape(ids.get("documentation")), "  "))
     result.append("")
+    result.append(indent("\n".join(parse_lifecycle_status(ids)), "  "))
     result.append(children2rst(ids, 1))
     result.append("")
     return "\n".join(result)
@@ -116,7 +144,7 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     if field.get("structure_reference") in DOCUMENTED_UTILITIES:
         util = field.get("structure_reference")
         assert len(util.split()) == 1, "structure_reference contains whitespace"
-        path = field.get('path_doc')
+        path = field.get("path_doc")
         return f"{'  ' * level}.. dd:util-ref:: {path} {util}\n"
     result = []
     result.append(f"{'  ' * level}.. dd:node:: {field.get('path_doc')}")
@@ -131,6 +159,7 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     result.append("")
     result.append(rst_escape(field.get("documentation")))
     result.append("")
+    result.extend(parse_lifecycle_status(field))
     level += 1
     return f"\n{'  '*level}".join(result) + "\n" + children2rst(field, level)
 

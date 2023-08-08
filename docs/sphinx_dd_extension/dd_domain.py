@@ -65,37 +65,19 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
     def handle_signature(self, sig: str, signode: desc_signature) -> Tuple[str, str]:
         sig = sig.strip()
         prefix = self.env.ref_context.get("dd:ids")
-        parts = sig.split("/")
-        target = prefix + "/" if prefix else ""
-        for part in parts[:-1]:
-            target += part + "/"
-            text = nodes.Text(part)
-            # Uncomment to create clickable cross-references to each parent structure
-            # xref = pending_xref(
-            #     "", text, refdomain="dd", reftype="node", reftarget=target[:-1]
-            # )
-            # signode += addnodes.desc_addname(part, "", xref)
-            signode += text
-            signode += addnodes.desc_sig_literal_char("/", "/")
+        parts = sig.rsplit("/", 1)
+        if len(parts) > 1:
+            signode += nodes.Text(parts[0] + "/", parts[0] + "/")
         signode += addnodes.desc_name(parts[-1], parts[-1])
 
         # Add data_type, type and unit
         if "unit" in self.options:
             unit = self.options["unit"]
-            signode += addnodes.desc_sig_space("", " ")
-            signode += addnodes.desc_sig_literal_char("", "[")
-            signode += nodes.Text(unit, unit)
-            signode += addnodes.desc_sig_literal_char("", "]")
+            signode += DDUnit(unit, unit)
 
         if "data_type" in self.options:
             data_type = self.options["data_type"]
-            signode += addnodes.desc_sig_space("", " ")
-            signode += addnodes.desc_sig_literal_char("", "(")
-            text = nodes.Text(data_type, data_type)
-            signode += pending_xref(
-                "", text, refdomain="dd", reftype="data_type", reftarget=data_type
-            )
-            signode += addnodes.desc_sig_literal_char("", ")")
+            signode += DDDataType(data_type)
 
         # TODO: type
 
@@ -424,8 +406,48 @@ HTML5Translator.visit_desc_content = visit_desc_content
 HTML5Translator.depart_desc_content = depart_desc_content
 
 
+class DDUnit(nodes.inline):
+    """Docutils node for representing DD units."""
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self["classes"].append("dd_unit")
+
+
+class DDDataType(nodes.inline):
+    """Docutils node for representing DD data types."""
+
+    def __init__(self, data_type) -> None:
+        # Convert legacy identifiers
+        data_type = {
+            "str_type": "STR_0D",
+            "str_1d_type": "STR_1D",
+            "int_type": "INT_0D",
+            "flt_type": "FLT_0D",
+            "flt_1d_type": "FLT_1D",
+            "cpx_type": "CPX_0D",
+        }.get(data_type, data_type)
+
+        text = nodes.Text(data_type, data_type)
+        xref = pending_xref(
+            "", text, refdomain="dd", reftype="data_type", reftarget=data_type
+        )
+        super().__init__("", "", xref)
+        self["classes"].append("dd_data_type")
+
+
+def visit_span_element_html(self, node: Element) -> None:
+    self.body.append(self.starttag(node, "span", ""))
+
+
+def depart_span_element_html(self, node: Element) -> None:
+    self.body.append("</span>")
+
+
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_domain(DDDomain)
+    app.add_node(DDUnit, html=(visit_span_element_html, depart_span_element_html))
+    app.add_node(DDDataType, html=(visit_span_element_html, depart_span_element_html))
     return {
         "version": "0.1",
         "parallel_read_safe": True,

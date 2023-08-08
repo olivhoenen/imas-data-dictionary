@@ -1,3 +1,53 @@
 #dd-reference-toc ul, #dd-index-reference-toc ul ul, #dd-index-reference-toc-util ul ul {
     column-count: 2;
 }
+
+/* Overwrite admonition styles from theme */
+details.dd {
+    padding-right: 0;
+    border-radius: 0;
+    border-width: 0 0 0 0.05rem;
+    box-shadow: 0 0;
+}
+details.dd details.dd:last-child {
+    margin-bottom: 0;
+}
+summary.dd {
+    margin-right: 0;
+    padding-left: 0.6rem !important; /* Remove admonition icon */
+}
+summary.dd::before {
+    width: 0; /* Remove admonition icon */
+}
+
+/* Make parent structures in path appear lighter */
+.sig-object > span:first-child:not(.sig-name) {
+    /* color: var(--md-default-fg-color--light); */
+    font-weight: normal;
+}
+
+/* Custom elements */
+span.dd_unit {
+    cursor: help;
+    position: relative;
+    text-decoration: underline dotted;
+    font-weight: normal;
+    font-style: italic;
+    margin-left: 0.5em
+}
+span.dd_unit:hover::after, span.dd_unit:focus::after {
+    content: "Unit of this data node.";
+    position: absolute;
+    left: 0em;
+    top: 1.5em;
+    min-width: 11em;
+    padding: 0.4em;
+    border: 1px #aaa solid;
+    background-color: #fff;
+    color: #000;
+    z-index: 1;
+}
+
+span.dd_data_type {
+    float: right;
+}
