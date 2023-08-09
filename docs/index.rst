@@ -26,7 +26,7 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
    developer_docs
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Data dictionary reference
    :name: dd-index-reference-toc
 

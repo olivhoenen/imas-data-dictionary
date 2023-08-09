@@ -23,16 +23,20 @@ class DDAutoDoc(SphinxDirective):
     def run(self) -> None:
         rst = dedent(
             """
+            IDS reference
+            -------------
+
             .. toctree::
-                :caption: IDS reference
                 :name: dd-reference-toc
                 :glob:
                 :maxdepth: 1
 
                 generated/ids/*
 
+            Common IDS structures reference
+            -------------------------------
+
             .. toctree::
-                :caption: Common IDS structures reference
                 :name: dd-reference-toc-util
                 :glob:
                 :maxdepth: 1
