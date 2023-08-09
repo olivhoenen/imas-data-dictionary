@@ -16,6 +16,7 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
    data_types
    coordinates
    units
+   errorbars
 
 
 .. toctree::

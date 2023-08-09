@@ -159,7 +159,8 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
         result.append(f":type: {field.get('type')}")
     if "units" in field.keys():
         result.append(f":unit: {field.get('units')}")
-    # TODO: error
+    if has_error:
+        result.append(":has_error:")
     # TODO: coordinates
     result.append("")
     result.append(rst_escape(field.get("documentation")))

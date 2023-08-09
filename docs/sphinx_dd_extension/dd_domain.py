@@ -48,6 +48,14 @@ def remove_brackets(value: str) -> str:
             return value
 
 
+def create_ref_xref(text, target):
+    """Helper to create pending_xref node representing :ref:`{text} <target>`."""
+    node = nodes.Text(text, text)
+    return pending_xref(
+        "", node, refdomain="std", reftype="ref", reftarget=target, refexplicit=True
+    )
+
+
 class DDNode(ObjectDescription[Tuple[str, str]]):
     """Description of a node in the Data Dictionary."""
 
@@ -56,6 +64,7 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
         "noindexentry": directives.flag,
         "nocontentsentry": directives.flag,
         "data_type": directives.unchanged,
+        "has_error": directives.flag,
         "type": partial(
             directives.choice, values=("constant", "static", "dynamic", "")
         ),
@@ -70,7 +79,10 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
             signode += nodes.Text(parts[0] + "/", parts[0] + "/")
         signode += addnodes.desc_name(parts[-1], parts[-1])
 
-        # Add data_type, type and unit
+        # Add additional properties
+        if "has_error" in self.options:
+            signode += create_ref_xref(" ⇹", "errorbars")
+
         if "unit" in self.options:
             unit = self.options["unit"]
             signode += DDUnit(unit, unit)
