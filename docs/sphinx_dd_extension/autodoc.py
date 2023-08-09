@@ -124,7 +124,12 @@ def ids2rst(ids: ElementTree.Element) -> str:
     """Convert an IDS Element to rst documentation."""
     result = []
     name = ids.get("name")
-    title = f"``{name}``"
+    lifecycle_status = ids.get("lifecycle_status")
+    icon = {
+        "alpha": ":si-icon:`material/alpha;ids-icon`",
+        "active": ":si-icon:`material/star;ids-icon`",
+    }.get(lifecycle_status, "")
+    title = f"{icon}\\ ``{name}``"
     result.append(title)
     result.append("=" * len(title))
     result.append("")

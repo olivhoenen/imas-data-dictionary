@@ -2,6 +2,32 @@
     column-count: 2;
 }
 
+.ids-icon {
+    cursor: help;
+    position: relative;
+}
+.ids-icon::before {
+    background-color: var(--md-primary-fg-color);
+}
+.ids-icon:hover::after {
+    position: absolute;
+    width: max-content;
+    font-size: 0.8rem;
+    left: 1em;
+    top: 1.5rem;
+    padding: 0.4em;
+    border: 1px #aaa solid;
+    background-color: #fff;
+    color: #000;
+    z-index: 1;
+}
+.ids-icon.material_star:hover::after {
+    content: "This IDS is active.";
+}
+.ids-icon.material_alpha:hover::after {
+    content: "This IDS is in alpha status.";
+}
+
 /* Overwrite admonition styles from theme */
 details.dd {
     padding-right: 0;
@@ -40,7 +66,7 @@ span.dd_unit:hover::after, span.dd_unit:focus::after {
     position: absolute;
     left: 0em;
     top: 1.5em;
-    min-width: 11em;
+    width: max-content;
     padding: 0.4em;
     border: 1px #aaa solid;
     background-color: #fff;
