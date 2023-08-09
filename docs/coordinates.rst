@@ -14,12 +14,12 @@ Note that time coordinates are special due to the time slice functionality
 of the Access Layer. See the following section for more details.
 
 
+.. _`time coordinates`:
+
 Time coordinates and time handling
 ''''''''''''''''''''''''''''''''''
 
 Some quantities (and array of structures) are time dependent.
-
-.. todo:: static/dynamic/constant
 
 This time-dependent coordinate is treated specially in the access layer, and it
 depends on the value of ``ids_properties/homogeneous_time``. There are three
@@ -47,3 +47,28 @@ valid values for this property:
     is easier to understand :code:`ids.ids_properties.homogeneous_time =
     IDS_TIME_MODE_HOMOGENEOUS` then :code:`ids.ids_properties.homogeneous_time =
     1`.
+
+
+Static, constant and dynamic nodes
+----------------------------------
+
+IDS nodes can be 
+
+.. _`type-dynamic`:
+
+Dynamic
+    Dynamic quantities are time-dependent in the context of the IDS. They have a
+    :ref:`time coordinate <time coordinates>`.
+
+.. _`type-constant`:
+
+Constant
+    Constant quantities are not varying within the context of the IDS, such as the code
+    that has produced the IDS.
+
+.. _`type-static`:
+
+Static
+    Static quantities are also not varying, but likely to be constant over a wider
+    context, such as teh nominal coil positions during operation.
+

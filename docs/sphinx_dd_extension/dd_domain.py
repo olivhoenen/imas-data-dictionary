@@ -20,7 +20,6 @@ from sphinx.builders import Builder
 from sphinx.directives import ObjectDescription
 from sphinx.domains import Domain, ObjType
 from sphinx.environment import BuildEnvironment
-from sphinx.locale import __
 from sphinx.roles import XRefRole
 from sphinx.util.docutils import SphinxDirective, switch_source_input
 from sphinx.util.nodes import make_id, make_refnode, nested_parse_with_titles
@@ -48,11 +47,16 @@ def remove_brackets(value: str) -> str:
             return value
 
 
-def create_ref_xref(text, target):
+def create_ref_xref(node, target, **attributes):
     """Helper to create pending_xref node representing :ref:`{text} <target>`."""
-    node = nodes.Text(text, text)
     return pending_xref(
-        "", node, refdomain="std", reftype="ref", reftarget=target, refexplicit=True
+        "",
+        node,
+        refdomain="std",
+        reftype="ref",
+        reftarget=target,
+        refexplicit=True,
+        **attributes,
     )
 
 
@@ -81,7 +85,12 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
 
         # Add additional properties
         if "has_error" in self.options:
-            signode += create_ref_xref(" ⇹", "errorbars")
+            signode += create_ref_xref(nodes.Text(" ⇹"), "errorbars")
+
+        if "type" in self.options:
+            target = f"type-{self.options['type']}"
+            classes = [f"dd-{self.options['type']}"]
+            signode += create_ref_xref(nodes.inline(text=" "), target, classes=classes)
 
         if "unit" in self.options:
             unit = self.options["unit"]
@@ -229,6 +238,7 @@ class IDSXRefRole(XRefRole):
         title: str,
         target: str,
     ) -> Tuple[str, str]:
+        refnode["dd:ids"] = env.ref_context.get("dd:ids")
         # Process tildes, similar to the Python domain
         if not has_explicit_title:
             target = target.lstrip("~")  # only has a meaning for the title
@@ -320,7 +330,7 @@ class DDDomain(Domain):
     ) -> Tuple[str, Optional[Tuple[str, str, str]]]:
         """Find the DD object for "name", using the given context IDS name."""
         name = remove_brackets(name)
-        newname = f"{ids_name}/{name}" if ids_name else name
+        newname = f"{ids_name}/{name}" if ids_name and typ != "util" else name
         if newname in self.objects:
             obj = self.objects[newname]
         else:

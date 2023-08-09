@@ -60,6 +60,18 @@ def rst_escape(text: str):
     return re.sub(r"([*`|\\])", r"\\\1", text)
 
 
+def link_to_coordinate(coordinate: str) -> str:
+    result = []
+    for coor in coordinate.split(" OR "):
+        if coor.startswith("1..."):
+            result.append(f"``{coor}``")
+        elif coor.startswith("IDS:"):
+            result.append(f":dd:node:`{coor[4:]}`")
+        else:
+            result.append(f":dd:node:`{coor}`")
+    return " OR ".join(result)
+
+
 def parse_lifecycle_status(field: ElementTree.Element) -> List[str]:
     result = []
     lifecycle_status = field.get("lifecycle_status")
@@ -167,6 +179,24 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
         result.append(":has_error:")
     # TODO: coordinates
     result.append("")
+    coordinates_csv = []
+    for i in range(6):
+        coordinate = field.get(f"coordinate{i+1}")
+        if not coordinate:
+            break
+        # TODO: create reference
+        csv_line = f"  {i+1},{link_to_coordinate(coordinate)}"
+        coordinate_same_as = field.get(f"coordinate{i+1}_same_as")
+        if coordinate_same_as:
+            csv_line += f" (same as {link_to_coordinate(coordinate_same_as)})"
+        coordinates_csv.append(csv_line)
+    if coordinates_csv:
+        result.append(".. csv-table::")
+        result.append("  :class: dd-coordinates")
+        result.append("  :header: ,:ref:`Coordinate <coordinates>`")
+        result.append("")
+        result.extend(coordinates_csv)
+        result.append("")
     result.append(rst_escape(field.get("documentation")))
     result.append("")
     result.extend(parse_lifecycle_status(field))

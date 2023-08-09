@@ -30,12 +30,24 @@
     content: "This IDS is in alpha status.";
 }
 
+table.dd-coordinates {
+    float: right;
+    margin: 0.5em 0 0.5em 0.5em;
+}
+table.dd-coordinates th, table.dd-coordinates td {
+    padding: 0.5em !important;
+}
+table.dd-coordinates th:first-child, table.dd-coordinates td:first-child {
+    min-width: 0 !important;
+}
+
 /* Overwrite admonition styles from theme */
 details.dd {
     padding-right: 0;
     border-radius: 0;
     border-width: 0 0 0 0.05rem;
     box-shadow: 0 0;
+    clear: both;
 }
 details.dd details.dd:last-child {
     margin-bottom: 0;
@@ -50,7 +62,6 @@ summary.dd::before {
 
 /* Make parent structures in path appear lighter */
 .sig-object > span:first-child:not(.sig-name) {
-    /* color: var(--md-default-fg-color--light); */
     font-weight: normal;
 }
 
@@ -58,12 +69,14 @@ summary.dd::before {
 span.dd_unit {
     cursor: help;
     position: relative;
-    text-decoration: underline dotted;
     font-weight: normal;
     font-style: italic;
     margin-left: 0.5em
 }
-span.dd_unit:hover::after, span.dd_unit:focus::after {
+span.dd_unit:hover {
+    text-decoration: underline;
+}
+span.dd_unit:hover::after {
     content: "Unit of this data node.";
     position: absolute;
     left: 0em;
@@ -78,4 +91,17 @@ span.dd_unit:hover::after, span.dd_unit:focus::after {
 
 span.dd_data_type {
     float: right;
+}
+
+.dd-constant::after {
+    content: "{constant}";
+    font-weight: normal;
+}
+.dd-static::after {
+    content: "{static}";
+    font-weight: normal;
+}
+.dd-dynamic::after {
+    content: "{dynamic}";
+    font-weight: normal;
 }
