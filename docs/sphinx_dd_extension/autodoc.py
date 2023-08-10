@@ -61,8 +61,11 @@ class DDAutoDoc(SphinxDirective):
 
 def parse_documentation(text: str) -> str:
     """Parse documentation string from a DD element."""
-    # Escape special characters used by ReST as markup: *, `, |, \
-    return re.sub(r"([*`|\\])", r"\\\1", text)
+    # Escape special characters used by ReST as markup: *, `, |
+    text = re.sub(r"([*`|])", r"\\\1", text)
+    # Inline math
+    text = re.sub(r"\$(.*?)(?<!\\)\$", r":math:`\1`", text)
+    return text
 
 
 def link_to_coordinate(coordinate: str) -> str:
