@@ -45,7 +45,17 @@ class DDAutoDoc(SphinxDirective):
                 :maxdepth: 1
 
                 generated/util/*
-                """
+
+            Identifier reference
+            --------------------
+
+            .. toctree::
+                :name: dd-reference-toc-identifiers
+                :glob:
+                :maxdepth: 1
+
+                generated/identifier/*
+            """
         )
         self.result = StringList()
         for line in rst.splitlines():
@@ -111,18 +121,25 @@ def generate_dd_docs(app: Sphinx):
         idsname = ids.get("name")
         if not idsname:
             raise RuntimeError("Empty IDS name!")
-        docname = "generated/ids/" + idsname
-        docfile = docname + ".rst"
+        docfile = f"generated/ids/{idsname}.rst"
         Path(docfile).parent.mkdir(parents=True, exist_ok=True)
         Path(docfile).write_text(ids2rst(ids))
+
     for util in DOCUMENTED_UTILITIES:
         node = etree.find(f"utilities/field[@name='{util}']")
         if not node:
             raise RuntimeError(f"Utility {util} does not exist in DD XML")
-        docname = "generated/util/" + util
-        docfile = docname + ".rst"
+        docfile = f"generated/util/{util}.rst"
         Path(docfile).parent.mkdir(parents=True, exist_ok=True)
         Path(docfile).write_text(util2rst(node))
+
+    for identifier in Path.cwd().parent.glob("*/*identifier.xml"):
+        iden_tree = ElementTree.parse(identifier)
+        element = iden_tree.getroot()
+        docfile = f"generated/identifier/{identifier.stem}.rst"
+        Path(docfile).parent.mkdir(parents=True, exist_ok=True)
+        fname = identifier.relative_to(identifier.parents[1])  # folder/file.xml
+        Path(docfile).write_text(identifier2rst(element, fname))
 
 
 def util2rst(node: ElementTree.Element) -> str:
@@ -191,6 +208,21 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     result.append(parse_documentation(field.get("documentation")))
     result.append("")
 
+    # Miscellaneous attributes
+    if "appendable_by_appender_actor" in field.keys():
+        appendable = field.get("appendable_by_appender_actor")
+        result.append(f":Appendable by appender actor: {appendable}")
+    result.append("")
+
+    # Identifier
+    if "doc_identifier" in field.keys():
+        identifier = f":dd:identifier:`{field.get('doc_identifier')}`"
+        result.append(
+            f"This is an :ref:`identifier <identifiers>`. See {identifier} for the "
+            "available options."
+        )
+        result.append("")
+
     # Coordinates
     coordinates_csv = []
     for i in range(6):
@@ -221,7 +253,7 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
             result.append(f"  Renamed from ``{field.get('change_nbc_previous_name')}``")
         elif change_nbc_description == "type_changed":
             result.append(f".. versionchanged:: {change_nbc_version}")
-            previous_type = field.get('change_nbc_previous_type')
+            previous_type = field.get("change_nbc_previous_type")
             result.append(f"  Type changed from ``{previous_type}``")
         else:
             logger.warning(
@@ -236,7 +268,7 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     return f"\n{'  '*level}".join(result) + "\n" + children2rst(field, level)
 
 
-def children2rst(element: ElementTree.ElementTree, level: int) -> str:
+def children2rst(element: ElementTree.Element, level: int) -> str:
     children = {field.get("name"): field for field in element.iterfind("field")}
     has_error = set()
     skip = set()
@@ -249,6 +281,27 @@ def children2rst(element: ElementTree.ElementTree, level: int) -> str:
         for fieldname, field in children.items()
         if fieldname not in skip
     )
+
+
+def identifier2rst(element: ElementTree.Element, fname: str) -> str:
+    csv_items = "\n".join(
+        f'"{ele.get("name")}", "{ele.text}", "{ele.get("description")}"'
+        for ele in element.iterfind("int")
+    )
+
+    result = []
+    title = f"``{fname.stem}``"
+    result.append(f".. dd:identifier:: {fname}")
+    result.append("")
+    result.append(title)
+    result.append("=" * len(title))
+    result.append("")
+    result.append(".. csv-table::")
+    result.append('  :header: "Name","Index","Description"')
+    result.append("")
+    result.append(indent(csv_items, '    '))
+    result.append("")
+    return "\n".join(result)
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:

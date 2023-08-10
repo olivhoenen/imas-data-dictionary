@@ -6,6 +6,7 @@ Logic is partly based on code in the :external:py:mod:`sphinx.domains` module.
 
 from functools import partial
 import logging
+from pathlib import Path
 import re
 from typing import cast, Iterable, Optional, Dict, List, Tuple, Any
 
@@ -223,6 +224,31 @@ class UtilReference(DDNode):
         self.state.nested_parse(content, 0, contentnode)
 
 
+class DDIdentifier(SphinxDirective):
+    """Directive to mark an identifier."""
+
+    has_content = False
+    required_arguments = 1
+    optional_arguments = 0
+
+    def run(self) -> List[Node]:
+        """Run this directive."""
+        domain = cast(DDDomain, self.env.get_domain("dd"))
+        identifier_fname = self.arguments[0].strip()
+
+        # note identifier to the domain
+        node_id = make_id(self.env, self.state.document, "identifier", identifier_fname)
+        target = nodes.target("", "", ids=[node_id])
+        self.set_source_info(target)
+        self.state.document.note_explicit_target(target)
+
+        domain.note_object(identifier_fname, "identifier", node_id, location=target)
+        indextext = f"identifier; {identifier_fname}"
+        inode = addnodes.index(entries=[("pair", indextext, node_id, "", None)])
+
+        return [target, inode]
+
+
 class IDSXRefRole(XRefRole):
     """Extend standard cross-reference role to process tildes.
 
@@ -248,6 +274,22 @@ class IDSXRefRole(XRefRole):
         return title, target
 
 
+class IdentifierXRefRole(XRefRole):
+    """Extend standard cross-reference role to process identifiers correctly."""
+
+    def process_link(
+        self,
+        env: BuildEnvironment,
+        refnode: Element,
+        has_explicit_title: bool,
+        title: str,
+        target: str,
+    ) -> Tuple[str, str]:
+        if not has_explicit_title:
+            title = Path(target).stem
+        return title, target
+
+
 class DDDomain(Domain):
     """Sphinx domain for the Data Dictionary."""
 
@@ -263,6 +305,8 @@ class DDDomain(Domain):
         "node": ObjType("node", "node"),
         # Data types
         "data_type": ObjType("data_type", "data_type"),
+        # Identifiers
+        "identifier": ObjType("identifier", "identifier"),
     }
     directives = {
         "ids": IDS,
@@ -270,12 +314,14 @@ class DDDomain(Domain):
         "util-ref": UtilReference,
         "node": DDNode,
         "data_type": DDNode,
+        "identifier": DDIdentifier,
     }
     roles = {
         "ids": IDSXRefRole(),
         "util": IDSXRefRole(),
         "node": IDSXRefRole(),
         "data_type": IDSXRefRole(),
+        "identifier": IdentifierXRefRole(),
     }
     initial_data = {
         "objects": {},  # fullname -> docname, node_id, objtype
@@ -303,14 +349,6 @@ class DDDomain(Domain):
                 fullname,
                 docname,
             )
-            # logger.warning(
-            #     __("duplicate %s description of %s, other %s in %s"),
-            #     objtype,
-            #     fullname,
-            #     objtype,
-            #     docname,
-            #     location=location,
-            # )
         self.objects[fullname] = (self.env.docname, node_id, objtype)
 
     # Implement methods that should be overwritten
