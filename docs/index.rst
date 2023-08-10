@@ -17,6 +17,7 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
    coordinates
    units
    errorbars
+   nbc
 
 
 .. toctree::

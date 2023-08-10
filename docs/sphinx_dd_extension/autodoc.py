@@ -12,6 +12,9 @@ from docutils.statemachine import StringList
 from sphinx.application import Sphinx
 from sphinx.util.docutils import SphinxDirective
 from sphinx.util.nodes import nested_parse_with_titles
+from sphinx.util import logging
+
+logger = logging.getLogger(__name__)
 
 
 DOCUMENTED_UTILITIES = ["ids_properties", "code"]
@@ -177,7 +180,8 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
         result.append(f":unit: {field.get('units')}")
     if has_error:
         result.append(":has_error:")
-    # TODO: coordinates
+
+    # Coordinates
     result.append("")
     coordinates_csv = []
     for i in range(6):
@@ -197,8 +201,30 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
         result.append("")
         result.extend(coordinates_csv)
         result.append("")
+
+    # Documentation string
     result.append(rst_escape(field.get("documentation")))
     result.append("")
+
+    # NBC changes
+    if "change_nbc_description" in field.keys():
+        change_nbc_description = field.get("change_nbc_description")
+        change_nbc_version = field.get("change_nbc_version")
+        renames = ("aos_renamed", "leaf_renamed", "structure_renamed")
+        if change_nbc_description in renames:
+            result.append(f".. versionchanged:: {change_nbc_version}")
+            result.append(f"  Renamed from ``{field.get('change_nbc_previous_name')}``")
+        elif change_nbc_description == "type_changed":
+            result.append(f".. versionchanged:: {change_nbc_version}")
+            previous_type = field.get('change_nbc_previous_type')
+            result.append(f"  Type changed from ``{previous_type}``")
+        else:
+            logger.warning(
+                "Unknown nbc change %r, not documenting NBC change.",
+                change_nbc_description,
+            )
+
+    # Lifecycle information
     result.extend(parse_lifecycle_status(field))
     level += 1
     return f"\n{'  '*level}".join(result) + "\n" + children2rst(field, level)
