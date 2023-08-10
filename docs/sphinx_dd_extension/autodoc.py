@@ -59,7 +59,9 @@ class DDAutoDoc(SphinxDirective):
         return node.children
 
 
-def rst_escape(text: str):
+def parse_documentation(text: str) -> str:
+    """Parse documentation string from a DD element."""
+    # Escape special characters used by ReST as markup: *, `, |, \
     return re.sub(r"([*`|\\])", r"\\\1", text)
 
 
@@ -131,7 +133,7 @@ def util2rst(node: ElementTree.Element) -> str:
     result.append(f".. dd:util:: {name}")
     # TODO: options for utils?
     result.append("")
-    result.append(indent(rst_escape(node.get("documentation")), "  "))
+    result.append(indent(parse_documentation(node.get("documentation")), "  "))
     result.append("")
     result.append(indent("\n".join(parse_lifecycle_status(node)), "  "))
     result.append(children2rst(node, 1))
@@ -155,7 +157,7 @@ def ids2rst(ids: ElementTree.Element) -> str:
     result.append(f".. dd:ids:: {name}")
     # TODO: options for IDS
     result.append("")
-    result.append(indent(rst_escape(ids.get("documentation")), "  "))
+    result.append(indent(parse_documentation(ids.get("documentation")), "  "))
     result.append("")
     result.append(indent("\n".join(parse_lifecycle_status(ids)), "  "))
     result.append(children2rst(ids, 1))
@@ -180,9 +182,13 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
         result.append(f":unit: {field.get('units')}")
     if has_error:
         result.append(":has_error:")
+    result.append("")
+
+    # Documentation string
+    result.append(parse_documentation(field.get("documentation")))
+    result.append("")
 
     # Coordinates
-    result.append("")
     coordinates_csv = []
     for i in range(6):
         coordinate = field.get(f"coordinate{i+1}")
@@ -202,10 +208,6 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
         result.extend(coordinates_csv)
         result.append("")
 
-    # Documentation string
-    result.append(rst_escape(field.get("documentation")))
-    result.append("")
-
     # NBC changes
     if "change_nbc_description" in field.keys():
         change_nbc_description = field.get("change_nbc_description")
@@ -223,6 +225,7 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
                 "Unknown nbc change %r, not documenting NBC change.",
                 change_nbc_description,
             )
+        result.append("")
 
     # Lifecycle information
     result.extend(parse_lifecycle_status(field))
