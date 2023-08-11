@@ -67,6 +67,19 @@ def parse_documentation(text: str) -> str:
     return text
 
 
+def link_to_url(url: str, text: str) -> str:
+    if not url.startswith("http"):
+        # Assume it is a link relative to ../html_documentation
+        path = "../html_documentation/" + url
+        if Path(path).exists():
+            # Found it!
+            # But it's two folders further up relative to the generated rst file:
+            return f":download:`{text} <../../{path}>`"
+        logger.warning("Could not find document %s", url)
+    # Link to external web page:
+    return f"`{text} <{url}>`_"
+
+
 def link_to_coordinate(coordinate: str) -> str:
     """Generate rst to link to a coordinate.
 
@@ -193,6 +206,18 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     # Documentation string
     result.append(parse_documentation(field.get("documentation")))
     result.append("")
+
+    # URLs to additional content
+    if "url" in field.keys():
+        url = field.get("url")
+        result.append(link_to_url(url, "Click here for further documentation."))
+        result.append("")
+    if "url_protected" in field.keys():
+        url = field.get("url_protected")
+        line = link_to_url(url, "Click here for further documentation")
+        line += " (or contact imas@iter.org if you can't access this page)."
+        result.append(line)
+        result.append("")
 
     # Identifier
     if "doc_identifier" in field.keys():
