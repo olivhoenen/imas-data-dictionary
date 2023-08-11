@@ -26,6 +26,8 @@ class DDAutoDoc(SphinxDirective):
     def run(self) -> None:
         rst = dedent(
             """
+            .. _`ids reference`:
+
             IDS reference
             -------------
 
@@ -45,6 +47,8 @@ class DDAutoDoc(SphinxDirective):
                 :maxdepth: 1
 
                 generated/util/*
+
+            .. _`identifier reference`:
 
             Identifier reference
             --------------------

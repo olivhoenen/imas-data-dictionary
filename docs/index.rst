@@ -18,6 +18,7 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
    units
    errorbars
    nbc
+   identifiers
 
 
 .. toctree::
