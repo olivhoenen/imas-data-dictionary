@@ -477,22 +477,22 @@ class DDUnit(nodes.inline):
 class DDDataType(nodes.inline):
     """Docutils node for representing DD data types."""
 
-    def __init__(self, data_type) -> None:
+    def __init__(self, rawsource, **kwargs) -> None:
         # Convert legacy identifiers
-        data_type = {
+        rawsource = {
             "str_type": "STR_0D",
             "str_1d_type": "STR_1D",
             "int_type": "INT_0D",
             "flt_type": "FLT_0D",
             "flt_1d_type": "FLT_1D",
             "cpx_type": "CPX_0D",
-        }.get(data_type, data_type)
+        }.get(rawsource, rawsource)
 
-        text = nodes.Text(data_type, data_type)
+        text = nodes.Text(rawsource, rawsource)
         xref = pending_xref(
-            "", text, refdomain="dd", reftype="data_type", reftarget=data_type
+            "", text, refdomain="dd", reftype="data_type", reftarget=rawsource
         )
-        super().__init__("", "", xref)
+        super().__init__(rawsource, "", xref, **kwargs)
         self["classes"].append("dd_data_type")
 
 

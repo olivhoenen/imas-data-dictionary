@@ -124,7 +124,7 @@ def util2rst(node: ElementTree.Element) -> str:
     result.append(children2rst(node, 1))
     result.append("")
     # Collapse triple or more newlines
-    return re.sub(r"[\n]{2,}", "\n\n", "\n".join(result))
+    return re.sub(r"[\n]{3,}", "\n\n", "\n".join(result))
 
 
 def ids2rst(ids: ElementTree.Element) -> str:
@@ -141,15 +141,25 @@ def ids2rst(ids: ElementTree.Element) -> str:
     result.append("=" * len(title))
     result.append("")
     result.append(f".. dd:ids:: {name}")
-    # TODO: options for IDS
     result.append("")
+
+    # Documentation string
     result.append(indent(parse_documentation(ids.get("documentation")), INDENT))
     result.append("")
+
+    # Maxoccur
+    if "maxoccur" in ids.keys():
+        maxoccur = ids.get("maxoccur")
+        result.append(f"{INDENT}- Maximum occurrences (MDS+ backend only): {maxoccur}")
+    result.append("")
+
+    # Lifecycle status
     result.append(indent("\n".join(parse_lifecycle_status(ids)), INDENT))
+
     result.append(children2rst(ids, 1))
     result.append("")
     # Collapse triple or more newlines
-    return re.sub(r"[\n]{2,}", "\n\n", "\n".join(result))
+    return re.sub(r"[\n]{3,}", "\n\n", "\n".join(result))
 
 
 def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
@@ -196,7 +206,10 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     # Miscellaneous attributes
     if "appendable_by_appender_actor" in field.keys():
         appendable = field.get("appendable_by_appender_actor")
-        result.append(f":Appendable by appender actor: {appendable}")
+        result.append(f"- Appendable by appender actor: {appendable}")
+    if "maxoccur" in field.keys():
+        maxoccur = field.get("maxoccur")
+        result.append(f"- Maximum occurrences (MDS+ backend only): {maxoccur}")
     result.append("")
 
     # Coordinates
