@@ -3,7 +3,7 @@
 
 from pathlib import Path
 import re
-from textwrap import dedent, indent
+from textwrap import indent
 from typing import Any, Dict, List
 from xml.etree import ElementTree
 
@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 # Utilities that are documented separately to reduce the size of the reference pages
-DOCUMENTED_UTILITIES = ["ids_properties", "code"]
+DOCUMENTED_UTILITIES = ["ids_properties"]
 # Indentation character
 INDENT = " "
 
@@ -311,3 +311,8 @@ def identifier2rst(element: ElementTree.Element, fname: Path) -> str:
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.setup_extension("sphinx_dd_extension.dd_domain")
     app.connect("builder-inited", generate_dd_docs)
+    return {
+        "version": "0.1",
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }
