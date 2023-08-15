@@ -118,12 +118,17 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
         domain = cast(DDDomain, self.env.get_domain("dd"))
         domain.note_object(name[0], self.objtype, node_id, location=signode)
 
-        if "noindexentry" not in self.options:
-            indextext = name[0]
-            if indextext:
-                self.indexnode["entries"].append(
-                    ("single", indextext, node_id, "", None)
-                )
+        # According to sphinx docs we are responsible for creating indexnodes. However,
+        # doing so creates double index entries. Perhaps some magic from
+        # sphinx_immaterial? Either way, disabling this code...
+        # -----------------------------------------------------------------------------
+        # if "noindexentry" not in self.options:
+        #    indextext = name[0]
+        #    if indextext:
+        #        self.indexnode["entries"].append(
+        #            ("single", indextext, node_id, "", None)
+        #        )
+        # -----------------------------------------------------------------------------
 
 
 class _TopLevel(SphinxDirective):
