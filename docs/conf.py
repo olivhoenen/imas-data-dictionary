@@ -125,3 +125,4 @@ html_static_path = ["_static"]
 
 def setup(app):
     app.add_css_file("dd.css")
+    app.add_js_file("dd.js")
