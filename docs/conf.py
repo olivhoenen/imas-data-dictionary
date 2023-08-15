@@ -123,6 +123,12 @@ html_theme_options = {
 html_static_path = ["_static"]
 
 
+object_description_options = [
+    ("dd:node", dict(include_in_toc=False)),
+    ("dd:util-ref", dict(include_in_toc=False)),
+]
+
+
 def setup(app):
     app.add_css_file("dd.css")
     app.add_js_file("dd.js")
