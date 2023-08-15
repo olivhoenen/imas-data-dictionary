@@ -125,26 +125,6 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
                     ("single", indextext, node_id, "", None)
                 )
 
-    def _object_hierarchy_parts(self, sig_node: desc_signature) -> Tuple[str, ...]:
-        if "fullname" not in sig_node:
-            return ()
-        fullname = sig_node["fullname"]
-        return tuple(fullname.split("/"))
-
-    def _toc_entry_name(self, sig_node: desc_signature) -> str:
-        if not sig_node.get("_toc_parts"):
-            return ""
-
-        config = self.env.app.config
-        *parents, name = sig_node["_toc_parts"]
-        if config.toc_object_entries_show_parents == "domain":
-            return name
-        if config.toc_object_entries_show_parents == "hide":
-            return name
-        if config.toc_object_entries_show_parents == "all":
-            return "/".join(parents + [name])
-        return ""
-
 
 class _TopLevel(SphinxDirective):
     """Directive to mark the description of a Data Dictionary IDS/utility."""
