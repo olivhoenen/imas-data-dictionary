@@ -183,12 +183,13 @@ It consists of :guilabel:`identifier` node, :guilabel:`space` AOS,
 :guilabel:`identifier` node
 """""""""""""""""""""""""""
 
-The :guilabel:`identifier` node holds information on the grid:
+The :guilabel:`identifier` node holds information on the grid, see
+:dd:identifier:`ggd_identifier` for the possible values.
 
-- :guilabel:`name` leaf (STR_0D), holding the name of the grid,
-- :guilabel:`index` leaf (INT_0D), holding the grid index correlating with the
+- :guilabel:`name` leaf (:dd:data_type:`STR_0D`), holding the name of the grid,
+- :guilabel:`index` leaf (:dd:data_type:`INT_0D`), holding the grid index correlating with the
   time slices (starting with index 1), and
-- :guilabel:`description` leaf (STR_0D), holding the custom description of the
+- :guilabel:`description` leaf (:dd:data_type:`STR_0D`), holding the custom description of the
   grid.
 
 .. figure:: images/grid_ggd-identifier_node.png
@@ -207,7 +208,7 @@ The :guilabel:`space` AOS holds information on the various spaces of the grid:
 
 - :guilabel:`identifier` node, holding basic information for given space,
 - :guilabel:`geometry_type` node, defining type of space geometry,
-- :guilabel:`coordinates_types` leaf (INT_0D), holding coordinates IDs that are
+- :guilabel:`coordinates_types` leaf (:dd:data_type:`INT_0D`), holding coordinates IDs that are
   being used to define given space. The coordinate IDs can be found in
   :dd:identifier:`coordinate_identifier` or
   **$IMAS_PREFIX/include/cpp/coordinate_identifier.h**. For example, ID 1
@@ -236,12 +237,13 @@ The :guilabel:`space` AOS holds information on the various spaces of the grid:
 :guilabel:`identifier` node
 '''''''''''''''''''''''''''
 
-The :guilabel:`identifier` node holds information on the space:
+The :guilabel:`identifier` node holds information on the space, see
+:dd:identifier:`ggd_space_identifier` for the possible values.
 
-- :guilabel:`name` leaf (STR_0D), holding the name of the space,
-- :guilabel:`index` leaf (INT_0D), holding the space integer/index identifier
+- :guilabel:`name` leaf (:dd:data_type:`STR_0D`), holding the name of the space,
+- :guilabel:`index` leaf (:dd:data_type:`INT_0D`), holding the space integer/index identifier
   (starting with index 1), and
-- :guilabel:`description` leaf (STR_0D), holding the custom description of the
+- :guilabel:`description` leaf (:dd:data_type:`STR_0D`), holding the custom description of the
   space.
 
 .. figure:: images/space_identifier_node.png
@@ -259,10 +261,10 @@ The :guilabel:`identifier` node holds information on the space:
 The :guilabel:`identifier` node holds information on the geometry type used in
 given space description:
 
-- :guilabel:`name` leaf (STR_0D), holding the name of the geometry type,
-- :guilabel:`index` leaf (INT_0D), holding the geometry type integer/index
+- :guilabel:`name` leaf (:dd:data_type:`STR_0D`), holding the name of the geometry type,
+- :guilabel:`index` leaf (:dd:data_type:`INT_0D`), holding the geometry type integer/index
   identifier, ``0`` for standard geometry, ``1`` for Fourier geometry, and
-- :guilabel:`description` leaf (STR_0D), holding the custom description of the
+- :guilabel:`description` leaf (:dd:data_type:`STR_0D`), holding the custom description of the
   geometry type.
 
 .. figure:: images/space_geometry_type_node.png
@@ -295,7 +297,7 @@ holds:
   defining the boundary of given `n`-dimensional object. For example, for
   **2D object - surface**, the boundary would be defined by
   **1D objects - edges/lines**.
-- :guilabel:`geometry` leaf (FLT_1D), describing geometry of the object through
+- :guilabel:`geometry` leaf (:dd:data_type:`FLT_1D`), describing geometry of the object through
   coordinates. This usually refers only to **0D objects**, higher dimensional
   objects have this leaf empty. This is an array, and its size depends on the
   **space** :guilabel:`coordinates_type` leaf. For example, in a case of one
@@ -304,14 +306,14 @@ holds:
   ``objects_per_dimension(1).object(1).geometry`` would hold an 1D array
   containing two float numbers defining the "value" of the **X** and **Y**
   coordinates.
-- :guilabel:`nodes` leaf (INT_0D), describing which **0D objects** form this
+- :guilabel:`nodes` leaf (:dd:data_type:`INT_0D`), describing which **0D objects** form this
   element. For example, in a case of a **2D object - surface** that is
   constructed by nodes 1, 2, 3, and 4, the :guilabel:`nodes` leaf would hold
   integers (object IDs) 1, 2, 3, and 4, referring to
   ``objects_per_dimension(1).object(1)``, ``object(2)``, ``object(3)`` and
   ``object(4)``, where object IDs are indices to navigate to ``object(i)``
   node.
-- :guilabel:`measure` leaf (FLT_0D), describing the measure of the given
+- :guilabel:`measure` leaf (:dd:data_type:`FLT_0D`), describing the measure of the given
   object. For example, for **1D object - line/edge** -> **length**
   value, for **2D object - surface** -> **surface area** and
   **3D object - volume** -> **volume**.
@@ -335,9 +337,9 @@ be **two points/nodes**, while the boundary of a **2D quadrilateral cell**
 object would be **four edges**.
 The :guilabel:`boundary` AOS children are:
 
-- :guilabel:`index` leaf (INT_0D), defining index of given ``n-1`` dimensional
+- :guilabel:`index` leaf (:dd:data_type:`INT_0D`), defining index of given ``n-1`` dimensional
   object,
-- :guilabel:`neighbours` leaf (INT_1D), defining neighbours of given ``n-1``
+- :guilabel:`neighbours` leaf (:dd:data_type:`INT_1D`), defining neighbours of given ``n-1``
   dimensional boundary object.
 
 .. figure:: images/boundary_AOS.png
@@ -367,7 +369,7 @@ found in :dd:identifier:`ggd_subset_identifier` or
 The :guilabel:`grid_subset` AOS children are:
 
 - :guilabel:`identifier` node, holding basic information on the grid subset,
-- :guilabel:`dimension` leaf (INT_0D), defining dimension of the grid subset
+- :guilabel:`dimension` leaf (:dd:data_type:`INT_0D`), defining dimension of the grid subset
   elements,
 - :guilabel:`element` AOS, defining a set of elements defined by combination
   of objects from potentially all spaces,
@@ -388,12 +390,13 @@ The :guilabel:`grid_subset` AOS children are:
 :guilabel:`identifier` node
 '''''''''''''''''''''''''''
 
-The :guilabel:`identifier` node holds information on the grid subset:
+The :guilabel:`identifier` node holds information on the grid subset,  see
+:dd:identifier:`ggd_subset_identifier` for the possible values.
 
-- :guilabel:`name` leaf (STR_0D), holding the **name/label** of the grid subset,
-- :guilabel:`index` leaf (INT_0D), holding the **integer/index identifier**
+- :guilabel:`name` leaf (:dd:data_type:`STR_0D`), holding the **name/label** of the grid subset,
+- :guilabel:`index` leaf (:dd:data_type:`INT_0D`), holding the **integer/index identifier**
   (starting with index 1), and
-- :guilabel:`description` leaf (STR_0D), holding the custom description of the
+- :guilabel:`description` leaf (:dd:data_type:`STR_0D`), holding the custom description of the
   grid subset.
 
 .. figure:: images/grid_subset_identifier_node.png
@@ -432,11 +435,11 @@ named :guilabel:`object AOS`. The relation between
 
 The children of the :guilabel:`object` AOS are:
 
-- :guilabel:`space` leaf (INT_0D), representing index of the space from which
+- :guilabel:`space` leaf (:dd:data_type:`INT_0D`), representing index of the space from which
   that object is taken,
-- :guilabel:`dimension` leaf (INT_0D), referring to the dimension of the
+- :guilabel:`dimension` leaf (:dd:data_type:`INT_0D`), referring to the dimension of the
   object, and
-- :guilabel:`index` leaf (INT_0D), defining the object index.
+- :guilabel:`index` leaf (:dd:data_type:`INT_0D`), defining the object index.
 
 The :guilabel:`space`, :guilabel:`dimension` and :guilabel:`index` integers
 represent a **navigation indicies** to navigate through
@@ -466,9 +469,9 @@ Cartsian coordinates.
 
 Both have children with the same labels and characteristics:
 
-- :guilabel:`jacobian` node (FLT_1D)
-- :guilabel:`tensor_covariant` node (FLT_3D)
-- :guilabel:`tensor_contravariant` node (FLT_3D)
+- :guilabel:`jacobian` node (:dd:data_type:`FLT_1D`)
+- :guilabel:`tensor_covariant` node (:dd:data_type:`FLT_3D`)
+- :guilabel:`tensor_contravariant` node (:dd:data_type:`FLT_3D`)
 
 .. figure:: images/grid_subset_base_metric.png
    :align: center
@@ -528,14 +531,14 @@ the **electron temperature** - :guilabel:`temperature` AOS will be looked into.
 The :guilabel:`temperature` node holds plasma quantities related to (electron)
 temperature. Its children are:
 
-- :guilabel:`grid_index` leaf (INT_0D), holding index of the grid used to
+- :guilabel:`grid_index` leaf (:dd:data_type:`INT_0D`), holding index of the grid used to
   represent this quantity,
-- :guilabel:`grid_subset_index` leaf (INT_0D), holding index of the grid
+- :guilabel:`grid_subset_index` leaf (:dd:data_type:`INT_0D`), holding index of the grid
   subset the data is provided on (Each structure of :guilabel:`temperature`
   AOS corresponds to one of the grid subsets),
-- :guilabel:`values` leaf (FLT_1D) holding values corresponding to the
+- :guilabel:`values` leaf (:dd:data_type:`FLT_1D`) holding values corresponding to the
   grid subset (**one value** per **element** in the grid subset), and
-- :guilabel:`coefficients` leaf (FLT_2D) holding interpolation coefficients, to
+- :guilabel:`coefficients` leaf (:dd:data_type:`FLT_2D`) holding interpolation coefficients, to
   be used for a high precision evaluation of the physical quantity with finite
   elements, provided per element in the grid subset (first dimension).
 
