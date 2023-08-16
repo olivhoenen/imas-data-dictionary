@@ -531,8 +531,8 @@ temperature. Its children are:
 - :guilabel:`grid_index` leaf (INT_0D), holding index of the grid used to
   represent this quantity,
 - :guilabel:`grid_subset_index` leaf (INT_0D), holding index of the grid
-  subset the data is provided on (**Each structure of :guilabel:`temperature`
-  AOS corresponds to one of the grid subsets**),
+  subset the data is provided on (Each structure of :guilabel:`temperature`
+  AOS corresponds to one of the grid subsets),
 - :guilabel:`values` leaf (FLT_1D) holding values corresponding to the
   grid subset (**one value** per **element** in the grid subset), and
 - :guilabel:`coefficients` leaf (FLT_2D) holding interpolation coefficients, to
