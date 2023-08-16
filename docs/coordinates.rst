@@ -70,5 +70,5 @@ Constant
 
 Static
     Static quantities are also not varying, but likely to be constant over a wider
-    context, such as teh nominal coil positions during operation.
+    context, such as the nominal coil positions during operation.
 
