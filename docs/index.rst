@@ -35,9 +35,10 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
    reference
 
 
-Indices and tables
-==================
+..
+   Indices and tables
+   ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   * :ref:`genindex`
+   * :ref:`modindex`
+   * :ref:`search`
