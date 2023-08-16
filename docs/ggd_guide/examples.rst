@@ -1,7 +1,7 @@
 ..
     GGD doc copied from https://git.iter.org/projects/IMEX/repos/ggd/browse/doc/guide/source
     
-.. _examples:
+.. _ggd-examples:
 
 ========
 Examples
@@ -18,7 +18,7 @@ In this example we will describe a simple **unstructured grid** (single
 time slice) consisting of **one 2D object - surface** to present the basic
 concepts behind GGD.
 
-.. _example1_grid:
+.. _ggd-example1_grid:
 
 .. figure:: images/grid_structure_1.png
    :align: center
@@ -67,7 +67,7 @@ Defining the grid
    :width: 550px
 
 **6.)** In ``grid_ggd(1).space(1).coordinates_type`` leaf we define **two** coordinates
-following the :ref:`coordinate_identifiers` this way defining 2D space. We
+following the :dd:identifier:`coordinate_identifier` this way defining 2D space. We
 define ``1`` and ``2`` meaning **X** and **Y** coordinates:
 
 - ``grid_ggd(1).space(1).coordinate_types = [1, 2]``
@@ -95,7 +95,7 @@ coordinates are simplified according to the example):
 consists of **4 lines**.
 
 **9.2)** We define **4 lines** by defining **nodes** that compose **each line**
-(see figure :ref:`example1_grid`):
+(see figure :ref:`ggd-example1_grid`):
 
 - ``...objects_per_dimension(2).object(1).nodes = [1, 2]``
 - ``...objects_per_dimension(2).object(2).nodes = [2, 3]``
@@ -106,7 +106,7 @@ consists of **4 lines**.
 consists of **1 quadrilateral cell**.
 
 **10.2)** We define **1 quadrilateral cell** by defining **4 nodes** that compose
-**the quadrilateral** (see figure :ref:`example1_grid`):
+**the quadrilateral** (see figure :ref:`ggd-example1_grid`):
 
 - ``...objects_per_dimension(3).object(1).nodes = [1, 2, 3, 4]``
 
@@ -126,7 +126,7 @@ domain. This is due to **Data Dictionary** description, as physical quantities
 correlate directly to grid subsets and not to the grid itself.
 
 The agreed grid subset labels can be found here:
-:ref:`grid_subset_identifiers`.
+:dd:identifier:`ggd_subset_identifier`.
 
 **11.1)** Allocate **3** ``grid_ggd(1).grid_subset`` AOSs (nodes, faces, 2D cells):
 
@@ -265,7 +265,7 @@ In this case it would navigate to our **cells** grid subset.
 
    Defining physical quantities and their correlation to grid subsets.
 
-.. _example2:
+.. _ggd-example2:
 
 -----------------------------------------------
 Example 2: Minimalistic structured grid example
@@ -275,7 +275,7 @@ In this example we will describe a simple **structured grid** (two
 time slices) consisting of **5** points in X direction, and **3** points in
 Y direction to present the basic concepts behind GGD.
 
-.. _example2_grid:
+.. _ggd-example2_grid:
 
 .. figure:: images/example_2_1.png
    :align: center
@@ -321,7 +321,7 @@ Space 1 - X direction
 **standard geometry** -> **index 0**.
 
 **6.)** In ``grid_ggd(1).space(1).coordinates_type`` leaf we define **one**
-coordinate following the :ref:`coordinate_identifiers` this way defining 1D space. We define ``1`` meaning **X** coordinate:
+coordinate following the :dd:identifier:`coordinate_identifier` this way defining 1D space. We define ``1`` meaning **X** coordinate:
 
 .. figure:: images/example_2_3.png
    :align: center
@@ -360,7 +360,7 @@ Space 2 - Y direction
 **standard geometry** -> **index 0**
 
 **11.)** In ``grid_ggd(1).space(2).coordinates_type`` leaf we define **one**
-coordinate following the :ref:`coordinate_identifiers` this way defining 1D space. We define ``2`` meaning **Y** coordinate:
+coordinate following the :dd:identifier:`coordinate_identifier` this way defining 1D space. We define ``2`` meaning **Y** coordinate:
 
 .. figure:: images/example_2_5.png
    :align: center
@@ -391,7 +391,7 @@ domain. This is due to **Data Dictionary** description, as physical quantities
 correlate directly to grid subsets and to the grid itself.
 
 The agreed grid subset labels can be found here:
-:ref:`grid_subset_identifiers`.
+:dd:identifier:`ggd_subset_identifier`.
 
 **14.2)** Allocate **3** grid_subsets (nodes, faces, 2D cells):
 
@@ -496,7 +496,7 @@ In this case it would navigate to our **nodes** grid subset.
 Example 3: Structured grid subset example
 -----------------------------------------
 
-Following the :ref:`example2`, lets assume that the **two right-most 2D cells**
+Following the :ref:`ggd-example2`, lets assume that the **two right-most 2D cells**
 represent our **outer divertor** grid subset, just for purposes to explain the
 grid subset concepts when dealing with structured grids.
 
@@ -517,7 +517,7 @@ case, the **elemets** are **2D cells**, and those 2D cells are composed by
 **2 elements**, each composed by **2x4 points** which are defined on **1D spaces**.
 
 **1.)** Describe **outer divertor** grid subset. By grid subset identifiers definition
-(see :ref:`grid_subset_identifiers`) **outer divertor** is defined by index 24.
+(see :dd:identifier:`ggd_subset_identifier`) **outer divertor** is defined by index 24.
 
 - ``grid_ggd(1).grid_subset(4).dimension = 3``
 - ``grid_ggd(1).grid_subset(4).identifier.name = "outer_divertor"``
@@ -632,7 +632,7 @@ in **[R, Z] space** consisting of
 - **12 surfaces/2D cells** (2D objects).
 
 This grid will contains **6 grid subsets**, 3 base ones and four additional
-ones, according to :ref:`grid_subset_identifiers`:
+ones, according to :dd:identifier:`ggd_subset_identifier`:
 
 - **nodes (all nodes in the domain)**,
 - **faces (all lines/edges in the domain)**,
@@ -682,9 +682,9 @@ assume that grid does not change with time).
 - ``grid_ggd(1).space(1).geometry_type.index = 0``
 
 **6.)** In ``grid_ggd(1).space(1).coordinates_type`` leaf we define **two**
-coordinates following the :ref:`coordinate_identifiers` this way defining 2D
+coordinates following the :dd:identifier:`coordinate_identifier` this way defining 2D
 space. We define ``4`` and ``3`` meaning **R** and **Z** coordinates
-according to :ref:`coordinate_identifiers`:
+according to :dd:identifier:`coordinate_identifier`:
 
 - ``grid_ggd(1).space(1).coordinate_types = [4, 3]``
 
@@ -813,7 +813,7 @@ Second, we will define 3 more grid subsets: **x_aligned_faces**,
 total of **6** grid subsets.
 
 The agreed grid subset labels can be found here:
-:ref:`grid_subset_identifiers`.
+:dd:identifier:`ggd_subset_identifier`.
 
 11) Allocate **6** ``grid_ggd(1).grid_subset`` AOSs:
 

@@ -1,7 +1,7 @@
 ..
     GGD doc copied from https://git.iter.org/projects/IMEX/repos/ggd/browse/doc/guide/source
 
-.. _doc:
+.. _ggd-doc:
 
 =============================
 Introduction to GGD structure
@@ -209,7 +209,7 @@ The :guilabel:`space` AOS holds information on the various spaces of the grid:
 - :guilabel:`geometry_type` node, defining type of space geometry,
 - :guilabel:`coordinates_types` leaf (INT_0D), holding coordinates IDs that are
   being used to define given space. The coordinate IDs can be found in
-  :ref:`coordinate_identifiers` or
+  :dd:identifier:`coordinate_identifier` or
   **$IMAS_PREFIX/include/cpp/coordinate_identifier.h**. For example, ID 1
   describes first Cartesian
   coordinate in the horizontal plane - x[m] , ID 2 describes second cartesian
@@ -361,7 +361,7 @@ Each grid subset is defined by objects of only one type, that being either
 points or nodes, edges, surfaces, etc.
 
 List of confirmed grid subset **labels** and their belonging **IDs** can be
-found in :ref:`grid_subset_identifiers` or
+found in :dd:identifier:`ggd_subset_identifier` or
 **$IMAS_PREFIX/include/cpp/ggd_subset_identifier.h**.
 
 The :guilabel:`grid_subset` AOS children are:
@@ -450,7 +450,7 @@ this 2D surface would represent our **element**. 2D surface is then composed
 by either **4 points** or **4 edges** - **objects**.
 
 For direct examples and better insight on the relation between
-**grid subsets**, **elements**, and **objects** check the :ref:`examples`.
+**grid subsets**, **elements**, and **objects** check the :ref:`ggd-examples`.
 
 
 ''''''''''''''''''''''''''''''''''''''''''''''''

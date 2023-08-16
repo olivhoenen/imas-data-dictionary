@@ -335,6 +335,11 @@ class DDDomain(Domain):
                 docname,
             )
         self.objects[fullname] = (self.env.docname, node_id, objtype)
+        if objtype == "identifier":
+            # Allow to refer to the short name as well for identifiers
+            shortname = Path(fullname).stem
+            if shortname not in self.objects:
+                self.objects[shortname] = (self.env.docname, node_id, objtype)
 
     # Implement methods that should be overwritten
 
