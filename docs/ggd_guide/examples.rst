@@ -1106,11 +1106,11 @@ the :math:`l`-th Fourier mode at the toroidal position :math:`\varphi`.
 The table below lists which Fourier modes correspond to the different 
 mode indices :math:`l` with :math:`n_p` as peridicity of tyhe simulation
 
-  +----------------------+---+----------------------------+----------------------------+---------------------------+---------------------------+-----+
-  | :math:`l`            | 1 | 2                          | 3                          | 4                         | 5                         | ... |
-  +======================+===+============================+============================+===========================+===========================+=====+
-  | :math:`Z_l(\varphi)` | 1 | :math:`\cos(n_p\varphi_p)` | :math:`\sin(n_p\varphi_p)` | :math:`\cos(2n_p\varphi)` | :math:`\sin(2n_p\varphi)` | ... |
-  +----------------------+---+----------------------------+----------------------------+---------------------------+---------------------------+-----+
++----------------------+---+----------------------------+----------------------------+---------------------------+---------------------------+-----+
+| :math:`l`            | 1 | 2                          | 3                          | 4                         | 5                         | ... |
++======================+===+============================+============================+===========================+===========================+=====+
+| :math:`Z_l(\varphi)` | 1 | :math:`\cos(n_p\varphi_p)` | :math:`\sin(n_p\varphi_p)` | :math:`\cos(2n_p\varphi)` | :math:`\sin(2n_p\varphi)` | ... |
++----------------------+---+----------------------------+----------------------------+---------------------------+---------------------------+-----+
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Fourier Periodicity - :math:`n_p`
@@ -1134,28 +1134,28 @@ Defining the grid
 
 Following above rule and JOREK discretisation there are two grid_ggd spaces:
 
-     - Space 1 is two-dimensional (R,Z) space of unstructured grid
-       with geometry_2d associated to nodes and cells. Note that the R,
-       Z coordinates are expressed as every other quantity :math:`X(s,t,\varphi)`.
-       For tokamak applications, the (R,Z) grid does not vary toroidally and 
-       only the `n=0` harmonic is employed. In this case and using JOREK 
-       notation, R and Z are expressed as
+- Space 1 is two-dimensional (R,Z) space of unstructured grid
+  with geometry_2d associated to nodes and cells. Note that the R,
+  Z coordinates are expressed as every other quantity :math:`X(s,t,\varphi)`.
+  For tokamak applications, the (R,Z) grid does not vary toroidally and 
+  only the `n=0` harmonic is employed. In this case and using JOREK 
+  notation, R and Z are expressed as
 
-        :math:`R(s,t) =\sum_{k=1}^{N_{vert}}\sum_{j=1}^{N_{ord}}\texttt{nodes(i).x(j,1)} \cdot\texttt{H}(k,j;s,t) \cdot\texttt{element.size(k,j)}`
-        :math:`Z(s,t) =\sum_{k=1}^{N_{vert}}\sum_{j=1}^{N_{ord}}\texttt{nodes(i).x(j,2)} \cdot\texttt{H}(k,j;s,t) \cdot\texttt{element.size(k,j)}`
+  :math:`R(s,t) =\sum_{k=1}^{N_{vert}}\sum_{j=1}^{N_{ord}}\texttt{nodes(i).x(j,1)} \cdot\texttt{H}(k,j;s,t) \cdot\texttt{element.size(k,j)}`
+  :math:`Z(s,t) =\sum_{k=1}^{N_{vert}}\sum_{j=1}^{N_{ord}}\texttt{nodes(i).x(j,2)} \cdot\texttt{H}(k,j;s,t) \cdot\texttt{element.size(k,j)}`
 
 
-         a) The geometrical coefficients representing the grid (``x``) are stored as
-            ``objects_per_dimension[0].object[i].geometry_2d(j,:)=nodes(i).x(j,:)``
-         b) And the elements sizes :math:`1, d_{uk}, d_{vk}, d_{uv}d_{vk}` under 
-	    ``objects_per_dimension[2].object[i_elm].geometry_2d(:,:)=element.size(:,:)``
+  a) The geometrical coefficients representing the grid (``x``) are stored as
+     ``objects_per_dimension[0].object[i].geometry_2d(j,:)=nodes(i).x(j,:)``
+  b) And the elements sizes :math:`1, d_{uk}, d_{vk}, d_{uv}d_{vk}` under 
+     ``objects_per_dimension[2].object[i_elm].geometry_2d(:,:)=element.size(:,:)``
 
-     - Space 2 is one-dimensional Fourier space with :math:`\varphi` and
-       ``geometry_type.index >= 1`` (Fourier) with geometry objects (1, 2,
-       3, ..., number of harmonics)
+- Space 2 is one-dimensional Fourier space with :math:`\varphi` and
+  ``geometry_type.index >= 1`` (Fourier) with geometry objects (1, 2,
+  3, ..., number of harmonics)
 
-    .. image:: images/jorek_1.png
-       :scale: 50%
+.. image:: images/jorek_1.png
+   :scale: 50%
 
 
 
@@ -1231,9 +1231,9 @@ there. Anisotropic structure of cell's shape is specified by
 
 Therefore, we  have anisotropic Bezier element with:
 
- - In poloidal plane exact Bezier cubic non-rational quads
- - In toroidal direction an approximation between toroidal planes with
-   rational quadratic Bezier curves.
+- In poloidal plane exact Bezier cubic non-rational quads
+- In toroidal direction an approximation between toroidal planes with
+  rational quadratic Bezier curves.
 
 
 
