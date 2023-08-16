@@ -23,6 +23,14 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
 
 .. toctree::
    :maxdepth: 2
+   :caption: GGD guide
+
+   ggd_guide/doc
+   ggd_guide/examples
+
+
+.. toctree::
+   :maxdepth: 2
    :caption: Developer documentation
 
    developer_docs
