@@ -937,9 +937,6 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Wb</units>
-						<cocos_label_transformation>psi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_psi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.global_quantities.psi_axis</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -952,9 +949,6 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Wb</units>
-						<cocos_label_transformation>psi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_psi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.global_quantities.psi_boundary</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1024,9 +1018,6 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Wb</units>
-						<cocos_label_transformation>psi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_psi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.global_quantities.psi_external_average</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1448,101 +1439,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="equilibrium_constraints_0D_psi_like">
-		<xs:annotation>
-			<xs:documentation>Scalar constraint, psi_like cocos transform</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="measured">
-				<xs:annotation>
-					<xs:documentation>Measured value</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<cocos_label_transformation>psi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_psi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>IDSPATH.measured</cocos_leaf_name_aos_indices>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="source">
-				<xs:annotation>
-					<xs:documentation>Path to the source data for this measurement in the IMAS data dictionary</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="time_measurement">
-				<xs:annotation>
-					<xs:documentation>Exact time slice used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>s</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="exact">
-				<xs:annotation>
-					<xs:documentation>Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="weight">
-				<xs:annotation>
-					<xs:documentation>Weight given to the measurement</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="reconstructed">
-				<xs:annotation>
-					<xs:documentation>Value calculated from the reconstructed equilibrium</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<cocos_label_transformation>psi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_psi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>IDSPATH.reconstructed</cocos_leaf_name_aos_indices>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="chi_squared">
-				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="equilibrium_constraints_0D_one_like">
 		<xs:annotation>
 			<xs:documentation>Scalar constraint, one_like cocos transform</xs:documentation>
@@ -1805,7 +1701,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="flux_loop" type="equilibrium_constraints_0D_psi_like" maxOccurs="unbounded">
+			<xs:element name="flux_loop" type="equilibrium_constraints_0D" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of flux loops</xs:documentation>
 					<xs:appinfo>
@@ -1942,9 +1838,6 @@
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
 						<units>Wb</units>
-						<cocos_label_transformation>psi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_psi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_1d.psi</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2003,9 +1896,6 @@
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<units>Pa.Wb^-1</units>
-						<cocos_label_transformation>dodpsi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dodpsi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_1d.dpressure_dpsi</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2019,9 +1909,6 @@
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<units>T^2.m^2/Wb</units>
-						<cocos_label_transformation>dodpsi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dodpsi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_1d.f_df_dpsi</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2148,9 +2035,6 @@
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<units>Wb/m</units>
-						<cocos_label_transformation>psi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_psi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_1d.dpsi_drho_tor</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2297,9 +2181,6 @@
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<units>m^3.Wb^-1</units>
-						<cocos_label_transformation>dodpsi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dodpsi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_1d.dvolume_dpsi</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2339,9 +2220,6 @@
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<units>m^2.Wb^-1</units>
-						<cocos_label_transformation>dodpsi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_dodpsi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_1d.darea_dpsi</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2638,9 +2516,6 @@
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<units>Wb</units>
-						<cocos_label_transformation>psi_like</cocos_label_transformation>
-						<cocos_transformation_expression>.fact_psi</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_2d{j}.psi</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
