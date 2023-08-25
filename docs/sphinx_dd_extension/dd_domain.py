@@ -48,14 +48,14 @@ def remove_brackets(value: str) -> str:
             return value
 
 
-def create_ref_xref(node, target, **attributes):
+def create_ref_xref(node, reftarget, **attributes):
     """Helper to create pending_xref node representing :ref:`{text} <target>`."""
     return pending_xref(
         "",
         node,
         refdomain="std",
         reftype="ref",
-        reftarget=target,
+        reftarget=reftarget,
         refexplicit=True,
         **attributes,
     )
@@ -99,6 +99,8 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
 
         if "data_type" in self.options:
             data_type = self.options["data_type"]
+            if data_type in ("structure", "struct_array"):
+                signode.parent["classes"].append("dd-struct")
             signode += DDDataType(data_type)
 
         # TODO: type
