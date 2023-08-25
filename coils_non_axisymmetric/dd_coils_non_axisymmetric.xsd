@@ -56,18 +56,6 @@
 			<xs:documentation>Elements descibring the conductor contour</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="names">
-				<xs:annotation>
-					<xs:documentation>Name or description of every element</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>../types</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_1D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="types">
 				<xs:annotation>
 					<xs:documentation>Type of every element: 1: line segment, its ends are given by the start and end points; index = 2: arc of a circle; index = 3: full circle</xs:documentation>
@@ -87,7 +75,7 @@
 			</xs:element>
 			<xs:element name="intermediate_points" type="coil_na_rzphi1d_static">
 				<xs:annotation>
-					<xs:documentation>Position of an intermediate point along the arc of circle, for every element, providing the orientation of the element (must define with the corresponding start point an aperture angle strictly inferior to PI). Meaningful only if type/index = 2, fill with default/empty value otherwise</xs:documentation>
+					<xs:documentation>Position of an intermediate point along the circle or arc of circle, for every element, providing the orientation of the element (must define with the corresponding start point an aperture angle strictly inferior to PI). Meaningful only if type/index = 2 or 3, fill with default/empty value otherwise</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="end_points" type="coil_na_rzphi1d_static">
@@ -128,14 +116,6 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="current" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Current in the conductor (positive when it flows from the first to the last element)</xs:documentation>
-					<xs:appinfo>
-						<units>A</units>
-					</xs:appinfo>
-				</xs:annotation>
 			</xs:element>
 			<xs:element name="voltage" type="signal_flt_1d">
 				<xs:annotation>
