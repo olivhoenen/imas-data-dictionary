@@ -1246,10 +1246,10 @@
 			</xs:element>
 			<xs:element name="chi_squared_r">
 				<xs:annotation>
-					<xs:documentation>Squared error on the major radius normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error on the major radius normalized by the variance considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the variance of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>-</units>
+						<units>m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1258,10 +1258,10 @@
 			</xs:element>
 			<xs:element name="chi_squared_z">
 				<xs:annotation>
-					<xs:documentation>Squared error on the altitude normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error on the altitude normalized by the variance considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the variance of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>-</units>
+						<units>m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1352,7 +1352,7 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the variance of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
@@ -1447,7 +1447,7 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the variance of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -1542,7 +1542,7 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the variance of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -1637,7 +1637,7 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the variance of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -1732,7 +1732,7 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the variance of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -1821,7 +1821,7 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the variance of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -2031,9 +2031,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="chi_squared_average">
+			<xs:element name="chi_squared_norm">
 				<xs:annotation>
-					<xs:documentation>Sum of the chi_squared of all constraints used for the equilibrium reconstruction, divided by the number of used constraints (i.e. having a non-zero weight)</xs:documentation>
+					<xs:documentation>Sum of the chi_squared of all constraints used for the equilibrium reconstruction, divided by the number of degrees of freedom of the identification model</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -2042,6 +2042,18 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="freedom_degrees_n">
+				<xs:annotation>
+					<xs:documentation>Number of degrees of freedom of the identification model</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="constraints_n">
@@ -3139,7 +3151,7 @@
 						<lifecycle_status>alpha</lifecycle_status>
 						<lifecycle_version>3.17.0</lifecycle_version>
 					</xs:appinfo>
-					<xs:documentation>In case of equilibrium reconstruction under constraints, measurements used to constrain the equilibrium, reconstructed values and accuracy of the fit. The names of the child nodes correspond to the following definition: the solver aims at minimizing a cost function defined as : J=1/2*sum_i [ weight_i^2 (reconstructed_i - measured_i)^2 / sigma_i^2 ]. in which sigma_i is the standard deviation of the measurement error (to be found in the IDS of the measurement)</xs:documentation>
+					<xs:documentation>In case of equilibrium reconstruction under constraints, measurements used to constrain the equilibrium, reconstructed values and accuracy of the fit. The names of the child nodes correspond to the following definition: the solver aims at minimizing a cost function defined as : J=1/2*sum_i [ weight_i^2 (reconstructed_i - measured_i)^2 / sigma_i^2 ]. in which sigma_i is the variance of the measurement error (to be found in the IDS of the measurement)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="global_quantities" type="equlibrium_global_quantities">
