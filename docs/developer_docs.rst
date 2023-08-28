@@ -1,5 +1,5 @@
-DD Developer documentation
-==========================
+Developer documentation
+=======================
 
 Developer documentation for the Data Dictionary can be found on the ITER git and
 IDM:

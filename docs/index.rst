@@ -13,12 +13,17 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
    :caption: Contents
 
    intro
-   data_types
-   coordinates
-   units
-   errorbars
-   nbc
-   identifiers
+   data_dictionary_glossary
+
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Data dictionary reference
+   :name: dd-index-reference-toc
+
+   reference_ids
+   reference_util
+   reference_identifier
 
 
 .. toctree::
@@ -34,15 +39,6 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
    :caption: Developer documentation
 
    developer_docs
-
-.. toctree::
-   :maxdepth: 3
-   :caption: Data dictionary reference
-   :name: dd-index-reference-toc
-
-   reference_ids
-   reference_util
-   reference_identifier
 
 
 ..
