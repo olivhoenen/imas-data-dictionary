@@ -24,7 +24,7 @@ window.addEventListener("load", (event)=>{
         element.target = "_blank";
     }
     // Open leaf nodes by default
-    for (var element of document.querySelectorAll("details:not(.dd-struct)")) {
-        element.open = true;
-    }
+    // for (var element of document.querySelectorAll("details:not(.dd-struct)")) {
+    //     element.open = true;
+    // }
 })

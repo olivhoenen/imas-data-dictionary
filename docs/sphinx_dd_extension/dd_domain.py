@@ -61,6 +61,28 @@ def create_ref_xref(node, reftarget, **attributes):
     )
 
 
+def get_summary(content: StringList, n_char=80) -> str:
+    """Create a summary string from the contents of a DD node"""
+    needs_ellipsis = False
+    # Get the first line of the contents
+    if not content:
+        return ""
+    text = content[0]
+    sentence_end = text.find(". ")
+    if sentence_end != -1:
+        text = text[: sentence_end + 1]
+        needs_ellipsis = True
+    # Only display first N_CHAR characters of the first sentence
+    if len(text) > n_char:
+        break_at_space = text.find(" ", n_char)
+        if break_at_space != -1:
+            text = text[:break_at_space]
+            needs_ellipsis = True
+    if needs_ellipsis:
+        text = text + " [...]"
+    return text
+
+
 class DDNode(ObjectDescription[Tuple[str, str]]):
     """Description of a node in the Data Dictionary."""
 
@@ -103,7 +125,10 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
                 signode.parent["classes"].append("dd-struct")
             signode += DDDataType(data_type)
 
-        # TODO: type
+        # Summary of contents
+        summary_txt = get_summary(self.content)
+        if summary_txt:
+            signode += addnodes.desc_annotation("", summary_txt, classes=["dd-summary"])
 
         fullname = f"{prefix}/{sig}" if prefix else sig
         fullname = remove_brackets(fullname)
@@ -437,9 +462,13 @@ def visit_desc_signature(self, node: Element) -> None:
 
 def depart_desc_signature(self, node: Element) -> None:
     self.protect_literal_text -= 1
-    if not node.get("is_multiline"):
-        self.add_permalink_ref(node, "Permalink to this definition")
     self.body.append("</summary>\n")
+
+
+def visit_desc_annotation(self, node: Element) -> None:
+    # Add permalink before the summary annotation
+    self.add_permalink_ref(node.parent, "Permalink to this definition")
+    self.body.append(self.starttag(node, 'em', '', CLASS='property'))
 
 
 def visit_desc_content(self, node: Element) -> None:
@@ -454,6 +483,7 @@ HTML5Translator.visit_desc = visit_desc
 HTML5Translator.depart_desc = depart_desc
 HTML5Translator.visit_desc_signature = visit_desc_signature
 HTML5Translator.depart_desc_signature = depart_desc_signature
+HTML5Translator.visit_desc_annotation = visit_desc_annotation
 HTML5Translator.visit_desc_content = visit_desc_content
 HTML5Translator.depart_desc_content = depart_desc_content
 
