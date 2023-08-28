@@ -127,8 +127,7 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
 
         # Summary of contents
         summary_txt = get_summary(self.content)
-        if summary_txt:
-            signode += addnodes.desc_annotation("", summary_txt, classes=["dd-summary"])
+        signode += addnodes.desc_annotation("", summary_txt, classes=["dd-summary"])
 
         fullname = f"{prefix}/{sig}" if prefix else sig
         fullname = remove_brackets(fullname)
