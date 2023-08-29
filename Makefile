@@ -17,6 +17,7 @@ ID_IDENT = $(wildcard */*_identifier.xml)
 ID_FILES = $(ID_IDENT)
 
 .PHONY: all clean test install
+
 all: dd htmldoc test
 
 clean: # dd_clean htmldoc_clean
@@ -56,7 +57,7 @@ dd_install: $(DD_FILES)
 	ln -sf dd_data_dictionary.xml $(includedir)/IDSDef.xml
 	pip install . --target $(prefix)/python/lib
 	$(mkdir_p) $(prefix)/bin
-	ln -sf $(prefix)/python/lib/bin/idsdef  $(prefix)/bin/idsdef
+	ln -sf $(prefix)/python/lib/bin/idsinfo  $(prefix)/bin/idsinfo
 
 identifiers_install: $(ID_IDENT)
 	$(mkdir_p) $(foreach subdir,$(sort $(^D)),$(includedir)/$(subdir))
@@ -86,7 +87,7 @@ ifeq ($(SAXON),)
 SAXON := $(JAVA) net.sf.saxon.Transform
 endif
 # Saxon -threads is only valid from 9.4:
-SAXON_THREADS := $(shell sv=$$($(SAXON) -t 2>&1 | head -1);\
+SAXON_THREADS := $(shell sv=$$($(SAXON) -t 2>&1 | grep "^Saxon");\
 	major=$$(echo $${sv} | sed "s/Saxon[^ ]* \([0-9]\+\).*/\1/");\
 	minor=$$(echo $${sv} | sed "s/Saxon[^ ]* [0-9]\+\.\([0-9]\+\).*/\1/");\
 	minor=$$(printf %02d $${minor});\

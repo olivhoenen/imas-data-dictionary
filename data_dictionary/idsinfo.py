@@ -3,10 +3,10 @@
 """
 Usage
 
-$ python idsdef metadata
+$ python idsinfo metadata
 This is Data Dictionary version = 3.37.0, following COCOS = 11
 
-$ python idsdef info amns_data ids_properties/comment -a
+$ python idsinfo info amns_data ids_properties/comment -a
 name: comment
 path: ids_properties/comment
 path_doc: ids_properties/comment
@@ -14,27 +14,27 @@ documentation: Any comment describing the content of this IDS
 data_type: STR_0D
 type: constant
 
-$ python idsdef info amns_data ids_properties/comment -m
+$ python idsinfo info amns_data ids_properties/comment -m
 This is Data Dictionary version = 3.37.0, following COCOS = 11
 ==============================================================
 Any comment describing the content of this IDS
 $   
 
-$ python idsdef info amns_data ids_properties/comment -s data_type
+$ python idsinfo info amns_data ids_properties/comment -s data_type
 STR_0D
 $  
 
-$ python idsdef idspath
+$ python idsinfo idspath
 /home/ITER/sawantp1/.local/dd_3.37.1+54.g20c6794.dirty/include/IDSDef.xml
 
-$ python idsdef idsnames 
+$ python idsinfo idsnames 
 amns_data
 barometry
 bolometer
 bremsstrahlung_visible
 ...
 
-$ python idsdef search ggd 
+$ python idsinfo search ggd 
 distribution_sources/source/ggd
 distributions/distribution/ggd
 edge_profiles/grid_ggd
@@ -56,7 +56,7 @@ def major_minor_micro(version):
     return int(major), int(minor), int(micro)
 
 
-class IDSDef:
+class IDSInfo:
     """Simple class which allows to query meta-data from the definition of IDSs as expressed in IDSDef.xml."""
 
     root = None
@@ -207,8 +207,8 @@ class IDSDef:
 def main():
     import argparse
 
-    idsdef_parser = argparse.ArgumentParser(description="IDS Def Utilities")
-    subparsers = idsdef_parser.add_subparsers(help="sub-commands help")
+    idsinfo_parser = argparse.ArgumentParser(description="IDS Def Utilities")
+    subparsers = idsinfo_parser.add_subparsers(help="sub-commands help")
 
     idspath_command_parser = subparsers.add_parser(
         "idspath", help="print ids definition path"
@@ -278,38 +278,38 @@ def main():
         default="documentation",
         help="Select attribute to be printed \t(default=%(default)s)",
     )
-    args = idsdef_parser.parse_args()
+    args = idsinfo_parser.parse_args()
     try:
         if args.cmd is None:
-            idsdef_parser.print_help()
+            idsinfo_parser.print_help()
             return
     except AttributeError:
-        idsdef_parser.print_help()
+        idsinfo_parser.print_help()
         return
 
     # Create IDSDef Object
-    idsdef_object = IDSDef()
+    idsinfoObj = IDSInfo()
     if args.cmd == "metadata":
-        mstr = f"This is Data Dictionary version = {idsdef_object.version}, following COCOS = {idsdef_object.cocos}"
+        mstr = f"This is Data Dictionary version = {idsinfoObj.version}, following COCOS = {idsinfoObj.cocos}"
         print(mstr)
         print("=" * len(mstr))
 
     if args.cmd == "idspath":
-        print(idsdef_object.get_idsdef_path())
+        print(idsinfoObj.get_idsdef_path())
     if args.cmd == "info":
-        attribute_dict = idsdef_object.query(args.ids, args.path)
+        attribute_dict = idsinfoObj.query(args.ids, args.path)
         if args.all:
             for a in attribute_dict.keys():
                 print(f"{a}: {attribute_dict[a]}")
         else:
             print(attribute_dict[args.select])
     elif args.cmd == "idsnames":
-        for name in idsdef_object.get_ids_names():
+        for name in idsinfoObj.get_ids_names():
             print(name)
     elif args.cmd == "search":
         if args.text not in ["", None]:
             print(f"Searching for '{args.text}'.")
-            result = idsdef_object.find_in_ids(args.text.strip(), strict=args.strict)
+            result = idsinfoObj.find_in_ids(args.text.strip(), strict=args.strict)
             for ids_name, fields in result.items():
                 print(f"{ids_name}:")
                 for field, attributes in fields.items():
@@ -327,7 +327,7 @@ def main():
             return
     elif args.cmd == "idsfields":
         if args.idsname not in ["", None]:
-            result = idsdef_object.list_ids_fields(args.idsname.strip())
+            result = idsinfoObj.list_ids_fields(args.idsname.strip())
             if bool(result):
                 print(f"Listing all fields from ids :'{args.idsname}'")
                 for ids_name, fields in result.items():
