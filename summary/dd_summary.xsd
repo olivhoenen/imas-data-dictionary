@@ -1335,7 +1335,7 @@
 			</xs:element>
 			<xs:element name="q" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>Safety factor (IMAS uses COCOS=11: only positive when toroidal current and magnetic field are in same direction)</xs:documentation>
+					<xs:documentation>Safety factor (IMAS uses COCOS=17: only positive when toroidal current and magnetic field are in same direction)</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
 						<cocos_label_transformation>q_like</cocos_label_transformation>
@@ -1352,14 +1352,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="b_field" type="summary_dynamic_flt_1d_root">
+			<xs:element name="b_field_tor" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
-					<xs:documentation>Magnetic field</xs:documentation>
+					<xs:documentation>Toroidal magnetic field</xs:documentation>
 					<xs:appinfo>
 						<units>T</units>
 						<cocos_label_transformation>b0_like</cocos_label_transformation>
 						<cocos_transformation_expression>.sigma_b0_eff</cocos_transformation_expression>
 						<cocos_leaf_name_aos_indices>IDSPATH.b_field.value</cocos_leaf_name_aos_indices>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>b_field</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2777,19 +2780,25 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="li" type="summary_dynamic_flt_1d_root">
+			<xs:element name="li_3" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Internal inductance. The li_3 definition is used, i.e. li_3 = 2/R0/mu0^2/Ip^2 * int(Bp^2 dV).</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>li</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="li_mhd" type="summary_dynamic_flt_1d_root">
+			<xs:element name="li_3_mhd" type="summary_dynamic_flt_1d_root">
 				<xs:annotation>
 					<xs:documentation>Internal inductance as determined by an equilibrium reconstruction code. Use this only when the li node above is used for another estimation method and there is a need to store a second value of li (determined by an equilibrium reconstruction code). The li_3 definition is used, i.e. li_3 = 2/R0/mu0^2/Ip^2 * int(Bp^2 dV).</xs:documentation>
 					<xs:appinfo>
 						<units>-</units>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>li_mhd</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
