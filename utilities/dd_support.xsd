@@ -5207,7 +5207,7 @@
 			<xs:documentation>Generic grid, list of objects of a given dimension within a space (constant)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="boundary" type="generic_grid_constant_space_dimension_object_boundary" maxOccurs="unbounded">
+			<xs:element name="boundary" type="generic_grid_constant_space_dimension_object_boundary" maxOccurs="6">
 				<xs:annotation>
 					<xs:documentation>Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object</xs:documentation>
 					<xs:appinfo>
@@ -5273,7 +5273,7 @@
 			<xs:documentation>Generic grid, list of dimensions within a space (constant)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="object" type="generic_grid_constant_space_dimension_object" maxOccurs="unbounded">
+			<xs:element name="object" type="generic_grid_constant_space_dimension_object" maxOccurs="300">
 				<xs:annotation>
 					<xs:documentation>Set of objects for a given dimension</xs:documentation>
 					<xs:appinfo>
@@ -5323,7 +5323,7 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="objects_per_dimension" type="generic_grid_constant_space_dimension" maxOccurs="unbounded">
+			<xs:element name="objects_per_dimension" type="generic_grid_constant_space_dimension" maxOccurs="6">
 				<xs:annotation>
 					<xs:documentation>Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.</xs:documentation>
 					<xs:appinfo>
@@ -5552,7 +5552,7 @@
 			<xs:documentation>Generic grid, element part of a grid_subset (constant)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="object" type="generic_grid_constant_grid_subset_element_object" maxOccurs="unbounded">
+			<xs:element name="object" type="generic_grid_constant_grid_subset_element_object" maxOccurs="3">
 				<xs:annotation>
 					<xs:documentation>Set of objects defining the element</xs:documentation>
 					<xs:appinfo>
@@ -5639,7 +5639,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="element" type="generic_grid_dynamic_grid_subset_element" maxOccurs="unbounded">
+			<xs:element name="element" type="generic_grid_constant_grid_subset_element" maxOccurs="100">
 				<xs:annotation>
 					<xs:documentation>Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces</xs:documentation>
 					<xs:appinfo>
@@ -5647,7 +5647,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="base" type="generic_grid_dynamic_grid_subset_metric" maxOccurs="unbounded">
+			<xs:element name="base" type="generic_grid_dynamic_grid_subset_metric" maxOccurs="3">
 				<xs:annotation>
 					<xs:documentation>Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.</xs:documentation>
 					<xs:appinfo>
@@ -5955,7 +5955,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="space" type="generic_grid_constant_space" maxOccurs="unbounded">
+			<xs:element name="space" type="generic_grid_constant_space" maxOccurs="6">
 				<xs:annotation>
 					<xs:documentation>Set of grid spaces</xs:documentation>
 					<xs:appinfo>
@@ -5964,7 +5964,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="grid_subset" type="generic_grid_constant_grid_subset" maxOccurs="unbounded">
+			<xs:element name="grid_subset" type="generic_grid_constant_grid_subset" maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation>Grid subsets</xs:documentation>
 					<xs:appinfo>
