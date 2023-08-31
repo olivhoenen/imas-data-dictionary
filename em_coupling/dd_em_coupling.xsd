@@ -326,6 +326,15 @@
 						<xs:group ref="STR_1D"/>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="grid_ggd" type="generic_grid_constant" maxOccurs="5">
+					<xs:annotation>
+						<xs:documentation>Set of grids for use in the coupling_matrix array of structure, described using the GGD</xs:documentation>
+						<xs:appinfo>
+							<coordinate1>1...N</coordinate1>
+							<introduced_after_version>3.39.0</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="coupling_matrix" type="em_coupling_matrix" maxOccurs="20">
 					<xs:annotation>
 						<xs:documentation>Set of user-defined coupling matrices, complementary to the other system-based coupling matrices of this IDS</xs:documentation>

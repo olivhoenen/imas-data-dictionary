@@ -5172,6 +5172,167 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_space_dimension_object_boundary">
+		<xs:annotation>
+			<xs:documentation>Generic grid, description of an object boundary and its neighbours (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Index of this (n-1)-dimensional boundary object</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="neighbours">
+				<xs:annotation>
+					<xs:documentation>List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object can possibly have multiple neighbours on a boundary</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_space_dimension_object">
+		<xs:annotation>
+			<xs:documentation>Generic grid, list of objects of a given dimension within a space (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="boundary" type="generic_grid_constant_space_dimension_object_boundary" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of  (n-1)-dimensional objects defining the boundary of this n-dimensional object</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometry">
+				<xs:annotation>
+					<xs:documentation>Geometry data associated with the object, its detailed content is defined by ../../geometry_content. Its dimension depends on the type of object, geometry and coordinate considered. </xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="nodes">
+				<xs:annotation>
+					<xs:documentation>List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="measure">
+				<xs:annotation>
+					<xs:documentation>Measure of the space object, i.e. physical size (length for 1d, area for 2d, volume for 3d objects,...)</xs:documentation>
+					<xs:appinfo>
+						<units>m^dimension</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="geometry_2d">
+				<xs:annotation>
+					<xs:documentation>2D geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. Typically, the first dimension represents the object coordinates, while the second dimension would represent the values of the various degrees of freedom of the finite element attached to the object.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_space_dimension">
+		<xs:annotation>
+			<xs:documentation>Generic grid, list of dimensions within a space (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="object" type="generic_grid_constant_space_dimension_object" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of objects for a given dimension</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometry_content" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Content of the ../object/geometry node for this dimension</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/ggd_geometry_content_identifier.xml</doc_identifier>
+						<introduced_after_version>3.33.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_space">
+		<xs:annotation>
+			<xs:documentation>Generic grid space (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Space identifier</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/ggd_space_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometry_type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Type of space geometry (0: standard, 1:Fourier, >1: Fourier with periodicity)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="coordinates_type">
+				<xs:annotation>
+					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space. The meaning of these predefined integer constants can be found in the Data Dictionary under utilities/coordinate_identifier.xml</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>constant</type>
+						<url>utilities/coordinate_identifier.xml</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="objects_per_dimension" type="generic_grid_constant_space_dimension" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_dynamic_space_dimension_object_boundary">
 		<xs:annotation>
 			<xs:documentation>Generic grid, description of an object boundary and its neighbours (dynamic within a type 3 AoS)</xs:documentation>
@@ -5342,6 +5503,161 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_grid_subset_element_object">
+		<xs:annotation>
+			<xs:documentation>Generic grid, object part of an element part of a grid_subset (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="space">
+				<xs:annotation>
+					<xs:documentation>Index of the space from which that object is taken</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dimension">
+				<xs:annotation>
+					<xs:documentation>Dimension of the object</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Object index</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_grid_subset_element">
+		<xs:annotation>
+			<xs:documentation>Generic grid, element part of a grid_subset (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="object" type="generic_grid_constant_grid_subset_element_object" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of objects defining the element</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_grid_subset_metric">
+		<xs:annotation>
+			<xs:documentation>Generic grid, metric description for a given grid_subset and base (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="jacobian">
+				<xs:annotation>
+					<xs:documentation>Metric Jacobian</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tensor_covariant">
+				<xs:annotation>
+					<xs:documentation>Covariant metric tensor, given on each element of the subgrid (first dimension)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../element</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tensor_contravariant">
+				<xs:annotation>
+					<xs:documentation>Contravariant metric tensor, given on each element of the subgrid (first dimension)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../element</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate2_same_as>../tensor_covariant</coordinate2_same_as>
+						<coordinate3>1...N</coordinate3>
+						<coordinate3_same_as>../tensor_covariant</coordinate3_same_as>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_grid_subset">
+		<xs:annotation>
+			<xs:documentation>Generic grid grid_subset (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Grid subset identifier</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/ggd_subset_identifier.xml</doc_identifier>
+						<url>utilities/LFS_snowflake_GGD_subsets.png</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dimension">
+				<xs:annotation>
+					<xs:documentation>Space dimension of the grid subset elements. This must be equal to the sum of the dimensions of the individual objects forming the element.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="element" type="generic_grid_dynamic_grid_subset_element" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="base" type="generic_grid_dynamic_grid_subset_metric" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="metric" type="generic_grid_dynamic_grid_subset_metric">
+				<xs:annotation>
+					<xs:documentation>Metric of the canonical frame onto Cartesian coordinates</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -5610,6 +5926,49 @@
 					<xs:appinfo>
 						<units>s</units>
 						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant">
+		<xs:annotation>
+			<xs:documentation>Generic grid (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Grid identifier</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/ggd_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="path">
+				<xs:annotation>
+					<xs:documentation>Path of the grid, including the IDS name, in case of implicit reference to a grid_ggd node described in another IDS. To be filled only if the grid is not described explicitly in this grid_ggd structure. Example syntax: IDS::wall/0/description_ggd(1)/grid_ggd, means that the grid is located in the wall IDS, occurrence 0, with relative path description_ggd(1)/grid_ggd, using Fortran index convention (here : first index of the array)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="space" type="generic_grid_constant_space" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of grid spaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<url_protected>https://confluence.iter.org/download/attachments/178133297/GGDguide.pdf</url_protected>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid_subset" type="generic_grid_constant_grid_subset" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
