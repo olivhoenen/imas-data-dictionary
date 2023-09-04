@@ -20,7 +20,8 @@ window.addEventListener("hashchange", dd_open_details);
 window.addEventListener("load", dd_open_details);
 window.addEventListener("load", (event)=>{
     // Links inside summary elements open in a new tab
-    for (var element of document.querySelectorAll("summary a:not(.headerlink)")) {
+    for (var element of document.querySelectorAll(
+            "a.dd-dynamic, a.dd-static, a.dd-constant, a.dd_data_type, a.errorbar")) {
         element.target = "_blank";
     }
     // Open leaf nodes by default

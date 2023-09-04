@@ -108,12 +108,15 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
 
         # Add additional properties
         if "has_error" in self.options:
-            signode += create_ref_xref(nodes.Text(" ⇹"), "errorbars")
+            signode += create_ref_xref(
+                nodes.Text(" ⇹"), "errorbars", classes=["errorbar"]
+            )
 
         if "type" in self.options:
             target = f"type-{self.options['type']}"
             classes = [f"dd-{self.options['type']}"]
-            signode += create_ref_xref(nodes.inline(text=" "), target, classes=classes)
+            # Note: actual text is added with CSS (::before)
+            signode += create_ref_xref(nodes.inline(), target, classes=classes)
 
         if "unit" in self.options:
             unit = self.options["unit"]
@@ -123,7 +126,22 @@ class DDNode(ObjectDescription[Tuple[str, str]]):
             data_type = self.options["data_type"]
             if data_type in ("structure", "struct_array"):
                 signode.parent["classes"].append("dd-struct")
-            signode += DDDataType(data_type)
+            data_type = {
+                "str_type": "STR_0D",
+                "str_1d_type": "STR_1D",
+                "int_type": "INT_0D",
+                "flt_type": "FLT_0D",
+                "flt_1d_type": "FLT_1D",
+                "cpx_type": "CPX_0D",
+            }.get(data_type, data_type)
+            signode += pending_xref(
+                "",
+                nodes.Text(data_type),
+                refdomain="dd",
+                reftype="data_type",
+                reftarget=data_type,
+                classes=["dd_data_type"]
+            )
 
         # Summary of contents
         summary_txt = get_summary(self.content)
@@ -467,7 +485,7 @@ def depart_desc_signature(self, node: Element) -> None:
 def visit_desc_annotation(self, node: Element) -> None:
     # Add permalink before the summary annotation
     self.add_permalink_ref(node.parent, "Permalink to this definition")
-    self.body.append(self.starttag(node, 'em', '', CLASS='property'))
+    self.body.append(self.starttag(node, "em", "", CLASS="property"))
 
 
 def visit_desc_content(self, node: Element) -> None:
@@ -495,28 +513,6 @@ class DDUnit(nodes.inline):
         self["classes"].append("dd_unit")
 
 
-class DDDataType(nodes.inline):
-    """Docutils node for representing DD data types."""
-
-    def __init__(self, rawsource, **kwargs) -> None:
-        # Convert legacy identifiers
-        rawsource = {
-            "str_type": "STR_0D",
-            "str_1d_type": "STR_1D",
-            "int_type": "INT_0D",
-            "flt_type": "FLT_0D",
-            "flt_1d_type": "FLT_1D",
-            "cpx_type": "CPX_0D",
-        }.get(rawsource, rawsource)
-
-        text = nodes.Text(rawsource, rawsource)
-        xref = pending_xref(
-            "", text, refdomain="dd", reftype="data_type", reftarget=rawsource
-        )
-        super().__init__(rawsource, "", xref, **kwargs)
-        self["classes"].append("dd_data_type")
-
-
 def visit_span_element_html(self, node: Element) -> None:
     self.body.append(self.starttag(node, "span", ""))
 
@@ -528,7 +524,6 @@ def depart_span_element_html(self, node: Element) -> None:
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_domain(DDDomain)
     app.add_node(DDUnit, html=(visit_span_element_html, depart_span_element_html))
-    app.add_node(DDDataType, html=(visit_span_element_html, depart_span_element_html))
     return {
         "version": "0.1",
         "parallel_read_safe": True,

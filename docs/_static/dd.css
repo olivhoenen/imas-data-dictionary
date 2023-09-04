@@ -88,7 +88,6 @@ summary.dd::after {
 /* [Reference] Style units, data_type and type elements */
 span.dd_unit {
     cursor: help;
-    position: relative;
     font-weight: normal;
     font-style: italic;
     margin-left: 0.5em
@@ -96,35 +95,59 @@ span.dd_unit {
 span.dd_unit:hover {
     text-decoration: underline;
 }
-span.dd_unit:hover::after {
-    content: "Unit of this data node.";
+
+.dd_data_type {
+    float: right;
+}
+
+.dd-constant::before {
+    content: " {constant}";
+    font-weight: normal;
+}
+.dd-static::before {
+    content: " {static}";
+    font-weight: normal;
+}
+.dd-dynamic::before {
+    content: " {dynamic}";
+    font-weight: normal;
+}
+
+/* Tooltips */
+.errorbar,
+.dd_unit,
+.dd_data_type,
+.dd-constant,
+.dd-static,
+.dd-dynamic {
+    position: relative;
+}
+.errorbar:hover::after,
+.dd_unit:hover::after,
+.dd_data_type:hover::after,
+.dd-constant:hover::after,
+.dd-static:hover::after,
+.dd-dynamic:hover::after {
     position: absolute;
     left: 0em;
     top: 1.5em;
     width: max-content;
     padding: 0.4em;
-    border: 1px #aaa solid;
-    background-color: #fff;
-    color: #000;
+    text-align: center;
+    font-weight: normal;
+    font-style: italic;
+    border-radius: 0.4em;
+    background-color: #555;
+    color: #fff;
     z-index: 1;
 }
+.errorbar:hover::after { content: "This data node has errorbars.";}
+.dd_unit:hover::after { content: "Unit of this data node."; }
+.dd_data_type:hover::after { content: "Data type of this node."; }
+.dd-constant:hover::after { content: "Data is not time dependent."; }
+.dd-static:hover::after { content: "Data is not time dependent."; }
+.dd-dynamic:hover::after { content: "Data is time dependent."; }
 
-span.dd_data_type {
-    float: right;
-}
-
-.dd-constant::after {
-    content: "{constant}";
-    font-weight: normal;
-}
-.dd-static::after {
-    content: "{static}";
-    font-weight: normal;
-}
-.dd-dynamic::after {
-    content: "{dynamic}";
-    font-weight: normal;
-}
 
 /**
  * GGD guide uses guilabel elements for emphasising elements
