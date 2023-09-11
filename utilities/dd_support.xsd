@@ -6028,6 +6028,59 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="profiles_2d_grid">
+		<xs:annotation>
+			<xs:documentation>Definition of the 2D grid with dim1, dim2, constant</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="dim1">
+				<xs:annotation>
+					<xs:documentation>First dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+						<cocos_label_transformation>grid_type_dim1_like</cocos_label_transformation>
+						<cocos_transformation_expression>grid_type_transformation(index_grid_type,1)</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>IDSPATH.grid.dim1</cocos_leaf_name_aos_indices>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dim2">
+				<xs:annotation>
+					<xs:documentation>Second dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+						<cocos_label_transformation>grid_type_dim2_like</cocos_label_transformation>
+						<cocos_transformation_expression>grid_type_transformation(index_grid_type,2)</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>IDSPATH.grid.dim2</cocos_leaf_name_aos_indices>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="volume_element">
+				<xs:annotation>
+					<xs:documentation>Volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../dim1</coordinate1>
+						<coordinate2>../dim2</coordinate2>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_profiles_2d_grid">
 		<xs:annotation>
 			<xs:documentation>Definition of the 2D grid</xs:documentation>

@@ -70,18 +70,18 @@ $ firefox $PYTHON_PATH/share/doc/imas/html_documentation.html
 ```
 ### Python scripts
 
-Installer provides `idsdef` utility which can be used on the command line interface. 
+Installer provides `idsinfo` utility which can be used on the command line interface. 
 
 # IDSDEF utility
-The `idsdef` command provides useful features such as showing
+The `idsinfo` command provides useful features such as showing
 metadata, listing all variables, searching for text in IDS fields,
 etc.
 
 ## Usage
 
 ```sh
-$ idsdef
-usage: idsdef [-h] {idspath,metadata,idsnames,search,idsfields,info} ...
+$ idsinfo
+usage: idsinfo [-h] {idspath,metadata,idsnames,search,idsfields,info} ...
 
 IDS Def Utilities
 
@@ -104,14 +104,14 @@ optional arguments:
 ### Print data dictionary xml path
 
 ```sh
-$ idsdef idspath
+$ idsinfo idspath
 /home/ITER/username/.local/dd_3.38.1+15.g41c54bc.dirty/include/IDSDef.xml
 ```
 
 ### Show metadata abot data dictionary
 
 ```sh
-$ idsdef metadata
+$ idsinfo metadata
 This is Data Dictionary version = 3.38.1-15-g41c54bc, following COCOS = 11
 ```
 
@@ -119,7 +119,7 @@ This is Data Dictionary version = 3.38.1-15-g41c54bc, following COCOS = 11
 
 Input: Text to search for
 ```sh
-$ idsdef search neutron
+$ idsinfo search neutron
 Searching for 'neutron'.
 neutron_diagnostic:
         detectors/green_functions/source_neutron_energies
@@ -139,7 +139,7 @@ summary:
 
 Input: IDS name
 ```sh
-$ idsdef idsfields amns_data
+$ idsinfo idsfields amns_data
 Listing all fields from ids :'amns_data'
 ids_properties
 ids_properties/comment
@@ -163,6 +163,6 @@ ids_properties/plugins
 ### Show information of IDS
 
 ```sh
-$ idsdef info amns_data
+$ idsinfo info amns_data
 Atomic, molecular, nuclear and surface physics data. Each occurrence contains the data for a given element (nuclear charge), describing various physical processes. For each process, data tables are organized by charge states. The coordinate system used by the data tables is described under the coordinate_system node.
 ```
