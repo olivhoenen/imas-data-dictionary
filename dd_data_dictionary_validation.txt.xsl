@@ -49,6 +49,25 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
 <xsl:apply-templates select=".//field[not(@coordinate6) and (@data_type='FLT_6D' or @data_type='CPX_6D' )]">
 <xsl:with-param name="error_description" select="'This field must have a coordinate6 attribute'"/>
 </xsl:apply-templates>
+<!-- Test the absence of coordinate metadata of dimensions higher than the dimension of the data type -->
+<xsl:apply-templates select=".//field[@coordinate1 and not(matches(@data_type, '[1-6][dD]|structure|struct_array'))]">
+<xsl:with-param name="error_description" select="'This field must not have a coordinate1 attribute'"/>
+</xsl:apply-templates>
+<xsl:apply-templates select=".//field[@coordinate2 and not(matches(@data_type, '[2-6]D|structure'))]">
+<xsl:with-param name="error_description" select="'This field must not have a coordinate2 attribute'"/>
+</xsl:apply-templates>
+<xsl:apply-templates select=".//field[@coordinate3 and not(matches(@data_type, '[3-6]D|structure'))]">
+<xsl:with-param name="error_description" select="'This field must not have a coordinate3 attribute'"/>
+</xsl:apply-templates>
+<xsl:apply-templates select=".//field[@coordinate4 and not(matches(@data_type, '[4-6]D|structure'))]">
+<xsl:with-param name="error_description" select="'This field must not have a coordinate4 attribute'"/>
+</xsl:apply-templates>
+<xsl:apply-templates select=".//field[@coordinate5 and not(matches(@data_type, '[5-6]D|structure'))]">
+<xsl:with-param name="error_description" select="'This field must not have a coordinate5 attribute'"/>
+</xsl:apply-templates>
+<xsl:apply-templates select=".//field[@coordinate6 and not(matches(@data_type, '6D|structure'))]">
+<xsl:with-param name="error_description" select="'This field must not have a coordinate6 attribute'"/>
+</xsl:apply-templates>
 <!-- Test the presence of the "units" metadata for FLT and CPX data (R5.3) -->
 <xsl:apply-templates select=".//field[not(@units) and (@data_type='FLT_0D' or @data_type='FLT_1D' or @data_type='FLT_2D' or @data_type='FLT_3D' or @data_type='FLT_4D' or @data_type='FLT_5D' or @data_type='FLT_6D' or @data_type='CPX_0D' or @data_type='CPX_1D' or @data_type='CPX_2D' or @data_type='CPX_3D' or @data_type='CPX_4D' or @data_type='CPX_5D' or @data_type='CPX_6D')]">
 <xsl:with-param name="error_description" select="'This field must have a units attribute'"/>
