@@ -40,6 +40,7 @@ extensions = [
     "sphinx_immaterial",
     "sphinx_dd_extension.dd_domain",
     "sphinx_dd_extension.autodoc",
+    "sphinx_dd_extension.dd_changelog",
 ]
 
 templates_path = ["_templates"]
