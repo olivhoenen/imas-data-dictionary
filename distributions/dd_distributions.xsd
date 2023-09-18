@@ -44,14 +44,14 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="distributions_d_global_quantities_thermalised">
+	<xs:complexType name="distributions_d_global_quantities_thermalized">
 		<xs:annotation>
-			<xs:documentation>Global quantities for thermalisation source/sinks</xs:documentation>
+			<xs:documentation>Global quantities for thermalization source/sinks</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="particles">
 				<xs:annotation>
-					<xs:documentation>Source rate of thermal particles due to the thermalisation of fast particles</xs:documentation>
+					<xs:documentation>Source rate of thermal particles due to the thermalization of fast particles</xs:documentation>
 					<xs:appinfo>
 						<units>s^-1</units>
 						<type>dynamic</type>
@@ -63,7 +63,7 @@
 			</xs:element>
 			<xs:element name="power">
 				<xs:annotation>
-					<xs:documentation>Power input to the thermal particle population due to the thermalisation of fast particles</xs:documentation>
+					<xs:documentation>Power input to the thermal particle population due to the thermalization of fast particles</xs:documentation>
 					<xs:appinfo>
 						<units>W</units>
 						<type>dynamic</type>
@@ -75,7 +75,7 @@
 			</xs:element>
 			<xs:element name="torque">
 				<xs:annotation>
-					<xs:documentation>Torque input to the thermal particle population due to the thermalisation of fast particles</xs:documentation>
+					<xs:documentation>Torque input to the thermal particle population due to the thermalization of fast particles</xs:documentation>
 					<xs:appinfo>
 						<units>N.m</units>
 						<type>dynamic</type>
@@ -274,7 +274,7 @@
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed).</xs:documentation>
+					<xs:documentation>Ion charge (of the dominant ionization state; lumped ions are allowed).</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
@@ -367,7 +367,7 @@
 			</xs:element>
 			<xs:element name="state" type="distributions_d_global_quantities_collisions_ion_state" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:documentation>Collisional exchange with the various states of the ion species (ioniation, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -544,9 +544,14 @@
 					<xs:documentation>Power and torque exchanged between the species described by the distribution and the different plasma species through collisions</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="thermalisation" type="distributions_d_global_quantities_thermalised">
+			<xs:element name="thermalization" type="distributions_d_global_quantities_thermalized">
 				<xs:annotation>
-					<xs:documentation>Volume integrated source of thermal particles, momentum and energy due to thermalisation. Here thermalisation refers to non-thermal particles, sufficiently assimilated to the thermal background to be re-categorised as thermal particles. Note that this source may also be negative if thermal particles are being accelerated such that they form a distinct non-thermal contribution, e.g. due run-away of RF interactions.</xs:documentation>
+					<xs:documentation>Volume integrated source of thermal particles, momentum and energy due to thermalization. Here thermalization refers to non-thermal particles, sufficiently assimilated to the thermal background to be re-categorized as thermal particles. Note that this source may also be negative if thermal particles are being accelerated such that they form a distinct non-thermal contribution, e.g. due run-away of RF interactions.</xs:documentation>
+<xs:appinfo>
+<change_nbc_version>4.0.0</change_nbc_version>
+<change_nbc_description>structure_renamed</change_nbc_description>
+<change_nbc_previous_name>thermalisation</change_nbc_previous_name>
+</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="source" type="distributions_d_global_quantities_source" maxOccurs="unbounded">
@@ -568,14 +573,14 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="distributions_d_profiles_1d_thermalised">
+	<xs:complexType name="distributions_d_profiles_1d_thermalized">
 		<xs:annotation>
-			<xs:documentation>1D profiles of thermalisation source/sinks</xs:documentation>
+			<xs:documentation>1D profiles of thermalization source/sinks</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="particles">
 				<xs:annotation>
-					<xs:documentation>Source rate of thermal particle density due to the thermalisation of fast particles</xs:documentation>
+					<xs:documentation>Source rate of thermal particle density due to the thermalization of fast particles</xs:documentation>
 					<xs:appinfo>
 						<units>s^-1.m^-3</units>
 						<type>dynamic</type>
@@ -588,7 +593,7 @@
 			</xs:element>
 			<xs:element name="energy">
 				<xs:annotation>
-					<xs:documentation>Source rate of energy density within the thermal particle population due to the thermalisation of fast particles</xs:documentation>
+					<xs:documentation>Source rate of energy density within the thermal particle population due to the thermalization of fast particles</xs:documentation>
 					<xs:appinfo>
 						<units>W.m^-3</units>
 						<type>dynamic</type>
@@ -601,7 +606,7 @@
 			</xs:element>
 			<xs:element name="momentum_tor">
 				<xs:annotation>
-					<xs:documentation>Source rate of toroidal angular momentum density within the thermal particle population due to the thermalisation of fast particles</xs:documentation>
+					<xs:documentation>Source rate of toroidal angular momentum density within the thermal particle population due to the thermalization of fast particles</xs:documentation>
 					<xs:appinfo>
 						<units>N.m^-2</units>
 						<type>dynamic</type>
@@ -731,7 +736,7 @@
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed).</xs:documentation>
+					<xs:documentation>Ion charge (of the dominant ionization state; lumped ions are allowed).</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
@@ -832,7 +837,7 @@
 			</xs:element>
 			<xs:element name="state" type="distributions_d_profiles_2d_collisions_ion_state" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:documentation>Collisional exchange with the various states of the ion species (ioniation, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -855,7 +860,7 @@
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed).</xs:documentation>
+					<xs:documentation>Ion charge (of the dominant ionization state; lumped ions are allowed).</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
@@ -956,7 +961,7 @@
 			</xs:element>
 			<xs:element name="state" type="distributions_d_profiles_2d_partial_collisions_ion_state" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:documentation>Collisional exchange with the various states of the ion species (ionization, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -1533,7 +1538,7 @@
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed).</xs:documentation>
+					<xs:documentation>Ion charge (of the dominant ionization state; lumped ions are allowed).</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
@@ -1630,7 +1635,7 @@
 			</xs:element>
 			<xs:element name="state" type="distributions_d_profiles_1d_collisions_ion_state" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:documentation>Collisional exchange with the various states of the ion species (ionization, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -1653,7 +1658,7 @@
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed).</xs:documentation>
+					<xs:documentation>Ion charge (of the dominant ionization state; lumped ions are allowed).</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
@@ -1750,7 +1755,7 @@
 			</xs:element>
 			<xs:element name="state" type="distributions_d_profiles_1d_partial_collisions_ion_state" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Collisional exchange with the various states of the ion species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:documentation>Collisional exchange with the various states of the ion species (ionization, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -2445,9 +2450,14 @@
 					<xs:documentation>Power and torque exchanged between the species described by the distribution and the different plasma species through collisions</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="thermalisation" type="distributions_d_profiles_1d_thermalised">
+			<xs:element name="thermalization" type="distributions_d_profiles_1d_thermalized">
 				<xs:annotation>
-					<xs:documentation>Flux surface averaged source of thermal particles, momentum and energy due to thermalisation. Here thermalisation refers to non-thermal particles, sufficiently assimilated to the thermal background to be re-categorised as thermal particles. Note that this source may also be negative if thermal particles are being accelerated such that they form a distinct non-thermal contribution, e.g. due run-away of RF interactions.</xs:documentation>
+					<xs:documentation>Flux surface averaged source of thermal particles, momentum and energy due to thermalisation. Here thermalisation refers to non-thermal particles, sufficiently assimilated to the thermal background to be re-categorized as thermal particles. Note that this source may also be negative if thermal particles are being accelerated such that they form a distinct non-thermal contribution, e.g. due run-away of RF interactions.</xs:documentation>
+					<xs:appinfo>
+<change_nbc_version>4.0.0</change_nbc_version>
+<change_nbc_description>structure_renamed</change_nbc_description>
+<change_nbc_previous_name>thermalisation</change_nbc_previous_name>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="source" type="distributions_d_profiles_1d_source" maxOccurs="unbounded">
@@ -2552,7 +2562,7 @@
 			</xs:element>
 			<xs:element name="rho_tor_norm">
 				<xs:annotation>
-					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:documentation>Normalized toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>

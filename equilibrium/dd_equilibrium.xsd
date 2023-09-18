@@ -522,7 +522,7 @@
 			</xs:element>
 			<xs:element name="psi_norm">
 				<xs:annotation>
-					<xs:documentation>Value of the normalised poloidal flux at which the boundary is taken (typically 99.x %), the flux being normalised to its value at the separatrix</xs:documentation>
+					<xs:documentation>Value of the normalized poloidal flux at which the boundary is taken (typically 99.x %), the flux being normalized to its value at the separatrix</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -803,7 +803,7 @@
 			</xs:element>
 			<xs:element name="rho_tor_norm">
 				<xs:annotation>
-					<xs:documentation>Minimum q position in normalised toroidal flux coordinate</xs:documentation>
+					<xs:documentation>Minimum q position in normalized toroidal flux coordinate</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -846,14 +846,14 @@
 			</xs:element>
 			<xs:element name="beta_tor_norm">
 				<xs:annotation>
-					<xs:documentation>Normalised toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA] </xs:documentation>
+					<xs:documentation>Normalized toroidal beta, defined as 100 * beta_tor * a[m] * B0 [T] / ip [MA] </xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
 						<change_nbc_version>4.0.0</change_nbc_version>
 						<change_nbc_description>leaf_renamed</change_nbc_description>
 						<change_nbc_previous_name>beta_normal</change_nbc_previous_name>
-				</xs:appinfo>
+					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
@@ -1626,24 +1626,30 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="equilibrium_constraints_magnetisation">
+	<xs:complexType name="equilibrium_constraints_magnetization">
 		<xs:annotation>
-			<xs:documentation>Magnetisation constraints along R and Z axis</xs:documentation>
+			<xs:documentation>Magnetization constraints along R and Z axis</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="magnetisation_r" type="equilibrium_constraints_0D">
+			<xs:element name="magnetization_r" type="equilibrium_constraints_0D">
 				<xs:annotation>
 					<xs:documentation>Magnetisation M of the iron core segment along the major radius axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;</xs:documentation>
 					<xs:appinfo>
 						<units>T</units>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>magnetisation_r</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="magnetisation_z" type="equilibrium_constraints_0D">
+			<xs:element name="magnetization_z" type="equilibrium_constraints_0D">
 				<xs:annotation>
 					<xs:documentation>Magnetisation M of the iron core segment along the vertical axis, assumed to be constant inside a given iron segment. Reminder : H = 1/mu0 * B - mur * M;</xs:documentation>
 					<xs:appinfo>
 						<units>T</units>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>magnetisation_z</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1695,12 +1701,15 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="mse_polarisation_angle" type="equilibrium_constraints_0D" maxOccurs="unbounded">
+			<xs:element name="mse_polarization_angle" type="equilibrium_constraints_0D" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of MSE polarisation angles</xs:documentation>
+					<xs:documentation>Set of MSE polarization angles</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>IDS:mse/channel</coordinate1>
 						<units>rad</units>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>aos_renamed</change_nbc_description>
+						<change_nbc_previous_name>mse_polarisation_angle</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1725,9 +1734,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="iron_core_segment" type="equilibrium_constraints_magnetisation" maxOccurs="unbounded">
+			<xs:element name="iron_core_segment" type="equilibrium_constraints_magnetization" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Magnetisation M of a set of iron core segments</xs:documentation>
+					<xs:documentation>Magnetization M of a set of iron core segments</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>IDS:iron_core/segment</coordinate1>
 						<units>T</units>
@@ -2020,7 +2029,7 @@
 			</xs:element>
 			<xs:element name="rho_tor_norm">
 				<xs:annotation>
-					<xs:documentation>Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:documentation>Normalized toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
@@ -2166,7 +2175,7 @@
 			</xs:element>
 			<xs:element name="rho_volume_norm">
 				<xs:annotation>
-					<xs:documentation>Normalised square root of enclosed volume (radial coordinate). The normalizing value is the enclosed volume at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:documentation>Normalized square root of enclosed volume (radial coordinate). The normalizing value is the enclosed volume at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
