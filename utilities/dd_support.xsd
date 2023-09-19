@@ -1052,7 +1052,7 @@
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:documentation>Ion charge (of the dominant ionization state; lumped ions are allowed)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>Elementary Charge Unit</units>
@@ -1075,7 +1075,7 @@
 			</xs:element>
 			<xs:element name="state" type="plasma_composition_ion_state_constant">
 				<xs:annotation>
-					<xs:documentation>Quantities related to the different states of the species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:documentation>Quantities related to the different states of the species (ionization, energy, excitation, ...)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1173,7 +1173,7 @@
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed)</xs:documentation>
+					<xs:documentation>Ion charge (of the dominant ionization state; lumped ions are allowed)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
@@ -1207,7 +1207,7 @@
 			</xs:element>
 			<xs:element name="state" type="plasma_composition_ion_state" maxOccurs="10">
 				<xs:annotation>
-					<xs:documentation>Quantities related to the different states of the species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:documentation>Quantities related to the different states of the species (ionization, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -1217,7 +1217,7 @@
 	</xs:complexType>
 	<xs:complexType name="plasma_composition_species">
 		<xs:annotation>
-			<xs:documentation>Description of simple species (elements) without declaration of their ionisation state</xs:documentation>
+			<xs:documentation>Description of simple species (elements) without declaration of their ionization state</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="a">
@@ -2712,12 +2712,15 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="ionisation_potential">
+			<xs:element name="ionization_potential">
 				<xs:annotation>
-					<xs:documentation>Cumulative and average ionisation potential to reach a given bundle. Defined as sum (x_z* (sum of Epot from z'=0 to z-1)), where Epot is the ionisation potential of ion Xz’+, and x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
+					<xs:documentation>Cumulative and average ionization potential to reach a given bundle. Defined as sum (x_z* (sum of Epot from z'=0 to z-1)), where Epot is the ionization potential of ion Xz’+, and x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.</xs:documentation>
 					<xs:appinfo>
 						<units>eV</units>
 						<type>dynamic</type>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>ionisation_potential</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2914,7 +2917,7 @@
 			</xs:element>
 			<xs:element name="z_ion">
 				<xs:annotation>
-					<xs:documentation>Ion charge (of the dominant ionisation state; lumped ions are allowed), volume averaged over plasma radius</xs:documentation>
+					<xs:documentation>Ion charge (of the dominant ionization state; lumped ions are allowed), volume averaged over plasma radius</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Elementary Charge Unit</units>
@@ -3148,7 +3151,7 @@
 			</xs:element>
 			<xs:element name="state" type="core_profiles_ions_charge_states2" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Quantities related to the different states of the species (ionisation, energy, excitation, ...)</xs:documentation>
+					<xs:documentation>Quantities related to the different states of the species (ionization, energy, excitation, ...)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -3671,7 +3674,7 @@
 			</xs:element>
 			<xs:element name="ion" type="core_profile_ions" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Quantities related to the different ion species, in the sense of isonuclear or isomolecular sequences. Ionisation states (or other types of states) must be differentiated at the state level below</xs:documentation>
+					<xs:documentation>Quantities related to the different ion species, in the sense of isonuclear or isomolecular sequences. Ionization states (or other types of states) must be differentiated at the state level below</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -5677,7 +5680,7 @@
 			</xs:element>
 			<xs:element name="temperature">
 				<xs:annotation>
-					<xs:documentation>Reference temperature profile used to define the local thermal energy and the thermal velocity (for normalisation of the grid coordinates)</xs:documentation>
+					<xs:documentation>Reference temperature profile used to define the local thermal energy and the thermal velocity (for normalization of the grid coordinates)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../profiles_1d(itime)/grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
@@ -5728,7 +5731,7 @@
 		<xs:sequence>
 			<xs:element name="temperature">
 				<xs:annotation>
-					<xs:documentation>Reference temperature profile used to define the local thermal energy and the thermal velocity (for normalisation of the grid coordinates)</xs:documentation>
+					<xs:documentation>Reference temperature profile used to define the local thermal energy and the thermal velocity (for normalization of the grid coordinates)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../../../profiles_1d(itime)/grid/rho_tor_norm</coordinate1>
 						<units>eV</units>
