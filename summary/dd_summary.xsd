@@ -3871,6 +3871,105 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="summary_disruption_decay_linear">
+		<xs:annotation>
+			<xs:documentation>Disruption decay times for one quantity, custom linear definition</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x1">
+				<xs:annotation>
+					<xs:documentation>User-defined parameter, see description of linear_custom</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="x2">
+				<xs:annotation>
+					<xs:documentation>User-defined value, see description of linear_custom</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="decay_time" type="summary_constant_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Decay time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_disruption_decay_times">
+		<xs:annotation>
+			<xs:documentation>Disruption decay times for one quantity</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="linear_20_80" type="summary_constant_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Decay time defined as (t(0.2)-t(0.8))/0.6, where t(X) corresponds to the time where this quantity reaches X*100% of its pre-disruptive value</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="linear_custom" type="summary_disruption_decay_linear">
+				<xs:annotation>
+					<xs:documentation>Decay time defined as (t(X2)-t(X1))/(X1-X2), where t(Xj) corresponds to the time where this quantity reaches Xj*100% of its pre-disruptive value </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="exponential" type="summary_constant_flt_0d">
+				<xs:annotation>
+					<xs:documentation>Exponential decay time (tau) used when the process is described by an exponential function (exp(-(t-t0)/tau))). Here "t" is time and "t0" is the time where the decay process starts</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="summary_disruption_decay">
+		<xs:annotation>
+			<xs:documentation>Disruption decay times for various quantities</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ip" type="summary_disruption_decay_times">
+				<xs:annotation>
+					<xs:documentation>Total toroidal plasma current (including the halo)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="current_runaways" type="summary_disruption_decay_times">
+				<xs:annotation>
+					<xs:documentation>Total toroidal current carried by runaway electrons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e_volume_average" type="summary_disruption_decay_times">
+				<xs:annotation>
+					<xs:documentation>Volume average electron temperature</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e_magnetic_axis" type="summary_disruption_decay_times">
+				<xs:annotation>
+					<xs:documentation>Electron temperature at the magnetic axis</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="energy_thermal" type="summary_disruption_decay_times">
+				<xs:annotation>
+					<xs:documentation>Thermal plasma energy content = 3/2 * integral over the plasma volume of the thermal pressure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="summary_disruption">
 		<xs:annotation>
 			<xs:documentation>Disruption related parameters</xs:documentation>
@@ -3911,6 +4010,14 @@
 			<xs:element name="mitigation_valve" type="summary_constant_int_0d">
 				<xs:annotation>
 					<xs:documentation>Flag indicating whether any disruption mitigation valve has been used (1) or none (0)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="decay_times" type="summary_disruption_decay">
+				<xs:annotation>
+					<xs:documentation>Characteristic decay times describing the loss of different quantities during the disruption</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -3956,7 +4063,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.22.0</lifecycle_version>
-				<lifecycle_last_change>3.38.0</lifecycle_last_change>
+				<lifecycle_last_change>3.40.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
