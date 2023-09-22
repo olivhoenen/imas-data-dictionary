@@ -125,8 +125,9 @@ def generate_dd_changelog(app: Sphinx):
             previous_version_idx += 1
 
         if pull_requests_text != "":
-            changelog_text += "Included pull requests (`diff <{diff_url}>`__)\n"
+            changelog_text += "Included pull requests\n"
             changelog_text += "----------------------------------------------------\n\n"
+            changelog_text += f"`diff <{diff_url}>`__\n\n"
             changelog_text += pull_requests_text
             changelog_text += "\n\n"
         elif diff_url:
