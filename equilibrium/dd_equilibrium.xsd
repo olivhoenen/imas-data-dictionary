@@ -2046,11 +2046,21 @@
 			</xs:element>
 			<xs:element name="j_tor" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of flux-surface averaged toroidal current density estimates at various positions</xs:documentation>
+					<xs:documentation>Set of flux-surface averaged toroidal current density estimates at various positions  (= average(j_tor/R) / average(1/R))</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>A.m^-2</units>
 						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="j_parallel" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of flux-surface averaged parallel current density estimates at various positions (= average(j.B) / B0, where B0 = /vacuum_toroidal_field/b0)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>A.m^-2</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2240,7 +2250,7 @@
 			</xs:element>
 			<xs:element name="j_parallel">
 				<xs:annotation>
-					<xs:documentation>Flux surface averaged parallel current density = average(j.B) / B0, where B0 = Equilibrium/Global/Toroidal_Field/B0</xs:documentation>
+					<xs:documentation>Flux surface averaged parallel current density = average(j.B) / B0, where B0 = /vacuum_toroidal_field/b0</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
