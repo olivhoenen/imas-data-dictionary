@@ -273,7 +273,7 @@ def generate_dd_changelog(app: Sphinx):
 
     versions = [
         x.name
-        for x in get_tags()
+        for x in reversed(get_tags())
         if x.name != factory.version and x.name in dd_xml_versions()
     ]
 
