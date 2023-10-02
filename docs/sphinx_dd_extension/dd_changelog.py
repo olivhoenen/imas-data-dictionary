@@ -164,6 +164,8 @@ def ids_changes(ids_name: str, from_factory, to_factory):
     # retyped: list[tuple[str, str, str]]
     version_map, old = dd_version_map_from_factories(ids_name, from_factory, to_factory)
     for f, t in version_map.old_to_new.path.items():
+        if f.endswith(("_error_index", "_error_upper", "_error_lower")):
+            continue
         if f == t:
             pass
         if f in version_map.old_to_new.type_change:
@@ -174,6 +176,8 @@ def ids_changes(ids_name: str, from_factory, to_factory):
             renamed.append((f, t))
 
     for f, t in version_map.new_to_old.path.items():
+        if f.endswith(("_error_index", "_error_upper", "_error_lower")):
+            continue
         if t is None and f not in version_map.new_to_old.type_change:
             added.append(f)
     return added, removed, renamed
