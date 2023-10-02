@@ -281,7 +281,7 @@ def generate_dd_changelog(app: Sphinx):
 
     docfile.unlink(True)
 
-    output = "IDS\n===\n\n"
+    output = heading(f"IDS migration guide to: {factory.version}", "=")
 
     output += ".. toctree::\n   :maxdepth: 1\n   :caption: IDS versions\n\n"
 
@@ -298,10 +298,14 @@ def generate_dd_changelog(app: Sphinx):
         removed_ids = set(from_factory).difference(factory)
 
         text += heading(version, style="=")
+        text += (
+            f"On this page, all IDS changes between DD version {from_factory.version}"
+            f" and version {factory.version} are shown\n\n"
+        )
         for i in added_ids:
-            text += heading(f"(green)+{i}")
+            text += heading(f"NEW IDS: {i}")
         for i in removed_ids:
-            text += heading(f"(red)-{i}")
+            text += heading(f"REMOVED IDS: {i}")
 
         for i in set(factory).intersection(set(from_factory)):
             added, removed, renamed = ids_changes(i, from_factory, factory)
