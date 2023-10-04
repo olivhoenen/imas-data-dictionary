@@ -95,7 +95,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="relative_permeability">
+			<xs:element name="saturated_relative_permeability">
 				<xs:annotation>
 					<xs:documentation>Saturated relative magnetic permeability of each element</xs:documentation>
 					<xs:appinfo>
@@ -111,6 +111,26 @@
 			<xs:element name="permeability_table_index">
 				<xs:annotation>
 					<xs:documentation>Index of permeability table (Fortran convention) to be used for each element. If not allocated or if an element is equal to EMPTY_INT, use the sibling saturated relative permeability instead ../relative_permeability, for that element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>../centroid/x</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="axisymmetric" type="outline_2d_geometry_static" maxOccurs="33">
+				<xs:annotation>
+					<xs:documentation>Optional equivalent axisymmetric representation of the geometry of each element (e.g. for each iron core segment), typically used to represent iron core in axisymmetric equilibrium solvers</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../centroid/x</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ggd_object_index">
+				<xs:annotation>
+					<xs:documentation>Index of GGD volumic object (Fortran convention) corresponding to each element. Refers to the array /grid_ggd/space(1)/objects_per_dimension(4)/object</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>../centroid/x</coordinate1>
@@ -173,7 +193,7 @@
 			</xs:element>
 			<xs:element name="relative_permeability">
 				<xs:annotation>
-					<xs:documentation>Relative permeability of the iron segment</xs:documentation>
+					<xs:documentation>Relative permeability as a function of the magnetic field</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>-</units>
@@ -200,7 +220,7 @@
 				<xs:element ref="ids_properties"/>
 				<xs:element name="object" type="ferritic_object" maxOccurs="32">
 					<xs:annotation>
-						<xs:documentation>Set of objects around the tokamak, described by a list of centroids of its inclosing shell elements</xs:documentation>
+						<xs:documentation>Set of objects around the tokamak, described by a list of centroids of its inclosing shell elements. Optionnally a full 3D description of the elements can be added in ../grid_ggd or an equivalent axisymmetric representation can be added.</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<coordinate1>1...N</coordinate1>
@@ -214,6 +234,11 @@
 							<type>static</type>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="grid_ggd" type="generic_grid_constant">
+					<xs:annotation>
+						<xs:documentation>GGD for describing the 3D geometry of the various objects and their elements</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="code"/>
