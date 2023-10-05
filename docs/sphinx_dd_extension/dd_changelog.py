@@ -9,10 +9,11 @@ from typing import Any, Dict, List
 from git import Repo, Tag
 import json
 import re
+from packaging.version import Version
 
 from imaspy import IDSFactory
 from imaspy.dd_zip import dd_xml_versions
-from imaspy.ids_convert import dd_version_map_from_factories
+from imaspy.ids_convert import DDVersionMap
 
 import os
 
@@ -173,23 +174,25 @@ def generate_git_changelog(app: Sphinx):
     logger.info("Finished generating DD changelog sources.")
 
 
-def heading(s: str, style="-"):
-    return f"{s}\n{style*len(s)}\n\n"
-
-
 def ids_changes(ids_name: str, from_factory, to_factory):
     added: list[str] = []
     removed: list[str] = []
     renamed: list[tuple[str, str]] = []
-    # retyped: list[tuple[str, str, str]]
-    version_map, old = dd_version_map_from_factories(ids_name, from_factory, to_factory)
+    retyped: list[tuple[str, str, str]] = []
+    version_map = DDVersionMap(
+        ids_name, from_factory._etree, to_factory._etree, Version(from_factory.version)
+    )
     for f, t in version_map.old_to_new.path.items():
         if f.endswith(("_error_index", "_error_upper", "_error_lower")):
             continue
-        if f == t:
-            pass
         if f in version_map.old_to_new.type_change:
-            pass
+            from_data_type = from_factory._etree.find(f".//field[@path='{f}']").get(
+                "data_type"
+            )
+            to_data_type = to_factory._etree.find(f".//field[@path='{f}']").get(
+                "data_type"
+            )
+            retyped.append((f, from_data_type, to_data_type))
         elif t is None:
             removed.append(f)
         else:
@@ -200,7 +203,7 @@ def ids_changes(ids_name: str, from_factory, to_factory):
             continue
         if t is None and f not in version_map.new_to_old.type_change:
             added.append(f)
-    return added, removed, renamed
+    return added, removed, renamed, retyped
 
 
 def indent(s, i):
@@ -253,7 +256,7 @@ def get_relative_path(a: str, b: str):
     return os.path.relpath(b, a)
 
 
-def to_tree_with_postfix(a: list[str], root_name="root"):
+def to_tree_renamed(a: list[str]):
     output = ".. code-block:: \n\n"
     t = TreeNode()
     for i, j in sorted(a):
@@ -262,7 +265,16 @@ def to_tree_with_postfix(a: list[str], root_name="root"):
     return output
 
 
-def to_tree(a: list[str], root_name="root"):
+def to_tree_retyped(a: list[str]):
+    output = ".. code-block:: \n\n"
+    t = TreeNode()
+    for i, j, k in sorted(a):
+        t.add_path(i, f": {j} → {k}")
+    output += indent(str(t), 4)
+    return output
+
+
+def to_tree(a: list[str]):
     output = ".. code-block:: \n\n"
     t = TreeNode()
     a.sort()
@@ -280,16 +292,14 @@ def format_renamed(renamed):
 
 
 def generate_dd_changelog(app: Sphinx):
-    logger.info("Generating DD ids changelog sources.")
+    logger.info("Generating DD ids migration guide sources.")
 
     # Ensure output folders exist
     (Path("generated/changelog/ids_changes")).mkdir(parents=True, exist_ok=True)
 
     my_ids_xml = "../IDSDef.xml"
 
-    factory = IDSFactory("3.39.0")
-
-    print(factory.version)
+    factory = IDSFactory(xml_path=my_ids_xml)
 
     versions = [
         x.name
@@ -302,8 +312,10 @@ def generate_dd_changelog(app: Sphinx):
     docfile.unlink(True)
 
     output = heading(f"IDS migration guide to: {factory.version}", "=")
+    output += f"Below you can find all changes the current ({factory.version})"
+    output += " and a specific old DD version\n\n"
 
-    output += ".. toctree::\n   :maxdepth: 1\n   :caption: IDS versions\n\n"
+    output += ".. toctree::\n   :maxdepth: 1\n   :caption: DD versions\n\n"
 
     for version in versions:
         version_docfile = Path(f"generated/changelog/ids_changes/{version}.rst")
@@ -328,20 +340,29 @@ def generate_dd_changelog(app: Sphinx):
             text += heading(f"REMOVED IDS: {i}")
 
         for i in set(factory).intersection(set(from_factory)):
-            added, removed, renamed = ids_changes(i, from_factory, factory)
-            if len(added) > 0 or len(removed) > 0 or len(renamed) > 0:
+            added, removed, renamed, retyped = ids_changes(i, from_factory, factory)
+            if (
+                len(added) > 0
+                or len(removed) > 0
+                or len(renamed) > 0
+                or len(retyped) > 0
+            ):
                 text += heading(i)
             if len(added) > 0:
                 text += heading("Added", "*")
-                text += to_tree(added, i)
+                text += to_tree(added)
                 text += "\n"
             if len(removed) > 0:
                 text += heading("Removed", "*")
-                text += to_tree(removed, i)
+                text += to_tree(removed)
                 text += "\n"
             if len(renamed) > 0:
                 text += heading("Renamed", "*")
-                text += to_tree_with_postfix(renamed)
+                text += to_tree_renamed(renamed)
+                text += "\n"
+            if len(retyped) > 0:
+                text += heading("Type changed", "*")
+                text += to_tree_retyped(retyped)
                 text += "\n"
 
         with open(version_docfile, "w") as f:
