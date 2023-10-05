@@ -20,7 +20,14 @@ import os
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
+from xml.etree import ElementTree
+
 logger = logging.getLogger(__name__)
+
+
+def get_current_ids_names():
+    etree = ElementTree.parse("../IDSDef.xml")
+    return [x.get("name") for x in etree.iterfind("IDS")]
 
 
 def heading(s: str, style="-"):
@@ -81,17 +88,40 @@ def get_pull_requests_from_commits(commits, pull_requests):
     return prs
 
 
-def generate_release_text(titles_descriptions_uris: tuple[str, str, str]):
+def generate_release_text(titles_descriptions_uris: tuple[str, str, str], ids_list):
     release_titles = [
         x
         for x in titles_descriptions_uris
-        if x[0].startswith("release/") or x[0].startswith("hotfix/")
+        if x[0].lower().startswith("release/") or x[0].lower().startswith("hotfix/")
     ]
 
     if len(release_titles) == 1:
-        description = release_titles[0][1]
+        description = replace_ids_names_with_links(ids_list, release_titles[0][1])
         return replace_imas_jira(generate_list(description))
     return None
+
+
+def link_to_ids(ids_name):
+    return f":dd:ids:`{ids_name.lower()}`"
+
+
+def replace_ids_names_with_links(ids_list, text):
+    return "\n".join(
+        [
+            " ".join(
+                [
+                    ",".join(
+                        [
+                            link_to_ids(x) if x.lower() in ids_list else x
+                            for x in j.split(",")
+                        ]
+                    )
+                    for j in k.split(" ")
+                ]
+            )
+            for k in text.split("\n")
+        ]
+    )
 
 
 def generate_git_changelog(app: Sphinx):
@@ -123,6 +153,9 @@ def generate_git_changelog(app: Sphinx):
 
     previous_version_idx = 1
 
+    current_ids_names = get_current_ids_names()
+    print(current_ids_names)
+
     for version, commits in zip(reversed(tags), reversed(commits_between_tags)):
         # For each release generate a changelog
         release = heading(f"Release {version.name}", "-")
@@ -133,13 +166,15 @@ def generate_git_changelog(app: Sphinx):
         prs = get_pull_requests_from_commits(commits, pull_requests)
         titles_descriptions_uris = [
             (
-                x.get("title", "").lower(),
+                x.get("title", ""),
                 x.get("description", "no description"),
                 x.get("links", {}).get("self", []),
             )
             for x in prs
         ]
-        release_notes_text = generate_release_text(titles_descriptions_uris)
+        release_notes_text = generate_release_text(
+            titles_descriptions_uris, current_ids_names
+        )
         changelog_pr_text = "\n".join(
             [f"* `{x[0]} <{x[2]}>`__" for x in titles_descriptions_uris]
         )
