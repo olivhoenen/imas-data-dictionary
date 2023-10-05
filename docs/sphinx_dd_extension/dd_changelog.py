@@ -22,6 +22,10 @@ from sphinx.util import logging
 logger = logging.getLogger(__name__)
 
 
+def heading(s: str, style="-"):
+    return f"{s}\n{style*len(s)}\n\n"
+
+
 def tag_sort_helper(tag: Tag):
     parts = tag.name.split(".")
     return tuple(map(int, parts))
@@ -70,6 +74,25 @@ def get_tags():
     return tags
 
 
+def get_pull_requests_from_commits(commits, pull_requests):
+    commit_shas = [x.hexsha for x in commits]
+    prs = [x for x in pull_requests if x["fromRef"]["latestCommit"] in commit_shas]
+    return prs
+
+
+def generate_release_text(titles_descriptions_uris: tuple[str, str, str]):
+    release_titles = [
+        x
+        for x in titles_descriptions_uris
+        if x[0].startswith("release/") or x[0].startswith("hotfix/")
+    ]
+
+    if len(release_titles) == 1:
+        description = release_titles[0][1]
+        return replace_imas_jira(generate_list(description))
+    return None
+
+
 def generate_git_changelog(app: Sphinx):
     """Generate a changelog using git pull requests"""
     logger.info("Generating DD git changelog sources.")
@@ -77,56 +100,54 @@ def generate_git_changelog(app: Sphinx):
     # Ensure output folders exist
     (Path("generated/changelog")).mkdir(parents=True, exist_ok=True)
 
+    # Remove any previous generated files
     docfile = Path("generated/changelog/git.rst")
-
     docfile.unlink(True)
 
+    # Find DD versions using git tags
     repo = Repo("..")
+    tags = list(sort_tags(repo.tags))
 
-    tags = sort_tags(repo.tags)
+    # Find all commits between two releases
+    commits_between_tags = [
+        repo.iter_commits(rev=f"{t[0]}..{t[1]}") for t in zip(tags, tags[1:])
+    ]
 
-    tag_pairs = [(tags[i], tags[i + 1]) for i in range(len(tags) - 1)]
-
-    commits_between_tags = reversed(
-        [repo.iter_commits(rev=f"{t[0]}..{t[1]}") for t in tag_pairs]
-    )
-
+    # Open the pull requests file (generated using dd_changelog_helper.py)
     with open("pull_requests.json", "r") as f:
         pull_requests = json.load(f)
 
-    changelog_text = "=============\nChangelog\n=============\n\n"
+    # Create the changelog text
+    changelog_text = heading("Changelog", "=")
 
     previous_version_idx = 1
 
-    tags = list(reversed(tags))
-
-    for version, commits in zip(tags[:-1], commits_between_tags):
-        release = f"Release {version.name}\n"
-        release += "=" * len(release) + "\n\n"
+    for version, commits in zip(reversed(tags), reversed(commits_between_tags)):
+        # For each release generate a changelog
+        release = heading(f"Release {version.name}", "-")
 
         release_notes_text = ""
 
-        pull_requests_text = ""
-        for commit in commits:
-            for pr in filter(
-                lambda x: commit.hexsha == x["fromRef"]["latestCommit"], pull_requests
-            ):
-                title: str = pr["title"]
-                if title.lower().startswith("release/") or title.lower().startswith(
-                    "hotfix/"
-                ):
-                    description: str = pr.get("description", "no description")
-                    release_notes_text += replace_imas_jira(generate_list(description))
-                self_uri = pr.get("links", {}).get("self", [])
-                if len(self_uri) != 0:
-                    title = f"`{title} <{self_uri[0].get('href')}>`__"
-                pull_requests_text += f"* {title}\n"
+        # Check which pull-requests were merged for this release
+        prs = get_pull_requests_from_commits(commits, pull_requests)
+        titles_descriptions_uris = [
+            (
+                x.get("title", "").lower(),
+                x.get("description", "no description"),
+                x.get("links", {}).get("self", []),
+            )
+            for x in prs
+        ]
+        release_notes_text = generate_release_text(titles_descriptions_uris)
+        changelog_pr_text = "\n".join(
+            [f"* `{x[0]} <{x[2]}>`__" for x in titles_descriptions_uris]
+        )
 
         # if release_notes_text != "" or pull_requests_text != "":
         changelog_text += release
 
-        if release_notes_text != "":
-            changelog_text += "Release notes\n--------------\n\n"
+        if release_notes_text is not None:
+            changelog_text += heading("Release notes", "*")
             changelog_text += replace_note(release_notes_text)
             changelog_text += "\n\n"
 
@@ -138,11 +159,10 @@ def generate_git_changelog(app: Sphinx):
             diff_url = f"https://git.iter.org/projects/IMAS/repos/data-dictionary/compare/diff?targetBranch={previous_version.tag.tag}&sourceBranch={version.tag.tag}&targetRepoId=114"
             previous_version_idx += 1
 
-        if pull_requests_text != "":
-            changelog_text += "Included pull requests\n"
-            changelog_text += "----------------------------------------------------\n\n"
+        if changelog_pr_text != "":
+            changelog_text += heading("Included pull requests", "*")
             changelog_text += f"`diff <{diff_url}>`__\n\n"
-            changelog_text += pull_requests_text
+            changelog_text += changelog_pr_text
             changelog_text += "\n\n"
         elif diff_url:
             changelog_text += f"`diff <{diff_url}>`__\n\n"
