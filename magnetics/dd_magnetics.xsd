@@ -47,7 +47,7 @@
 			</xs:element>
 			<xs:element name="position" type="rzphi0d_static" maxOccurs="100">
 				<xs:annotation>
-					<xs:documentation>List of (R,Z,phi) points defining the position of the coil guiding centre</xs:documentation>
+					<xs:documentation>List of (R,Z,phi) points defining the position of the coil guiding centre. Values defining a single segment must be entered in contiguous order</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -56,7 +56,7 @@
 			</xs:element>
 			<xs:element name="indices_compound">
 				<xs:annotation>
-					<xs:documentation>Indices (from the rogowski_coil array of structure) of the partial Rogoswkis used to build the coumpound signal (sum of the partial Rogoswki signals) Use only if ../measure_quantity/index = 5, leave empty otherwise</xs:documentation>
+					<xs:documentation>Indices (from the rogowski_coil array of structure) of the partial Rogoswkis used to build the coumpound signal (sum of the partial Rogoswki signals). Can be set to any unique integer value for each section of a compound rogowski coil. Use only if ../measure_quantity/index = 5, leave empty otherwise</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -602,7 +602,7 @@
 				</xs:element>
 				<xs:element name="rogowski_coil" type="magnetics_rogowski" maxOccurs="20">
 					<xs:annotation>
-						<xs:documentation>Set of Rogowski coils</xs:documentation>
+						<xs:documentation>Set of Rogowski coils. If some of the coils form a compound Rogowski sensor, they must be entered in continguous order</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
 						</xs:appinfo>
