@@ -18,6 +18,7 @@
       <body>
               <p class="welcome">ITER Physics Data Model Documentation : Top level (list of all IDSs)</p>
               <p>This version of the ITER Physics Data Model follows the COCOS = <xsl:value-of select="./cocos"/> coordinate convention. The COCOS conventions are defined in [O. Sauter and S.Yu. Medvedev, Computer Physics Communications 184 (2013) 293]</p>
+              <p>For conversion between cylindrical (R,phi,Z) and Cartesian (X,Y,Z) coordinates, IMAS follows the <a href="https://en.wikipedia.org/wiki/ISO_31-11">ISO 31-11 standard</a>, namely the X axis corresponds to phi = 0</p>
 			  <p>Mathematical operators :
 			  <ul>
 						<li><a href="http://www-fusion.ciemat.es/wiki/Flux_coordinates#Flux_Surface_Average">Flux surface average</a></li>
