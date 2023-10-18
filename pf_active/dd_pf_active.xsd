@@ -234,12 +234,11 @@
 			</xs:element>
 			<xs:element name="connections">
 				<xs:annotation>
-					<xs:documentation>Description of the supplies and coils connections (nodes) across the circuit. Nodes of the circuit are listed as the first dimension of the matrix. Supplies (listed first) and coils (listed second) SIDES are listed as the second dimension. Thus the second dimension has a size equal to 2*(N_supplies+N_coils). N_supplies (resp. N_coils) is the total number of supplies (resp. coils) listed in the supply (resp.coil) array of structure, i.e. including also supplies/coils that are not part of the actual circuit. The (i,j) matrix elements are 1 if the j-th supply or coil side is connected to the i-th node, or 0 otherwise. For coils, sides are listed so that a current flowing from side 1 to side 2 (inside the coil) is positive (i.e. counter-clockwise when seen from above).</xs:documentation>
+					<xs:documentation>Description of the supplies and coils connections (nodes) across the circuit. Nodes of the circuit are listed as the first dimension of the matrix. Supplies (listed first) and coils (listed second) are listed as the second dimension. Thus the second dimension has a size equal to (N_supplies+N_coils). N_supplies (resp. N_coils) is the total number of supplies (resp. coils) listed in the supply (resp.coil) array of structure, i.e. including also supplies/coils that are not part of the actual circuit. The (i,j) matrix elements are 1 if the j-th supply or coil side is connected to the i-th node by its positive side, -1 if connected by its negative side, or 0 if not connected.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
 						<coordinate2>1...N</coordinate2>
-						<url>pf_active/PFConnections.html</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
