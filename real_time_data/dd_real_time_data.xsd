@@ -40,6 +40,19 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="sample">
+				<xs:annotation>
+					<xs:documentation>Index of sample (time stamp counter)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<coordinate1>../time_stamp</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="rtd_allocatable_signals">
@@ -82,18 +95,17 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="data">
+			<xs:element name="data_str">
 				<xs:annotation>
-					<xs:documentation>Signal data (e.g. diagnostic signal or PCS command)</xs:documentation>
+					<xs:documentation>Signal data (e.g. diagnostic signal or PCS command), serialized as a string</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>mixed</units>
 						<introduced_after_version>3.39.0</introduced_after_version>
 						<coordinate1>../../time_stamp</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
+					<xs:group ref="STR_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="quality">
