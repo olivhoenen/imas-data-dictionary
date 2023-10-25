@@ -9577,6 +9577,28 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the new grid subset the statistics value is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the grid used to represent the statistics value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="uq_input_path">
 				<xs:annotation>
 					<xs:documentation>For Sobol index only, path to the related the uq_input quantity, e.g. ../../../uq_input_2d(3) </xs:documentation>
