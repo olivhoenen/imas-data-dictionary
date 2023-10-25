@@ -4129,6 +4129,51 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="covariance_matrix">
+		<xs:annotation>
+			<xs:documentation>User-defined covariance matrix</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Description of this covariance matrix</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rows_uri">
+				<xs:annotation>
+					<xs:documentation>List of URIs corresponding to the rows (1st dimension) of the covariance matrix. If not all indices of a given node are used, they must be listed explicitly e.g. rows_uri(i) = pf_active:1/coil(i) will refer to a list of indices of the occurrence 1 of the pf_active IDS of this data entry. If the rows correspond to all indices of a given vector it is sufficient to give a single URI where this vector is denoted using the (:) implicit notation, e.g. rows_uri(1) = /grid_ggd(3)/grid_subset(2)/elements(:).</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<url>utilities/IMAS-URI-scheme.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Covariance matrix</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>mixed</units>
+						<coordinate1>../rows_uri</coordinate1>
+						<coordinate2>../rows_uri</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="detector_energy_band">
 		<xs:annotation>
 			<xs:documentation>Detector energy band</xs:documentation>
