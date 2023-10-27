@@ -42,7 +42,7 @@ An IDS *path* can be used in the following cases:
 ### *idspath* or *fragment* as `path` field in IDSs
 
 In several places in the Data-Dictionary, specific string fields of IDS allow to make a reference to other fields of the same IDS. 
-This is the case for instance of the field `/ids_properties/provenance/node(:)/path`. In this field, an idspath is expected point 
+This is the case for instance of the field `/ids_properties/provenance/node(:)/path`. In this field, an idspath is expected to point 
 to a subset of the current IDS.
 
 In other cases, the reference `path` field allows to point to different IDS of the same data-entry (e.g in `grid_ggd(:)/path`). 
