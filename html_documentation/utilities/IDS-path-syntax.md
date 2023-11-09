@@ -41,7 +41,7 @@ An IDS *path* can be used in the following cases:
 ​
 ### *idspath* or *fragment* as `path` field in IDSs
 
-In several places in the Data-Dictionary, specific string fields of IDS allow to make a reference to other fields of the same IDS. 
+In several places in the Data-Dictionary, specific string fields of an IDS allow references to be made to other fields in the same IDS. 
 This is the case for instance of the field `/ids_properties/provenance/node(:)/path`. In this field, an idspath is expected to point 
 to a subset of the current IDS.
 
