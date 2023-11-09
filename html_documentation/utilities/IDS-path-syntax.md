@@ -52,7 +52,7 @@ Refer to [URI syntax](IMAS-URI-scheme.md) documentation for more information.
 
 ### *idspath* in URI fragment
 
-When the *idspath* is given as a part of an IMAS URI, it is always given in complement information on the IDS (and optionnally its occurrence), 
+When *idspath* is given as a part of an IMAS URI, it is always contains the specific IDS (and optionally its occurrence) 
 and follows the syntax `#ids[:occurrence][/idspath]` described in the [URI syntax](IMAS-URI-scheme.md) documentation. 
 
 ### *idspath* as an argument of a `partial_get` operation
