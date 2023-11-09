@@ -432,7 +432,7 @@
 			</xs:element>
 			<xs:element name="force_radial_crushing" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Radial crushing force applied on this coil (positive when outwards) </xs:documentation>
+					<xs:documentation>Radial crushing force applied on this coil (positive when compressive) </xs:documentation>
 					<xs:appinfo>
 						<units>N</units>
 						<introduced_after_version>3.39.0</introduced_after_version>
@@ -441,7 +441,7 @@
 			</xs:element>
 			<xs:element name="force_vertical_crushing" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Vertical crushing force applied on this coil (positive when upwards) </xs:documentation>
+					<xs:documentation>Vertical crushing force applied on this coil (positive when compressive) </xs:documentation>
 					<xs:appinfo>
 						<units>N</units>
 						<introduced_after_version>3.39.0</introduced_after_version>
@@ -457,7 +457,7 @@
 		<xs:sequence>
 			<xs:element name="combination_matrix">
 				<xs:annotation>
-					<xs:documentation>Force limits are expressed as a linear combination of the forces on each individual coil. The weights of the linear combination are given by this matrix, while the limits are given by the sibling nodes limit_min and limit_max. Each row of this matrix corresponds to a force limit. The columns represent, for each coil, the 4 types of forces on the coil namely [radial, vertical, radial_crush, vertical_crush]. There are therefore 4*coils_n columns.</xs:documentation>
+					<xs:documentation>Force limits are expressed as a linear combination of the forces on each individual coil. The weights of the linear combination are given by this matrix, while the limits are given by the sibling nodes limit_min and limit_max. Each row of this matrix corresponds to a force limit. The columns represent, for each coil, the 4 types of forces on the coil namely [coil1_radial, coil1_vertical, coil1_radial_crush, coil1_vertical_crush, coil2_radial, coil2_vertical, coil2_radial_crush, coil2_vertical_crush, ...]. There are therefore 4*coils_n columns.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>../limit_max</coordinate1>
@@ -471,7 +471,7 @@
 			</xs:element>
 			<xs:element name="limit_max">
 				<xs:annotation>
-					<xs:documentation>Maximum force combination limit, for each limit. EMPTY_FLT value means unbounded</xs:documentation>
+					<xs:documentation>Maximum force limit, for each limit (line of the combination matrix). EMPTY_FLT value means unbounded</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>N</units>
@@ -484,7 +484,7 @@
 			</xs:element>
 			<xs:element name="limit_min">
 				<xs:annotation>
-					<xs:documentation>Minimum force combination limit, for each limit. EMPTY_FLT value means unbounded</xs:documentation>
+					<xs:documentation>Minimum force limit, for each limit (line of the combination matrix). EMPTY_FLT value means unbounded</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>N</units>
