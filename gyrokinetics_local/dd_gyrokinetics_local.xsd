@@ -312,7 +312,7 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="debye_length_reference">
+			<xs:element name="debye_length_norm">
 				<xs:annotation>
 					<xs:documentation>Debye length computed from the reference quantities (see detailed documentation at the root of the IDS)</xs:documentation>
 					<xs:appinfo>
@@ -615,9 +615,55 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="gyrokinetics_fields_nl_1d">
+		<xs:annotation>
+			<xs:documentation>Fields intensity, 1D, flux surface averaged, summed over kx, time averaged, non-linear</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="phi_potential_perturbed_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised perturbed electrostatic potential</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../binormal_wavevector_norm</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="a_field_parallel_perturbed_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised perturbed parallel vector potential</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../binormal_wavevector_norm</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b_field_parallel_perturbed_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised perturbed parallel magnetic field</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../binormal_wavevector_norm</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="gyrokinetics_fields_nl_2d_ky0">
 		<xs:annotation>
-			<xs:documentation>Fields intensity, 2D, ky=0, flux surface averaged, non-linear</xs:documentation>
+			<xs:documentation>Fields 2D, ky=0, flux surface averaged, non-linear, complex</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="phi_potential_perturbed_norm">
@@ -631,7 +677,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="CPX_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="a_field_parallel_perturbed_norm">
@@ -645,7 +691,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="CPX_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="b_field_parallel_perturbed_norm">
@@ -659,7 +705,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="CPX_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -767,7 +813,7 @@
 	</xs:complexType>
 	<xs:complexType name="gyrokinetics_fields_nl_4d">
 		<xs:annotation>
-			<xs:documentation>Fields intensity, 4D, non-linear</xs:documentation>
+			<xs:documentation>Fields, 4D, non-linear, complex</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="phi_potential_perturbed_norm">
@@ -783,7 +829,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_4D"/>
+					<xs:group ref="CPX_4D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="a_field_parallel_perturbed_norm">
@@ -799,7 +845,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_4D"/>
+					<xs:group ref="CPX_4D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="b_field_parallel_perturbed_norm">
@@ -815,7 +861,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_4D"/>
+					<xs:group ref="CPX_4D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -2550,7 +2596,7 @@
 					<xs:documentation>1D fluxes (flux-surface and time averaged), summed over kx and ky</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="fields_intensity_4d" type="gyrokinetics_fields_nl_4d">
+			<xs:element name="fields_4d" type="gyrokinetics_fields_nl_4d">
 				<xs:annotation>
 					<xs:documentation>4D fields</xs:documentation>
 				</xs:annotation>
@@ -2565,9 +2611,44 @@
 					<xs:documentation>2D fields (time averaged and flux surface averaged)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="fields_intensity_2d_k_y_0" type="gyrokinetics_fields_nl_2d_ky0">
+			<xs:element name="fields_zonal_2d" type="gyrokinetics_fields_nl_2d_ky0">
 				<xs:annotation>
-					<xs:documentation>2D fields (taken at ky=0, flux surface averaged)</xs:documentation>
+					<xs:documentation>2D zonal fields (taken at ky=0, flux surface averaged)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fields_intensity_1d" type="gyrokinetics_fields_nl_1d">
+				<xs:annotation>
+					<xs:documentation>1D fields (summed over kx, time averaged and flux surface averaged)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_5d_rotating_frame" type="gyrokinetics_fluxes_nl_5d">
+				<xs:annotation>
+					<xs:documentation>5D fluxes in the rotating frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_4d_rotating_frame" type="gyrokinetics_fluxes_nl_4d">
+				<xs:annotation>
+					<xs:documentation>4D fluxes (time averaged) in the rotating frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_3d_rotating_frame" type="gyrokinetics_fluxes_nl_3d">
+				<xs:annotation>
+					<xs:documentation>3D fluxes (time and flux surface averaged) in the rotating frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_2d_k_x_sum_rotating_frame" type="gyrokinetics_fluxes_nl_2d_sum_kx">
+				<xs:annotation>
+					<xs:documentation>2D fluxes (time and flux-surface averaged), summed over kx in the rotating frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_2d_k_x_k_y_sum_rotating_frame" type="gyrokinetics_fluxes_nl_2d_sum_kx_ky">
+				<xs:annotation>
+					<xs:documentation>2D fluxes (flux-surface averaged), summed over kx and ky in the rotating frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fluxes_1d_rotating_frame" type="gyrokinetics_fluxes_nl_1d">
+				<xs:annotation>
+					<xs:documentation>1D fluxes (flux-surface and time averaged), summed over kx and ky in the rotating frame</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
