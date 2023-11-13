@@ -9625,6 +9625,218 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="statistics_distribution_2d">
+		<xs:annotation>
+			<xs:documentation>Distribution function of a 2D physical quantity</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bins">
+				<xs:annotation>
+					<xs:documentation>Bins of quantitiy values, defined for each element (first dimension) corresponding to the first dimension of the original 2D quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="probability">
+				<xs:annotation>
+					<xs:documentation>Probability to have a value of the quantity between bins(n) and bins(n+1) (thus the size of its second dimension is the size of the second dimension of the bins array - 1). The first dimension correspond to the first dimension of the original 2D quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../bins</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics_quantity_2d_type">
+		<xs:annotation>
+			<xs:documentation>Statistics over time for a given 2D quantity and a given statistics type</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Identifier of the statistics type</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/statistics_type_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value of the statistics for that quantity, the array corresponding to the first dimension of the original 2D quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the new grid subset the statistics value is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the grid used to represent the statistics value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="uq_input_path">
+				<xs:annotation>
+					<xs:documentation>For Sobol index only, path to the related the uq_input quantity, e.g. ../../../uq_input_2d(3) </xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics_input_2d">
+		<xs:annotation>
+			<xs:documentation>Statistics input 2D quantity</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="path">
+				<xs:annotation>
+					<xs:documentation>Path of the quantity within the IDS, following the syntax given in the link below</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<url>utilities/IDS-path-syntax.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="distribution" type="statistics_distribution_2d">
+				<xs:annotation>
+					<xs:documentation>Probability distribution function of the quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics_quantity_2d">
+		<xs:annotation>
+			<xs:documentation>Statistics over time for a given 2D quantity</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="path">
+				<xs:annotation>
+					<xs:documentation>Path of the quantity within the IDS, following the syntax given in the link below</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<url>utilities/IDS-path-syntax.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="statistics_type" type="statistics_quantity_2d_type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of statistics types applied to the quantity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="distribution" type="statistics_distribution_2d">
+				<xs:annotation>
+					<xs:documentation>Probability distribution function of the quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics">
+		<xs:annotation>
+			<xs:documentation>Statistics over time</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="quantity_2d" type="statistics_quantity_2d" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of 2D quantities on which statistics are provided. 2D means 1D+time dimension, so either a 1D quantity within a dynamic array of structure, or a 2D dynamic quantity outside of an array of structure. Therefore the resulting statistical value is 1D for a given statistics time slice. </xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uq_input_2d" type="statistics_input_2d" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>If the statistics are based on an uncertainty quantification process, set of 2D input quantities that are varied</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time_width">
+				<xs:annotation>
+					<xs:documentation>Width of the time interval over which the statistics have been calculated. By convention, the time interval starts at time-time_width and ends at time.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="vessel_2d_element">
 		<xs:annotation>
 			<xs:documentation>2D vessel block element description</xs:documentation>
