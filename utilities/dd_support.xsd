@@ -4129,6 +4129,51 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="covariance_matrix">
+		<xs:annotation>
+			<xs:documentation>User-defined covariance matrix</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Description of this covariance matrix</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rows_uri">
+				<xs:annotation>
+					<xs:documentation>List of URIs corresponding to the rows (1st dimension) of the covariance matrix. If not all indices of a given node are used, they must be listed explicitly e.g. rows_uri(i) = pf_active:1/coil(i) will refer to a list of indices of the occurrence 1 of the pf_active IDS of this data entry. If the rows correspond to all indices of a given vector it is sufficient to give a single URI where this vector is denoted using the (:) implicit notation, e.g. rows_uri(1) = /grid_ggd(3)/grid_subset(2)/elements(:).</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<url>utilities/IMAS-URI-scheme.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Covariance matrix</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>mixed</units>
+						<coordinate1>../rows_uri</coordinate1>
+						<coordinate2>../rows_uri</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="detector_energy_band">
 		<xs:annotation>
 			<xs:documentation>Detector energy band</xs:documentation>
@@ -4867,6 +4912,122 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_vector_components_rzphi">
+		<xs:annotation>
+			<xs:documentation>Vector components in predefined directions on a generic grid, R, Z and toroidal directions only (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Component along the major radius axis, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="r_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Component along the height axis, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../r</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal">
+				<xs:annotation>
+					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../r</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -9464,6 +9625,218 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="statistics_distribution_2d">
+		<xs:annotation>
+			<xs:documentation>Distribution function of a 2D physical quantity</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bins">
+				<xs:annotation>
+					<xs:documentation>Bins of quantitiy values, defined for each element (first dimension) corresponding to the first dimension of the original 2D quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="probability">
+				<xs:annotation>
+					<xs:documentation>Probability to have a value of the quantity between bins(n) and bins(n+1) (thus the size of its second dimension is the size of the second dimension of the bins array - 1). The first dimension correspond to the first dimension of the original 2D quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../bins</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics_quantity_2d_type">
+		<xs:annotation>
+			<xs:documentation>Statistics over time for a given 2D quantity and a given statistics type</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Identifier of the statistics type</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/statistics_type_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value of the statistics for that quantity, the array corresponding to the first dimension of the original 2D quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the new grid subset the statistics value is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the grid used to represent the statistics value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="uq_input_path">
+				<xs:annotation>
+					<xs:documentation>For Sobol index only, path to the related the uq_input quantity, e.g. ../../../uq_input_2d(3) </xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics_input_2d">
+		<xs:annotation>
+			<xs:documentation>Statistics input 2D quantity</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="path">
+				<xs:annotation>
+					<xs:documentation>Path of the quantity within the IDS, following the syntax given in the link below</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<url>utilities/IDS-path-syntax.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="distribution" type="statistics_distribution_2d">
+				<xs:annotation>
+					<xs:documentation>Probability distribution function of the quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics_quantity_2d">
+		<xs:annotation>
+			<xs:documentation>Statistics over time for a given 2D quantity</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="path">
+				<xs:annotation>
+					<xs:documentation>Path of the quantity within the IDS, following the syntax given in the link below</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<url>utilities/IDS-path-syntax.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="statistics_type" type="statistics_quantity_2d_type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of statistics types applied to the quantity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="distribution" type="statistics_distribution_2d">
+				<xs:annotation>
+					<xs:documentation>Probability distribution function of the quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics">
+		<xs:annotation>
+			<xs:documentation>Statistics over time</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="quantity_2d" type="statistics_quantity_2d" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of 2D quantities on which statistics are provided. 2D means 1D+time dimension, so either a 1D quantity within a dynamic array of structure, or a 2D dynamic quantity outside of an array of structure. Therefore the resulting statistical value is 1D for a given statistics time slice. </xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uq_input_2d" type="statistics_input_2d" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>If the statistics are based on an uncertainty quantification process, set of 2D input quantities that are varied</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time_width">
+				<xs:annotation>
+					<xs:documentation>Width of the time interval over which the statistics have been calculated. By convention, the time interval starts at time-time_width and ends at time.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="vessel_2d_element">
 		<xs:annotation>
 			<xs:documentation>2D vessel block element description</xs:documentation>
@@ -9935,6 +10308,18 @@
 						<xs:group ref="STR_0D"/>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="name">
+					<xs:annotation>
+						<xs:documentation>User-defined name for this IDS occurrence</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<introduced_after_version>3.39.0</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="homogeneous_time">
 					<xs:annotation>
 						<xs:documentation>This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2</xs:documentation>
@@ -9945,6 +10330,15 @@
 					<xs:complexType>
 						<xs:group ref="INT_0D"/>
 					</xs:complexType>
+				</xs:element>
+				<xs:element name="occurrence_type" type="identifier">
+					<xs:annotation>
+						<xs:documentation>Type of data contained in this occurrence</xs:documentation>
+						<xs:appinfo>
+							<doc_identifier>utilities/occurrence_type_identifier.xml</doc_identifier>
+							<introduced_after_version>3.39.0</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
 				</xs:element>
 				<xs:element name="source">
 					<xs:annotation>
