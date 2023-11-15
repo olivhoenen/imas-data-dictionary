@@ -563,8 +563,8 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../angle_pol</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -577,8 +577,8 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../angle_pol</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -591,8 +591,8 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../angle_pol</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -605,8 +605,8 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../angle_pol</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -619,8 +619,8 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../angle_pol</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -633,8 +633,8 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../angle_pol</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -647,8 +647,8 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../angle_pol</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2169,43 +2169,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="gyrokinetics_fluxes_moments">
-		<xs:annotation>
-			<xs:documentation>Turbulent fluxes and moments for a given eigenmode and a given species</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="moments_norm_gyrocenter" type="gyrokinetics_moments_linear">
-				<xs:annotation>
-					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="moments_norm_particle" type="gyrokinetics_moments_linear">
-				<xs:annotation>
-					<xs:documentation>Moments (normalised) of the perturbed distribution function of particles</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="moments_norm_gyrocenter_bessel_0" type="gyrokinetics_moments_linear">
-				<xs:annotation>
-					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters times 0th order Bessel function of the first kind</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="moments_norm_gyrocenter_bessel_1" type="gyrokinetics_moments_linear">
-				<xs:annotation>
-					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters times 1st order Bessel function of the first kind</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="linear_weights" type="gyrokinetics_fluxes">
-				<xs:annotation>
-					<xs:documentation>Normalised fluxes in the laboratory frame</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="linear_weights_rotating_frame" type="gyrokinetics_fluxes">
-				<xs:annotation>
-					<xs:documentation>Normalised fluxes in the rotating frame</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="gyrokinetics_eigenmode_fields">
 		<xs:annotation>
 			<xs:documentation>Fields output of the GK calculation for a given eigenmode</xs:documentation>
@@ -2419,14 +2382,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="fluxes_moments" type="gyrokinetics_fluxes_moments" maxOccurs="10">
-				<xs:annotation>
-					<xs:appinfo>
-						<coordinate1>/species</coordinate1>
-					</xs:appinfo>
-					<xs:documentation>Fluxes and moments of the perturbed distribution function, for this eigenmode and for each species. The fluxes are time averaged for non-linear runs (using model/ time_interval_norm) and given at the last time step for linear runs. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="code" type="code_partial_constant">
 				<xs:annotation>
 					<xs:documentation>Code-specific parameters used for this eigenmode</xs:documentation>
@@ -2446,6 +2401,36 @@
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="moments_norm_gyrocenter" type="gyrokinetics_moments_linear">
+				<xs:annotation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="moments_norm_particle" type="gyrokinetics_moments_linear">
+				<xs:annotation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of particles</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="moments_norm_gyrocenter_bessel_0" type="gyrokinetics_moments_linear">
+				<xs:annotation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters times 0th order Bessel function of the first kind</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="moments_norm_gyrocenter_bessel_1" type="gyrokinetics_moments_linear">
+				<xs:annotation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters times 1st order Bessel function of the first kind</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="linear_weights" type="gyrokinetics_fluxes">
+				<xs:annotation>
+					<xs:documentation>Normalised fluxes in the laboratory frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="linear_weights_rotating_frame" type="gyrokinetics_fluxes">
+				<xs:annotation>
+					<xs:documentation>Normalised fluxes in the rotating frame</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
