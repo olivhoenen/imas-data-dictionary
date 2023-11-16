@@ -563,12 +563,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../angle_pol</coordinate1>
-						<coordinate2>../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="j_parallel">
@@ -577,12 +578,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../angle_pol</coordinate1>
-						<coordinate2>../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="pressure_parallel">
@@ -591,12 +593,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../angle_pol</coordinate1>
-						<coordinate2>../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="pressure_perpendicular">
@@ -605,12 +608,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../angle_pol</coordinate1>
-						<coordinate2>../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="heat_flux_parallel">
@@ -619,12 +623,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../angle_pol</coordinate1>
-						<coordinate2>../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v_parallel_energy_perpendicular">
@@ -633,12 +638,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../angle_pol</coordinate1>
-						<coordinate2>../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v_perpendicular_square_energy">
@@ -647,12 +653,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../angle_pol</coordinate1>
-						<coordinate2>../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -2020,7 +2027,7 @@
 	</xs:complexType>
 	<xs:complexType name="gyrokinetics_fluxes">
 		<xs:annotation>
-			<xs:documentation>Turbulent fluxes for a given eigenmode and a given species</xs:documentation>
+			<xs:documentation>Turbulent fluxes for a given eigenmode</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="particles_phi_potential">
@@ -2029,10 +2036,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="particles_a_field_parallel">
@@ -2041,10 +2049,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="particles_b_field_parallel">
@@ -2053,10 +2062,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="energy_phi_potential">
@@ -2065,10 +2075,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="energy_a_field_parallel">
@@ -2077,10 +2088,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="energy_b_field_parallel">
@@ -2089,10 +2101,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_parallel_phi_potential">
@@ -2101,10 +2114,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_parallel_a_field_parallel">
@@ -2125,10 +2139,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_perpendicular_phi_potential">
@@ -2137,10 +2152,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_perpendicular_a_field_parallel">
@@ -2149,11 +2165,12 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
+					<xs:group ref="FLT_1D"/>
+			</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_perpendicular_b_field_parallel">
 				<xs:annotation>
@@ -2161,10 +2178,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
