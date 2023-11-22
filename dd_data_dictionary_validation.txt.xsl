@@ -102,6 +102,12 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
 </xsl:apply-templates>
 <!-- Coordinate checks -->
 <xsl:apply-templates select="." mode="coordinate_validation"/>
+<!-- Check usage of reserved names -->
+<xsl:variable name="reserved_names" select="replace(unparsed-text('./reserved_names.txt'), '[\n\r]', '|')" />
+<xsl:apply-templates select=".//field[contains($reserved_names, concat('|', @name, '|'))]">
+<xsl:with-param name="error_description" select="'Illegal name: name is found in the list of reserved names (see `reserved_names.txt`)'"/>
+</xsl:apply-templates>
+<!-- End of validation rules -->
 </xsl:variable>
 <xsl:choose>
     <xsl:when test="not(string($test_output))">
