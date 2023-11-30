@@ -8019,6 +8019,52 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="xyz1d_positions_static">
+		<xs:annotation>
+			<xs:documentation>Structure for list of X, Y, Z positions (1D, static)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x">
+				<xs:annotation>
+					<xs:documentation>List of X coordinates</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="y">
+				<xs:annotation>
+					<xs:documentation>List of Y coordinates</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../x</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>List of Z coordinates</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../x</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="xyz2d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for list of X, Y, Z components (2D, static)</xs:documentation>

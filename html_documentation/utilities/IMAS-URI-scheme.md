@@ -69,13 +69,12 @@ will send requests for data over the netwrok. A URI would then look like: `imas:
 
 ### Backend
 
-The `backend` is the name of the Access-Layer backend used to retrieve the stored data, this name is given in lower case.
-Current possibilities are: `mdsplus`, `hdf5`, `ascii`, `memory` and `uda`.
+The `backend` is the name of the Access-Layer backend used to retrieve the stored data, this name is given in lower case and is mandatory.
+Current possibilities are: `mdsplus`, `hdf5`, `ascii`, `memory` and `uda`. Be aware that some backends may not be available in a given install of the Access-Layer.
 
 ### Query
 
-The query is mandatoryThe `query` starts with `?` and is composed of a list of semi-colon `;` separated pairs `key=value`. Some of the keys are standard 
-and recognized by all backends, while others may be specific to a backend. Standard keys are
+A `query` is mandatory. It starts with `?` and is composed of a list of semi-colon `;` (or ampersand `&`) separated pairs `key=value`. The following keys are standard and recognized by all backends:
 
 - `path`: absolute path on the localhost where the data is stored;
 - `shot`, `run`, `user`, `database`, `version`: allowed for compatibility purpose with legacy data-entry identifiers.
@@ -83,15 +82,17 @@ and recognized by all backends, while others may be specific to a backend. Stand
 **Note**: if legacy identifiers are provided, they are always transformed into a standard `path` before the query is being passed to the 
 backend.
 
+Other keys may exist, be optional or mandatory for a given backend. Please refer to the latest documentation of the Access-Layer for more information on backend-specific keys.
+
 ### Fragment
 
-In order to identify a subset from a given data-entry a `fragment` can be added to the URI. 
+In order to identify a subset from a given data-entry, a `fragment` can be added to the URI. 
 Such `fragment`, which starts with a hash `#`, is optional and allows to identify a specific IDS, or a part of an IDS. 
 
 The structure of the fragment is **`#idsname[:occurrence][/idspath]`**, where:
 
 - **`idsname`** is the type name of the IDS, given in lower case, is mandatory in fragments and comes directly after the `#` delimiter;
-- **`occurrence`** is the occurrence of the IDS (refer to the [Access-Layer User Guide](https://user.iter.org/?uid=YSQENW&action=get_document) for more information), is optional and comes after a colon `:` delimiter which associates it with the IDS specified before the delimiter;
+- **`occurrence`** is the occurrence of the IDS (refer to the [Access-Layer User Guide](https://user.iter.org/?uid=YSQENW&action=get_document) for more information), is optional and comes after a colon `:` delimiter that links the occurrence to the IDS specified before the delimiter;
 - **`idspath`** is the path from IDS root to the IDS subset that needs to be identified, and is optional (in such case the fragment identifies the entire IDS structure). Refer to the [IDS path syntax](IDS-path-syntax.md) document for more information.
 
 
