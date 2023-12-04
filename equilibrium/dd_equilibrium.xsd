@@ -4,6 +4,174 @@
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="equilibrium_connection_length">
+		<xs:annotation>
+			<xs:documentation>Connection length</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="delta_r">
+				<xs:annotation>
+					<xs:documentation>Starting point major radii relative to the LFS equatorial point</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>Connection length values, for each starting point, to the target</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../delta_r</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="equilibrium_strike_point">
+		<xs:annotation>
+			<xs:documentation>Strike point description</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius of the strike point</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height of the strike point</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="leg_outline" type="rz1d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>RZ outline of the leg between the X point and the strike point</xs:documentation>
+					<xs:appinfo>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grazing_angle">
+				<xs:annotation>
+					<xs:documentation>Grazing angle between the 3D field line and the plasma facing component at the strike point</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="connection_length" type="equilibrium_connection_length">
+				<xs:annotation>
+					<xs:documentation>Connection lengths following the 3D field lines from an array of starting points near the LFS equatorial point (Z=Z_magnetic_axis) to the target</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="equilibrium_x_point">
+		<xs:annotation>
+			<xs:documentation>X-point description</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi_norm">
+				<xs:annotation>
+					<xs:documentation>Value of the normalized poloidal flux at the x_point</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Value of the poloidal flux at the x_point</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="strike_point" type="equilibrium_strike_point" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Array of strike points connected to the X-point</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="levelset" type="rz1d_dynamic_aos" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Array of levelset to store magnetic surface open contours associated to the X-point (that aren't strike points legs)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="equilibrium_gap">
 		<xs:annotation>
 			<xs:documentation>Gap for describing the plasma boundary</xs:documentation>
@@ -201,307 +369,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="equilibrium_boundary_second_separatrix">
-		<xs:annotation>
-			<xs:documentation>Geometry of the plasma boundary at the secondary separatrix</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="outline" type="rz1d_dynamic_aos">
-				<xs:annotation>
-					<xs:documentation>RZ outline of the plasma boundary</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="psi">
-				<xs:annotation>
-					<xs:documentation>Value of the poloidal flux at the separatrix</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>Wb</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="distance_inner_outer">
-				<xs:annotation>
-					<xs:documentation>Distance between the inner and outer separatrices, in the major radius direction, at the plasma outboard and at the height corresponding to the maximum R for the inner separatrix.</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<introduced_after_version>3.32.1</introduced_after_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="x_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Array of X-points, for each of them the RZ position is given</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="strike_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Array of strike points, for each of them the RZ position is given</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<introduced_after_version>3.32.1</introduced_after_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="equilibrium_boundary_separatrix">
-		<xs:annotation>
-			<xs:documentation>Geometry of the plasma boundary at the separatrix</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="type">
-				<xs:annotation>
-					<xs:documentation>0 (limiter) or 1 (diverted)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="outline" type="rz1d_dynamic_aos">
-				<xs:annotation>
-					<xs:documentation>RZ outline of the plasma boundary</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="psi">
-				<xs:annotation>
-					<xs:documentation>Value of the poloidal flux at the separatrix</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>Wb</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="geometric_axis" type="rz0d_dynamic_aos">
-				<xs:annotation>
-					<xs:documentation>RZ position of the geometric axis (defined as (Rmin+Rmax) / 2 and (Zmin+Zmax) / 2 of the boundary)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="minor_radius">
-				<xs:annotation>
-					<xs:documentation>Minor radius of the plasma boundary (defined as (Rmax-Rmin) / 2 of the boundary)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="elongation">
-				<xs:annotation>
-					<xs:documentation>Elongation of the plasma boundary</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<url>equilibrium/DefinitionEqBoundary.svg</url>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="triangularity">
-				<xs:annotation>
-					<xs:documentation>Triangularity of the plasma boundary</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
-						<type>dynamic</type>
-						<url>equilibrium/DefinitionEqBoundary.svg</url>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="triangularity_upper">
-				<xs:annotation>
-					<xs:documentation>Upper triangularity of the plasma boundary</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
-						<type>dynamic</type>
-						<url>equilibrium/DefinitionEqBoundary.svg</url>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="triangularity_lower">
-				<xs:annotation>
-					<xs:documentation>Lower triangularity of the plasma boundary</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
-						<type>dynamic</type>
-						<url>equilibrium/DefinitionEqBoundary.svg</url>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="triangularity_outer">
-				<xs:annotation>
-					<xs:documentation>Outer triangularity of the plasma boundary</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
-						<type>dynamic</type>
-						<url>equilibrium/DefinitionEqBoundary.svg</url>
-						<introduced_after_version>3.38.1</introduced_after_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="triangularity_inner">
-				<xs:annotation>
-					<xs:documentation>Inner triangularity of the plasma boundary</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
-						<type>dynamic</type>
-						<url>equilibrium/DefinitionEqBoundary.svg</url>
-						<introduced_after_version>3.38.1</introduced_after_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="triangularity_minor">
-				<xs:annotation>
-					<xs:documentation>Minor triangularity of the plasma boundary</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
-						<type>dynamic</type>
-						<url>equilibrium/DefinitionEqBoundary.svg</url>
-						<introduced_after_version>3.38.1</introduced_after_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="squareness_upper_inner">
-				<xs:annotation>
-					<xs:documentation>Upper inner squareness of the plasma boundary (definition from T. Luce, Plasma Phys. Control. Fusion 55 (2013) 095009)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<lifecycle_status>alpha</lifecycle_status>
-						<lifecycle_version>3.18.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="squareness_upper_outer">
-				<xs:annotation>
-					<xs:documentation>Upper outer squareness of the plasma boundary (definition from T. Luce, Plasma Phys. Control. Fusion 55 (2013) 095009)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<lifecycle_status>alpha</lifecycle_status>
-						<lifecycle_version>3.18.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="squareness_lower_inner">
-				<xs:annotation>
-					<xs:documentation>Lower inner squareness of the plasma boundary (definition from T. Luce, Plasma Phys. Control. Fusion 55 (2013) 095009)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<lifecycle_status>alpha</lifecycle_status>
-						<lifecycle_version>3.18.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="squareness_lower_outer">
-				<xs:annotation>
-					<xs:documentation>Lower outer squareness of the plasma boundary (definition from T. Luce, Plasma Phys. Control. Fusion 55 (2013) 095009)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>-</units>
-						<lifecycle_status>alpha</lifecycle_status>
-						<lifecycle_version>3.18.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="x_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Array of X-points, for each of them the RZ position is given</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="strike_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Array of strike points, for each of them the RZ position is given</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="active_limiter_point" type="rz0d_dynamic_aos">
-				<xs:annotation>
-					<xs:documentation>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="closest_wall_point" type="equilibrium_boundary_closest">
-				<xs:annotation>
-					<xs:documentation>Position and distance to the plasma boundary of the point of the first wall which is the closest to plasma boundary</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="dr_dz_zero_point" type="rz0d_dynamic_aos">
-				<xs:annotation>
-					<xs:documentation>Outboard point on the separatrix on which dr/dz = 0 (local maximum of the major radius of the separatrix). In case of multiple local maxima, the closest one from z=z_magnetic_axis is chosen. </xs:documentation>
-					<xs:appinfo>
-						<introduced_after_version>3.32.1</introduced_after_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="gap" type="equilibrium_gap" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Set of gaps, defined by a reference point and a direction.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="equilibrium_boundary">
 		<xs:annotation>
-			<xs:documentation>Geometry of the plasma boundary typically taken at psi_norm = 99.x % of the separatrix</xs:documentation>
+			<xs:documentation>Geometry of the plasma boundary</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="type">
@@ -522,7 +392,7 @@
 			</xs:element>
 			<xs:element name="psi_norm">
 				<xs:annotation>
-					<xs:documentation>Value of the normalized poloidal flux at which the boundary is taken (typically 99.x %), the flux being normalized to its value at the separatrix</xs:documentation>
+					<xs:documentation>Value of the normalized poloidal flux at which the boundary is taken, the flux being normalized to its value at the separatrix (so psi_norm = 1 if the boundary is the separatrix)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>-</units>
@@ -669,26 +539,52 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="x_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
+			<xs:element name="closest_wall_point" type="equilibrium_boundary_closest">
 				<xs:annotation>
-					<xs:documentation>Array of X-points, for each of them the RZ position is given</xs:documentation>
+					<xs:documentation>Position and distance to the plasma boundary of the point of the first wall which is the closest to plasma boundary</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3</introduced_after_version>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>../boundary_separatrix/closest_wall_point</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="strike_point" type="rz0d_dynamic_aos" maxOccurs="unbounded">
+			<xs:element name="dr_dz_zero_point" type="rz0d_dynamic_aos">
 				<xs:annotation>
-					<xs:documentation>Array of strike points, for each of them the RZ position is given</xs:documentation>
+					<xs:documentation>Outboard point on the separatrix on which dr/dz = 0 (local maximum of the major radius of the separatrix). In case of multiple local maxima, the closest one from z=z_magnetic_axis is chosen. </xs:documentation>
 					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3</introduced_after_version>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>../boundary_separatrix/dr_dz_zero_point</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="active_limiter_point" type="rz0d_dynamic_aos">
+			<xs:element name="gap" type="equilibrium_gap" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>RZ position of the active limiter point (point of the plasma boundary in contact with the limiter)</xs:documentation>
+					<xs:documentation>Set of gaps, defined by a reference point and a direction.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3</introduced_after_version>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>aos_renamed</change_nbc_description>
+						<change_nbc_previous_name>../boundary_separatrix/gap</change_nbc_previous_name>
+					</xs:appinfo>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_point_indices">
+				<xs:annotation>
+					<xs:documentation>List of indices in the ../../x_point array of X-points that belong to the boundary (maybe more than one for double null, snowflakes, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -2777,17 +2673,27 @@
 		<xs:sequence>
 			<xs:element name="boundary" type="equilibrium_boundary">
 				<xs:annotation>
-					<xs:documentation>Description of the plasma boundary used by fixed-boundary codes and typically chosen at psi_norm = 99.x% of the separatrix</xs:documentation>
+					<xs:documentation>Description of the plasma boundary. The boundary can be either the real separatrix (provided by a free boundary equilibrium solver) or the 0.99x psi_norm flux surface provided by a fixed boundary equilibrium</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="boundary_separatrix" type="equilibrium_boundary_separatrix">
+			<xs:element name="x_point" type="equilibrium_x_point" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Description of the plasma boundary at the separatrix</xs:documentation>
+					<xs:documentation>Array of X-points, orderded by increasing psi_norm (so the first one correspond to the separatrix). For each of them the RZ position is given, as well as the related strike points and legs.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3</introduced_after_version>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>aos_renamed</change_nbc_description>
+						<change_nbc_previous_name>boundary_separatrix/x_point</change_nbc_previous_name>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="boundary_secondary_separatrix" type="equilibrium_boundary_second_separatrix">
+			<xs:element name="point" type="rz0d_dynamic_aos">
 				<xs:annotation>
-					<xs:documentation>Geometry of the secondary separatrix, defined as the outer flux surface with an X-point</xs:documentation>
+					<xs:documentation>In case boundary/type = 0 (limiter), RZ position of the active limiter point (point of the plasma boundary in contact with the limiter). In case boundary/type = 1 (diverted), RZ position of the active X-point</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3</introduced_after_version>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="constraints" type="equilibrium_constraints">
