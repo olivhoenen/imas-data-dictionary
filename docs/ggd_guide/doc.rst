@@ -1,16 +1,16 @@
 ..
-    GGD doc copied from https://git.iter.org/projects/IMEX/repos/ggd/browse/doc/guide/source
+    GGD doc initially copied from https://git.iter.org/projects/IMEX/repos/ggd/browse/doc/guide/source
 
 .. _ggd-doc:
 
-=============================
-Introduction to GGD structure
-=============================
+=================================
+Introduction to the GGD structure
+=================================
 
-The purpose of this guide is to provide a better insight on the GGD
-structure found in **Data Dictionary** [DD_git]_ and how to utilize it
-for storing description of grids such as **structured** and **unstructured**
-grids.
+The purpose of this guide is to provide a better insight on the **Generalized
+Grid Description (GGD)** structure found in **Data Dictionary** [DD_git]_ and
+how to utilize it for storing description of grids such as **structured**
+and **unstructured** grids.
 
 ----------------------------------
 Basic principles of tree hierarchy
@@ -485,8 +485,8 @@ The :guilabel:`ggd` AOS
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 The :guilabel:`ggd` AOS holds the plasma quantities represented using the
-**general grid description** for various time slices. The quantities correspond
-directly to one of the grid subsets (e.g. 100 values corresponding to
+**Generalized Grid Description** for various time slices. The quantities
+correspond directly to one of the grid subsets (e.g. 100 values corresponding to
 grid subset composed by 100 points). :guilabel:`ggd` AOS contents differ
 between IDSs and usually it contains many child nodes/AOSs however the same
 rules apply to all.

@@ -14,6 +14,7 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
 
    intro
    data_dictionary_glossary
+   generated/changelog/changelog
 
 
 .. toctree::
