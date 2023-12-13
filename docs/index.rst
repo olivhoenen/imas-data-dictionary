@@ -17,6 +17,11 @@ View the :ref:`reference` for a detailed reference of all IDSs, or use the
 
 
 .. toctree::
+   :caption: Advanced search
+
+   qt
+
+.. toctree::
    :maxdepth: 3
    :caption: Data dictionary reference
    :name: dd-index-reference-toc
