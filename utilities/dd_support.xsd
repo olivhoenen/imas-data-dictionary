@@ -5144,18 +5144,17 @@
 					<xs:documentation>Type of space geometry (0: standard, 1:Fourier, >1: Fourier with periodicity)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="coordinates_type">
+<xs:element name="coordinates_type" type="identifier_dynamic_aos3" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space. The meaning of these predefined integer constants can be found in the Data Dictionary under utilities/coordinate_identifier.xml</xs:documentation>
+					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space.</xs:documentation>
 					<xs:appinfo>
+						<doc_identifier>utilities/coordinate_identifier.xml</doc_identifier>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>INT_1D</change_nbc_previous_type>
 						<coordinate1>1...N</coordinate1>
-						<type>dynamic</type>
-						<url>utilities/coordinate_identifier.xml</url>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="objects_per_dimension" type="generic_grid_dynamic_space_dimension" maxOccurs="unbounded">
 				<xs:annotation>
