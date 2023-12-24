@@ -561,6 +561,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="point" type="rz0d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>In case type = 0 (limiter), RZ position of the active limiter point (point of the plasma boundary in contact with the limiter). In case type = 1 (diverted), RZ position of the active X-point</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="gap" type="equilibrium_gap" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of gaps, defined by a reference point and a direction.</xs:documentation>
@@ -2685,14 +2693,6 @@
 						<change_nbc_version>4.0.0</change_nbc_version>
 						<change_nbc_description>aos_renamed</change_nbc_description>
 						<change_nbc_previous_name>boundary_separatrix/x_point</change_nbc_previous_name>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="point" type="rz0d_dynamic_aos">
-				<xs:annotation>
-					<xs:documentation>In case boundary/type = 0 (limiter), RZ position of the active limiter point (point of the plasma boundary in contact with the limiter). In case boundary/type = 1 (diverted), RZ position of the active X-point</xs:documentation>
-					<xs:appinfo>
-						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
