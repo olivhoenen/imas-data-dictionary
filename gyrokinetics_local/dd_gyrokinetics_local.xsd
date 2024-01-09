@@ -99,6 +99,34 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="potential_energy_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised gradient (with respect to r_minor_norm) of the effective potential energy</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<coordinate1>../../species_all/angle_pol</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="potential_energy_gradient_norm">
+				<xs:annotation>
+					<xs:documentation>Effective potential energy determining the poloidal variation of the species background density</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>-</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<coordinate1>../../species_all/angle_pol</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="gyrokinetics_flux_surface">
@@ -336,6 +364,20 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="angle_pol">
+				<xs:annotation>
+					<xs:documentation>Poloidal angle grid, from -pi to pi, on which the species dependent effective potential energy (which determines the poloidal variation of the density) is expressed. The angle is defined with respect to (R0,Z0) with R0=(Rmax-Rmin)/2 and Z0=(Zmax-Zmin)/2. It is increasing clockwise. So (r,theta,phi) is right-handed. theta=0 for Z=Z0 and R>R0 (LFS)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>rad</units>
+						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="gyrokinetics_input_normalizing">
@@ -345,7 +387,7 @@
 		<xs:sequence>
 			<xs:element name="t_e">
 				<xs:annotation>
-					<xs:documentation>Electron temperature at outboard equatorial midplane of the flux surface (poloidal_angle = 0)</xs:documentation>
+					<xs:documentation>Electron temperature at outboard equatorial midplane of the flux surface (angle_pol = 0)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>eV</units>
@@ -357,7 +399,7 @@
 			</xs:element>
 			<xs:element name="n_e">
 				<xs:annotation>
-					<xs:documentation>Electron density at outboard equatorial midplane of the flux surface (poloidal_angle = 0)</xs:documentation>
+					<xs:documentation>Electron density at outboard equatorial midplane of the flux surface (angle_pol = 0)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>m^-3</units>
@@ -521,12 +563,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../poloidal_angle</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="j_parallel">
@@ -535,12 +578,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../poloidal_angle</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="pressure_parallel">
@@ -549,12 +593,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../poloidal_angle</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="pressure_perpendicular">
@@ -563,12 +608,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../poloidal_angle</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="heat_flux_parallel">
@@ -577,12 +623,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../poloidal_angle</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v_parallel_energy_perpendicular">
@@ -591,12 +638,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../poloidal_angle</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="v_perpendicular_square_energy">
@@ -605,12 +653,13 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
-						<coordinate1>../../../poloidal_angle</coordinate1>
-						<coordinate2>../../../time_norm</coordinate2>
+						<coordinate1>../../../../../species</coordinate1>
+						<coordinate2>../../angle_pol</coordinate2>
+						<coordinate3>../../time_norm</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
+					<xs:group ref="CPX_3D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -771,7 +820,7 @@
 						<type>constant</type>
 						<coordinate1>../../binormal_wavevector_norm</coordinate1>
 						<coordinate2>../../radial_wavevector_norm</coordinate2>
-						<coordinate3>../../poloidal_angle</coordinate3>
+						<coordinate3>../../angle_pol</coordinate3>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -786,7 +835,7 @@
 						<type>constant</type>
 						<coordinate1>../../binormal_wavevector_norm</coordinate1>
 						<coordinate2>../../radial_wavevector_norm</coordinate2>
-						<coordinate3>../../poloidal_angle</coordinate3>
+						<coordinate3>../../angle_pol</coordinate3>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -801,7 +850,7 @@
 						<type>constant</type>
 						<coordinate1>../../binormal_wavevector_norm</coordinate1>
 						<coordinate2>../../radial_wavevector_norm</coordinate2>
-						<coordinate3>../../poloidal_angle</coordinate3>
+						<coordinate3>../../angle_pol</coordinate3>
 						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
@@ -823,7 +872,7 @@
 						<type>constant</type>
 						<coordinate1>../../binormal_wavevector_norm</coordinate1>
 						<coordinate2>../../radial_wavevector_norm</coordinate2>
-						<coordinate3>../../poloidal_angle</coordinate3>
+						<coordinate3>../../angle_pol</coordinate3>
 						<coordinate4>../../time_norm</coordinate4>
 						<units>-</units>
 					</xs:appinfo>
@@ -839,7 +888,7 @@
 						<type>constant</type>
 						<coordinate1>../../binormal_wavevector_norm</coordinate1>
 						<coordinate2>../../radial_wavevector_norm</coordinate2>
-						<coordinate3>../../poloidal_angle</coordinate3>
+						<coordinate3>../../angle_pol</coordinate3>
 						<coordinate4>../../time_norm</coordinate4>
 						<units>-</units>
 					</xs:appinfo>
@@ -855,7 +904,7 @@
 						<type>constant</type>
 						<coordinate1>../../binormal_wavevector_norm</coordinate1>
 						<coordinate2>../../radial_wavevector_norm</coordinate2>
-						<coordinate3>../../poloidal_angle</coordinate3>
+						<coordinate3>../../angle_pol</coordinate3>
 						<coordinate4>../../time_norm</coordinate4>
 						<units>-</units>
 					</xs:appinfo>
@@ -1580,7 +1629,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1596,7 +1645,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1612,7 +1661,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1628,7 +1677,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1644,7 +1693,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1660,7 +1709,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1676,7 +1725,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1692,7 +1741,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1708,7 +1757,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1724,7 +1773,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1740,7 +1789,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1756,7 +1805,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1779,7 +1828,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1796,7 +1845,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1813,7 +1862,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1830,7 +1879,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1847,7 +1896,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1864,7 +1913,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1881,7 +1930,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1898,7 +1947,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1915,7 +1964,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1932,7 +1981,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1949,7 +1998,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1966,7 +2015,7 @@
 						<coordinate1>/species</coordinate1>
 						<coordinate2>../../binormal_wavevector_norm</coordinate2>
 						<coordinate3>../../radial_wavevector_norm</coordinate3>
-						<coordinate4>../../poloidal_angle</coordinate4>
+						<coordinate4>../../angle_pol</coordinate4>
 						<coordinate5>../../time_norm</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1978,7 +2027,7 @@
 	</xs:complexType>
 	<xs:complexType name="gyrokinetics_fluxes">
 		<xs:annotation>
-			<xs:documentation>Turbulent fluxes for a given eigenmode and a given species</xs:documentation>
+			<xs:documentation>Turbulent fluxes for a given eigenmode</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="particles_phi_potential">
@@ -1987,10 +2036,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="particles_a_field_parallel">
@@ -1999,10 +2049,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="particles_b_field_parallel">
@@ -2011,10 +2062,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="energy_phi_potential">
@@ -2023,10 +2075,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="energy_a_field_parallel">
@@ -2035,10 +2088,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="energy_b_field_parallel">
@@ -2047,10 +2101,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_parallel_phi_potential">
@@ -2059,10 +2114,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_parallel_a_field_parallel">
@@ -2083,10 +2139,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_perpendicular_phi_potential">
@@ -2095,10 +2152,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_perpendicular_a_field_parallel">
@@ -2107,10 +2165,11 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="momentum_tor_perpendicular_b_field_parallel">
@@ -2119,58 +2178,139 @@
 					<xs:appinfo>
 						<type>constant</type>
 						<units>-</units>
+						<coordinate1>../../../../../species</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="gyrokinetics_fluxes_moments">
+	<xs:complexType name="gyrokinetics_eigenmode_fields">
 		<xs:annotation>
-			<xs:documentation>Turbulent fluxes and moments for a given eigenmode and a given species</xs:documentation>
+			<xs:documentation>Electromagnetic fields of a gyrokinetic calculation for a given eigenmode</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="moments_norm_gyrocenter" type="gyrokinetics_moments_linear">
+			<xs:element name="phi_potential_perturbed_weight">
 				<xs:annotation>
-					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters</xs:documentation>
+					<xs:documentation>Amplitude of the perturbed electrostatic potential normalised to the sum of amplitudes of all perturbed fields</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../time_norm</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="moments_norm_particle" type="gyrokinetics_moments_linear">
+			<xs:element name="phi_potential_perturbed_parity">
 				<xs:annotation>
-					<xs:documentation>Moments (normalised) of the perturbed distribution function of particles</xs:documentation>
+					<xs:documentation>Parity of the perturbed electrostatic potential with respect to theta = 0 (poloidal angle)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../time_norm</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="moments_norm_gyrocenter_bessel_0" type="gyrokinetics_moments_linear">
+			<xs:element name="a_field_parallel_perturbed_weight">
 				<xs:annotation>
-					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters times 0th order Bessel function of the first kind</xs:documentation>
+					<xs:documentation>Amplitude of the perturbed parallel vector potential normalised to the sum of amplitudes of all perturbed fields</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../time_norm</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="moments_norm_gyrocenter_bessel_1" type="gyrokinetics_moments_linear">
+			<xs:element name="a_field_parallel_perturbed_parity">
 				<xs:annotation>
-					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters times 1st order Bessel function of the first kind</xs:documentation>
+					<xs:documentation>Parity of the perturbed parallel vector potential with respect to theta = 0 (poloidal angle)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../time_norm</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="linear_weights_gyrocenter" type="gyrokinetics_fluxes">
+			<xs:element name="b_field_parallel_perturbed_weight">
 				<xs:annotation>
-					<xs:documentation>Normalised gyrocenter fluxes in the laboratory frame</xs:documentation>
+					<xs:documentation>Amplitude of the perturbed parallel magnetic field normalised to the sum of amplitudes of all perturbed fields</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../time_norm</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="linear_weights_gyrocenter_rotating_frame" type="gyrokinetics_fluxes">
+			<xs:element name="b_field_parallel_perturbed_parity">
 				<xs:annotation>
-					<xs:documentation>Normalised gyrocenter fluxes in the rotating frame</xs:documentation>
+					<xs:documentation>Parity of the perturbed parallel magnetic field with respect to theta = 0 (poloidal angle)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../time_norm</coordinate1>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="linear_weights_particle" type="gyrokinetics_fluxes">
+			<xs:element name="phi_potential_perturbed_norm">
 				<xs:annotation>
-					<xs:documentation>Normalised particle fluxes in the laboratory frame</xs:documentation>
+					<xs:documentation>Normalised perturbed electrostatic potential</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="CPX_2D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="linear_weights_particle_rotating_frame" type="gyrokinetics_fluxes">
+			<xs:element name="a_field_parallel_perturbed_norm">
 				<xs:annotation>
-					<xs:documentation>Normalised particle fluxes in the rotating frame</xs:documentation>
+					<xs:documentation>Normalised perturbed parallel vector potential</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
+						<units>-</units>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="CPX_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b_field_parallel_perturbed_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised perturbed parallel magnetic field</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../angle_pol</coordinate1>
+						<coordinate2>../../time_norm</coordinate2>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="CPX_2D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -2226,87 +2366,9 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi_potential_perturbed_weight">
+			<xs:element name="angle_pol">
 				<xs:annotation>
-					<xs:documentation>Amplitude of the perturbed electrostatic potential normalised to the sum of amplitudes of all perturbed fields</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../time_norm</coordinate1>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="phi_potential_perturbed_parity">
-				<xs:annotation>
-					<xs:documentation>Parity of the perturbed electrostatic potential with respect to theta = 0 (poloidal angle)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../time_norm</coordinate1>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="a_field_parallel_perturbed_weight">
-				<xs:annotation>
-					<xs:documentation>Amplitude of the perturbed parallel vector potential normalised to the sum of amplitudes of all perturbed fields</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../time_norm</coordinate1>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="a_field_parallel_perturbed_parity">
-				<xs:annotation>
-					<xs:documentation>Parity of the perturbed parallel vector potential with respect to theta = 0 (poloidal angle)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../time_norm</coordinate1>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b_field_parallel_perturbed_weight">
-				<xs:annotation>
-					<xs:documentation>Amplitude of the perturbed parallel magnetic field normalised to the sum of amplitudes of all perturbed fields</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../time_norm</coordinate1>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b_field_parallel_perturbed_parity">
-				<xs:annotation>
-					<xs:documentation>Parity of the perturbed parallel magnetic field with respect to theta = 0 (poloidal angle)</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../time_norm</coordinate1>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="poloidal_angle">
-				<xs:annotation>
-					<xs:documentation>Poloidal angle grid (see detailed documentation at the root of the IDS)</xs:documentation>
+					<xs:documentation>Poloidal angle grid. The angle is defined with respect to (R0,Z0) with R0=(Rmax-Rmin)/2 and Z0=(Zmax-Zmin)/2. It is increasing clockwise. So (r,theta,phi) is right-handed. theta=0 for Z=Z0 and R>R0 (LFS)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<coordinate1>1...N</coordinate1>
@@ -2315,48 +2377,6 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="phi_potential_perturbed_norm">
-				<xs:annotation>
-					<xs:documentation>Normalised perturbed electrostatic potential</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../poloidal_angle</coordinate1>
-						<coordinate2>../time_norm</coordinate2>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="a_field_parallel_perturbed_norm">
-				<xs:annotation>
-					<xs:documentation>Normalised perturbed parallel vector potential</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../poloidal_angle</coordinate1>
-						<coordinate2>../time_norm</coordinate2>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b_field_parallel_perturbed_norm">
-				<xs:annotation>
-					<xs:documentation>Normalised perturbed parallel magnetic field</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../poloidal_angle</coordinate1>
-						<coordinate2>../time_norm</coordinate2>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="CPX_2D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="time_norm">
@@ -2372,12 +2392,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="fluxes_moments" type="gyrokinetics_fluxes_moments" maxOccurs="10">
+			<xs:element name="fields" type="gyrokinetics_eigenmode_fields">
 				<xs:annotation>
+					<xs:documentation>Electrostatic potential, magnetic field and magnetic vector potential</xs:documentation>
 					<xs:appinfo>
-						<coordinate1>/species</coordinate1>
+						<introduced_after_version>3.39.0</introduced_after_version>
 					</xs:appinfo>
-					<xs:documentation>Fluxes and moments of the perturbed distribution function, for this eigenmode and for each species. The fluxes are time averaged for non-linear runs (using model/ time_interval_norm) and given at the last time step for linear runs. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="code" type="code_partial_constant">
@@ -2399,6 +2419,36 @@
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="moments_norm_gyrocenter" type="gyrokinetics_moments_linear">
+				<xs:annotation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="moments_norm_particle" type="gyrokinetics_moments_linear">
+				<xs:annotation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of particles</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="moments_norm_gyrocenter_bessel_0" type="gyrokinetics_moments_linear">
+				<xs:annotation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters times 0th order Bessel function of the first kind</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="moments_norm_gyrocenter_bessel_1" type="gyrokinetics_moments_linear">
+				<xs:annotation>
+					<xs:documentation>Moments (normalised) of the perturbed distribution function of gyrocenters times 1st order Bessel function of the first kind</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="linear_weights" type="gyrokinetics_fluxes">
+				<xs:annotation>
+					<xs:documentation>Normalised fluxes in the laboratory frame</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="linear_weights_rotating_frame" type="gyrokinetics_fluxes">
+				<xs:annotation>
+					<xs:documentation>Normalised fluxes in the rotating frame</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -2508,9 +2558,9 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="poloidal_angle">
+			<xs:element name="angle_pol">
 				<xs:annotation>
-					<xs:documentation>Poloidal angle grid (see detailed documentation at the root of the IDS)</xs:documentation>
+					<xs:documentation>Poloidal angle grid. The angle is defined with respect to (R0,Z0) with R0=(Rmax-Rmin)/2 and Z0=(Zmax-Zmin)/2. It is increasing clockwise. So (r,theta,phi) is right-handed. theta=0 for Z=Z0 and R>R0 (LFS)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<coordinate1>1...N</coordinate1>
@@ -2658,8 +2708,11 @@
 			<xs:documentation>Description of a local gyrokinetic simulation (delta-f, flux-tube). All quantities within this IDS are normalised (apart from time and from the normalizing quantities structure), thus independent of rhostar, consistently with the local approximation and a spectral representation is assumed in the perpendicular plane (i.e. homogeneous turbulence).</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
-				<lifecycle_version>3.22.0</lifecycle_version>
+				<lifecycle_version>3.40.0</lifecycle_version>
 				<lifecycle_last_change>3.40.0</lifecycle_last_change>
+				<change_nbc_version>3.40.0</change_nbc_version>
+				<change_nbc_description>ids_renamed</change_nbc_description>
+				<change_nbc_previous_name>gyrokinetics</change_nbc_previous_name>
 				<url>https://gitlab.com/gkdb/gkdb/raw/master/doc/general/IOGKDB.pdf</url>
 			</xs:appinfo>
 		</xs:annotation>
