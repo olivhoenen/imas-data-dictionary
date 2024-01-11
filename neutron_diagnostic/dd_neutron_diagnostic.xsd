@@ -144,6 +144,19 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="neutron_flux_integrated_flags">
+				<xs:annotation>
+					<xs:documentation>Array of flags telling, for each coordinate of the neutron_flux, whether the neutron_flux has been integrated over this coordinate (1) or not (0). If it has been integrated over a coordinate, the size related to this coordinate must be equal to 1</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...5</coordinate1>
+						<introduced_after_version>3.40.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="neutron_flux">
 				<xs:annotation>
 					<xs:documentation>Grouped neutron flux in the detector from one neutron energy bin emitted by the current plasma voxel towards the detector</xs:documentation>
@@ -172,6 +185,19 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="response_function_integrated_flags">
+				<xs:annotation>
+					<xs:documentation>Array of flags telling, for each coordinate of the response_function, whether the response_function has been integrated over this coordinate (1) or not (0). If it has been integrated over a coordinate, the size related to this coordinate must be equal to 1</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<coordinate1>1...5</coordinate1>
+						<introduced_after_version>3.40.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>			
 			<xs:element name="response_function">
 				<xs:annotation>
 					<xs:documentation>Number of events occurring in the detector from one neutron energy bin emitted by the current plasma voxel towards the detector</xs:documentation>
@@ -646,7 +672,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
-				<lifecycle_last_change>3.40.0</lifecycle_last_change>
+				<lifecycle_last_change>3.41.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -657,7 +683,7 @@
 						<xs:documentation>Set of neutron detection systems</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
-							<change_nbc_version>3.40.0</change_nbc_version>
+							<change_nbc_version>3.41.0</change_nbc_version>
 							<change_nbc_description>aos_renamed</change_nbc_description>
 							<change_nbc_previous_name>detectors</change_nbc_previous_name>
 						</xs:appinfo>
