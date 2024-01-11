@@ -427,21 +427,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_detectors_radiation">
-		<xs:sequence>
-			<xs:element name="index">
-				<xs:annotation>
-					<xs:documentation>Index of radiation type</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="neutron_diagnostic_detectors_mode">
 		<xs:sequence>
 			<xs:element name="identifier" type="identifier_static">
@@ -655,111 +640,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_unit_source_radiation_reaction">
-		<xs:sequence>
-			<xs:element name="energy">
-				<xs:annotation>
-					<xs:documentation>Energy boundaries for Detector Radiator Flux</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...N</coordinate1>
-						<units>eV</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="flux">
-				<xs:annotation>
-					<xs:documentation>Radiation flux from Unit Ring Source in recent detector's converter</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>../../../../detectors</coordinate1>
-						<coordinate2>../energy</coordinate2>
-						<units>m^-2</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="d2flux_drdz">
-				<xs:annotation>
-					<xs:documentation>Second deriviation of Radiation flux from Unit Ring Source in recent detector's converter for "spline" reconstruction</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>../../../../detectors</coordinate1>
-						<coordinate2>../energy</coordinate2>
-						<units>m^-4</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="reaction_rate">
-				<xs:annotation>
-					<xs:documentation>Reaction Rate on converter's material from Unit Ring Source in recent detector's converter</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>../../../../detectors</coordinate1>
-						<coordinate2>../energy</coordinate2>
-						<units>m^-3</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="sensitivity">
-				<xs:annotation>
-					<xs:documentation>Sensitivity of converter's material in recent detector's converter</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>../../../../detectors</coordinate1>
-						<coordinate2>../energy</coordinate2>
-						<units>cps.m^2.s</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_unit_source_radiation">
-		<xs:sequence>
-			<xs:element name="reaction" type="neutron_diagnostic_unit_source_radiation_reaction" maxOccurs="2">
-				<xs:annotation>
-					<xs:documentation>Plasma reaction (1 - 'DT'; 2 - 'DD')</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...2</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_unit_source">
-		<xs:annotation>
-			<xs:documentation>Unit ring sources distribution</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="position" type="rz0d_static">
-				<xs:annotation>
-					<xs:documentation>Position of ring unit sources inside vacuum vessel</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="radiation" type="neutron_diagnostic_unit_source_radiation" maxOccurs="2">
-				<xs:annotation>
-					<xs:documentation>Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...2</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:element name="neutron_diagnostic">
 		<xs:annotation>
 			<xs:documentation>Neutron diagnostic</xs:documentation>
@@ -786,14 +666,6 @@
 				<xs:element name="synthetic_signals" type="neutron_diagnostic_synthetic_signals">
 					<xs:annotation>
 						<xs:documentation>Output Data from Neutron Diagnostic's Module</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="unit_source" type="neutron_diagnostic_unit_source" maxOccurs="2500">
-					<xs:annotation>
-						<xs:documentation>Unit ring sources description</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="latency">
