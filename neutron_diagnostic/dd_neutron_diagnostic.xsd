@@ -573,9 +573,66 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="converter_name">
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_detectors_mode">
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier_static">
 				<xs:annotation>
-					<xs:documentation>Name of detector's converter for resent particle</xs:documentation>
+					<xs:documentation>Identifier of the measuring mode</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>neutron_diagnostic/neutron_mode_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="counting" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Detected counts per second as a function of time</xs:documentation>
+					<xs:appinfo>
+						<units>counts.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="count_limit_max">
+				<xs:annotation>
+					<xs:documentation>Maximum count limit under which the detector response is linear</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>counts.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="count_limit_min">
+				<xs:annotation>
+					<xs:documentation>Minimum count limit above which the detector response is linear</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>counts.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spectrum" type="signal_flt_2d">
+				<xs:annotation>
+					<xs:documentation>Detected counts per second per energy channel as a function of time (in case of spectroscopic measurement mode)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../energy_band</coordinate1>
+						<units>counts.s^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="neutron_diagnostic_detectors">
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Name of the detector</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -584,33 +641,34 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="converter_volume">
+			<xs:element name="geometry" type="detector_aperture">
 				<xs:annotation>
-					<xs:documentation>Volume of detector's converter for resent particle</xs:documentation>
+					<xs:documentation>Detector geometry</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="material" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Name of detector's converter for resent particle</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m^3</units>
+						<doc_identifier>utilities/materials_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nuclei_n">
+				<xs:annotation>
+					<xs:documentation>Number of target nuclei in the dectector</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="converter_nuclear_density">
+			<xs:element name="temperature">
 				<xs:annotation>
-					<xs:documentation>Nuclear density of detector's converter for resent particle</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m^-3</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="converter_temperature">
-				<xs:annotation>
-					<xs:documentation>Temperature of detector's converter</xs:documentation>
+					<xs:documentation>Temperature of the detector</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>/time</coordinate1>
@@ -621,62 +679,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_detectors_mode">
-		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>Name of Measuring Mode</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="counting" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Counting in Measuring Mode in Dynamic</xs:documentation>
-					<xs:appinfo>
-						<units>cps</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_detectors">
-		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>Name of Detector</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="radiation" type="neutron_diagnostic_detectors_radiation" maxOccurs="2">
-				<xs:annotation>
-					<xs:documentation>Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="position" type="rzphi0d_static">
-				<xs:annotation>
-					<xs:documentation>Detector Position Data SHOULD BE REMOVED, REDUNDANT WITH THE NEW DETECTOR DESCRIPTION</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="detector" type="detector_aperture">
-				<xs:annotation>
-					<xs:documentation>Detector description</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="aperture" type="detector_aperture" maxOccurs="2">
 				<xs:annotation>
 					<xs:documentation>Description of a set of collimating apertures</xs:documentation>
@@ -685,9 +687,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="mode" type="neutron_diagnostic_detectors_mode" maxOccurs="50">
+			<xs:element name="mode" type="neutron_diagnostic_detectors_mode" maxOccurs="5">
 				<xs:annotation>
-					<xs:documentation>Measuring Mode Properties and Data</xs:documentation>
+					<xs:documentation>Set of Measuring Modes simultaneously used by the detector</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
@@ -702,9 +704,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="start_time">
+			<xs:element name="exposure_time">
 				<xs:annotation>
-					<xs:documentation>Time stamp of the moment diagnostic starts recording data</xs:documentation>
+					<xs:documentation>Exposure time</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
 						<units>s</units>
@@ -713,67 +715,6 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="end_time">
-				<xs:annotation>
-					<xs:documentation>Time stamp of the moment diagnostic ends recording data</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>s</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="spectrum_sampling_time">
-				<xs:annotation>
-					<xs:documentation>Sampling time used to obtain one spectrum time slice</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<units>s</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="amplitude_raw" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Raw amplitude of the measured signal</xs:documentation>
-					<xs:appinfo>
-						<units>V</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="amplitude_peak" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Processed peak amplitude of the measured signal</xs:documentation>
-					<xs:appinfo>
-						<units>V</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="spectrum_total">
-				<xs:annotation>
-					<xs:documentation>Detected count per energy channel, integrated over the whole acquisition duration</xs:documentation>
-					<xs:appinfo>
-						<type>constant</type>
-						<coordinate1>../energy_band</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="spectrum" type="signal_int_2d">
-				<xs:annotation>
-					<xs:documentation>Detected count per energy channel as a function of time</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../energy_band</coordinate1>
-						<coordinate2>time</coordinate2>
-					</xs:appinfo>
-				</xs:annotation>
 			</xs:element>
 			<xs:element name="adc" type="neutron_diagnostic_adc">
 				<xs:annotation>
@@ -939,7 +880,7 @@
 		<xs:sequence>
 			<xs:element name="position" type="rz0d_static">
 				<xs:annotation>
-					<xs:documentation>Position of ring unit sources inside ITER vacuum vessel</xs:documentation>
+					<xs:documentation>Position of ring unit sources inside vacuum vessel</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="radiation" type="neutron_diagnostic_unit_source_radiation" maxOccurs="2">
@@ -954,11 +895,11 @@
 	</xs:complexType>
 	<xs:element name="neutron_diagnostic">
 		<xs:annotation>
-			<xs:documentation>Neutron diagnostic such as DNFM, NFM or MFC</xs:documentation>
+			<xs:documentation>Neutron diagnostic</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.6.0</lifecycle_version>
-				<lifecycle_last_change>3.39.0</lifecycle_last_change>
+				<lifecycle_last_change>3.40.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -966,14 +907,17 @@
 				<xs:element ref="ids_properties"/>
 				<xs:element name="characteristics" type="neutron_diagnostic_characteristics">
 					<xs:annotation>
-						<xs:documentation>Description of Diagnostic's module detection characteristics for differen plasma modes based on Design Description</xs:documentation>
+						<xs:documentation>Description of Diagnostic's module detection characteristics for different plasma modes based on Design Description. LIKELY WE SHOULD REMOVE COMPLETELY THIS STRUCTURE SINCE THEY SEEM TO DESCRIBE REQUIREMENTS</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="detectors" type="neutron_diagnostic_detectors" maxOccurs="60">
+				<xs:element name="detector" type="neutron_diagnostic_detectors" maxOccurs="60">
 					<xs:annotation>
-						<xs:documentation>Description of Detectors properties and Data in Neutron Diagnostic Module</xs:documentation>
+						<xs:documentation>Set of neutron detection systems</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
+							<change_nbc_version>3.40.0</change_nbc_version>
+							<change_nbc_description>aos_renamed</change_nbc_description>
+							<change_nbc_previous_name>detectors</change_nbc_previous_name>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
