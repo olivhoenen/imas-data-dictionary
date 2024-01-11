@@ -197,7 +197,7 @@
 				<xs:complexType>
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
-			</xs:element>			
+			</xs:element>
 			<xs:element name="response_function">
 				<xs:annotation>
 					<xs:documentation>Number of events occurring in the detector from one neutron energy bin emitted by the current plasma voxel towards the detector</xs:documentation>
@@ -636,36 +636,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="neutron_diagnostic_synthetic_signals">
-		<xs:sequence>
-			<xs:element name="total_neutron_flux">
-				<xs:annotation>
-					<xs:documentation>Total Neutron Flux in Dynamic</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
-						<units>s^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="fusion_power">
-				<xs:annotation>
-					<xs:documentation>Fusion Power</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../time</coordinate1>
-						<units>W</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:element name="neutron_diagnostic">
 		<xs:annotation>
 			<xs:documentation>Neutron diagnostic</xs:documentation>
@@ -689,10 +659,37 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="synthetic_signals" type="neutron_diagnostic_synthetic_signals">
+				<xs:element name="neutron_flux_total">
 					<xs:annotation>
-						<xs:documentation>Output Data from Neutron Diagnostic's Module</xs:documentation>
+						<xs:documentation>Total Neutron Flux reconstructed from the detectors signals</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<coordinate1>../time</coordinate1>
+							<units>s^-1</units>
+							<change_nbc_version>3.41.0</change_nbc_version> 
+							<change_nbc_description>leaf_renamed</change_nbc_description>
+							<change_nbc_previous_name>synthetic_signals/total_neutron_flux</change_nbc_previous_name>
+						</xs:appinfo>
 					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_1D"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="fusion_power">
+					<xs:annotation>
+						<xs:documentation>Fusion power reconstructed from the detectors signals</xs:documentation>
+						<xs:appinfo>
+							<type>dynamic</type>
+							<coordinate1>../time</coordinate1>
+							<units>W</units>
+							<change_nbc_version>3.41.0</change_nbc_version> 
+							<change_nbc_description>leaf_renamed</change_nbc_description>
+							<change_nbc_previous_name>synthetic_signals/fusion_power</change_nbc_previous_name>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="FLT_1D"/>
+					</xs:complexType>
 				</xs:element>
 				<xs:element name="latency">
 					<xs:annotation>
