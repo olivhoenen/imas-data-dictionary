@@ -26,6 +26,9 @@ help:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
+	@echo "const xmlString=\`" > _static/IDSDefxml.js
+	@tail -n +2 ../IDSDef.xml >> _static/IDSDefxml.js
+	@echo "\`;" >> _static/IDSDefxml.js
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 
