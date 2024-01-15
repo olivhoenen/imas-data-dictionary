@@ -27,10 +27,8 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@echo "const xmlString=\`" > _static/IDSDefxml.js
-# copy'<IDSs xmlns:fn="http://www.w3.org/2005/02/xpath-functions">'
-	@head -n 2 ../IDSDef.xml |tail -n 1 >>_static/IDSDefxml.js
-# from '<IDS name=amns_data' to '</IDSs>'
-	@tail -n +$(($(grep "/utilities>" ../IDSDef.xml -n  |cut -f1 -d: )+1)) ../IDSDef.xml >> _static/IDSDefxml.js
+# remove <utilities> <cocos> <version>
+	@java net.sf.saxon.Transform -t -s:../IDSDef.xml -xsl:generate_js_IDSDef.xsl >> _static/IDSDefxml.js
 # end the string '\`;'
 	@echo "\`;" >> _static/IDSDefxml.js
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
