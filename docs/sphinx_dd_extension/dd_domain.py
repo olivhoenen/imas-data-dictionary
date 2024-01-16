@@ -114,13 +114,13 @@ class DDElement(SphinxDirective):
 
         # Options
         data_type = self.options.get("data_type")
-        has_error = self.options.get("has_error")
+        has_error = "has_error" in self.options
         typ = self.options.get("type")
         units = self.options.get("units")
 
         # Generate summary
         summary = ""
-        if not self.options.get("no_summary", False):
+        if "no_summary" not in self.options:
             summary = get_summary(self.content)
 
         # Create DD Node
