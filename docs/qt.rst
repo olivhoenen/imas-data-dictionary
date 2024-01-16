@@ -1,3 +1,5 @@
+.. _`query tool`:
+
 Query tool
 ==========
 

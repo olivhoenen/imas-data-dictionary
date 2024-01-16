@@ -6,7 +6,8 @@ for IMAS data. See :ref:`introduction` for more background about the Data
 Dictionary and IMAS in general.
 
 View the :ref:`reference` for a detailed reference of all IDSs, or use the
-`search bar <?q=>`_ to look for specific IDSs or nodes.
+`search bar <?q=>`_ to look for specific IDSs or nodes. The :ref:`query tool`
+can be used for more advanced search queries.
 
 .. toctree::
    :maxdepth: 2
