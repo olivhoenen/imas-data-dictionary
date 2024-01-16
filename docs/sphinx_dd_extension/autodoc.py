@@ -46,6 +46,12 @@ def generate_dd_docs(app: Sphinx):
 
     Generate rst files for: all IDSs, common utilities and identifiers.
     """
+    if not app.config.dd_autodoc_generate:
+        logger.warning(
+            "Not generating DD documentation sources (dd_autodoc_create=False)"
+        )
+        return
+
     logger.info("Generating DD documentation sources.")
     etree = get_xml_etree()
     # Ensure output folders exist
@@ -375,6 +381,7 @@ def identifier2rst(element: ElementTree.Element, fname: Path) -> str:
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
+    app.add_config_value("dd_autodoc_generate", True, "env", [bool])
     app.setup_extension("sphinx_dd_extension.dd_domain")
     app.connect("builder-inited", generate_dd_docs)
     return {

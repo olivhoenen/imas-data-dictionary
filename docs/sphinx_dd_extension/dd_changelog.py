@@ -134,6 +134,12 @@ def replace_ids_names_with_links(ids_list, text):
 
 def generate_git_changelog(app: Sphinx):
     """Generate a changelog using git pull requests"""
+    if not app.config.dd_changelog_generate:
+        logger.warning(
+            "Not generating DD changelog sources (dd_changelog_generate=False)"
+        )
+        return
+
     logger.info("Generating DD git changelog sources.")
 
     # Ensure output folders exist
@@ -164,7 +170,14 @@ def generate_git_changelog(app: Sphinx):
     current_ids_names = get_current_ids_names()
     print(current_ids_names)
 
+    last_major_version = -1
+
     for version, commits in zip(reversed(tags), reversed(commits_between_tags)):
+        # Generate headings when switching between major versions
+        major_version = int(version.name.split(".")[0])
+        if major_version != last_major_version:
+            last_major_version = major_version
+            changelog_text += heading(f"Major version {major_version}", "#")
         # For each release generate a changelog
         release = heading(f"Release {version.name}", "-")
 
@@ -335,6 +348,12 @@ def format_renamed(renamed):
 
 
 def generate_dd_changelog(app: Sphinx):
+    if not app.config.dd_changelog_generate:
+        logger.warning(
+            "Not generating DD changelog sources (dd_changelog_generate=False)"
+        )
+        return
+
     docfile = Path("generated/changelog/ids.rst")
     docfile.unlink(True)
 
@@ -359,7 +378,8 @@ def generate_dd_changelog(app: Sphinx):
         if x.name != factory.version and x.name in dd_xml_versions()
     ]
 
-    output = heading(f"IDS migration guide to: {factory.version}", "=")
+    output = heading("IDS migration guide", "#")
+    output += heading(f"IDS migration guide to: {factory.version}", "=")
     output += f"Below you can find all changes the current ({factory.version})"
     output += " and a specific old DD version\n\n"
 
@@ -423,6 +443,7 @@ def generate_dd_changelog(app: Sphinx):
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
+    app.add_config_value("dd_changelog_generate", True, "env", [bool])
     app.connect("builder-inited", generate_git_changelog)
     app.connect("builder-inited", generate_dd_changelog)
     return {

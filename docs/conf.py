@@ -29,6 +29,13 @@ html_context = {
 
 language = "en"
 
+# Options for generating documentation.
+#
+# Note: these should be enabled to generate the IDS reference and changelog!
+#   For example: SPHINXOPTS="-D dd_changelog_generate=1 -D dd_autodoc_generate=1"
+dd_changelog_generate = False
+dd_autodoc_generate = False
+
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
