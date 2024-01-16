@@ -4,16 +4,14 @@ dd_changelog_helper.py
 Logic is partly based on code in the :external:py:mod:`sphinx.domains` module.
 """
 
+from __future__ import annotations
+
 from pathlib import Path
 from typing import Any, Dict, List
 from git import Repo, Tag
 import json
 import re
 from packaging.version import Version
-
-from imaspy import IDSFactory
-from imaspy.dd_zip import dd_xml_versions
-from imaspy.ids_convert import DDVersionMap
 
 import os
 
@@ -23,6 +21,16 @@ from sphinx.util import logging
 from xml.etree import ElementTree
 
 logger = logging.getLogger(__name__)
+
+try:
+    from imaspy import IDSFactory
+    from imaspy.dd_zip import dd_xml_versions
+    from imaspy.ids_convert import DDVersionMap
+
+    has_imaspy = True
+except ImportError:
+    logger.error("IMASPy is not available, IDS migration guide will not be generated")
+    has_imaspy = False
 
 
 def get_current_ids_names():
@@ -327,6 +335,15 @@ def format_renamed(renamed):
 
 
 def generate_dd_changelog(app: Sphinx):
+    docfile = Path("generated/changelog/ids.rst")
+    docfile.unlink(True)
+
+    if not has_imaspy:
+        docfile.write_text(
+            heading("IDS migration guide <MISSING>", "=")
+            + "ImportError: Could not import ``imaspy``."
+        )
+
     logger.info("Generating DD ids migration guide sources.")
 
     # Ensure output folders exist
@@ -341,10 +358,6 @@ def generate_dd_changelog(app: Sphinx):
         for x in reversed(get_tags())
         if x.name != factory.version and x.name in dd_xml_versions()
     ]
-
-    docfile = Path("generated/changelog/ids.rst")
-
-    docfile.unlink(True)
 
     output = heading(f"IDS migration guide to: {factory.version}", "=")
     output += f"Below you can find all changes the current ({factory.version})"
