@@ -10,7 +10,7 @@ import sys
 
 # Ensure that our extension module can be imported:
 sys.path.append(os.path.curdir)
-import sphinx_dd_extension.dd_domain
+import sphinx_dd_extension.autodoc
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -45,6 +45,11 @@ extensions = [
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+
+cocos = sphinx_dd_extension.autodoc.get_cocos_version()
+rst_epilog = f"""
+.. |cocos| replace:: {cocos}
+"""
 
 
 # -- Intersphinx configuration -----------------------------------------------

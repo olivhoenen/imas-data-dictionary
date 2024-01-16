@@ -17,6 +17,8 @@ logger = logging.getLogger(__name__)
 DOCUMENTED_UTILITIES = ["ids_properties"]
 # Indentation character
 INDENT = " "
+# Cached DD XML element tree
+_etree = None
 
 
 def update_file(path: Path, text: str):
@@ -26,13 +28,26 @@ def update_file(path: Path, text: str):
     path.write_text(text)
 
 
+def get_xml_etree():
+    global _etree
+    if _etree is None:
+        _etree = ElementTree.parse("../IDSDef.xml")
+    return _etree
+
+
+def get_cocos_version():
+    etree = get_xml_etree()
+    cocos = etree.find("cocos")
+    return cocos.text
+
+
 def generate_dd_docs(app: Sphinx):
     """Read IDSDef.xml and generate rst reference files.
 
     Generate rst files for: all IDSs, common utilities and identifiers.
     """
     logger.info("Generating DD documentation sources.")
-    etree = ElementTree.parse("../IDSDef.xml")
+    etree = get_xml_etree()
     # Ensure output folders exist
     for folder in ("ids", "util", "identifier"):
         (Path("generated") / folder).mkdir(parents=True, exist_ok=True)

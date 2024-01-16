@@ -13,3 +13,4 @@ Glossary
    errorbars
    nbc
    identifiers
+   cocos
