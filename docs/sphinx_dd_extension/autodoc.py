@@ -19,6 +19,13 @@ DOCUMENTED_UTILITIES = ["ids_properties"]
 INDENT = " "
 
 
+def update_file(path: Path, text: str):
+    if path.exists():
+        if path.read_text() == text:
+            return  # Nothing to be done!
+    path.write_text(text)
+
+
 def generate_dd_docs(app: Sphinx):
     """Read IDSDef.xml and generate rst reference files.
 
@@ -34,23 +41,23 @@ def generate_dd_docs(app: Sphinx):
         idsname = ids.get("name")
         if not idsname:
             raise RuntimeError("Empty IDS name!")
-        docfile = f"generated/ids/{idsname}.rst"
-        Path(docfile).write_text(ids2rst(ids))
+        docfile = Path(f"generated/ids/{idsname}.rst")
+        update_file(docfile, ids2rst(ids))
 
     for util in DOCUMENTED_UTILITIES:
         node = etree.find(f"utilities/field[@name='{util}']")
         if not node:
             raise RuntimeError(f"Utility {util} does not exist in DD XML")
-        docfile = f"generated/util/{util}.rst"
-        Path(docfile).write_text(util2rst(node))
+        docfile = Path(f"generated/util/{util}.rst")
+        update_file(docfile, util2rst(node))
 
     # Find all ../*/*_identifier.xml files
     for identifier in Path.cwd().parent.glob("*/*_identifier.xml"):
         iden_tree = ElementTree.parse(identifier)
         element = iden_tree.getroot()
-        docfile = f"generated/identifier/{identifier.stem}.rst"
+        docfile = Path(f"generated/identifier/{identifier.stem}.rst")
         fname = identifier.relative_to(identifier.parents[1])  # folder/file.xml
-        Path(docfile).write_text(identifier2rst(element, fname))
+        update_file(docfile, identifier2rst(element, fname))
     logger.info("Finished generating DD documentation sources.")
 
 
@@ -202,7 +209,7 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     if "type" in field.keys():
         result.append(f":type: {field.get('type')}")
     if "units" in field.keys():
-        result.append(f":unit: {field.get('units')}")
+        result.append(f":units: {field.get('units')}")
     if has_error:
         result.append(":has_error:")
     result.append("")
@@ -238,7 +245,8 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
         result.append(f"- Appendable by appender actor: {appendable}")
     if "maxoccur" in field.keys():
         maxoccur = field.get("maxoccur")
-        result.append(f"- Maximum occurrences (MDS+ backend only): {maxoccur}")
+        if maxoccur != "unbounded":
+            result.append(f"- Maximum occurrences (MDS+ backend only): {maxoccur}")
     result.append("")
 
     # Coordinates

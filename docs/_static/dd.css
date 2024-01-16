@@ -52,10 +52,17 @@ table.dd-coordinates th:first-child, table.dd-coordinates td:first-child {
 /* [Reference] Summary of DD node contents */
 details .dd-summary {
     font-weight: normal;
+    font-style: italic;
     display: block;
 }
+/* Hide the summary when a node is uncollapsed
 details[open] > * > .dd-summary {
     display: none;
+}
+*/
+/* Add more spacing after an opened node */
+details.dd[open] {
+    margin-bottom: 2.5rem;
 }
 
 /* [Reference] Overwrite admonition styles from theme */
@@ -70,19 +77,18 @@ details.dd details.dd:last-child {
 }
 summary.dd {
     margin-right: 0;
+    font-weight: normal;
     padding-right: 0.6rem !important; /* Move collapse icon left */
     padding-left: 1.8rem !important; /* Remove admonition icon */
+}
+summary.dd .name {
+    font-weight: bold;
 }
 summary.dd::before {
     width: 0; /* Remove admonition icon */
 }
 summary.dd::after {
     left: 0.4rem;
-}
-
-/* [Reference] Make parent structures in path appear lighter */
-.sig-object > span:first-child:not(.sig-name) {
-    font-weight: normal;
 }
 
 /* [Reference] Style units, data_type and type elements */
@@ -98,6 +104,7 @@ span.dd_unit:hover {
 
 .dd_data_type {
     float: right;
+    font-weight: bold;
 }
 
 .dd-constant::before {

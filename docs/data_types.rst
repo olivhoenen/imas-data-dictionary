@@ -19,7 +19,7 @@ Structural data types
 
     A structure node.
 
-.. dd:data_type:: struct_array
+.. dd:data_type:: AoS
 
     An array of structures node.
 

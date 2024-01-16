@@ -15,17 +15,15 @@ from docutils.statemachine import StringList
 from docutils.nodes import Element, Node
 from docutils.parsers.rst import directives
 from sphinx import addnodes
-from sphinx.addnodes import desc_content, desc_signature, pending_xref
+from sphinx.addnodes import pending_xref
 from sphinx.application import Sphinx
 from sphinx.builders import Builder
-from sphinx.directives import ObjectDescription
 from sphinx.domains import Domain, ObjType
 from sphinx.environment import BuildEnvironment
 from sphinx.roles import XRefRole
-from sphinx.util.docutils import SphinxDirective, switch_source_input
-from sphinx.util.nodes import make_id, make_refnode, nested_parse_with_titles
+from sphinx.util.docutils import SphinxDirective
+from sphinx.util.nodes import make_id, make_refnode
 from sphinx.util.typing import OptionSpec
-from sphinx.writers.html5 import HTML5Translator
 
 
 logger = logging.getLogger(__name__)
@@ -48,7 +46,7 @@ def remove_brackets(value: str) -> str:
             return value
 
 
-def create_ref_xref(node, reftarget, **attributes):
+def create_xref(node, reftarget, **attributes):
     """Helper to create pending_xref node representing :ref:`{text} <target>`."""
     return pending_xref(
         "",
@@ -83,96 +81,69 @@ def get_summary(content: StringList, n_char=80) -> str:
     return text
 
 
-class DDNode(ObjectDescription[Tuple[str, str]]):
-    """Description of a node in the Data Dictionary."""
+# Custom Sphinx directives
+########################################################################################
+
+
+class DDElement(SphinxDirective):
+    """Directive to describe a Data Dictionary node."""
+
+    has_content = True
+    required_arguments = 1
+    optional_arguments = 0
+    final_argument_whitespace = False
 
     option_spec: OptionSpec = {
-        "noindex": directives.flag,
-        "noindexentry": directives.flag,
-        "nocontentsentry": directives.flag,
         "data_type": directives.unchanged,
         "has_error": directives.flag,
+        "no_summary": directives.flag,
         "type": partial(
             directives.choice, values=("constant", "static", "dynamic", "")
         ),
-        "unit": directives.unchanged,
+        "units": directives.unchanged,
     }
 
-    def handle_signature(self, sig: str, signode: desc_signature) -> Tuple[str, str]:
-        sig = sig.strip()
+    def run(self) -> List[Node]:
+        # IDS name:
         prefix = self.env.ref_context.get("dd:ids")
-        parts = sig.rsplit("/", 1)
-        if len(parts) > 1:
-            signode += nodes.Text(parts[0] + "/", parts[0] + "/")
-        signode += addnodes.desc_name(parts[-1], parts[-1])
 
-        # Add additional properties
-        if "has_error" in self.options:
-            signode += create_ref_xref(
-                nodes.Text(" ⇹"), "errorbars", classes=["errorbar"]
-            )
-
-        if "type" in self.options:
-            target = f"type-{self.options['type']}"
-            classes = [f"dd-{self.options['type']}"]
-            # Note: actual text is added with CSS (::before)
-            signode += create_ref_xref(nodes.inline(), target, classes=classes)
-
-        if "unit" in self.options:
-            unit = self.options["unit"]
-            signode += DDUnit(unit, unit)
-
-        if "data_type" in self.options:
-            data_type = self.options["data_type"]
-            if data_type in ("structure", "struct_array"):
-                signode.parent["classes"].append("dd-struct")
-            data_type = {
-                "str_type": "STR_0D",
-                "str_1d_type": "STR_1D",
-                "int_type": "INT_0D",
-                "flt_type": "FLT_0D",
-                "flt_1d_type": "FLT_1D",
-                "cpx_type": "CPX_0D",
-            }.get(data_type, data_type)
-            signode += pending_xref(
-                "",
-                nodes.Text(data_type),
-                refdomain="dd",
-                reftype="data_type",
-                reftarget=data_type,
-                classes=["dd_data_type"]
-            )
-
-        # Summary of contents
-        summary_txt = get_summary(self.content)
-        signode += addnodes.desc_annotation("", summary_txt, classes=["dd-summary"])
-
-        fullname = f"{prefix}/{sig}" if prefix else sig
+        # Name
+        name = self.arguments[0].strip()
+        fullname = f"{prefix}/{name}" if prefix else name
         fullname = remove_brackets(fullname)
-        signode["fullname"] = fullname
-        return fullname, prefix
 
-    def add_target_and_index(
-        self, name: Tuple[str, str], sig: str, signode: desc_signature
-    ) -> None:
-        node_id = make_id(self.env, self.state.document, "", name[0])
-        signode["ids"].append(node_id)
-        self.state.document.note_explicit_target(signode)
+        # Options
+        data_type = self.options.get("data_type")
+        has_error = self.options.get("has_error")
+        typ = self.options.get("type")
+        units = self.options.get("units")
 
+        # Generate summary
+        summary = ""
+        if not self.options.get("no_summary", False):
+            summary = get_summary(self.content)
+
+        # Create DD Node
+        node = DDNode(name, data_type, typ, units, summary, has_error)
+
+        # Generate a unique ID:
+        node_id = make_id(self.env, self.state.document, "", fullname)
+        node["ids"].append(node_id)
+
+        # Register with domain
+        objtype = self.name.rsplit(":", 1)[-1]
         domain = cast(DDDomain, self.env.get_domain("dd"))
-        domain.note_object(name[0], self.objtype, node_id, location=signode)
+        domain.note_object(fullname, objtype, node_id, location=node)
+        # Create an index node -- this seems not necessary
+        # addnodes.index(entries=[("single", fullname, node_id, "", None)])
 
-        # According to sphinx docs we are responsible for creating indexnodes. However,
-        # doing so creates double index entries. Perhaps some magic from
-        # sphinx_immaterial? Either way, disabling this code...
-        # -----------------------------------------------------------------------------
-        # if "noindexentry" not in self.options:
-        #    indextext = name[0]
-        #    if indextext:
-        #        self.indexnode["entries"].append(
-        #            ("single", indextext, node_id, "", None)
-        #        )
-        # -----------------------------------------------------------------------------
+        # Parse contents
+        content_node = nodes.container()
+        self.state.nested_parse(self.content, 0, content_node)
+        node += content_node.children
+
+        # return [indexnode, node]
+        return [node]
 
 
 class _TopLevel(SphinxDirective):
@@ -198,10 +169,7 @@ class _TopLevel(SphinxDirective):
         self.env.ref_context["dd:ids"] = ids_name
 
         content_node = nodes.section()
-        with switch_source_input(self.state, self.content):
-            # necessary so that the child nodes get the right source/line set
-            content_node.document = self.state.document
-            nested_parse_with_titles(self.state, self.content, content_node)
+        self.state.nested_parse(self.content, 0, content_node)
 
         ret = []
         if not noindex:
@@ -232,25 +200,22 @@ class Util(_TopLevel):
     refname = "util"
 
 
-class UtilReference(DDNode):
+class UtilReference(DDElement):
     """Directive to mark that a node is a reference to a utility struct."""
 
-    def handle_signature(self, sig: str, signode: desc_signature) -> Tuple[str, str]:
-        # reference is guaranteed to not have whitespace, but path may have (?)
-        *sigs, reference = sig.split()
-        sig = sig.join(sigs)
-        self.options["data_type"] = "structure"
-        self.options["reference"] = reference
-        return super().handle_signature(sig, signode)
+    has_content = False
+    required_arguments = 2
 
-    def transform_content(self, contentnode: desc_content) -> None:
-        reference = self.options["reference"]
-        content = StringList()
-        content.append(
+    def run(self):
+        self.options["data_type"] = "structure"
+        self.options["no_summary"] = True
+        self.content = StringList()
+        reference = self.arguments.pop()
+        self.content.append(
             f"See common IDS structure reference: :dd:util:`{reference}`.",
             *self.get_source_info(),
         )
-        self.state.nested_parse(content, 0, contentnode)
+        return super().run()
 
 
 class DDIdentifier(SphinxDirective):
@@ -319,6 +284,10 @@ class IdentifierXRefRole(XRefRole):
         return title, target
 
 
+# Custom Sphinx Domain
+########################################################################################
+
+
 class DDDomain(Domain):
     """Sphinx domain for the Data Dictionary."""
 
@@ -341,8 +310,8 @@ class DDDomain(Domain):
         "ids": IDS,
         "util": Util,
         "util-ref": UtilReference,
-        "node": DDNode,
-        "data_type": DDNode,
+        "node": DDElement,
+        "data_type": DDElement,
         "identifier": DDIdentifier,
     }
     roles = {
@@ -462,70 +431,105 @@ class DDDomain(Domain):
         return f"{ids_name}/{target}" if ids_name else target
 
 
-# Monkeypatch:
-def visit_desc(self, node: Element) -> None:
+# Custom docutils nodes
+########################################################################################
+
+
+class DDNode(nodes.Element):
+    """Docutils node to represent a DD Element (structure, AoS, data element)."""
+
+    def __init__(self, name, data_type, typ, units, summary, has_error):
+        super().__init__("", classes=["dd"])
+        # Create summary node
+        self += DDSummary(self, name, data_type, typ, units, summary, has_error)
+
+
+# Visitors of DDNode for HTML documentation:
+def visit_ddnode(self, node: Element) -> None:
     self.body.append(self.starttag(node, "details"))
 
 
-def depart_desc(self, node: Element) -> None:
+def depart_ddnode(self, node: Element) -> None:
     self.body.append("</details>\n\n")
 
 
-def visit_desc_signature(self, node: Element) -> None:
-    # the id is set automatically
+class DDSummary(nodes.TextElement):
+    """Docutils node to represent the summary of a DD Element."""
+
+    def __init__(self, parent, name, data_type, typ, units, summary, has_error):
+        super().__init__("", classes=["dd"])
+
+        parts = name.rsplit("/", 1)
+        if len(parts) > 1:
+            self += nodes.Text(parts[0] + "/")
+        self += nodes.inline(text=parts[-1], classes=["name"])
+
+        if has_error:
+            self += create_xref(nodes.Text(" ⇹"), "errorbars", classes=["errorbar"])
+
+        if typ:
+            # Note: actual text is added with CSS (::before)
+            self += create_xref(nodes.inline(), f"type-{typ}", classes=[f"dd-{typ}"])
+
+        if units:
+            self += nodes.inline(text=units, classes=["dd_unit"])
+
+        if data_type:
+            if data_type in ("structure", "struct_array"):
+                parent["classes"].append("dd-struct")
+            data_type = {
+                "str_type": "STR_0D",
+                "str_1d_type": "STR_1D",
+                "int_type": "INT_0D",
+                "flt_type": "FLT_0D",
+                "flt_1d_type": "FLT_1D",
+                "cpx_type": "CPX_0D",
+                "struct_array": "AoS",  # IMAS-5058: AoS in doc instead of struct_array
+            }.get(data_type, data_type)
+            self += pending_xref(
+                "",
+                nodes.Text(data_type),
+                refdomain="dd",
+                reftype="data_type",
+                reftarget=data_type,
+                classes=["dd_data_type"],
+            )
+
+        self += DDPermaLink()
+
+        if summary:
+            self += nodes.inline(text=summary, classes=["dd-summary"])
+
+
+# Visitors of DDSummary for HTML documentation:
+def visit_ddsummary(self, node: Element) -> None:
     self.body.append(self.starttag(node, "summary"))
-    self.protect_literal_text += 1
 
 
-def depart_desc_signature(self, node: Element) -> None:
-    self.protect_literal_text -= 1
+def depart_ddsummary(self, node: Element) -> None:
     self.body.append("</summary>\n")
 
 
-def visit_desc_annotation(self, node: Element) -> None:
-    # Add permalink before the summary annotation
-    self.add_permalink_ref(node.parent, "Permalink to this definition")
-    self.body.append(self.starttag(node, "em", "", CLASS="property"))
+class DDPermaLink(nodes.Inline, nodes.Element):
+    """Placeholder node for a permalink."""
 
 
-def visit_desc_content(self, node: Element) -> None:
+# Visitors of DDPermaLink for HTML documentation:
+def visit_ddpermalink(self, node: Element) -> None:
+    self.add_permalink_ref(node.parent.parent, "Permalink to this node")
+
+
+def depart_ddpermalink(self, node: Element) -> None:
     pass
-
-
-def depart_desc_content(self, node: Element) -> None:
-    pass
-
-
-HTML5Translator.visit_desc = visit_desc
-HTML5Translator.depart_desc = depart_desc
-HTML5Translator.visit_desc_signature = visit_desc_signature
-HTML5Translator.depart_desc_signature = depart_desc_signature
-HTML5Translator.visit_desc_annotation = visit_desc_annotation
-HTML5Translator.visit_desc_content = visit_desc_content
-HTML5Translator.depart_desc_content = depart_desc_content
-
-
-class DDUnit(nodes.inline):
-    """Docutils node for representing DD units."""
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-        self["classes"].append("dd_unit")
-
-
-def visit_span_element_html(self, node: Element) -> None:
-    self.body.append(self.starttag(node, "span", ""))
-
-
-def depart_span_element_html(self, node: Element) -> None:
-    self.body.append("</span>")
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_domain(DDDomain)
-    app.add_node(DDUnit, html=(visit_span_element_html, depart_span_element_html))
+    app.add_node(DDNode, html=(visit_ddnode, depart_ddnode))
+    app.add_node(DDSummary, html=(visit_ddsummary, depart_ddsummary))
+    app.add_node(DDPermaLink, html=(visit_ddpermalink, depart_ddpermalink))
     return {
-        "version": "0.1",
+        "version": "0.2",
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }
