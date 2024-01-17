@@ -25,6 +25,17 @@ module load \
 echo "Done loading modules"
 set -x
 
+# Create Python virtual environment
+rm -rf venv
+python -m venv --system-site-packages venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r docs/requirements.txt
+
+# Debugging:
+pip freeze
+
 # Set sphinx options:
 # - `-D dd_changelog_generate=1`: generate and build the changelog
 # - `-D dd_autodoc_generate=1`: generate and build the IDS reference
