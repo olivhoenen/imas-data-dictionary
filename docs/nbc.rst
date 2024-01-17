@@ -4,7 +4,7 @@ Non-backwards compatible changes
 As the data dictionary evolves, sometimes Non-backwards Compatible Changes (NBCs) are
 introduced. Currently there are two types of NBCs which are documented:
 
-1.  Renames of :dd:data_type:`structure`\ s, :dd:data_type:`struct_array`\ s or data
+1.  Renames of :dd:data_type:`structure`\ s, :dd:data_type:`AoS`\ s or data
     nodes. For example, :dd:node:`reflectometer_profile/position/r` was renamed in
     version 3.23.3, the original name was ``position/r/data``.
 2.  Change of data type. For example,

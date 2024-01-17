@@ -3,7 +3,7 @@
 Coordinates and time handling
 =============================
 
-Dimensional quanitities such as :dd:data_type:`struct_array` and multi-dimensional
+Dimensional quanitities such as :dd:data_type:`AoS` and multi-dimensional
 :ref:`data <data types>` nodes have associated coordinates. Coordinates can
 refer to other data quantities in the IDS, which is indicated with the path to
 the coordinate quantity. Alternatively, a coordinate can be a plain index, which
