@@ -80,6 +80,13 @@ html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv: dd_data_d
 IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
 	$(xslt2proc)
 
+# Sphinx documentation
+.PHONY: sphinx docs
+
+docs: sphinx
+sphinx: IDSDef.xml
+	$(MAKE) -C docs html
+
 # Generic Dependencies
 
 SAXON := $(shell command -v saxon 2> /dev/null)
