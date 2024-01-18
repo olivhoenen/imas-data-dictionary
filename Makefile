@@ -84,7 +84,7 @@ IDSNames.txt dd_data_dictionary_validation.txt: %: dd_data_dictionary.xml %.xsl
 .PHONY: sphinx docs
 
 docs: sphinx
-sphinx: IDSDef.xml
+sphinx: all
 	$(MAKE) -C docs html
 
 # Generic Dependencies
