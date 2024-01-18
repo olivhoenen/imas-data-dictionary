@@ -59,7 +59,7 @@ def create_xref(node, reftarget, **attributes):
     )
 
 
-def get_summary(content: StringList, n_char=80) -> str:
+def get_summary(content: StringList, n_char=60) -> str:
     """Create a summary string from the contents of a DD node"""
     needs_ellipsis = False
     # Get the first line of the contents
