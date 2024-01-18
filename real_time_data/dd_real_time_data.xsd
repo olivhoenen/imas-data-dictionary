@@ -26,6 +26,33 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="time_stamp">
+				<xs:annotation>
+					<xs:documentation>Time of creation for all signals belonging to this topic. A set of time stamps can be recorded if needed</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>s</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="sample">
+				<xs:annotation>
+					<xs:documentation>Index of sample (time stamp counter)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<coordinate1>../time_stamp</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="rtd_allocatable_signals">
@@ -44,11 +71,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="definition">
+			<xs:element name="data_type">
 				<xs:annotation>
-					<xs:documentation>Signal definition</xs:documentation>
+					<xs:documentation>Signal data type</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+						<introduced_after_version>3.39.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -57,27 +85,41 @@
 			</xs:element>
 			<xs:element name="allocated_position">
 				<xs:annotation>
-					<xs:documentation>Allocation of signal to a position in the SDN (1..N); this will be implementation specific</xs:documentation>
+					<xs:documentation>Allocation of signal to a position in the SDN (1..N), or several positions in case of signal reshaping; this will be implementation specific</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_0D"/>
+					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="value" type="signal_flt_1d">
+			<xs:element name="data_str">
 				<xs:annotation>
-					<xs:documentation>Signal value</xs:documentation>
+					<xs:documentation>Signal data (e.g. diagnostic signal or PCS command), serialized as a string</xs:documentation>
 					<xs:appinfo>
-						<units>mixed</units>
+						<type>constant</type>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<coordinate1>../../time_stamp</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="quality" type="signal_int_1d">
+			<xs:element name="quality">
 				<xs:annotation>
 					<xs:documentation>Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&amp;action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<coordinate1>../../time_stamp</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -87,7 +129,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.34.0</lifecycle_version>
-				<lifecycle_last_change>3.34.0</lifecycle_last_change>
+				<lifecycle_last_change>3.40.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
