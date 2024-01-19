@@ -15,7 +15,7 @@ module purge
 # - GitPython (providing `git` package), needed for the changelog
 # - IMASPy (providing `imaspy` package), needed for the changelog
 module load \
-    Saxon-HE/10.3-Java-11 \
+    Saxon-HE/11.4-Java-11 \
     Python/3.8.6-GCCcore-10.2.0 \
     GitPython/3.1.14-GCCcore-10.2.0 \
     IMASPy/1.0.0-foss-2020b
