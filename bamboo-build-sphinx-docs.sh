@@ -18,7 +18,7 @@ module load \
     Saxon-HE/10.3-Java-11 \
     Python/3.8.6-GCCcore-10.2.0 \
     GitPython/3.1.14-GCCcore-10.2.0 \
-    IMASPy/0.8.0-foss-2020b
+    IMASPy/1.0.0-foss-2020b
 
 
 # Debuggging:
