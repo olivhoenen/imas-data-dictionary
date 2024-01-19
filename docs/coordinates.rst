@@ -72,3 +72,18 @@ Static
     Static quantities are also not varying, but likely to be constant over a wider
     context, such as the nominal coil positions during operation.
 
+
+.. _`dd4-alternatives`:
+
+Alternatives for a coordinate
+'''''''''''''''''''''''''''''
+
+Starting with Data Dictionary 4.0, a coordinate can indicate that other data
+fields can be used as coordinate instead. For example,
+:dd:node:`core_profiles/profiles_1d/grid/rho_tor_norm` indicates that (among
+others) :dd:node:`core_profiles/profiles_1d/grid/rho_tor` can be used as an
+alternative.
+
+When filling any quantity that has ``rho_tor_norm`` as coordinate (for example
+:dd:node:`core_profiles/profiles_1d/t_i_average`), you may choose to fill an
+alternative coordinate instead, and leave ``rho_tor_norm`` empty.

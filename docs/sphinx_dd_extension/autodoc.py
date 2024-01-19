@@ -4,7 +4,7 @@
 from pathlib import Path
 import re
 from textwrap import indent
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Set
 from xml.etree import ElementTree
 
 from sphinx.application import Sphinx
@@ -108,7 +108,7 @@ def link_to_url(url: str, text: str) -> str:
     return f"`{text} <{url}>`_"
 
 
-def link_to_coordinate(coordinate: str) -> str:
+def link_to_coordinate(coordinate: str, coordinates_with_alternatives: Set[str]) -> str:
     """Generate rst to link to a coordinate.
 
     Args:
@@ -122,6 +122,8 @@ def link_to_coordinate(coordinate: str) -> str:
             result.append(f":dd:node:`{coor[4:]}`")
         else:
             result.append(f":dd:node:`{coor}`")
+            if coor in coordinates_with_alternatives:
+                result[-1] += " (or :ref:`alternatives <dd4-alternatives>`)"
     return " OR ".join(result)
 
 
@@ -166,7 +168,7 @@ def util2rst(node: ElementTree.Element) -> str:
     result.append(indent(parse_documentation(node.get("documentation")), INDENT))
     result.append("")
     result.append(indent("\n".join(parse_lifecycle_status(node)), INDENT))
-    result.append(children2rst(node, 1))
+    result.append(children2rst(node, 1, set()))
     result.append("")
     # Collapse triple or more newlines
     return re.sub(r"[\n]{3,}", "\n\n", "\n".join(result))
@@ -174,6 +176,13 @@ def util2rst(node: ElementTree.Element) -> str:
 
 def ids2rst(ids: ElementTree.Element) -> str:
     """Convert an IDS Element to rst documentation."""
+    # Cache all elements with alternative coordinates
+    coordinates_with_alternatives = {
+        # Strip leading (:) / (:,:) / etc.
+        re.sub(r"\([^)]*\)$", "", ele.get("path_doc"))
+        for ele in ids.iterfind(".//*[@alternative_coordinate1]")
+    }
+
     result = []
     name = ids.get("name")
     lifecycle_status = ids.get("lifecycle_status")
@@ -201,19 +210,25 @@ def ids2rst(ids: ElementTree.Element) -> str:
     # Lifecycle status
     result.append(indent("\n".join(parse_lifecycle_status(ids)), INDENT))
 
-    result.append(children2rst(ids, 1))
+    result.append(children2rst(ids, 1, coordinates_with_alternatives))
     result.append("")
     # Collapse triple or more newlines
     return re.sub(r"[\n]{3,}", "\n\n", "\n".join(result))
 
 
-def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
+def field2rst(
+    field: ElementTree.Element,
+    has_error: bool,
+    level: int,
+    coordinates_with_alternatives: Set[str],
+) -> str:
     """Convert an IDS Field element to rst documentation.
 
     Args:
         field: XML element of this field
         has_error: True iff this field has corresponding error nodes
         level: indentation level
+        coordinates_with_alternatives: Mapping of paths with alternative coordinates
     """
     # Link to common utilities that are documented elsewhere
     if field.get("structure_reference") in DOCUMENTED_UTILITIES:
@@ -238,6 +253,19 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     # Documentation string
     result.append(parse_documentation(field.get("documentation")))
     result.append("")
+
+    alternative_coordinates = field.get("alternative_coordinate1", "")
+    if alternative_coordinates:
+        result.append(".. rubric:: Alternatives for this coordinate")
+        result.append("")
+        result.append(
+            "The following items may be used as a coordinate instead of "
+            f"``{field.get('name')}``:"
+        )
+        result.append("")
+        for item in alternative_coordinates.split(";"):
+            result.append(f"- :dd:node:`{item}`")
+        result.append("")
 
     # URLs to additional content
     if "url" in field.keys():
@@ -277,10 +305,11 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
         if not coordinate:
             break
         coordinate_same_as = field.get(f"coordinate{i+1}_same_as")
+        coor_link = link_to_coordinate(coordinate, coordinates_with_alternatives)
         same_as = ""
         if coordinate_same_as:
-            same_as += f" (same as {link_to_coordinate(coordinate_same_as)})"
-        coordinates_csv.append(f' {i+1},"{link_to_coordinate(coordinate)}{same_as}"')
+            same_as += f" (same as {link_to_coordinate(coordinate_same_as, set())})"
+        coordinates_csv.append(f' {i+1},"{coor_link}{same_as}"')
 
     if coordinates_csv:
         result.append(".. csv-table::")
@@ -316,11 +345,15 @@ def field2rst(field: ElementTree.Element, has_error: bool, level: int) -> str:
     result = indent("\n".join(result), INDENT * level)
     result = result[len(INDENT) :]  # Indent first line one level lower
     # Add documentation for children
-    result += "\n" + children2rst(field, level)
+    result += "\n" + children2rst(field, level, coordinates_with_alternatives)
     return result
 
 
-def children2rst(element: ElementTree.Element, level: int) -> str:
+def children2rst(
+    element: ElementTree.Element,
+    level: int,
+    coordinates_with_alternatives: Set[str],
+) -> str:
     """Convert all children of an IDS element to rst documentation.
 
     Args:
@@ -342,7 +375,7 @@ def children2rst(element: ElementTree.Element, level: int) -> str:
                 skip.add(error_name)
 
     return "\n".join(
-        field2rst(field, fieldname in has_error, level)
+        field2rst(field, fieldname in has_error, level, coordinates_with_alternatives)
         for fieldname, field in children.items()
         if fieldname not in skip
     )
