@@ -527,6 +527,18 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="identifier">
+				<xs:annotation>
+					<xs:documentation>Identifier of this unit. Although the details may be machine-specific, a tree-like syntax must be followed, listing first top level components, then going down to finer element description. The tree levels are separated by a /, using a number of levels relevant to the granularity of the description. Example : ic_antenna/a1/bumpers refers to the bumpers of the a1 IC antenna</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="closed">
 				<xs:annotation>
 					<xs:documentation>Flag identifying whether the contour is closed (1) or open (0)</xs:documentation>
@@ -537,6 +549,15 @@
 				<xs:complexType>
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="component_type" type="identifier_static">
+				<xs:annotation>
+					<xs:documentation>Type of component of this unit</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>wall/wall_component_identifier.xml</doc_identifier>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="outline" type="rz1d_static">
 				<xs:annotation>
@@ -583,7 +604,7 @@
 			</xs:element>
 			<xs:element name="unit" type="wall_2d_limiter_unit" maxOccurs="33">
 				<xs:annotation>
-					<xs:documentation>Set of limiter units</xs:documentation>
+					<xs:documentation>Set of limiter units. Multiple units must be ordered so that they define contiguous sections, clockwise in the poloidal direction. </xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -682,7 +703,10 @@
 		<xs:sequence>
 			<xs:element name="type" type="identifier_static">
 				<xs:annotation>
-					<xs:documentation>Type of the description. index = 0 for equilibrium codes (single closed limiter and vessel); 1 for gas-tight walls (disjoint PFCs with inner vessel as last limiter_unit; no vessel structure); 2 for free boundary codes (disjoint PFCs and vessel) </xs:documentation>
+					<xs:documentation>Type of the description</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>wall/wall_description_2d_type_identifier.xml</doc_identifier>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="limiter" type="wall_2d_limiter">
@@ -1889,6 +1913,91 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="j_total" type="generic_grid_vector_components_rzphi" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Total current density, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>A.m^-2</units>
+						<coordinate1>1...N</coordinate1>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="e_field" type="generic_grid_vector_components_rzphi" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Electric field, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>V.m^-1</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="a_field" type="generic_grid_vector_components_rzphi" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Magnetic vector potential, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>T.m</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="psi" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Poloidal flux, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>Wb</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phi_potential" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Electric potential, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>V</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resistivity" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Resistivity, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>Ohm.m</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wall_description_ggd_thickness">
+		<xs:annotation>
+			<xs:documentation>Thickness of a thin wall with GGD description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_subset" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The thickness is given for various wall components (grid subsets)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="time" type="flt_type">
 				<xs:annotation>
 					<xs:documentation>Time</xs:documentation>
@@ -1925,6 +2034,43 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="wall_description_ggd_component">
+		<xs:annotation>
+			<xs:documentation>Component type for GGD description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifiers">
+				<xs:annotation>
+					<xs:documentation>Identifiers of the components (described in the various grid_subsets). Although the details may be machine-specific, a tree-like syntax must be followed, listing first top level components, then going down to finer element description. The tree levels are separated by a /, using a number of levels relevant to the granularity of the description. Example : ic_antenna/a1/bumpers refers to the bumpers of the a1 IC antenna</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="type" type="generic_grid_identifier_single" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The component type is given for various grid_subsets, using the identifier convention below</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../identifiers</coordinate1>
+						<doc_identifier>wall/wall_component_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="wall_description_ggd">
 		<xs:annotation>
 			<xs:documentation>3D wall description using the GGD</xs:documentation>
@@ -1932,7 +2078,7 @@
 		<xs:sequence>
 			<xs:element name="type" type="identifier_static">
 				<xs:annotation>
-					<xs:documentation>Type of wall: index = 0 for gas tight and 1 for a wall with holes/open ports</xs:documentation>
+					<xs:documentation>Type of wall: index = 0 for gas tight, 1 for a wall with holes/open ports, 2 for a thin wall description</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="grid_ggd" type="generic_grid_aos3_root" maxOccurs="unbounded">
@@ -1955,6 +2101,28 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="component" type="wall_description_ggd_component" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Description of the components represented by various subsets, given for each slice of the grid_ggd time base (the component description is not supposed to change, but grid_ggd may evolve with time)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<coordinate1_same_as>../grid_ggd</coordinate1_same_as>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="thickness" type="wall_description_ggd_thickness" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>In the case of a thin wall description, effective thickness of each surface element of grid_ggd, given for each slice of the grid_ggd time base (the thickness is not supposed to change, but grid_ggd may evolve with time)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<coordinate1_same_as>../grid_ggd</coordinate1_same_as>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="ggd" type="wall_description_ggd_ggd" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Wall physics quantities represented using the general grid description, for various time slices.</xs:documentation>
@@ -1972,7 +2140,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.38.0</lifecycle_last_change>
+				<lifecycle_last_change>3.40.1</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>

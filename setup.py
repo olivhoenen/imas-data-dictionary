@@ -117,6 +117,6 @@ setup(
     data_files=paths,
     # Run command line script and should be installed by Python installer
     entry_points={  # Using inetrnal Python automated script option
-        "console_scripts": ["idsdef=data_dictionary.idsdef:main"]
+        "console_scripts": ["idsinfo=data_dictionary.idsinfo:main"]
     },
 )
