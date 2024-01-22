@@ -184,6 +184,7 @@ class _TopLevel(SphinxDirective):
             indextext = f"{self.refname}; {ids_name}"
             inode = addnodes.index(entries=[("pair", indextext, node_id, "", None)])
             ret.append(inode)
+        ret.append(ExpandCollapseNode())
         ret.extend(content_node.children)
         return ret
 
@@ -523,11 +524,33 @@ def depart_ddpermalink(self, node: Element) -> None:
     pass
 
 
+class ExpandCollapseNode(nodes.Inline, nodes.Element):
+    """Placeholder for expand/collapse all buttons."""
+
+
+def visit_expandcollapsenode(self, node: Element) -> None:
+    self.body.append(
+        "<div class='dd-toggle'><a class='dd-expand' "
+        'onclick=\'document.querySelectorAll("details").forEach('
+        "(ele) => {ele.open = true;})'><span>+</span> Expand all</a>"
+        "<a class='dd-collapse' "
+        'onclick=\'document.querySelectorAll("details").forEach('
+        "(ele) => {ele.open = false;})'><span>-</span> Collapse all</a></div>"
+    )
+
+
+def depart_expandcollapsenode(self, node: Element) -> None:
+    pass
+
+
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_domain(DDDomain)
     app.add_node(DDNode, html=(visit_ddnode, depart_ddnode))
     app.add_node(DDSummary, html=(visit_ddsummary, depart_ddsummary))
     app.add_node(DDPermaLink, html=(visit_ddpermalink, depart_ddpermalink))
+    app.add_node(
+        ExpandCollapseNode, html=(visit_expandcollapsenode, depart_expandcollapsenode)
+    )
     return {
         "version": "0.2",
         "parallel_read_safe": True,
