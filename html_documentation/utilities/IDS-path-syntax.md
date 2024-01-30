@@ -28,7 +28,7 @@ have their names followed by round brackets **`()`**, this is mandatory unless t
 	+ `(i)` indicates the i-th element of the array, 1 being the first element (same as Fortran arrays)
 	+ `(i:j)` indicates all elements from the i-th to the j-th (both included)
 - for nD arrays, a list of n range specifiers separated by commas must be given, e.g in 3D
-	+ `(:,:,1)` represents a 2D slab for the first element in the last dimension (usually the time, unless the quantity is not time dependent or has one time dependent array of structure as ancester)
+	+ `(:,:,1)` represents a 2D slab for the first element in the last dimension (usually the time, unless the quantity is not time dependent or has one time dependent array of structure as ancestor)
 ​
 ​
 ## Use cases and examples
