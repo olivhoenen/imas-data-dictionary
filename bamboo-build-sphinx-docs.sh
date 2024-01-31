@@ -37,9 +37,8 @@ pip install -r docs/requirements.txt
 pip freeze
 
 # Try to update the pull_requests.json with a Bitbucket server API call:
-IMAS_DD_BITBUCKET_TOKEN=${IMAS_DD_BITBUCKET_TOKEN:-${bamboo_IMAS_DD_BITBUCKET_TOKEN}}
-if [ -z ${IMAS_DD_BITBUCKET_TOKEN+x} ]; then
-    echo '$IMAS_DD_BITBUCKET is not set, using cached pull_requests.json'
+if [ -z "${IMAS_DD_BITBUCKET_TOKEN:+x}${bamboo_IMAS_DD_BITBUCKET_TOKEN:+x}" ]; then
+    echo '$IMAS_DD_BITBUCKET_TOKEN is not set, using cached pull_requests.json'
 else
     echo 'Updating pull_requests.json ...'
     cd docs

@@ -11,7 +11,12 @@ import json
 import os
 
 
-token = os.environ["IMAS_DD_BITBUCKET_TOKEN"]
+for name in ["IMAS_DD_BITBUCKET_TOKEN", "bamboo_IMAS_DD_BITBUCKET_TOKEN"]:
+    if name in os.environ:
+        token = os.environ[name]
+        break
+else:
+    raise RuntimeError("Token not found. Missing env var: $IMAS_DD_BITBUCKET_TOKEN.")
 
 
 # https://stackoverflow.com/questions/71603314/ssl-error-unsafe-legacy-renegotiation-disabled
