@@ -36,6 +36,16 @@ pip install -r docs/requirements.txt
 # Debugging:
 pip freeze
 
+# Try to update the pull_requests.json with a Bitbucket server API call:
+if [ -z "${IMAS_DD_BITBUCKET_TOKEN:+x}${bamboo_IMAS_DD_BITBUCKET_TOKEN:+x}" ]; then
+    echo '$IMAS_DD_BITBUCKET_TOKEN is not set, using cached pull_requests.json'
+else
+    echo 'Updating pull_requests.json ...'
+    cd docs
+    python -m sphinx_dd_extension.dd_changelog_helper
+    cd ..
+fi
+
 # Set sphinx options:
 # - `-D dd_changelog_generate=1`: generate and build the changelog
 # - `-D dd_autodoc_generate=1`: generate and build the IDS reference
