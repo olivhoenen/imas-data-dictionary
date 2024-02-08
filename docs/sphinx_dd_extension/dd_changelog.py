@@ -132,6 +132,15 @@ def replace_ids_names_with_links(ids_list, text):
     )
 
 
+def get_pr_link(pr_json) -> str:
+    """Extract the link to the Pull Request from its JSON representation"""
+    try:
+        return pr_json["links"]["self"][0]["href"]
+    except LookupError:
+        # This shouldn't happen, but for fail-safe:
+        return ""
+
+
 def generate_git_changelog(app: Sphinx):
     """Generate a changelog using git pull requests"""
     if not app.config.dd_changelog_generate:
@@ -189,7 +198,7 @@ def generate_git_changelog(app: Sphinx):
             (
                 x.get("title", ""),
                 x.get("description", "no description"),
-                x.get("links", {}).get("self", []),
+                get_pr_link(x),
             )
             for x in prs
         ]
