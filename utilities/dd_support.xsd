@@ -5409,7 +5409,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="geometry">
+			<xs:element name="geometry" type="flt_1d_type">
 				<xs:annotation>
 					<xs:documentation>Geometry data associated with the object, its detailed content is defined by ../../geometry_content. Its dimension depends on the type of object, geometry and coordinate considered. </xs:documentation>
 					<xs:appinfo>
@@ -5418,9 +5418,6 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="nodes">
 				<xs:annotation>
@@ -5434,7 +5431,7 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="measure">
+			<xs:element name="measure" type="flt_type">
 				<xs:annotation>
 					<xs:documentation>Measure of the space object, i.e. physical size (length for 1d, area for 2d, volume for 3d objects,...)</xs:documentation>
 					<xs:appinfo>
@@ -5442,11 +5439,8 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="geometry_2d">
+			<xs:element name="geometry_2d" type="flt_2d_type">
 				<xs:annotation>
 					<xs:documentation>2D geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. Typically, the first dimension represents the object coordinates, while the second dimension would represent the values of the various degrees of freedom of the finite element attached to the object.</xs:documentation>
 					<xs:appinfo>
@@ -5457,9 +5451,6 @@
 						<introduced_after_version>3.35.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
