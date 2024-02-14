@@ -55,3 +55,6 @@ export SPHINXOPTS="-D dd_changelog_generate=1 -D dd_autodoc_generate=1 -W --keep
 
 # Build the sphinx documentation
 make sphinx
+
+# Output the version, used by the deployment script for tagged releases:
+git describe > docs/_build/html/version.txt
