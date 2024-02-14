@@ -116,20 +116,6 @@ html_theme_options = {
         },
     ],
     "version_dropdown": True,
-    "version_info": [  # TODO: remove once this is covered by the deployment script
-        {
-            "version": "html/index.html#",
-            "title": "dev",
-            "aliases": [],
-        }
-    ] + [
-        {
-            "version": f"https://sharepoint.iter.org/departments/POP/CM/IMDesign/Data%20Model/CI/imas-{version}/html_documentation.html#",
-            "title": f"{version}",
-            "aliases": ["latest"] if version == "3.38.1" else [],
-        }
-        for version in ["3.38.1", "3.37.2", "3.36.0", "3.35.0", "3.34.0", "3.33.0", "3.34.0", "3.33.0", "3.32.1", "3.31.0", "3.30.0"]
-    ],
     "version_json": "../versions.js",
 }
 
