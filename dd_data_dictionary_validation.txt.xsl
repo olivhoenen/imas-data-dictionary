@@ -53,19 +53,19 @@ The utilities section has errors:<xsl:apply-templates select="./utilities//field
 <xsl:apply-templates select=".//field[@coordinate1 and not(matches(@data_type, '[1-6][dD]|structure|struct_array'))]">
 <xsl:with-param name="error_description" select="'This field must not have a coordinate1 attribute'"/>
 </xsl:apply-templates>
-<xsl:apply-templates select=".//field[@coordinate2 and not(matches(@data_type, '[2-6]D|structure'))]">
+<xsl:apply-templates select=".//field[@coordinate2 and not(matches(@data_type, '[2-6][dD]|structure'))]">
 <xsl:with-param name="error_description" select="'This field must not have a coordinate2 attribute'"/>
 </xsl:apply-templates>
-<xsl:apply-templates select=".//field[@coordinate3 and not(matches(@data_type, '[3-6]D|structure'))]">
+<xsl:apply-templates select=".//field[@coordinate3 and not(matches(@data_type, '[3-6][dD]|structure'))]">
 <xsl:with-param name="error_description" select="'This field must not have a coordinate3 attribute'"/>
 </xsl:apply-templates>
-<xsl:apply-templates select=".//field[@coordinate4 and not(matches(@data_type, '[4-6]D|structure'))]">
+<xsl:apply-templates select=".//field[@coordinate4 and not(matches(@data_type, '[4-6][dD]|structure'))]">
 <xsl:with-param name="error_description" select="'This field must not have a coordinate4 attribute'"/>
 </xsl:apply-templates>
-<xsl:apply-templates select=".//field[@coordinate5 and not(matches(@data_type, '[5-6]D|structure'))]">
+<xsl:apply-templates select=".//field[@coordinate5 and not(matches(@data_type, '[5-6][dD]|structure'))]">
 <xsl:with-param name="error_description" select="'This field must not have a coordinate5 attribute'"/>
 </xsl:apply-templates>
-<xsl:apply-templates select=".//field[@coordinate6 and not(matches(@data_type, '6D|structure'))]">
+<xsl:apply-templates select=".//field[@coordinate6 and not(matches(@data_type, '6[dD]|structure'))]">
 <xsl:with-param name="error_description" select="'This field must not have a coordinate6 attribute'"/>
 </xsl:apply-templates>
 <!-- Test the presence of the "units" metadata for FLT and CPX data (R5.3) -->
