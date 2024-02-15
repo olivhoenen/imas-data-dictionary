@@ -255,8 +255,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			</xsl:when>
 			<xsl:when test="@name">
 				<xsl:choose>
-					<!-- if the node is a leaf defined as a simple type -->
-					<xsl:when test="@type='int_type' or @type='flt_type'  or @type='str_type' or @type='flt_1d_type' or @type='str_1d_type' or @type='int_1d_type'">
+					<!-- if the node is a leaf defined as a simple type (then it won't have errorbars) -->
+					<xsl:when test="ends-with(@type,'_type') and (starts-with(@type,'int') or starts-with(@type,'flt') or starts-with(@type,'str') or starts-with(@type,'cpx'))">
 						<field>
 							<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
 							<xsl:choose>
