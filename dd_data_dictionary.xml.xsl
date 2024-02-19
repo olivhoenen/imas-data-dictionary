@@ -270,7 +270,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								</xsl:otherwise>
 							</xsl:choose>
 							<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
-							<xsl:attribute name="data_type"><xsl:value-of select="@type"/></xsl:attribute>
+							<xsl:attribute name="data_type"><xsl:call-template name="ConvertDataType"><xsl:with-param name="data_type" select="@type"/></xsl:call-template></xsl:attribute>
 							<xsl:for-each select="xs:annotation/xs:appinfo/*">
 								<!-- Generic method for declaring all appinfo as attributes-->
 								<xsl:attribute name="{name(.)}"><xsl:value-of select="."/></xsl:attribute>
@@ -889,5 +889,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:when test="contains($data_type,'5d') or contains($data_type,'5D')">(:,:,:,:,:)</xsl:when>
 			<xsl:when test="contains($data_type,'6d') or contains($data_type,'6D')">(:,:,:,:,:,:)</xsl:when>
 		</xsl:choose>
+	</xsl:template>
+	<!-- Convert simple types without errorbars to regular data types recognized by the Access Layer -->
+	<xsl:template name="ConvertDataType">
+		<xsl:param name="data_type"/>
+        <xsl:value-of select="upper-case(substring-before($data_type,'_type'))"/>
+        <xsl:if test="not(contains($data_type,'d_type'))">_0D</xsl:if>        
 	</xsl:template>
 </xsl:stylesheet>
