@@ -62,7 +62,6 @@ if os.path.exists("install"):
         paths.append(
             (path.replace("install", "dd_" + version), glob.glob(path + "/*.*"))
         )
-    print("Found IDSDef.xml " + str(paths))
 else:
     raise Exception(
         "Couldn't find IDSDef.xml, Can not install data dictionary python package"
