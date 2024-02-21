@@ -1,31 +1,26 @@
-from setuptools import setup
+import glob
+import os
 import pathlib
-import os, glob
 import sys
+from pathlib import Path
 
-
+from setuptools import setup
 
 sys.path.append(str(Path(__file__).parent.resolve()))
 
 import versioneer
+from generate import (generate_dd_data_dictionary,
+                      generate_dd_data_dictionary_validation,
+                      generate_html_documentation,
+                      generate_ids_cocos_transformations_symbolic_table,
+                      generate_idsnames)
+from install import (copy_utilities, create_idsdef_symlink,
+                     install_cocos_csv_files, install_css_files,
+                     install_dd_files, install_html_files,
+                     install_identifiers_files, install_ids_files,
+                     install_img_files, install_js_files,
+                     install_utilities_files)
 
-from generate import generate_dd_data_dictionary
-from generate import generate_html_documentation
-from generate import generate_ids_cocos_transformations_symbolic_table
-from generate import generate_idsnames
-from generate import generate_dd_data_dictionary_validation
-
-from install import install_html_files
-from install import install_css_files
-from install import install_js_files
-from install import install_img_files
-from install import install_cocos_csv_files
-from install import install_ids_files
-from install import install_dd_files
-from install import install_utilities_files
-from install import create_idsdef_symlink
-from install import copy_utilities
-from install import install_identifiers_files
 
 #pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1+202.gab0f789
 def convertGitToPep440(versionStr):
