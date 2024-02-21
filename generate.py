@@ -8,12 +8,12 @@ import versioneer
 PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
 
-#pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1dev0+gab0f789
+#pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1+202.gab0f789
 def convertGitToPep440(versionStr):
     parts = versionStr.split('-')
     if len(parts) == 3:
         baseVersion, iterations, commitHash = parts
-        return f"{baseVersion}dev{iterations}+{commitHash}"
+        return f"{baseVersion}+{iterations}.{commitHash}"
     else:
         return versionStr
 
