@@ -15,11 +15,11 @@ with the Access-Layer is defined by 5 arguments:
 - **`database`** (string)
 - **`version`** (string)
 
-When more storage backends have been implemented in the Access-Layer, the **`backendID`** (int) was added to the list.
+When more storage backends have been implemented in the Access-Layer 4, the **`backendID`** (int) was added to the list.
 This fixed list imposed some limitations (ranges of `shot` and `run`) and required implicit rules to convert them into 
 a standardized path on the system. It also lacks the flexibility asked for by developers (e.g capability to store data 
 in non-standard paths had to be added by _hacking_ the interpretation of the `user` argument with additional rules to
-cover cases where an absolute path is given).
+cover cases where an absolute path is given). In addition, `shot` was replaced by `pulse` when Access-Layer 5 was released. 
 
 To address some of the limitation and improve the flexibility and genericity of the identification of IMAS data resources, 
 a proposal (initially discussed in [IMAS-1281](https://jira.iter.org/browse/IMAS-1281)) was made to introduce a new API taking a URI as argument. 
@@ -83,10 +83,9 @@ Current possibilities are: `mdsplus`, `hdf5`, `ascii`, `memory` and `uda`. Be aw
 A `query` is mandatory. It starts with `?` and is composed of a list of semi-colon `;` (or ampersand `&`) separated pairs `key=value`. The following keys are standard and recognized by all backends:
 
 - `path`: absolute path on the localhost where the data is stored (e.g. `path=/project/run` or `path=./localrun`);
-- `pulse`, `run`, `user`, `database`, `version`: allowed for compatibility purpose with legacy data-entry identifiers (e.g. `pulse=123;run=2;user=me;database=test;version=3`).
+- `pulse`, `run`, `user`, `database`, `version`: allowed for both compatibility purpose with historical data-entry identifiers (e.g. `pulse=123;run=2;user=me;database=test;version=3`, but the legacy `shot` instead of `pulse` is also permitted). 
 
-**Note**: if legacy identifiers are provided, they are always transformed into a standard `path` before the query is being passed to the 
-backend.
+**Note**: if legacy identifiers are provided, they are always transformed into a standard `path` before the query is being passed to the backend. 
 
 Other keys may exist, be optional or mandatory for a given backend. Please refer to the latest documentation of the Access-Layer for more information on backend-specific keys.
 
