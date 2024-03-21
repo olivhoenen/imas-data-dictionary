@@ -15,13 +15,13 @@ with the Access-Layer is defined by 5 arguments:
 - **`database`** (string)
 - **`version`** (string)
 
-When more storage backends have been implemented in the Access-Layer 4, the **`backendID`** (int) was added to the list.
+When more storage backends have been implemented in the Access-Layer v4, the **`backendID`** (int) was added to the list.
 This fixed list imposed some limitations (ranges of `shot` and `run`) and required implicit rules to convert them into 
-a standardized path on the system. It also lacks the flexibility asked for by developers (e.g capability to store data 
+a standardized path on the system. It also lacked the flexibility asked for by developers (e.g capability to store data 
 in non-standard paths had to be added by _hacking_ the interpretation of the `user` argument with additional rules to
-cover cases where an absolute path is given). In addition, `shot` was replaced by `pulse` when Access-Layer 5 was released. 
+cover cases where an absolute path was given). In addition, `shot` was replaced by `pulse` when Access-Layer v5 was released. 
 
-To address some of the limitation and improve the flexibility and genericity of the identification of IMAS data resources, 
+To address some of these limitations and improve the flexibility and generality of the identification of IMAS data resources, 
 a proposal (initially discussed in [IMAS-1281](https://jira.iter.org/browse/IMAS-1281)) was made to introduce a new API taking a URI as argument. 
 This document describes the chosen URI schema.
 
@@ -80,19 +80,19 @@ Current possibilities are: `mdsplus`, `hdf5`, `ascii`, `memory` and `uda`. Be aw
 
 ### Query
 
-A `query` is mandatory. It starts with `?` and is composed of a list of semi-colon `;` (or ampersand `&`) separated pairs `key=value`. The following keys are standard and recognized by all backends:
+A `query` is mandatory. It starts with `?` and is composed of a list of semi-colon `;` (or ampersand `&`) separated `key=value` pairs. The following keys are standard and recognized by all backends:
 
 - `path`: absolute path on the localhost where the data is stored (e.g. `path=/project/run` or `path=./localrun`);
-- `pulse`, `run`, `user`, `database`, `version`: allowed for both compatibility purpose with historical data-entry identifiers (e.g. `pulse=123;run=2;user=me;database=test;version=3`, but the legacy `shot` instead of `pulse` is also permitted). 
+- `pulse`, `run`, `user`, `database`, `version`: allowed for compatibility with historical data-entry identifiers (e.g. `pulse=123;run=2;user=me;database=test;version=3`, where the legacy `shot` instead of `pulse` is also permitted). 
 
-**Note**: if legacy identifiers are provided, they are always transformed into a standard `path` before the query is being passed to the backend. 
+**Note**: If legacy identifiers are provided, they are always transformed into a standard `path` before the query is passed to the backend. 
 
-Other keys may exist, be optional or mandatory for a given backend. Please refer to the latest documentation of the Access-Layer for more information on backend-specific keys.
+Other keys may exist, both optional and mandatory for a given backend. Please refer to the latest documentation of the Access-Layer for more information on backend-specific keys.
 
 ### Fragment
 
 In order to identify a subset from a given data-entry, a `fragment` can be added to the URI. 
-Such `fragment`, which starts with a hash `#`, is optional and allows to identify a specific IDS, or a part of an IDS. 
+Such a `fragment`, which starts with a hash `#`, is optional and allows to identify a specific IDS, or a part of an IDS. 
 
 The structure of the fragment is **`#idsname[:occurrence][/idspath]`**, where:
 
