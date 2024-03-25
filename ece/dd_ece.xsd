@@ -4,6 +4,51 @@
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="int_1d_time_1_and_type_change">
+		<xs:annotation>
+			<xs:documentation>Similar to a signal (INT_1D) but with time base one level above, includes a type change information because of a historical correction specific to the ECE IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Data</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+						<change_nbc_version>3.41.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>FLT_1D</change_nbc_previous_type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity_timed">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../time</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validity">
+				<xs:annotation>
+					<xs:documentation>Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ece_channel_beam_spot">
 		<xs:annotation>
 			<xs:documentation>Spot ellipse characteristics</xs:documentation>
@@ -106,9 +151,17 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="harmonic" type="physical_quantity_flt_1d_time_1">
+			<xs:element name="harmonic" type="int_1d_time_1_and_type_change">
 				<xs:annotation>
 					<xs:documentation>Harmonic detected by the channel. 1 corresponds to the "O1" mode, while 2 corresponds to the "X2" mode. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="line_of_sight" type="line_of_sight_2points">
+				<xs:annotation>
+					<xs:documentation>Line of sight of this channel, defined by two points. By convention, the first point is the closest to the diagnostic. Fill only in case the channels have different lines of sight</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.40.1</introduced_after_version>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="if_bandwidth">
@@ -180,7 +233,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.2.1</lifecycle_version>
-				<lifecycle_last_change>3.33.0</lifecycle_last_change>
+				<lifecycle_last_change>3.41.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -188,7 +241,7 @@
 				<xs:element ref="ids_properties"/>
 				<xs:element name="line_of_sight" type="line_of_sight_2points">
 					<xs:annotation>
-						<xs:documentation>Description of the line of sight of the diagnostic (valid for all channels), defined by two points. By convention, the first point is the closest to the diagnostic</xs:documentation>
+						<xs:documentation>Line of sight of the diagnostic (fill when valid for all channels), defined by two points. By convention, the first point is the closest to the diagnostic. In case the channels have different lines of sight, they should be described within the channel array of structures</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="t_e_central" type="signal_flt_1d_validity_position">
@@ -199,7 +252,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="channel" type="ece_channel" maxOccurs="100">
+				<xs:element name="channel" type="ece_channel" maxOccurs="200">
 					<xs:annotation>
 						<xs:documentation>Set of channels (frequency)</xs:documentation>
 						<xs:appinfo>

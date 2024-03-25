@@ -1,25 +1,53 @@
 import os
 import shutil
 import subprocess
+import re
+
+import versioneer
 
 PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
 
+#pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1+202.gab0f789
+def convertGitToPep440(versionStr):
+    parts = versionStr.split('-')
+    if len(parts) == 3:
+        baseVersion, iterations, commitHash = parts
+        return f"{baseVersion}+{iterations}.{commitHash}"
+    else:
+        return versionStr
 
 def join_path(path1="", path2=""):
     return os.path.normpath(os.path.join(path1, path2))
 
+DD_GIT_DESCRIBE = convertGitToPep440(versioneer.get_version())
 
-DD_GIT_DESCRIBE = str(
-    subprocess.check_output(["git", "describe"], cwd=PWD).decode().strip()
-)
+def saxon_version(verb=False)->int:
+    cmd = ["java", "net.sf.saxon.Transform", "-t"]
+    try:
+        out = subprocess.run(cmd,
+                             capture_output=True,
+                             text=True,
+                             check=False)
+        line = out.stderr.split('\n')[0]
+        version = re.search(r"Saxon.* +(\d+)\.(\d+)", line)
+        if (verb):
+            print("Got Saxon version:", version.group(1), version.group(2))
+        major = int(version.group(1)) * 100
+        minor = int(version.group(2))
+        version = major + minor
+    except:
+        if (verb):
+            print("Error: can't get Saxon version.")
+        version = 0
+    return version
 
 
-def generate_dd_data_dictionary():
+def generate_dd_data_dictionary(extra_opts=""):
     dd_data_dictionary_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + " -threads:4"
+        + extra_opts
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml.xsd"
         + " -xsl:"
@@ -50,11 +78,11 @@ def generate_dd_data_dictionary():
 
 
 # TODO Check the problem of generation
-def generate_html_documentation():
+def generate_html_documentation(extra_opts=""):
     html_documentation_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + " -threads:4"
+        + extra_opts
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
@@ -83,11 +111,11 @@ def generate_html_documentation():
     )
 
 
-def generate_ids_cocos_transformations_symbolic_table():
+def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
     ids_cocos_transformations_symbolic_table_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + " -threads:4"
+        + extra_opts
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
@@ -134,11 +162,11 @@ def generate_idsnames():
         f.close()
 
 
-def generate_dd_data_dictionary_validation():
+def generate_dd_data_dictionary_validation(extra_opts=""):
     dd_data_dictionary_validation_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
-        + " -threads:4"
+        + extra_opts
         + " -t -warnings:fatal -s:"
         + "dd_data_dictionary.xml"
         + " -xsl:"
@@ -159,8 +187,13 @@ def generate_dd_data_dictionary_validation():
         assert False, stderr
 
 if __name__ == "__main__":
-    generate_dd_data_dictionary()
-    generate_html_documentation()
-    generate_ids_cocos_transformations_symbolic_table()
+    
+    # Can we use threads in this version of Saxon?
+    threads = ""
+    if saxon_version() >= 904: threads = " -threads:4"
+    
+    generate_dd_data_dictionary(extra_opts=threads)
+    generate_html_documentation(extra_opts=threads)
+    generate_ids_cocos_transformations_symbolic_table(extra_opts=threads)
     generate_idsnames()
-    generate_dd_data_dictionary_validation()
+    generate_dd_data_dictionary_validation(extra_opts=threads)

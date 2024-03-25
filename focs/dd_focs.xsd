@@ -129,13 +129,157 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="focs_link_properties">
+		<xs:annotation>
+			<xs:documentation>Properties of a link fibre</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id">
+				<xs:annotation>
+					<xs:documentation>ID of the fibre, e.g. commercial reference</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="retardation">
+				<xs:annotation>
+					<xs:documentation>Retardation of the equivalent element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="azimuth">
+				<xs:annotation>
+					<xs:documentation>Azimuth of the equivalent element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rotation">
+				<xs:annotation>
+					<xs:documentation>Rotation of the equivalent element</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="faraday_mirror_angle">
+				<xs:annotation>
+					<xs:documentation>Faraday mirror rotation angle</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="focs_fibre_properties">
+		<xs:annotation>
+			<xs:documentation>Properties of the fibre</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id">
+				<xs:annotation>
+					<xs:documentation>ID of the fibre, e.g. commercial reference</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="beat_length">
+				<xs:annotation>
+					<xs:documentation>Linear beat length</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spun">
+				<xs:annotation>
+					<xs:documentation>Spun period</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="twist">
+				<xs:annotation>
+					<xs:documentation>Twist period</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spun_initial_azimuth">
+				<xs:annotation>
+					<xs:documentation>Spun fibre initial azimuth</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verdet_constant">
+				<xs:annotation>
+					<xs:documentation>Verdet constant</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>rad.T^-1.m^-1</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="focs">
 		<xs:annotation>
 			<xs:documentation>Fiber Optic Current Sensor (FOCS)</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.39.0</lifecycle_version>
-				<lifecycle_last_change>3.39.0</lifecycle_last_change>
+				<lifecycle_last_change>3.40.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -163,36 +307,21 @@
 						<xs:group ref="STR_0D"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="beat_length">
+				<xs:element name="fibre_properties" type="focs_fibre_properties">
 					<xs:annotation>
-						<xs:documentation>Linear beat length</xs:documentation>
+						<xs:documentation>Intrinsic properties of the fibre installed on the vacuum vessel</xs:documentation>
 						<xs:appinfo>
-							<type>static</type>
-							<units>m</units>
+							<introduced_after_version>3.39.0</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_0D"/>
-					</xs:complexType>
 				</xs:element>
-				<xs:element name="spun">
+				<xs:element name="fibre_length">
 					<xs:annotation>
-						<xs:documentation>Spun period</xs:documentation>
+						<xs:documentation>Spun fibre length on the vacuum vessel</xs:documentation>
 						<xs:appinfo>
 							<type>static</type>
 							<units>m</units>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="FLT_0D"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="twist">
-					<xs:annotation>
-						<xs:documentation>Twist period</xs:documentation>
-						<xs:appinfo>
-							<type>static</type>
-							<units>m</units>
+							<introduced_after_version>3.39.0</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
 					<xs:complexType>
