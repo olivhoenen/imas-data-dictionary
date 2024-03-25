@@ -39,6 +39,12 @@ As a result, the structure of the IMAS URI is the following, with elements betwe
 
 **`imas:[//host/]backend?query[#fragment]`**
 
+Some valid syntax examples:
+
+- `imas:mdsplus?pulse=123;run=2;user=public;database=ITER;version=3`
+- `imas:hdf5?path=/home/username/runfolder`
+- `imas:ascii?path=./debug`
+
 Each part of the URI are described in more details in the following subsections.
 
 
@@ -76,8 +82,8 @@ Current possibilities are: `mdsplus`, `hdf5`, `ascii`, `memory` and `uda`. Be aw
 
 A `query` is mandatory. It starts with `?` and is composed of a list of semi-colon `;` (or ampersand `&`) separated pairs `key=value`. The following keys are standard and recognized by all backends:
 
-- `path`: absolute path on the localhost where the data is stored;
-- `shot`, `run`, `user`, `database`, `version`: allowed for compatibility purpose with legacy data-entry identifiers.
+- `path`: absolute path on the localhost where the data is stored (e.g. `path=/project/run` or `path=./localrun`);
+- `pulse`, `run`, `user`, `database`, `version`: allowed for compatibility purpose with legacy data-entry identifiers (e.g. `pulse=123;run=2;user=me;database=test;version=3`).
 
 **Note**: if legacy identifiers are provided, they are always transformed into a standard `path` before the query is being passed to the 
 backend.

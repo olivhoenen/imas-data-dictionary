@@ -504,76 +504,13 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="pf_forces">
-		<xs:annotation>
-			<xs:documentation>Forces on the axisymmetric PF+CS coil system</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="name">
-				<xs:annotation>
-					<xs:documentation>Name of the force combination</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="combination">
-				<xs:annotation>
-					<xs:documentation>Coils involved in the force combinations. Normally the force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<coordinate1>1...N</coordinate1>
-						<units>-</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="limit_max">
-				<xs:annotation>
-					<xs:documentation>Maximum force combination limit</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>N</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="limit_min">
-				<xs:annotation>
-					<xs:documentation>Minimum force combination limit</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>N</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="force" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Force (positive when upwards for a vertical force, positive when outwards for a radial force) </xs:documentation>
-					<xs:appinfo>
-						<units>N</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:element name="pf_active">
 		<xs:annotation>
 			<xs:documentation>Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems</xs:documentation>
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.40.0</lifecycle_last_change>
+				<lifecycle_last_change>4.0.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
@@ -585,26 +522,6 @@
 						<xs:documentation>Active PF coils</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="vertical_force" type="pf_forces" maxOccurs="20">
-					<xs:annotation>
-						<xs:documentation>Vertical forces on the axisymmetric PF coil system</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-							<lifecycle_status>obsolescent</lifecycle_status>
-							<lifecycle_version>3.40.0</lifecycle_version>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="radial_force" type="pf_forces" maxOccurs="20">
-					<xs:annotation>
-						<xs:documentation>Radial forces on the axisymmetric PF coil system</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-							<lifecycle_status>obsolescent</lifecycle_status>
-							<lifecycle_version>3.40.0</lifecycle_version>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>

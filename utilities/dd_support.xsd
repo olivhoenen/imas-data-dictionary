@@ -433,7 +433,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-						<coordinate1>1...N</coordinate1>
+						<coordinate1>as_parent</coordinate1>
 						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
@@ -464,7 +464,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-						<coordinate1>1...N</coordinate1>
+						<coordinate1>as_parent</coordinate1>
 						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1238,10 +1238,13 @@
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>constant</type>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>FLT_0D</change_nbc_previous_type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="label">
@@ -1280,10 +1283,13 @@
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>constant</type>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>FLT_0D</change_nbc_previous_type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="atoms_n">
@@ -1325,10 +1331,13 @@
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>dynamic</type>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>FLT_0D</change_nbc_previous_type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="atoms_n">
@@ -5329,18 +5338,17 @@
 					<xs:documentation>Type of space geometry (0: standard, 1:Fourier, >1: Fourier with periodicity)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="coordinates_type">
+			<xs:element name="coordinates_type" type="identifier" maxOccurs="6">
 				<xs:annotation>
-					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space. The meaning of these predefined integer constants can be found in the Data Dictionary under utilities/coordinate_identifier.xml</xs:documentation>
+					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space.</xs:documentation>
 					<xs:appinfo>
+						<doc_identifier>utilities/coordinate_identifier.xml</doc_identifier>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>INT_1D</change_nbc_previous_type>
 						<coordinate1>1...N</coordinate1>
-						<type>constant</type>
-						<url>utilities/coordinate_identifier.xml</url>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="objects_per_dimension" type="generic_grid_constant_space_dimension" maxOccurs="6">
 				<xs:annotation>
@@ -5503,18 +5511,17 @@
 					<xs:documentation>Type of space geometry (0: standard, 1:Fourier, >1: Fourier with periodicity)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="coordinates_type">
+			<xs:element name="coordinates_type" type="identifier_dynamic_aos3" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space. The meaning of these predefined integer constants can be found in the Data Dictionary under utilities/coordinate_identifier.xml</xs:documentation>
+					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space.</xs:documentation>
 					<xs:appinfo>
+						<doc_identifier>utilities/coordinate_identifier.xml</doc_identifier>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>INT_1D</change_nbc_previous_type>
 						<coordinate1>1...N</coordinate1>
-						<type>dynamic</type>
-						<url>utilities/coordinate_identifier.xml</url>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="objects_per_dimension" type="generic_grid_dynamic_space_dimension" maxOccurs="unbounded">
 				<xs:annotation>
@@ -9934,19 +9941,6 @@
 							<introduced_after_version>3.39.0</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
-				</xs:element>
-				<xs:element name="source">
-					<xs:annotation>
-						<xs:documentation>Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...). Superseeded by the new provenance structure.</xs:documentation>
-						<xs:appinfo>
-							<type>constant</type>
-							<lifecycle_status>obsolescent</lifecycle_status>
-							<lifecycle_version>3.34.0</lifecycle_version>
-						</xs:appinfo>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:group ref="STR_0D"/>
-					</xs:complexType>
 				</xs:element>
 				<xs:element name="provider">
 					<xs:annotation>

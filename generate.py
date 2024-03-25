@@ -16,7 +16,7 @@ def convertGitToPep440(versionStr):
         return f"{baseVersion}+{iterations}.{commitHash}"
     else:
         return versionStr
-
+    
 def join_path(path1="", path2=""):
     return os.path.normpath(os.path.join(path1, path2))
 

@@ -152,6 +152,15 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:if test="xs:annotation/xs:appinfo/url">
 								<xsl:attribute name="url"><xsl:value-of select="xs:annotation/xs:appinfo/url"/></xsl:attribute>
 							</xsl:if>
+							<!-- Indicate whether the IDS is purely constant or contains dynamic quantities -->							
+							<xsl:choose>
+								<xsl:when test="*/*/xs:element[@ref='time']">
+									<xsl:attribute name="type">dynamic</xsl:attribute>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:attribute name="type">constant</xsl:attribute>
+								</xsl:otherwise>
+							</xsl:choose>
 							<!-- Scan its components in IMPLEMENT mode -->
 							<xsl:apply-templates select="xs:complexType" mode="IMPLEMENT">
 								<xsl:with-param name="currPath" select="''"/>
