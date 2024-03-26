@@ -48,7 +48,7 @@ def generate_dd_docs(app: Sphinx):
     """
     if not app.config.dd_autodoc_generate:
         logger.warning(
-            "Not generating DD documentation sources (dd_autodoc_create=False)"
+            "Not generating DD documentation sources (dd_autodoc_generate=False)"
         )
         return
 
