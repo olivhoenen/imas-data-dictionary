@@ -21,7 +21,6 @@ from install import (copy_utilities, create_idsdef_symlink,
                      install_img_files, install_js_files,
                      install_utilities_files)
 
-
 #pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1+202.gab0f789
 def convertGitToPep440(versionStr):
     parts = versionStr.split('-')
@@ -31,6 +30,18 @@ def convertGitToPep440(versionStr):
     else:
         return versionStr
     
+from generate import (generate_dd_data_dictionary,
+                      generate_dd_data_dictionary_validation,
+                      generate_html_documentation,
+                      generate_ids_cocos_transformations_symbolic_table,
+                      generate_idsnames)
+from install import (copy_utilities, create_idsdef_symlink,
+                     install_cocos_csv_files, install_css_files,
+                     install_dd_files, install_html_files,
+                     install_identifiers_files, install_ids_files,
+                     install_img_files, install_js_files,
+                     install_utilities_files)
+
 current_directory = pathlib.Path(__file__).parent.resolve()
 long_description = (current_directory / "README.md").read_text(encoding="utf-8")
 

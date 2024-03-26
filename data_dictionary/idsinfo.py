@@ -207,7 +207,7 @@ class IDSInfo:
 def main():
     import argparse
 
-    idsinfo_parser = argparse.ArgumentParser(description="IDS Def Utilities")
+    idsinfo_parser = argparse.ArgumentParser(description="IDS Info Utilities")
     subparsers = idsinfo_parser.add_subparsers(help="sub-commands help")
 
     idspath_command_parser = subparsers.add_parser(

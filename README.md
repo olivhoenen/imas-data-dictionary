@@ -72,7 +72,7 @@ $ firefox $PYTHON_PATH/share/doc/imas/html_documentation.html
 
 Installer provides `idsinfo` utility which can be used on the command line interface. 
 
-# IDSDEF utility
+# IDSInfo utility
 The `idsinfo` command provides useful features such as showing
 metadata, listing all variables, searching for text in IDS fields,
 etc.
@@ -83,7 +83,7 @@ etc.
 $ idsinfo
 usage: idsinfo [-h] {idspath,metadata,idsnames,search,idsfields,info} ...
 
-IDS Def Utilities
+IDS Info Utilities
 
 positional arguments:
   {idspath,metadata,idsnames,search,idsfields,info}
