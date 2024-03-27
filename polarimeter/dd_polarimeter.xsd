@@ -81,7 +81,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the channel</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -90,11 +90,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>ID of the channel</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -125,8 +126,8 @@
 						<type>static</type>
 						<units>m</units>
 						<change_nbc_version>4.0.0</change_nbc_version>
-<change_nbc_description>leaf_renamed</change_nbc_description>
-<change_nbc_previous_name>polarisation_initial</change_nbc_previous_name>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>polarisation_initial</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

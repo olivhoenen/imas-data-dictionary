@@ -480,7 +480,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the gap</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -489,11 +489,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the gap</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -656,7 +657,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the antenna</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -665,11 +666,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the antenna</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -714,7 +716,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the beam</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -723,11 +725,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the beam</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -792,18 +795,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the antenna</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="identifier">
-				<xs:annotation>
-					<xs:documentation>Identifier of the antenna</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -849,6 +841,18 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="pulse_schedule_nbi_unit">
@@ -858,7 +862,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the NBI unit</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -867,11 +871,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the NBI unit</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1159,7 +1164,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the valve</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -1168,11 +1173,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the valve</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1409,7 +1415,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the supply</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -1418,11 +1424,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the supply</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1455,7 +1462,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the coil</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -1464,11 +1471,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the coil</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
