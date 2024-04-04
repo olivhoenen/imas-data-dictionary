@@ -194,6 +194,28 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="t_e_x" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Predicted radiation temperature of the e(X)traordinary mode</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+						<lifecycle_status>alpha</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+						<introduced_after_version>3.41.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_e_o" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Predicted radiation temperature of the Ordinary mode</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+						<lifecycle_status>alpha</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+						<introduced_after_version>3.41.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="t_e_voltage" type="signal_flt_1d_validity">
 				<xs:annotation>
 					<xs:documentation>Raw voltage measured on each channel, from which the calibrated temperature data is then derived</xs:documentation>
@@ -233,7 +255,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.2.1</lifecycle_version>
-				<lifecycle_last_change>3.41.0</lifecycle_last_change>
+				<lifecycle_last_change>3.42.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
@@ -249,6 +271,28 @@
 						<xs:documentation>Electron temperature from the closest channel to the magnetic axis, together with its radial location</xs:documentation>
 						<xs:appinfo>
 							<units>eV</units>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="t_e_central_x" type="signal_flt_1d_validity_position">
+					<xs:annotation>
+						<xs:documentation>Predicted radiation temperature of the channel closest to the magnetic axis, together with its radial location (eXtraordinary mode)</xs:documentation>
+						<xs:appinfo>
+							<units>eV</units>
+							<lifecycle_status>alpha</lifecycle_status>
+							<lifecycle_version>3.42.0</lifecycle_version>
+							<introduced_after_version>3.41.0</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="t_e_central_o" type="signal_flt_1d_validity_position">
+					<xs:annotation>
+						<xs:documentation>Predicted radiation temperature of the channel closest to the magnetic axis, together with its radial location (Ordinary mode)</xs:documentation>
+						<xs:appinfo>
+							<units>eV</units>
+							<lifecycle_status>alpha</lifecycle_status>
+							<lifecycle_version>3.42.0</lifecycle_version>
+							<introduced_after_version>3.41.0</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
