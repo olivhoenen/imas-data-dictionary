@@ -35,12 +35,12 @@ Indexing and array slicing (which is not equivalent to the time slice operations
 - indices are specified within round brackets **`()`** that are appended to the name of the array
 - for multidimensional arrays, each dimension is separated by a comma **`,`**. E.g in 3D: `(first dimension, second dimension, third dimension)`
 - each dimension of an array must be addressed, with either:
-    + a colon **`:`** operator (full slice) that indicates all elements for the dimension, e.g `(:)` corresponds to all elements of a 1D array (possibly an array of structures)
-	+ an integer that indicates a single element for the dimension, e.g `(3,1)` corresponds to the third element in the first dimension and the second element in the second dimension
-	+ a set of indices can be specified by curly brackets **`{}`** (does not have to be monotonic increasing), e.g `({1,5,3},:)` indicates the first, fifth and third elements in the first dimension and all elements in the second dimension
-	+ indexing from the end of the array is possible by using negative indices, e.g `(-1)` is the last elements (or think of it as the first element from the end)
-	+ indicating a range of elements is possible by adding an integer before the colon (corresponds to the first element included in the range, or lower bound, if omitted the range includes the start of the array) and/or after the colon (corresponds to the last element included in the range, or upper bound, if omitted the range includes the end at the array), e.g `(2:5)` indicates all elements between the second and the fifth, i.e `({2,3,4,5})`
-	+ using a stride is possible by adding another colon **`:`** specifier like `lower_bound:upper_bound:stride`, if omitted, the range has a stride of 1 which means it contains all elements within the lower and the upper bound
+    + a colon **`:`** operator (full slice) that indicates all elements for the dimension, e.g `(:)` corresponds to all elements of a 1D array (possibly an array of structures);
+	+ an integer that indicates a single element for the dimension, e.g `(3,1)` corresponds to the third element in the first dimension and the first element in the second dimension;
+	+ a set of indices can be specified by curly brackets **`{}`** (does not have to be monotonic increasing), e.g `({1,5,3},:)` indicates the first, fifth and third elements in the first dimension and all elements in the second dimension;
+	+ indexing from the end of the array is possible by using negative indices, e.g `(-1)` is the last elements (or think of it as the first element from the end);
+	+ indicating a range of elements is possible by adding an integer before the colon (corresponds to the first element included in the range, or lower bound, if omitted the range includes the start of the array) and/or after the colon (corresponds to the last element included in the range, or upper bound, if omitted the range includes the end at the array), e.g `(2:5)` indicates all elements between the second and the fifth, i.e `({2,3,4,5})` while `(:5)` is equivalent to `({1,2,3,4,5})`;
+	+ using a stride is possible by adding another colon **`:`** specifier following the syntax `lower_bound:upper_bound:stride`. If omitted, the range has a stride of `1` which means it contains all elements within the lower and the upper bound. E.g. `(::2)` corresponds to all odd indices while `(2::2)` corresponds to all even ones.
 
 
 ​
