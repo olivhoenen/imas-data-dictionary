@@ -20,9 +20,7 @@ def convertGitToPep440(versionStr):
 def join_path(path1="", path2=""):
     return os.path.normpath(os.path.join(path1, path2))
 
-
 DD_GIT_DESCRIBE = convertGitToPep440(versioneer.get_version())
-
 
 def saxon_version(verb=False)->int:
     cmd = ["java", "net.sf.saxon.Transform", "-t"]

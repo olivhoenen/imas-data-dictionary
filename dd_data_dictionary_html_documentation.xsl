@@ -181,8 +181,8 @@
 <xsl:when test="@data_type='int_1d_type'">INT_1D</xsl:when>
 <xsl:when test="@data_type='str_type'">STR_0D</xsl:when>
 <xsl:when test="@data_type='str_1d_type'">STR_1D</xsl:when>
-<xsl:otherwise><xsl:value-of select="@data_type"/><xsl:if test="@maxoccur and (@maxoccur!='unbounded')"> [max_size=<xsl:value-of select="@maxoccur"/> (limited in MDS+ backend only)]</xsl:if>  
-</xsl:otherwise>
+<xsl:when test="@data_type='struct_array'">array of structures<xsl:if test="@maxoccur and (@maxoccur!='unbounded')"> [max_size=<xsl:value-of select="@maxoccur"/> (limited in MDS+ backend only)]</xsl:if></xsl:when>
+<xsl:otherwise><xsl:value-of select="@data_type"/></xsl:otherwise>
 </xsl:choose>        
            </td>
            
