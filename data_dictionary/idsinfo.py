@@ -49,12 +49,7 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
-
-
-def major_minor_micro(version):
-    major, minor, micro = re.search("(\d+)\.(\d+)\.(\d+)", version).groups()
-    return int(major), int(minor), int(micro)
-
+from distutils.version import LooseVersion
 
 class IDSInfo:
     """Simple class which allows to query meta-data from the definition of IDSs as expressed in IDSDef.xml."""
@@ -83,22 +78,23 @@ class IDSInfo:
                     python_env_path = python_env
                     break
             if version_list is not None and len(version_list) != 0:
-                latest_version = max(version_list, key=major_minor_micro)
+                version_objects = [LooseVersion(version) for version in version_list]
+                latest_version = max(version_objects)
                 folder_to_look = os.path.join(python_env_path, latest_version)
                 for root, dirs, files in os.walk(folder_to_look):
                     for file in files:
                         if file.endswith("IDSDef.xml"):
                             self.idsdef_path = os.path.join(root, file)
                             break
-        # Fallback to IMAS_PREFIX environment variable
-        if not self.idsdef_path and "IMAS_PREFIX" in os.environ:
-            imaspref = os.environ["IMAS_PREFIX"]
-            self.idsdef_path = f"{imaspref}/include/IDSDef.xml"
+        if not self.idsdef_path:
+            current_fpath = os.path.dirname(os.path.realpath(__file__))
+            _idsdef_path = os.path.join(current_fpath, "../../../../include/IDSDef.xml")
+            if os.path.isfile(_idsdef_path):
+                self.idsdef_path=os.path.abspath(_idsdef_path)
 
         if not self.idsdef_path:
             raise Exception(
-                "Error while trying to access IDSDef.xml, make sure you've loaded IMAS module",
-                file=sys.stderr,
+                "Error while trying to access IDSDef.xml, make sure you've loaded IMAS module"
             )
         tree = ET.parse(self.idsdef_path)
         self.root = tree.getroot()
