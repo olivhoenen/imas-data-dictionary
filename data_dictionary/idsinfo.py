@@ -61,8 +61,8 @@ class IDSInfo:
     def __init__(self):
         # Find and parse XML definitions
         self.idsdef_path = ""
+        # Check idsdef.xml is installed in the Python environment (system as well as local)
         if not self.idsdef_path:  
-            # Check idsdef.xml installed in Python environment system as well as local
             local_path =  os.path.join(str(Path.home()), ".local")
             python_env_list= [sys.prefix, local_path]
             reg_compile = re.compile("dd_*")
@@ -80,18 +80,25 @@ class IDSInfo:
             if version_list is not None and len(version_list) != 0:
                 version_objects = [LooseVersion(version) for version in version_list]
                 latest_version = max(version_objects)
-                folder_to_look = os.path.join(python_env_path, latest_version)
+                folder_to_look = os.path.join(python_env_path, str(latest_version))
                 for root, dirs, files in os.walk(folder_to_look):
                     for file in files:
                         if file.endswith("IDSDef.xml"):
                             self.idsdef_path = os.path.join(root, file)
                             break
+                        
+        # Search throgh up level directory
         if not self.idsdef_path:
             current_fpath = os.path.dirname(os.path.realpath(__file__))
             _idsdef_path = os.path.join(current_fpath, "../../../../include/IDSDef.xml")
             if os.path.isfile(_idsdef_path):
                 self.idsdef_path=os.path.abspath(_idsdef_path)
 
+        # Search using IDSDEF_PATH env variable
+        if not self.idsdef_path:
+            if "IDSDEF_PATH" in os.environ:
+                self.idsdef_path = os.environ["IDSDEF_PATH"]
+                
         if not self.idsdef_path:
             raise Exception(
                 "Error while trying to access IDSDef.xml, make sure you've loaded IMAS module"
