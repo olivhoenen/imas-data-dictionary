@@ -103,6 +103,7 @@ class IDSInfo:
         # Search using IDSDEF_PATH env variable
         if not self.idsdef_path:
             if "IDSDEF_PATH" in os.environ:
+                _idsdef_path=os.environ["IDSDEF_PATH"]
                 if os.path.isfile(_idsdef_path):
                     self.idsdef_path = os.environ["IDSDEF_PATH"]
 
