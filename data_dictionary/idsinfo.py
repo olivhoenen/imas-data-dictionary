@@ -87,7 +87,7 @@ class IDSInfo:
                             self.idsdef_path = os.path.join(root, file)
                             break
                         
-        # Search throgh up level directory
+        # Search through higher level directories
         if not self.idsdef_path:
             current_fpath = os.path.dirname(os.path.realpath(__file__))
             _idsdef_path = os.path.join(current_fpath, "../../../../include/IDSDef.xml")
