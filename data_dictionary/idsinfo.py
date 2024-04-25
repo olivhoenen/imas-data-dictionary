@@ -101,7 +101,7 @@ class IDSInfo:
                 
         if not self.idsdef_path:
             raise Exception(
-                "Error while trying to access IDSDef.xml, make sure you've loaded IMAS module"
+                "Error accessing IDSDef.xml.  Make sure its location is defined in your environment, e.g. by loading an IMAS module."
             )
         tree = ET.parse(self.idsdef_path)
         self.root = tree.getroot()
