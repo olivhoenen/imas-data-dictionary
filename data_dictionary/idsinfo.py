@@ -90,15 +90,29 @@ class IDSInfo:
         # Search through higher level directories
         if not self.idsdef_path:
             current_fpath = os.path.dirname(os.path.realpath(__file__))
-            _idsdef_path = os.path.join(current_fpath, "../../../../include/IDSDef.xml")
+            # Newer approach : IMAS/<VERSION>/lib/python3.8/site-packages/data_dictionary/idsinfo.py
+            _idsdef_path = os.path.join(current_fpath, r"../../../../include/IDSDef.xml")
             if os.path.isfile(_idsdef_path):
                 self.idsdef_path=os.path.abspath(_idsdef_path)
+            else:
+                # Legacy approach : IMAS/<VERSION>/python/lib/data_dictionary/idsino.py
+                _idsdef_path = os.path.join(current_fpath, r"../../../include/IDSDef.xml")
+                if os.path.isfile(_idsdef_path):
+                    self.idsdef_path=os.path.abspath(_idsdef_path)
 
         # Search using IDSDEF_PATH env variable
         if not self.idsdef_path:
             if "IDSDEF_PATH" in os.environ:
-                self.idsdef_path = os.environ["IDSDEF_PATH"]
-                
+                if os.path.isfile(_idsdef_path):
+                    self.idsdef_path = os.environ["IDSDEF_PATH"]
+
+        # Search using IMAS_PREFIX env variable
+        if not self.idsdef_path:
+            if "IMAS_PREFIX" in os.environ:
+                _idsdef_path=os.path.join(os.environ["IMAS_PREFIX"], r"include/IDSDef.xml")
+                if os.path.isfile(_idsdef_path):
+                    self.idsdef_path = _idsdef_path
+                                
         if not self.idsdef_path:
             raise Exception(
                 "Error accessing IDSDef.xml.  Make sure its location is defined in your environment, e.g. by loading an IMAS module."
