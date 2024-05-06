@@ -49,6 +49,114 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="ece_beam_tracing_beam">
+		<xs:annotation>
+			<xs:documentation>Beam description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="power_initial">
+				<xs:annotation>
+					<xs:documentation>Initial power in the ray/beam</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="mode">
+				<xs:annotation>
+					<xs:documentation>X or O mode for this beam</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="length">
+				<xs:annotation>
+					<xs:documentation>Ray/beam curvilinear length</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="position" type="waves_rzphipsitheta1d_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Position of the ray/beam along its path</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="wave_vector" type="waves_beam_tracing_beam_k">
+				<xs:annotation>
+					<xs:documentation>Wave vector of the ray/beam along its path</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="e_field" type="waves_beam_tracing_beam_e_field">
+				<xs:annotation>
+					<xs:documentation>Electric field polarization of the ray/beam along its path</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_flow_norm" type="waves_beam_tracing_power_flow">
+				<xs:annotation>
+					<xs:documentation>Normalised power flow</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="electrons" type="waves_beam_tracing_electrons">
+				<xs:annotation>
+					<xs:documentation>Quantities related to the electrons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="spot" type="waves_beam_spot">
+				<xs:annotation>
+					<xs:documentation>Spot ellipse characteristics</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phase" type="waves_beam_phase">
+				<xs:annotation>
+					<xs:documentation>Phase ellipse characteristics</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ece_beam_tracing">
+		<xs:annotation>
+			<xs:documentation>Beam tracing calculations for a given time slice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="beam" type="ece_beam_tracing_beam" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of rays/beams describing the wave propagation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ece_channel_beam_spot">
 		<xs:annotation>
 			<xs:documentation>Spot ellipse characteristics</xs:documentation>
@@ -245,6 +353,16 @@
 			<xs:element name="beam" type="ece_channel_beam">
 				<xs:annotation>
 					<xs:documentation>ECE Gaussian optics parameters taken at the line_of_sight/first_point position (for synthetic modelling of the ECE emission)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beam_tracing" type="ece_beam_tracing" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Beam tracing calculations, for various time slices</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>time</coordinate1>
+						<type>dynamic</type>
+						<introduced_after_version>3.41.0</introduced_after_version>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
