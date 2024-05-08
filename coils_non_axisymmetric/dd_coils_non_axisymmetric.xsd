@@ -88,7 +88,11 @@
 			</xs:element>
 			<xs:element name="outline" type="normal_binormal_static">
 				<xs:annotation>
-					<xs:documentation>Polygonal outline of the cross section in the (normal, binormal) coordinate system. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Polygonal outline of the cross section in the (normal, binormal) coordinate system. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="area">
