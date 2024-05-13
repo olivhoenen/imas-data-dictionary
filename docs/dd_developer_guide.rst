@@ -805,6 +805,11 @@ metadata, to allow for instance the Access Layer to deploy alternative
 strategies to read from IMAS files written with previous versions of the
 DD and map them to the loaded DD version.
 
+NB: when a new category of NBC metadata is introduced in the DD, 
+it should be also documented in ``docs/sphinx_dd_extension/autodoc.py``,
+otherwise the Sphinx documentation generation will not recognize it and
+will fail.
+
 The following use cases are implemented :
 
 1. Renaming
@@ -875,6 +880,20 @@ The following use cases are implemented :
       <change_nbc_version>3.39.0</change_nbc_version>
       <change_nbc_description>type_changed</change_nbc_description>
       <change_nbc_previous_type>generic_grid_scalar</change_nbc_previous_type>
+
+3. Characterize closed contours by repeating the last point. This change of convention (IMAS-5168) is documented to enable automated conversion (before closed countour were either implicit, or indicated by a ``closed`` node, and the first point was never repeated). The NBC tags must be placed at the level of the parent structure of the coordinates describing the countour (within ``<appinfo>``):
+
+   .. code-block:: xml
+      :caption: Example for an implicitly closed counter (the countour is always closed, so the first point must be repeated when doing the conversion)
+
+      <change_nbc_version>4</change_nbc_version>
+      <change_nbc_description>repeat_children_first_point</change_nbc_description>
+
+   .. code-block:: xml
+      :caption: Example for a counter that is not necessarily closed (the conversion tool will check the closed flag in DDv3)
+
+      <change_nbc_version>4</change_nbc_version>
+      <change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
 
 
 Attaching COCOS transformation metadata at the node level
