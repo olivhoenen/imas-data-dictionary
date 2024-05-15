@@ -884,7 +884,7 @@ The following use cases are implemented :
 3. Characterize closed contours by repeating the last point. This change of convention (IMAS-5168) is documented to enable automated conversion (before closed countour were either implicit, or indicated by a ``closed`` node, and the first point was never repeated). The NBC tags must be placed at the level of the parent structure of the coordinates describing the countour (within ``<appinfo>``):
 
    .. code-block:: xml
-      :caption: Example for an implicitly closed counter (the countour is always closed, so the first point must be repeated when doing the conversion)
+      :caption: Example for an implicitly closed contour (the contour is always closed, so the first point must be repeated when doing the conversion)
 
       <change_nbc_version>4</change_nbc_version>
       <change_nbc_description>repeat_children_first_point</change_nbc_description>
