@@ -844,7 +844,7 @@ Abbrevations
       -  
       -  Poloidal mode number
 
-   *  -  ``n_tor``
+   *  -  ``n_phi``
       -  
       -  Toroidal mode number
 
@@ -938,7 +938,7 @@ Abbrevations
       -  Left term divided by right term
 
    *  -  ``*_*``
-      -  ``j_tor_r`` in the ``MHD`` IDS
+      -  ``r_j_phi`` in the ``MHD`` IDS
       -  Left term multiplied by right term
 
    *  -  ``focs``
@@ -1026,9 +1026,9 @@ Suffixes
       -  ``points_outline_n``
       -  Number of ..., requires underscore.
 
-   *  -  ``*_tor[_]``
+   *  -  ``*_tor[_], *_phi``
       -  ``rho_tor``
-      -  Toroidal
+      -  ``Toroidal. In the context of (r,phi,z) coordinate system, toroidal vector components are marked with the suffix _phi (instead of _tor) for similarity with the other components *_r, *_z.``
 
    *  -  ``*_pol``
       -  ``b_field_pol``

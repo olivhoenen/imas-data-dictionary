@@ -1325,6 +1325,8 @@
 						<cocos_label_transformation>tor_angle_like</cocos_label_transformation>
 						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
 						<cocos_leaf_name_aos_indices>IDSPATH.momentum_tor.value</cocos_leaf_name_aos_indices>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1333,6 +1335,33 @@
 					<xs:documentation>Ion toroidal rotation velocity, per species</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_phi" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons</xs:documentation>
+					<xs:appinfo>
+						<units>kg.m.s^-1</units>
+						<cocos_label_transformation>tor_angle_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>IDSPATH.momentum_phi.value</cocos_leaf_name_aos_indices>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>momentum_tor</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_phi" type="summary_species_tor_angle">
+				<xs:annotation>
+					<xs:documentation>Ion toroidal rotation velocity, per species</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>velocity_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1553,6 +1582,8 @@
 						<cocos_label_transformation>tor_angle_like</cocos_label_transformation>
 						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
 						<cocos_leaf_name_aos_indices>IDSPATH.momentum_tor.value</cocos_leaf_name_aos_indices>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1561,6 +1592,33 @@
 					<xs:documentation>Ion toroidal rotation velocity, per species</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_phi" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons</xs:documentation>
+					<xs:appinfo>
+						<units>kg.m.s^-1</units>
+						<cocos_label_transformation>tor_angle_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>IDSPATH.momentum_phi.value</cocos_leaf_name_aos_indices>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>momentum_tor</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_phi" type="summary_species_tor_angle">
+				<xs:annotation>
+					<xs:documentation>Ion toroidal rotation velocity, per species</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>velocity_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -3542,6 +3600,22 @@
 						<cocos_label_transformation>tor_angle_like</cocos_label_transformation>
 						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
 						<cocos_leaf_name_aos_indices>summary.heating_current_drive.ec{i}.angle_tor.value</cocos_leaf_name_aos_indices>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phi" type="summary_dynamic_flt_1d_root">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle of ECRH at resonance</xs:documentation>
+					<xs:appinfo>
+						<units>rad</units>
+						<cocos_label_transformation>tor_angle_like</cocos_label_transformation>
+						<cocos_transformation_expression>.sigma_rphiz_eff</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>summary.heating_current_drive.ec{i}.phi.value</cocos_leaf_name_aos_indices>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>angle_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -3680,6 +3754,20 @@
 			<xs:element name="n_tor" type="summary_dynamic_int_1d_root">
 				<xs:annotation>
 					<xs:documentation>Main toroidal mode number of IC waves. The wave vector toroidal component is defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction</xs:documentation>
+					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="n_phi" type="summary_dynamic_int_1d_root">
+				<xs:annotation>
+					<xs:documentation>Main toroidal mode number of IC waves. The wave vector toroidal component is defined as k_phi = n_phi grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>n_tor</change_nbc_previous_name>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="k_perpendicular" type="summary_dynamic_flt_1d_root">

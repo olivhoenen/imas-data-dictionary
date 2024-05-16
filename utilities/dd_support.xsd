@@ -1430,25 +1430,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>1...N</coordinate1>
-						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
-						<coordinate2>../../n_e/time</coordinate2>
-						<utilities_aoscontext>yes</utilities_aoscontext>
-						<change_nbc_version>3.23.3</change_nbc_version>
-						<change_nbc_description>leaf_renamed</change_nbc_description>
-						<change_nbc_previous_name>z/data</change_nbc_previous_name>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="phi">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
@@ -1462,6 +1443,25 @@
 						<change_nbc_version>3.23.3</change_nbc_version>
 						<change_nbc_description>leaf_renamed</change_nbc_description>
 						<change_nbc_previous_name>phi/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../n_e/data</coordinate1_same_as>
+						<coordinate2>../../n_e/time</coordinate2>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+						<change_nbc_version>3.23.3</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>z/data</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2284,12 +2284,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="phi">
 				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
+					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m</units>
+						<units>rad</units>
 						<coordinate1>../../types</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -2297,12 +2297,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
+					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>rad</units>
+						<units>m</units>
 						<coordinate1>../../types</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -4177,6 +4177,24 @@
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<type>dynamic</type>
 						<units>kg.m^-1.s^-1</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="momentum_phi">
+				<xs:annotation>
+					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<type>dynamic</type>
+						<units>kg.m^-1.s^-1</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>momentum_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -4289,6 +4307,24 @@
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>A/m^2</units>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="j_phi">
+				<xs:annotation>
+					<xs:documentation>Total toroidal current density = average(J_phi/R) / average(1/R)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>A/m^2</units>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>j_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -5281,6 +5317,70 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="toroidal">
+				<xs:annotation>
+					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../r</coordinate1>
+						<units>as_parent</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../r</coordinate1>
+						<units>as_parent</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>toroidal</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>toroidal_coefficients</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="z">
 				<xs:annotation>
 					<xs:documentation>Component along the height axis, one scalar value is provided per element in the grid subset.</xs:documentation>
@@ -5297,33 +5397,6 @@
 			<xs:element name="z_coefficients">
 				<xs:annotation>
 					<xs:documentation>Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
-						<coordinate2>1...N</coordinate2>
-						<units>as_parent</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="toroidal">
-				<xs:annotation>
-					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../r</coordinate1>
-						<units>as_parent</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="toroidal_coefficients">
-				<xs:annotation>
-					<xs:documentation>Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
@@ -5475,33 +5548,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="toroidal">
-				<xs:annotation>
-					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
-						<units>as_parent</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="toroidal_coefficients">
-				<xs:annotation>
-					<xs:documentation>Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
-						<coordinate2>1...N</coordinate2>
-						<units>as_parent</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="r">
 				<xs:annotation>
 					<xs:documentation>Component along the major radius axis, one scalar value is provided per element in the grid subset.</xs:documentation>
@@ -5525,6 +5571,70 @@
 						<coordinate2>1...N</coordinate2>
 						<units>as_parent</units>
 						<introduced_after_version>3.37.2</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal">
+				<xs:annotation>
+					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>as_parent</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>as_parent</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>toroidal</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>toroidal_coefficients</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -7043,24 +7153,24 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="delta_z">
-				<xs:annotation>
-					<xs:documentation>Height (relative to a reference point)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="delta_phi">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle (relative to a reference point)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="delta_z">
+				<xs:annotation>
+					<xs:documentation>Height (relative to a reference point)</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -7087,12 +7197,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="delta_z">
+			<xs:element name="delta_phi">
 				<xs:annotation>
-					<xs:documentation>Heights (relative to a reference point)</xs:documentation>
+					<xs:documentation>Toroidal angles (relative to a reference point)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m</units>
+						<units>rad</units>
 						<coordinate1>../delta_r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7100,12 +7210,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="delta_phi">
+			<xs:element name="delta_z">
 				<xs:annotation>
-					<xs:documentation>Toroidal angles (relative to a reference point)</xs:documentation>
+					<xs:documentation>Heights (relative to a reference point)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>rad</units>
+						<units>m</units>
 						<coordinate1>../delta_r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7132,24 +7242,24 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="phi">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -7178,24 +7288,24 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="phi">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -7224,24 +7334,24 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="phi">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -7295,12 +7405,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="phi">
 				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
+					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>m</units>
+						<units>rad</units>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7308,12 +7418,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
+					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
-						<units>rad</units>
+						<units>m</units>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7341,12 +7451,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="phi">
 				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
+					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m</units>
+						<units>rad</units>
 						<coordinate1>../r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7354,12 +7464,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
+					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>rad</units>
+						<units>m</units>
 						<coordinate1>../r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7388,12 +7498,12 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="phi">
 				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
+					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>m</units>
+						<units>rad</units>
 						<coordinate1>1...N</coordinate1>
 						<coordinate1_same_as>../r</coordinate1_same_as>
 						<coordinate2>1...N</coordinate2>
@@ -7404,12 +7514,12 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
+					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
-						<units>rad</units>
+						<units>m</units>
 						<coordinate1>1...N</coordinate1>
 						<coordinate1_same_as>../r</coordinate1_same_as>
 						<coordinate2>1...N</coordinate2>
@@ -7435,19 +7545,19 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="z" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="phi" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -7471,12 +7581,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="phi">
 				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
+					<xs:documentation>Toroidal angle</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>m</units>
+						<units>rad</units>
 						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7484,12 +7594,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>rad</units>
+						<units>m</units>
 						<coordinate1>../time</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7528,12 +7638,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="phi">
 				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
+					<xs:documentation>Toroidal angle</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>m</units>
+						<units>rad</units>
 						<coordinate1>/time</coordinate1>
 						<utilities_aoscontext>yes</utilities_aoscontext>
 					</xs:appinfo>
@@ -7542,12 +7652,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>rad</units>
+						<units>m</units>
 						<coordinate1>/time</coordinate1>
 						<utilities_aoscontext>yes</utilities_aoscontext>
 					</xs:appinfo>
@@ -7571,19 +7681,19 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="z" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="phi" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -7635,23 +7745,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>../../time</coordinate1>
-						<utilities_aoscontext>yes</utilities_aoscontext>
-						<change_nbc_version>3.26.0</change_nbc_version>
-						<change_nbc_description>leaf_renamed</change_nbc_description>
-						<change_nbc_previous_name>z/data</change_nbc_previous_name>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="phi">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle  (oriented counter-clockwise when viewing from above)</xs:documentation>
@@ -7663,6 +7756,23 @@
 						<change_nbc_version>3.26.0</change_nbc_version>
 						<change_nbc_description>leaf_renamed</change_nbc_description>
 						<change_nbc_previous_name>phi/data</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>../../time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+						<change_nbc_version>3.26.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>z/data</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -7746,19 +7856,19 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="z" type="signal_flt_1d">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="phi" type="signal_flt_1d">
 				<xs:annotation>
 					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<units>rad</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="z" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<units>m</units>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -7785,12 +7895,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="phi">
 				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
+					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>m</units>
+						<units>rad</units>
 						<coordinate1>../r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7798,12 +7908,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
+					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>rad</units>
+						<units>m</units>
 						<coordinate1>../r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7834,12 +7944,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="z">
+			<xs:element name="phi">
 				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
+					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>m</units>
+						<units>rad</units>
 						<coordinate1>../r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7847,12 +7957,12 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="phi">
+			<xs:element name="z">
 				<xs:annotation>
-					<xs:documentation>Toroidal angle (oriented counter-clockwise when viewing from above)</xs:documentation>
+					<xs:documentation>Height</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>rad</units>
+						<units>m</units>
 						<coordinate1>../r</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
@@ -10213,6 +10323,19 @@
 					<xs:documentation>Toroidal current induced in this block element</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="j_phi" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Toroidal current induced in this block element</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>j_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -10671,6 +10794,24 @@
 						<units>m^-1</units>
 						<type>dynamic</type>
 						<coordinate1>../../length</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="k_phi">
+				<xs:annotation>
+					<xs:documentation>Wave vector component in the toroidal direction</xs:documentation>
+					<xs:appinfo>
+						<units>m^-1</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>k_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -10713,6 +10854,24 @@
 						<type>dynamic</type>
 						<coordinate1>../../length</coordinate1>
 						<introduced_after_version>3.38.1</introduced_after_version>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="k_phi_norm">
+				<xs:annotation>
+					<xs:documentation>Normalized wave vector component in the toroidal direction = k_phi / norm(k)</xs:documentation>
+					<xs:appinfo>
+						<units>-</units>
+						<type>dynamic</type>
+						<coordinate1>../../length</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>k_tor_norm</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -10751,6 +10910,23 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../../length OR 1...1</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal wave number, contains a single value if varying_ntor = 0 to avoid useless repetition constant values. The wave vector toroidal component is defined as k_phi = n_phi grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../length OR 1...1</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -10762,6 +10938,22 @@
 					<xs:documentation>Flag telling whether n_tor is constant along the ray path (0) or varying (1)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="varying_n_phi">
+				<xs:annotation>
+					<xs:documentation>Flag telling whether n_phi is constant along the ray path (0) or varying (1)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>varying_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
