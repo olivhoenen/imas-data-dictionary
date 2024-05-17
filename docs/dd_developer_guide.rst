@@ -547,6 +547,9 @@ NB: ``FLT_*`` and ``CPX_*`` nodes will have sibling errorbar nodes automatically
 when generating the dd_data_dictionary.xml file. To avoid this, for performance reasons
 (e.g. in large size GGD objects), the data type of the leaf should be declared in a different way,
 using the simpleTypes defined in utilities.xsd (named flt_type and flt_nd_type). Example:
+
+.. code-block:: xml
+
 <xs:element name="time" type="flt_1d_type">
 		<xs:annotation>
 			<xs:documentation>Generic time</xs:documentation>
