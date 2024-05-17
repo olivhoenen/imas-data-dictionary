@@ -543,6 +543,20 @@ The detailed meaning of each property can be found in the
 :ref:`dm_rules_guidelines`. In particular sections :ref:`Self-description
 Conventions` and :ref:`List of the existing data types`.
 
+NB: ``FLT_*`` and ``CPX_*`` nodes will have sibling errorbar nodes automatically generated
+when generating the dd_data_dictionary.xml file. To avoid this, for performance reasons
+(e.g. in large size GGD objects), the data type of the leaf should be declared in a different way,
+using the simpleTypes defined in utilities.xsd (named flt_type and flt_nd_type). Example:
+<xs:element name="time" type="flt_1d_type">
+		<xs:annotation>
+			<xs:documentation>Generic time</xs:documentation>
+			<xs:appinfo>
+				<coordinate1>1...N</coordinate1>
+				<type>dynamic</type>
+				<units>s</units>
+			</xs:appinfo>
+		</xs:annotation>
+</xs:element>
 
 Simple structure node
 ~~~~~~~~~~~~~~~~~~~~~
