@@ -550,16 +550,16 @@ using the simpleTypes defined in utilities.xsd (named flt_type and flt_nd_type).
 
 .. code-block:: xml
 
-<xs:element name="time" type="flt_1d_type">
+	<xs:element name="time" type="flt_1d_type">
 		<xs:annotation>
 			<xs:documentation>Generic time</xs:documentation>
 			<xs:appinfo>
-				<coordinate1>1...N</coordinate1>
-				<type>dynamic</type>
-				<units>s</units>
+			<coordinate1>1...N</coordinate1>
+			<type>dynamic</type>
+			<units>s</units>
 			</xs:appinfo>
 		</xs:annotation>
-</xs:element>
+	</xs:element>
 
 Simple structure node
 ~~~~~~~~~~~~~~~~~~~~~
