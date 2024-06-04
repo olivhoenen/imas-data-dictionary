@@ -331,6 +331,12 @@ def field2rst(
             result.append(f".. versionchanged:: {change_nbc_version}")
             previous_type = field.get("change_nbc_previous_type")
             result.append(f"  Type changed from ``{previous_type}``")
+        elif change_nbc_description == "repeat_children_first_point":
+            result.append(f".. versionchanged:: {change_nbc_version}")
+            result.append(f"  Since this describes a closed countour first point must now be repeated at the end of the coordinate arrays of the children")
+        elif change_nbc_description == "repeat_children_first_point_conditional":
+            result.append(f".. versionchanged:: {change_nbc_version}")
+            result.append(f"  When describing a closed countour (closed child flag = 1 in DDv3), the first point must now be repeated at the end of the coordinate arrays of the children")
         else:
             logger.warning(
                 "Unknown nbc change %r, not documenting NBC change.",

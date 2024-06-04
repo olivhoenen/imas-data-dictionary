@@ -7411,50 +7411,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rz1d_static_closed_flag">
-		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (1D, constant) and closed flag</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="r">
-				<xs:annotation>
-					<xs:documentation>Major radius</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-						<coordinate1>../r</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="closed">
-				<xs:annotation>
-					<xs:documentation>Flag identifying whether the contour is closed (1) or open (0)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="rz1d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z positions (1D, constant)</xs:documentation>
@@ -7925,7 +7881,11 @@
 			</xs:element>
 			<xs:element name="outline" type="x1x21d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the filter in the (X1, X2) coordinate system, used only if geometry_type/index=1. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the filter in the (X1, X2) coordinate system, used only if geometry_type/index=1. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="x1_curvature">
@@ -8126,7 +8086,11 @@
 			</xs:element>
 			<xs:element name="outline" type="x1x21d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="surface">
@@ -8226,7 +8190,11 @@
 			</xs:element>
 			<xs:element name="outline" type="x1x21d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="surface">
@@ -8362,7 +8330,11 @@
 			</xs:element>
 			<xs:element name="outline" type="x1x21d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the object in the (X1, X2) coordinate system, used only if geometry_type/index=1. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the object in the (X1, X2) coordinate system, used only if geometry_type/index=1. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="x1_curvature">
@@ -9194,7 +9166,11 @@
 			</xs:element>
 			<xs:element name="outline" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the element. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the element. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="rectangle" type="rectangle_static">
@@ -9547,9 +9523,13 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="outline" type="rz1d_static_closed_flag">
+			<xs:element name="outline" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Outline of the block element. Do NOT repeat the first point for closed contours</xs:documentation>
+					<xs:documentation>Outline of the block element. Repeat the first point in case of a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="resistivity">
@@ -9591,19 +9571,31 @@
 			<xs:documentation>2D vessel annular description</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="outline_inner" type="rz1d_static_closed_flag">
+			<xs:element name="outline_inner" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Inner vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
+					<xs:documentation>Inner vessel outline. Repeat the first point in case of a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="outline_outer" type="rz1d_static_closed_flag">
+			<xs:element name="outline_outer" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Outer vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
+					<xs:documentation>Outer vessel outline. Repeat the first point in case of a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="centreline" type="rz1d_static_closed_flag">
+			<xs:element name="centreline" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Centreline, i.e. middle of the vessel layer as a series of point. Do NOT repeat the first point for closed contours</xs:documentation>
+					<xs:documentation>Centreline, i.e. middle of the vessel layer as a series of point. Repeat the first point in case of a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="thickness">
