@@ -5125,6 +5125,50 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_integer">
+		<xs:annotation>
+			<xs:documentation>Integer values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="values">
+				<xs:annotation>
+					<xs:documentation>One integer value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_identifier">
 		<xs:annotation>
 			<xs:documentation>Identifier values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
@@ -5231,7 +5275,7 @@
 			</xs:element>
 			<xs:element name="values">
 				<xs:annotation>
-					<xs:documentation>List of vector components, one list per element in the grid subset. First dimenstion: element index. Second dimension: vector component index.</xs:documentation>
+					<xs:documentation>List of vector components, one list per element in the grid subset. First dimension: element index. Second dimension: vector component index.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
@@ -5704,7 +5748,7 @@
 			</xs:element>
 			<xs:element name="values">
 				<xs:annotation>
-					<xs:documentation>List of matrix components, one list per element in the grid subset. First dimenstion: element index. Second dimension: first matrix index. Third dimension: second matrix index.</xs:documentation>
+					<xs:documentation>List of matrix components, one list per element in the grid subset. First dimension: element index. Second dimension: first matrix index. Third dimension: second matrix index.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
@@ -5722,7 +5766,7 @@
 					<xs:documentation>Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension). Second dimension: first matrix index. Third dimension: second matrix index. Fourth dimension: coefficient index</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>../values</coordinate1>
+						<coordinate1>1...N</coordinate1>
 						<coordinate2>1...N</coordinate2>
 						<coordinate3>1...N</coordinate3>
 						<coordinate4>1...N</coordinate4>
@@ -7055,6 +7099,24 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="poloidal_orbit_frequency" type="distributions_d_ggd_expansion">
+				<xs:annotation>
+					<xs:documentation>Poloidal orbit frequency (transit or bounce) at the grid location (in phase space)</xs:documentation>
+					<xs:appinfo>
+						<units>rad.sec^-1</units>
+						<introduced_after_version>3.41.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toroidal_orbit_frequency" type="distributions_d_ggd_expansion">
+				<xs:annotation>
+					<xs:documentation>Toroidal orbit frequency (transit or precession) at the grid location (in phase space)</xs:documentation>
+					<xs:appinfo>
+						<units>rad.sec^-1</units>
+						<introduced_after_version>3.41.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="expansion" type="distributions_d_ggd_expansion" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Distribution function expanded into a vector of successive approximations. The first element in the vector (expansion(1)) is the zeroth order distribution function, while the K:th element in the vector (expansion(K)) is the K:th correction, such that the total distribution function is a sum over all elements in the expansion vector.</xs:documentation>
@@ -7071,6 +7133,33 @@
 						<coordinate1>1...N</coordinate1>
 						<units>m^-3</units>
 						<introduced_after>3.34.0</introduced_after>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="amplitude" type="distributions_d_ggd_expansion">
+				<xs:annotation>
+					<xs:documentation>Value of the distribution function at the grid position in phase space. The interpolation coefficients refer to a C-2 spline.</xs:documentation>
+					<xs:appinfo>
+						<units>m^-6.s^-3</units>
+						<introduced_after_version>3.41.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orbit" type="distributions_d_ggd_orbit">
+				<xs:annotation>
+					<xs:documentation>Orbit description of the particle at this position in phase space. First dimension is the element index. Second dimension is the time along the orbit. Third dimension contains the particle phase space coordinates.</xs:documentation>
+					<xs:appinfo>
+						<units>mixed</units>
+						<introduced_after_version>3.41.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orbit_type" type="distributions_d_ggd_orbit_type">
+				<xs:annotation>
+					<xs:documentation>Orbit type identifier</xs:documentation>
+					<xs:appinfo>
+					        <doc_identifier>utilities/orbit_type_identifier.xml</doc_identifier>
+						<introduced_after_version>3.41.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
