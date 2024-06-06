@@ -7073,6 +7073,43 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="distributions_d_ggd_orbit">
+		<xs:annotation>
+			<xs:documentation>Description of the particle orbits for a given time slice, using a GGD representation</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_subset" type="generic_grid_matrix" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Description of the particle orbits, for various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="distributions_d_ggd_orbit_type">
+		<xs:annotation>
+			<xs:documentation>Identifier index of orbit type, for a given time slice, using a GGD representation</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_subset" type="generic_grid_integer" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Type identifier of the particle orbits, for various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="distributions_d_ggd">
 		<xs:annotation>
 			<xs:documentation>Distribution function for a given time slice, using a GGD representation</xs:documentation>
