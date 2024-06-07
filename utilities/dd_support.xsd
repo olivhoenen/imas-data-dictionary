@@ -7136,20 +7136,20 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="poloidal_orbit_frequency" type="distributions_d_ggd_expansion">
+			<xs:element name="orbit_frequency_pol" type="generic_grid_scalar">
 				<xs:annotation>
 					<xs:documentation>Poloidal orbit frequency (transit or bounce) at the grid location (in phase space)</xs:documentation>
 					<xs:appinfo>
-						<units>rad.sec^-1</units>
+						<units>rad.s^-1</units>
 						<introduced_after_version>3.41.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="toroidal_orbit_frequency" type="distributions_d_ggd_expansion">
+			<xs:element name="orbit_frequency_tor" type="generic_grid_scalar">
 				<xs:annotation>
 					<xs:documentation>Toroidal orbit frequency (transit or precession) at the grid location (in phase space)</xs:documentation>
 					<xs:appinfo>
-						<units>rad.sec^-1</units>
+						<units>rad.s^-1</units>
 						<introduced_after_version>3.41.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
@@ -7173,7 +7173,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="amplitude" type="distributions_d_ggd_expansion">
+			<xs:element name="amplitude" type="generic_grid_scalar">
 				<xs:annotation>
 					<xs:documentation>Value of the distribution function at the grid position in phase space. The interpolation coefficients refer to a C-2 spline.</xs:documentation>
 					<xs:appinfo>
@@ -7182,7 +7182,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="orbit" type="distributions_d_ggd_orbit">
+			<xs:element name="orbit" type="generic_grid_matrix">
 				<xs:annotation>
 					<xs:documentation>Orbit description of the particle at this position in phase space. First dimension is the element index. Second dimension is the time along the orbit. Third dimension contains the particle phase space coordinates.</xs:documentation>
 					<xs:appinfo>
