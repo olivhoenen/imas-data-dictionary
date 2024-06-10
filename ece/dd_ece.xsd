@@ -299,10 +299,23 @@
 					<xs:documentation>Electron temperature</xs:documentation>
 					<xs:appinfo>
 						<units>eV</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e_x" type="physical_quantity_flt_1d_time_1">
+			<xs:element name="t_radiation" type="physical_quantity_flt_1d_time_1">
+				<xs:annotation>
+					<xs:documentation>Radiation temperature</xs:documentation>
+					<xs:appinfo>
+						<units>eV</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>t_e</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="t_radiation_x" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Predicted radiation temperature of the e(X)traordinary mode</xs:documentation>
 					<xs:appinfo>
@@ -313,7 +326,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e_o" type="physical_quantity_flt_1d_time_1">
+			<xs:element name="t_radiation_o" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Predicted radiation temperature of the Ordinary mode</xs:documentation>
 					<xs:appinfo>
@@ -329,6 +342,19 @@
 					<xs:documentation>Raw voltage measured on each channel, from which the calibrated temperature data is then derived</xs:documentation>
 					<xs:appinfo>
 						<units>V</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="voltage_t_radiation" type="signal_flt_1d_validity">
+				<xs:annotation>
+					<xs:documentation>Raw voltage measured on each channel, from which the calibrated temperature data is then derived</xs:documentation>
+					<xs:appinfo>
+						<units>V</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>t_e_voltage</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -389,10 +415,23 @@
 						<xs:documentation>Electron temperature from the closest channel to the magnetic axis, together with its radial location</xs:documentation>
 						<xs:appinfo>
 							<units>eV</units>
+							<lifecycle_status>obsolescent</lifecycle_status>
+							<lifecycle_version>3.42.0</lifecycle_version>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="t_e_central_x" type="signal_flt_1d_validity_position">
+				<xs:element name="t_radiation_central" type="signal_flt_1d_validity_position">
+					<xs:annotation>
+						<xs:documentation>Radiation temperature from the closest channel to the magnetic axis, together with its radial location</xs:documentation>
+						<xs:appinfo>
+							<units>eV</units>
+							<change_nbc_version>3.42.0</change_nbc_version>
+							<change_nbc_description>structure_renamed</change_nbc_description>
+							<change_nbc_previous_name>t_e_central</change_nbc_previous_name>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="t_radiation_central_x" type="signal_flt_1d_validity_position">
 					<xs:annotation>
 						<xs:documentation>Predicted radiation temperature of the channel closest to the magnetic axis, together with its radial location (eXtraordinary mode)</xs:documentation>
 						<xs:appinfo>
@@ -403,7 +442,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="t_e_central_o" type="signal_flt_1d_validity_position">
+				<xs:element name="t_radiation_central_o" type="signal_flt_1d_validity_position">
 					<xs:annotation>
 						<xs:documentation>Predicted radiation temperature of the channel closest to the magnetic axis, together with its radial location (Ordinary mode)</xs:documentation>
 						<xs:appinfo>

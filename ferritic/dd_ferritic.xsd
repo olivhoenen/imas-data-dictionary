@@ -22,6 +22,22 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="b_field_phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal component of the magnetic field at each centroid</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../centroid/x</coordinate1>
+						<units>T</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>b_field_tor</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="b_field_z">
 				<xs:annotation>
 					<xs:documentation>Z component of the magnetic field at each centroid</xs:documentation>
@@ -42,6 +58,8 @@
 						<type>dynamic</type>
 						<coordinate1>../../centroid/x</coordinate1>
 						<units>T</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -55,6 +73,22 @@
 						<type>dynamic</type>
 						<coordinate1>../../centroid/x</coordinate1>
 						<units>A.m^-2</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="magnetic_moment_phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal component of the magnetic moment of each element</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../../centroid/x</coordinate1>
+						<units>A.m^-2</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>magnetic_moment_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -81,6 +115,8 @@
 						<type>dynamic</type>
 						<coordinate1>../../centroid/x</coordinate1>
 						<units>A.m^-2</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

@@ -64,23 +64,42 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_field_z">
+			<xs:element name="b_field_tor">
 				<xs:annotation>
-					<xs:documentation>Z component of the vacuum error magnetic field on the various surface points</xs:documentation>
+					<xs:documentation>Toroidal component of the vacuum error magnetic field on the various surface points</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>T</units>
 						<coordinate1>../outline/r</coordinate1>
 						<coordinate2>../phi</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_field_tor">
+			<xs:element name="b_field_phi">
 				<xs:annotation>
 					<xs:documentation>Toroidal component of the vacuum error magnetic field on the various surface points</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>T</units>
+						<coordinate1>../outline/r</coordinate1>
+						<coordinate2>../phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>b_field_tor</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b_field_z">
+				<xs:annotation>
+					<xs:documentation>Z component of the vacuum error magnetic field on the various surface points</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>T</units>
@@ -147,24 +166,44 @@
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_field_z">
+			<xs:element name="b_field_tor">
 				<xs:annotation>
-					<xs:documentation>Z component of the vacuum error magnetic field</xs:documentation>
+					<xs:documentation>Toroidal component of the vacuum error magnetic field</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>T</units>
 						<coordinate1>../grid/r</coordinate1>
 						<coordinate2>../grid/phi</coordinate2>
 						<coordinate3>../grid/z</coordinate3>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_field_tor">
+			<xs:element name="b_field_phi">
 				<xs:annotation>
 					<xs:documentation>Toroidal component of the vacuum error magnetic field</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>T</units>
+						<coordinate1>../grid/r</coordinate1>
+						<coordinate2>../grid/phi</coordinate2>
+						<coordinate3>../grid/z</coordinate3>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>b_field_tor</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="b_field_z">
+				<xs:annotation>
+					<xs:documentation>Z component of the vacuum error magnetic field</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>T</units>
@@ -228,7 +267,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.39.0</lifecycle_version>
-				<lifecycle_last_change>3.39.0</lifecycle_last_change>
+				<lifecycle_last_change>3.42.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
