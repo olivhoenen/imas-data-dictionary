@@ -368,7 +368,7 @@ def main():
             print("Could not find html documentation")
         else:
             url = idsinfoObj.doc_path
-        webbrowser.open(url)
+            webbrowser.open(url)
     elif args.cmd == "search":
         if args.text not in ["", None]:
             print(f"Searching for '{args.text}'.")
