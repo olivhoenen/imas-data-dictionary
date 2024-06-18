@@ -1049,7 +1049,7 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-				<xs:element name="electron_configuration">
+			<xs:element name="electron_configuration">
 				<xs:annotation>
 					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
 					<xs:appinfo>
@@ -11378,6 +11378,35 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="ids_provenance_node_source">
+		<xs:annotation>
+			<xs:documentation>Source information for a given node of the IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Source name</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="timestamp">
+				<xs:annotation>
+					<xs:documentation>Date and time (UTC) at which the source was created, expressed in a human readable form (ISO 8601) : the format of the string shall be : YYYY-MM-DDTHH:MM:SSZ. Example : 2020-07-24T14:19:00Z</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ids_provenance_node">
 		<xs:annotation>
 			<xs:documentation>Provenance information for a given node of the IDS</xs:documentation>
@@ -11395,18 +11424,15 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="sources">
+			<xs:element name="source" type="ids_provenance_node_source" maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation>List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the "code" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.</xs:documentation>
 					<xs:appinfo>
-						<type>constant</type>
 						<coordinate1>1...N</coordinate1>
 						<url>utilities/IMAS-URI-scheme.md</url>
+						<introduced_after_version>3.41.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_1D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
