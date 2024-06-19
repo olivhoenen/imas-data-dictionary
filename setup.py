@@ -25,6 +25,7 @@ from generate import (
     generate_dd_data_dictionary,
     generate_dd_data_dictionary_validation,
     generate_html_documentation,
+    generate_sphinx_documentation,
     generate_ids_cocos_transformations_symbolic_table,
     generate_idsnames,
 )
@@ -35,6 +36,7 @@ from install import (
     install_css_files,
     install_dd_files,
     install_html_files,
+    install_sphinx_files,
     install_identifiers_files,
     install_ids_files,
     install_img_files,
@@ -48,12 +50,14 @@ long_description = (current_directory / "README.md").read_text(encoding="utf-8")
 # Generate
 generate_dd_data_dictionary()
 generate_html_documentation()
+generate_sphinx_documentation()
 generate_ids_cocos_transformations_symbolic_table()
 generate_idsnames()
 generate_dd_data_dictionary_validation()
 
 # install
 install_html_files()
+install_sphinx_files()
 install_css_files()
 install_js_files()
 install_img_files()
@@ -105,6 +109,7 @@ setup(
     data_files=paths,
     scripts=[
         "scripts/dd_doc",
+        "scripts/dd_doclegacy"
     ],
     # Run command line script and should be installed by Python installer
     entry_points={  # Using inetrnal Python automated script option

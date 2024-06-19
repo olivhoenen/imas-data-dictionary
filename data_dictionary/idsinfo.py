@@ -62,7 +62,8 @@ class IDSInfo:
     def __init__(self):
         # Find and parse XML definitions
         self.idsdef_path = ""
-        self.doc_path = ""
+        self.legacy_doc_path = ""
+        self.sphinx_doc_path = ""
         # Check idsdef.xml is installed in the Python environment (system as well as local)
         if not self.idsdef_path:
             local_path = os.path.join(str(Path.home()), ".local")
@@ -88,7 +89,9 @@ class IDSInfo:
                         if file.endswith("IDSDef.xml"):
                             self.idsdef_path = os.path.join(root, file)
                         if file.endswith("html_documentation.html"):
-                            self.doc_path = os.path.join(root, file)
+                            self.legacy_doc_path = os.path.join(root, file)
+                        if root.endswith("sphinx") and file == "index.html":
+                            self.sphinx_doc_path = os.path.join(root, file)
 
         # Search through higher level directories
         if not self.idsdef_path:
@@ -111,21 +114,26 @@ class IDSInfo:
                 current_fpath, r"../../../../share/doc/imas/html_documentation.html"
             )
             if os.path.isfile(_doc_path):
-                self.doc_path = os.path.abspath(_doc_path)
+                self.legacy_doc_path = os.path.abspath(_doc_path)
             else:
                 _doc_path = os.path.join(
                     current_fpath, r"../../../share/doc/imas/html_documentation.html"
                 )
                 if os.path.isfile(_doc_path):
-                    self.doc_path = os.path.abspath(_doc_path)
-                    
-        # Search using IDSDEF_PATH env variable
-        if not self.idsdef_path:
-            if "IDSDEF_PATH" in os.environ:
-                _idsdef_path = os.environ["IDSDEF_PATH"]
-                if os.path.isfile(_idsdef_path):
-                    self.idsdef_path = os.environ["IDSDEF_PATH"]
-
+                    self.legacy_doc_path = os.path.abspath(_doc_path)
+            
+            _sphinxdoc_path = os.path.join(
+                current_fpath, r"../../../../share/doc/imas/sphinx/index.html"
+            )
+            if os.path.isfile(_sphinxdoc_path):
+                self.sphinx_doc_path = os.path.abspath(_sphinxdoc_path)
+            else:
+                _sphinxdoc_path = os.path.join(
+                    current_fpath, r"../../../share/doc/imas/sphinx/index.html"
+                )
+                if os.path.isfile(_sphinxdoc_path):
+                    self.sphinx_doc_path = os.path.abspath(_sphinxdoc_path)     
+                       
         # Search using IMAS_PREFIX env variable
         if not self.idsdef_path:
             if "IMAS_PREFIX" in os.environ:
@@ -135,18 +143,34 @@ class IDSInfo:
                 if os.path.isfile(_idsdef_path):
                     self.idsdef_path = _idsdef_path
 
-        if not self.doc_path:
+        if not self.legacy_doc_path:
             if "IMAS_PREFIX" in os.environ:
                 _doc_path = os.path.join(
                     os.environ["IMAS_PREFIX"], r"share/doc/imas/html_documentation.html"
                 )
                 if os.path.isfile(_doc_path):
-                    self.doc_path = _doc_path
+                    self.legacy_doc_path = _doc_path
+  
+        if not self.sphinx_doc_path:
+            if "IMAS_PREFIX" in os.environ:
+                _doc_path = os.path.join(
+                    os.environ["IMAS_PREFIX"], r"share/doc/imas/sphinx/index.html"
+                )
+                if os.path.isfile(_doc_path):
+                    self.sphinx_doc_path = _doc_path
+
+            # Search using IDSDEF_PATH env variable
+        if not self.idsdef_path:
+            if "IDSDEF_PATH" in os.environ:
+                _idsdef_path = os.environ["IDSDEF_PATH"]
+                if os.path.isfile(_idsdef_path):
+                    self.idsdef_path = os.environ["IDSDEF_PATH"]
                     
         if not self.idsdef_path:
             raise Exception(
                 "Error accessing IDSDef.xml.  Make sure its location is defined in your environment, e.g. by loading an IMAS module."
             )
+        
         tree = ET.parse(self.idsdef_path)
         self.root = tree.getroot()
         self.version = self.root.findtext("./version", default="N/A")
@@ -318,12 +342,12 @@ def main():
         help="Path for field of interest within the IDS",
     )
     doc_command_parser = subparsers.add_parser(
-        "doc", help="Show html documentation in the browser"
+        "dd_doc", help="Show documentation in the browser"
     )
-    doc_command_parser.set_defaults(cmd="doc")
+    doc_command_parser.set_defaults(cmd="dd_doc")
 
     doc_command_parser.add_argument(
-        "-l", "--legacy", action="store_true", help="Show old legacy documentation"
+        "-l", "--legacy", action="store_true", help="Show legacy documentation"
     )
     opt = info_command_parser.add_mutually_exclusive_group()
     opt.add_argument("-a", "--all", action="store_true", help="Print all attributes")
@@ -362,12 +386,14 @@ def main():
     elif args.cmd == "idsnames":
         for name in idsinfoObj.get_ids_names():
             print(name)
-    elif args.cmd == "doc":
+    elif args.cmd == "dd_doc":
         import webbrowser
-        if idsinfoObj.doc_path == "":
-            print("Could not find html documentation")
+        url = idsinfoObj.sphinx_doc_path
+        if args.legacy or url == "":
+            url = idsinfoObj.legacy_doc_path
+        if url == "":
+            print("Could not find documentation")
         else:
-            url = idsinfoObj.doc_path
             webbrowser.open(url)
     elif args.cmd == "search":
         if args.text not in ["", None]:
