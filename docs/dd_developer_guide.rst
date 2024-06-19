@@ -890,10 +890,22 @@ The following use cases are implemented :
       <change_nbc_description>repeat_children_first_point</change_nbc_description>
 
    .. code-block:: xml
-      :caption: Example for a contour that is not necessarily closed (the conversion tool will check the closed flag in DDv3)
+      :caption: Example for a contour that is not necessarily closed (the conversion tool will check the closed child flag in DDv3)
 
       <change_nbc_version>4</change_nbc_version>
       <change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
+
+   .. code-block:: xml
+      :caption: Example for a contour that is not necessarily closed (the conversion tool will check the closed sibling flag in DDv3)
+
+      <change_nbc_version>4</change_nbc_version>
+      <change_nbc_description>repeat_children_first_point_conditional_sibling</change_nbc_description>
+
+   .. code-block:: xml
+      :caption: Example for a dynamic contour that is not necessarily closed (the conversion tool will check the closed sibling flag in DDv3)
+
+      <change_nbc_version>4</change_nbc_version>
+      <change_nbc_description>repeat_children_first_point_conditional_sibling_dynamic</change_nbc_description>
 
 
 Attaching COCOS transformation metadata at the node level
