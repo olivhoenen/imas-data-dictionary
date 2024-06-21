@@ -17,7 +17,6 @@ module purge
 module load \
     Saxon-HE/12.4-Java-21 \
     Python/3.11.5-GCCcore-13.2.0 \
-    GitPython/3.1.42-GCCcore-13.2.0 \
     IMASPy/1.0.0-gfbf-2023b
 
 
