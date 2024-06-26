@@ -425,14 +425,14 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>dB</units>
-						<coordinate1>../frequencies_fourier</coordinate1>
-						<coordinate2>1...N</coordinate2>
-						<coordinate2_same_as>../../frequencies/data</coordinate2_same_as>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../../frequencies/data</coordinate1_same_as>
+						<coordinate2>../frequencies_fourier</coordinate2>
 						<coordinate3>../time</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
+					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="frequencies_fourier">
@@ -526,7 +526,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the channel</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -535,11 +535,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>ID of the channel</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

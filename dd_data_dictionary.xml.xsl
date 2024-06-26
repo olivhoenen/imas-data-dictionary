@@ -152,6 +152,15 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 							<xsl:if test="xs:annotation/xs:appinfo/url">
 								<xsl:attribute name="url"><xsl:value-of select="xs:annotation/xs:appinfo/url"/></xsl:attribute>
 							</xsl:if>
+							<!-- Indicate whether the IDS is purely constant or contains dynamic quantities -->							
+							<xsl:choose>
+								<xsl:when test="*/*/xs:element[@ref='time']">
+									<xsl:attribute name="type">dynamic</xsl:attribute>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:attribute name="type">constant</xsl:attribute>
+								</xsl:otherwise>
+							</xsl:choose>
 							<!-- Scan its components in IMPLEMENT mode -->
 							<xsl:apply-templates select="xs:complexType" mode="IMPLEMENT">
 								<xsl:with-param name="currPath" select="''"/>
@@ -246,8 +255,8 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			</xsl:when>
 			<xsl:when test="@name">
 				<xsl:choose>
-					<!-- if the node is a leaf defined as a simple type -->
-					<xsl:when test="@type='int_type' or @type='flt_type'  or @type='str_type' or @type='flt_1d_type' or @type='str_1d_type' or @type='int_1d_type'">
+					<!-- if the node is a leaf defined as a simple type (then it won't have errorbars) -->
+					<xsl:when test="ends-with(@type,'_type') and (starts-with(@type,'int') or starts-with(@type,'flt') or starts-with(@type,'str') or starts-with(@type,'cpx'))">
 						<field>
 							<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
 							<xsl:choose>
@@ -261,7 +270,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 								</xsl:otherwise>
 							</xsl:choose>
 							<xsl:attribute name="documentation"><xsl:value-of select="xs:annotation/xs:documentation"/></xsl:attribute>
-							<xsl:attribute name="data_type"><xsl:value-of select="@type"/></xsl:attribute>
+							<xsl:attribute name="data_type"><xsl:call-template name="ConvertDataType"><xsl:with-param name="data_type" select="@type"/></xsl:call-template></xsl:attribute>
 							<xsl:for-each select="xs:annotation/xs:appinfo/*">
 								<!-- Generic method for declaring all appinfo as attributes-->
 								<xsl:attribute name="{name(.)}"><xsl:value-of select="."/></xsl:attribute>
@@ -880,5 +889,11 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:when test="contains($data_type,'5d') or contains($data_type,'5D')">(:,:,:,:,:)</xsl:when>
 			<xsl:when test="contains($data_type,'6d') or contains($data_type,'6D')">(:,:,:,:,:,:)</xsl:when>
 		</xsl:choose>
+	</xsl:template>
+	<!-- Convert simple types without errorbars to regular data types recognized by the Access Layer -->
+	<xsl:template name="ConvertDataType">
+		<xsl:param name="data_type"/>
+        <xsl:value-of select="upper-case(substring-before($data_type,'_type'))"/>
+        <xsl:if test="not(contains($data_type,'d_type'))">_0D</xsl:if>        
 	</xsl:template>
 </xsl:stylesheet>

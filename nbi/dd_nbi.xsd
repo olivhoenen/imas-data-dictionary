@@ -179,7 +179,7 @@
 			</xs:element>
 			<xs:element name="width_min_horizontal">
 				<xs:annotation>
-					<xs:documentation>The horizontal width of the beamlets group at the at the horizontal focal point</xs:documentation>
+					<xs:documentation>The horizontal width (Full Width at Half Maximum) of the beamlets group at the horizontal focal point</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -191,7 +191,7 @@
 			</xs:element>
 			<xs:element name="width_min_vertical">
 				<xs:annotation>
-					<xs:documentation>The vertical width of the beamlets group at the at the vertical focal point</xs:documentation>
+					<xs:documentation>The vertical width (Full Width at Half Maximum) of the beamlets group at the vertical focal point</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -267,7 +267,7 @@
 			</xs:element>
 			<xs:element name="width_horizontal">
 				<xs:annotation>
-					<xs:documentation>Horizontal width of the beam group at the injection unit surface (or grounded grid)</xs:documentation>
+					<xs:documentation>Horizontal width (dimensions of the smallest rectangle that surrounds the outer dimensions of the beamlets) of the beamlet group at the injection unit surface (or grounded grid) </xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -279,7 +279,7 @@
 			</xs:element>
 			<xs:element name="width_vertical">
 				<xs:annotation>
-					<xs:documentation>Vertical width of the beam group at the injection unit surface (or grounded grid)</xs:documentation>
+					<xs:documentation>Vertical width (dimensions of the smallest rectangle that surrounds the outer dimensions of the beamlets) of the beamlet group at the injection unit surface (or grounded grid)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
@@ -291,7 +291,7 @@
 			</xs:element>
 			<xs:element name="focus" type="nbi_unit_beamlets_group_focus">
 				<xs:annotation>
-					<xs:documentation>Describes how the beamlet group is focused</xs:documentation>
+					<xs:documentation>Describes how the beamlet group is focused. Calculations of width_min_horizontal and width_min_vertical are on a plane defined by the average normal vector of the two constituent accelerator nbi target planes.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="divergence_component" type="nbi_unit_beamlets_group_divergence" maxOccurs="3">
@@ -316,7 +316,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the NBI unit</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -325,11 +325,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>ID of the NBI unit</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -379,7 +380,7 @@
 			</xs:element>
 			<xs:element name="beamlets_group" type="nbi_unit_beamlets_group" maxOccurs="16">
 				<xs:annotation>
-					<xs:documentation>Group of beamlets with common vertical and horizontal focal point. If there are no common focal points, then select small groups of beamlets such that a focal point description of the beamlets group provides a fair description</xs:documentation>
+					<xs:documentation>Group of beamlets with common vertical and horizontal focal point. If there are no common focal points, then select small groups of beamlets such that a focal point description of the beamlets group provides a fair description. Beamlet groups are assumed to be Gaussian.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>

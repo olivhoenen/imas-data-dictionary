@@ -433,7 +433,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-						<coordinate1>1...N</coordinate1>
+						<coordinate1>as_parent</coordinate1>
 						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
@@ -464,7 +464,7 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
-						<coordinate1>1...N</coordinate1>
+						<coordinate1>as_parent</coordinate1>
 						<coordinate2>../time</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1238,10 +1238,13 @@
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>constant</type>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>FLT_0D</change_nbc_previous_type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="label">
@@ -1280,10 +1283,13 @@
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>constant</type>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>FLT_0D</change_nbc_previous_type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="atoms_n">
@@ -1325,10 +1331,13 @@
 					<xs:appinfo>
 						<units>Elementary Charge Unit</units>
 						<type>dynamic</type>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>FLT_0D</change_nbc_previous_type>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="atoms_n">
@@ -3987,6 +3996,51 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="covariance_matrix">
+		<xs:annotation>
+			<xs:documentation>User-defined covariance matrix</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Description of this covariance matrix</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rows_uri">
+				<xs:annotation>
+					<xs:documentation>List of URIs corresponding to the rows (1st dimension) of the covariance matrix. If not all indices of a given node are used, they must be listed explicitly e.g. rows_uri(i) = pf_active:1/coil(i) will refer to a list of indices of the occurrence 1 of the pf_active IDS of this data entry. If the rows correspond to all indices of a given vector it is sufficient to give a single URI where this vector is denoted using the (:) implicit notation, e.g. rows_uri(1) = /grid_ggd(3)/grid_subset(2)/elements(:).</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<url>utilities/IMAS-URI-scheme.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="data">
+				<xs:annotation>
+					<xs:documentation>Covariance matrix</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>mixed</units>
+						<coordinate1>../rows_uri</coordinate1>
+						<coordinate2>../rows_uri</coordinate2>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="detector_energy_band">
 		<xs:annotation>
 			<xs:documentation>Detector energy band</xs:documentation>
@@ -4631,6 +4685,43 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_identifier_single">
+		<xs:annotation>
+			<xs:documentation>Identifier value (single value per subset) on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifier" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Identifier value for the grid subset</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_vector">
 		<xs:annotation>
 			<xs:documentation>Vector values on a generic grid (dynamic within a type 3 AoS)</xs:documentation>
@@ -4688,6 +4779,122 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_vector_components_rzphi">
+		<xs:annotation>
+			<xs:documentation>Vector components in predefined directions on a generic grid, R, Z and toroidal directions only (dynamic within a type 3 AoS)</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid used to represent this quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Component along the major radius axis, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="r_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Component along the height axis, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../r</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal">
+				<xs:annotation>
+					<xs:documentation>Toroidal component, one scalar value is provided per element in the grid subset.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../r</coordinate1>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="toroidal_coefficients">
+				<xs:annotation>
+					<xs:documentation>Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../r</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>as_parent</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -4993,6 +5200,157 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_space_dimension_object_boundary">
+		<xs:annotation>
+			<xs:documentation>Generic grid, description of an object boundary and its neighbours (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Index of this (n-1)-dimensional boundary object</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="neighbours">
+				<xs:annotation>
+					<xs:documentation>List of indices of the n-dimensional objects adjacent to the given n-dimensional object. An object may have multiple neighbours on a boundary</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_space_dimension_object">
+		<xs:annotation>
+			<xs:documentation>Generic grid, list of objects of a given dimension within a space (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="boundary" type="generic_grid_constant_space_dimension_object_boundary" maxOccurs="6">
+				<xs:annotation>
+					<xs:documentation>Set of (n-1)-dimensional objects defining the boundary of this n-dimensional object</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometry" type="flt_1d_type">
+				<xs:annotation>
+					<xs:documentation>Geometry data associated with the object. Its detailed content is defined by ../../geometry_content. Its dimension depends on the type of object, geometry and coordinate considered.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nodes">
+				<xs:annotation>
+					<xs:documentation>List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="measure" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Measure of the space object, i.e. physical size (length for 1d, area for 2d, volume for 3d objects,...)</xs:documentation>
+					<xs:appinfo>
+						<units>m^dimension</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometry_2d" type="flt_2d_type">
+				<xs:annotation>
+					<xs:documentation>2D geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. Typically, the first dimension represents the object coordinates, while the second dimension would represent the values of the various degrees of freedom of the finite element attached to the object.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_space_dimension">
+		<xs:annotation>
+			<xs:documentation>Generic grid, list of dimensions within a space (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="object" type="generic_grid_constant_space_dimension_object" maxOccurs="300">
+				<xs:annotation>
+					<xs:documentation>Set of objects for a given dimension</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometry_content" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Content of the ../object/geometry node for this dimension</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/ggd_geometry_content_identifier.xml</doc_identifier>
+						<introduced_after_version>3.33.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_space">
+		<xs:annotation>
+			<xs:documentation>Generic grid space (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Space identifier</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/ggd_space_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geometry_type" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Type of space geometry (0: standard, 1:Fourier, >1: Fourier with periodicity)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="coordinates_type" type="identifier" maxOccurs="6">
+				<xs:annotation>
+					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space.</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/coordinate_identifier.xml</doc_identifier>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>INT_1D</change_nbc_previous_type>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="objects_per_dimension" type="generic_grid_constant_space_dimension" maxOccurs="6">
+				<xs:annotation>
+					<xs:documentation>Definition of the space objects for every dimension (from one to the dimension of the highest-dimensional objects). The index correspond to 1=nodes, 2=edges, 3=faces, 4=cells/volumes, .... For every index, a collection of objects of that dimension is described.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="generic_grid_dynamic_space_dimension_object_boundary">
 		<xs:annotation>
 			<xs:documentation>Generic grid, description of an object boundary and its neighbours (dynamic within a type 3 AoS)</xs:documentation>
@@ -5042,7 +5400,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="geometry">
+			<xs:element name="geometry" type="flt_1d_type">
 				<xs:annotation>
 					<xs:documentation>Geometry data associated with the object, its detailed content is defined by ../../geometry_content. Its dimension depends on the type of object, geometry and coordinate considered. </xs:documentation>
 					<xs:appinfo>
@@ -5051,9 +5409,6 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="nodes">
 				<xs:annotation>
@@ -5067,7 +5422,7 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="measure">
+			<xs:element name="measure" type="flt_type">
 				<xs:annotation>
 					<xs:documentation>Measure of the space object, i.e. physical size (length for 1d, area for 2d, volume for 3d objects,...)</xs:documentation>
 					<xs:appinfo>
@@ -5075,11 +5430,8 @@
 						<type>dynamic</type>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
-			<xs:element name="geometry_2d">
+			<xs:element name="geometry_2d" type="flt_2d_type">
 				<xs:annotation>
 					<xs:documentation>2D geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. Typically, the first dimension represents the object coordinates, while the second dimension would represent the values of the various degrees of freedom of the finite element attached to the object.</xs:documentation>
 					<xs:appinfo>
@@ -5090,9 +5442,6 @@
 						<introduced_after_version>3.35.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -5144,18 +5493,17 @@
 					<xs:documentation>Type of space geometry (0: standard, 1:Fourier, >1: Fourier with periodicity)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="coordinates_type">
+			<xs:element name="coordinates_type" type="identifier_dynamic_aos3" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space. The meaning of these predefined integer constants can be found in the Data Dictionary under utilities/coordinate_identifier.xml</xs:documentation>
+					<xs:documentation>Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space.</xs:documentation>
 					<xs:appinfo>
+						<doc_identifier>utilities/coordinate_identifier.xml</doc_identifier>
+						<change_nbc_version>4.0.0</change_nbc_version>
+						<change_nbc_description>type_changed</change_nbc_description>
+						<change_nbc_previous_type>INT_1D</change_nbc_previous_type>
 						<coordinate1>1...N</coordinate1>
-						<type>dynamic</type>
-						<url>utilities/coordinate_identifier.xml</url>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="objects_per_dimension" type="generic_grid_dynamic_space_dimension" maxOccurs="unbounded">
 				<xs:annotation>
@@ -5163,6 +5511,161 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_grid_subset_element_object">
+		<xs:annotation>
+			<xs:documentation>Generic grid, object part of an element part of a grid_subset (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="space">
+				<xs:annotation>
+					<xs:documentation>Index of the space from which that object is taken</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dimension">
+				<xs:annotation>
+					<xs:documentation>Dimension of the object</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Object index</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_grid_subset_element">
+		<xs:annotation>
+			<xs:documentation>Generic grid, element part of a grid_subset (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="object" type="generic_grid_constant_grid_subset_element_object" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Set of objects defining the element</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_grid_subset_metric">
+		<xs:annotation>
+			<xs:documentation>Generic grid, metric description for a given grid_subset and base (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="jacobian">
+				<xs:annotation>
+					<xs:documentation>Metric Jacobian</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../element</coordinate1>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tensor_covariant">
+				<xs:annotation>
+					<xs:documentation>Covariant metric tensor, given on each element of the subgrid (first dimension)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../element</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tensor_contravariant">
+				<xs:annotation>
+					<xs:documentation>Contravariant metric tensor, given on each element of the subgrid (first dimension)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../../element</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate2_same_as>../tensor_covariant</coordinate2_same_as>
+						<coordinate3>1...N</coordinate3>
+						<coordinate3_same_as>../tensor_covariant</coordinate3_same_as>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="generic_grid_constant_grid_subset">
+		<xs:annotation>
+			<xs:documentation>Generic grid grid_subset (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Grid subset identifier</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/ggd_subset_identifier.xml</doc_identifier>
+						<url>utilities/LFS_snowflake_GGD_subsets.png</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dimension">
+				<xs:annotation>
+					<xs:documentation>Space dimension of the grid subset elements. This must be equal to the sum of the dimensions of the individual objects forming the element.</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="element" type="generic_grid_constant_grid_subset_element" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>Set of elements defining the grid subset. An element is defined by a combination of objects from potentially all spaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="base" type="generic_grid_constant_grid_subset_metric" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Set of bases for the grid subset. For each base, the structure describes the projection of the base vectors on the canonical frame of the grid.</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="metric" type="generic_grid_constant_grid_subset_metric">
+				<xs:annotation>
+					<xs:documentation>Metric of the canonical frame onto Cartesian coordinates</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -5188,7 +5691,7 @@
 			</xs:element>
 			<xs:element name="dimension">
 				<xs:annotation>
-					<xs:documentation>Dimension of the object</xs:documentation>
+					<xs:documentation>Dimension of the object - using the convention  1=nodes, 2=edges, 3=faces, 4=cells/volumes</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -5302,7 +5805,7 @@
 			</xs:element>
 			<xs:element name="dimension">
 				<xs:annotation>
-					<xs:documentation>Space dimension of the grid subset elements. This must be equal to the sum of the dimensions of the individual objects forming the element.</xs:documentation>
+					<xs:documentation>Space dimension of the grid subset elements, using the convention 1=nodes, 2=edges, 3=faces, 4=cells/volumes</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -5436,6 +5939,49 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="generic_grid_constant">
+		<xs:annotation>
+			<xs:documentation>Generic grid (constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Grid identifier</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/ggd_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="path">
+				<xs:annotation>
+					<xs:documentation>Path of the grid, including the IDS name, in case of implicit reference to a grid_ggd node described in another IDS. To be filled only if the grid is not described explicitly in this grid_ggd structure. Example syntax: IDS::wall/0/description_ggd(1)/grid_ggd, means that the grid is located in the wall IDS, occurrence 0, with relative path description_ggd(1)/grid_ggd, using Fortran index convention (here : first index of the array)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="space" type="generic_grid_constant_space" maxOccurs="6">
+				<xs:annotation>
+					<xs:documentation>Set of grid spaces</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<url_protected>https://confluence.iter.org/download/attachments/178133297/GGDguide.pdf</url_protected>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grid_subset" type="generic_grid_constant_grid_subset" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Grid subsets</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="geometry_matrix_emission">
 		<xs:annotation>
 			<xs:documentation>Emission grid for the geometry matrix of a detector</xs:documentation>
@@ -5486,6 +6032,59 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="profiles_2d_grid">
+		<xs:annotation>
+			<xs:documentation>Definition of the 2D grid with dim1, dim2, constant</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="dim1">
+				<xs:annotation>
+					<xs:documentation>First dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+						<cocos_label_transformation>grid_type_dim1_like</cocos_label_transformation>
+						<cocos_transformation_expression>grid_type_transformation(index_grid_type,1)</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>IDSPATH.grid.dim1</cocos_leaf_name_aos_indices>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dim2">
+				<xs:annotation>
+					<xs:documentation>Second dimension values</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>1...N</coordinate1>
+						<units>mixed</units>
+						<cocos_label_transformation>grid_type_dim2_like</cocos_label_transformation>
+						<cocos_transformation_expression>grid_type_transformation(index_grid_type,2)</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>IDSPATH.grid.dim2</cocos_leaf_name_aos_indices>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="volume_element">
+				<xs:annotation>
+					<xs:documentation>Volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<coordinate1>../dim1</coordinate1>
+						<coordinate2>../dim2</coordinate2>
+						<units>m^3</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -6252,6 +6851,55 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="rzphi1d_dynamic_root_time">
+		<xs:annotation>
+			<xs:documentation>Structure for R, Z, Phi positions (1D, dynamic), using the root time of the IDS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>/time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<coordinate1>/time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal angle</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>rad</units>
+						<coordinate1>/time</coordinate1>
+						<utilities_aoscontext>yes</utilities_aoscontext>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="rzphirhopsitheta1d_dynamic_aos1">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi, rho_tor_norm, psi, theta positions (1D, dynamic within a type 1 array of structures (indexed on objects, data/time structure)</xs:documentation>
@@ -6763,50 +7411,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rz1d_static_closed_flag">
-		<xs:annotation>
-			<xs:documentation>Structure for list of R, Z positions (1D, constant) and closed flag</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="r">
-				<xs:annotation>
-					<xs:documentation>Major radius</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-						<coordinate1>1...N</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>m</units>
-						<coordinate1>../r</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="closed">
-				<xs:annotation>
-					<xs:documentation>Flag identifying whether the contour is closed (1) or open (0)</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="rz1d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z positions (1D, constant)</xs:documentation>
@@ -6962,6 +7566,95 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="xyz0d_constant">
+		<xs:annotation>
+			<xs:documentation>Structure for list of X, Y, Z components (0D, constant)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x">
+				<xs:annotation>
+					<xs:documentation>Component along X axis</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="y">
+				<xs:annotation>
+					<xs:documentation>Component along Y axis</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Component along Z axis</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="xyz1d_positions_static">
+		<xs:annotation>
+			<xs:documentation>Structure for list of X, Y, Z positions (1D, static)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x">
+				<xs:annotation>
+					<xs:documentation>List of X coordinates</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="y">
+				<xs:annotation>
+					<xs:documentation>List of Y coordinates</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../x</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>List of Z coordinates</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<units>m</units>
+						<coordinate1>../x</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="xyz2d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for list of X, Y, Z components (2D, static)</xs:documentation>
@@ -7082,11 +7775,23 @@
 			<xs:documentation>Characteristics of the filter window (largely derived from curved_object), with some filter specific additions</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="identifier">
+			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>ID of the filter</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -7176,7 +7881,11 @@
 			</xs:element>
 			<xs:element name="outline" type="x1x21d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the filter in the (X1, X2) coordinate system, used only if geometry_type/index=1. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the filter in the (X1, X2) coordinate system, used only if geometry_type/index=1. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="x1_curvature">
@@ -7377,7 +8086,11 @@
 			</xs:element>
 			<xs:element name="outline" type="x1x21d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="surface">
@@ -7477,7 +8190,11 @@
 			</xs:element>
 			<xs:element name="outline" type="x1x21d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the detector/aperture in the (X1, X2) coordinate system. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="surface">
@@ -7499,11 +8216,23 @@
 			<xs:documentation>Generic description of a small plane or curved object (crystal, reflector, ...), using a generalization of the detector_aperture complexType</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="identifier">
+			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>ID of the object</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
+					<xs:appinfo>
+						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -7601,7 +8330,11 @@
 			</xs:element>
 			<xs:element name="outline" type="x1x21d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the object in the (X1, X2) coordinate system, used only if geometry_type/index=1. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the object in the (X1, X2) coordinate system, used only if geometry_type/index=1. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="x1_curvature">
@@ -7913,17 +8646,6 @@
 			<xs:documentation>Camera geometry. The orientation of the camera is described as follows : pixels are aligned along x1 and x2 unit vectors while x3 is normal to the detector plane.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="identifier">
-				<xs:annotation>
-					<xs:documentation>ID of the camera</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="STR_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="pixel_dimensions">
 				<xs:annotation>
 					<xs:documentation>Pixel dimension in each direction (x1, x2)</xs:documentation>
@@ -8444,7 +9166,11 @@
 			</xs:element>
 			<xs:element name="outline" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the element. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the element. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="rectangle" type="rectangle_static">
@@ -8487,7 +9213,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of this element</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -8496,11 +9222,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of this element</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -8509,7 +9236,7 @@
 			</xs:element>
 			<xs:element name="turns_with_sign">
 				<xs:annotation>
-					<xs:documentation>Number of effective turns in the element for calculating magnetic fields of the coil/loop; includes the sign of the number of turns (positive means current is counter-clockwise when seen from above)</xs:documentation>
+					<xs:documentation>Number of effective turns in the element for calculating the magnetic field from the coil/loop. Should be positive, unless the coil has elements going in opposite directions. </xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>-</units>
@@ -8568,6 +9295,218 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="statistics_distribution_2d">
+		<xs:annotation>
+			<xs:documentation>Distribution function of a 2D physical quantity</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bins">
+				<xs:annotation>
+					<xs:documentation>Bins of quantitiy values, defined for each element (first dimension) corresponding to the first dimension of the original 2D quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>mixed</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="probability">
+				<xs:annotation>
+					<xs:documentation>Probability to have a value of the quantity between bins(n) and bins(n+1) (thus the size of its second dimension is the size of the second dimension of the bins array - 1). The first dimension correspond to the first dimension of the original 2D quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate1_same_as>../bins</coordinate1_same_as>
+						<coordinate2>1...N</coordinate2>
+						<units>-</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics_quantity_2d_type">
+		<xs:annotation>
+			<xs:documentation>Statistics over time for a given 2D quantity and a given statistics type</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Identifier of the statistics type</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>utilities/statistics_type_identifier.xml</doc_identifier>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value">
+				<xs:annotation>
+					<xs:documentation>Value of the statistics for that quantity, the array corresponding to the first dimension of the original 2D quantity</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>mixed</units>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_subset_index">
+				<xs:annotation>
+					<xs:documentation>Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the new grid subset the statistics value is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="grid_index">
+				<xs:annotation>
+					<xs:documentation>Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the grid used to represent the statistics value</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="uq_input_path">
+				<xs:annotation>
+					<xs:documentation>For Sobol index only, path to the related the uq_input quantity, e.g. ../../../uq_input_2d(3) </xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics_input_2d">
+		<xs:annotation>
+			<xs:documentation>Statistics input 2D quantity</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="path">
+				<xs:annotation>
+					<xs:documentation>Path of the quantity within the IDS, following the syntax given in the link below</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<url>utilities/IDS-path-syntax.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="distribution" type="statistics_distribution_2d">
+				<xs:annotation>
+					<xs:documentation>Probability distribution function of the quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics_quantity_2d">
+		<xs:annotation>
+			<xs:documentation>Statistics over time for a given 2D quantity</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="path">
+				<xs:annotation>
+					<xs:documentation>Path of the quantity within the IDS, following the syntax given in the link below</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<url>utilities/IDS-path-syntax.md</url>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="statistics_type" type="statistics_quantity_2d_type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of statistics types applied to the quantity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="distribution" type="statistics_distribution_2d">
+				<xs:annotation>
+					<xs:documentation>Probability distribution function of the quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statistics">
+		<xs:annotation>
+			<xs:documentation>Statistics over time</xs:documentation>
+			<xs:appinfo>
+				<aos3Parent>yes</aos3Parent>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="quantity_2d" type="statistics_quantity_2d" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of 2D quantities on which statistics are provided. 2D means 1D+time dimension, so either a 1D quantity within a dynamic array of structure, or a 2D dynamic quantity outside of an array of structure. Therefore the resulting statistical value is 1D for a given statistics time slice. </xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uq_input_2d" type="statistics_input_2d" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>If the statistics are based on an uncertainty quantification process, set of 2D input quantities that are varied</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time_width">
+				<xs:annotation>
+					<xs:documentation>Width of the time interval over which the statistics have been calculated. By convention, the time interval starts at time-time_width and ends at time.</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>s</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="time" type="flt_type">
+				<xs:annotation>
+					<xs:documentation>Time</xs:documentation>
+					<xs:appinfo>
+						<units>s</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="vessel_2d_element">
 		<xs:annotation>
 			<xs:documentation>2D vessel block element description</xs:documentation>
@@ -8584,9 +9523,13 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="outline" type="rz1d_static_closed_flag">
+			<xs:element name="outline" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Outline of the block element. Do NOT repeat the first point for closed contours</xs:documentation>
+					<xs:documentation>Outline of the block element. Repeat the first point in case of a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="resistivity">
@@ -8628,19 +9571,31 @@
 			<xs:documentation>2D vessel annular description</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="outline_inner" type="rz1d_static_closed_flag">
+			<xs:element name="outline_inner" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Inner vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
+					<xs:documentation>Inner vessel outline. Repeat the first point in case of a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="outline_outer" type="rz1d_static_closed_flag">
+			<xs:element name="outline_outer" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Outer vessel outline. Do NOT repeat the first point for closed contours</xs:documentation>
+					<xs:documentation>Outer vessel outline. Repeat the first point in case of a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="centreline" type="rz1d_static_closed_flag">
+			<xs:element name="centreline" type="rz1d_static">
 				<xs:annotation>
-					<xs:documentation>Centreline, i.e. middle of the vessel layer as a series of point. Do NOT repeat the first point for closed contours</xs:documentation>
+					<xs:documentation>Centreline, i.e. middle of the vessel layer as a series of point. Repeat the first point in case of a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point_conditional</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="thickness">
@@ -8677,7 +9632,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the unit</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -8686,11 +9641,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the unit</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -8943,6 +9899,18 @@
 						<xs:group ref="STR_0D"/>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="name">
+					<xs:annotation>
+						<xs:documentation>User-defined name for this IDS occurrence</xs:documentation>
+						<xs:appinfo>
+							<type>constant</type>
+							<introduced_after_version>3.39.0</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:group ref="STR_0D"/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="homogeneous_time">
 					<xs:annotation>
 						<xs:documentation>This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2</xs:documentation>
@@ -8953,6 +9921,15 @@
 					<xs:complexType>
 						<xs:group ref="INT_0D"/>
 					</xs:complexType>
+				</xs:element>
+				<xs:element name="occurrence_type" type="identifier">
+					<xs:annotation>
+						<xs:documentation>Type of data contained in this occurrence</xs:documentation>
+						<xs:appinfo>
+							<doc_identifier>utilities/occurrence_type_identifier.xml</doc_identifier>
+							<introduced_after_version>3.39.0</introduced_after_version>
+						</xs:appinfo>
+					</xs:annotation>
 				</xs:element>
 				<xs:element name="provider">
 					<xs:annotation>

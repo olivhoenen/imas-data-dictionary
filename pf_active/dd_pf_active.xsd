@@ -9,7 +9,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the PF supply</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -18,11 +18,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the supply</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -201,7 +202,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the circuit</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -210,11 +211,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>ID of the circuit</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -234,12 +236,11 @@
 			</xs:element>
 			<xs:element name="connections">
 				<xs:annotation>
-					<xs:documentation>Description of the supplies and coils connections (nodes) across the circuit. Nodes of the circuit are listed as the first dimension of the matrix. Supplies (listed first) and coils (listed second) SIDES are listed as the second dimension. Thus the second dimension has a size equal to 2*(N_supplies+N_coils). N_supplies (resp. N_coils) is the total number of supplies (resp. coils) listed in the supply (resp.coil) array of structure, i.e. including also supplies/coils that are not part of the actual circuit. The (i,j) matrix elements are 1 if the j-th supply or coil side is connected to the i-th node, or 0 otherwise. For coils, sides are listed so that a current flowing from side 1 to side 2 (inside the coil) is positive (i.e. counter-clockwise when seen from above).</xs:documentation>
+					<xs:documentation>Description of the supplies and coils connections (nodes) across the circuit. Nodes of the circuit are listed as the first dimension of the matrix. Supplies (listed first) and coils (listed second) are listed as the second dimension. Thus the second dimension has a size equal to (N_supplies+N_coils). N_supplies (resp. N_coils) is the total number of supplies (resp. coils) listed in the supply (resp.coil) array of structure, i.e. including also supplies/coils that are not part of the actual circuit. The (i,j) matrix elements are 1 if the j-th supply or coil side is connected to the i-th node by its positive side, -1 if connected by its negative side, or 0 if not connected.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<coordinate1>1...N</coordinate1>
 						<coordinate2>1...N</coordinate2>
-						<url>pf_active/PFConnections.html</url>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -274,7 +275,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the coil</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 					</xs:appinfo>
@@ -283,11 +284,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Alphanumeric identifier of coils used for convenience</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -387,7 +389,7 @@
 			</xs:element>
 			<xs:element name="element" type="pf_coils_elements" maxOccurs="328">
 				<xs:annotation>
-					<xs:documentation>Each PF coil is comprised of a number of cross-section elements described  individually</xs:documentation>
+					<xs:documentation>Each PF coil is comprised of a number of cross-section elements described  individually and connected serially</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
@@ -395,7 +397,7 @@
 			</xs:element>
 			<xs:element name="current" type="signal_flt_1d">
 				<xs:annotation>
-					<xs:documentation>Current fed in the coil (for 1 turn, to be multiplied by the number of turns to obtain the generated magnetic field), positive when flowing from side 1 to side 2 of the coil (inside the coil), this numbering being made consistently with the convention that the current is counter-clockwise when seen from above.</xs:documentation>
+					<xs:documentation>Current fed in the coil (for 1 turn, to be multiplied by the number of turns to obtain the generated magnetic field), positive when the current is counter-clockwise when seen from above.</xs:documentation>
 					<xs:appinfo>
 						<units>A</units>
 						<cocos_label_transformation>ip_like</cocos_label_transformation>
@@ -412,59 +414,87 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="force_radial" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Radial force applied on this coil (positive when outwards) </xs:documentation>
+					<xs:appinfo>
+						<units>N</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="force_vertical" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Vertical force applied on this coil (positive when upwards) </xs:documentation>
+					<xs:appinfo>
+						<units>N</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="force_radial_crushing" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Radial crushing force applied on this coil (positive when compressive) </xs:documentation>
+					<xs:appinfo>
+						<units>N</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="force_vertical_crushing" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Vertical crushing force applied on this coil (positive when compressive) </xs:documentation>
+					<xs:appinfo>
+						<units>N</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="pf_forces">
+	<xs:complexType name="pf_force_limits">
 		<xs:annotation>
-			<xs:documentation>Forces on the axisymmetric PF+CS coil system</xs:documentation>
+			<xs:documentation>Description of force limits</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name">
+			<xs:element name="combination_matrix">
 				<xs:annotation>
-					<xs:documentation>Name of the force combination</xs:documentation>
+					<xs:documentation>Force limits are expressed as a linear combination of the forces on each individual coil. The weights of the linear combination are given by this matrix, while the limits are given by the sibling nodes limit_min and limit_max. Each row of this matrix corresponds to a force limit. The columns represent, for each coil, the 4 types of forces on the coil namely [coil1_radial, coil1_vertical, coil1_radial_crush, coil1_vertical_crush, coil2_radial, coil2_vertical, coil2_radial_crush, coil2_vertical_crush, ...]. There are therefore 4*coils_n columns.</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<coordinate1>../limit_max</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="STR_0D"/>
+					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="combination">
+			<xs:element name="limit_max">
 				<xs:annotation>
-					<xs:documentation>Coils involved in the force combinations. Normally the force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination</xs:documentation>
+					<xs:documentation>Maximum force limit, for each limit (line of the combination matrix). EMPTY_FLT value means unbounded</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
+						<units>N</units>
 						<coordinate1>1...N</coordinate1>
-						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="limit_max">
-				<xs:annotation>
-					<xs:documentation>Maximum force combination limit</xs:documentation>
-					<xs:appinfo>
-						<type>static</type>
-						<units>N</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="limit_min">
 				<xs:annotation>
-					<xs:documentation>Minimum force combination limit</xs:documentation>
+					<xs:documentation>Minimum force limit, for each limit (line of the combination matrix). EMPTY_FLT value means unbounded</xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>N</units>
+						<coordinate1>../limit_max</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
+					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="force" type="signal_flt_1d">
@@ -483,7 +513,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.0</lifecycle_version>
-				<lifecycle_last_change>3.37.0</lifecycle_last_change>
+				<lifecycle_last_change>4.0.0</lifecycle_last_change>
 			</xs:appinfo>
 			<xs:appinfo/>
 		</xs:annotation>
@@ -498,19 +528,11 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="vertical_force" type="pf_forces" maxOccurs="20">
+				<xs:element name="force_limits" type="pf_force_limits">
 					<xs:annotation>
-						<xs:documentation>Vertical forces on the axisymmetric PF coil system</xs:documentation>
+						<xs:documentation>Description of force limits on the axisymmetric PF coil system</xs:documentation>
 						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="radial_force" type="pf_forces" maxOccurs="20">
-					<xs:annotation>
-						<xs:documentation>Radial forces on the axisymmetric PF coil system</xs:documentation>
-						<xs:appinfo>
-							<coordinate1>1...N</coordinate1>
+							<introduced_after_version>3.39.0</introduced_after_version>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>

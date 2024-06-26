@@ -104,7 +104,7 @@
 		<xs:sequence>
 			<xs:element name="name">
 				<xs:annotation>
-					<xs:documentation>Name of the gap</xs:documentation>
+					<xs:documentation>Short string identifier (unique for a given device)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 					</xs:appinfo>
@@ -113,11 +113,12 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifier">
+			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Identifier of the gap</xs:documentation>
+					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<introduced_after_version>3</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -244,6 +245,15 @@
 				<xs:complexType>
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="result" type="identifier_dynamic_aos3">
+				<xs:annotation>
+					<xs:documentation>Convergence result</xs:documentation>
+					<xs:appinfo>
+						<doc_identifier>equilibrium/equilibrium_convergence_status.xml</doc_identifier>
+						<introduced_after_version>3.40.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -621,6 +631,32 @@
 					<xs:group ref="FLT_0D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="psi_norm">
+				<xs:annotation>
+					<xs:documentation>Minimum q position in normalised poloidal flux</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Minimum q position in poloidal flux</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Wb</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="equlibrium_global_quantities">
@@ -760,6 +796,19 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rho_tor_boundary">
+				<xs:annotation>
+					<xs:documentation>Toroidal flux coordinate at the selected plasma boundary</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -942,10 +991,10 @@
 			</xs:element>
 			<xs:element name="chi_squared_r">
 				<xs:annotation>
-					<xs:documentation>Squared error on the major radius normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error on the major radius normalized by the variance considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>m</units>
+						<units>m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -954,10 +1003,10 @@
 			</xs:element>
 			<xs:element name="chi_squared_z">
 				<xs:annotation>
-					<xs:documentation>Squared error on the altitude normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error on the altitude normalized by the variance considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>m</units>
+						<units>m^-2</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1039,7 +1088,7 @@
 					<xs:documentation>Value calculated from the reconstructed equilibrium</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>as_parent</units>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1048,7 +1097,7 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>as_parent</units>
@@ -1143,10 +1192,10 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>as_parent</units>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1238,10 +1287,10 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>as_parent</units>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1333,10 +1382,10 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>as_parent</units>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1422,10 +1471,10 @@
 			</xs:element>
 			<xs:element name="chi_squared">
 				<xs:annotation>
-					<xs:documentation>Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
+					<xs:documentation>Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<units>as_parent</units>
+						<units>-</units>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1620,11 +1669,21 @@
 			</xs:element>
 			<xs:element name="j_tor" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Set of flux-surface averaged toroidal current density estimates at various positions</xs:documentation>
+					<xs:documentation>Set of flux-surface averaged toroidal current density approximations at various positions  (= average(j_tor/R) / average(1/R))</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>A.m^-2</units>
 						<introduced_after_version>3.38.1</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="j_parallel" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Set of flux-surface averaged parallel current density approximations at various positions (= average(j.B) / B0, where B0 = /vacuum_toroidal_field/b0)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+						<units>A.m^-2</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1644,6 +1703,44 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="chi_squared_reduced">
+				<xs:annotation>
+					<xs:documentation>Sum of the chi_squared of all constraints used for the equilibrium reconstruction, divided by the number of degrees of freedom of the identification model</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>-</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
+						<uri>https://arxiv.org/abs/1009.2755</uri>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="freedom_degrees_n">
+				<xs:annotation>
+					<xs:documentation>Number of degrees of freedom of the identification model</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="constraints_n">
+				<xs:annotation>
+					<xs:documentation>Number of constraints used (i.e. having a non-zero weight)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<introduced_after_version>3.39.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_0D"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="equilibrium_profiles_1d">
@@ -1658,6 +1755,20 @@
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
 						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi_norm">
+				<xs:annotation>
+					<xs:documentation>Normalised poloidal flux, namely (psi(rho)-psi(magnetic_axis)) / (psi(LCFS)-psi(magnetic_axis))</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>../psi</coordinate1>
+						<units>-</units>
+						<introduced_after_version>3.39.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1753,11 +1864,11 @@
 			</xs:element>
 			<xs:element name="j_parallel">
 				<xs:annotation>
-					<xs:documentation>Flux surface averaged parallel current density = average(j.B) / B0, where B0 = Equilibrium/Global/Toroidal_Field/B0</xs:documentation>
+					<xs:documentation>Flux surface averaged approximation to parallel current density = average(j.B) / B0, where B0 = /vacuum_toroidal_field/b0</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
-						<units>A/m^2</units>
+						<units>A.m^-2</units>
 						<cocos_label_transformation>ip_like</cocos_label_transformation>
 						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
 						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_1d.j_parallel</cocos_leaf_name_aos_indices>
@@ -2666,7 +2777,7 @@
 			<xs:appinfo>
 				<lifecycle_status>active</lifecycle_status>
 				<lifecycle_version>3.1.0</lifecycle_version>
-				<lifecycle_last_change>3.39.0</lifecycle_last_change>
+				<lifecycle_last_change>3.41.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>
