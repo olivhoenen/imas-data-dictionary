@@ -17,23 +17,10 @@
 					<xs:documentation>0-minimum, 1-saddle, 2-maximum</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:group ref="INT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="point_index">
-				<xs:annotation>
-					<xs:documentation>For saddle type geometries (critical type = 1) point_index references items from the x_point array of structures otherwise items are referenced from the o_point array of structures</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../critical_type</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_1D"/>
+					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="r">
