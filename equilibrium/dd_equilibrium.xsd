@@ -4,32 +4,9 @@
 <?modxslt-stylesheet type="text/xsl" media="screen" alternate="no" title="Show raw source of the XML file" charset="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<xs:complexType name="equilibrium_contour_tree_edges">
+	<xs:complexType name="equilibrium_contour_tree_node">
 		<xs:annotation>
-			<xs:documentation>Edges description</xs:documentation>
-			<xs:appinfo>
-				<aos3Parent>yes</aos3Parent>
-			</xs:appinfo>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="node_index">
-				<xs:annotation>
-					<xs:documentation>For each edge (1st dimension), the two connected nodes are listed (the node index refers to the ../../nodes/critical_type and point_index vectors)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>1...N</coordinate1>
-						<coordinate2>1...2</coordinate2>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_2D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="equilibrium_contour_tree_nodes">
-		<xs:annotation>
-			<xs:documentation>Nodes description</xs:documentation>
+			<xs:documentation>Node description</xs:documentation>
 			<xs:appinfo>
 				<aos3Parent>yes</aos3Parent>
 			</xs:appinfo>
@@ -59,6 +36,47 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="r">
+				<xs:annotation>
+					<xs:documentation>Major radius</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="z">
+				<xs:annotation>
+					<xs:documentation>Height</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>m</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="psi">
+				<xs:annotation>
+					<xs:documentation>Value of the poloidal flux at the node</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>Wb</units>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="levelset" type="rz1d_dynamic_aos">
+				<xs:annotation>
+					<xs:documentation>Single poloidal flux contour including critical point (x-point only)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="equilibrium_contour_tree">
@@ -69,15 +87,26 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="nodes" type="equilibrium_contour_tree_nodes">
+			<xs:element name="node" type="equilibrium_contour_tree_node" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Nodes of a contour tree are either local extremum (o-points) or saddle points (x-points) of the poloidal flux map. A contour tree node is defined by its critical type and point index. A critical type of 1 references a saddle topology with the point index identifying node in the x-point array of structures. A critical type of 0 or 2 references a local extremum with the point index identifying node in the o-point array of structures</xs:documentation>
+					<xs:documentation>Set of nodes. A contour tree node is defined by its critical type and position within the poloidal plane. A critical type of 1 references an x-point whilst a critical type of 0 or 2 references an o-point. Both X-points and O-points are rarely coincident with nodes defining the poloidal upon which the poloidal flux map is defined. The order in which the critical points are stored in the nodes array of structure is only important for the primary plasma O-point and X-points. If present, the primary plasma O-point should be placed as the first element of the nodes array of structure. If present, the primary plasma X-point should be the second element in the nodes structure</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>1...N</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="edges" type="equilibrium_contour_tree_edges">
+			<xs:element name="edges">
 				<xs:annotation>
-					<xs:documentation>Edges connect nodes to one another. A single node may connect to multiple edges such as the case where a single maximum (a hill) may topologically link to multiple minima (the floors of different valleys)</xs:documentation>
+					<xs:documentation>Edges connect nodes to one another. A single node may connect to multiple edges such as the case where a single maximum (a hill) may topologically link to multiple minima (the floors of different valleys). For each edge (1st dimension), the index of the two connected nodes are listed (index referring to the ../node array)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...2</coordinate2>
+					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_2D"/>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -115,7 +144,7 @@
 			</xs:element>
 			<xs:element name="psi">
 				<xs:annotation>
-					<xs:documentation>Value of the poloidal flux at the x_point</xs:documentation>
+					<xs:documentation>Value of the poloidal flux at the o_point</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>Wb</units>
@@ -186,7 +215,7 @@
 				<xs:annotation>
 					<xs:documentation>Set of poloidal flux open contours associated to the X-point</xs:documentation>
 					<xs:appinfo>
-<coordinate1>1...N</coordinate1>					
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2710,7 +2739,7 @@
 			</xs:element>
 			<xs:element name="contour_tree" type="equilibrium_contour_tree">
 				<xs:annotation>
-					<xs:documentation>Description of the topological connectivity of the poloidal flux map critical points as an undirected graph</xs:documentation>
+					<xs:documentation>Description of the topological connectivity of the poloidal flux map critical points as an undirected graph. Critical points are ether local extremum (o-points) or saddle points (x-points) of the poloidal flux map. X-points have zero gradients in orthogonal directions but are not local extremum of the poloidal flux map whilst O-points are.</xs:documentation>
 					<xs:appinfo>
 						<introduced_after_version>3</introduced_after_version>
 						<lifecycle_status>alpha</lifecycle_status>
