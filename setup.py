@@ -10,26 +10,39 @@ sys.path.append(str(Path(__file__).parent.resolve()))
 
 import versioneer
 
-#pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1+202.gab0f789
+
+# pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1+202.gab0f789
 def convertGitToPep440(versionStr):
-    parts = versionStr.split('-')
+    parts = versionStr.split("-")
     if len(parts) == 3:
         baseVersion, iterations, commitHash = parts
         return f"{baseVersion}+{iterations}.{commitHash}"
     else:
         return versionStr
-    
-from generate import (generate_dd_data_dictionary,
-                      generate_dd_data_dictionary_validation,
-                      generate_html_documentation,
-                      generate_ids_cocos_transformations_symbolic_table,
-                      generate_idsnames)
-from install import (copy_utilities, create_idsdef_symlink,
-                     install_cocos_csv_files, install_css_files,
-                     install_dd_files, install_html_files,
-                     install_identifiers_files, install_ids_files,
-                     install_img_files, install_js_files,
-                     install_utilities_files)
+
+
+from generate import (
+    generate_dd_data_dictionary,
+    generate_dd_data_dictionary_validation,
+    generate_html_documentation,
+    generate_sphinx_documentation,
+    generate_ids_cocos_transformations_symbolic_table,
+    generate_idsnames,
+)
+from install import (
+    copy_utilities,
+    create_idsdef_symlink,
+    install_cocos_csv_files,
+    install_css_files,
+    install_dd_files,
+    install_html_files,
+    install_sphinx_files,
+    install_identifiers_files,
+    install_ids_files,
+    install_img_files,
+    install_js_files,
+    install_utilities_files,
+)
 
 current_directory = pathlib.Path(__file__).parent.resolve()
 long_description = (current_directory / "README.md").read_text(encoding="utf-8")
@@ -37,12 +50,14 @@ long_description = (current_directory / "README.md").read_text(encoding="utf-8")
 # Generate
 generate_dd_data_dictionary()
 generate_html_documentation()
+generate_sphinx_documentation()
 generate_ids_cocos_transformations_symbolic_table()
 generate_idsnames()
 generate_dd_data_dictionary_validation()
 
 # install
 install_html_files()
+install_sphinx_files()
 install_css_files()
 install_js_files()
 install_img_files()
@@ -54,11 +69,11 @@ create_idsdef_symlink()
 copy_utilities()
 install_identifiers_files()
 
-#stores include and share folder in root python path while installing
+# stores include and share folder in root python path while installing
 paths = []
 version = convertGitToPep440(versioneer.get_version())
 if os.path.exists("install"):
-    for (path, directories, filenames) in os.walk("install"):
+    for path, directories, filenames in os.walk("install"):
         paths.append(
             (path.replace("install", "dd_" + version), glob.glob(path + "/*.*"))
         )
@@ -92,6 +107,10 @@ setup(
     packages=["data_dictionary"],
     # Global data available to all packages in the python environment
     data_files=paths,
+    scripts=[
+        "scripts/dd_doc",
+        "scripts/dd_doclegacy"
+    ],
     # Run command line script and should be installed by Python installer
     entry_points={  # Using inetrnal Python automated script option
         "console_scripts": ["idsinfo=data_dictionary.idsinfo:main"]

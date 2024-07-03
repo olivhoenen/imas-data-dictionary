@@ -27,6 +27,7 @@ sysconfdir = os.path.join(prefix, "etc")
 includedir = os.path.join(prefix, "include")
 docdir = os.path.join(datarootdir, "doc")
 htmldir = docdir
+sphinxdir = os.path.join(docdir, "imas/sphinx")
 libdir = os.path.join(exec_prefix, "lib")
 srcdir = DD_BUILD
 
@@ -66,6 +67,20 @@ def install_html_files():
     )
     execute_command(html_files_command)
 
+def install_sphinx_files():
+    sourcedir = "docs/_build/html"
+    Path(sphinxdir).mkdir(parents=True, exist_ok=True)
+
+    for root, dirs, files in os.walk(sourcedir):
+        for file in files:
+            sourcefile = os.path.join(root, file)
+            relative_path = os.path.relpath(sourcefile, sourcedir)
+            destfile = os.path.join(sphinxdir, relative_path)
+            
+            destdir = os.path.dirname(destfile)
+            Path(destdir).mkdir(parents=True, exist_ok=True)
+
+            subprocess.run(['install', '-m', '644', sourcefile, destfile])
 
 def install_css_files():
     Path(htmldir + "/imas/css").mkdir(parents=True, exist_ok=True)

@@ -110,6 +110,23 @@ def generate_html_documentation(extra_opts=""):
         "html_documentation/utilities/coordinate_identifier.xml",
     )
 
+def generate_sphinx_documentation():
+    sphinx_documentation_generation_command = (
+        r"python -m venv docenv && source docenv/bin/activate && pip install -r docs/requirements.txt && make -C docs html && deactivate && rm -rf docenv"
+    )
+    proc = subprocess.Popen(
+        sphinx_documentation_generation_command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        shell=True,
+        universal_newlines=True,
+    )
+    proc.wait()
+    (stdout, stderr) = proc.communicate()
+
+    if proc.returncode != 0:
+        assert False, stderr
+
 
 def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
     ids_cocos_transformations_symbolic_table_generation_command = (
@@ -194,6 +211,7 @@ if __name__ == "__main__":
     
     generate_dd_data_dictionary(extra_opts=threads)
     generate_html_documentation(extra_opts=threads)
+    generate_sphinx_documentation()
     generate_ids_cocos_transformations_symbolic_table(extra_opts=threads)
     generate_idsnames()
     generate_dd_data_dictionary_validation(extra_opts=threads)
