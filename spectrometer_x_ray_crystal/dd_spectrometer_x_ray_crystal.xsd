@@ -370,7 +370,11 @@
 			</xs:element>
 			<xs:element name="outline" type="x1x21d_static">
 				<xs:annotation>
-					<xs:documentation>Irregular outline of the object in the (X1, X2) coordinate system, used only if geometry_type/index=1. Do NOT repeat the first point.</xs:documentation>
+					<xs:documentation>Irregular outline of the object in the (X1, X2) coordinate system, used only if geometry_type/index=1. Repeat the first point since this is a closed contour</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>repeat_children_first_point</change_nbc_description>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="x1_curvature">
