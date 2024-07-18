@@ -3918,6 +3918,16 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="velocity_parallel_over_b_field" type="generic_grid_scalar" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Parallel (to magnetic field) velocity of the centre of mass of all the species (see equation 2 in the paper linked below), divided by the module of the local magnetic field, given on various grid subsets</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1.T^-1</units>
+						<coordinate1>1...N</coordinate1>
+						<url>https://iopscience.iop.org/article/10.1088/1361-6587/ac414d</url>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="vorticity" type="generic_grid_vector_components" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Curl of the velocity_mass_centre vector, given on various grid subsets</xs:documentation>
@@ -4021,7 +4031,7 @@
 				</xs:element>
 				<xs:element name="profiles_1d" type="plasma_profiles_profiles_1d" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>Radial profiles for various time slices, taken on outboard equatorial mid-plane when in the SOL</xs:documentation>
+						<xs:documentation>Radial profiles for various time slices. Flux averaged profiles in the closed field line region (grid/rho_pol_norm &lt;= 1) and taking local values on outboard equatorial mid-plane when in the SOL (grid/rho_pol_norm &gt; 1)</xs:documentation>
 						<xs:appinfo>
 							<coordinate1>time</coordinate1>
 							<type>dynamic</type>
