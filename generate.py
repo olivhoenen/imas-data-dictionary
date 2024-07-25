@@ -1,26 +1,16 @@
+from setuptools_scm import get_version
 import os
+import re
 import shutil
 import subprocess
-import re
-
-import versioneer
 
 PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
 
-#pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1+202.gab0f789
-def convertGitToPep440(versionStr):
-    parts = versionStr.split('-')
-    if len(parts) == 3:
-        baseVersion, iterations, commitHash = parts
-        return f"{baseVersion}+{iterations}.{commitHash}"
-    else:
-        return versionStr
-
 def join_path(path1="", path2=""):
     return os.path.normpath(os.path.join(path1, path2))
 
-DD_GIT_DESCRIBE = convertGitToPep440(versioneer.get_version())
+DD_GIT_DESCRIBE = get_version()
 
 def saxon_version(verb=False)->int:
     cmd = ["java", "net.sf.saxon.Transform", "-t"]

@@ -7,12 +7,12 @@ from os import listdir
 from os.path import isfile, join
 from pathlib import Path
 
-import versioneer
+from setuptools_scm import get_version
 
 DD_BUILD = pathlib.Path(__file__).parent.resolve()
 IMAS_INSTALL_DIR = os.path.join(DD_BUILD, "install")
 
-DD_GIT_DESCRIBE = versioneer.get_version()
+DD_GIT_DESCRIBE = get_version()
 UAL_GIT_DESCRIBE = DD_GIT_DESCRIBE
 
 
