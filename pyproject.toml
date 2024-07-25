@@ -1,6 +1,6 @@
 
 [build-system]
-requires = ["setuptools>=61", "wheel", "setuptools-scm>=8.0"]
+requires = ["setuptools>=64", "setuptools-scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -25,7 +25,7 @@ dynamic = ["version"]
 homepage = "https://imas.iter.org/"
 
 [tool.setuptools_scm]
-version_file = "data_dictionary/_version.py"
+write_to = "data_dictionary/_version.py"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -33,5 +33,12 @@ include = ["data_dictionary*"]
 
 [project.scripts]
 idsinfo = "data_dictionary.idsinfo:main"
+
+# Including script files
+[tool.setuptools]
+script-files = [
+    "scripts/dd_doc",
+    "scripts/dd_doclegacy"
+]
 
 
