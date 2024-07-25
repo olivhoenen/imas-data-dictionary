@@ -31,14 +31,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="position" type="rzphi1d_static">
-				<xs:annotation>
-					<xs:documentation>Position of the intersection between laser beam and each line of sight</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../../channel</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="thomson_scattering_polychromator">
@@ -197,6 +189,14 @@
 			<xs:element name="delta_position" type="rzphi1d_dynamic_aos1_common_time">
 				<xs:annotation>
 					<xs:documentation>Incremental variation of the position of the measurements, due to e.g. different lasers not intersecting the line of sight at the same position. The actual position is then the static position + delta_position</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="position_per_laser" type="rzphi1d_static">
+				<xs:annotation>
+					<xs:documentation>Position of the intersection between each laser beam and this line of sight</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../laser</coordinate1>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="distance_separatrix_midplane" type="signal_flt_1d">
