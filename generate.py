@@ -102,7 +102,7 @@ def generate_html_documentation(extra_opts=""):
 
 def generate_sphinx_documentation():
     sphinx_documentation_generation_command = (
-        r"python -m venv docenv && source docenv/bin/activate && pip install -r docs/requirements.txt && make -C docs html && deactivate && rm -rf docenv"
+        r"sphinx-build -b html . _build/html"
     )
     proc = subprocess.Popen(
         sphinx_documentation_generation_command,
