@@ -102,7 +102,7 @@ def generate_html_documentation(extra_opts=""):
 
 def generate_sphinx_documentation():
     sphinx_documentation_generation_command = (
-        r"sphinx-build -b html . _build/html"
+        r"make -C docs html"
     )
     proc = subprocess.Popen(
         sphinx_documentation_generation_command,
