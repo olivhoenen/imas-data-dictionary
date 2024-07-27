@@ -10,40 +10,6 @@
   -* and for providing resources to the project. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
-	<!--Distributions included because of the use of some generic types - temporary issue due to IFORT compiler refusing to compile utilities_copy_struct.f90 -->
-	<xs:complexType name="waves_CPX_1D">
-		<xs:annotation>
-			<xs:documentation>Structure for 1D complex number, real and imaginary parts</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="real">
-				<xs:annotation>
-					<xs:documentation>Real part</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="imaginary">
-				<xs:annotation>
-					<xs:documentation>Imaginary part</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>as_parent</units>
-						<coordinate1>../../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="waves_CPX_amp_phase_1D">
 		<xs:annotation>
 			<xs:documentation>Structure for 1D complex number, amplitude and phase</xs:documentation>
@@ -116,146 +82,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="waves_beam_spot">
-		<xs:annotation>
-			<xs:documentation>Spot ellipse characteristics</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="size">
-				<xs:annotation>
-					<xs:documentation>Size of the spot ellipse: distance between the central ray and the peripheral rays in the horizontal (first index of the first coordinate) and vertical direction (second index of the first coordinate)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../length</coordinate2>
-						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="angle">
-				<xs:annotation>
-					<xs:documentation>Rotation angle for the spot ellipse</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../../length</coordinate1>
-						<units>rad</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="waves_beam_phase">
-		<xs:annotation>
-			<xs:documentation>Phase ellipse characteristics</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="curvature">
-				<xs:annotation>
-					<xs:documentation>Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams, in the horizontal direction (first index of the first coordinate) and in the vertical direction (second index of the first coordinate)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>1...2</coordinate1>
-						<coordinate2>../../length</coordinate2>
-						<units>m^-1</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="angle">
-				<xs:annotation>
-					<xs:documentation>Rotation angle for the phase ellipse</xs:documentation>
-					<xs:appinfo>
-						<units>rad</units>
-						<type>dynamic</type>
-						<coordinate1>../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="waves_rzphipsitheta1d_dynamic_aos3">
-		<xs:annotation>
-			<xs:documentation>Structure for R, Z, Phi, Psi, Theta positions (1D, dynamic within a type 3 array of structure)</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="r">
-				<xs:annotation>
-					<xs:documentation>Major radius</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="z">
-				<xs:annotation>
-					<xs:documentation>Height</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>m</units>
-						<coordinate1>../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="phi">
-				<xs:annotation>
-					<xs:documentation>Toroidal angle</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>rad</units>
-						<coordinate1>../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="psi">
-				<xs:annotation>
-					<xs:documentation>Poloidal flux</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>Wb</units>
-						<coordinate1>../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="theta">
-				<xs:annotation>
-					<xs:documentation>Poloidal angle</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<units>rad</units>
-						<coordinate1>../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="waves_coherent_wave_beam_tracing_ion_state">
 		<xs:annotation>
 			<xs:documentation>State related quantities for beam tracing</xs:documentation>
@@ -290,6 +116,22 @@
 					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -375,6 +217,22 @@
 					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -412,59 +270,6 @@
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="waves_coherent_wave_beam_tracing_electrons">
-		<xs:annotation>
-			<xs:documentation>Electrons related quantities for beam tracing</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="power">
-				<xs:annotation>
-					<xs:documentation>Power absorbed along the beam by the species</xs:documentation>
-					<xs:appinfo>
-						<units>W</units>
-						<type>dynamic</type>
-						<coordinate1>../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="waves_coherent_wave_beam_tracing_power_flow">
-		<xs:annotation>
-			<xs:documentation>Power flow for beam tracing</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="perpendicular">
-				<xs:annotation>
-					<xs:documentation>Normalized power flow in the direction perpendicular to the magnetic field</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
-						<type>dynamic</type>
-						<coordinate1>../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="parallel">
-				<xs:annotation>
-					<xs:documentation>Normalized power flow in the direction parallel to the magnetic field</xs:documentation>
-					<xs:appinfo>
-						<units>-</units>
-						<type>dynamic</type>
-						<coordinate1>../../length</coordinate1>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -671,22 +476,22 @@
 					<xs:documentation>Position of the ray/beam along its path</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="wave_vector" type="waves_coherent_wave_beam_tracing_beam_k">
+			<xs:element name="wave_vector" type="waves_beam_tracing_beam_k">
 				<xs:annotation>
 					<xs:documentation>Wave vector of the ray/beam along its path</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="e_field" type="waves_coherent_wave_beam_tracing_beam_e_field">
+			<xs:element name="e_field" type="waves_beam_tracing_beam_e_field">
 				<xs:annotation>
 					<xs:documentation>Electric field polarization of the ray/beam along its path</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="power_flow_norm" type="waves_coherent_wave_beam_tracing_power_flow">
+			<xs:element name="power_flow_norm" type="waves_beam_tracing_power_flow">
 				<xs:annotation>
 					<xs:documentation>Normalized power flow</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="electrons" type="waves_coherent_wave_beam_tracing_electrons">
+			<xs:element name="electrons" type="waves_beam_tracing_electrons">
 				<xs:annotation>
 					<xs:documentation>Quantities related to the electrons</xs:documentation>
 				</xs:annotation>
@@ -775,6 +580,22 @@
 					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -834,6 +655,24 @@
 						<type>dynamic</type>
 						<units>W</units>
 						<coordinate1>../../../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Wave power absorbed by the thermal particle population per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -859,6 +698,24 @@
 						<type>dynamic</type>
 						<units>W</units>
 						<coordinate1>../../../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Wave power absorbed by the fast particle population per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -897,6 +754,22 @@
 					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -922,6 +795,24 @@
 						<type>dynamic</type>
 						<units>W</units>
 						<coordinate1>../../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Wave power absorbed by the thermal particle population per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -947,6 +838,24 @@
 						<type>dynamic</type>
 						<units>W</units>
 						<coordinate1>../../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Wave power absorbed by the fast particle population per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1009,6 +918,24 @@
 						<type>dynamic</type>
 						<units>W</units>
 						<coordinate1>../../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Wave power absorbed by the thermal particle population per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1034,6 +961,24 @@
 						<type>dynamic</type>
 						<units>W</units>
 						<coordinate1>../../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Wave power absorbed by the fast particle population per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<units>W</units>
+						<coordinate1>../../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1076,6 +1021,23 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal mode numbers, the wave vector toroidal component being defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1101,6 +1063,24 @@
 						<units>W</units>
 						<type>dynamic</type>
 						<coordinate1>../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1113,6 +1093,23 @@
 					<xs:appinfo>
 						<units>A</units>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_phi">
+				<xs:annotation>
+					<xs:documentation>Wave driven toroidal current from a stand alone calculation (not consistent with other sources)</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>current_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1126,6 +1123,24 @@
 						<units>A</units>
 						<type>dynamic</type>
 						<coordinate1>../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_phi_n_phi">
+				<xs:annotation>
+					<xs:documentation>Wave driven toroidal current from a stand alone calculation (not consistent with other sources) per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+						<type>dynamic</type>
+						<coordinate1>../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>current_tor_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1190,6 +1205,22 @@
 					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1251,6 +1282,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1278,6 +1328,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1305,6 +1374,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_inside_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1332,6 +1420,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_inside_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1370,6 +1477,22 @@
 					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1397,6 +1520,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1424,6 +1566,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1451,6 +1612,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_inside_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1478,6 +1658,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_inside_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1531,6 +1730,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1558,6 +1776,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1585,6 +1822,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_thermal_inside_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1612,6 +1868,25 @@
 						<type>dynamic</type>
 						<coordinate1>../../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_inside_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1620,7 +1895,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="waves_profiles_1d_e_field_n_tor">
+	<xs:complexType name="waves_profiles_1d_e_field_n_phi">
 		<xs:annotation>
 			<xs:documentation>Components of the surface averaged electric field</xs:documentation>
 		</xs:annotation>
@@ -1667,6 +1942,23 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal mode numbers, the wave vector toroidal component being defined as k_phi = n_phi grad phi where phi is the toroidal angle so that a positive n_phi means a wave propagating in the positive phi direction</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1694,6 +1986,25 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_n_phi">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged absorbed wave power density per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1721,6 +2032,25 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_inside_n_phi">
+				<xs:annotation>
+					<xs:documentation>Total absorbed wave power (electrons + ion + fast populations) inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_inside_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1734,6 +2064,24 @@
 						<units>A</units>
 						<type>dynamic</type>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_phi_inside">
+				<xs:annotation>
+					<xs:documentation>Wave driven toroidal current, inside a flux surface</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>current_tor_inside</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1748,6 +2096,25 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_phi_inside_n_phi">
+				<xs:annotation>
+					<xs:documentation>Wave driven toroidal current, inside a flux surface, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>A</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>current_tor_inside_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1775,17 +2142,49 @@
 						<type>dynamic</type>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<coordinate2>../n_tor</coordinate2>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="e_field_n_tor" type="waves_profiles_1d_e_field_n_tor" maxOccurs="unbounded">
+			<xs:element name="current_parallel_density_n_phi">
+				<xs:annotation>
+					<xs:documentation>Flux surface averaged wave driven parallel current density, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>A.m^-2</units>
+						<type>dynamic</type>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<coordinate2>../n_phi</coordinate2>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>current_parallel_density_n_tor</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_2D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="e_field_n_tor" type="waves_profiles_1d_e_field_n_phi" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Components of the electric field per toroidal mode number, averaged over the flux surface, where the averaged is weighted with the power deposition density, such that e_field = ave(e_field.power_density) / ave(power_density)</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="e_field_n_phi" type="waves_profiles_1d_e_field_n_phi" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Components of the electric field per toroidal mode number, averaged over the flux surface, where the averaged is weighted with the power deposition density, such that e_field = ave(e_field.power_density) / ave(power_density)</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>aos_renamed</change_nbc_description>
+						<change_nbc_previous_name>e_field_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1796,7 +2195,7 @@
 						<units>V.m^-1</units>
 						<type>dynamic</type>
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<coordinate2>../n_tor</coordinate2>
+						<coordinate2>../n_phi</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2165,6 +2564,22 @@
 					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2232,6 +2647,28 @@
 						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
 						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
 						<coordinate3>../../../n_tor</coordinate3>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
+						<coordinate3>../../../n_phi</coordinate3>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2265,6 +2702,28 @@
 						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
 						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
 						<coordinate3>../../../n_tor</coordinate3>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../../grid/r</coordinate2_same_as>
+						<coordinate3>../../../n_phi</coordinate3>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2303,6 +2762,22 @@
 					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2336,6 +2811,28 @@
 						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
 						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
 						<coordinate3>../../n_tor</coordinate3>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+						<coordinate3>../../n_phi</coordinate3>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2369,6 +2866,28 @@
 						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
 						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
 						<coordinate3>../../n_tor</coordinate3>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+						<coordinate3>../../n_phi</coordinate3>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2428,6 +2947,28 @@
 						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
 						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
 						<coordinate3>../../n_tor</coordinate3>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_thermal_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the thermal species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+						<coordinate3>../../n_phi</coordinate3>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_thermal_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2461,6 +3002,28 @@
 						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
 						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
 						<coordinate3>../../n_tor</coordinate3>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="power_density_fast_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density on the fast species, per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../../grid/r</coordinate2_same_as>
+						<coordinate3>../../n_phi</coordinate3>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_fast_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2469,7 +3032,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="waves_profiles_2d_e_field_n_tor">
+	<xs:complexType name="waves_profiles_2d_e_field_n_phi">
 		<xs:annotation>
 			<xs:documentation>Components of the surface averaged electric field</xs:documentation>
 		</xs:annotation>
@@ -2516,6 +3079,23 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>1...N</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="INT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="n_phi">
+				<xs:annotation>
+					<xs:documentation>Toroidal mode numbers, the wave vector toroidal component being defined as k_phi = n_phi grad phi where phi is the toroidal angle so that a positive n_phi means a wave propagating in the positive phi direction</xs:documentation>
+					<xs:appinfo>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2549,17 +3129,52 @@
 						<coordinate1_same_as>../grid/r</coordinate1_same_as>
 						<coordinate2_same_as>../grid/r</coordinate2_same_as>
 						<coordinate3>../n_tor</coordinate3>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:group ref="FLT_3D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="e_field_n_tor" type="waves_profiles_2d_e_field_n_tor" maxOccurs="unbounded">
+			<xs:element name="e_field_n_tor" type="waves_profiles_2d_e_field_n_phi" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Components of the electric field per toroidal mode number</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>../n_tor</coordinate1>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="power_density_n_phi">
+				<xs:annotation>
+					<xs:documentation>Absorbed wave power density per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<units>W.m^-3</units>
+						<type>dynamic</type>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate1_same_as>../grid/r</coordinate1_same_as>
+						<coordinate2_same_as>../grid/r</coordinate2_same_as>
+						<coordinate3>../n_phi</coordinate3>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>power_density_n_tor</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_3D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="e_field_n_phi" type="waves_profiles_2d_e_field_n_phi" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Components of the electric field per toroidal mode number</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../n_phi</coordinate1>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>e_field_n_tor</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -2657,7 +3272,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.5.0</lifecycle_version>
-				<lifecycle_last_change>3.39.0</lifecycle_last_change>
+				<lifecycle_last_change>3.41.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>

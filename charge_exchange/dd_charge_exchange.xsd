@@ -21,6 +21,22 @@
 					<xs:documentation>String identifying the processed spectral line: Spectroscopy notation emitting element (e.g. D I, Be IV,  W I, C VI), transition - if known - between round brackets (e.g. (3-2) ) and indication type of charge exchange - if applicable - between square brackets (e.g. [ACX] or [PCX]). Example for beryllium active charge exchange line at 468.5 nm: 'Be IV (8-6) [ACX]'. Example for impact excitation tungsten line coming from the plasma edge: 'W I' </xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying the processed spectral line: Spectroscopy notation emitting element (e.g. D I, Be IV,  W I, C VI), transition - if known - between round brackets (e.g. (3-2) ) and indication type of charge exchange - if applicable - between square brackets (e.g. [ACX] or [PCX]). Example for beryllium active charge exchange line at 468.5 nm: 'Be IV (8-6) [ACX]'. Example for impact excitation tungsten line coming from the plasma edge: 'W I' </xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -265,6 +281,22 @@
 					<xs:documentation>String identifying the fast ion (e.g. H+, D+, T+, He+2, C+6, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying the fast ion (e.g. H+, D+, T+, He+2, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -347,6 +379,22 @@
 					<xs:documentation>String identifying the ion (e.g. H+, D+, T+, He+2, C+6, ...)</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying the ion (e.g. H+, D+, T+, He+2, C+6, ...)</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -371,12 +419,40 @@
 					<xs:documentation>Toroidal velocity of the ion (oriented counter-clockwise when seen from above) at the channel measurement point</xs:documentation>
 					<xs:appinfo>
 						<units>m.s^-1</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="velocity_tor_method" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Description of the method used to reconstruct the ion toroidal velocity</xs:documentation>
+					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_phi" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Toroidal velocity of the ion (oriented counter-clockwise when seen from above) at the channel measurement point</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>velocity_tor</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="velocity_phi_method" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Description of the method used to reconstruct the ion toroidal velocity</xs:documentation>
+					<xs:appinfo>
+						<units>m.s^-1</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>velocity_tor_method</change_nbc_previous_name>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="velocity_pol" type="signal_flt_1d">
@@ -456,6 +532,22 @@
 					<xs:documentation>String identifying the diagnostic neutral beam particle</xs:documentation>
 					<xs:appinfo>
 						<type>constant</type>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="STR_0D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>String identifying the diagnostic neutral beam particle</xs:documentation>
+					<xs:appinfo>
+						<type>constant</type>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>leaf_renamed</change_nbc_description>
+						<change_nbc_previous_name>label</change_nbc_previous_name>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -579,12 +671,39 @@
 					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi), at the channel measurement point</xs:documentation>
 					<xs:appinfo>
 						<units>kg.m^-1.s^-1</units>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="momentum_tor_method" type="identifier">
 				<xs:annotation>
 					<xs:documentation>Description of the method used to reconstruct the total plasma toroidal momentum</xs:documentation>
+					<xs:appinfo>
+						<lifecycle_status>obsolescent</lifecycle_status>
+						<lifecycle_version>3.42.0</lifecycle_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_phi" type="signal_flt_1d">
+				<xs:annotation>
+					<xs:documentation>Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi), at the channel measurement point</xs:documentation>
+					<xs:appinfo>
+						<units>kg.m^-1.s^-1</units>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>momentum_tor</change_nbc_previous_name>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="momentum_phi_method" type="identifier">
+				<xs:annotation>
+					<xs:documentation>Description of the method used to reconstruct the total plasma toroidal momentum</xs:documentation>
+					<xs:appinfo>
+						<change_nbc_version>3.42.0</change_nbc_version>
+						<change_nbc_description>structure_renamed</change_nbc_description>
+						<change_nbc_previous_name>momentum_tor_method</change_nbc_previous_name>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ion" type="charge_exchange_channel_ion" maxOccurs="13">
@@ -624,7 +743,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.0.4</lifecycle_version>
-				<lifecycle_last_change>3.33.0</lifecycle_last_change>
+				<lifecycle_last_change>3.42.0</lifecycle_last_change>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexType>

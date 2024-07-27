@@ -168,6 +168,12 @@ def generate_git_changelog(app: Sphinx):
     ]
 
     # Open the pull requests file (generated using dd_changelog_helper.py)
+    if not Path("pull_requests.json").exists():
+        dd_changelog_helper = Path(__file__).parent / "dd_changelog_helper.py"
+        raise RuntimeError(
+            "Missing file 'pull_requests.json': please generate with "
+            f"`python {dd_changelog_helper}`"
+        )
     with open("pull_requests.json", "r") as f:
         pull_requests = json.load(f)
 

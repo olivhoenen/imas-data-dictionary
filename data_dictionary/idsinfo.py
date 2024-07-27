@@ -49,11 +49,7 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
-
-
-def major_minor_micro(version):
-    major, minor, micro = re.search("(\d+)\.(\d+)\.(\d+)", version).groups()
-    return int(major), int(minor), int(micro)
+from distutils.version import LooseVersion
 
 
 class IDSInfo:
@@ -66,10 +62,12 @@ class IDSInfo:
     def __init__(self):
         # Find and parse XML definitions
         self.idsdef_path = ""
-        if not self.idsdef_path:  
-            # Check idsdef.xml installed in Python environment system as well as local
-            local_path =  os.path.join(str(Path.home()), ".local")
-            python_env_list= [sys.prefix, local_path]
+        self.legacy_doc_path = ""
+        self.sphinx_doc_path = ""
+        # Check idsdef.xml is installed in the Python environment (system as well as local)
+        if not self.idsdef_path:
+            local_path = os.path.join(str(Path.home()), ".local")
+            python_env_list = [sys.prefix, local_path]
             reg_compile = re.compile("dd_*")
             version_list = None
             python_env_path = ""
@@ -83,23 +81,96 @@ class IDSInfo:
                     python_env_path = python_env
                     break
             if version_list is not None and len(version_list) != 0:
-                latest_version = max(version_list, key=major_minor_micro)
-                folder_to_look = os.path.join(python_env_path, latest_version)
+                version_objects = [LooseVersion(version) for version in version_list]
+                latest_version = max(version_objects)
+                folder_to_look = os.path.join(python_env_path, str(latest_version))
                 for root, dirs, files in os.walk(folder_to_look):
                     for file in files:
                         if file.endswith("IDSDef.xml"):
                             self.idsdef_path = os.path.join(root, file)
-                            break
-        # Fallback to IMAS_PREFIX environment variable
-        if not self.idsdef_path and "IMAS_PREFIX" in os.environ:
-            imaspref = os.environ["IMAS_PREFIX"]
-            self.idsdef_path = f"{imaspref}/include/IDSDef.xml"
+                        if file.endswith("html_documentation.html"):
+                            self.legacy_doc_path = os.path.join(root, file)
+                        if root.endswith("sphinx") and file == "index.html":
+                            self.sphinx_doc_path = os.path.join(root, file)
 
+        # Search through higher level directories
+        if not self.idsdef_path:
+            current_fpath = os.path.dirname(os.path.realpath(__file__))
+            # Newer approach : IMAS/<VERSION>/lib/python3.8/site-packages/data_dictionary/idsinfo.py
+            _idsdef_path = os.path.join(
+                current_fpath, r"../../../../include/IDSDef.xml"
+            )
+            if os.path.isfile(_idsdef_path):
+                self.idsdef_path = os.path.abspath(_idsdef_path)
+            else:
+                # Legacy approach : IMAS/<VERSION>/python/lib/data_dictionary/idsinfo.py
+                _idsdef_path = os.path.join(
+                    current_fpath, r"../../../include/IDSDef.xml"
+                )
+                if os.path.isfile(_idsdef_path):
+                    self.idsdef_path = os.path.abspath(_idsdef_path)
+            
+            _doc_path = os.path.join(
+                current_fpath, r"../../../../share/doc/imas/html_documentation.html"
+            )
+            if os.path.isfile(_doc_path):
+                self.legacy_doc_path = os.path.abspath(_doc_path)
+            else:
+                _doc_path = os.path.join(
+                    current_fpath, r"../../../share/doc/imas/html_documentation.html"
+                )
+                if os.path.isfile(_doc_path):
+                    self.legacy_doc_path = os.path.abspath(_doc_path)
+            
+            _sphinxdoc_path = os.path.join(
+                current_fpath, r"../../../../share/doc/imas/sphinx/index.html"
+            )
+            if os.path.isfile(_sphinxdoc_path):
+                self.sphinx_doc_path = os.path.abspath(_sphinxdoc_path)
+            else:
+                _sphinxdoc_path = os.path.join(
+                    current_fpath, r"../../../share/doc/imas/sphinx/index.html"
+                )
+                if os.path.isfile(_sphinxdoc_path):
+                    self.sphinx_doc_path = os.path.abspath(_sphinxdoc_path)     
+                       
+        # Search using IMAS_PREFIX env variable
+        if not self.idsdef_path:
+            if "IMAS_PREFIX" in os.environ:
+                _idsdef_path = os.path.join(
+                    os.environ["IMAS_PREFIX"], r"include/IDSDef.xml"
+                )
+                if os.path.isfile(_idsdef_path):
+                    self.idsdef_path = _idsdef_path
+
+        if not self.legacy_doc_path:
+            if "IMAS_PREFIX" in os.environ:
+                _doc_path = os.path.join(
+                    os.environ["IMAS_PREFIX"], r"share/doc/imas/html_documentation.html"
+                )
+                if os.path.isfile(_doc_path):
+                    self.legacy_doc_path = _doc_path
+  
+        if not self.sphinx_doc_path:
+            if "IMAS_PREFIX" in os.environ:
+                _doc_path = os.path.join(
+                    os.environ["IMAS_PREFIX"], r"share/doc/imas/sphinx/index.html"
+                )
+                if os.path.isfile(_doc_path):
+                    self.sphinx_doc_path = _doc_path
+
+            # Search using IDSDEF_PATH env variable
+        if not self.idsdef_path:
+            if "IDSDEF_PATH" in os.environ:
+                _idsdef_path = os.environ["IDSDEF_PATH"]
+                if os.path.isfile(_idsdef_path):
+                    self.idsdef_path = os.environ["IDSDEF_PATH"]
+                    
         if not self.idsdef_path:
             raise Exception(
-                "Error while trying to access IDSDef.xml, make sure you've loaded IMAS module",
-                file=sys.stderr,
+                "Error accessing IDSDef.xml.  Make sure its location is defined in your environment, e.g. by loading an IMAS module."
             )
+        
         tree = ET.parse(self.idsdef_path)
         self.root = tree.getroot()
         self.version = self.root.findtext("./version", default="N/A")
@@ -159,13 +230,13 @@ class IDSInfo:
             for field in ids.iter("field"):
                 if re.match(regex_to_search, field.attrib["name"]):
                     attributes = {}
-                    
+
                     if "units" in field.attrib.keys():
                         attributes["units"] = field.attrib["units"]
                     if "documentation" in field.attrib.keys():
                         attributes["documentation"] = field.attrib["documentation"]
-                        
-                    search_result_for_ids[field.attrib["path"]] = attributes 
+
+                    search_result_for_ids[field.attrib["path"]] = attributes
                     if not is_top_node:
                         is_top_node = True
                         top_node_name = ids.attrib["name"]
@@ -182,7 +253,7 @@ class IDSInfo:
                 search_result_for_ids = {}
                 for field in ids.iter("field"):
                     attributes = {}
-                    
+
                     if "units" in field.attrib.keys():
                         attributes["units"] = field.attrib["units"]
                     if "documentation" in field.attrib.keys():
@@ -192,9 +263,7 @@ class IDSInfo:
                         "\(([^:][^itime]*?)\)", "(:)", field.attrib["path_doc"]
                     )
                     if "timebasepath" in field.attrib.keys():
-                        field_path = re.sub(
-                        "\(([:]*?)\)$", "(itime)", field_path
-                        )
+                        field_path = re.sub("\(([:]*?)\)$", "(itime)", field_path)
                     search_result_for_ids[field_path] = attributes
                     if not is_top_node:
                         is_top_node = True
@@ -230,17 +299,19 @@ def main():
         help="Text to search in all IDSes",
     )
     search_command_parser.add_argument(
-        "-s", "--strict",
+        "-s",
+        "--strict",
         action="store_true",
         help="Perform a strict search, ie, the text has to match exactly within a word, eg: 'value' does not match 'values'",
     )
 
     search_command_parser.add_argument(
-        "-v", "--verbose",
+        "-v",
+        "--verbose",
         action="store_true",
         help="Shows description along with unit",
     )
-    
+
     idsfields_command_parser = subparsers.add_parser(
         "idsfields", help="shows all fields from ids"
     )
@@ -252,7 +323,8 @@ def main():
         help="Provide ids Name",
     )
     idsfields_command_parser.add_argument(
-        "-v", "--verbose",
+        "-v",
+        "--verbose",
         action="store_true",
         help="Shows description along with unit",
     )
@@ -268,6 +340,14 @@ def main():
         nargs="?",
         default=None,
         help="Path for field of interest within the IDS",
+    )
+    doc_command_parser = subparsers.add_parser(
+        "dd_doc", help="Show documentation in the browser"
+    )
+    doc_command_parser.set_defaults(cmd="dd_doc")
+
+    doc_command_parser.add_argument(
+        "-l", "--legacy", action="store_true", help="Show legacy documentation"
     )
     opt = info_command_parser.add_mutually_exclusive_group()
     opt.add_argument("-a", "--all", action="store_true", help="Print all attributes")
@@ -306,6 +386,15 @@ def main():
     elif args.cmd == "idsnames":
         for name in idsinfoObj.get_ids_names():
             print(name)
+    elif args.cmd == "dd_doc":
+        import webbrowser
+        url = idsinfoObj.sphinx_doc_path
+        if args.legacy or url == "":
+            url = idsinfoObj.legacy_doc_path
+        if url == "":
+            print("Could not find documentation")
+        else:
+            webbrowser.open(url)
     elif args.cmd == "search":
         if args.text not in ["", None]:
             print(f"Searching for '{args.text}'.")

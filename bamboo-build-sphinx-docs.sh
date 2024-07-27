@@ -15,10 +15,9 @@ module purge
 # - GitPython (providing `git` package), needed for the changelog
 # - IMASPy (providing `imaspy` package), needed for the changelog
 module load \
-    Saxon-HE/11.4-Java-11 \
-    Python/3.8.6-GCCcore-10.2.0 \
-    GitPython/3.1.14-GCCcore-10.2.0 \
-    IMASPy/1.0.0-foss-2020b
+    Saxon-HE/12.4-Java-21 \
+    Python/3.11.5-GCCcore-13.2.0 \
+    IMASPy/1.0.0-gfbf-2023b
 
 
 # Debuggging:
@@ -38,7 +37,10 @@ pip freeze
 
 # Try to update the pull_requests.json with a Bitbucket server API call:
 if [ -z "${IMAS_DD_BITBUCKET_TOKEN:+x}${bamboo_IMAS_DD_BITBUCKET_TOKEN:+x}" ]; then
-    echo '$IMAS_DD_BITBUCKET_TOKEN is not set, using cached pull_requests.json'
+    echo '$IMAS_DD_BITBUCKET_TOKEN is not set, cannot create changelog!'
+    echo 'Please set environment variable $IMAS_DD_BITBUCKET_TOKEN to a token with read'
+    echo 'access to https://git.iter.org/projects/IMAS/repos/data-dictionary/browse'
+    echo 'See https://confluence.iter.org/display/IMP/How+to+access+repositories+with+access+token'
 else
     echo 'Updating pull_requests.json ...'
     cd docs
