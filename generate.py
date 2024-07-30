@@ -7,28 +7,28 @@ import subprocess
 PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
 
+
 def join_path(path1="", path2=""):
     return os.path.normpath(os.path.join(path1, path2))
 
+
 DD_GIT_DESCRIBE = get_version()
 
-def saxon_version(verb=False)->int:
+
+def saxon_version(verb=False) -> int:
     cmd = ["java", "net.sf.saxon.Transform", "-t"]
     try:
-        out = subprocess.run(cmd,
-                             capture_output=True,
-                             text=True,
-                             check=False)
-        line = out.stderr.split('\n')[0]
+        out = subprocess.run(cmd, capture_output=True, text=True, check=False)
+        line = out.stderr.split("\n")[0]
         version = re.search(r"Saxon.* +(\d+)\.(\d+)", line)
-        if (verb):
+        if verb:
             print("Got Saxon version:", version.group(1), version.group(2))
         major = int(version.group(1)) * 100
         minor = int(version.group(2))
         version = major + minor
-    except:
-        if (verb):
-            print("Error: can't get Saxon version.")
+    except Exception as e:
+        if verb:
+            print(f"Error: can't get Saxon version. {e}")
         version = 0
     return version
 
@@ -99,30 +99,29 @@ def generate_html_documentation(extra_opts=""):
         "utilities/coordinate_identifier.xml",
         "html_documentation/utilities/coordinate_identifier.xml",
     )
-    
+
+
 def generate_sphinx_documentation():
     from sphinx.cmd.build import main as sphinx_main
 
-    idsdef_path = os.path.join(PWD, "docs",'_static/IDSDefxml.js')
+    idsdef_path = os.path.join(PWD, "docs", "_static/IDSDefxml.js")
 
-    with open(idsdef_path, 'w') as file:
+    with open(idsdef_path, "w") as file:
         file.write("const xmlString=`\n")
 
-    idsdef_command = [
-        'java', 'net.sf.saxon.Transform',
-        '-t', '-s:IDSDef.xml', '-xsl:docs/generate_js_IDSDef.xsl'
-    ]
-    with open(idsdef_path, 'a') as file:
+    idsdef_command = ["java", "net.sf.saxon.Transform", "-t", "-s:IDSDef.xml", "-xsl:docs/generate_js_IDSDef.xsl"]
+    with open(idsdef_path, "a") as file:
         subprocess.run(idsdef_command, stdout=file, check=True)
 
-    with open(idsdef_path, 'a') as file:
+    with open(idsdef_path, "a") as file:
         file.write("`;")
 
     source_dir = os.path.join(PWD, "docs", ".")
     build_dir = os.path.join(PWD, "docs", "_build")
     sphinx_args = ["-b", "html", source_dir, build_dir]
     sphinx_main(sphinx_args)
-        
+
+
 def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
     ids_cocos_transformations_symbolic_table_generation_command = (
         "java"
@@ -198,12 +197,14 @@ def generate_dd_data_dictionary_validation(extra_opts=""):
     if proc.returncode != 0:
         assert False, stderr
 
+
 if __name__ == "__main__":
-    
+
     # Can we use threads in this version of Saxon?
     threads = ""
-    if saxon_version() >= 904: threads = " -threads:4"
-    
+    if saxon_version() >= 904:
+        threads = " -threads:4"
+
     generate_dd_data_dictionary(extra_opts=threads)
     generate_html_documentation(extra_opts=threads)
     generate_sphinx_documentation()
