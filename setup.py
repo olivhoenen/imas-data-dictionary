@@ -54,7 +54,7 @@ class CustomInstallCommand(install):
         copy_utilities()
         install_identifiers_files()
         
-        if os.getenv('DD_DOCS'):
+        if os.getenv('DD_DOC'):
             from generate import generate_sphinx_documentation
             generate_sphinx_documentation()
             from install import install_sphinx_files
