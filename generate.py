@@ -116,15 +116,17 @@ def generate_sphinx_documentation():
     with open(idsdef_path, "a") as file:
         file.write("`;")
 
-    source_dir = os.path.join(PWD, "docs", ".")
-    build_dir = os.path.join(PWD, "docs", "_build")
+    source_dir = os.path.join(PWD, "docs")
+    build_dir = os.path.join(PWD, "docs", "_build/html")
 
     directory = Path(build_dir)
     if directory.exists():
         shutil.rmtree(build_dir)
 
     sphinx_args = ["-b", "html", source_dir, build_dir]
+    
     sphinx_main(sphinx_args)
+
 
 
 def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
