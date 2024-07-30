@@ -99,25 +99,30 @@ def generate_html_documentation(extra_opts=""):
         "utilities/coordinate_identifier.xml",
         "html_documentation/utilities/coordinate_identifier.xml",
     )
-
+    
 def generate_sphinx_documentation():
-    sphinx_documentation_generation_command = (
-        r"make -C docs html"
-    )
-    proc = subprocess.Popen(
-        sphinx_documentation_generation_command,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        shell=True,
-        universal_newlines=True,
-    )
-    proc.wait()
-    (stdout, stderr) = proc.communicate()
+    from sphinx.cmd.build import main as sphinx_main
 
-    if proc.returncode != 0:
-        assert False, stderr
+    idsdef_path = os.path.join(PWD, "docs",'_static/IDSDefxml.js')
 
+    with open(idsdef_path, 'w') as file:
+        file.write("const xmlString=`\n")
 
+    idsdef_command = [
+        'java', 'net.sf.saxon.Transform',
+        '-t', '-s:IDSDef.xml', '-xsl:docs/generate_js_IDSDef.xsl'
+    ]
+    with open(idsdef_path, 'a') as file:
+        subprocess.run(idsdef_command, stdout=file, check=True)
+
+    with open(idsdef_path, 'a') as file:
+        file.write("`;")
+
+    source_dir = os.path.join(PWD, "docs", ".")
+    build_dir = os.path.join(PWD, "docs", "_build")
+    sphinx_args = ["-b", "html", source_dir, build_dir]
+    sphinx_main(sphinx_args)
+        
 def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
     ids_cocos_transformations_symbolic_table_generation_command = (
         "java"
