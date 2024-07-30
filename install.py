@@ -63,7 +63,7 @@ def install_html_files():
 
 
 def install_sphinx_files():
-    sourcedir = "docs/_build/html"
+    sourcedir = "docs/_build"
     Path(sphinxdir).mkdir(parents=True, exist_ok=True)
 
     for root, dirs, files in os.walk(sourcedir):
@@ -216,3 +216,4 @@ if __name__ == "__main__":
     create_idsdef_symlink()
     copy_utilities()
     install_identifiers_files()
+    install_sphinx_files()

@@ -1,3 +1,4 @@
+from pathlib import Path
 from setuptools_scm import get_version
 import os
 import re
@@ -105,7 +106,6 @@ def generate_sphinx_documentation():
     from sphinx.cmd.build import main as sphinx_main
 
     idsdef_path = os.path.join(PWD, "docs", "_static/IDSDefxml.js")
-
     with open(idsdef_path, "w") as file:
         file.write("const xmlString=`\n")
 
@@ -118,6 +118,11 @@ def generate_sphinx_documentation():
 
     source_dir = os.path.join(PWD, "docs", ".")
     build_dir = os.path.join(PWD, "docs", "_build")
+
+    directory = Path(build_dir)
+    if directory.exists():
+        shutil.rmtree(build_dir)
+
     sphinx_args = ["-b", "html", source_dir, build_dir]
     sphinx_main(sphinx_args)
 

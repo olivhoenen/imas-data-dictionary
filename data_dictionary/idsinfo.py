@@ -311,8 +311,8 @@ def main():
         default=None,
         help="Path for field of interest within the IDS",
     )
-    doc_command_parser = subparsers.add_parser("dd_doc", help="Show documentation in the browser")
-    doc_command_parser.set_defaults(cmd="dd_doc")
+    doc_command_parser = subparsers.add_parser("doc", help="Show documentation in the browser")
+    doc_command_parser.set_defaults(cmd="doc")
 
     doc_command_parser.add_argument("-l", "--legacy", action="store_true", help="Show legacy documentation")
     opt = info_command_parser.add_mutually_exclusive_group()
@@ -352,8 +352,8 @@ def main():
     elif args.cmd == "idsnames":
         for name in idsinfoObj.get_ids_names():
             print(name)
-    elif args.cmd == "dd_doc":
-        url=""
+    elif args.cmd == "doc":
+        url = ""
         if args.legacy:
             url = idsinfoObj.legacy_doc_path
             if not url:
@@ -361,9 +361,11 @@ def main():
         else:
             url = idsinfoObj.sphinx_doc_path
             if not url:
-                raise Exception("Could not find sphinx documentation, use dd_doclegacy command for legacy documentation")
-        
+                raise Exception(
+                    "Could not find sphinx documentation, use dd_doclegacy command for legacy documentation"
+                )
         if url:
+            print("Showing documentation from : " + url)
             import webbrowser
             webbrowser.open(url)
     elif args.cmd == "search":
