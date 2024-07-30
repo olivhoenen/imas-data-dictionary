@@ -125,7 +125,9 @@ def generate_sphinx_documentation():
 
     sphinx_args = ["-b", "html", source_dir, build_dir]
     
-    sphinx_main(sphinx_args)
+    ret=sphinx_main(sphinx_args)
+    if ret != 0:
+        raise RuntimeError(f"Sphinx build failed with return code {ret}")
 
 
 
