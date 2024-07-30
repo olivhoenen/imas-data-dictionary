@@ -353,16 +353,18 @@ def main():
         for name in idsinfoObj.get_ids_names():
             print(name)
     elif args.cmd == "dd_doc":
-        import webbrowser
-
-        url = idsinfoObj.sphinx_doc_path
-        if not url:
-            raise Exception("Could not find sphinx documentation, use dd_doclegacy command for legacy documentation")
+        url=""
         if args.legacy:
             url = idsinfoObj.legacy_doc_path
             if not url:
                 print("Could not find legacy documentation")
+        else:
+            url = idsinfoObj.sphinx_doc_path
+            if not url:
+                raise Exception("Could not find sphinx documentation, use dd_doclegacy command for legacy documentation")
+        
         if url:
+            import webbrowser
             webbrowser.open(url)
     elif args.cmd == "search":
         if args.text not in ["", None]:
