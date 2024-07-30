@@ -356,11 +356,13 @@ def main():
         import webbrowser
 
         url = idsinfoObj.sphinx_doc_path
-        if args.legacy or url == "":
+        if not url:
+            raise Exception("Could not find sphinx documentation, use dd_doclegacy command for legacy documentation")
+        if args.legacy:
             url = idsinfoObj.legacy_doc_path
-        if url == "":
-            print("Could not find documentation")
-        else:
+            if not url:
+                print("Could not find legacy documentation")
+        if url:
             webbrowser.open(url)
     elif args.cmd == "search":
         if args.text not in ["", None]:
