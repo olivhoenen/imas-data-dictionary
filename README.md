@@ -67,7 +67,18 @@ $PYTHON_PATH/share/doc/imas
 and can be accessible using following command
 ```
 $ firefox $PYTHON_PATH/share/doc/imas/html_documentation.html
+$ dd_doclegacy
 ```
+
+if you want to also generate sphinx documentation locally then use 
+`build-sphinx-docs.sh` this script. Just need to pass GIT Read Token to build data-dictionary documentation
+
+You can access it using following command
+```
+$ firefox $PYTHON_PATH/share/doc/imas/sphinx/index.html
+$ dd_doc
+```
+
 ### Python scripts
 
 Installer provides `idsinfo` utility which can be used on the command line interface. 
@@ -80,13 +91,13 @@ etc.
 ## Usage
 
 ```sh
-$ idsinfo
-usage: idsinfo [-h] {idspath,metadata,idsnames,search,idsfields,info} ...
+idsinfo -h
+usage: idsinfo [-h] {idspath,metadata,idsnames,search,idsfields,info,doc} ...
 
 IDS Info Utilities
 
 positional arguments:
-  {idspath,metadata,idsnames,search,idsfields,info}
+  {idspath,metadata,idsnames,search,idsfields,info,doc}
                         sub-commands help
     idspath             print ids definition path
     metadata            print metadata
@@ -94,9 +105,11 @@ positional arguments:
     search              Search in ids
     idsfields           shows all fields from ids
     info                Query the IDS XML Definition for documentation
+    doc                 Show documentation in the browser
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
+
 ```
 
 ## Examples:
