@@ -12,4 +12,3 @@ pip install -r docs/requirements.txt
 
 python generate_docs.py
 echo "Done"
-deactivate
