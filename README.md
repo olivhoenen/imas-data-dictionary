@@ -70,8 +70,7 @@ $ firefox $PYTHON_PATH/share/doc/imas/html_documentation.html
 $ dd_doclegacy
 ```
 
-if you want to also generate sphinx documentation locally then use 
-`build-sphinx-docs.sh` this script. Just need to pass GIT Read Token to build data-dictionary documentation
+if you want to generate sphinx documentation on SDCC then use `build-sphinx-docs.sh` script. 
 
 You can access it using following command
 ```

@@ -77,7 +77,7 @@ def install_sphinx_files():
 
                 subprocess.run(["install", "-m", "644", sourcefile, destfile])
     else:
-        raise Exception("Could not find sphinx documentation to install")
+        print("Proceeding installation without the sphinx documentation since it could not be found")
 
 
 def install_css_files():

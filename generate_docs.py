@@ -1,74 +1,21 @@
+from generate import (
+    generate_dd_data_dictionary,
+    generate_dd_data_dictionary_validation,
+    generate_html_documentation,
+    generate_ids_cocos_transformations_symbolic_table,
+    generate_idsnames,
+    saxon_version,
+)
 from pathlib import Path
 import os
 import shutil
 import subprocess
-import re
-from setuptools_scm import get_version
-
-DD_GIT_DESCRIBE = get_version()
-
-
-def saxon_version(verb=False) -> int:
-    cmd = ["java", "net.sf.saxon.Transform", "-t"]
-    try:
-        out = subprocess.run(cmd, capture_output=True, text=True, check=False)
-        line = out.stderr.split("\n")[0]
-        version = re.search(r"Saxon.* +(\d+)\.(\d+)", line)
-        if verb:
-            print("Got Saxon version:", version.group(1), version.group(2))
-        major = int(version.group(1)) * 100
-        minor = int(version.group(2))
-        version = major + minor
-    except Exception as e:
-        if verb:
-            print(f"Error: can't get Saxon version. {e}")
-        version = 0
-    return version
-
-
-def generate_dd_data_dictionary(extra_opts=""):
-    dd_data_dictionary_generation_command = (
-        "java"
-        + " net.sf.saxon.Transform"
-        + extra_opts
-        + " -t -warnings:fatal -s:"
-        + "dd_data_dictionary.xml.xsd"
-        + " -xsl:"
-        + "dd_data_dictionary.xml.xsl"
-        + " -o:"
-        + "dd_data_dictionary.xml"
-        + " DD_GIT_DESCRIBE="
-        + DD_GIT_DESCRIBE
-    )
-    proc = subprocess.Popen(
-        dd_data_dictionary_generation_command.split(),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        # env=env,
-        universal_newlines=True,
-    )
-    proc.wait()
-    (stdout, stderr) = proc.communicate()
-
-    if proc.returncode != 0:
-        assert False, stderr
-    else:
-        if not os.path.islink(os.path.join(".", "IDSDef.xml")):
-            os.symlink(
-                "dd_data_dictionary.xml",
-                "IDSDef.xml",
-            )
 
 
 def generate_sphinx_documentation():
     from sphinx.cmd.build import main as sphinx_main
 
     os.chdir("docs")
-
-    try:
-        subprocess.run(["python", "-m", "sphinx_dd_extension.dd_changelog_helper"], check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while updating the changelog: {e}")
 
     idsdef_path = os.path.join(".", "_static/IDSDefxml.js")
     with open(idsdef_path, "w") as file:
@@ -100,7 +47,7 @@ def generate_sphinx_documentation():
         "--keep-going",
     ]
 
-    ret = sphinx_main(sphinx_args)
+    sphinx_main(sphinx_args)
     # if ret != 0:
     #     raise RuntimeError(f"Sphinx build failed with return code {ret}")
 
@@ -126,4 +73,8 @@ if __name__ == "__main__":
         threads = " -threads:4"
 
     generate_dd_data_dictionary(extra_opts=threads)
+    generate_html_documentation(extra_opts=threads)
+    generate_ids_cocos_transformations_symbolic_table(extra_opts=threads)
+    generate_idsnames()
+    generate_dd_data_dictionary_validation(extra_opts=threads)
     generate_sphinx_documentation()

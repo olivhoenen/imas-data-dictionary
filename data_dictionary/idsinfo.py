@@ -358,9 +358,7 @@ def main():
         else:
             url = idsinfoObj.sphinx_doc_path
             if not url:
-                print(
-                    "Could not find sphinx documentation. falling back to legacy documentation"
-                )
+                print("Could not find sphinx documentation. falling back to legacy documentation")
                 url = idsinfoObj.legacy_doc_path
         if url:
             print("Showing documentation from : " + url)
