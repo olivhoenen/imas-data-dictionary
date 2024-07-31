@@ -11,7 +11,8 @@ if [ -z "$1" ]; then
 else
     export IMAS_DD_BITBUCKET_TOKEN="$1"
 fi
-
+module load IMAS-AL-Python/5.2.2-intel-2023b-DD-3.41.0
+module unload Data-Dictionary
 module load Saxon-HE/12.4-Java-21 
 module load Python/3.11.5-GCCcore-13.2.0 
 module load IMASPy/1.0.0-gfbf-2023b
