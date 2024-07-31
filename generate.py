@@ -1,4 +1,3 @@
-from pathlib import Path
 from setuptools_scm import get_version
 import os
 import re
@@ -102,35 +101,6 @@ def generate_html_documentation(extra_opts=""):
     )
 
 
-def generate_sphinx_documentation():
-    from sphinx.cmd.build import main as sphinx_main
-
-    idsdef_path = os.path.join(PWD, "docs", "_static/IDSDefxml.js")
-    with open(idsdef_path, "w") as file:
-        file.write("const xmlString=`\n")
-
-    idsdef_command = ["java", "net.sf.saxon.Transform", "-t", "-s:IDSDef.xml", "-xsl:docs/generate_js_IDSDef.xsl"]
-    with open(idsdef_path, "a") as file:
-        subprocess.run(idsdef_command, stdout=file, check=True)
-
-    with open(idsdef_path, "a") as file:
-        file.write("`;")
-
-    source_dir = os.path.join(PWD, "docs")
-    build_dir = os.path.join(PWD, "docs", "_build/html")
-
-    directory = Path(build_dir)
-    if directory.exists():
-        shutil.rmtree(build_dir)
-
-    sphinx_args = ["-b", "html", source_dir, build_dir]
-    
-    ret=sphinx_main(sphinx_args)
-    if ret != 0:
-        raise RuntimeError(f"Sphinx build failed with return code {ret}")
-
-
-
 def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
     ids_cocos_transformations_symbolic_table_generation_command = (
         "java"
@@ -216,7 +186,6 @@ if __name__ == "__main__":
 
     generate_dd_data_dictionary(extra_opts=threads)
     generate_html_documentation(extra_opts=threads)
-    generate_sphinx_documentation()
     generate_ids_cocos_transformations_symbolic_table(extra_opts=threads)
     generate_idsnames()
     generate_dd_data_dictionary_validation(extra_opts=threads)

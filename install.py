@@ -64,18 +64,20 @@ def install_html_files():
 
 def install_sphinx_files():
     sourcedir = "docs/_build/html"
-    Path(sphinxdir).mkdir(parents=True, exist_ok=True)
+    if os.path.exists(sourcedir):
 
-    for root, dirs, files in os.walk(sourcedir):
-        for file in files:
-            sourcefile = os.path.join(root, file)
-            relative_path = os.path.relpath(sourcefile, sourcedir)
-            destfile = os.path.join(sphinxdir, relative_path)
+        for root, dirs, files in os.walk(sourcedir):
+            for file in files:
+                sourcefile = os.path.join(root, file)
+                relative_path = os.path.relpath(sourcefile, sourcedir)
+                destfile = os.path.join(sphinxdir, relative_path)
 
-            destdir = os.path.dirname(destfile)
-            Path(destdir).mkdir(parents=True, exist_ok=True)
+                destdir = os.path.dirname(destfile)
+                Path(destdir).mkdir(parents=True, exist_ok=True)
 
-            subprocess.run(["install", "-m", "644", sourcefile, destfile])
+                subprocess.run(["install", "-m", "644", sourcefile, destfile])
+    else:
+        raise Exception("Could not find sphinx documentation to install")
 
 
 def install_css_files():

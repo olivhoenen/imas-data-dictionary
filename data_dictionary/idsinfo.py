@@ -367,6 +367,7 @@ def main():
         if url:
             print("Showing documentation from : " + url)
             import webbrowser
+
             webbrowser.open(url)
     elif args.cmd == "search":
         if args.text not in ["", None]:
