@@ -105,7 +105,7 @@ def link_to_url(url: str, text: str) -> str:
             return f":download:`{text} <../../{path}>`"
         logger.warning("Could not find document %s", url)
     # Link to external web page:
-    return f"`{text} <{url}>`_"
+    return f"`{text} <{url}>`__"
 
 
 def link_to_coordinate(coordinate: str, coordinates_with_alternatives: Set[str]) -> str:
