@@ -63,14 +63,24 @@ dd_data_dictionary.xml             IDSNames.txt    radiation
 #### The share directory - documentation
 
 Installer installs html documentation. You can find it at following path
+```bash
 $PYTHON_PATH/share/doc/imas
-and can be accessible using following command
+```
+and can be accessible using following commands
 ```
 $ firefox $PYTHON_PATH/share/doc/imas/html_documentation.html
 $ dd_doclegacy
 ```
 
-if you want to generate sphinx documentation on SDCC then use `build-sphinx-docs.sh` script. 
+if you want to generate sphinx documentation on SDCC then you need `Python` and `Saxon`  
+
+For generating IDS Migration guide you need `IMASPy` and `IMAS` should be installed
+
+```bash
+pip install -r docs/requirements.txt
+python generate_docs.py
+pip install .
+```
 
 You can access it using following command
 ```
