@@ -18,23 +18,23 @@ $ python idsinfo info amns_data ids_properties/comment -m
 This is Data Dictionary version = 3.37.0, following COCOS = 11
 ==============================================================
 Any comment describing the content of this IDS
-$   
+$
 
 $ python idsinfo info amns_data ids_properties/comment -s data_type
 STR_0D
-$  
+$
 
 $ python idsinfo idspath
 /home/ITER/sawantp1/.local/dd_3.37.1+54.g20c6794.dirty/include/IDSDef.xml
 
-$ python idsinfo idsnames 
+$ python idsinfo idsnames
 amns_data
 barometry
 bolometer
 bremsstrahlung_visible
 ...
 
-$ python idsinfo search ggd 
+$ python idsinfo search ggd
 distribution_sources/source/ggd
 distributions/distribution/ggd
 edge_profiles/grid_ggd
@@ -44,12 +44,12 @@ edge_sources/grid_ggd
         source/ggd
 ...
 """
+from packaging.version import Version
+from pathlib import Path
 import os
 import re
 import sys
 import xml.etree.ElementTree as ET
-from pathlib import Path
-from distutils.version import LooseVersion
 
 
 class IDSInfo:
@@ -72,18 +72,14 @@ class IDSInfo:
             version_list = None
             python_env_path = ""
             for python_env in python_env_list:
-                version_list = [
-                    dirname
-                    for dirname in os.listdir(python_env)
-                    if reg_compile.match(dirname)
-                ]
+                version_list = [dirname for dirname in os.listdir(python_env) if reg_compile.match(dirname)]
                 if version_list:
                     python_env_path = python_env
                     break
             if version_list is not None and len(version_list) != 0:
-                version_objects = [LooseVersion(version) for version in version_list]
+                version_objects = [Version(version.replace("dd_", "")) for version in version_list]
                 latest_version = max(version_objects)
-                folder_to_look = os.path.join(python_env_path, str(latest_version))
+                folder_to_look = os.path.join(python_env_path, "dd_" + str(latest_version))
                 for root, dirs, files in os.walk(folder_to_look):
                     for file in files:
                         if file.endswith("IDSDef.xml"):
@@ -97,65 +93,47 @@ class IDSInfo:
         if not self.idsdef_path:
             current_fpath = os.path.dirname(os.path.realpath(__file__))
             # Newer approach : IMAS/<VERSION>/lib/python3.8/site-packages/data_dictionary/idsinfo.py
-            _idsdef_path = os.path.join(
-                current_fpath, r"../../../../include/IDSDef.xml"
-            )
+            _idsdef_path = os.path.join(current_fpath, r"../../../../include/IDSDef.xml")
             if os.path.isfile(_idsdef_path):
                 self.idsdef_path = os.path.abspath(_idsdef_path)
             else:
                 # Legacy approach : IMAS/<VERSION>/python/lib/data_dictionary/idsinfo.py
-                _idsdef_path = os.path.join(
-                    current_fpath, r"../../../include/IDSDef.xml"
-                )
+                _idsdef_path = os.path.join(current_fpath, r"../../../include/IDSDef.xml")
                 if os.path.isfile(_idsdef_path):
                     self.idsdef_path = os.path.abspath(_idsdef_path)
-            
-            _doc_path = os.path.join(
-                current_fpath, r"../../../../share/doc/imas/html_documentation.html"
-            )
+
+            _doc_path = os.path.join(current_fpath, r"../../../../share/doc/imas/html_documentation.html")
             if os.path.isfile(_doc_path):
                 self.legacy_doc_path = os.path.abspath(_doc_path)
             else:
-                _doc_path = os.path.join(
-                    current_fpath, r"../../../share/doc/imas/html_documentation.html"
-                )
+                _doc_path = os.path.join(current_fpath, r"../../../share/doc/imas/html_documentation.html")
                 if os.path.isfile(_doc_path):
                     self.legacy_doc_path = os.path.abspath(_doc_path)
-            
-            _sphinxdoc_path = os.path.join(
-                current_fpath, r"../../../../share/doc/imas/sphinx/index.html"
-            )
+
+            _sphinxdoc_path = os.path.join(current_fpath, r"../../../../share/doc/imas/sphinx/index.html")
             if os.path.isfile(_sphinxdoc_path):
                 self.sphinx_doc_path = os.path.abspath(_sphinxdoc_path)
             else:
-                _sphinxdoc_path = os.path.join(
-                    current_fpath, r"../../../share/doc/imas/sphinx/index.html"
-                )
+                _sphinxdoc_path = os.path.join(current_fpath, r"../../../share/doc/imas/sphinx/index.html")
                 if os.path.isfile(_sphinxdoc_path):
-                    self.sphinx_doc_path = os.path.abspath(_sphinxdoc_path)     
-                       
+                    self.sphinx_doc_path = os.path.abspath(_sphinxdoc_path)
+
         # Search using IMAS_PREFIX env variable
         if not self.idsdef_path:
             if "IMAS_PREFIX" in os.environ:
-                _idsdef_path = os.path.join(
-                    os.environ["IMAS_PREFIX"], r"include/IDSDef.xml"
-                )
+                _idsdef_path = os.path.join(os.environ["IMAS_PREFIX"], r"include/IDSDef.xml")
                 if os.path.isfile(_idsdef_path):
                     self.idsdef_path = _idsdef_path
 
         if not self.legacy_doc_path:
             if "IMAS_PREFIX" in os.environ:
-                _doc_path = os.path.join(
-                    os.environ["IMAS_PREFIX"], r"share/doc/imas/html_documentation.html"
-                )
+                _doc_path = os.path.join(os.environ["IMAS_PREFIX"], r"share/doc/imas/html_documentation.html")
                 if os.path.isfile(_doc_path):
                     self.legacy_doc_path = _doc_path
-  
+
         if not self.sphinx_doc_path:
             if "IMAS_PREFIX" in os.environ:
-                _doc_path = os.path.join(
-                    os.environ["IMAS_PREFIX"], r"share/doc/imas/sphinx/index.html"
-                )
+                _doc_path = os.path.join(os.environ["IMAS_PREFIX"], r"share/doc/imas/sphinx/index.html")
                 if os.path.isfile(_doc_path):
                     self.sphinx_doc_path = _doc_path
 
@@ -165,12 +143,13 @@ class IDSInfo:
                 _idsdef_path = os.environ["IDSDEF_PATH"]
                 if os.path.isfile(_idsdef_path):
                     self.idsdef_path = os.environ["IDSDEF_PATH"]
-                    
+
         if not self.idsdef_path:
             raise Exception(
-                "Error accessing IDSDef.xml.  Make sure its location is defined in your environment, e.g. by loading an IMAS module."
+                "Error accessing IDSDef.xml.  Make sure its location is defined in your environment, e.g. by"
+                "loading an IMAS module."
             )
-        
+
         tree = ET.parse(self.idsdef_path)
         self.root = tree.getroot()
         self.version = self.root.findtext("./version", default="N/A")
@@ -199,11 +178,9 @@ class IDSInfo:
         """Returns attributes of the selected ids/path node as a dictionary."""
         ids = self.root.find(f"./IDS[@name='{ids}']")
         if ids is None:
-            raise ValueError(
-                f"Error getting the IDS, please check that '{ids}' corresponds to a valid IDS name"
-            )
+            raise ValueError(f"Error getting the IDS, please check that '{ids}' corresponds to a valid IDS name")
 
-        if path != None:
+        if path is not None:
             fields = path.split("/")
 
             try:
@@ -259,11 +236,9 @@ class IDSInfo:
                     if "documentation" in field.attrib.keys():
                         attributes["documentation"] = field.attrib["documentation"]
 
-                    field_path = re.sub(
-                        "\(([^:][^itime]*?)\)", "(:)", field.attrib["path_doc"]
-                    )
+                    field_path = re.sub(r"\(([^:][^itime]*?)\)", "(:)", field.attrib["path_doc"])
                     if "timebasepath" in field.attrib.keys():
-                        field_path = re.sub("\(([:]*?)\)$", "(itime)", field_path)
+                        field_path = re.sub(r"\(([:]*?)\)$", "(itime)", field_path)
                     search_result_for_ids[field_path] = attributes
                     if not is_top_node:
                         is_top_node = True
@@ -279,9 +254,7 @@ def main():
     idsinfo_parser = argparse.ArgumentParser(description="IDS Info Utilities")
     subparsers = idsinfo_parser.add_subparsers(help="sub-commands help")
 
-    idspath_command_parser = subparsers.add_parser(
-        "idspath", help="print ids definition path"
-    )
+    idspath_command_parser = subparsers.add_parser("idspath", help="print ids definition path")
     idspath_command_parser.set_defaults(cmd="idspath")
 
     metadata_command_parser = subparsers.add_parser("metadata", help="print metadata")
@@ -302,7 +275,8 @@ def main():
         "-s",
         "--strict",
         action="store_true",
-        help="Perform a strict search, ie, the text has to match exactly within a word, eg: 'value' does not match 'values'",
+        help="Perform a strict search, ie, the text has to match exactly within a word, eg:"
+        "'value' does not match 'values'",
     )
 
     search_command_parser.add_argument(
@@ -312,9 +286,7 @@ def main():
         help="Shows description along with unit",
     )
 
-    idsfields_command_parser = subparsers.add_parser(
-        "idsfields", help="shows all fields from ids"
-    )
+    idsfields_command_parser = subparsers.add_parser("idsfields", help="shows all fields from ids")
     idsfields_command_parser.set_defaults(cmd="idsfields")
     idsfields_command_parser.add_argument(
         "idsname",
@@ -328,9 +300,7 @@ def main():
         action="store_true",
         help="Shows description along with unit",
     )
-    info_command_parser = subparsers.add_parser(
-        "info", help="Query the IDS XML Definition for documentation"
-    )
+    info_command_parser = subparsers.add_parser("info", help="Query the IDS XML Definition for documentation")
     info_command_parser.set_defaults(cmd="info")
 
     info_command_parser.add_argument("ids", type=str, help="IDS name")
@@ -341,14 +311,10 @@ def main():
         default=None,
         help="Path for field of interest within the IDS",
     )
-    doc_command_parser = subparsers.add_parser(
-        "dd_doc", help="Show documentation in the browser"
-    )
-    doc_command_parser.set_defaults(cmd="dd_doc")
+    doc_command_parser = subparsers.add_parser("doc", help="Show documentation in the browser")
+    doc_command_parser.set_defaults(cmd="doc")
 
-    doc_command_parser.add_argument(
-        "-l", "--legacy", action="store_true", help="Show legacy documentation"
-    )
+    doc_command_parser.add_argument("-l", "--legacy", action="store_true", help="Show legacy documentation")
     opt = info_command_parser.add_mutually_exclusive_group()
     opt.add_argument("-a", "--all", action="store_true", help="Print all attributes")
     opt.add_argument(
@@ -386,14 +352,18 @@ def main():
     elif args.cmd == "idsnames":
         for name in idsinfoObj.get_ids_names():
             print(name)
-    elif args.cmd == "dd_doc":
-        import webbrowser
-        url = idsinfoObj.sphinx_doc_path
-        if args.legacy or url == "":
+    elif args.cmd == "doc":
+        if args.legacy:
             url = idsinfoObj.legacy_doc_path
-        if url == "":
-            print("Could not find documentation")
         else:
+            url = idsinfoObj.sphinx_doc_path
+            if not url:
+                print("Could not find sphinx documentation. falling back to legacy documentation")
+                url = idsinfoObj.legacy_doc_path
+        if url:
+            print("Showing documentation from : " + url)
+            import webbrowser
+
             webbrowser.open(url)
     elif args.cmd == "search":
         if args.text not in ["", None]:

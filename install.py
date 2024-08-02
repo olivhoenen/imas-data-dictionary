@@ -1,18 +1,16 @@
-import os
-import pathlib
-import subprocess
-import shutil
-from genericpath import exists
 from os import listdir
 from os.path import isfile, join
 from pathlib import Path
-
-import versioneer
+from setuptools_scm import get_version
+import os
+import pathlib
+import shutil
+import subprocess
 
 DD_BUILD = pathlib.Path(__file__).parent.resolve()
 IMAS_INSTALL_DIR = os.path.join(DD_BUILD, "install")
 
-DD_GIT_DESCRIBE = versioneer.get_version()
+DD_GIT_DESCRIBE = get_version()
 UAL_GIT_DESCRIBE = DD_GIT_DESCRIBE
 
 
@@ -58,29 +56,29 @@ def install_html_files():
     Path(htmldir + "/imas").mkdir(parents=True, exist_ok=True)
 
     dd_versions = [
-        "html_documentation/" + f
-        for f in listdir("html_documentation")
-        if isfile(join("html_documentation", f))
+        "html_documentation/" + f for f in listdir("html_documentation") if isfile(join("html_documentation", f))
     ]
-    html_files_command = (
-        "install -m 644 " + " ".join(dd_versions) + " " + os.path.join(htmldir, "imas")
-    )
+    html_files_command = "install -m 644 " + " ".join(dd_versions) + " " + os.path.join(htmldir, "imas")
     execute_command(html_files_command)
+
 
 def install_sphinx_files():
     sourcedir = "docs/_build/html"
-    Path(sphinxdir).mkdir(parents=True, exist_ok=True)
+    if os.path.exists(sourcedir):
 
-    for root, dirs, files in os.walk(sourcedir):
-        for file in files:
-            sourcefile = os.path.join(root, file)
-            relative_path = os.path.relpath(sourcefile, sourcedir)
-            destfile = os.path.join(sphinxdir, relative_path)
-            
-            destdir = os.path.dirname(destfile)
-            Path(destdir).mkdir(parents=True, exist_ok=True)
+        for root, dirs, files in os.walk(sourcedir):
+            for file in files:
+                sourcefile = os.path.join(root, file)
+                relative_path = os.path.relpath(sourcefile, sourcedir)
+                destfile = os.path.join(sphinxdir, relative_path)
 
-            subprocess.run(['install', '-m', '644', sourcefile, destfile])
+                destdir = os.path.dirname(destfile)
+                Path(destdir).mkdir(parents=True, exist_ok=True)
+
+                subprocess.run(["install", "-m", "644", sourcefile, destfile])
+    else:
+        print("Proceeding installation without the sphinx documentation since it could not be found")
+
 
 def install_css_files():
     Path(htmldir + "/imas/css").mkdir(parents=True, exist_ok=True)
@@ -89,12 +87,7 @@ def install_css_files():
         for f in listdir("html_documentation/css")
         if isfile(join("html_documentation/css", f))
     ]
-    css_files_command = (
-        "install -m 644 "
-        + " ".join(css_files)
-        + " "
-        + os.path.join(htmldir, "imas/css")
-    )
+    css_files_command = "install -m 644 " + " ".join(css_files) + " " + os.path.join(htmldir, "imas/css")
     execute_command(css_files_command)
 
 
@@ -105,9 +98,7 @@ def install_js_files():
         for f in listdir("html_documentation/js")
         if isfile(join("html_documentation/js", f))
     ]
-    js_files_command = (
-        "install -m 644 " + " ".join(js_files) + " " + os.path.join(htmldir, "imas/js")
-    )
+    js_files_command = "install -m 644 " + " ".join(js_files) + " " + os.path.join(htmldir, "imas/js")
     execute_command(js_files_command)
 
 
@@ -118,12 +109,7 @@ def install_img_files():
         for f in listdir("html_documentation/img")
         if isfile(join("html_documentation/img", f))
     ]
-    img_files_command = (
-        "install -m 644 "
-        + " ".join(img_files)
-        + " "
-        + os.path.join(htmldir, "imas/img")
-    )
+    img_files_command = "install -m 644 " + " ".join(img_files) + " " + os.path.join(htmldir, "imas/img")
     execute_command(img_files_command)
 
 
@@ -135,10 +121,7 @@ def install_utilities_files():
         if isfile(join("html_documentation/utilities", f))
     ]
     utilities_files_command = (
-        "install -m 644 "
-        + " ".join(utilities_files)
-        + " "
-        + os.path.join(htmldir, "imas/utilities")
+        "install -m 644 " + " ".join(utilities_files) + " " + os.path.join(htmldir, "imas/utilities")
     )
     execute_command(utilities_files_command)
 
@@ -150,12 +133,7 @@ def install_cocos_csv_files():
         for f in listdir("html_documentation/cocos")
         if isfile(join("html_documentation/cocos", f))
     ]
-    cocos_csv_files_command = (
-        "install -m 644 "
-        + " ".join(cocos_csv_files)
-        + " "
-        + os.path.join(htmldir, "imas/cocos")
-    )
+    cocos_csv_files_command = "install -m 644 " + " ".join(cocos_csv_files) + " " + os.path.join(htmldir, "imas/cocos")
     execute_command(cocos_csv_files_command)
 
 
@@ -176,12 +154,7 @@ def install_ids_files():
             if isfile(join("html_documentation/" + ids, f))
         ]
         Path(htmldir + "/imas/" + ids).mkdir(parents=True, exist_ok=True)
-        ids_files_command = (
-            "install -m 644 "
-            + " ".join(ids_files)
-            + " "
-            + os.path.join(htmldir, "imas/" + ids)
-        )
+        ids_files_command = "install -m 644 " + " ".join(ids_files) + " " + os.path.join(htmldir, "imas/" + ids)
         execute_command(ids_files_command)
 
 
@@ -206,16 +179,12 @@ def create_idsdef_symlink():
 
 
 def ignored_files(adir, filenames):
-    return [
-        filename for filename in filenames if not filename.endswith("_identifier.xml")
-    ]
+    return [filename for filename in filenames if not filename.endswith("_identifier.xml")]
 
 
 def copy_utilities():
     if not os.path.exists(os.path.join(includedir, "utilities")):
-        shutil.copytree(
-            "utilities", os.path.join(includedir, "utilities"), ignore=ignored_files
-        )
+        shutil.copytree("utilities", os.path.join(includedir, "utilities"), ignore=ignored_files)
 
 
 # Identifiers definition files
@@ -233,12 +202,7 @@ def install_identifiers_files():
         directory_path = os.path.dirname(file_path)
         directory_name = os.path.basename(directory_path)
         Path(includedir + "/" + directory_name).mkdir(parents=True, exist_ok=True)
-        identifiers_command = (
-            "install -m 644 "
-            + file_path
-            + " "
-            + os.path.join(includedir, directory_name)
-        )
+        identifiers_command = "install -m 644 " + file_path + " " + os.path.join(includedir, directory_name)
         execute_command(identifiers_command)
 
 
@@ -254,3 +218,4 @@ if __name__ == "__main__":
     create_idsdef_symlink()
     copy_utilities()
     install_identifiers_files()
+    install_sphinx_files()
