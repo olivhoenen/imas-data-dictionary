@@ -510,28 +510,6 @@
 					<xs:group ref="STR_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="is_neutral">
-				<xs:annotation>
-					<xs:documentation>Flag specifying if this state corresponds to a neutral (1) or not (0)</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-						<type>dynamic</type>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="INT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="neutral_type" type="identifier_dynamic_aos3">
-				<xs:annotation>
-					<xs:documentation>Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.3.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="electron_configuration">
 				<xs:annotation>
 					<xs:documentation>Configuration of atomic orbitals of this state, e.g. 1s2-2s1</xs:documentation>
@@ -861,21 +839,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="momentum_tor">
-				<xs:annotation>
-					<xs:documentation>Source term for total toroidal momentum equation</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>kg.m^-1.s^-2</units>
-						<type>dynamic</type>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="momentum_phi">
 				<xs:annotation>
 					<xs:documentation>Source term for total toroidal momentum equation</xs:documentation>
@@ -892,21 +855,6 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="torque_tor_inside">
-				<xs:annotation>
-					<xs:documentation>Toroidal torque inside the flux surface. Cumulative volume integral of the source term for the total toroidal momentum equation</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>kg.m^2.s^-2</units>
-						<type>dynamic</type>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="torque_phi_inside">
 				<xs:annotation>
 					<xs:documentation>Toroidal torque inside the flux surface. Cumulative volume integral of the source term for the total toroidal momentum equation</xs:documentation>
@@ -917,21 +865,6 @@
 						<change_nbc_version>3.42.0</change_nbc_version>
 						<change_nbc_description>leaf_renamed</change_nbc_description>
 						<change_nbc_previous_name>torque_tor_inside</change_nbc_previous_name>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="momentum_tor_j_cross_b_field">
-				<xs:annotation>
-					<xs:documentation>Contribution to the toroidal momentum source term (already included in the momentum_tor node) corresponding to the toroidal torques onto the thermal plasma due to Lorentz force associated with radial currents. These currents appear as return-currents (enforcing quasi-neutrality, div(J)=0) balancing radial currents of non-thermal particles, e.g. radial currents of fast and trapped neutral-beam-ions.</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>../grid/rho_tor_norm</coordinate1>
-						<units>kg.m^-1.s^-2</units>
-						<type>dynamic</type>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1096,20 +1029,6 @@
 				<xs:annotation>
 					<xs:documentation>Sources for electrons</xs:documentation>
 				</xs:annotation>
-			</xs:element>
-			<xs:element name="torque_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal torque</xs:documentation>
-					<xs:appinfo>
-						<units>kg.m^2.s^-2</units>
-						<type>dynamic</type>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
 			</xs:element>
 			<xs:element name="torque_phi">
 				<xs:annotation>

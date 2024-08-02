@@ -295,16 +295,6 @@
 					<xs:documentation>Simple estimate of the difference in position induced by the presence of suprathermal electrons. Position without corrections = position - delta_position_suprathermal</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="t_e" type="physical_quantity_flt_1d_time_1">
-				<xs:annotation>
-					<xs:documentation>Electron temperature</xs:documentation>
-					<xs:appinfo>
-						<units>eV</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="t_radiation" type="physical_quantity_flt_1d_time_1">
 				<xs:annotation>
 					<xs:documentation>Radiation temperature</xs:documentation>
@@ -335,16 +325,6 @@
 						<lifecycle_status>alpha</lifecycle_status>
 						<lifecycle_version>3.42.0</lifecycle_version>
 						<introduced_after_version>3.41.0</introduced_after_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="t_e_voltage" type="signal_flt_1d_validity">
-				<xs:annotation>
-					<xs:documentation>Raw voltage measured on each channel, from which the calibrated temperature data is then derived</xs:documentation>
-					<xs:appinfo>
-						<units>V</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -431,16 +411,6 @@
 				<xs:element name="line_of_sight" type="line_of_sight_2points">
 					<xs:annotation>
 						<xs:documentation>Line of sight of the diagnostic (fill when valid for all channels), defined by two points. By convention, the first point is the closest to the diagnostic. In case the channels have different lines of sight, they should be described within the channel array of structures</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="t_e_central" type="signal_flt_1d_validity_position">
-					<xs:annotation>
-						<xs:documentation>Electron temperature from the closest channel to the magnetic axis, together with its radial location</xs:documentation>
-						<xs:appinfo>
-							<units>eV</units>
-							<lifecycle_status>obsolescent</lifecycle_status>
-							<lifecycle_version>3.42.0</lifecycle_version>
-						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="t_radiation_central" type="signal_flt_1d_validity_position">

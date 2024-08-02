@@ -115,7 +115,7 @@
 			</xs:element>
 			<xs:element name="description">
 				<xs:annotation>
-					<xs:documentation>Description, e.g. “channel viewing the upper divertor”</xs:documentation>
+					<xs:documentation>Description, e.g. ï¿½channel viewing the upper divertorï¿½</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<introduced_after_version>3</introduced_after_version>
@@ -576,23 +576,6 @@
 					<xs:appinfo>
 						<type>dynamic</type>
 						<units>m</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_0D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b_field_tor">
-				<xs:annotation>
-					<xs:documentation>Total toroidal magnetic field at the magnetic axis</xs:documentation>
-					<xs:appinfo>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
-						<type>dynamic</type>
-						<units>T</units>
-						<cocos_label_transformation>b0_like</cocos_label_transformation>
-						<cocos_transformation_expression>.sigma_b0_eff</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.global_quantities.magnetic_axis.b_field_tor</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1687,18 +1670,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_tor" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Set of flux-surface averaged toroidal current density approximations at various positions  (= average(j_tor/R) / average(1/R))</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>A.m^-2</units>
-						<introduced_after_version>3.38.1</introduced_after_version>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="j_phi" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of flux-surface averaged toroidal current density approximations at various positions  (= average(j_tor/R) / average(1/R))</xs:documentation>
@@ -1708,7 +1679,7 @@
 						<change_nbc_version>3.42.0</change_nbc_version>
 						<change_nbc_description>aos_renamed</change_nbc_description>
 						<change_nbc_previous_name>j_tor</change_nbc_previous_name>
-				</xs:appinfo>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="j_parallel" type="equilibrium_constraints_0D_position" maxOccurs="unbounded">
@@ -1874,24 +1845,6 @@
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
 						<units>T^2.m^2/Wb</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_1D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="j_tor">
-				<xs:annotation>
-					<xs:documentation>Flux surface averaged toroidal current density = average(j_tor/R) / average(1/R)</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../psi</coordinate1>
-						<units>A.m^-2</units>
-						<cocos_label_transformation>ip_like</cocos_label_transformation>
-						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_1d.j_tor</cocos_leaf_name_aos_indices>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2539,25 +2492,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="j_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal plasma current density</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>A.m^-2</units>
-						<cocos_label_transformation>ip_like</cocos_label_transformation>
-						<cocos_transformation_expression>.sigma_ip_eff</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_2d{j}.j_tor</cocos_leaf_name_aos_indices>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="j_phi">
 				<xs:annotation>
 					<xs:documentation>Toroidal plasma current density</xs:documentation>
@@ -2629,22 +2563,6 @@
 					<xs:group ref="FLT_2D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="b_z">
-				<xs:annotation>
-					<xs:documentation>Z component of the poloidal magnetic field</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>T</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.5.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="b_field_z">
 				<xs:annotation>
 					<xs:documentation>Z component of the poloidal magnetic field</xs:documentation>
@@ -2653,25 +2571,6 @@
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<units>T</units>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:group ref="FLT_2D"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="b_field_tor">
-				<xs:annotation>
-					<xs:documentation>Toroidal component of the magnetic field</xs:documentation>
-					<xs:appinfo>
-						<type>dynamic</type>
-						<coordinate1>../grid/dim1</coordinate1>
-						<coordinate2>../grid/dim2</coordinate2>
-						<units>T</units>
-						<cocos_label_transformation>b0_like</cocos_label_transformation>
-						<cocos_transformation_expression>.sigma_b0_eff</cocos_transformation_expression>
-						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_2d{j}.b_field_tor</cocos_leaf_name_aos_indices>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2730,17 +2629,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="j_tor" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Toroidal plasma current density, given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>A.m^-2</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="j_phi" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Toroidal plasma current density, given on various grid subsets</xs:documentation>
@@ -2768,17 +2656,6 @@
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>T</units>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="b_field_tor" type="generic_grid_scalar" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Toroidal component of the magnetic field, given on various grid subsets</xs:documentation>
-					<xs:appinfo>
-						<coordinate1>1...N</coordinate1>
-						<units>T</units>
-						<lifecycle_status>obsolescent</lifecycle_status>
-						<lifecycle_version>3.42.0</lifecycle_version>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
