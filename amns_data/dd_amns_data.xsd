@@ -272,7 +272,7 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>units given by process(i1)/results_units</units>
-						<coordinate1>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(1)/values</coordinate1>
+						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -285,8 +285,8 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>units given by process(i1)/results_units</units>
-						<coordinate1>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(1)/values</coordinate1>
-						<coordinate2>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(2)/values</coordinate2>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -299,9 +299,9 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>units given by process(:)/results_units</units>
-						<coordinate1>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(1)/values</coordinate1>
-						<coordinate2>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(2)/values</coordinate2>
-						<coordinate3>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(3)/values</coordinate3>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -314,10 +314,10 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>units given by process(i1)/results_units</units>
-						<coordinate1>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(1)/values</coordinate1>
-						<coordinate2>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(2)/values</coordinate2>
-						<coordinate3>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(3)/values</coordinate3>
-						<coordinate4>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(4)/values</coordinate4>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>1...N</coordinate4>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -330,11 +330,11 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>units given by process(i1)/results_units</units>
-						<coordinate1>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(1)/values</coordinate1>
-						<coordinate2>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(2)/values</coordinate2>
-						<coordinate3>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(3)/values</coordinate3>
-						<coordinate4>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(4)/values</coordinate4>
-						<coordinate5>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(5)/values</coordinate5>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>1...N</coordinate4>
+						<coordinate5>1...N</coordinate5>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -347,12 +347,12 @@
 					<xs:appinfo>
 						<type>static</type>
 						<units>units given by process(i1)/results_units</units>
-						<coordinate1>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(1)/values</coordinate1>
-						<coordinate2>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(2)/values</coordinate2>
-						<coordinate3>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(3)/values</coordinate3>
-						<coordinate4>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(4)/values</coordinate4>
-						<coordinate5>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(5)/values</coordinate5>
-						<coordinate6>../../../coordinate_system(process(i1)/coordinate_index)/coordinate(6)/values</coordinate6>
+						<coordinate1>1...N</coordinate1>
+						<coordinate2>1...N</coordinate2>
+						<coordinate3>1...N</coordinate3>
+						<coordinate4>1...N</coordinate4>
+						<coordinate5>1...N</coordinate5>
+						<coordinate6>1...N</coordinate6>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -499,7 +499,7 @@
 			</xs:element>
 			<xs:element name="charge_state" type="amns_data_process_charge_state" maxOccurs="75">
 				<xs:annotation>
-					<xs:documentation>Process tables for a set of charge states. Only one table is used for that process, defined by process(:)/table_dimension</xs:documentation>
+					<xs:documentation>Process tables for a set of charge states. Only one table is used for that process, defined by process(:)/table_dimension. If the data in the table_Nd array are used as parameters for a function, then no coordinates are needed, and coordinate_index should be set to -1, and result_transformation should contain the integer identifier to the internally provided functions. If the results will come from an interpolation in the table_Nd data, then coordinates must be provided in coordinate_system(process(i1)/coordinate_index), and the shape of the table should match the cartesian product of the coordinates</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 					</xs:appinfo>
