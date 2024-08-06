@@ -34,6 +34,7 @@ def saxon_version(verb=False) -> int:
 
 
 def generate_dd_data_dictionary(extra_opts=""):
+    print("generating dd_data_dictionary.xml")
     dd_data_dictionary_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
@@ -54,21 +55,24 @@ def generate_dd_data_dictionary(extra_opts=""):
         # env=env,
         universal_newlines=True,
     )
-    proc.wait()
     (stdout, stderr) = proc.communicate()
 
     if proc.returncode != 0:
         assert False, stderr
     else:
-        if not os.path.islink(join_path(PWD, "IDSDef.xml")):
-            os.symlink(
-                "dd_data_dictionary.xml",
-                "IDSDef.xml",
-            )
+        try:
+            if not os.path.islink(join_path(PWD, "IDSDef.xml")):
+                os.symlink(
+                    "dd_data_dictionary.xml",
+                    "IDSDef.xml",
+                )
+        except Exception as _:  # noqa: F841
+            shutil.copy("dd_data_dictionary.xml", "IDSDef.xml")
 
 
 # TODO Check the problem of generation
 def generate_html_documentation(extra_opts=""):
+    print("generating html_documentation.html")
     html_documentation_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
@@ -89,7 +93,6 @@ def generate_html_documentation(extra_opts=""):
         # env=env,
         universal_newlines=True,
     )
-    proc.wait()
     (stdout, stderr) = proc.communicate()
 
     if proc.returncode != 0:
@@ -102,6 +105,7 @@ def generate_html_documentation(extra_opts=""):
 
 
 def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
+    print("generating html_documentation/cocos/ids_cocos_transformations_symbolic_table.csv")
     ids_cocos_transformations_symbolic_table_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
@@ -122,7 +126,6 @@ def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
         # env=env,
         universal_newlines=True,
     )
-    proc.wait()
     (stdout, stderr) = proc.communicate()
 
     if proc.returncode != 0:
@@ -130,6 +133,7 @@ def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
 
 
 def generate_idsnames():
+    print("generating IDSNames.txt")
     proc = subprocess.Popen(
         [
             "xsltproc",
@@ -141,7 +145,6 @@ def generate_idsnames():
         # env=env,
         universal_newlines=True,
     )
-    proc.wait()
     (stdout, stderr) = proc.communicate()
 
     if proc.returncode != 0:
@@ -153,6 +156,8 @@ def generate_idsnames():
 
 
 def generate_dd_data_dictionary_validation(extra_opts=""):
+    print("dd_data_dictionary_validation.txt")
+
     dd_data_dictionary_validation_generation_command = (
         "java"
         + " net.sf.saxon.Transform"
@@ -170,7 +175,7 @@ def generate_dd_data_dictionary_validation(extra_opts=""):
         stderr=subprocess.PIPE,
         universal_newlines=True,
     )
-    proc.wait()
+
     (stdout, stderr) = proc.communicate()
 
     if proc.returncode != 0:
