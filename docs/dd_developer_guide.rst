@@ -48,7 +48,7 @@ The repository contains:
 -  ``dd_data_dictionary.xml.xsd``: this is the root of the data dictionary tree,
    listing the IDS and their maximum occurrence number (has to be pre-declared,
    temporary limitation). Its root element also contains the information of
-   which COCOS convention is used in this version of the DD (``cocos=11`` in the
+   which COCOS convention is used in this version of the DD (``cocos=17`` in the
    example below):
 
    .. code-block:: xml
@@ -57,7 +57,7 @@ The repository contains:
          <xs:annotation>
             <xs:documentation>Root of the Physics Data Dictionary</xs:documentation>
             <xs:appinfo>
-               <cocos>11</cocos>
+               <cocos>17</cocos>
             </xs:appinfo>
          </xs:annotation>
       </xs:element>
