@@ -1,13 +1,13 @@
+from setuptools_scm import get_version
 import os
+import re
 import shutil
 import subprocess
-import re
-
-import versioneer
 
 PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
 
+<<<<<<< HEAD
 #pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1+202.gab0f789
 def convertGitToPep440(versionStr):
     parts = versionStr.split('-')
@@ -17,28 +17,30 @@ def convertGitToPep440(versionStr):
     else:
         return versionStr
     
+=======
+
+>>>>>>> develop/3
 def join_path(path1="", path2=""):
     return os.path.normpath(os.path.join(path1, path2))
 
-DD_GIT_DESCRIBE = convertGitToPep440(versioneer.get_version())
 
-def saxon_version(verb=False)->int:
+DD_GIT_DESCRIBE = get_version()
+
+
+def saxon_version(verb=False) -> int:
     cmd = ["java", "net.sf.saxon.Transform", "-t"]
     try:
-        out = subprocess.run(cmd,
-                             capture_output=True,
-                             text=True,
-                             check=False)
-        line = out.stderr.split('\n')[0]
+        out = subprocess.run(cmd, capture_output=True, text=True, check=False)
+        line = out.stderr.split("\n")[0]
         version = re.search(r"Saxon.* +(\d+)\.(\d+)", line)
-        if (verb):
+        if verb:
             print("Got Saxon version:", version.group(1), version.group(2))
         major = int(version.group(1)) * 100
         minor = int(version.group(2))
         version = major + minor
-    except:
-        if (verb):
-            print("Error: can't get Saxon version.")
+    except Exception as e:
+        if verb:
+            print(f"Error: can't get Saxon version. {e}")
         version = 0
     return version
 
@@ -109,23 +111,6 @@ def generate_html_documentation(extra_opts=""):
         "utilities/coordinate_identifier.xml",
         "html_documentation/utilities/coordinate_identifier.xml",
     )
-
-def generate_sphinx_documentation():
-    sphinx_documentation_generation_command = (
-        r"python -m venv docenv && source docenv/bin/activate && pip install -r docs/requirements.txt && make -C docs html && deactivate && rm -rf docenv"
-    )
-    proc = subprocess.Popen(
-        sphinx_documentation_generation_command,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        shell=True,
-        universal_newlines=True,
-    )
-    proc.wait()
-    (stdout, stderr) = proc.communicate()
-
-    if proc.returncode != 0:
-        assert False, stderr
 
 
 def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
@@ -203,15 +188,16 @@ def generate_dd_data_dictionary_validation(extra_opts=""):
     if proc.returncode != 0:
         assert False, stderr
 
+
 if __name__ == "__main__":
-    
+
     # Can we use threads in this version of Saxon?
     threads = ""
-    if saxon_version() >= 904: threads = " -threads:4"
-    
+    if saxon_version() >= 904:
+        threads = " -threads:4"
+
     generate_dd_data_dictionary(extra_opts=threads)
     generate_html_documentation(extra_opts=threads)
-    generate_sphinx_documentation()
     generate_ids_cocos_transformations_symbolic_table(extra_opts=threads)
     generate_idsnames()
     generate_dd_data_dictionary_validation(extra_opts=threads)
