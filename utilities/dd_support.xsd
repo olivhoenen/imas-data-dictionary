@@ -2274,7 +2274,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="coil_na_rzphi1d_static">
+	<xs:complexType name="coil_na_rphiz1d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi positions (1D, static), with a reference to the types coordinate specific to this IDS</xs:documentation>
 		</xs:annotation>
@@ -2337,22 +2337,22 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="start_points" type="coil_na_rzphi1d_static">
+			<xs:element name="start_points" type="coil_na_rphiz1d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the start point of every element</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="intermediate_points" type="coil_na_rzphi1d_static">
+			<xs:element name="intermediate_points" type="coil_na_rphiz1d_static">
 				<xs:annotation>
 					<xs:documentation>Position of an intermediate point along the circle or arc of circle, for every element, providing the orientation of the element (must define with the corresponding start point an aperture angle strictly inferior to PI). In the case of a line segment (../types/index=1), fill this node with a point such that the vector intermediate_point - start_point defines the direction of the element's normal axis (see documentation of ../elements)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="end_points" type="coil_na_rzphi1d_static">
+			<xs:element name="end_points" type="coil_na_rphiz1d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the end point of every element. Meaningful only if type/index = 1 or 2, fill with default/empty value otherwise</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="centres" type="coil_na_rzphi1d_static">
+			<xs:element name="centres" type="coil_na_rphiz1d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the centre of the arc of a circle of every element (meaningful only if type/index = 2 or 3, fill with default/empty value otherwise)</xs:documentation>
 				</xs:annotation>
@@ -2377,7 +2377,7 @@
 						<coordinate1>../elements/types OR 1...1</coordinate1>
 						<change_nbc_version>3.40.0</change_nbc_version>
 						<change_nbc_description>type_changed</change_nbc_description>
-						<change_nbc_previous_type>delta_rzphi1d_static</change_nbc_previous_type>
+						<change_nbc_previous_type>delta_rphiz1d_static</change_nbc_previous_type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -5305,7 +5305,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="generic_grid_vector_components_rzphi">
+	<xs:complexType name="generic_grid_vector_components_rphiz">
 		<xs:annotation>
 			<xs:documentation>Vector components in predefined directions on a generic grid, R, Z and toroidal directions only (dynamic within a type 3 AoS)</xs:documentation>
 			<xs:appinfo>
@@ -6971,7 +6971,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="delta_rzphi0d_static">
+	<xs:complexType name="delta_rphiz0d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi relative positions (0D, static)</xs:documentation>
 		</xs:annotation>
@@ -7014,7 +7014,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="delta_rzphi1d_static">
+	<xs:complexType name="delta_rphiz1d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi relative positions (1D, static)</xs:documentation>
 		</xs:annotation>
@@ -7060,7 +7060,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi0d_static">
+	<xs:complexType name="rphiz0d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi positions (0D, static)</xs:documentation>
 		</xs:annotation>
@@ -7103,7 +7103,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi0d_dynamic_aos3">
+	<xs:complexType name="rphiz0d_dynamic_aos3">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi positions (0D, dynamic within a type 3 array of structures (index on time))</xs:documentation>
 			<xs:appinfo>
@@ -7149,7 +7149,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphipsirho0d_dynamic_aos3">
+	<xs:complexType name="rphizpsirho0d_dynamic_aos3">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi, psi, rho_tor positions (0D, dynamic within a type 3 array of structures (index on time))</xs:documentation>
 			<xs:appinfo>
@@ -7219,7 +7219,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi1d_grid">
+	<xs:complexType name="rphiz1d_grid">
 		<xs:annotation>
 			<xs:documentation>R, Z, Phi structured grid, in which R, Z and phi don't necessarily have the same number of elements</xs:documentation>
 		</xs:annotation>
@@ -7265,7 +7265,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi1d_static">
+	<xs:complexType name="rphiz1d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi positions (1D, static)</xs:documentation>
 		</xs:annotation>
@@ -7311,7 +7311,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi2d_static">
+	<xs:complexType name="rphiz2d_static">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi positions (2D, static)</xs:documentation>
 		</xs:annotation>
@@ -7364,7 +7364,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi1d_dynamic_aos1">
+	<xs:complexType name="rphiz1d_dynamic_aos1">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi positions (1D, dynamic within a type 1 array of structures (indexed on objects, data/time structure)</xs:documentation>
 		</xs:annotation>
@@ -7395,7 +7395,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi1d_dynamic_aos1_common_time">
+	<xs:complexType name="rphiz1d_dynamic_aos1_common_time">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi positions (1D, dynamic within a type 1 array of structure and with a common time base at the same level)</xs:documentation>
 		</xs:annotation>
@@ -7451,7 +7451,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi1d_dynamic_root_time">
+	<xs:complexType name="rphiz1d_dynamic_root_time">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi positions (1D, dynamic), using the root time of the IDS</xs:documentation>
 		</xs:annotation>
@@ -7500,7 +7500,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphirhopsitheta1d_dynamic_aos1">
+	<xs:complexType name="rphizrhopsitheta1d_dynamic_aos1">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi, rho_tor_norm, psi, theta positions (1D, dynamic within a type 1 array of structures (indexed on objects, data/time structure)</xs:documentation>
 		</xs:annotation>
@@ -7555,7 +7555,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphirhopsitheta1d_dynamic_aos1_common_time_1">
+	<xs:complexType name="rphizrhopsitheta1d_dynamic_aos1_common_time_1">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi, rho_tor_norm, psi, theta positions (1D, dynamic within a type 1 array of structures, assuming a common time array one level above</xs:documentation>
 		</xs:annotation>
@@ -7664,7 +7664,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi1d_dynamic_aos1_definition">
+	<xs:complexType name="rphiz1d_dynamic_aos1_definition">
 		<xs:annotation>
 			<xs:documentation>Structure for list of R, Z, Phi positions (1D, dynamic within a type 1 array of structures (indexed on objects, data/time structure), including a definition of the reference point</xs:documentation>
 		</xs:annotation>
@@ -7706,7 +7706,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphi1d_dynamic_aos3">
+	<xs:complexType name="rphiz1d_dynamic_aos3">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi positions (1D, dynamic within a type 3 array of structure)</xs:documentation>
 			<xs:appinfo>
@@ -7755,7 +7755,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="rzphipsitheta1d_dynamic_aos3">
+	<xs:complexType name="rphizpsitheta1d_dynamic_aos3">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi, Psi, Theta positions (1D, dynamic within a type 3 array of structures)</xs:documentation>
 			<xs:appinfo>
@@ -8414,7 +8414,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="centre" type="rzphi0d_static">
+			<xs:element name="centre" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>Coordinates of the origin of the local coordinate system (X1,X2,X3) describing the filter. This origin is located within the filter area and should be the middle point of the filter surface. If geometry_type=2, it's the centre of the circular filter. If geometry_type=3, it's the centre of the rectangular filter. </xs:documentation>
 				</xs:annotation>
@@ -8643,7 +8643,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="centre" type="rzphi0d_static">
+			<xs:element name="centre" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.</xs:documentation>
 				</xs:annotation>
@@ -8723,7 +8723,7 @@
 					<xs:group ref="INT_0D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="centre" type="rzphi0d_static">
+			<xs:element name="centre" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane detector/aperture. This origin is located within the detector/aperture area.</xs:documentation>
 				</xs:annotation>
@@ -8863,7 +8863,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="centre" type="rzphi0d_static">
+			<xs:element name="centre" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>Coordinates of the origin of the local coordinate system (X1,X2,X3) describing the object. This origin is located within the object area and should be the middle point of the object surface. If geometry_type=2, it's the centre of the circular object. If geometry_type=3, it's the centre of the rectangular object. </xs:documentation>
 				</xs:annotation>
@@ -9048,7 +9048,7 @@
 			<xs:documentation>Generic description of a polarizer (extension of the detector_aperture complex type)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="centre" type="rzphi0d_static">
+			<xs:element name="centre" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>If geometry_type=2, coordinates of the centre of the circle. If geometry_type=1 or 3, coordinates of the origin of the local coordinate system (X1,X2,X3) describing the plane polarizer. This origin is located within the polarizer area. Note that there is some flexibility here and the data provider should choose the most convenient coordinate system for the object, respecting the definitions of (X1,X2,X3) indicated below.</xs:documentation>
 				</xs:annotation>
@@ -9116,29 +9116,29 @@
 			<xs:documentation>Generic description of a line of sight, defined by two points</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="first_point" type="rzphi0d_static">
+			<xs:element name="first_point" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the first point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="second_point" type="rzphi0d_static">
+			<xs:element name="second_point" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the second point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="line_of_sight_2points_rzphi_2d">
+	<xs:complexType name="line_of_sight_2points_rphiz_2d">
 		<xs:annotation>
 			<xs:documentation>Generic description of a line of sight, defined by two points</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="first_point" type="rzphi2d_static">
+			<xs:element name="first_point" type="rphiz2d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the first point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="second_point" type="rzphi2d_static">
+			<xs:element name="second_point" type="rphiz2d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the second point</xs:documentation>
 				</xs:annotation>
@@ -9150,12 +9150,12 @@
 			<xs:documentation>Generic description of a line of sight, defined by two points, dynamic within an AoS1 (1st point fixed, 2nd point is dynamic)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="first_point" type="rzphi0d_static">
+			<xs:element name="first_point" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the first point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="second_point" type="rzphi1d_dynamic_aos1_common_time">
+			<xs:element name="second_point" type="rphiz1d_dynamic_aos1_common_time">
 				<xs:annotation>
 					<xs:documentation>Position of the second point (possibly dynamic)</xs:documentation>
 				</xs:annotation>
@@ -9207,12 +9207,12 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="first_point" type="rzphi0d_dynamic_aos3">
+			<xs:element name="first_point" type="rphiz0d_dynamic_aos3">
 				<xs:annotation>
 					<xs:documentation>Position of the first point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="second_point" type="rzphi0d_dynamic_aos3">
+			<xs:element name="second_point" type="rphiz0d_dynamic_aos3">
 				<xs:annotation>
 					<xs:documentation>Position of the second point</xs:documentation>
 				</xs:annotation>
@@ -9224,17 +9224,17 @@
 			<xs:documentation>Generic description of a line of sight, defined by two points (one way) and an optional third point to indicate the direction of reflection if the second point is e.g. the position of a mirror reflecting the line-of-sight</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="first_point" type="rzphi0d_static">
+			<xs:element name="first_point" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the first point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="second_point" type="rzphi0d_static">
+			<xs:element name="second_point" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the second point</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="third_point" type="rzphi0d_static">
+			<xs:element name="third_point" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the third point</xs:documentation>
 				</xs:annotation>
@@ -9271,7 +9271,7 @@
 					<xs:group ref="INT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="pixel_position" type="rzphi2d_static">
+			<xs:element name="pixel_position" type="rphiz2d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the centre of each pixel. First dimension : line index (x1 axis). Second dimension: column index (x2 axis).</xs:documentation>
 				</xs:annotation>
@@ -9289,7 +9289,7 @@
 					<xs:group ref="FLT_1D"/>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="centre" type="rzphi0d_static">
+			<xs:element name="centre" type="rphiz0d_static">
 				<xs:annotation>
 					<xs:documentation>Position of the camera centre</xs:documentation>
 				</xs:annotation>
@@ -9315,7 +9315,7 @@
 					<xs:documentation>Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the camera plane and oriented towards the plasma.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="line_of_sight" type="line_of_sight_2points_rzphi_2d">
+			<xs:element name="line_of_sight" type="line_of_sight_2points_rphiz_2d">
 				<xs:annotation>
 					<xs:documentation>Description of the line of sight for each pixel, given by 2 points. For each coordinate : first dimension : line index (x1 axis); second dimension: column index (x2 axis).</xs:documentation>
 				</xs:annotation>
@@ -10494,7 +10494,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="waves_rzphipsitheta1d_dynamic_aos3">
+	<xs:complexType name="waves_rphizpsitheta1d_dynamic_aos3">
 		<xs:annotation>
 			<xs:documentation>Structure for R, Z, Phi, Psi, Theta, rho_tor_norm positions (1D, dynamic within a type 3 array of structure)</xs:documentation>
 			<xs:appinfo>
