@@ -11,22 +11,6 @@ sys.path.append(str(pathlib.Path(__file__).parent.resolve()))
 
 current_directory = pathlib.Path(__file__).parent.resolve()
 
-<<<<<<< HEAD
-import versioneer
-from generate import (generate_dd_data_dictionary,
-                      generate_dd_data_dictionary_validation,
-                      generate_html_documentation,
-                      generate_ids_cocos_transformations_symbolic_table,
-                      generate_idsnames)
-from install import (copy_utilities, create_idsdef_symlink,
-                     install_cocos_csv_files, install_css_files,
-                     install_dd_files, install_html_files,
-                     install_identifiers_files, install_ids_files,
-                     install_img_files, install_js_files,
-                     install_utilities_files)
-=======
->>>>>>> develop/3
-
 class CustomInstallCommand(install):
     description = "DD files generation"
     paths = []

@@ -7,19 +7,6 @@ import subprocess
 PWD = os.path.realpath(os.path.dirname(__file__))
 UAL = os.path.dirname(PWD)
 
-<<<<<<< HEAD
-#pep440 version conversion 4.1.1-202-gab0f789 -> 4.1.1+202.gab0f789
-def convertGitToPep440(versionStr):
-    parts = versionStr.split('-')
-    if len(parts) == 3:
-        baseVersion, iterations, commitHash = parts
-        return f"{baseVersion}+{iterations}.{commitHash}"
-    else:
-        return versionStr
-    
-=======
-
->>>>>>> develop/3
 def join_path(path1="", path2=""):
     return os.path.normpath(os.path.join(path1, path2))
 
