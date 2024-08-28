@@ -7,7 +7,12 @@ import datetime
 import os
 import subprocess
 import sys
-
+from git import Repo
+try:
+    is_gitrepo = True
+    try_repo=Repo("..")
+except Exception as _:
+    is_gitrepo = False
 # Ensure that our extension module can be imported:
 sys.path.append(os.path.curdir)
 import sphinx_dd_extension.autodoc
@@ -18,10 +23,16 @@ import sphinx_dd_extension.autodoc
 project = "IMAS Data Dictionary"
 copyright = f"{datetime.datetime.now().year}, ITER Organization"
 author = "ITER Organization"
-
-version = subprocess.check_output(["git", "describe"]).decode().strip()
-last_tag = subprocess.check_output(["git", "describe", "--abbrev=0"]).decode().strip()
-is_develop = version != last_tag
+if is_gitrepo:
+    version = subprocess.check_output(["git", "describe"]).decode().strip()
+    last_tag = subprocess.check_output(["git", "describe", "--abbrev=0"]).decode().strip()
+    is_develop = version != last_tag
+else:
+	os.chdir("..")
+	from setuptools_scm import get_version
+	version=get_version()
+	is_develop="dev" in version
+	os.chdir("docs")
 
 html_context = {
     "is_develop": is_develop
