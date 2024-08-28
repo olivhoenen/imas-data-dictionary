@@ -21,7 +21,13 @@ from sphinx.util import logging
 from xml.etree import ElementTree
 
 logger = logging.getLogger(__name__)
-
+try:
+    is_gitrepo = True
+    try_repo=Repo("..")
+except Exception as _:
+    logger.error("git repo is not present, Data Dictionary changelog will not be generated")
+    is_gitrepo = False
+    
 try:
     from imaspy import IDSFactory
     from imaspy.dd_zip import dd_xml_versions
@@ -460,8 +466,10 @@ def generate_dd_changelog(app: Sphinx):
 
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_config_value("dd_changelog_generate", True, "env", [bool])
-    app.connect("builder-inited", generate_git_changelog)
-    app.connect("builder-inited", generate_dd_changelog)
+    if is_gitrepo:
+        app.connect("builder-inited", generate_git_changelog)
+    if has_imaspy:
+        app.connect("builder-inited", generate_dd_changelog)
     return {
         "version": "0.1",
         "parallel_read_safe": True,

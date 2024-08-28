@@ -1,11 +1,3 @@
-from generate import (
-    generate_dd_data_dictionary,
-    generate_dd_data_dictionary_validation,
-    generate_html_documentation,
-    generate_ids_cocos_transformations_symbolic_table,
-    generate_idsnames,
-    saxon_version,
-)
 from pathlib import Path
 import os
 import shutil
@@ -14,7 +6,9 @@ import subprocess
 
 def generate_sphinx_documentation():
     from sphinx.cmd.build import main as sphinx_main
+    from setuptools_scm import get_version
 
+    git_describe_output = get_version()
     os.chdir("docs")
 
     idsdef_path = os.path.join(".", "_static/IDSDefxml.js")
@@ -50,14 +44,16 @@ def generate_sphinx_documentation():
     sphinx_main(sphinx_args)
     # if ret != 0:
     #     raise RuntimeError(f"Sphinx build failed with return code {ret}")
+    try:
+        from git import Repo
 
-    from git import Repo
+        output_file_path = os.path.join("docs", "_build", "html", "version.txt")
 
-    output_file_path = os.path.join("docs", "_build", "html", "version.txt")
+        repo = Repo("..")
 
-    repo = Repo("..")
-
-    git_describe_output = repo.git.describe().strip()
+        git_describe_output = repo.git.describe().strip()
+    except Exception as _:  # noqa: F841
+        pass
 
     os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
     with open(output_file_path, "w") as version_file:
@@ -66,6 +62,14 @@ def generate_sphinx_documentation():
 
 
 if __name__ == "__main__":
+    from generate import (
+        generate_dd_data_dictionary,
+        generate_dd_data_dictionary_validation,
+        generate_html_documentation,
+        generate_ids_cocos_transformations_symbolic_table,
+        generate_idsnames,
+        saxon_version,
+    )
 
     # Can we use threads in this version of Saxon?
     threads = ""
