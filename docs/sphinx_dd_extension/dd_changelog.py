@@ -461,7 +461,8 @@ def generate_dd_changelog(app: Sphinx):
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_config_value("dd_changelog_generate", True, "env", [bool])
     app.connect("builder-inited", generate_git_changelog)
-    app.connect("builder-inited", generate_dd_changelog)
+    if has_imaspy:
+        app.connect("builder-inited", generate_dd_changelog)
     return {
         "version": "0.1",
         "parallel_read_safe": True,

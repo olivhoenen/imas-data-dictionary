@@ -70,7 +70,6 @@ def generate_dd_data_dictionary(extra_opts=""):
             shutil.copy("dd_data_dictionary.xml", "IDSDef.xml")
 
 
-# TODO Check the problem of generation
 def generate_html_documentation(extra_opts=""):
     print("generating html_documentation.html")
     html_documentation_generation_command = (
@@ -134,26 +133,27 @@ def generate_ids_cocos_transformations_symbolic_table(extra_opts=""):
 
 def generate_idsnames():
     print("generating IDSNames.txt")
+    idsnames_command = (
+        "java"
+        + " net.sf.saxon.Transform"
+        + " -t -warnings:fatal -s:"
+        + "dd_data_dictionary.xml"
+        + " -xsl:"
+        + "IDSNames.txt.xsl"
+        + " -o:"
+        + "IDSNames.txt"
+    )
     proc = subprocess.Popen(
-        [
-            "xsltproc",
-            join_path(PWD, "IDSNames.txt.xsl"),
-            join_path(PWD, "dd_data_dictionary.xml"),
-        ],
+        idsnames_command.split(),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        # env=env,
         universal_newlines=True,
     )
+
     (stdout, stderr) = proc.communicate()
 
     if proc.returncode != 0:
         assert False, stderr
-    else:
-        f = open("IDSNames.txt", "w")
-        f.write(stdout)
-        f.close()
-
 
 def generate_dd_data_dictionary_validation(extra_opts=""):
     print("dd_data_dictionary_validation.txt")
