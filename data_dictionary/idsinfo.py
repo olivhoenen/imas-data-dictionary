@@ -228,14 +228,21 @@ class IDSInfo:
                 is_top_node = False
                 top_node_name = ""
                 search_result_for_ids = {}
+                fieldlist=[]
                 for field in ids.iter("field"):
+                    fieldlist.append(field)
                     attributes = {}
 
                     if "units" in field.attrib.keys():
                         attributes["units"] = field.attrib["units"]
+                        if "as_parent" in attributes["units"]:
+                            for sfield in reversed(fieldlist):
+                                if "units" in sfield.attrib.keys():
+                                    if "as_parent" not in sfield.attrib["units"]:
+                                        attributes["units"] = sfield.attrib["units"]
+                                        break
                     if "documentation" in field.attrib.keys():
                         attributes["documentation"] = field.attrib["documentation"]
-
                     field_path = re.sub(r"\(([^:][^itime]*?)\)", "(:)", field.attrib["path_doc"])
                     if "timebasepath" in field.attrib.keys():
                         field_path = re.sub(r"\(([:]*?)\)$", "(itime)", field_path)
