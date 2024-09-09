@@ -7,7 +7,7 @@ set -e -o pipefail
 echo "Loading modules..."
 
 # Set up environment such that module files can be loaded
-. /usr/share/Modules/init/sh
+. /etc/profile.d/modules.sh
 module purge
 # Load modules required for building the Sphinx documentation
 # - Saxon (required for building the DD)
