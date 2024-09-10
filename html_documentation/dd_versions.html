@@ -18,6 +18,47 @@
 			</thead>
 			<p><a href="html_documentation.html">Back to top IDS list</a></p>
 			<tr>
+				<td><b>4.0.0</b></td>
+				<td><ul>
+					<li>Removed all obsolescent nodes from DDv3, this includes the removal of all *_error_index nodes</li>
+					<li>The poloidal flux 'psi' becomes defined by its engineering definition, instead of the previous COCOS-dependent poloidal flux function definition, which is equivalent to moving to COCOS = 17</li>
+					<li>Deleted obsolete substructures in the transport solver numerics IDS</li>
+					<li>Renamed some quantities for the sake of consistency:</li>
+					<ul>
+						<li>SUMMARY IDS : global_quantities/li &rarr; li_3 and li_mhd &rarr; li_3_mhd, local/magnetic_axis/b_field &rarr; b_field_tor</li>
+						<li>PULSE_SCHEDULE IDS: flux_control/i_plasma &rarr; ip, loop_voltage &rarr; v_loop, beta_normal &rarr; beta_tor_norm</li>
+						<li>EQUILIBRIUM IDS: time_slice/global_quantities/beta_normal &rarr; beta_tor_norm, time_slice/constraints/bpol_probe &rarr; b_field_pol_probe</li>
+					</ul>
+					<li>Changed to American spelling –ize instead of -ise</li>
+					<li>Changed the data type of z_n (nuclear charge), used in several IDSs, was FLT_0D, becomes INT_0D</li>
+					<li>Renamed 'toroidal flux loop' as 'poloidal flux loop' in the magnetics_flux_loop_type_identifier (used in the MAGNETICS IDS)</li>
+					<li>DATASET_DESCRIPTION, DATASET_FAIR, AMNS_DATA, GYROKINETICS_LOCAL and REAL_TIME_DATA IDSs become constant IDSs (root time and code/output_flag nodes removed)</li>
+					<li>Revision of the DATASET_DESCRIPTION IDS, in particular in view of AL5 which introduces a generalization of the way of identifying an IMAS data entry</li>					
+					<li>Redefinition of boundaries in the EQUILIBRIUM IDS:</li>
+					<ul>
+						<li>Redefinition of boundary elongation and triangularity</li>
+						<li>In the 'time_slice/boundary' structure: boundary/x_point and strike_point arrays removed, active_limiter_point removed</li>
+						<li>The new structure allows storing a single boundary: boundary_v4 can either correspond to the definition of boundary_v3 (psi_norm &lt; 1) or to the definition of boundary_separatrix_v3 (psi_norm = 1)</li>
+						<li>The 'boundary_separatrix' and 'boundary_secondary_separatrix' structures are removed</li>
+						<li>The topology of additional magnetic surfaces containing X or O points can be described in the new 'countour_tree' structure</li>
+					</ul>
+					<li>Changed the definition of circuit/connections in the PF_ACTIVE IDS</li>
+					<li>Turned the GGD space/coordinates_type vector into a proper identifier structure</li>
+					<li>In subsystems-related IDSs, change (name, identifier) to (name, description) with the same definition everywhere:</li>
+					<ul>
+						<li>name : Short string identifier (unique for a given device)</li>
+						<li>description : Description, e.g. “channel viewing the upper divertor”</li>
+					</ul>
+					<li>Similarly, 'label' of chemical elements has been replaced by 'name' (change prepared in 3.42.0)</li>
+					<li>Changed countour descriptions to follow ISO 19125-1 norm: closed boundary curves (linear rings) must include the end point (otherwise, it means they are open). The equality of the start and end points is used to assert that the curve is closed.</li>
+					<li>Changed suffixes *_tor into *_phi to denote the toroidal component of a vector in the (R,phi,Z) right-handed cylinder coordinate system (change prepared in 3.42.0)</li>
+					<li>Removed error bars from some GGD leaves: space/objects_per_dimension/object/geometry, measure and geometry_2d</li>
+					<li>Clarification of indexing and improvement of the IDSPATH syntax</li>
+					<li>Introduction of the alternative coordinates feature (in CORE_PROFILES)</li>
+				</ul>
+				</td>
+			</tr>
+			<tr>
 				<td>3.42.0</td>
 				<td>Extension of the SPECTROMETER_MASS IDS. Update the TF IDS (reuse the description of conductors as in the COILS_NON_AXISYMMETRIC). Extension of the ECE IDS. Declare _tor suffix as obsolescent and replace it by _phi suffix for toroidal vector components. Improvement of the GYROKINETICS_LOCAL IDS. Add "name" nodes to replace all "label" nodes when moving to DDv4. Mark the previous matrices with explicit names as obsolescent in the EM_COUPLING IDS. Extension of the DISTRIBUTIONS IDS. Extension of the THOMSON_SCATTERING IDS. New PLASMA_PROFILES, PLASMA_SOURCES and PLASMA_TRANSPORT IDSs</td>
 			</tr>
