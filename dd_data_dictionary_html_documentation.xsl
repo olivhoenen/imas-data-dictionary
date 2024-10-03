@@ -17,7 +17,7 @@
       </head>
       <body>
               <p class="welcome">ITER Physics Data Model Documentation : Top level (list of all IDSs)</p>
-              <p>This version of the ITER Physics Data Model follows the COCOS = <xsl:value-of select="./cocos"/> coordinate convention. The COCOS conventions are defined in [O. Sauter and S.Yu. Medvedev, Computer Physics Communications 184 (2013) 293]</p>
+              <p>This version of the ITER Physics Data Model corresponds to COCOS = <xsl:value-of select="./cocos"/> coordinate convention. The COCOS conventions are defined in [O. Sauter and S.Yu. Medvedev, Computer Physics Communications 184 (2013) 293]</p>
               <p>For conversion between cylindrical (R,phi,Z) and Cartesian (X,Y,Z) coordinates, IMAS follows the <a href="https://en.wikipedia.org/wiki/ISO_31-11">ISO 31-11 standard</a>, namely the origin and Z axis align and the X axis corresponds to phi = 0</p>
 			  <p>Mathematical operators :
 			  <ul>
@@ -166,12 +166,13 @@
         </tr>
         </table>
            </xsl:if>
-           <xsl:if test="@cocos_label_transformation">. This quantity is COCOS-dependent, with the following transformation :
+           <!--<xsl:if test="@cocos_label_transformation">. This quantity is COCOS-dependent, with the following transformation :
                 <table border="1">
                       <thead><td>Label</td><td>Expression</td></thead>
                       <tr><td><xsl:value-of select="@cocos_label_transformation"/></td><td><xsl:value-of select="@cocos_transformation_expression"/></td></tr>
         </table>
            </xsl:if>
+	   -->
            </td>
            <td>
 <xsl:choose>
