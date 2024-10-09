@@ -17,6 +17,7 @@ module purge
 module load \
     Saxon-HE/12.4-Java-21 \
     Python/3.11.5-GCCcore-13.2.0 \
+    IMAS-AL-Core/5.3.2-foss-2023b \
     IMASPy/1.1.0-foss-2023b
 
 
