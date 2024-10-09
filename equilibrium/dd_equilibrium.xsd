@@ -2463,12 +2463,15 @@
 			</xs:element>
 			<xs:element name="theta">
 				<xs:annotation>
-					<xs:documentation>Values of the poloidal angle on the grid</xs:documentation>
+					<xs:documentation>Values of the poloidal angle on the grid. The poloidal angle is centered on the magnetic axis and oriented clockwise from front, so that (rho,theta,phi) is a right handed system</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
 						<coordinate2>../grid/dim2</coordinate2>
 						<units>rad</units>
+						<cocos_label_transformation>pol_angle_like</cocos_label_transformation>
+						<cocos_transformation_expression>.fact_dtheta</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.profiles_2d{j}.theta</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -2622,10 +2625,13 @@
 			</xs:element>
 			<xs:element name="theta" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Values of the poloidal angle, given on various grid subsets</xs:documentation>
+					<xs:documentation>Values of the poloidal angle, given on various grid subsets. The poloidal angle is centered on the magnetic axis and oriented clockwise from front, so that (rho,theta,phi) is a right handed system</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>rad</units>
+						<cocos_label_transformation>pol_angle_like</cocos_label_transformation>
+						<cocos_transformation_expression>.fact_dtheta</cocos_transformation_expression>
+						<cocos_leaf_name_aos_indices>equilibrium.time_slice{i}.ggd{j}.theta{k}.values</cocos_leaf_name_aos_indices>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
