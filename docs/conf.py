@@ -33,7 +33,6 @@ else:
 	version=get_version()
 	is_develop="dev" in version
 	os.chdir("docs")
-project += f" Version {version}"
 html_context = {
     "is_develop": is_develop
 }
