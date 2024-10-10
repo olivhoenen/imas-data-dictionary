@@ -1956,7 +1956,7 @@
 			</xs:element>
 			<xs:element name="rho_tor_norm">
 				<xs:annotation>
-					<xs:documentation>Normalized toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation) </xs:documentation>
+					<xs:documentation>Normalized toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation). Namely (rho_tor(rho)-rho_tor(magnetic_axis)) / (rho_tor(boundary)-rho_tor(magnetic_axis))</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../psi</coordinate1>
@@ -2463,7 +2463,7 @@
 			</xs:element>
 			<xs:element name="theta">
 				<xs:annotation>
-					<xs:documentation>Values of poloidal angle on the grid. The poloidal angle is centered on the magnetic axis and oriented such that (grad rho_norm, grad theta, grad phi) form a right-handed set where grad rho_norm points away from the magnetic axis.</xs:documentation>
+					<xs:documentation>Values of poloidal angle on the grid. The poloidal angle is centered on the magnetic axis and oriented such that (grad rho_tor_norm, grad theta, grad phi) form a right-handed set where grad rho_tor_norm points away from the magnetic axis.</xs:documentation>
 					<xs:appinfo>
 						<type>dynamic</type>
 						<coordinate1>../grid/dim1</coordinate1>
@@ -2625,7 +2625,7 @@
 			</xs:element>
 			<xs:element name="theta" type="generic_grid_scalar" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Values of the poloidal angle, given on various grid subsets. The poloidal angle is centered on the magnetic axis and oriented such that (grad rho_norm, grad theta, grad phi) form a right-handed set where grad rho_norm points away from the magnetic axis.</xs:documentation>
+					<xs:documentation>Values of the poloidal angle, given on various grid subsets. The poloidal angle is centered on the magnetic axis and oriented such that (grad rho_tor_norm, grad theta, grad phi) form a right-handed set where grad rho_tor_norm points away from the magnetic axis.</xs:documentation>
 					<xs:appinfo>
 						<coordinate1>1...N</coordinate1>
 						<units>rad</units>
