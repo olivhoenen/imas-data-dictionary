@@ -263,16 +263,16 @@ def ids_changes(ids_name: str, from_factory, to_factory):
     for f, t in version_map.old_to_new.path.items():
         if f.endswith(("_error_index", "_error_upper", "_error_lower")):
             continue
-        if f in version_map.old_to_new.type_change:
+        if t is None:
+            removed.append(f)
+        elif f in version_map.old_to_new.type_change:
             from_data_type = from_factory._etree.find(f".//field[@path='{f}']").get(
                 "data_type"
             )
-            to_data_type = to_factory._etree.find(f".//field[@path='{f}']").get(
+            to_data_type = to_factory._etree.find(f".//field[@path='{t}']").get(
                 "data_type"
             )
             retyped.append((f, from_data_type, to_data_type))
-        elif t is None:
-            removed.append(f)
         else:
             renamed.append((f, t))
 
