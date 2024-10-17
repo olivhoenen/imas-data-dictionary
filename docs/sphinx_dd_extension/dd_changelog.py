@@ -266,6 +266,10 @@ def ids_changes(ids_name: str, from_factory, to_factory):
         if t is None:
             removed.append(f)
         elif f in version_map.old_to_new.type_change:
+            # DD3 -> DD4 specific conversion
+            if f=="ids_properties/source" and t=="ids_properties/provenance":
+                renamed.append((f,t))
+                continue
             from_data_type = from_factory._etree.find(f".//field[@path='{f}']").get(
                 "data_type"
             )
