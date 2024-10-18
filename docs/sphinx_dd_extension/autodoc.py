@@ -343,6 +343,9 @@ def field2rst(
         elif change_nbc_description == "repeat_children_first_point_conditional_sibling_dynamic":
             result.append(f".. versionchanged:: {change_nbc_version}")
             result.append(f"  When describing a closed dynamic countour (closed sibling flag = 1 in DDv3), the first point must now be repeated at the end of the coordinate arrays of the children")
+        elif change_nbc_description == "repeat_children_first_point_conditional_centreline":
+            result.append(f".. versionchanged:: {change_nbc_version}")
+            result.append(f"  When describing a closed dynamic countour (specific case: the conversion tool will check the ../centreline/closed flag in DDv3), the first point must now be repeated at the end of the coordinate arrays of the children")
         else:
             logger.warning(
                 "Unknown nbc change %r, not documenting NBC change.",
