@@ -925,10 +925,10 @@ The following use cases are implemented :
       <change_nbc_description>repeat_children_first_point_conditional_sibling_dynamic</change_nbc_description>
       
    .. code-block:: xml
-      :caption: Example for a contour that is not necessarily closed (specific case: the conversion tool will check the ../centreline/closed flag in DDv3)
+      :caption: Specific case for wall annular thickness (which has a size equals to the contour size-1): remove the last point of a vector in case the ../centreline/closed flag is False in DDv3
 
       <change_nbc_version>4</change_nbc_version>
-      <change_nbc_description>repeat_children_first_point_conditional_centreline</change_nbc_description>
+      <change_nbc_description>remove_last_point_if_open_annular_centreline</change_nbc_description>
 
 
 
