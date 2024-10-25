@@ -10203,11 +10203,13 @@
 			</xs:element>
 			<xs:element name="thickness">
 				<xs:annotation>
-					<xs:documentation>Thickness of the vessel layer  in the perpendicular direction to the centreline. Thickness(i) is the thickness of the layer between centreline/r(i),z(i) and centreline/r(i+1),z(i+1)</xs:documentation>
+					<xs:documentation>Thickness of the vessel layer  in the perpendicular direction to the centreline. Thickness(i) is the thickness of the layer between centreline/r(i),z(i) and centreline/r(i+1),z(i+1), so its size is equal to the length of centreline/r-1 if the thickness is varying. If the thickness is constant for all points, allocate this node to size 1 to store a single value. </xs:documentation>
 					<xs:appinfo>
 						<type>static</type>
 						<units>m</units>
-						<coordinate1>../centreline/r</coordinate1>
+						<coordinate1>1...N</coordinate1>
+						<change_nbc_version>4</change_nbc_version>
+						<change_nbc_description>remove_last_point_if_open_annular_centreline</change_nbc_description>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>

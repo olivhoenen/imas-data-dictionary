@@ -343,6 +343,9 @@ def field2rst(
         elif change_nbc_description == "repeat_children_first_point_conditional_sibling_dynamic":
             result.append(f".. versionchanged:: {change_nbc_version}")
             result.append(f"  When describing a closed dynamic countour (closed sibling flag = 1 in DDv3), the first point must now be repeated at the end of the coordinate arrays of the children")
+        elif change_nbc_description == "remove_last_point_if_open_annular_centreline":
+            result.append(f".. versionchanged:: {change_nbc_version}")
+            result.append(f"  Specific case for wall annular thickness (which has a size equals to the contour size-1): remove the last point of a vector in case the ../centreline/closed flag is False in DDv3")
         else:
             logger.warning(
                 "Unknown nbc change %r, not documenting NBC change.",
