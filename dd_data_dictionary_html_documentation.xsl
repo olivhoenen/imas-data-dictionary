@@ -21,7 +21,7 @@
               <p>For conversion between cylindrical (R,phi,Z) and Cartesian (X,Y,Z) coordinates, IMAS follows the <a href="https://en.wikipedia.org/wiki/ISO_31-11">ISO 31-11 standard</a>, namely the origin and Z axis align and the X axis corresponds to phi = 0</p>
 			  <p>Mathematical operators :
 			  <ul>
-						<li><a href="http://www-fusion.ciemat.es/wiki/Flux_coordinates#Flux_Surface_Average">Flux surface average</a></li>
+						<li><a href="https://wiki.fusion.ciemat.es/wiki/Flux_coordinates#Flux_Surface_Average">Flux surface average</a></li>
 			  </ul>
 			  </p>
        		  <p><a href="dd_versions.html">Data Dictionary version history</a></p>
