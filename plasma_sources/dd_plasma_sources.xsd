@@ -4,6 +4,39 @@
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by USER USER (CEA - CENTRE DE CADARACHE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="../utilities/dd_support.xsd"/>
+	<xs:complexType name="plasma_sources_source_profiles_1d_particles_decomposed_2">
+		<xs:annotation>
+			<xs:documentation>Source terms decomposed for the particle transport equation, assuming core_radial_grid 2 levels above</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="implicit_part">
+				<xs:annotation>
+					<xs:documentation>Implicit part of the source term, i.e. to be multiplied by the equation's primary quantity</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="explicit_part">
+				<xs:annotation>
+					<xs:documentation>Explicit part of the source term</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../../grid/rho_tor_norm</coordinate1>
+						<units>m^-3.s^-1</units>
+						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="plasma_sources_source_profiles_1d_particles_decomposed_3">
 		<xs:annotation>
 			<xs:documentation>Source terms decomposed for the particle transport equation, assuming core_radial_grid 3 levels above</xs:documentation>
@@ -833,6 +866,42 @@
 						<coordinate1>../grid/rho_tor_norm</coordinate1>
 						<units>W</units>
 						<type>dynamic</type>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="total_ion_particles">
+				<xs:annotation>
+					<xs:documentation>Source term for the total (summed over ion  species) density equation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>m^-3.s^-1</units>
+						<type>dynamic</type>
+						<introduced_after_version>4.0.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:group ref="FLT_1D"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="total_ion_particles_decomposed" type="plasma_sources_source_profiles_1d_energy_decomposed_2">
+				<xs:annotation>
+					<xs:documentation>Decomposition of the source term for total ion density equation into implicit and explicit parts</xs:documentation>
+					<xs:appinfo>
+						<introduced_after_version>4.0.0</introduced_after_version>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="total_ion_particles_inside">
+				<xs:annotation>
+					<xs:documentation>Total ion particle source (summed over ion  species) inside the flux surface. Cumulative volume integral of the source term for the total ion density equation</xs:documentation>
+					<xs:appinfo>
+						<coordinate1>../grid/rho_tor_norm</coordinate1>
+						<units>s^-1</units>
+						<type>dynamic</type>
+						<introduced_after_version>4.0.0</introduced_after_version>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:complexType>
@@ -1676,7 +1745,7 @@
 			<xs:appinfo>
 				<lifecycle_status>alpha</lifecycle_status>
 				<lifecycle_version>3.42.0</lifecycle_version>
-				<lifecycle_last_change>3.42.0</lifecycle_last_change>
+				<lifecycle_last_change>4.1.0</lifecycle_last_change>
 				<specific_validation_rules>yes</specific_validation_rules>
 			</xs:appinfo>
 		</xs:annotation>
