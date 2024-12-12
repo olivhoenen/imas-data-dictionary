@@ -27,7 +27,7 @@ directory with html documentation.
 
 ### Documentation (Sphinx)
 
-if you want to generate sphinx documentation on SDCC then you need `Python` 
+If you want to generate sphinx documentation then you need `Python` 
 and `Saxon`. For generating the IDS Migration guide you need `IMASPy` installed.
 You can generate and install this documentation with the following steps:
 
