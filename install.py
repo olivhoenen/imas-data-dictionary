@@ -94,7 +94,7 @@ def ignored_files(adir, filenames):
 def copy_utilities():
     print("copying utilities")
     if not os.path.exists(os.path.join(includedir, "utilities")):
-        shutil.copytree("utilities", os.path.join(includedir, "utilities"), ignore=ignored_files)
+        shutil.copytree("schemas/utilities", os.path.join(includedir, "utilities"), ignore=ignored_files)
 
 
 # Identifiers definition files
