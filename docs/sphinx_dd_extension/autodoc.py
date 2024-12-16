@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 # Utilities that are documented separately to reduce the size of the reference pages
-DOCUMENTED_UTILITIES = ["ids_properties"]
+DOCUMENTED_UTILITIES = ["ids_properties","code"]
 # Indentation character
 INDENT = " "
 # Cached DD XML element tree
@@ -73,7 +73,7 @@ def generate_dd_docs(app: Sphinx):
         update_file(docfile, util2rst(node))
 
     # Find all ../*/*_identifier.xml files
-    for identifier in Path.cwd().parent.glob("*/*_identifier.xml"):
+    for identifier in Path.cwd().parent.glob("schemas/*/*_identifier.xml"):
         iden_tree = ElementTree.parse(identifier)
         element = iden_tree.getroot()
         docfile = Path(f"generated/identifier/{identifier.stem}.rst")

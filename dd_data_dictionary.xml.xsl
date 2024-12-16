@@ -75,7 +75,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			</cocos>
 			<utilities>
 				<!-- Declare complex types from Utilities -->
-				<xsl:for-each select="document('utilities/dd_support.xsd')/*/xs:complexType">
+				<xsl:for-each select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType">
 					<field>
 						<xsl:attribute name="name" select="@name"/>
 						<xsl:attribute name="data_type" select="'structure'"/>
@@ -93,7 +93,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					</field>
 				</xsl:for-each>
 				<!-- Declare Elements from Utilities (only those being the root of a structure, simple elements are not needed in IDSDef.xml)-->
-				<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[./xs:complexType]" mode="IMPLEMENT">
+				<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:element[./xs:complexType]" mode="IMPLEMENT">
 					<xsl:with-param name="structure_reference" select="'self'"/>
 					<xsl:with-param name="aosLevel" select="1"/>
 					<xsl:with-param name="aos3Parent" select="xs:annotation/xs:appinfo/aos3Parent"/>
@@ -591,7 +591,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 			<xsl:with-param name="actRef" select="$thisRef"/>
 			<xsl:with-param name="maxOcc" select="$maxOcc"/>
 		</xsl:apply-templates>
-		<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]" mode="DECLARE"/>
+		<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]" mode="DECLARE"/>
 	</xsl:template>
 	<xsl:template match="xs:include" mode="DECLARE">
 		<xsl:param name="actRef"/>
@@ -608,7 +608,7 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="currPath_doc"/>
 		<xsl:param name="aosLevel"/>
 		<xsl:choose>
-			<xsl:when test="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisRef]">
+			<xsl:when test="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisRef]">
 				when the reference to be included is a complexType defined in utilities : NEVER HAPPENS
 				CHECK RESULT HERE IF THIS APPEARS
 				<xsl:apply-templates select="document('utilities.xsd')/*/xs:complexType[@name=$thisRef]" mode="IMPLEMENT">
@@ -618,9 +618,9 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 					<xsl:with-param name="parentmachine" select="yes"/>
 				</xsl:apply-templates>
 			</xsl:when>
-			<xsl:when test="document('utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]">
+			<xsl:when test="document('schemas/utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]">
 				<!-- when the reference to be included is an element defined in utilities -->
-				<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]" mode="IMPLEMENT">
+				<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:element[@name=$thisRef]" mode="IMPLEMENT">
 					<xsl:with-param name="currPath" select="$currPath"/>
 					<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
 					<xsl:with-param name="aosLevel" select="$aosLevel"/>
@@ -653,9 +653,9 @@ DEBUG: 	  result="<xsl:value-of select="$result"/>"</xsl:message>
 		<xsl:param name="parentCoordinate6"/>
 		<xsl:param name="structure_reference"/>
 		<xsl:choose>
-			<xsl:when test="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]">
+			<xsl:when test="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]">
 				<!-- if the complexType definition is in Utilities-->
-				<xsl:apply-templates select="document('utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
+				<xsl:apply-templates select="document('schemas/utilities/dd_support.xsd')/*/xs:complexType[@name=$thisType]" mode="IMPLEMENT">
 					<!--This fills the complexType from its definition in utilities (if it is there and not in the local schema)-->
 					<xsl:with-param name="currPath" select="$currPath"/>
 					<xsl:with-param name="currPath_doc" select="$currPath_doc"/>
