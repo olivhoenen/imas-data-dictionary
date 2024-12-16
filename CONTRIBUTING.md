@@ -2,7 +2,7 @@
 
 We welcome any kind of contribution to the IMAS Data Dictionary, 
 from a simple comment or a question, to a request for a change in 
-the schemas, or even a full fledged pull request on the code. 
+the schemas, or even a fully fledged pull request on the code. 
 Please read and follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## You have a question
@@ -53,6 +53,6 @@ and 5 from the previous section).
 
 
 While we will try to answer questions quickly and to address issues in a timely 
-manner, it can may sometimes take longer than expected. A friendly ping in the 
-discussion or the issue thread can help draw attention if you find that it was 
+manner, it can sometimes take longer than expected. A friendly ping in the 
+discussion or the issue thread can help draw attention to it if you find that it is 
 stalled.
