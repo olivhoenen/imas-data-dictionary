@@ -1035,10 +1035,10 @@ applying the same conversion on the errorbar nodes as on the main node.
 Adding node creation tag in the DD
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Following the feature request `<https://jira.iter.org/browse/IMAS-3696>`_, it is
-decided to start introducing metadata indicating after which tag a node has been
-created/introduced in the DD. In case of a structure node, this information
-applies by default to all its descendants.
+Following a feature request, it was decided to introduce metadata
+indicating after which tag a node has been introduced into the DD. In
+case of a structure node, this information applies by default to all
+of its descendants.
 
 This done with the following metadata, to be located within the
 ``<appinfo>`` tag of the node:
