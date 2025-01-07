@@ -1,10 +1,7 @@
 name: build-wheel-and-publish-test-pypi
 
 
-on:
-  push:
-      branches:
-          - pypi-workflow
+on: push
 #  release:
 #     # types: [published]
 
@@ -16,8 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-      with:
-        persist-credentials: false
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -48,10 +44,6 @@ jobs:
     needs:
     - build
     runs-on: ubuntu-latest
-
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/imas-data-dictionary-test
 
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
