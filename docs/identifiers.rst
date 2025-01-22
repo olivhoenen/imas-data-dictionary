@@ -23,5 +23,5 @@ structure is applicable.
 
 The use of private indices or names in identifiers structure is discouraged, since this
 would defeat the purpose of having a standard enumerated list. Please create a new discussion in `proposed changes 
-<https://github.com/iterorganization/imas-data-dictionary/discussions/categories/proposed-changes>`_ when you want to add a
+<https://github.com/iterorganization/IMAS-Data-Dictionary/discussions/categories/proposed-changes>`_ when you want to add a
 new identifier value.

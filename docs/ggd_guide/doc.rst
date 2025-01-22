@@ -557,8 +557,8 @@ holds :math:`{n}` values which correspond to
 ``...grid_ggd(grid index).grid_subset(grid_subset_index).element(1...n)``
 elements.
 
-.. [DD_git] Data Dictionary repository: https://github.com/iterorganization/imas-data-dictionary
-.. [IMAS_releases] IMAS Data Dictionary releases: https://github.com/iterorganization/imas-data-dictionary/releases
+.. [DD_git] Data Dictionary repository: https://github.com/iterorganization/IMAS-Data-Dictionary
+.. [IMAS_releases] IMAS Data Dictionary releases: https://github.com/iterorganization/IMAS-Data-Dictionary/releases
 .. [Thesis] M. Sc. Thesis: Visualisation of Fusion Data-Structures for Scrape-Off Layer Plasma Simulations, , University of Ljubljana, Faculty of Mechanical Engineering, September 2017
 .. [JOREK] The JOREK non-linear MHD Code website: http://jorek.eu/
 

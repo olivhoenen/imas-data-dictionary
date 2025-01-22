@@ -78,7 +78,7 @@ intersphinx_mapping = {}
 
 html_theme = "sphinx_immaterial"
 html_theme_options = {
-    "repo_url": "https://github.com/iterorganization/imas-data-dictionary",
+    "repo_url": "https://github.com/iterorganization/IMAS-Data-Dictionary",
     "repo_name": "Data Dictionary",
     "icon": {
         "repo": "fontawesome/brands/github",

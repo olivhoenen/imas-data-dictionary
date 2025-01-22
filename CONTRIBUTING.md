@@ -6,12 +6,12 @@ the schemas, or even a fully fledged pull request on the code.
 Please read and follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## You have a question
-1. use the [discussion search](https://github.com/iterorganization/imas-data-dictionary/discussions/categories/q-a) 
+1. use the [discussion search](https://github.com/iterorganization/IMAS-Data-Dictionary/discussions/categories/q-a) 
 to check if someone already asked a similar question;
 2. if not, create a **new discussion in the Q&A section**.
 
 ## You have found a bug in the code, or an error in the schemas
-1. use the [issue search](https://github.com/iterorganization/imas-data-dictionary/issues) 
+1. use the [issue search](https://github.com/iterorganization/IMAS-Data-Dictionary/issues) 
 to check if someone already created a similar issue;
 2. if not, make a **new issue** to describe the problem and all the 
 relevant information to allow reproducing the error or identifying 
@@ -20,7 +20,7 @@ dependencies, permalink to the wrongly defined quantify);
 3. apply relevant labels to the issue.
 
 ## You want to make some change to the code
-1. use the [issue search](https://github.com/iterorganization/imas-data-dictionary/issues) 
+1. use the [issue search](https://github.com/iterorganization/IMAS-Data-Dictionary/issues) 
 to check if someone already proposed a similar idea/change;
 2. if not, create a **new issue** to describe what you intend to work on;
 3. wait until some kind of consensus is reached about your idea being relevant;
@@ -32,8 +32,8 @@ with the latest commits from `develop` (find instructions
 [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)).
 
 ## You want to propose some change to the schemas 
-1. use the [discussion search](https://github.com/iterorganization/imas-data-dictionary/discussions/categories/proposed-changes) 
-and the [issue search](https://github.com/iterorganization/imas-data-dictionary/issues) 
+1. use the [discussion search](https://github.com/iterorganization/IMAS-Data-Dictionary/discussions/categories/proposed-changes) 
+and the [issue search](https://github.com/iterorganization/IMAS-Data-Dictionary/issues) 
 to check if someone already proposed a similar idea/change;
 2. if not, create a **new discussion thread**, describing your idea 
 as well as the context in which the new feature will be used; 

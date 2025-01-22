@@ -12,6 +12,6 @@ Other documentation for the Data Dictionary can be found on the ITER git and
 IDM:
 
 - `Contribution guidelines (git.iter.org)
-  <https://github.com/iterorganization/imas-data-dictionary/blob/develop/CONTRIBUTING.md>`_
+  <https://github.com/iterorganization/IMAS-Data-Dictionary/blob/develop/CONTRIBUTING.md>`_
 - `Data Dictionary Lifecycle (ITER_D_QQYMUK)
   <https://user.iter.org/?uid=QQYMUK>`_

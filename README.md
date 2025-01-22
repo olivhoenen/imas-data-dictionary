@@ -14,7 +14,7 @@ It's possible to install the Data Dictionary within a Python environment.
 > Prerequisite : A Python interpreter is all you need
 
 ```sh
-git clone git@github.com:iterorganization/imas-data-dictionary.git
+git clone git@github.com:iterorganization/IMAS-Data-Dictionary.git
 cd imas-data-dictionary
 pip install . [--user]
 ```
