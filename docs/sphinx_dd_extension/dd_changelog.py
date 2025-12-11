@@ -21,11 +21,17 @@ from sphinx.util import logging
 from xml.etree import ElementTree
 
 logger = logging.getLogger(__name__)
-
 try:
-    from imaspy import IDSFactory
-    from imaspy.dd_zip import dd_xml_versions
-    from imaspy.ids_convert import DDVersionMap
+    is_gitrepo = True
+    try_repo=Repo("..")
+except Exception as _:
+    logger.error("git repo is not present, Data Dictionary changelog will not be generated")
+    is_gitrepo = False
+    
+try:
+    from imas import IDSFactory
+    from imas.dd_zip import dd_xml_versions
+    from imas.ids_convert import DDVersionMap
 
     has_imaspy = True
 except ImportError:
@@ -168,75 +174,82 @@ def generate_git_changelog(app: Sphinx):
     ]
 
     # Open the pull requests file (generated using dd_changelog_helper.py)
-    with open("pull_requests.json", "r") as f:
-        pull_requests = json.load(f)
+    if not Path("pull_requests.json").exists():
+        dd_changelog_helper = Path(__file__).parent / "dd_changelog_helper.py"
+        print(
+            "Missing file 'pull_requests.json': you can generate with "
+            f"`python {dd_changelog_helper}` Continuing document generation without it.."
+        )
+    else:
+        with open("pull_requests.json", "r") as f:
+            pull_requests = json.load(f)
 
-    # Create the changelog text
-    changelog_text = heading("Changelog", "=")
+        # Create the changelog text
+        changelog_text = heading("Changelog", "=")
 
-    previous_version_idx = 1
+        previous_version_idx = 1
 
-    current_ids_names = get_current_ids_names()
-    print(current_ids_names)
+        current_ids_names = get_current_ids_names()
+        print(current_ids_names)
 
-    last_major_version = -1
+        last_major_version = -1
 
-    for version, commits in zip(reversed(tags), reversed(commits_between_tags)):
-        # Generate headings when switching between major versions
-        major_version = int(version.name.split(".")[0])
-        if major_version != last_major_version:
-            last_major_version = major_version
-            changelog_text += heading(f"Major version {major_version}", "#")
-        # For each release generate a changelog
-        release = heading(f"Release {version.name}", "-")
+        for version, commits in zip(reversed(tags), reversed(commits_between_tags)):
+            # Generate headings when switching between major versions
+            major_version = int(version.name.split(".")[0])
+            if major_version != last_major_version:
+                last_major_version = major_version
+                changelog_text += heading(f"Major version {major_version}", "#")
+            # For each release generate a changelog
+            release = heading(f"Release {version.name}", "-")
 
-        release_notes_text = ""
+            release_notes_text = ""
 
-        # Check which pull-requests were merged for this release
-        prs = get_pull_requests_from_commits(commits, pull_requests)
-        titles_descriptions_uris = [
-            (
-                x.get("title", ""),
-                x.get("description", "no description"),
-                get_pr_link(x),
+            # Check which pull-requests were merged for this release
+            prs = get_pull_requests_from_commits(commits, pull_requests)
+            titles_descriptions_uris = [
+                (
+                    x.get("title", ""),
+                    x.get("description", "no description"),
+                    get_pr_link(x),
+                )
+                for x in prs
+            ]
+            release_notes_text = generate_release_text(
+                titles_descriptions_uris, current_ids_names
             )
-            for x in prs
-        ]
-        release_notes_text = generate_release_text(
-            titles_descriptions_uris, current_ids_names
-        )
-        changelog_pr_text = "\n".join(
-            [f"* `{x[0]} <{x[2]}>`__" for x in titles_descriptions_uris]
-        )
+            changelog_pr_text = "\n".join(
+                [f"* `{x[0]} <{x[2]}>`__" for x in titles_descriptions_uris]
+            )
 
-        # if release_notes_text != "" or pull_requests_text != "":
-        changelog_text += release
+            # if release_notes_text != "" or pull_requests_text != "":
+            changelog_text += release
 
-        if release_notes_text is not None:
-            changelog_text += heading("Release notes", "*")
-            changelog_text += replace_note(release_notes_text)
-            changelog_text += "\n\n"
+            if release_notes_text is not None:
+                changelog_text += heading("Release notes", "*")
+                changelog_text += replace_note(release_notes_text)
+                changelog_text += "\n\n"
 
-        diff_url = None
+            diff_url = None
 
-        if len(tags) > previous_version_idx:
-            previous_version = tags[previous_version_idx]
+            if len(tags) > previous_version_idx:
+                previous_version = tags[previous_version_idx]
 
-            diff_url = f"https://git.iter.org/projects/IMAS/repos/data-dictionary/compare/diff?targetBranch={previous_version.tag.tag}&sourceBranch={version.tag.tag}&targetRepoId=114"
-            previous_version_idx += 1
+                diff_url = f"https://git.iter.org/projects/IMAS/repos/data-dictionary/compare/diff?targetBranch={previous_version.tag.tag}&sourceBranch={version.tag.tag}&targetRepoId=114"
+                previous_version_idx += 1
 
-        if changelog_pr_text != "":
-            changelog_text += heading("Included pull requests", "*")
-            changelog_text += f"`diff <{diff_url}>`__\n\n"
-            changelog_text += changelog_pr_text
-            changelog_text += "\n\n"
-        elif diff_url:
-            changelog_text += f"`diff <{diff_url}>`__\n\n"
+            if changelog_pr_text != "":
+                changelog_text += heading("Included pull requests", "*")
+                changelog_text += f"`diff <{diff_url}>`__\n\n"
+                changelog_text += changelog_pr_text
+                changelog_text += "\n\n"
+            elif diff_url:
+                changelog_text += f"`diff <{diff_url}>`__\n\n"
 
-    with open(docfile, "w") as f:
-        f.write(changelog_text)
+        with open(docfile, "w") as f:
+            f.write(changelog_text)
 
-    logger.info("Finished generating DD changelog sources.")
+        logger.info("Finished generating DD changelog sources.")
 
 
 def ids_changes(ids_name: str, from_factory, to_factory):
@@ -250,16 +263,20 @@ def ids_changes(ids_name: str, from_factory, to_factory):
     for f, t in version_map.old_to_new.path.items():
         if f.endswith(("_error_index", "_error_upper", "_error_lower")):
             continue
-        if f in version_map.old_to_new.type_change:
+        if t is None:
+            removed.append(f)
+        elif f in version_map.old_to_new.type_change:
+            # DD3 -> DD4 specific conversion
+            if f=="ids_properties/source" and t=="ids_properties/provenance":
+                renamed.append((f,t))
+                continue
             from_data_type = from_factory._etree.find(f".//field[@path='{f}']").get(
                 "data_type"
             )
-            to_data_type = to_factory._etree.find(f".//field[@path='{f}']").get(
+            to_data_type = to_factory._etree.find(f".//field[@path='{t}']").get(
                 "data_type"
             )
             retyped.append((f, from_data_type, to_data_type))
-        elif t is None:
-            removed.append(f)
         else:
             renamed.append((f, t))
 
@@ -453,8 +470,10 @@ def generate_dd_changelog(app: Sphinx):
 
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_config_value("dd_changelog_generate", True, "env", [bool])
-    app.connect("builder-inited", generate_git_changelog)
-    app.connect("builder-inited", generate_dd_changelog)
+    if is_gitrepo:
+        app.connect("builder-inited", generate_git_changelog)
+    if has_imaspy:
+        app.connect("builder-inited", generate_dd_changelog)
     return {
         "version": "0.1",
         "parallel_read_safe": True,
